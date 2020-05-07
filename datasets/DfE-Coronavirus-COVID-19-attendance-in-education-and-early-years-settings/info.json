@@ -1,0 +1,22 @@
+{
+    "title": "Coronavirus (COVID-19): attendance in education and early years settings",
+    "publisher": "Department for Education",
+    "description": "A summary of how many children and teachers attended education and childcare settings since Monday 23 March.",
+    "landingPage": "https://www.gov.uk/government/publications/coronavirus-covid-19-attendance-in-education-and-early-years-settings",
+    "datasetNotes": [
+        "On the landing page "
+    ],
+    "published": "2020-04-28",
+    "families": [
+        "Covid-19"
+    ],
+    "extract": {
+        "source": "ODS, XLS",
+        "stage": "Prioritized"
+    },
+    "transform": {
+        "airtable": "recxlt2AnrpsqIhKN"
+    },
+    "sizingNotes": "1 simple structure table",
+    "notes": "Email issued 05/05/2020"
+}

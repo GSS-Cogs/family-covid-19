@@ -1,0 +1,20 @@
+{
+    "family": "Covid-19",
+    "pipelines": [
+        "DWP-Universal-Credit-declarations-claims-and-advances-management-information",
+        "DfE-Coronavirus-COVID-19-attendance-in-education-and-early-years-settings",
+        "HMCTS-Courts-and-tribunals-data-on-audio-and-video-technology-use-during-coronavirus-outbreak",
+        "MHCLG-National-non-domestic-rates-collected-by-councils-in-England-forecast-for-2020-to-2021",
+        "NIDoH-COVID19-Summary-Info-NI",
+        "NISRA-Weekly-deaths-Year-NI",
+        "NRS-Deaths-involving-coronavirus-COVID-19-in-Scotland",
+        "SG-COVID-19-data-by-NHS-Board-date",
+        "SG-COVID-Business-support-fund-grant-scheme-statistics-date",
+        "SG-Trends-in-daily-COVID-19-data-date",
+        "WG-Attendance-at-local-authority-settings-during-the-coronavirus-COVID-19-pandemic",
+        "WG-NHS-activity-and-capacity-during-the-coronavirus-COVID-19-pandemic",
+        "WG-Notifications-of-deaths-of-residents-related-to-COVID-19-in-adult-care-homes",
+        "WG-Summary-data-about-coronavirus-COVID-19-and-the-response-to-it",
+        "WG-Survey-of-public-views-on-the-coronavirus-COVID-19"
+    ]
+}

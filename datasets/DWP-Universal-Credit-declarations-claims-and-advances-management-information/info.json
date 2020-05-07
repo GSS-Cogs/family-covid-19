@@ -1,0 +1,22 @@
+{
+    "title": "Universal Credit declarations (claims) and advances: management information",
+    "publisher": "Department for Work and Pensions",
+    "description": "Management information providing daily counts of Universal Credit declarations (claims) and advances from 1 March to 28 April 2020.",
+    "landingPage": "https://www.gov.uk/government/collections/universal-credit-statistics",
+    "datasetNotes": [
+        "On the landing page scroll to Research about Universal Credit and click on the latest release of these stats.  A new window will open and the data set is found under documents "
+    ],
+    "published": "2020-05-05",
+    "families": [
+        "Covid-19"
+    ],
+    "extract": {
+        "source": "ODS",
+        "stage": "Prioritized"
+    },
+    "transform": {
+        "airtable": "recVbDfppAnRCi4q8"
+    },
+    "sizingNotes": "Simple table structure with some footnotes",
+    "notes": "Email issued 06/05/2020"
+}

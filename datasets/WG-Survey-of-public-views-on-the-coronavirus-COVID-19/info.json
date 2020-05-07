@@ -1,0 +1,21 @@
+{
+    "title": "Survey of public views on the coronavirus (COVID-19)",
+    "publisher": "Welsh Government",
+    "description": "Information on public views and behaviours during the coronavirus crisis.",
+    "landingPage": "https://gov.wales/survey-public-views-coronavirus-covid-19",
+    "datasetNotes": [
+        "On the landing page scroll to the latest release, this will open another page scroll to data and click on the + the spreadsheet can be found here"
+    ],
+    "published": "2020-05-04",
+    "families": [
+        "Covid-19"
+    ],
+    "extract": {
+        "source": "ODS"
+    },
+    "transform": {
+        "airtable": "recZlLW1AKJlMZrx2"
+    },
+    "sizingNotes": "1 Simple table structure  with footnotes in row 22-24",
+    "notes": "Email issued 05/05/2020"
+}

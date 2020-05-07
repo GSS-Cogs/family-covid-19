@@ -1,0 +1,21 @@
+{
+    "title": "COVID-19 data by NHS Board: [date]",
+    "publisher": "Scottish Government",
+    "description": "Coronavirus (COVID-19): Scotland Board-level Daily Data.",
+    "landingPage": "https://www.gov.scot/publications/trends-in-number-of-people-in-hospital-with-confirmed-or-suspected-covid-19/",
+    "datasetNotes": [
+        "On landing page scroll towards bottom where dataset can be found."
+    ],
+    "published": "2020-05-05",
+    "families": [
+        "Covid-19"
+    ],
+    "extract": {
+        "source": "XLS"
+    },
+    "transform": {
+        "airtable": "recmEnQuFkzmA77kg"
+    },
+    "sizingNotes": "Simple table structure with straightforward dimensions and no footnotes.",
+    "notes": ""
+}

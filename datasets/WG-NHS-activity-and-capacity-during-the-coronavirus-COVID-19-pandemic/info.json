@@ -1,0 +1,21 @@
+{
+    "title": "NHS activity and capacity during the coronavirus (COVID-19) pandemic",
+    "publisher": "Welsh Government",
+    "description": "Weekly update on coronavirus and NHS activity and capacity.",
+    "landingPage": "https://gov.wales/nhs-activity-and-capacity-during-coronavirus-covid-19-pandemic",
+    "datasetNotes": [
+        "On the landing page scroll to the latest release, this will open another page scroll to data and click on the + the spreadsheet can be found here"
+    ],
+    "published": "2020-04-30",
+    "families": [
+        "Covid-19"
+    ],
+    "extract": {
+        "source": "ODS"
+    },
+    "transform": {
+        "airtable": "rectRIlXxxPKKOEpI"
+    },
+    "sizingNotes": "Simple table structure although different formats across 9 tabs",
+    "notes": "Having difficulty finding contact details however may be able to get a contact from other areas of WG who I have emailed?"
+}

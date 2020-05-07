@@ -1,0 +1,21 @@
+{
+    "title": "Trends in daily COVID-19 data: [date]",
+    "publisher": "Scottish Government",
+    "description": "Data includes: \nnumber of people tested, and number positive and negative\nnumber of people who have died and tested positive, numbers of calls to 111 and coronavirus helpline, number of people in ICU with confirmed or suspected COVID-19, number of people in hospital with confirmed or suspected COVID-19, ambulance attendances (total and COVID-19 suspected), ambulance conveyances for suspected COVID-19\ndelayed discharges, NHS staff absence related to COVID-19, number of care homes notifying cases of COVID-19 to date, number of suspected cases of COVID-19 in care homes.",
+    "landingPage": "https://www.gov.scot/publications/trends-in-number-of-people-in-hospital-with-confirmed-or-suspected-covid-19/",
+    "datasetNotes": [
+        "On landing page scroll towards bottom where dataset can be found."
+    ],
+    "published": "2020-05-05",
+    "families": [
+        "Covid-19"
+    ],
+    "extract": {
+        "source": "XLS"
+    },
+    "transform": {
+        "airtable": "recR7QK3eaMRPpG9v"
+    },
+    "sizingNotes": "Tabs are a mixture of data tables and charts. Data tables are simple in structure with multiple dimensions, some with several footnotes.",
+    "notes": ""
+}

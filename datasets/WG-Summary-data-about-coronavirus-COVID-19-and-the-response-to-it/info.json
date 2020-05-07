@@ -1,0 +1,21 @@
+{
+    "title": "Summary data about coronavirus (COVID-19) and the response to it",
+    "publisher": "Welsh Government",
+    "description": "An overview of statistics about coronavirus and the response to it, including support provided.",
+    "landingPage": "https://gov.wales/summary-data-about-coronavirus-covid-19-and-response-it",
+    "datasetNotes": [
+        "On the landing page scroll to the latest release, this will open another page scroll to data and click on the + the spreadsheet can be found here"
+    ],
+    "published": "2020-05-04",
+    "families": [
+        "Covid-19"
+    ],
+    "extract": {
+        "source": "ODS"
+    },
+    "transform": {
+        "airtable": "rec0WyFK8u3lw4UNb"
+    },
+    "sizingNotes": "Simple table structure over 5 Tabs some footnotes",
+    "notes": "Email issued 05/05/2020"
+}

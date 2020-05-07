@@ -1,0 +1,21 @@
+{
+    "title": "National non-domestic rates collected by councils in England: forecast for 2020 to 2021",
+    "publisher": "Ministry for Housing, Communities and Local Government",
+    "description": "This release provides information on national non-domestic rates and associated information for the financial year 2020 to 2021.",
+    "landingPage": "https://www.gov.uk/government/statistics/national-non-domestic-rates-collected-by-councils-in-england-forecast-for-2020-to-2021#history",
+    "datasetNotes": [
+        "On the landing page,  this is the final spreadsheet titled 'National non-domestic rates 2020 -2021:  additional relief for 2020 - 2021'"
+    ],
+    "published": "2020-04-22",
+    "families": [
+        "Covid-19"
+    ],
+    "extract": {
+        "source": "XLS"
+    },
+    "transform": {
+        "airtable": "reclr9yUcYlOKY6fl"
+    },
+    "sizingNotes": "Simple table structure with footnotes.",
+    "notes": "Email issued 05/05/20202 to nndr.statistics@communities.gov.uk 05/05/2020"
+}

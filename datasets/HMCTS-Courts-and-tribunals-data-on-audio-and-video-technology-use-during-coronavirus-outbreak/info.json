@@ -1,0 +1,21 @@
+{
+    "title": "Courts and tribunals data on audio and video technology use during coronavirus outbreak",
+    "publisher": "HM Courts & Tribunal Services",
+    "description": "These figures, reported by individual courts and tribunals, provide an indicative estimate of the number of hearings that have taken place using audio and video technology in HMCTS since 23 March 2020. The figures were drawn together rapidly and specifically in response to the coronavirus outbreak.",
+    "landingPage": "https://www.gov.uk/guidance/courts-and-tribunals-data-on-audio-and-video-technology-use-during-coronavirus-outbreak#history",
+    "datasetNotes": [
+        "On the landing page the data can be found as a table under the heading 'Estimated number of hearings using audio and video in courts and tribunals'"
+    ],
+    "published": "2020-04-30",
+    "families": [
+        "Covid-19"
+    ],
+    "extract": {
+        "source": ""
+    },
+    "transform": {
+        "airtable": "recN9Ce7PKWwzm6c6"
+    },
+    "sizingNotes": "Simple table on the landing page",
+    "notes": ""
+}

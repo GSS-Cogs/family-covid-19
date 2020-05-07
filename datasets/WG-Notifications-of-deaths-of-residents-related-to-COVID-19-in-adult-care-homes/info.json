@@ -1,0 +1,21 @@
+{
+    "title": "Notifications of deaths of residents related to COVID-19 in adult care homes",
+    "publisher": "Welsh Government",
+    "description": "Notifications to Care Inspectorate Wales of deaths of residents related to COVID-19 in adult care homes during the coronavirus pandemic",
+    "landingPage": "https://gov.wales/notifications-deaths-residents-related-covid-19-adult-care-homes-1-march-1-may-2020",
+    "datasetNotes": [
+        "This is he first publication the landing page may change "
+    ],
+    "published": "2020-05-05",
+    "families": [
+        "Covid-19"
+    ],
+    "extract": {
+        "source": "ODS"
+    },
+    "transform": {
+        "airtable": "recwEcBhoQtC3VyCl"
+    },
+    "sizingNotes": "Simple table structure although different formats across 7 tabs",
+    "notes": "Email issued 05/05/2020"
+}

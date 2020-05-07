@@ -1,5 +1,15 @@
 {
     "family": "Covid-19",
+    "github": "https://github.com/GSS-Cogs/family-covid-19",
+    "jenkins": {
+        "base": "https://ci.floop.org.uk",
+        "path": [
+            "GSS_data",
+            "COVID-19"
+        ]
+    },
+    "sparql": "https://production-drafter-ons-alpha.publishmydata.com/v1/sparql/live",
+    "pmd": "http://gss-data.org.uk",
     "pipelines": [
         "DWP-Universal-Credit-declarations-claims-and-advances-management-information",
         "DfE-Coronavirus-COVID-19-attendance-in-education-and-early-years-settings",

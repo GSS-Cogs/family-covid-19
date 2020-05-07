@@ -1,5 +1,5 @@
 {
-    "family": "Covid-19",
+    "family": "COVID-19",
     "github": "https://github.com/GSS-Cogs/family-covid-19",
     "jenkins": {
         "base": "https://ci.floop.org.uk",

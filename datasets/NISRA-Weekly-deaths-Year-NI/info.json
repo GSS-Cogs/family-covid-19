@@ -15,7 +15,8 @@
         "stage": "Candidate"
     },
     "transform": {
-        "airtable": "recz2ijoq9hGcYMhT"
+        "airtable": "recz2ijoq9hGcYMhT",
+        "main_issue": 15
     },
     "sizingNotes": "Simple table structure with multiple dimensions and some footnotes.",
     "notes": "The Northern Ireland weekly deaths statistics have been extended to include information relating to respiratory and COVID-19 related deaths."

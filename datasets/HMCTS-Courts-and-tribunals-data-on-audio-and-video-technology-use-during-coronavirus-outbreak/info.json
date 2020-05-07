@@ -14,7 +14,8 @@
         "source": ""
     },
     "transform": {
-        "airtable": "recN9Ce7PKWwzm6c6"
+        "airtable": "recN9Ce7PKWwzm6c6",
+        "main_issue": 2
     },
     "sizingNotes": "Simple table on the landing page",
     "notes": ""

@@ -14,7 +14,8 @@
         "source": "XLS"
     },
     "transform": {
-        "airtable": "recmEnQuFkzmA77kg"
+        "airtable": "recmEnQuFkzmA77kg",
+        "main_issue": 10
     },
     "sizingNotes": "Simple table structure with straightforward dimensions and no footnotes.",
     "notes": ""

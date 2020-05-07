@@ -15,7 +15,8 @@
         "stage": "Prioritized"
     },
     "transform": {
-        "airtable": "recVbDfppAnRCi4q8"
+        "airtable": "recVbDfppAnRCi4q8",
+        "main_issue": 6
     },
     "sizingNotes": "Simple table structure with some footnotes",
     "notes": "Email issued 06/05/2020"

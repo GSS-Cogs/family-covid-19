@@ -14,7 +14,8 @@
         "source": "ODS"
     },
     "transform": {
-        "airtable": "rectRIlXxxPKKOEpI"
+        "airtable": "rectRIlXxxPKKOEpI",
+        "main_issue": 11
     },
     "sizingNotes": "Simple table structure although different formats across 9 tabs",
     "notes": "Having difficulty finding contact details however may be able to get a contact from other areas of WG who I have emailed?"

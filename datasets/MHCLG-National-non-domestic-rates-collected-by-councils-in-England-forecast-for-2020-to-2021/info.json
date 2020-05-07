@@ -14,7 +14,8 @@
         "source": "XLS"
     },
     "transform": {
-        "airtable": "reclr9yUcYlOKY6fl"
+        "airtable": "reclr9yUcYlOKY6fl",
+        "main_issue": 9
     },
     "sizingNotes": "Simple table structure with footnotes.",
     "notes": "Email issued 05/05/20202 to nndr.statistics@communities.gov.uk 05/05/2020"

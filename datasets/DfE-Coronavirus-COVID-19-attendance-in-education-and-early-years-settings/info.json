@@ -15,7 +15,8 @@
         "stage": "Prioritized"
     },
     "transform": {
-        "airtable": "recxlt2AnrpsqIhKN"
+        "airtable": "recxlt2AnrpsqIhKN",
+        "main_issue": 14
     },
     "sizingNotes": "1 simple structure table",
     "notes": "Email issued 05/05/2020"

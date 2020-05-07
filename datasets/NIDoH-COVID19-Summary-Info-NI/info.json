@@ -14,7 +14,8 @@
         "source": "Power BI"
     },
     "transform": {
-        "airtable": "recSdxPHl7NKhkSLH"
+        "airtable": "recSdxPHl7NKhkSLH",
+        "main_issue": 5
     },
     "sizingNotes": "Messy Power BI tables with integrated text and graphs. Source data no doubt comes from other datasets which have yet to be ascertained.",
     "notes": ""

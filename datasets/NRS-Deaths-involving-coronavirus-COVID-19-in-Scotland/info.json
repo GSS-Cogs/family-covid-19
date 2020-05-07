@@ -14,7 +14,8 @@
         "source": "XLS, CSV, OD"
     },
     "transform": {
-        "airtable": "reccCfhxfABKk4IZ0"
+        "airtable": "reccCfhxfABKk4IZ0",
+        "main_issue": 8
     },
     "sizingNotes": "Already online in Open Data format.",
     "notes": ""

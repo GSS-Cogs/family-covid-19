@@ -18,7 +18,7 @@
 	Coronavirus COVID-19 attendance in education and early years settings
 
 #### Table Structure
-	Period, Attendance in Education Settings, Marker, Measure Type, Unit, Value 
+	Period, Attendance in Education Setting, Marker, Measure Type, Unit, Value 
 
 #### Sheet: COVID-19 attendance
 
@@ -26,7 +26,7 @@
 	
 	B - Day - Not needed can be defined from the date
 	
-	C2:K2 - Attendance in Education Settings (codelist)
+	C2:K2 - Attendance in Education Setting (codelist)
 	
 	L - Notes - Change to Marker - change values as follows:
 		See notes section at bottom of table --- See Metadata for Methodology

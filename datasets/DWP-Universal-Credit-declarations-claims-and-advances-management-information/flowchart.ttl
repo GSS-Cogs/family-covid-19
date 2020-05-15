@@ -35,14 +35,14 @@ cogs:PMD a owl:Class ;
 ###########################################################################################################
 
 cogsgit:top-level a cogs:LandingPage ;
-  rdfs:label "DfE Coronavirus (COVID-19): attendance in education and early years settings" ;
-  rdfs:comment "https://www.gov.uk/government/publications/coronavirus-covid-19-attendance-in-education-and-early-years-settings";
+  rdfs:label "DWP Universal Credit declarations (claims) and advances: management information" ;
+  rdfs:comment "https://www.gov.uk/government/collections/universal-credit-statistics";
   cogs:splits cogsgit:sheet1 ;
 .
 
 cogsgit:sheet1 a cogs:Sheets ;
   rdfs:label "" ;
-  rdfs:comment "COVID-19 attendance" ;
+  rdfs:comment "" ;
   cogs:transforms cogsgit:dataset1 ;
 .
 
@@ -56,7 +56,7 @@ cogsgit:dataset1 a cogs:Datasets ;
 
 cogsgit:columns1 a cogs:Columns ;
   rdfs:label "" ;
-  rdfs:comment "Period, Attendance in Education Settings, Marker, Measure Type, Unit, Value" ;
+  rdfs:comment "Period, " ;
   cogs:uploads cogsgit:pmd1 ;
 .
 

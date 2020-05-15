@@ -18,7 +18,7 @@
 	name
 
 #### Table Structure
-	Period, COVID 19 Tests, Test Outcome, Critical Worker Category, Critical Worker Description, Test Location, Marker, Measure Type, Unit, Value 
+	Period, Test Outcome, Critical Worker Category, Critical Worker Description, Test Location, Marker, Measure Type, Unit, Value 
 
 #### Sheet: Completed_tests
 

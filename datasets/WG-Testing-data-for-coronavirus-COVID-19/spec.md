@@ -15,7 +15,7 @@
 ### Dataset One
 
 #### Output Dataset Name:
-	name
+	WG Testing data for Coronavirus - COVID-19 
 
 #### Table Structure
 	Period, Test Outcome, Critical Worker Category, Critical Worker Description, Test Location, Marker, Measure Type, Unit, Value 
@@ -34,6 +34,8 @@
 	Add Critical Worker Category column with value All
 
 	Add Critical Worker Description column with value All
+
+	Add Test Location column with value All
 		
 	Add Measure Type column with value Cumulative Tests
 	
@@ -51,9 +53,9 @@
 		
 	A9:A17 - Critical Worker Category (Codelist)
 
-	Add Test Location column with value All
-
 	Add Critical Worker Description column with value All
+
+	Add Test Location column with value All
 
 	Add Measure Type Column with value Cumulative Tests
 

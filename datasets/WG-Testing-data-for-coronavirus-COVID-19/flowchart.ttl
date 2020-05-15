@@ -35,28 +35,28 @@ cogs:PMD a owl:Class ;
 ###########################################################################################################
 
 cogsgit:top-level a cogs:LandingPage ;
-  rdfs:label "DfE Coronavirus (COVID-19): attendance in education and early years settings" ;
-  rdfs:comment "https://www.gov.uk/government/publications/coronavirus-covid-19-attendance-in-education-and-early-years-settings";
+  rdfs:label "WG Testing data for coronavirus (COVID-19)" ;
+  rdfs:comment "https://gov.wales/testing-data-coronavirus-covid-19-12-may-2020";
   cogs:splits cogsgit:sheet1 ;
 .
 
 cogsgit:sheet1 a cogs:Sheets ;
   rdfs:label "" ;
-  rdfs:comment "COVID-19 attendance" ;
+  rdfs:comment "Completed_tests, Critical_workers_category, Critical_workers_detail, Location_tests" ;
   cogs:transforms cogsgit:dataset1 ;
 .
 
 
 cogsgit:dataset1 a cogs:Datasets ;
   rdfs:label "" ;
-  rdfs:comment "Coronavirus COVID-19 attendance in education and early years settings" ;
+  rdfs:comment "WG Testing data for Coronavirus - COVID-19 " ;
   cogs:outputs cogsgit:columns1 ;
 .
 
 
 cogsgit:columns1 a cogs:Columns ;
   rdfs:label "" ;
-  rdfs:comment "Period, Attendance in Education Settings, Marker, Measure Type, Unit, Value" ;
+  rdfs:comment "Period, Test Outcome, Critical Worker Category, Critical Worker Description, Test Location, Marker, Measure Type, Unit, Value" ;
   cogs:uploads cogsgit:pmd1 ;
 .
 

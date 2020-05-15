@@ -42,21 +42,21 @@ cogsgit:top-level a cogs:LandingPage ;
 
 cogsgit:sheet1 a cogs:Sheets ;
   rdfs:label "" ;
-  rdfs:comment "" ;
+  rdfs:comment "1, 2" ;
   cogs:transforms cogsgit:dataset1 ;
 .
 
 
 cogsgit:dataset1 a cogs:Datasets ;
   rdfs:label "" ;
-  rdfs:comment "Coronavirus COVID-19 attendance in education and early years settings" ;
+  rdfs:comment "DWP Universal Credit Declarations and Advances - Management Information" ;
   cogs:outputs cogsgit:columns1 ;
 .
 
 
 cogsgit:columns1 a cogs:Columns ;
   rdfs:label "" ;
-  rdfs:comment "Period, " ;
+  rdfs:comment "Period, Universal Credit Stage, Measure Type, Unit, Marker, Value" ;
   cogs:uploads cogsgit:pmd1 ;
 .
 

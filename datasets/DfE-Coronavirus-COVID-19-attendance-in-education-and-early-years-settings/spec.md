@@ -1,6 +1,6 @@
 # COGS Dataset Specification
 
-[Home](https://gss-cogs.github.io/family-homelessness/datasets/specmenu.html)
+[Home](https://gss-cogs.github.io/family-covid-19/datasets/specmenu.html)
 
 ## Coronavirus COVID-19 attendance in education and early years settings
 

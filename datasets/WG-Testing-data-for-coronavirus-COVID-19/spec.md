@@ -99,9 +99,9 @@
 
 	Add Emergency Services Worker column with value All
 
-	Add Measure Type Column with value Tests
+	Add Measure Type Column with value Tests and Percentage where relevant
 
-	Add Unit column with value Count		
+	Add Unit column with value Count and Percent where relevant	
 
 ##### Footnotes
 	Add to Metadata:

@@ -11,7 +11,8 @@
         "COVID-19"
     ],
     "extract": {
-        "source": "ODS"
+        "source": "ODS",
+        "stage": "Documented"
     },
     "transform": {
         "airtable": "rec0WyFK8u3lw4UNb",

@@ -1,0 +1,19 @@
+{
+    "title": "Deaths registered weekly in England and Wales, provisional",
+    "publisher": "Office for National Statistics",
+    "description": "",
+    "landingPage": "https://www.ons.gov.uk/peoplepopulationandcommunity/birthsdeathsandmarriages/deaths/datasets/weeklyprovisionalfiguresondeathsregisteredinenglandandwales",
+    "published": "",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": ""
+    },
+    "transform": {
+        "airtable": "recqb90KngZb1RN7k",
+        "main_issue": 31
+    },
+    "sizingNotes": "",
+    "notes": ""
+}

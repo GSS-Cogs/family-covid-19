@@ -1,0 +1,20 @@
+{
+    "title": "Economic review: April 2020",
+    "publisher": "Office for National Statistics",
+    "description": "",
+    "landingPage": "https://www.ons.gov.uk/releases/economicreviewapril2020",
+    "published": "",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": "",
+        "stage": "Not Required"
+    },
+    "transform": {
+        "airtable": "recPVotMDgf8Of2zl",
+        "main_issue": 21
+    },
+    "sizingNotes": "",
+    "notes": ""
+}

@@ -11,7 +11,8 @@
         "COVID-19"
     ],
     "extract": {
-        "source": "XLS"
+        "source": "XLS",
+        "stage": "Documented"
     },
     "transform": {
         "airtable": "recOgjCe0veZiYSBc",

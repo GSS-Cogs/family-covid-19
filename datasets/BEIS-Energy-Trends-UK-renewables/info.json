@@ -1,0 +1,19 @@
+{
+    "title": "Energy Trends: UK renewables",
+    "publisher": "Department for Business, Energy and Industrial Strategy",
+    "description": "Quarterly and monthly data on renewable electricity capacity and generation, liquid biofuels for transport and the renewables obligation scheme.",
+    "landingPage": "https://www.gov.uk/government/statistics/energy-trends-section-6-renewables#history",
+    "published": "2020-03-26",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": "XLS"
+    },
+    "transform": {
+        "airtable": "rece2iJpd8is5pgBm",
+        "main_issue": 27
+    },
+    "sizingNotes": "",
+    "notes": "Although not specifically Covid-19  the spreadsheets may allow the impact of the pandemic to be derived."
+}

@@ -1,0 +1,19 @@
+{
+    "title": "Covid-19 news and information: consumption and attitudes",
+    "publisher": "The Office of Communications",
+    "description": "As a response to the Covid-19 outbreak, Ofcom is providing a range of information about how people are getting news and information about the crisis.",
+    "landingPage": "https://www.ofcom.org.uk/research-and-data/tv-radio-and-on-demand/news-media/coronavirus-news-consumption-attitudes-behaviour",
+    "published": "2020-05-12",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": "XLS, CSV, Power BI"
+    },
+    "transform": {
+        "airtable": "recnKyl5hB4sImj7k",
+        "main_issue": 30
+    },
+    "sizingNotes": "A number of spreadsheets each containing a number of messy tables needs discussions to determine if/how these should be broken down and published on PMD",
+    "notes": ""
+}

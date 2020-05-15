@@ -1,0 +1,22 @@
+{
+    "title": "COVID-19 Statistical Report",
+    "publisher": "Public Health Scotland",
+    "description": "This is the first release by Public Health Scotland on COVID-19 data across NHSScotland.",
+    "landingPage": "https://beta.isdscotland.org/find-publications-and-data/population-health/covid-19/covid-19-statistical-report/",
+    "datasetNotes": [
+        "On landing page, link to dataset of on left of page under heading \"Data Files\"."
+    ],
+    "published": "2020-05-06",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": "XLS"
+    },
+    "transform": {
+        "airtable": "recQD6c5aniAsOD1U",
+        "main_issue": 22
+    },
+    "sizingNotes": "Small tables with simple structures and multiple dimensions. Minimal footnotes but multiple tables on some pages.",
+    "notes": ""
+}

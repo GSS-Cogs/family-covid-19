@@ -1,0 +1,22 @@
+{
+    "title": "COVID-19 Daily Deaths",
+    "publisher": "NHS England",
+    "description": "This section contains information on deaths of patients who have died in hospitals in England and had tested positive for COVID-19 or where COVID-19 was mentioned on the death certificate. All deaths are recorded against the date of death rather than the date the deaths were announced.",
+    "landingPage": "https://www.england.nhs.uk/statistics/statistical-work-areas/covid-19-daily-deaths/",
+    "datasetNotes": [
+        "On the landing page scroll  to Data and click on the link 'COVID-19 all announced deaths'"
+    ],
+    "published": "2020-05-13",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": "XLS"
+    },
+    "transform": {
+        "airtable": "recLBVjKCzWq5PrrN",
+        "main_issue": 19
+    },
+    "sizingNotes": "Simple table structure across 7 tabs of differing size",
+    "notes": ""
+}

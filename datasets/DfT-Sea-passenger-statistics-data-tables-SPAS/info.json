@@ -1,0 +1,22 @@
+{
+    "title": "Sea passenger statistics: data tables (SPAS)",
+    "publisher": "Department for Transport",
+    "description": "Data on UK international and domestic sea passengers, produced by Department for Transport.",
+    "landingPage": "https://www.gov.uk/government/statistical-data-sets/sea-passenger-statistics-spas#history",
+    "datasetNotes": [
+        "On the landing page scroll down to 'All UK international short sea, long sea and cruise passengers' and select the by direction monthly ODS file.   Although not specifically Covid-19 spreadsheet will allow the impact of the pandemic to be derived."
+    ],
+    "published": "2020-05-13",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": "ODS"
+    },
+    "transform": {
+        "airtable": "recsttlxdkxMQpuNj",
+        "main_issue": 32
+    },
+    "sizingNotes": "Simple table structure with some footnotes",
+    "notes": "Although not specifically Covid-19  the spreadsheet may allow the impact of the pandemic to be derived."
+}

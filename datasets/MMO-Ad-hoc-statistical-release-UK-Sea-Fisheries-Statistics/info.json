@@ -1,0 +1,23 @@
+{
+    "title": "Ad hoc statistical release: UK Sea Fisheries Statistics",
+    "publisher": "Marine Management Organisation",
+    "description": "Published in response to the COVID-19 pandemic to provide timely evidence on impacts on commercial sea fishing activity",
+    "landingPage": "https://www.gov.uk/government/collections/ad-hoc-statistical-releases-sea-fisheries-statistics",
+    "datasetNotes": [
+        "On landing page scroll to latest release  click on the link another page will open scroll to  documents  and open the XLS spreadsheet "
+    ],
+    "published": "2020-05-12",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": "XLS",
+        "stage": "Documented"
+    },
+    "transform": {
+        "airtable": "reca2iRnnJMLqAJ1A",
+        "main_issue": 25
+    },
+    "sizingNotes": "3 Simple tables with there are some footnotes, a mixture of measures  types of value (\u00a3'000s) and quantity (Tons).   Period is month/year currently March 2019/2020.",
+    "notes": ""
+}

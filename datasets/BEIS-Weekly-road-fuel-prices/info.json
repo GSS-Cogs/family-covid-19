@@ -1,0 +1,22 @@
+{
+    "title": "Weekly road fuel prices",
+    "publisher": "Department for Business, Energy and Industrial Strategy",
+    "description": "BEIS publishes road fuel price statistics providing average UK retail 'pump' prices on a weekly basis.",
+    "landingPage": "https://www.gov.uk/government/statistical-data-sets/oil-and-petroleum-products-weekly-statistics",
+    "datasetNotes": [
+        "On landing page there a number of spreadsheets in different formats "
+    ],
+    "published": "2020-05-12",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": "XLS, CSV"
+    },
+    "transform": {
+        "airtable": "recS04zJ2ogCDzDdS",
+        "main_issue": 23
+    },
+    "sizingNotes": "Simple table structure,  with side notes, although there are a number of tabs for each year, it should be possible to obtain all of the information from the 'All years' tab",
+    "notes": "Although not specifically Covid-19 the  spreadsheet may allow the impact of the pandemic to be derived."
+}

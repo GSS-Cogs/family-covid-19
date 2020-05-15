@@ -1,0 +1,22 @@
+{
+    "title": "Coronavirus (COVID-19) in the UK",
+    "publisher": "Public Health England",
+    "description": "",
+    "landingPage": "https://coronavirus.data.gov.uk/?_ga=2.156389567.589199403.1589439040-1962094972.1582617556",
+    "datasetNotes": [
+        "On the landing page scroll to the map of the UK and underneath is the option to Download the latest cases data as CSV or JSON & the latest deaths data as CSV or JSON"
+    ],
+    "published": "2020-05-14",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": "CSV, JSON"
+    },
+    "transform": {
+        "airtable": "recyr2nSSQUdgJrRK",
+        "main_issue": 36
+    },
+    "sizingNotes": "Available as 2 CSV or JSON files.",
+    "notes": ""
+}

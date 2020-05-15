@@ -1,0 +1,22 @@
+{
+    "title": "Ambulance Quality Indicators",
+    "publisher": "NHS England",
+    "description": "This contains background material for the Ambulance System Indicators (AmbSYS) and Clinical Outcomes (AmbCO) for all eleven Ambulance Services in England.",
+    "landingPage": "https://www.england.nhs.uk/statistics/statistical-work-areas/ambulance-quality-indicators/",
+    "datasetNotes": [
+        "On the landing page scroll down to the 'Time series data' for XLS or 'CSV data' for CSV and click on the latest release."
+    ],
+    "published": "2020-05-14",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": "XLS, ODS"
+    },
+    "transform": {
+        "airtable": "recjhAMzekkazitYh",
+        "main_issue": 29
+    },
+    "sizingNotes": "A number of messy tables with footnotes",
+    "notes": "Although not specifically Covid-19  the spreadsheets may allow the impact of the pandemic to be derived."
+}

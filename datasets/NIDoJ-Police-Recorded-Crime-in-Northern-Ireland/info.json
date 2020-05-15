@@ -1,0 +1,23 @@
+{
+    "title": "Police Recorded Crime in Northern Ireland",
+    "publisher": "Northern Ireland Department of Justice",
+    "description": "Latest police recorded crime statistics.. Each monthly update provides statistics covering the latest 24 months.",
+    "landingPage": "https://www.psni.police.uk/inside-psni/Statistics/police-recorded-crime-statistics/",
+    "datasetNotes": [
+        "On landing page scroll to middle of page where latest monthly dataset will appear under heading \"Crime tables\". There is now an exceptional weekly statistical bulletin due to COVID19 which has taken the place of the monthly report untill end June but no weekly dataset present, just pdf."
+    ],
+    "published": "2020-03-26",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": "XLS, ODS",
+        "stage": "Not Required"
+    },
+    "transform": {
+        "airtable": "rect9SYDUUUMql7AG",
+        "main_issue": 33
+    },
+    "sizingNotes": "Messy table structure with multiple tables on some tabs, multiple dimensions/sub-dimensions and multiple footnotes. Embedded graphs present.",
+    "notes": ""
+}

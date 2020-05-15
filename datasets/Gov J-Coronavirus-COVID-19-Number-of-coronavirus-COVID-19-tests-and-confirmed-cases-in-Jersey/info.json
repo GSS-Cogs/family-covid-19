@@ -1,0 +1,23 @@
+{
+    "title": "Coronavirus (COVID-19): Number of coronavirus (COVID-19) tests and confirmed cases in Jersey",
+    "publisher": "Government of Jersey",
+    "description": "Table of negative tests, confirmed cases, pending results and deaths resultant from COVID-19 in Jersey, Channel Islands.",
+    "landingPage": "https://opendata.gov.je/dataset/coronavirus-covid-19-number-of-cases-in-jersey?_ga=2.235851713.1328647050.1589177685-828445812.1589177685",
+    "datasetNotes": [
+        "There are a number of different  data sets in different formats on the landing page under Data and Resources the data is also available as an API"
+    ],
+    "published": "2020-05-03",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": "XLS, CSV, API, JSON",
+        "stage": "Candidate"
+    },
+    "transform": {
+        "airtable": "recaOJyLEriApT7ui",
+        "main_issue": 26
+    },
+    "sizingNotes": "Tables available as an API",
+    "notes": "Licence details: https://opendata.gov.je/pages/open-government-licence-jersey-ogl-j-v1-0"
+}

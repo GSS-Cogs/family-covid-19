@@ -1,0 +1,68 @@
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix cogsgit: <https://github.com/GSS-Cogs/> .
+@prefix cogs: <http://gss-cogs.uk/def/arch/> .
+
+<http://gss-cogs.uk/def/arch> a owl:Ontology;
+  rdfs:label "COGS Homelessness Transform Mapping" ;
+.
+
+cogs:SoftwarePackage a owl:Class ;
+  rdfs:label "Software package" ;
+.
+cogs:LandingPage a owl:Class ;
+  rdfs:subClassOf cogs:SoftwarePackage ;
+  rdfs:label "Landing Page" ;
+.
+cogs:Datasets a owl:Class ;
+  rdfs:subClassOf cogs:SoftwarePackage ;
+  rdfs:label "Output Dataset" ;
+.
+cogs:Sheets a owl:Class ;
+  rdfs:subClassOf cogs:SoftwarePackage ;
+  rdfs:label "Sheet names to join";
+.
+cogs:Columns a owl:Class ;
+  rdfs:subClassOf cogs:SoftwarePackage ;
+  rdfs:label "Table" ;
+.
+cogs:PMD a owl:Class ;
+  rdfs:subClassOf cogs:SoftwarePackage ;
+  rdfs:label "PMD" ;
+.
+
+###########################################################################################################
+
+cogsgit:top-level a cogs:LandingPage ;
+  rdfs:label "Coronavirus (COVID-19): attendance in education and early years settings" ;
+  rdfs:comment "https://www.gov.uk/government/publications/coronavirus-covid-19-attendance-in-education-and-early-years-settings";
+  cogs:splits cogsgit:sheet1 ;
+.
+
+cogsgit:sheet1 a cogs:Sheets ;
+  rdfs:label "" ;
+  rdfs:comment "COVID-19 attendance" ;
+  cogs:transforms cogsgit:dataset1 ;
+.
+
+
+cogsgit:dataset1 a cogs:Datasets ;
+  rdfs:label "" ;
+  rdfs:comment "Coronavirus COVID-19 attendance in education and early years settings" ;
+  cogs:outputs cogsgit:columns1 ;
+.
+
+
+cogsgit:columns1 a cogs:Columns ;
+  rdfs:label "" ;
+  rdfs:comment "Period, Attendance in Education Settings, Marker, Measure Type, Unit, Value" ;
+  cogs:uploads cogsgit:pmd1 ;
+.
+
+
+cogsgit:pmd1 a cogs:PMD ;
+  rdfs:label "" ;
+  rdfs:comment "Publish my Data: http://gss-data.org.uk/data/search" ;
+.
+###################################################################################################

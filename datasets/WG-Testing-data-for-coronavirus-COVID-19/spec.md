@@ -35,9 +35,9 @@
 
 	Add Emergency Services Worker column with value All
 		
-	Add Measure Type column with value Cumulative Tests
-	
-	Ass Unit column with value Count
+	Add Measure Type Column with value People
+
+	Add Unit column with value Cumulative Count
 
 #### Sheet: Critical_workers_category
 
@@ -55,9 +55,9 @@
 
 	Add Test Location column with value All
 
-	Add Measure Type Column with value Cumulative Tests
+	Add Measure Type Column with value People
 
-	Add Unit column with value Count
+	Add Unit column with value Cumulative Count
 
 #### Sheet: Critical_workers_detail
 
@@ -75,9 +75,9 @@
 
 	Add Test Location column with value All
 
-	Add Measure Type Column with value Cumulative Tests
+	Add Measure Type Column with value People
 
-	Add Unit column with value Count
+	Add Unit column with value Cumulative Count
 
 #### Sheet: Location_tests
 
@@ -99,7 +99,7 @@
 
 	Add Emergency Services Worker column with value All
 
-	Add Measure Type Column with value Cumulative Tests
+	Add Measure Type Column with value Tests
 
 	Add Unit column with value Count		
 

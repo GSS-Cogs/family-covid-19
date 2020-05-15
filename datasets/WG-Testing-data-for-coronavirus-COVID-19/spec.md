@@ -1,10 +1,10 @@
 # COGS Dataset Specification
 
-## Coronavirus COVID-19 attendance in education and early years settings
+## Testing data for coronavirus (COVID-19)
 
-### Department for Education
+### Welsh Government
 
-[Landing Page](https://www.gov.uk/government/publications/coronavirus-covid-19-attendance-in-education-and-early-years-settings)
+[Landing Page](https://gov.wales/testing-data-coronavirus-covid-19-12-may-2020)
 
 [Transform Flowchart](flowchart.ttl)
 

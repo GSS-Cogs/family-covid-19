@@ -56,7 +56,7 @@ cogsgit:dataset1 a cogs:Datasets ;
 
 cogsgit:columns1 a cogs:Columns ;
   rdfs:label "" ;
-  rdfs:comment "Period, Test Outcome, Critical Worker Category, Critical Worker Description, Test Location, Marker, Measure Type, Unit, Value" ;
+  rdfs:comment "Period, Test Outcome, Critical Worker Category, Emergency Services Worker, Test Location, Marker, Measure Type, Unit, Value" ;
   cogs:uploads cogsgit:pmd1 ;
 .
 

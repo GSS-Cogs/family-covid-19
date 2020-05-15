@@ -18,7 +18,7 @@
 	WG Testing data for Coronavirus - COVID-19 
 
 #### Table Structure
-	Period, Test Outcome, Critical Worker Category, Critical Worker Description, Test Location, Marker, Measure Type, Unit, Value 
+	Period, Test Outcome, Critical Worker Category, Emergency Services Worker, Test Location, Marker, Measure Type, Unit, Value 
 
 #### Sheet: Completed_tests
 
@@ -33,9 +33,7 @@
 
 	Add Critical Worker Category column with value All
 
-	Add Critical Worker Description column with value All
-
-	Add Test Location column with value All
+	Add Emergency Services Worker column with value All
 		
 	Add Measure Type column with value Cumulative Tests
 	
@@ -53,7 +51,7 @@
 		
 	A9:A17 - Critical Worker Category (Codelist)
 
-	Add Critical Worker Description column with value All
+	Add Emergency Services Worker column with value All
 
 	Add Test Location column with value All
 
@@ -73,7 +71,7 @@
 
 	A11:A30 - Critical Worker Category (Codelist)
 
-	B11:B30 - Critical Worker Description (Codelist)
+	B11:B30 - Emergency Services Worker (Codelist)
 
 	Add Test Location column with value All
 
@@ -99,12 +97,14 @@
 
 	Add Critical Worker Category column with value All
 
-	Add Critical Worker Description column with value All
+	Add Emergency Services Worker column with value All
 
 	Add Measure Type Column with value Cumulative Tests
 
 	Add Unit column with value Count		
 
 ##### Footnotes
-	Footnotes 
+	Add to Metadata:
+		Data presented is the cumulative total correct at the date stated
+		The column Emergency Services Worker is a legacy category. Numbers may decline over time as data entry improves
 		

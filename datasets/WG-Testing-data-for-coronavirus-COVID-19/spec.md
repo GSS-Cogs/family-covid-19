@@ -15,26 +15,27 @@
 ### Dataset One
 
 #### Output Dataset Name:
-	Coronavirus COVID-19 attendance in education and early years settings
+	name
 
 #### Table Structure
-	Period, Attendance in Education Settings, Marker, Measure Type, Unit, Value 
+	Period, ************, Marker, Measure Type, Unit, Value 
 
-#### Sheet: COVID-19 attendance
+#### Sheet: Completed_tests
 
-	A3:A37 - Date - Change name to Period and format as required
-	
-	B - Day - Not needed can be defined from the date
-	
-	C2:K2 - Attendance in Education Settings (codelist)
-	
-	L - Notes - Change to Marker - change values as follows:
-		See notes section at bottom of table --- See Metadata for Methodology
-		
-	Add Measure Type column with values People and Percentage as required
-	
-	Add Unit column with values Count and Percent as required
+	Spec
+
+#### Sheet: Critical_workers_category
+
+	Spec
+
+#### Sheet: Critical_workers_detail
+
+	Spec
+
+#### Sheet: Location_tests
+
+	Spec
 
 ##### Footnotes
-	Footnotes need to be added to the metadata and the Notes (Marker) column changed as mentioned above
+	Footnotes 
 		

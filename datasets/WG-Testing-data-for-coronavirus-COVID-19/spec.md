@@ -24,7 +24,7 @@
 
 	A - Date - Change name to Period and format as required
 
-	B:C - Test Outcome
+	B:C - Test Outcome (Codelist)
 	
 		Cumulative individuals tested - Total
 		Cumulative positive cases - Positive
@@ -90,7 +90,7 @@
 		% results within 3 days - Results within 3 Days
 
 
-	A9:A11 - Test Location
+	A9:A11 - Test Location (Codelist)
 		Tested in hospital - Hospital
 		Tested ar coronavirus testing unit - Coronavirus Testing Unit
 		Testing as drive-through centres - Drive-through Centres

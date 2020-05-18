@@ -89,19 +89,19 @@ cogsgit:columns1 a cogs:Columns ;
 .
 cogsgit:columns2 a cogs:Columns ;
   rdfs:comment "Period, Emergency Assistance Payments, Measure Type, Unit, Marker, Value" ;
-  cogs:uploads cogsgit:pmd2 ;
+  cogs:uploads cogsgit:pmd1 ;
 .
 cogsgit:columns3 a cogs:Columns ;
   rdfs:comment "Period, Business Rate Grants, Measure Type, Unit, Marker, Value" ;
-  cogs:uploads cogsgit:pmd3 ;
+  cogs:uploads cogsgit:pmd1 ;
 .
 cogsgit:columns4 a cogs:Columns ;
   rdfs:comment "Period, Development West Bank Loans, Measure Type, Unit, Marker, Value" ;
-  cogs:uploads cogsgit:pmd4 ;
+  cogs:uploads cogsgit:pmd1 ;
 .
 cogsgit:columns5 a cogs:Columns ;
   rdfs:comment "Period, Economic Resilience Fund, Measure Type, Unit, Marker, Value" ;
-  cogs:uploads cogsgit:pmd5 ;
+  cogs:uploads cogsgit:pmd1 ;
 .
 
 cogsgit:pmd1 a cogs:PMD ;

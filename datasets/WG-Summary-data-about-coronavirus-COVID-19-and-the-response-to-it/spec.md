@@ -16,8 +16,8 @@
 
 #### Output Dataset Name:
 
-		WG Food Parcels
-
+		WG COVID-19 Food Parcel Support
+		
 #### Table Structure
 
 		Period, Food Parcel Status, Measure Type, Unit, Marker, Value
@@ -40,81 +40,58 @@
 
 #### Output Dataset Name:
 
-		WG Emergency Assistance Payments
+		WG COVID-19 Support Response
 
 #### Table Structure
 
-		Period, Emergency Assistance Payments, Measure Type, Unit, Marker, Value
+		Period, Support Type, Finance Type, Measure Type, Unit, Marker, Value
 
 #### Sheet: Discretionary_Assistance_Fund
 
 		A8:A57 - Date - Change name to Period and format as required
 			Time period for Total needs to be added for totals in row 58
-		B7:C7 - Emergency Assistance Payments (Codelist)
-			COVID-19 related Payments
-			Normal EAP Payments
+		B7:C7 - Finance Type (Codelist)
+			COVID-19 related Payments - COVID-19 Related
+			Normal EAP Payments - Normal EAP
+		Add Support Type Column with value Emergency Assistance
 		Add Measure Type column with value Payments
 		Add Unit column with value Count
 
-### Dataset Three
-
-#### Output Dataset Name:
-
-		WG Business Rate Grants
-
-#### Table Structure
-
-		Period, Business Rate Grants, Measure Type, Unit, Marker, Value
 		
 #### Sheet: Business_Rates_Grants
 
 		A7:A20 - Date - Change name to Period and format as required
-		B6:C6 - Business Rate Grants
+		B6:C6 - Finance Type
 			Number of business rates grants awarded (cumulative) - Awarded
 			Amount awarded in business rates grants (£m) (cumulative) - Awarded
+		Add Support Type Column with value Business Rate Grants
 		Add Measure Type column with values Cumulative Count and Cumulative GBP Million
 		Add Unit column with values Count and GBP 		
 
-### Dataset Four
-
-#### Output Dataset Name:
-
-		WG Development West Bank Loans
-
-#### Table Structure
-
-		Period, Development West Bank Loans, Measure Type, Unit, Marker, Value
 		
 #### Sheet: DBW_loans
 
 		A7:A15 - Date - Change name to Period and format as required
-		B6:C6 - Development West Bank Loans (Codelist)
+		B6:C6 - Finance Type (Codelist)
 			Number of DBW loans approved (cumulative) - Approved
 			Amount approved in DBW loans (£m) (cumulative) - Approved
+		Add Support Type Column with value Development Wales Bank Loans
 		Add Measure Type column with values Cumulative Count and Cumulative GBP Million
 		Add Unit column with values Count and GBP 
 
-### Dataset Five
-
-#### Output Dataset Name:
-
-		WG Economic Resilience Fund
-		
-#### Table Structure
-
-		Period, Economic Resilience Fund, Measure Type, Unit, Marker, Value
 		
 #### Sheet: ERF
 
 		A7:A12 - Date - Change name to Period and format as required
-		B6:G6 - Economic Resilience Fund (Codelist)
-			Micro-business applications (cumulative) - Micro-business applications
-			Micro-business amount applied for (£m) (cumulative) - Micro-business applications
-			SME applications (cumulative) - SME applications
-			SME aunt applied for (£m) (cumulative) - SME applications
+		B6:G6 - Finance Type (Codelist)
+			Micro-business applications (cumulative) - Micro-business
+			Micro-business amount applied for (£m) (cumulative) - Micro-business
+			SME applications (cumulative) - SME
+			SME amount applied for (£m) (cumulative) - SME
 			Total applications (cumulative) - Total
 			Total amount applied for (£m)(cumulative) - Total 
-		Add Measure Type column with values Cumulative Count and Cumulative GBP Million
+		Add Support Type Column with value Economic Resilience Fund
+		Add Measure Type column with values Cumulative Applications and Cumulative GBP Million
 		Add Unit column with values Count and GBP 
 		
 

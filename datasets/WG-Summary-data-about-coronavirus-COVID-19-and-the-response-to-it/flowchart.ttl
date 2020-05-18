@@ -37,7 +37,7 @@ cogs:PMD a owl:Class ;
 cogsgit:top-level a cogs:LandingPage ;
   rdfs:label "WG Summary data about coronavirus  COVID-19  and the response to it " ;
   rdfs:comment "https://gov.wales/summary-data-about-coronavirus-covid-19-and-response-it";
-  cogs:splits cogsgit:sheet1 ;
+  cogs:splits cogsgit:sheet1, cogsgit:sheet2, cogsgit:sheet3, cogsgit:sheet4, cogsgit:sheet5 ;
 .
 
 cogsgit:sheet1 a cogs:Sheets ;

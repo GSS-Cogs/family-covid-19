@@ -41,70 +41,86 @@ cogsgit:top-level a cogs:LandingPage ;
 .
 
 cogsgit:sheet1 a cogs:Sheets ;
+  rdfs:label "" ;
   rdfs:comment "Food Parcels" ;
   cogs:transforms cogsgit:dataset1 ;
 .
 cogsgit:sheet2 a cogs:Sheets ;
+  rdfs:label "" ;
   rdfs:comment "Discretionary_Assistance_Fund" ;
   cogs:transforms cogsgit:dataset2 ;
 .
 cogsgit:sheet3 a cogs:Sheets ;
+  rdfs:label "" ;
   rdfs:comment "Business_Rates_Grants" ;
   cogs:transforms cogsgit:dataset3 ;
 .
 cogsgit:sheet4 a cogs:Sheets ;
+  rdfs:label "" ;
   rdfs:comment "DBW_loans" ;
   cogs:transforms cogsgit:dataset4 ;
 .
 cogsgit:sheet5 a cogs:Sheets ;
+  rdfs:label "" ;
   rdfs:comment "ERF" ;
   cogs:transforms cogsgit:dataset5 ;
 .
 
 cogsgit:dataset1 a cogs:Datasets ;
+  rdfs:label "" ;
   rdfs:comment "WG Food Parcels" ;
   cogs:outputs cogsgit:columns1 ;
 .
 cogsgit:dataset2 a cogs:Datasets ;
+  rdfs:label "" ;
   rdfs:comment "WG Emergency Assistance Payments" ;
   cogs:outputs cogsgit:columns2 ;
 .
 cogsgit:dataset3 a cogs:Datasets ;
+  rdfs:label "" ;
   rdfs:comment "WG Business Rate Grants" ;
   cogs:outputs cogsgit:columns3 ;
 .
 cogsgit:dataset4 a cogs:Datasets ;
+  rdfs:label "" ;
   rdfs:comment "WG Development West Bank Loans" ;
   cogs:outputs cogsgit:columns4 ;
 .
 cogsgit:dataset5 a cogs:Datasets ;
+  rdfs:label "" ;
   rdfs:comment "WG Economic Resilience Fund" ;
   cogs:outputs cogsgit:columns5 ;
 .
 
 
 cogsgit:columns1 a cogs:Columns ;
+  rdfs:label "" ;
   rdfs:comment "Period, Food Parcel Status, Measure Type, Unit, Marker, Value" ;
   cogs:uploads cogsgit:pmd1 ;
 .
 cogsgit:columns2 a cogs:Columns ;
+  rdfs:label "" ;
   rdfs:comment "Period, Emergency Assistance Payments, Measure Type, Unit, Marker, Value" ;
   cogs:uploads cogsgit:pmd1 ;
 .
 cogsgit:columns3 a cogs:Columns ;
+  rdfs:label "" ;
   rdfs:comment "Period, Business Rate Grants, Measure Type, Unit, Marker, Value" ;
   cogs:uploads cogsgit:pmd1 ;
 .
 cogsgit:columns4 a cogs:Columns ;
+  rdfs:label "" ;
   rdfs:comment "Period, Development West Bank Loans, Measure Type, Unit, Marker, Value" ;
   cogs:uploads cogsgit:pmd1 ;
 .
 cogsgit:columns5 a cogs:Columns ;
+  rdfs:label "" ;
   rdfs:comment "Period, Economic Resilience Fund, Measure Type, Unit, Marker, Value" ;
   cogs:uploads cogsgit:pmd1 ;
 .
 
 cogsgit:pmd1 a cogs:PMD ;
+  rdfs:label "" ;
   rdfs:comment "Publish my Data: http://gss-data.org.uk/data/search" ;
 .
 ###################################################################################################

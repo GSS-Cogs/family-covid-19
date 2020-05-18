@@ -1,0 +1,19 @@
+{
+    "title": "Inflation and price indices",
+    "publisher": "Office for National Statistics",
+    "description": "",
+    "landingPage": "https://www.ons.gov.uk/economy/inflationandpriceindices",
+    "published": "",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": ""
+    },
+    "transform": {
+        "airtable": "rechOIXej7QvMnRnz",
+        "main_issue": 53
+    },
+    "sizingNotes": "",
+    "notes": ""
+}

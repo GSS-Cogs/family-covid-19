@@ -1,0 +1,19 @@
+{
+    "title": "Coronavirus and the social impacts on those with a disability in Great Britain",
+    "publisher": "Office for National Statistics",
+    "description": "",
+    "landingPage": "https://www.gov.uk/government/statistics/coronavirus-and-the-social-impacts-on-those-with-a-disability-in-great-britain",
+    "published": "",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": ""
+    },
+    "transform": {
+        "airtable": "recSDY00FsOlKUMAr",
+        "main_issue": 45
+    },
+    "sizingNotes": "",
+    "notes": ""
+}

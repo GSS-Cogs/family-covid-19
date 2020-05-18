@@ -1,0 +1,19 @@
+{
+    "title": "Deaths involving COVID-19, England and Wales: deaths occurring in April 2020",
+    "publisher": "Office for National Statistics",
+    "description": "",
+    "landingPage": "https://www.ons.gov.uk/peoplepopulationandcommunity/birthsdeathsandmarriages/deaths/bulletins/deathsinvolvingcovid19englandandwales/deathsoccurringinapril2020",
+    "published": "",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": ""
+    },
+    "transform": {
+        "airtable": "recxT5QTP96yJRxbQ",
+        "main_issue": 57
+    },
+    "sizingNotes": "",
+    "notes": ""
+}

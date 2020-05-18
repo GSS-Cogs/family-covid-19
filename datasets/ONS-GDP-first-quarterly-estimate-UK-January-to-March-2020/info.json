@@ -1,0 +1,19 @@
+{
+    "title": "GDP first quarterly estimate, UK: January to March 2020",
+    "publisher": "Office for National Statistics",
+    "description": "",
+    "landingPage": "https://www.ons.gov.uk/economy/grossdomesticproductgdp/bulletins/gdpfirstquarterlyestimateuk/januarytomarch2020",
+    "published": "",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": ""
+    },
+    "transform": {
+        "airtable": "recuKofNtUbaY9up8",
+        "main_issue": 56
+    },
+    "sizingNotes": "",
+    "notes": ""
+}

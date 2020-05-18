@@ -1,7 +1,7 @@
 {
     "title": "Building materials and components: monthly statistics",
     "publisher": "Department for Business, Energy and Industrial Strategy",
-    "description": "Monthly",
+    "description": "",
     "landingPage": "https://www.gov.uk/government/collections/building-materials-and-components-monthly-statistics-2012",
     "datasetNotes": [
         "On the landing page scroll to '2020 monthly bulletins' and click n the latest release, this will open a new page "
@@ -18,5 +18,5 @@
         "main_issue": 34
     },
     "sizingNotes": "",
-    "notes": "Although not specifically Covid-19  the spreadsheets may allow the impact of the pandemic to be derived."
+    "notes": "Although not specifically Covid-19  the spreadsheets may allow the impact of the pandemic to be derived in the future."
 }

@@ -1,0 +1,22 @@
+{
+    "title": "Animal feed prices",
+    "publisher": "Department for Environment Food & Rural Affairs",
+    "description": "Series of straights and compound animal feed prices across Great Britain.",
+    "landingPage": "https://www.gov.uk/government/statistical-data-sets/animal-feed-prices",
+    "datasetNotes": [
+        "On the landing page Straights feed price is available in an ODS and Machine readable format. "
+    ],
+    "published": "2020-05-07",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": "ODS, CSV"
+    },
+    "transform": {
+        "airtable": "recfmI4998m5VHckL",
+        "main_issue": 52
+    },
+    "sizingNotes": "A machine readable CSV is available. Simple table structure with some foot notes.",
+    "notes": "Although not specifically Covid-19  the spreadsheets may allow the impact of the pandemic to be derived.  Contact details are for 2020 the contact details change for each year and are provided on the yearly tab."
+}

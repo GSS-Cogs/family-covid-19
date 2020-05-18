@@ -1,0 +1,19 @@
+{
+    "title": "Deaths involving COVID-19 in the care sector, England and Wales: deaths occurring up to 1 May 2020 and registered up to 9 May 2020 (provisional)",
+    "publisher": "Office for National Statistics",
+    "description": "",
+    "landingPage": "https://www.ons.gov.uk/peoplepopulationandcommunity/birthsdeathsandmarriages/deaths/articles/deathsinvolvingcovid19inthecaresectorenglandandwales/deathsoccurringupto1may2020andregisteredupto9may2020provisional",
+    "published": "",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": ""
+    },
+    "transform": {
+        "airtable": "rec1fNhJAawQhyw6q",
+        "main_issue": 37
+    },
+    "sizingNotes": "",
+    "notes": ""
+}

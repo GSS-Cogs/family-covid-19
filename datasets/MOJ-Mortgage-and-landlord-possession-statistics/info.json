@@ -1,0 +1,22 @@
+{
+    "title": "Mortgage and landlord possession statistics",
+    "publisher": "Ministry of Justice",
+    "description": "Possession claim actions in county courts by mortgage lenders and social and private landlords.\nThis release contains an additional annex related to coronavirus (COVID-19). This annex provides further detail of the early impact of COVID-19 related actions on possession actions in March 2020. Further analysis of the impact on possession claims will be provided in future publications.",
+    "landingPage": "https://www.gov.uk/government/collections/mortgage-and-landlord-possession-statistics",
+    "datasetNotes": [
+        "On the landing page page scroll to documents and click on the latest release, this will open a new window, the data can be found under documents, as an ODS and the CVS in a zip file."
+    ],
+    "published": "2020-05-14",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": "ODS, CSV"
+    },
+    "transform": {
+        "airtable": "recVK5EozM8FUQsnU",
+        "main_issue": 46
+    },
+    "sizingNotes": "Mostly simple table structure with some foot notes.  Some of the table structures differ, some tables are available as a CVS.",
+    "notes": ""
+}

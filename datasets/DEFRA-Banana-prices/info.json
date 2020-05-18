@@ -1,0 +1,22 @@
+{
+    "title": "Banana prices",
+    "publisher": "Department for Environment Food & Rural Affairs",
+    "description": "Average weekly wholesale prices of bananas by country of origin",
+    "landingPage": "https://www.gov.uk/government/statistical-data-sets/banana-prices",
+    "datasetNotes": [
+        "On the landing page scroll down to Weekly price time series, 2015 to 2020."
+    ],
+    "published": "2020-05-18",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": "ODS"
+    },
+    "transform": {
+        "airtable": "recZxiP9QwwMSZyRE",
+        "main_issue": 48
+    },
+    "sizingNotes": "Simple table structure with some foot notes",
+    "notes": "Although not specifically Covid-19  the spreadsheets may allow the impact of the pandemic to be derived.  Contact details are for 2020 the contact details change for each year and are provided on the yearly tab."
+}

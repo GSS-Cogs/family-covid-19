@@ -1,0 +1,22 @@
+{
+    "title": "Monthly Insolvency Statistics",
+    "publisher": "The Insolvency Service",
+    "description": "Monthly insolvency statistics in response to the coronavirus (COVID-19) pandemic.",
+    "landingPage": "https://www.gov.uk/government/collections/monthly-insolvency-statistics",
+    "datasetNotes": [
+        "On the landing page scroll down to Documents and click on the latest release, another page will open scroll down to Documents and the data is available in an ODS and XLS format."
+    ],
+    "published": "2020-05-15",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": "XLS, ODS"
+    },
+    "transform": {
+        "airtable": "recazeOya303uMlZt",
+        "main_issue": 49
+    },
+    "sizingNotes": "Messy table structure with footnotes and a mixture of figures and %",
+    "notes": ""
+}

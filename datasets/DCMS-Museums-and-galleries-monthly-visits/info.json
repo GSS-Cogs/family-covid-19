@@ -1,0 +1,22 @@
+{
+    "title": "Museums and galleries monthly visits",
+    "publisher": "Department for Digital, Culture, Media & Sport",
+    "description": "Monthly provisional statistics on the number of visits to the DCMS-sponsored museums and galleries are published here every quarter.",
+    "landingPage": "https://www.gov.uk/government/statistical-data-sets/museums-and-galleries-monthly-visits",
+    "datasetNotes": [
+        "On the landing page available in XLS and CSV formats"
+    ],
+    "published": "2020-04-23",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": "XLS, CSV"
+    },
+    "transform": {
+        "airtable": "rec7YGAUZuvT1KO7I",
+        "main_issue": 39
+    },
+    "sizingNotes": "Multiple Simple table structure on 2 tabs tables on each tab are a different format.  Financial period.",
+    "notes": "Although not specifically Covid-19  the spreadsheets may allow the impact of the pandemic to be derived."
+}

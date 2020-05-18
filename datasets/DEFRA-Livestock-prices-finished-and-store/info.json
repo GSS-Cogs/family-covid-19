@@ -1,0 +1,22 @@
+{
+    "title": "Livestock prices, finished and store",
+    "publisher": "Department for Environment Food & Rural Affairs",
+    "description": "Average prices for cattle, sheep and pigs sold at store and finished auction markets in Great Britain.",
+    "landingPage": "https://www.gov.uk/government/statistical-data-sets/livestock-prices-finished-and-store",
+    "datasetNotes": [
+        "On the landing page there are machine readable CSVs."
+    ],
+    "published": "2020-04-21",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": "CSV, ODS"
+    },
+    "transform": {
+        "airtable": "recRpryfH9n6HARgF",
+        "main_issue": 44
+    },
+    "sizingNotes": "2 machine readable CSVs are available on the landing page",
+    "notes": "Although not specifically Covid-19  the spreadsheets may allow the impact of the pandemic to be derived.  Contact details are for 2020 the contact details change for each year and are provided on the yearly tab."
+}

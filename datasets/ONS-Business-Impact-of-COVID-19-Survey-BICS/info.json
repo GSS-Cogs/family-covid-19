@@ -1,0 +1,19 @@
+{
+    "title": "Business Impact of COVID-19 Survey (BICS)",
+    "publisher": "Office for National Statistics",
+    "description": "",
+    "landingPage": "https://www.ons.gov.uk/economy/economicoutputandproductivity/output/datasets/businessimpactofcovid19surveybics",
+    "published": "",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": ""
+    },
+    "transform": {
+        "airtable": "recCWAp0ERFXwddQw",
+        "main_issue": 40
+    },
+    "sizingNotes": "",
+    "notes": ""
+}

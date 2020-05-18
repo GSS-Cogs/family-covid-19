@@ -1,0 +1,19 @@
+{
+    "title": "UK trade in goods statistics",
+    "publisher": "HM Revenue & Customs",
+    "description": "UK Overseas Trade Statistics and Regional Trade Statistics at summary product and country level, and by UK regions and devolved administrations.",
+    "landingPage": "https://www.gov.uk/government/collections/uk-overseas-trade-statistics-and-regional-trade-statistics",
+    "published": "",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": ""
+    },
+    "transform": {
+        "airtable": "recb9lDNjuR1KuWkD",
+        "main_issue": 50
+    },
+    "sizingNotes": "",
+    "notes": "Although not specifically Covid-19  the spreadsheets may allow the impact of the pandemic to be derived. This is already been picked up as part  of trade family."
+}

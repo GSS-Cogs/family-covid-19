@@ -1,0 +1,19 @@
+{
+    "title": "Access to gardens and public green space in Great Britain",
+    "publisher": "Office for National Statistics",
+    "description": "",
+    "landingPage": "https://www.ons.gov.uk/releases/accesstogardensandpublicgreenspaceingreatbritain",
+    "published": "",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": ""
+    },
+    "transform": {
+        "airtable": "rec3ws3XttvtlV2Hr",
+        "main_issue": 38
+    },
+    "sizingNotes": "",
+    "notes": ""
+}

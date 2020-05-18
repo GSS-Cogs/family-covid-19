@@ -1,0 +1,22 @@
+{
+    "title": "Wholesale fruit and vegetable prices",
+    "publisher": "Department for Environment Food & Rural Affairs",
+    "description": "Series of weekly average wholesale market prices of selected home grown horticultural produce.",
+    "landingPage": "https://www.gov.uk/government/statistical-data-sets/wholesale-fruit-and-vegetable-prices-weekly-average",
+    "datasetNotes": [
+        "On the landing page scroll down to Weekly price time series, 2015 to 2020.  this is available as XLS and ODS"
+    ],
+    "published": "2020-05-18",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": "XLS, ODS"
+    },
+    "transform": {
+        "airtable": "rece6piGKm5WA4BOO",
+        "main_issue": 51
+    },
+    "sizingNotes": "Simple table structure with some foot notes",
+    "notes": "Although not specifically Covid-19  the spreadsheets may allow the impact of the pandemic to be derived.  Contact details are for 2020 the contact details change for each year and are provided on the yearly tab."
+}

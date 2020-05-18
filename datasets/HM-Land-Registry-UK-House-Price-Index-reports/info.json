@@ -1,0 +1,22 @@
+{
+    "title": "UK House Price Index: reports",
+    "publisher": "HM Land Registry",
+    "description": "Reports for the UK House Price Index (UK HPI) for England, Scotland, Wales and Northern Ireland, including in CSV format.",
+    "landingPage": "https://www.gov.uk/government/collections/uk-house-price-index-reports",
+    "datasetNotes": [
+        "On the landing page scroll down to the most recent date and click on the data downloads link this will open another page  scroll down to full file and click on the link this will open a csv file."
+    ],
+    "published": "2020-04-22",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": "CSV"
+    },
+    "transform": {
+        "airtable": "recIecVHH7mkXwTqi",
+        "main_issue": 42
+    },
+    "sizingNotes": "The full download is available as a CSV",
+    "notes": "Although not specifically Covid-19, it is mentioned in the report, the impact of the pandemic may be derived."
+}

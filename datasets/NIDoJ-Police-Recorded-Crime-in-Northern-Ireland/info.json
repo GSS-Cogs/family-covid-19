@@ -4,7 +4,7 @@
     "description": "Latest police recorded crime statistics.. Each monthly update provides statistics covering the latest 24 months.",
     "landingPage": "https://www.psni.police.uk/inside-psni/Statistics/police-recorded-crime-statistics/",
     "datasetNotes": [
-        "On landing page scroll to middle of page where latest monthly dataset will appear under heading \"Crime tables\". There is now an exceptional weekly statistical bulletin due to COVID19 which has taken the place of the monthly report untill end June but no weekly dataset present, just pdf."
+        "On landing page scroll to middle of page where latest monthly dataset will appear under heading \"Crime tables\". There is now an exceptional weekly statistical bulletin due to COVID19 which has taken the place of the monthly report untill end June but no weekly dataset present, just pdf. No specific COVID data, hence, not required at present."
     ],
     "published": "2020-03-26",
     "families": [

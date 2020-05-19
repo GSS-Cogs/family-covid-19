@@ -42,7 +42,7 @@ cogsgit:top-level a cogs:LandingPage ;
 
 cogsgit:sheet1 a cogs:Sheets ;
   rdfs:label "" ;
-  rdfs:comment "coronavirus-cases_latest, coronavirus-deaths_latest" ;
+  rdfs:comment "Also available as JSON, coronavirus-cases_latest.csv -> coronavirus-cases_latest, coronavirus-deaths_latest.csv -> coronavirus-deaths_latest" ;
   cogs:transforms cogsgit:dataset1 ;
 .
 

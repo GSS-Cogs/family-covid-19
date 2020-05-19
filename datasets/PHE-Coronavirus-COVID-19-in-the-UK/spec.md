@@ -22,7 +22,7 @@
 
 		Period, ONS Geography Code, Area Type, Reported Case Type, Measure Type, Unit, Marker, Value
 
-#### Filename: coronavirus-cases_latest.csv
+#### Filename: coronavirus-cases_latest.csv (Also available as JSON)
 
 #### Sheet: coronavirus-cases_latest
 
@@ -34,7 +34,7 @@
 		Add Measure Type column with values Cases and Rate
 		Add Unit column with value Count
 
-#### Filename: coronavirus-deaths_latest.csv
+#### Filename: coronavirus-deaths_latest.csv (Also available as JSON)
 
 #### Sheet: coronavirus-deaths_latest
 

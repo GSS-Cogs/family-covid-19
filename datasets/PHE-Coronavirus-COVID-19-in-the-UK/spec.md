@@ -1,8 +1,8 @@
 # COGS Dataset Specification
 
-[Family Home](https://gss-cogs.github.io/family-covid-19-AIRTABLE/datasets/specmenu.html)
+[Family Home](https://gss-cogs.github.io/family-covid-19/datasets/specmenu.html)
 
-[Family Transform Status](https://gss-cogs.github.io/family-covid-19-AIRTABLE/datasets/index.html)
+[Family Transform Status](https://gss-cogs.github.io/family-covid-19/datasets/index.html)
 
 ## PHE Coronavirus  COVID-19  in the UK 
 

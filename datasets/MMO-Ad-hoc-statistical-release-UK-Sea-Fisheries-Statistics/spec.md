@@ -93,9 +93,9 @@
 		A high volume landing of mackerel by an English vessel has missing data. Therefore, to give a more realistic estimate, the value for this landing has been imputed based on March 2019 mackerel prices
 
 
-**DM Notes**
+#### DM Notes
 
-Intro													
+##### Intro													
 														
 The MMO publishes national statistics on fishing activity across the UK on a monthly basis with a two month lag: 
 https://www.gov.uk/government/collections/monthly-uk-sea-fisheries-statistics.
@@ -107,7 +107,7 @@ In publishing more timely data we are accepting a reduction in data quality as t
 We welcome feedback on this publication. Please submit your comments here: https://forms.gle/Qoaty1byCddJYryb9.
 												
 
-**Glossary**	
+##### Glossary	
 	
 Demersal: Species of demersal fish inhabit the bottom of the ocean. Key demersal species fished by the UK fleet include cod, haddock and whiting. 
 	

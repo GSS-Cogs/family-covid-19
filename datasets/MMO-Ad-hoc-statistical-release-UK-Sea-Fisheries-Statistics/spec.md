@@ -50,6 +50,7 @@
 
 		D6:E6 - Year - change to Period and format as required
 		B:C - Country & Admin Port - change to ONS Geography Code and change values to 9 digit codes
+			Ignore Unknown rows for now as we currently do not have a Geography code for it
 		Add Vessel Length column with value All
 		Add Species Group column with value All
 		F, J, N Change has latest Year in Period column

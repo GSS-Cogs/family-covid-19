@@ -10,7 +10,7 @@
 
 [Landing Page](https://coronavirus.data.gov.uk/?_ga=2.156389567.589199403.1589439040-1962094972.1582617556)
 
-[Transform Flowchart](https://gss-cogs.github.io/family-covid-19-AIRTABLE/datasets/specflowcharts.html?phe-coronavirus-covid-19-in-the-uk/flowchart.ttl)
+[Transform Flowchart](https://gss-cogs.github.io/family-covid-19/datasets/specflowcharts.html?phe-coronavirus-covid-19-in-the-uk/flowchart.ttl)
 
 ### Dataset One
 

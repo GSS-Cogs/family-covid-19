@@ -10,7 +10,7 @@
 
 [Landing Page](https://www.gov.uk/government/collections/ad-hoc-statistical-releases-sea-fisheries-statistics)
 
-[Transform Flowchart](https://gss-cogs.github.io/family-covid-19/datasets/specflowcharts.html?mmo-ad-hoc-statistical-release-uk-sea-fisheries-statistics/flowchart.ttl)
+[Transform Flowchart](https://gss-cogs.github.io/family-covid-19/datasets/specflowcharts.html?MMO-Ad-hoc-statistical-release-UK-Sea-Fisheries-Statistics/flowchart.ttl)
 
 ### Dataset One
 

@@ -16,7 +16,10 @@
     },
     "transform": {
         "airtable": "recOgjCe0veZiYSBc",
-        "main_issue": 3
+        "main_issue": 3,
+        "stage": [
+            "To Do"
+        ]
     },
     "sizingNotes": "Simple table with straightforward dimensions.",
     "notes": ""

@@ -11,11 +11,16 @@
         "COVID-19"
     ],
     "extract": {
-        "source": "CSV, JSON"
+        "source": "CSV, JSON",
+        "stage": "Documented"
     },
     "transform": {
         "airtable": "recyr2nSSQUdgJrRK",
-        "main_issue": 36
+        "main_issue": 36,
+        "stage": [
+            "To Do",
+            "Priority"
+        ]
     },
     "sizingNotes": "Available as 2 CSV or JSON files.",
     "notes": ""

@@ -16,7 +16,10 @@
     },
     "transform": {
         "airtable": "rect9SYDUUUMql7AG",
-        "main_issue": 33
+        "main_issue": 33,
+        "stage": [
+            "Hold"
+        ]
     },
     "sizingNotes": "Messy table structure with multiple tables on some tabs, multiple dimensions/sub-dimensions and multiple footnotes. Embedded graphs present.",
     "notes": ""

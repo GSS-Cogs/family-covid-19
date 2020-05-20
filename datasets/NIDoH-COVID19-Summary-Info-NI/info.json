@@ -11,7 +11,8 @@
         "COVID-19"
     ],
     "extract": {
-        "source": "Power BI"
+        "source": "Power BI",
+        "stage": "Candidate"
     },
     "transform": {
         "airtable": "recSdxPHl7NKhkSLH",

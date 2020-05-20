@@ -13,7 +13,10 @@
     },
     "transform": {
         "airtable": "recvZp0Mts20HjW3V",
-        "main_issue": 35
+        "main_issue": 35,
+        "stage": [
+            "Hold"
+        ]
     },
     "sizingNotes": "",
     "notes": ""

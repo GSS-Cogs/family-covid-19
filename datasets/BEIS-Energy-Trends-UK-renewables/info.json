@@ -8,11 +8,15 @@
         "COVID-19"
     ],
     "extract": {
-        "source": "XLS"
+        "source": "XLS",
+        "stage": "Not Required"
     },
     "transform": {
         "airtable": "rece2iJpd8is5pgBm",
-        "main_issue": 27
+        "main_issue": 27,
+        "stage": [
+            "Hold"
+        ]
     },
     "sizingNotes": "",
     "notes": "Although not specifically Covid-19  the spreadsheets may allow the impact of the pandemic to be derived in the future."

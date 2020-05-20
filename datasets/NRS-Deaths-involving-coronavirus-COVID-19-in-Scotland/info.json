@@ -16,7 +16,10 @@
     },
     "transform": {
         "airtable": "reccCfhxfABKk4IZ0",
-        "main_issue": 8
+        "main_issue": 8,
+        "stage": [
+            "Hold"
+        ]
     },
     "sizingNotes": "Already online in Open Data format.",
     "notes": ""

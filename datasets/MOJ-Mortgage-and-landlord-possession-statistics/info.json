@@ -11,11 +11,15 @@
         "COVID-19"
     ],
     "extract": {
-        "source": "ODS, CSV"
+        "source": "ODS, CSV",
+        "stage": "Candidate"
     },
     "transform": {
         "airtable": "recVK5EozM8FUQsnU",
-        "main_issue": 46
+        "main_issue": 46,
+        "stage": [
+            "Hold"
+        ]
     },
     "sizingNotes": "Mostly simple table structure with some foot notes.  Some of the table structures differ, some tables are available as a CVS.",
     "notes": ""

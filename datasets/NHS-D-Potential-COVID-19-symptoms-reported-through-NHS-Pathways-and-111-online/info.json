@@ -11,11 +11,16 @@
         "COVID-19"
     ],
     "extract": {
-        "source": "XLS, CSV"
+        "source": "XLS, CSV",
+        "stage": "Documented"
     },
     "transform": {
         "airtable": "recLmieAYkBCgBZhh",
-        "main_issue": 20
+        "main_issue": 20,
+        "stage": [
+            "To Do",
+            "Priority"
+        ]
     },
     "sizingNotes": "Simple table structure. only 2 spreadsheets are required. it may be possible to combine the following files into one data set:  NHS Pathways Covid-19 data 2020 and 111 Online Covid-19 Open data.  Data description (XLS) and meta data (CSV) are also available on this page",
     "notes": ""

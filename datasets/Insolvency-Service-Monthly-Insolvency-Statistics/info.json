@@ -11,11 +11,15 @@
         "COVID-19"
     ],
     "extract": {
-        "source": "XLS, ODS"
+        "source": "XLS, ODS",
+        "stage": "Documented"
     },
     "transform": {
         "airtable": "recazeOya303uMlZt",
-        "main_issue": 49
+        "main_issue": 49,
+        "stage": [
+            "To Do"
+        ]
     },
     "sizingNotes": "Messy table structure with footnotes and a mixture of figures and %",
     "notes": ""

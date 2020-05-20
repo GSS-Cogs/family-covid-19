@@ -11,11 +11,15 @@
         "COVID-19"
     ],
     "extract": {
-        "source": "XLS, CSV, XML"
+        "source": "XLS, CSV, XML",
+        "stage": "Documented"
     },
     "transform": {
         "airtable": "recS04zJ2ogCDzDdS",
-        "main_issue": 23
+        "main_issue": 23,
+        "stage": [
+            "To Do"
+        ]
     },
     "sizingNotes": "Simple table structure,  with side notes, although there are a number of tabs for each year, it should be possible to obtain all of the information from the 'All years' tab",
     "notes": "Although not specifically Covid-19 the  spreadsheet may allow the impact of the pandemic to be derived."

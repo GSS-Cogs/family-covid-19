@@ -16,7 +16,10 @@
     },
     "transform": {
         "airtable": "recR7QK3eaMRPpG9v",
-        "main_issue": 4
+        "main_issue": 4,
+        "stage": [
+            "To Do"
+        ]
     },
     "sizingNotes": "Tabs are a mixture of data tables and charts. Data tables are simple in structure with multiple dimensions, some with several footnotes.",
     "notes": ""

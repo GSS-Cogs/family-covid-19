@@ -12,11 +12,15 @@
     ],
     "extract": {
         "source": "XLS",
-        "stage": "Candidate"
+        "stage": "Documented"
     },
     "transform": {
         "airtable": "recz2ijoq9hGcYMhT",
-        "main_issue": 15
+        "main_issue": 15,
+        "stage": [
+            "To Do",
+            "Priority"
+        ]
     },
     "sizingNotes": "Simple table structure with multiple dimensions and some footnotes.",
     "notes": "The Northern Ireland weekly deaths statistics have been extended to include information relating to respiratory and COVID-19 related deaths."

@@ -11,7 +11,8 @@
         "COVID-19"
     ],
     "extract": {
-        "source": "CSV"
+        "source": "CSV",
+        "stage": "Candidate"
     },
     "transform": {
         "airtable": "recIecVHH7mkXwTqi",

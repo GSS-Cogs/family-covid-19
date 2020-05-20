@@ -16,7 +16,10 @@
     },
     "transform": {
         "airtable": "recaOJyLEriApT7ui",
-        "main_issue": 26
+        "main_issue": 26,
+        "stage": [
+            "Hold"
+        ]
     },
     "sizingNotes": "Tables available as an API",
     "notes": "Licence details: https://opendata.gov.je/pages/open-government-licence-jersey-ogl-j-v1-0"

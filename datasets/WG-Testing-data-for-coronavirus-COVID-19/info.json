@@ -12,11 +12,15 @@
     ],
     "extract": {
         "source": "ODS",
-        "stage": "Prioritized"
+        "stage": "Documented"
     },
     "transform": {
         "airtable": "recgH0NiZiQOEzOAf",
-        "main_issue": 28
+        "main_issue": 28,
+        "stage": [
+            "To Do",
+            "Priority"
+        ]
     },
     "sizingNotes": "Simple table structure with a mixture of numbers and %",
     "notes": ""

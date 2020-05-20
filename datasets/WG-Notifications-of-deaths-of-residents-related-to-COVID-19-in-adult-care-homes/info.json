@@ -11,11 +11,16 @@
         "COVID-19"
     ],
     "extract": {
-        "source": "ODS"
+        "source": "ODS",
+        "stage": "Documented"
     },
     "transform": {
         "airtable": "recwEcBhoQtC3VyCl",
-        "main_issue": 13
+        "main_issue": 13,
+        "stage": [
+            "To Do",
+            "Priority"
+        ]
     },
     "sizingNotes": "Simple table structure although different formats across 7 tabs",
     "notes": "Email issued 05/05/2020"

@@ -11,11 +11,15 @@
         "COVID-19"
     ],
     "extract": {
-        "source": "XLS, ODS"
+        "source": "XLS, ODS",
+        "stage": "Documented"
     },
     "transform": {
         "airtable": "rece6piGKm5WA4BOO",
-        "main_issue": 51
+        "main_issue": 51,
+        "stage": [
+            "To Do"
+        ]
     },
     "sizingNotes": "Simple table structure with some foot notes",
     "notes": "Although not specifically Covid-19  the spreadsheets may allow the impact of the pandemic to be derived.  Contact details are for 2020 the contact details change for each year and are provided on the yearly tab."

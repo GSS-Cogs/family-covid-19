@@ -11,11 +11,15 @@
         "COVID-19"
     ],
     "extract": {
-        "source": "CSV, ODS"
+        "source": "CSV, ODS",
+        "stage": "Documented"
     },
     "transform": {
         "airtable": "recRpryfH9n6HARgF",
-        "main_issue": 44
+        "main_issue": 44,
+        "stage": [
+            "To Do"
+        ]
     },
     "sizingNotes": "2 machine readable CSVs are available on the landing page",
     "notes": "Although not specifically Covid-19  the spreadsheets may allow the impact of the pandemic to be derived.  Contact details are for 2020 the contact details change for each year and are provided on the yearly tab."

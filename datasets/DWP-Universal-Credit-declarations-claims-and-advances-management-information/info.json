@@ -12,11 +12,15 @@
     ],
     "extract": {
         "source": "ODS",
-        "stage": "Prioritized"
+        "stage": "Documented"
     },
     "transform": {
         "airtable": "recVbDfppAnRCi4q8",
-        "main_issue": 6
+        "main_issue": 6,
+        "stage": [
+            "To Do",
+            "Priority"
+        ]
     },
     "sizingNotes": "Simple table structure with some footnotes",
     "notes": "Email issued 06/05/2020"

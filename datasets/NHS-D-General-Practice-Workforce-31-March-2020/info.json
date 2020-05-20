@@ -13,7 +13,8 @@
         "source": ""
     },
     "transform": {
-        "airtable": "recUoiKb3po7DB95l"
+        "airtable": "recUoiKb3po7DB95l",
+        "main_issue": 66
     },
     "sizingNotes": "",
     "notes": ""

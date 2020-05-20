@@ -14,7 +14,8 @@
         "source": ""
     },
     "transform": {
-        "airtable": "rec0a03yeLrYOXZtn"
+        "airtable": "rec0a03yeLrYOXZtn",
+        "main_issue": 59
     },
     "sizingNotes": "",
     "notes": "The next release will cover the period impacted by Covid-19"

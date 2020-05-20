@@ -14,7 +14,8 @@
         "source": ""
     },
     "transform": {
-        "airtable": "recFxXak6bGzxZxll"
+        "airtable": "recFxXak6bGzxZxll",
+        "main_issue": 63
     },
     "sizingNotes": "A number of messy tables",
     "notes": ""

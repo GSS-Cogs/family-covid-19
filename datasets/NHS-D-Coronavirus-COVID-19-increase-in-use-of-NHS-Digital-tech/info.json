@@ -14,7 +14,8 @@
         "source": "XLS"
     },
     "transform": {
-        "airtable": "recDkTxd14s1WPZ4O"
+        "airtable": "recDkTxd14s1WPZ4O",
+        "main_issue": 62
     },
     "sizingNotes": "4 basic XLS spreadsheets with minimum information.  It may be possible to obtain data to support some of the charts that do not have a down data load option",
     "notes": ""

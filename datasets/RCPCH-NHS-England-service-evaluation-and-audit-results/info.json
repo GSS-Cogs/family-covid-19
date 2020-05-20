@@ -14,7 +14,8 @@
         "source": "CSV"
     },
     "transform": {
-        "airtable": "recfcI6Yha0k6WiKe"
+        "airtable": "recfcI6Yha0k6WiKe",
+        "main_issue": 69
     },
     "sizingNotes": "6 simple csv tables it should be possible t combine all data into one dataset",
     "notes": ""

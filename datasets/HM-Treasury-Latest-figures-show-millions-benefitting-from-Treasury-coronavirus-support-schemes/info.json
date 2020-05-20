@@ -14,7 +14,8 @@
         "source": "XLS"
     },
     "transform": {
-        "airtable": "recWTWF9bGrSToRAE"
+        "airtable": "recWTWF9bGrSToRAE",
+        "main_issue": 67
     },
     "sizingNotes": "4 tabs with a simple table structure.  Table 1 is not required as this is a summary and is included as a running total in the other 3 Tables.",
     "notes": ""

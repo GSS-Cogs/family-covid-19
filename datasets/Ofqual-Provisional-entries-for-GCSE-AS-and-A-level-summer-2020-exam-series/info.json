@@ -10,7 +10,8 @@
         "source": ""
     },
     "transform": {
-        "airtable": "recIyZvi5S63CqVtb"
+        "airtable": "recIyZvi5S63CqVtb",
+        "main_issue": 64
     },
     "sizingNotes": "",
     "notes": "These will be released may/June 2020 and will be impacted by Covid-19"

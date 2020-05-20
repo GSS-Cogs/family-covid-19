@@ -1,0 +1,18 @@
+{
+    "title": "Analysis of death registrations not associated with coronavirus (COVID-19), England and Wales: January 2020 to May 2020",
+    "publisher": "Office for National Statistics",
+    "description": "",
+    "landingPage": "https://www.ons.gov.uk/releases/analysisofdeathregistrationsnotassociatedwithcoronaviruscovid19englandandwalesjanuary2020tomay2020",
+    "published": "",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": ""
+    },
+    "transform": {
+        "airtable": "rec2731fHgz3UTw6L"
+    },
+    "sizingNotes": "",
+    "notes": ""
+}

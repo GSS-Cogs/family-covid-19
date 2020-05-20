@@ -1,0 +1,18 @@
+{
+    "title": "Passenger rail performance",
+    "publisher": "Office of Rail and Road",
+    "description": "",
+    "landingPage": "https://dataportal.orr.gov.uk/statistics/performance/passenger-rail-performance/",
+    "published": "",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": ""
+    },
+    "transform": {
+        "airtable": "recN8MLXpZ0Dnotop"
+    },
+    "sizingNotes": "",
+    "notes": "Although not specifically Covid-19, it is mentioned in the report, the impact of the pandemic may be derived."
+}

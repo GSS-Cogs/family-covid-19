@@ -1,0 +1,20 @@
+{
+    "title": "General Practice Workforce - 31 March 2020",
+    "publisher": "NHS Digital",
+    "description": "Detailed information about the GP workforce in General Practices, including by type, gender, age and staff movement. The publication includes information on the numbers and details of the GP workforce for England, NHS England regions, Health Education England regions and CCG regions.",
+    "datasetNotes": [
+        "Due 28 May"
+    ],
+    "published": "",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": ""
+    },
+    "transform": {
+        "airtable": "recUoiKb3po7DB95l"
+    },
+    "sizingNotes": "",
+    "notes": ""
+}

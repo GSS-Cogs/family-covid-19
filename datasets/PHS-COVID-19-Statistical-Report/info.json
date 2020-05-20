@@ -4,7 +4,7 @@
     "description": "This is the first release by Public Health Scotland on COVID-19 data across NHSScotland.",
     "landingPage": "https://beta.isdscotland.org/find-publications-and-data/population-health/covid-19/covid-19-statistical-report/",
     "datasetNotes": [
-        "On landing page, link to dataset of on left of page under heading \"Data Files\"."
+        "On landing page, link to dataset of on left of page under heading \"Data Files\".  There is an open data platform with the data.  Needs investigating"
     ],
     "published": "2020-05-06",
     "families": [

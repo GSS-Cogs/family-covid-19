@@ -1,0 +1,18 @@
+{
+    "title": "Life under coronavirus restrictions: How people spent their time between 28 March and 26 April 2020",
+    "publisher": "Office for National Statistics",
+    "description": "",
+    "landingPage": "https://www.gov.uk/government/statistics/announcements/life-under-coronavirus-restrictions-how-people-spent-their-time-between-28-march-and-26-april-2020",
+    "published": "",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": ""
+    },
+    "transform": {
+        "airtable": "recegBfqaC8OjchdQ"
+    },
+    "sizingNotes": "",
+    "notes": ""
+}

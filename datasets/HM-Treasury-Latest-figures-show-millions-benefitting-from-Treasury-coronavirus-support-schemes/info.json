@@ -1,0 +1,21 @@
+{
+    "title": "Latest figures show millions benefitting from Treasury coronavirus support schemes",
+    "publisher": "HM Treasury",
+    "description": "New figures on the UK-wide government support schemes for individuals and businesses have been published today, Tuesday 19 May 2020.",
+    "landingPage": "https://www.gov.uk/government/publications/latest-figures-show-millions-benefitting-from-treasury-coronavirus-support-schemes",
+    "datasetNotes": [
+        "On the landing page under documents click on the link Covid Business Lending Data"
+    ],
+    "published": "2020-05-19",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": "XLS"
+    },
+    "transform": {
+        "airtable": "recWTWF9bGrSToRAE"
+    },
+    "sizingNotes": "4 tabs with a simple table structure.  Table 1 is not required as this is a summary and is included as a running total in the other 3 Tables.",
+    "notes": ""
+}

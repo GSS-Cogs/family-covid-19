@@ -1,0 +1,18 @@
+{
+    "title": "COVID-19 Infection Survey (CIS)",
+    "publisher": "Office for National Statistics",
+    "description": "",
+    "landingPage": "https://www.ons.gov.uk/surveys/informationforhouseholdsandindividuals/householdandindividualsurveys/covid19infectionsurveycis",
+    "published": "",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": ""
+    },
+    "transform": {
+        "airtable": "rec0XUipYo912KVUL"
+    },
+    "sizingNotes": "",
+    "notes": ""
+}

@@ -1,0 +1,20 @@
+{
+    "title": "Statistics relating to Covid-19 and the immigration system, May 2020",
+    "publisher": "Home Office",
+    "description": "A statistical report showing the impact of Covid-19 on the immigration system, up to April 2020.",
+    "datasetNotes": [
+        "Due 28 May "
+    ],
+    "published": "",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": ""
+    },
+    "transform": {
+        "airtable": "recCh0vTQTwQ4rNbY"
+    },
+    "sizingNotes": "",
+    "notes": ""
+}

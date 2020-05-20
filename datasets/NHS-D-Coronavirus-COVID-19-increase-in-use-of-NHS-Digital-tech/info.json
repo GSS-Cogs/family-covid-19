@@ -1,0 +1,21 @@
+{
+    "title": "Coronavirus (COVID-19) increase in use of NHS Digital tech",
+    "publisher": "NHS Digital",
+    "description": "tatistics on uptake of our services",
+    "landingPage": "https://digital.nhs.uk/coronavirus/nhs-digital-tech-analytics",
+    "datasetNotes": [
+        "On the landing page data can be found underneath the charts and can be accessed via the down the data for this chart link."
+    ],
+    "published": "2020-05-01",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": "XLS"
+    },
+    "transform": {
+        "airtable": "recDkTxd14s1WPZ4O"
+    },
+    "sizingNotes": "4 basic XLS spreadsheets with minimum information.  It may be possible to obtain data to support some of the charts that do not have a down data load option",
+    "notes": ""
+}

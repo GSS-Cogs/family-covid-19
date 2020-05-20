@@ -1,0 +1,17 @@
+{
+    "title": "Provisional entries for GCSE, AS and A level: summer 2020 exam series",
+    "publisher": "Ofqual",
+    "description": "",
+    "published": "",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": ""
+    },
+    "transform": {
+        "airtable": "recIyZvi5S63CqVtb"
+    },
+    "sizingNotes": "",
+    "notes": "These will be released may/June 2020 and will be impacted by Covid-19"
+}

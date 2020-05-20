@@ -1,0 +1,20 @@
+{
+    "title": "COVID-19 Related Absence in the Northern Ireland Civil Service April 2020",
+    "publisher": "Northern Ireland Statistics and Research Agency",
+    "description": "Northern Ireland Statistics and Research Agency",
+    "datasetNotes": [
+        "Due 28 May"
+    ],
+    "published": "",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": ""
+    },
+    "transform": {
+        "airtable": "recx603mysPPBCLDf"
+    },
+    "sizingNotes": "",
+    "notes": ""
+}

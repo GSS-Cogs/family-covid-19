@@ -1,0 +1,21 @@
+{
+    "title": "NHS England service evaluation and audit - results",
+    "publisher": "Royal College of Paediatrics and Child Health",
+    "description": "Run by NHS England, this aims to provide important up-to-date information on the clinical aspects of COVID-19 while also determining the care needs of children admitted to hospital with COVID-19.",
+    "landingPage": "https://www.rcpch.ac.uk/resources/covid-19-service-evaluation-audit-care-needs-children-admitted-hospital-england#results",
+    "datasetNotes": [
+        "On the landing page scroll down to Results click on the download data link under each chart"
+    ],
+    "published": "2020-05-14",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": "CSV"
+    },
+    "transform": {
+        "airtable": "recfcI6Yha0k6WiKe"
+    },
+    "sizingNotes": "6 simple csv tables it should be possible t combine all data into one dataset",
+    "notes": ""
+}

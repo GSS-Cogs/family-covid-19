@@ -6,6 +6,8 @@
 
 ## NHS-D Potential COVID-19 symptoms reported through NHS Pathways and 111 online 
 
+### National Health Service
+
 [Landing Page](https://digital.nhs.uk/data-and-information/publications/statistical/mi-potential-covid-19-symptoms-reported-through-nhs-pathways-and-111-online)
 
 [Transform Flowchart](https://gss-cogs.github.io/family-covid-19-AIRTABLE/datasets/specflowcharts.html?nhs-d-potential-covid-19-symptoms-reported-through-nhs-pathways-and-111-online/flowchart.ttl)
@@ -14,21 +16,46 @@
 
 #### Output Dataset Name:
 
-		name
+		NHS Potential COVID-19 Symptoms reported through NHS Pathways and 111 Online
 
 #### Table Structure
 
-		Columns, Measure Type, Unit, Marker, Value
+		Period, Site Type, Sex, Age, ONS Geography Code, Measure Type, Unit, Marker, Value
 
-#### Sheet: 1
+#### Filename: 111 Online Covid-19 data_CCG mapped.csv
 
-		spec
+#### Sheet: 111 Online Covid-19 data_CCG ma
 
-#### Sheet: 2
+		A - SiteType - change to Site Type (Codelist) (111, 999)
+		B - CallDate - Change to Period and format as required
+		C - Gender - change to Sex (Male = M, Female = F, Unknown = U)
+		D - AgeBand - Change to Age (Codelist)
+		E - CCGCode - Change to ONS Geography Code
+		F - CCGName - Ignore as we have the Geography codes
+		G - April20 mappedCCGCode - Ignore as some of these geographies are not available on the portal
+		H - April20 mappedCCGName - Ignore 
+		I - TriageCount - These are the Observations (Obvs)
+		Add Measure Type column with value Triage
+		Add Unit column with value Count 
 
-		spec
+#### Filename: NHS Pathway Covid-19 data CCG mapped.csv
+
+#### Sheet: NHS Pathway Covid-19 data CCG
+
+		A - JourneyDate - Change to Period and format as required
+		B - Gender - change to Sex (Male = M, Female = F, Unknown = U)
+		C - AgeBand - Change to Age (Codelist)
+		D - CCGCode - Change to ONS Geography Code 
+		E - CCGName - Ignore as we have the Geography codes
+		F - April20 mappedCCGCode - Ignore as some of these geographies are not available on the portal
+		G - April20 mappedCCGName - Ignore 
+		H - Total - These are the Observations (Obvs)
+		Add Site Type column with value 111 Online
+		Add Measure Type column with value Online Assessments
+		Add Unit column with value Count 
 
 ##### Footnotes
 
-		footnotes
+		
+		Extra files have been created with lots of Metadata, need to decide how we can handle this.
 

@@ -35,28 +35,28 @@ cogs:PMD a owl:Class ;
 ###########################################################################################################
 
 cogsgit:top-level a cogs:LandingPage ;
-  rdfs:label "PASTE TRANSFORM TITLE HERE" ;
-  rdfs:comment "PASTE LANDING PAGE HERE";
+  rdfs:label "NHS-D Potential COVID-19 symptoms reported through NHS Pathways and 111 online " ;
+  rdfs:comment "https://digital.nhs.uk/data-and-information/publications/statistical/mi-potential-covid-19-symptoms-reported-through-nhs-pathways-and-111-online";
   cogs:splits cogsgit:sheet1 ;
 .
 
 cogsgit:sheet1 a cogs:Sheets ;
   rdfs:label "" ;
-  rdfs:comment "PASTE SHEET NAMES HERE" ;
+  rdfs:comment "111 Online Covid-19 data_CCG mapped.csv -> 111 Online Covid-19 data_CCG ma, NHS Pathway Covid-19 data CCG mapped.csv -> NHS Pathway Covid-19 data CCG" ;
   cogs:transforms cogsgit:dataset1 ;
 .
 
 
 cogsgit:dataset1 a cogs:Datasets ;
   rdfs:label "" ;
-  rdfs:comment "PASTE OUTPUT DATASET NAME HERE" ;
+  rdfs:comment "NHS Potential COVID-19 Symptoms reported through NHS Pathways and 111 Online" ;
   cogs:outputs cogsgit:columns1 ;
 .
 
 
 cogsgit:columns1 a cogs:Columns ;
   rdfs:label "" ;
-  rdfs:comment "PASET OUTPUT COLUMNS HERE" ;
+  rdfs:comment "Period, Site Type, Sex, Age, ONS Geography Code, Measure Type, Unit, Marker, Value" ;
   cogs:uploads cogsgit:pmd1 ;
 .
 

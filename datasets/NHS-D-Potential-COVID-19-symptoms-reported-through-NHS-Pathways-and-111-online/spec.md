@@ -2,7 +2,7 @@
 
 [Family Home](https://gss-cogs.github.io/family-covid-19/datasets/specmenu.html)
 
-[Family Transform Status](https://gss-cogs.github.io/family-covid-19datasets/index.html)
+[Family Transform Status](https://gss-cogs.github.io/family-covid-19/datasets/index.html)
 
 ## NHS-D Potential COVID-19 symptoms reported through NHS Pathways and 111 online 
 
@@ -10,7 +10,7 @@
 
 [Landing Page](https://digital.nhs.uk/data-and-information/publications/statistical/mi-potential-covid-19-symptoms-reported-through-nhs-pathways-and-111-online)
 
-[Transform Flowchart](https://gss-cogs.github.io/family-covid-19/datasets/specflowcharts.html?[nhs-d-potential-covid-19-symptoms-reported-through-nhs-pathways-and-111-online](https://gss-cogs.github.io/family-covid-19/datasets/specmenu.html)/flowchart.ttl)
+[Transform Flowchart](https://gss-cogs.github.io/family-covid-19/datasets/specflowcharts.html?NHS-D-Potential-COVID-19-symptoms-reported-through-NHS-Pathways-and-111-online/flowchart.ttl)
 
 ### Dataset One
 

@@ -59,3 +59,6 @@
 		
 		Extra files have been created with lots of Metadata, need to decide how we can handle this.
 
+#### DM Notes
+
+	Some of the mapped Geography codes are missing from the portal, they cooer to be aggregated, merged or renamed NHS Trusts. Emailed Matt Jinman on 20/05/2020 with a list of 75 codes asking if they can be added.

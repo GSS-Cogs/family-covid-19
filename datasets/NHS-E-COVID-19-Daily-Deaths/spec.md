@@ -148,7 +148,8 @@
 
 ##### Footnotes
 
-		footnotes
+		Hopefully this is in already in the metadata
+		Note: interpretation of the figures should take into account the fact that totals by date of death, particularly for recent prior days, are likely to be updated in future releases. For example as deaths are confirmed as testing positive for Covid-19, as more post-mortem tests are processed and data from them are validated. Any changes are made clear in the daily files.
 
 #### DM Notes
 

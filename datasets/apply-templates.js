@@ -170,8 +170,12 @@ if (dataset) {
                     $.fn.dataTable.ext.search.push(
                         function( settings, data, dataIndex ) {
                             var all = $('#toggle_all').hasClass('active');
-                            var stage = data[4];
-                            if ((stage == '') && !all) {
+                            if (all) return true;
+                            var stages = data[4].split(',').map(s => s.trim().toUpperCase());
+                            if ((stages.length == 1) && (stages[0] == '')) {
+                                stages = [];
+                            }
+                            if ((stages.length == 0) || (stages.indexOf('HOLD') >= 0)) {
                                 return false;
                             } else {
                                 return true;

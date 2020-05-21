@@ -163,7 +163,7 @@
 		Hywel Dda University = W11000025
 		Powys Teaching = W11000024
 		Swansea Bay University = W11000031
-		**To be confirmed = ?
+		To be confirmed = ?
 		Resident outside Wales = ?
-		Total = ?**
+		Total = ?
 

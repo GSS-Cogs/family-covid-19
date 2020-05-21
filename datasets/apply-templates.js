@@ -167,9 +167,24 @@ if (dataset) {
                         "pipelines": collected,
                         "issue_badge_base": `https://img.shields.io/github/issues/detail/state${(new URL(info.github)).pathname}`
                     }));
-                  $('#datasets_table').DataTable({
-                    "paging": false
-                  });
+                    $.fn.dataTable.ext.search.push(
+                        function( settings, data, dataIndex ) {
+                            var all = $('#toggle_all').hasClass('active');
+                            var stage = data[4];
+                            if ((stage == '') && !all) {
+                                return false;
+                            } else {
+                                return true;
+                            }
+                        }
+                    );
+                    let table = $('#datasets_table').DataTable({
+                      "paging": false
+                    });
+                    $('#toggle_all').click(function() {
+                        $(this).button('toggle');
+                        table.draw();
+                    });
                 });
             });
         });

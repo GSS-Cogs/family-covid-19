@@ -8,7 +8,7 @@
         "COVID-19"
     ],
     "extract": {
-        "source": "",
+        "source": "CMD",
         "stage": "Not Required"
     },
     "transform": {

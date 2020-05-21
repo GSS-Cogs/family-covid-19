@@ -10,7 +10,7 @@
 
 [Landing Page](https://gov.wales/nhs-activity-and-capacity-during-coronavirus-covid-19-pandemic)
 
-[Transform Flowchart](https://gss-cogs.github.io/family-covid-19/datasets/specflowcharts.html?wg-nhs-activity-and-capacity-during-the-coronavirus-covid-19-pandemic/flowchart.ttl)
+[Transform Flowchart](https://gss-cogs.github.io/family-covid-19/datasets/specflowcharts.html?WG-NHS-activity-and-capacity-during-the-coronavirus-COVID-19-pandemic/flowchart.ttl)
 
 ### Dataset One
 

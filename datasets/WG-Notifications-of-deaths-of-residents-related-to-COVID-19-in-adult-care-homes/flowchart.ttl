@@ -21,7 +21,7 @@ cogs:Datasets a owl:Class ;
 .
 cogs:Sheets a owl:Class ;
   rdfs:subClassOf cogs:SoftwarePackage ;
-  rdfs:label "Sheet names to join";
+  rdfs:label "Sheet Names";
 .
 cogs:Columns a owl:Class ;
   rdfs:subClassOf cogs:SoftwarePackage ;

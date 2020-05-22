@@ -70,6 +70,9 @@
 .card-header.PMD {
     background-color: #f7c2ae;
 }
+.card-header.Rename {
+    background-color: #f7c2ae;
+}
 
     </style></svg>
     </div>
@@ -103,12 +106,16 @@
           const outputs = store.statementsMatching(undefined, COGS('outputs'), undefined);
           const uploads = store.statementsMatching(undefined, COGS('uploads'), undefined);
           const joins = store.statementsMatching(undefined, COGS('joins'), undefined);
+          const scrape = store.statementsMatching(undefined, COGS('scrape'), undefined);
+          const harmonise = store.statementsMatching(undefined, COGS('harmonise'), undefined);
           console.log(requires);
           console.log(splits);
           console.log(transforms);
           console.log(outputs)
           console.log(uploads)
           console.log(joins)
+          console.log(scrape)
+          console.log(harmonise)
           const nodes = new Set();
           requires.forEach(s => {
             nodes.add(s.subject);
@@ -131,6 +138,14 @@
             nodes.add(s.object);
           });
           joins.forEach(s => {
+            nodes.add(s.subject);
+            nodes.add(s.object);
+          });
+          scrape.forEach(s => {
+            nodes.add(s.subject);
+            nodes.add(s.object);
+          });
+          harmonise.forEach(s => {
             nodes.add(s.subject);
             nodes.add(s.object);
           });
@@ -194,6 +209,12 @@
           });
           joins.forEach(s => {
             g.setEdge(s.subject.value, s.object.value, {label: 'joins', curve: d3.curveBasis });
+          });
+          scrape.forEach(s => {
+            g.setEdge(s.subject.value, s.object.value, {label: 'scrape', curve: d3.curveBasis });
+          });
+          harmonise.forEach(s => {
+            g.setEdge(s.subject.value, s.object.value, {label: 'harmonise', curve: d3.curveBasis });
           });
           const render = new dagreD3.render();
           const svg = d3.select("svg"),

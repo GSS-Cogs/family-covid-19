@@ -47,19 +47,19 @@ cogsgit:columns8 a cogs:Columns ; rdfs:label "" ; rdfs:comment "Area Code, Local
 cogsgit:columns9 a cogs:Columns ; rdfs:label "" ; rdfs:comment "Area Code, Local Authority, Notification Date, Measure Type, Unit, Marker, Value" ; cogs:harmonise cogsgit:rename9 ; .
 
 
-cogsgit:rename1 a cogs:Rename ; rdfs:label "" ; rdfs:comment "" ; cogs:join cogsgit:Dataset1 ; .
-cogsgit:rename2 a cogs:Rename ; rdfs:label "" ; rdfs:comment "" ; cogs:join cogsgit:Dataset2 ; .
-cogsgit:rename3 a cogs:Rename ; rdfs:label "" ; rdfs:comment "" ; cogs:join cogsgit:Dataset2 ; .
-cogsgit:rename4 a cogs:Rename ; rdfs:label "" ; rdfs:comment "" ; cogs:join cogsgit:Dataset2 ; .
-cogsgit:rename5 a cogs:Rename ; rdfs:label "" ; rdfs:comment "" ; cogs:join cogsgit:Dataset2 ; .
-cogsgit:rename6 a cogs:Rename ; rdfs:label "" ; rdfs:comment "" ; cogs:join cogsgit:Dataset2 ; .
-cogsgit:rename7 a cogs:Rename ; rdfs:label "" ; rdfs:comment "" ; cogs:join cogsgit:Dataset2 ; .
-cogsgit:rename8 a cogs:Rename ; rdfs:label "" ; rdfs:comment "" ; cogs:join cogsgit:Dataset2 ; .
-cogsgit:rename9 a cogs:Rename ; rdfs:label "" ; rdfs:comment "" ; cogs:join cogsgit:Dataset2 ; .
+cogsgit:rename1 a cogs:Rename ; rdfs:label "" ; rdfs:comment "" ; cogs:joins cogsgit:Dataset1 ; .
+cogsgit:rename2 a cogs:Rename ; rdfs:label "" ; rdfs:comment "" ; cogs:joins cogsgit:Dataset2 ; .
+cogsgit:rename3 a cogs:Rename ; rdfs:label "" ; rdfs:comment "" ; cogs:joins cogsgit:Dataset2 ; .
+cogsgit:rename4 a cogs:Rename ; rdfs:label "" ; rdfs:comment "" ; cogs:joins cogsgit:Dataset2 ; .
+cogsgit:rename5 a cogs:Rename ; rdfs:label "" ; rdfs:comment "" ; cogs:joins cogsgit:Dataset2 ; .
+cogsgit:rename6 a cogs:Rename ; rdfs:label "" ; rdfs:comment "" ; cogs:joins cogsgit:Dataset2 ; .
+cogsgit:rename7 a cogs:Rename ; rdfs:label "" ; rdfs:comment "" ; cogs:joins cogsgit:Dataset2 ; .
+cogsgit:rename8 a cogs:Rename ; rdfs:label "" ; rdfs:comment "" ; cogs:joins cogsgit:Dataset2 ; .
+cogsgit:rename9 a cogs:Rename ; rdfs:label "" ; rdfs:comment "" ; cogs:joins cogsgit:Dataset2 ; .
 
 
-cogsgit:Dataset1 a cogs:Datasets ; rdfs:label "" ; rdfs:comment "" ; cogs:harmonise cogsgit:pmd1 ; .
-cogsgit:Dataset2 a cogs:Datasets ; rdfs:label "" ; rdfs:comment "" ; cogs:harmonise cogsgit:pmd1 ; .
+cogsgit:Dataset1 a cogs:Datasets ; rdfs:label "" ; rdfs:comment "" ; cogs:outputs cogsgit:pmd1 ; .
+cogsgit:Dataset2 a cogs:Datasets ; rdfs:label "" ; rdfs:comment "" ; cogs:outputs cogsgit:pmd1 ; .
 
 cogsgit:pmd1 a cogs:PMD ; rdfs:label "" ; rdfs:comment "Publish my Data: http://gss-data.org.uk/data/search" ; .
 ###################################################################################################

@@ -14,7 +14,7 @@
 
 --------
 
-### 1. Initial Scrape and Transformation
+### 1. Scrape and Transform
 
 #### Sheet: Table_1 Notifications of Service User Deaths received from Adult Care Homes
 

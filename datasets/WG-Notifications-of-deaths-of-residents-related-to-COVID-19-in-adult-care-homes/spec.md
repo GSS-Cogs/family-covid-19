@@ -133,7 +133,7 @@
 
 --------------------------
 
-### 2. Harmonisation
+### 2. Harmonise 
 
 #### Dataset Outputs:
 

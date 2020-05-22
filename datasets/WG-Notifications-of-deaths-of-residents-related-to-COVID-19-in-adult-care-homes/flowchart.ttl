@@ -37,7 +37,7 @@ cogs:PMD a owl:Class ;
 cogsgit:top-level a cogs:LandingPage ;
   rdfs:label "Notifications of deaths of residents related to COVID-19 in adult care homes" ;
   rdfs:comment "https://gov.wales/notifications-deaths-residents-related-covid-19-adult-care-homes";
-  cogs:splits cogsgit:sheet1 ;
+  cogs:splits cogsgit:sheet1, cogsgit:sheet2, cogsgit:sheet3, cogsgit:sheet4, cogsgit:sheet5, cogsgit:sheet6, cogsgit:sheet7, cogsgit:sheet8, cogsgit:sheet9 ;
 .
 
 cogsgit:sheet1 a cogs:Sheets ; rdfs:label "" ; rdfs:comment "Table_1 Notifications of Service User Deaths received from Adult Care Homes" ; cogs:transforms cogsgit:columns1 ; .

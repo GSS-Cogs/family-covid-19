@@ -173,24 +173,19 @@
             } else if (tl !== undefined) {
               html += tl;
             } else {
-              html += 'Software Package';
+              html += '---------';
             }
             html += '</div><div class="card-body"><h4 class="card-title text-wrap">';
-            if (l !== undefined) {
-              html += l.value;
-            } else {
-              html += 'Unknown';
-            }
+            //if (l !== undefined) {
+            //  html += l.value;
+            //} else {
+            //  html += 'Unknown';
+            //}
             html += '</h3><p class="card-text text-wrap">';
             if (c !== undefined) {
               html += c.value;
             }
             html += '</p>';
-            //if (n.value.startsWith('https://github.com/')) {
-              //html += '<a href="' + n.value + '"><i class="pull-right fa fa-github"></i></a>';
-            //} else {
-              //html += '<a href="' + n.value + '"><i class="pull-right fa fa-external-link"></i></a>';
-            //}
             html += '</div></div>';
             g.setNode(n.value, {
               labelType: 'html',

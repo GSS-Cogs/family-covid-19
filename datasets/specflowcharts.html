@@ -164,16 +164,13 @@
             const tl = store.any(t, RDFS('label'));
             let html = '<div class="card card-node">';
             if (t !== undefined && t.value.startsWith(COGS().value)) {
-              if (l !== undefined) {
-                html += '<div class="card-header ' + l.value + '">';
-              }
-              else {
                 html += '<div class="card-header ' + t.value.substring(COGS().value.length) + '">';
-              }
             } else {
               html += '<div class="card-header">';
             }
-            if (tl !== undefined) {
+            if (l !== undefined) {
+              html += l.value
+            } else if (tl !== undefined) {
               html += tl;
             } else {
               html += 'Software Package';

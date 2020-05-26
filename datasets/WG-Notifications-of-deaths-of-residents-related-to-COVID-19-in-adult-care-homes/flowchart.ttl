@@ -52,21 +52,18 @@ cogsgit:sheet9 a cogs:Sheets ; rdfs:label "Table_9" ; rdfs:comment "Number of no
 
 
 cogsgit:columns1 a cogs:Columns ; rdfs:label "" ; rdfs:comment "Notification Date Range, Care Provided, Measure Type, Unit, Marker, Value" ; cogs:harmonise cogsgit:dataset1 ; .
-cogsgit:columns2 a cogs:Columns ; rdfs:label "" ; rdfs:comment "Notification Date Range, Location of Death, Measure Type, Unit, Marker, Value" ; cogs:harmonise cogsgit:dataset1 ; .
-cogsgit:columns3 a cogs:Columns ; rdfs:label "" ; rdfs:comment "Notification Day, Notification Year, Cause of Death, Measure Type, Unit, Marker, Value" ; cogs:harmonise cogsgit:dataset1 ; .
-cogsgit:columns4 a cogs:Columns ; rdfs:label "" ; rdfs:comment "Notification Date, Location of Death, Measure Type, Unit, Marker, Value" ; cogs:harmonise cogsgit:dataset1 ; .
-cogsgit:columns5 a cogs:Columns ; rdfs:label "" ; rdfs:comment "Notification Date, Location of Death, Measure Type, Unit, Marker, Value" ; cogs:harmonise cogsgit:dataset1 ; .
-cogsgit:columns6 a cogs:Columns ; rdfs:label "" ; rdfs:comment "Area Code, Local Authority, Notification Date, Measure Type, Unit, Marker, Value" ; cogs:harmonise cogsgit:dataset1; .
-cogsgit:columns7 a cogs:Columns ; rdfs:label "" ; rdfs:comment "Area Code, Local Authority, Notification Date, Measure Type, Unit, Marker, Value" ; cogs:harmonise cogsgit:dataset1 ; .
-cogsgit:columns8 a cogs:Columns ; rdfs:label "" ; rdfs:comment "Area Code, Local Authority, Notification Date, Measure Type, Unit, Marker, Value" ; cogs:harmonise cogsgit:dataset1 ; .
-cogsgit:columns9 a cogs:Columns ; rdfs:label "" ; rdfs:comment "Area Code, Local Authority, Notification Date, Measure Type, Unit, Marker, Value" ; cogs:harmonise cogsgit:dataset1 ; .
+cogsgit:columns2 a cogs:Columns ; rdfs:label "" ; rdfs:comment "Notification Date Range, Location of Death, Measure Type, Unit, Marker, Value" ; cogs:harmonise cogsgit:dataset2 ; .
+cogsgit:columns3 a cogs:Columns ; rdfs:label "" ; rdfs:comment "Notification Day, Notification Year, Cause of Death, Measure Type, Unit, Marker, Value" ; cogs:harmonise cogsgit:dataset2 ; .
+cogsgit:columns4 a cogs:Columns ; rdfs:label "" ; rdfs:comment "Notification Date, Location of Death, Measure Type, Unit, Marker, Value" ; cogs:harmonise cogsgit:dataset2 ; .
+cogsgit:columns5 a cogs:Columns ; rdfs:label "" ; rdfs:comment "Notification Date, Location of Death, Measure Type, Unit, Marker, Value" ; cogs:harmonise cogsgit:dataset2 ; .
+cogsgit:columns6 a cogs:Columns ; rdfs:label "" ; rdfs:comment "Area Code, Local Authority, Notification Date, Measure Type, Unit, Marker, Value" ; cogs:harmonise cogsgit:dataset2 ; .
+cogsgit:columns7 a cogs:Columns ; rdfs:label "" ; rdfs:comment "Area Code, Local Authority, Notification Date, Measure Type, Unit, Marker, Value" ; cogs:harmonise cogsgit:dataset2 ; .
+cogsgit:columns8 a cogs:Columns ; rdfs:label "" ; rdfs:comment "Area Code, Local Authority, Notification Date, Measure Type, Unit, Marker, Value" ; cogs:harmonise cogsgit:dataset2 ; .
+cogsgit:columns9 a cogs:Columns ; rdfs:label "" ; rdfs:comment "Area Code, Local Authority, Notification Date, Measure Type, Unit, Marker, Value" ; cogs:harmonise cogsgit:dataset2 ; .
 
 
-cogsgit:dataset1 a cogs:Datasets ;
-  rdfs:label "" ;
-  rdfs:comment "WG NHS activity and capacity during the coronavirus COVID-19 pandemic" ;
-  cogs:outputs cogsgit:columns1 ;
-.
+cogsgit:dataset1 a cogs:Datasets ; rdfs:label "" ; rdfs:comment "Dataset 1" ; cogs:outputs cogsgit:columns1 ; .
+cogsgit:dataset2 a cogs:Datasets ; rdfs:label "" ; rdfs:comment "Dataset 2" ; cogs:outputs cogsgit:columns1 ; .
 
 
 cogsgit:columns1 a cogs:Columns ;

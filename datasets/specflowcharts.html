@@ -159,6 +159,7 @@
           const g = new dagreD3.graphlib.Graph().setGraph({rankDir: 'LR'});
           nodes.forEach(n => {
             const l = store.any(n, RDFS('label'));
+            const l2 = store.any(n, RDFS('label2'));
             const c = store.any(n, RDFS('comment'));
             const t = store.any(n, RDF('type'))
             const tl = store.any(t, RDFS('label'));
@@ -168,19 +169,16 @@
             } else {
               html += '<div class="card-header">';
             }
-            if (l !== undefined) {
-              html += l.value
+            if (l2 !== undefined) {
+              html += l2
+            } else if (l !== undefined) {
+              html += l;
             } else if (tl !== undefined) {
               html += tl;
             } else {
               html += '---------';
             }
             html += '</div><div class="card-body"><h4 class="card-title text-wrap">';
-            //if (l !== undefined) {
-            //  html += l.value;
-            //} else {
-            //  html += 'Unknown';
-            //}
             html += '</h3><p class="card-text text-wrap">';
             if (c !== undefined) {
               html += c.value;

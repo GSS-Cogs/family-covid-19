@@ -169,9 +169,7 @@
             } else {
               html += '<div class="card-header">';
             }
-            if (l2 !== undefined) {
-              html += l2
-            } else if (l !== undefined) {
+            if (l !== undefined) {
               html += l;
             } else if (tl !== undefined) {
               html += tl;
@@ -180,6 +178,9 @@
             }
             html += '</div><div class="card-body"><h4 class="card-title text-wrap">';
             html += '</h3><p class="card-text text-wrap">';
+            if (l2 !== undefined) {
+              html += l2
+            }
             if (c !== undefined) {
               html += c.value;
             }

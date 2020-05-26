@@ -11,6 +11,9 @@
 cogs:SoftwarePackage a owl:Class ;
   rdfs:label "Software package" ;
 .
+cogs:SoftwarePackage a owl:Class ;
+  rdfs:label2 "Label2" ;
+.
 cogs:LandingPage a owl:Class ;
   rdfs:subClassOf cogs:SoftwarePackage ;
   rdfs:label "Landing Page" ;

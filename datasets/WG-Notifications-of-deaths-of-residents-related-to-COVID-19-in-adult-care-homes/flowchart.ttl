@@ -50,37 +50,37 @@ cogsgit:sheet2 a cogs:Sheets ;
   rdfs:comment "Notifications of deaths of adult care home residents with confirmed or suspected COVID-19 by location of death" ;
   cogs:transforms cogsgit:dataset1 ;
 .
-cogsgit:sheet2 a cogs:Sheets ;
+cogsgit:sheet3 a cogs:Sheets ;
   rdfs:label "Table_3" ;
   rdfs:comment "Notifications of deaths of residents from adult care homes by date of notification and cause" ;
   cogs:transforms cogsgit:dataset1 ;
 .
-cogsgit:sheet2 a cogs:Sheets ;
+cogsgit:sheet4 a cogs:Sheets ;
   rdfs:label "Table_4" ;
   rdfs:comment "Notifications of deaths of adult care home residents with confirmed or suspected covid-19 by location of death and date of notification" ;
   cogs:transforms cogsgit:dataset1 ;
 .
-cogsgit:sheet2 a cogs:Sheets ;
+cogsgit:sheet5 a cogs:Sheets ;
   rdfs:label "Table_5" ;
   rdfs:comment "Notifications of deaths of adult care home residents by location of death and date of notification" ;
   cogs:transforms cogsgit:dataset1 ;
 .
-cogsgit:sheet2 a cogs:Sheets ;
+cogsgit:sheet6 a cogs:Sheets ;
   rdfs:label "Table_6" ;
   rdfs:comment "Number of notifications of deaths of adult care home residents involving COVID-19 (both confirmed and suspected) occurring in care homes, by Local Authority and day of notification" ;
   cogs:transforms cogsgit:dataset1 ;
 .
-cogsgit:sheet2 a cogs:Sheets ;
+cogsgit:sheet7 a cogs:Sheets ;
   rdfs:label "Table_7" ;
   rdfs:comment "Number of notifications of deaths of adult care home residents involving COVID-19 (both confirmed and suspected) occurring in any location, by Local Authority and day of notification" ;
   cogs:transforms cogsgit:dataset1 ;
 .
-cogsgit:sheet2 a cogs:Sheets ;
+cogsgit:sheet8 a cogs:Sheets ;
   rdfs:label "Table_8" ;
   rdfs:comment "Number of notifications of deaths of adult care home residents by Local Authority and day of notification" ;
   cogs:transforms cogsgit:dataset1 ;
 .
-cogsgit:sheet2 a cogs:Sheets ;
+cogsgit:sheet9 a cogs:Sheets ;
   rdfs:label "Table_9" ;
   rdfs:comment "Number of notifications of deaths of adult care home residents occurring in care homes by Local Authority and day of notification" ;
   cogs:transforms cogsgit:dataset1 ;

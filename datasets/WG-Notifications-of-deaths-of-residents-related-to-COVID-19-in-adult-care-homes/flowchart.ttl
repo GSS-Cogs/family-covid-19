@@ -8,7 +8,9 @@
   rdfs:label "COGS COVID-19 Specification Mapping" ;
 .
 
-cogs:SoftwarePackage a owl:Class ; vrdfs:label "Software package" ; .
+cogs:SoftwarePackage a owl:Class ; 
+  vrdfs:label "Software package" ; 
+.
 
 cogs:LandingPage a owl:Class ;    
   rdfs:subClassOf cogs:SoftwarePackage ;    
@@ -30,10 +32,7 @@ cogs:PMD a owl:Class ;
   rdfs:subClassOf cogs:SoftwarePackage ;    
   rdfs:label "PMD" ; 
 .
-cogs:Rename a owl:Class ;         
-  rdfs:subClassOf cogs:SoftwarePackage ;    
-  rdfs:label "Rename & Add" ; 
-.
+
 
 ###########################################################################################################
 

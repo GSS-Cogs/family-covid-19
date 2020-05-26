@@ -43,26 +43,10 @@ cogsgit:top-level a cogs:LandingPage ;
   cogs:splits cogsgit:sheet1 ;
 .
 
-cogsgit:sheet1 a cogs:Sheets ; rdfs:label "" ; rdfs:comment "Table_1 Notifications of Service User Deaths received from Adult Care Homes" ; cogs:transforms cogsgit:columns1 ; .
-cogsgit:sheet2 a cogs:Sheets ; rdfs:label "" ; rdfs:comment "Table_2 Notifications of deaths of adult care home residents with confirmed or suspected COVID-19 by location of death" ; cogs:transforms cogsgit:columns2 ; .
-cogsgit:sheet3 a cogs:Sheets ; rdfs:label "" ; rdfs:comment "Table_3 Notifications of deaths of residents from adult care homes by date of notification and cause" ; cogs:transforms cogsgit:columns3 ; .
-cogsgit:sheet4 a cogs:Sheets ; rdfs:label "" ; rdfs:comment "Table_4 Notifications of deaths of adult care home residents with confirmed or suspected covid-19 by location of death and date of notification" ; cogs:transforms cogsgit:columns4 ; .
-cogsgit:sheet5 a cogs:Sheets ; rdfs:label "" ; rdfs:comment "Table_5 Notifications of deaths of adult care home residents by location of death and date of notification" ; cogs:transforms cogsgit:columns5 ; .
-cogsgit:sheet6 a cogs:Sheets ; rdfs:label "" ; rdfs:comment "Table_6 Number of notifications of deaths of adult care home residents involving COVID-19 (both confirmed and suspected) occurring in care homes, by Local Authority and day of notification" ; cogs:transforms cogsgit:columns6 ; .
-cogsgit:sheet7 a cogs:Sheets ; rdfs:label "" ; rdfs:comment "Table_7 Number of notifications of deaths of adult care home residents involving COVID-19 (both confirmed and suspected) occurring in any location, by Local Authority and day of notification" ; cogs:transforms cogsgit:columns7 ; .
-cogsgit:sheet8 a cogs:Sheets ; rdfs:label "" ; rdfs:comment "Table_8 Number of notifications of deaths of adult care home residents by Local Authority and day of notification" ; cogs:transforms cogsgit:columns8 ; .
-cogsgit:sheet9 a cogs:Sheets ; rdfs:label "" ; rdfs:comment "Table_9 Number of notifications of deaths of adult care home residents occurring in care homes by Local Authority and day of notification" ; cogs:transforms cogsgit:columns9 ; .
-
-
-cogsgit:columns1 a cogs:Columns ; rdfs:label "" ; rdfs:comment "Notification Date Range, Care Provided, Measure Type, Unit, Marker, Value" ; .
-cogsgit:columns2 a cogs:Columns ; rdfs:label "" ; rdfs:comment "Notification Date Range, Location of Death, Measure Type, Unit, Marker, Value" ; .
-cogsgit:columns3 a cogs:Columns ; rdfs:label "" ; rdfs:comment "Notification Day, Notification Year, Cause of Death, Measure Type, Unit, Marker, Value" ; .
-cogsgit:columns4 a cogs:Columns ; rdfs:label "" ; rdfs:comment "Notification Date, Location of Death, Measure Type, Unit, Marker, Value" ; .
-cogsgit:columns5 a cogs:Columns ; rdfs:label "" ; rdfs:comment "Notification Date, Location of Death, Measure Type, Unit, Marker, Value" ; .
-cogsgit:columns6 a cogs:Columns ; rdfs:label "" ; rdfs:comment "Area Code, Local Authority, Notification Date, Measure Type, Unit, Marker, Value" ; .
-cogsgit:columns7 a cogs:Columns ; rdfs:label "" ; rdfs:comment "Area Code, Local Authority, Notification Date, Measure Type, Unit, Marker, Value" ; .
-cogsgit:columns8 a cogs:Columns ; rdfs:label "" ; rdfs:comment "Area Code, Local Authority, Notification Date, Measure Type, Unit, Marker, Value" ; .
-cogsgit:columns9 a cogs:Columns ; rdfs:label "" ; rdfs:comment "Area Code, Local Authority, Notification Date, Measure Type, Unit, Marker, Value" ; .
+cogsgit:sheet1 a cogs:Sheets ; 
+  rdfs:label "" ; rdfs:comment "Table_1 Notifications of Service User Deaths received from Adult Care Homes" ; 
+  cogs:transforms cogsgit:columns1 ; 
+.
 
 
 ###################################################################################################

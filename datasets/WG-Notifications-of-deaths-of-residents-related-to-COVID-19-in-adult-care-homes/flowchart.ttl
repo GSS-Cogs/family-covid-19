@@ -39,7 +39,9 @@ cogs:Rename a owl:Class ;
 
 cogsgit:top-level a cogs:LandingPage ;
   rdfs:label "Landing Page" ;
-  rdfs:comment "Notifications of deaths of residents related to COVID-19 in adult care homes \n https://gov.wales/notifications-deaths-residents-related-covid-19-adult-care-homes";
+  rdfs:comment "<b>Notifications of deaths of residents related to COVID-19 in adult care homes</b>
+                \n\n
+                   https://gov.wales/notifications-deaths-residents-related-covid-19-adult-care-homes";
   cogs:scrape cogsgit:sheet1, cogsgit:sheet2, cogsgit:sheet3, cogsgit:sheet4, cogsgit:sheet5, cogsgit:sheet6, cogsgit:sheet7, cogsgit:sheet8, cogsgit:sheet9 ;
 .
 
@@ -81,7 +83,7 @@ cogsgit:dataset2 a cogs:Datasets ; rdfs:label "Dateset Name 2" ; rdfs:comment "D
 
 
 cogsgit:pmd1 a cogs:PMD ;
-  rdfs:label "" ;
+  rdfs:label "PMD" ;
   rdfs:comment "Publish my Data: http://gss-data.org.uk/data/search" ;
 .
 ###################################################################################################

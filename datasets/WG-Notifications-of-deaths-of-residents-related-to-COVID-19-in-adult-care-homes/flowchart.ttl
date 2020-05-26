@@ -21,7 +21,7 @@ cogs:Datasets a owl:Class ;
 .
 cogs:Sheets a owl:Class ;
   rdfs:subClassOf cogs:SoftwarePackage ;
-  rdfs:label "Sheet names to join";
+  rdfs:label "Sheet Name";
 .
 cogs:Columns a owl:Class ;
   rdfs:subClassOf cogs:SoftwarePackage ;
@@ -37,7 +37,7 @@ cogs:PMD a owl:Class ;
 cogsgit:top-level a cogs:LandingPage ;
   rdfs:label "Notifications of deaths of residents related to COVID-19 in adult care homes" ;
   rdfs:comment "https://gov.wales/notifications-deaths-residents-related-covid-19-adult-care-homes";
-  cogs:splits cogsgit:sheet1, cogsgit:sheet2 ;
+  cogs:scrapes cogsgit:sheet1, cogsgit:sheet2, cogsgit:sheet3, cogsgit:sheet4, cogsgit:sheet5, cogsgit:sheet6, cogsgit:sheet7, cogsgit:sheet8, cogsgit:sheet9 ;
 .
 
 cogsgit:sheet1 a cogs:Sheets ;

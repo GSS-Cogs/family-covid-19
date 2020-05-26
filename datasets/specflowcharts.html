@@ -105,19 +105,19 @@
           });
           console.log(packages);
           const requires = store.statementsMatching(undefined, COGS('requires'), undefined);
-          const splits = store.statementsMatching(undefined, COGS('splits'), undefined);
-          const transforms = store.statementsMatching(undefined, COGS('transforms'), undefined);
-          const outputs = store.statementsMatching(undefined, COGS('outputs'), undefined);
-          const uploads = store.statementsMatching(undefined, COGS('uploads'), undefined);
-          const joins = store.statementsMatching(undefined, COGS('joins'), undefined);
+          const split = store.statementsMatching(undefined, COGS('split'), undefined);
+          const transform = store.statementsMatching(undefined, COGS('transform'), undefined);
+          const output = store.statementsMatching(undefined, COGS('output'), undefined);
+          const upload = store.statementsMatching(undefined, COGS('upload'), undefined);
+          const join = store.statementsMatching(undefined, COGS('joins'), undefined);
           const scrape = store.statementsMatching(undefined, COGS('scrape'), undefined);
           const harmonise = store.statementsMatching(undefined, COGS('harmonise'), undefined);
           console.log(requires);
-          console.log(splits);
-          console.log(transforms);
-          console.log(outputs)
-          console.log(uploads)
-          console.log(joins)
+          console.log(split);
+          console.log(transform);
+          console.log(output)
+          console.log(upload)
+          console.log(join)
           console.log(scrape)
           console.log(harmonise)
           const nodes = new Set();
@@ -125,23 +125,23 @@
             nodes.add(s.subject);
             nodes.add(s.object);
           });
-          splits.forEach(s => {
+          split.forEach(s => {
             nodes.add(s.subject);
             nodes.add(s.object);
           });
-          transforms.forEach(s => {
+          transform.forEach(s => {
             nodes.add(s.subject);
             nodes.add(s.object);
           });
-          outputs.forEach(s => {
+          output.forEach(s => {
             nodes.add(s.subject);
             nodes.add(s.object);
           });
-          uploads.forEach(s => {
+          upload.forEach(s => {
             nodes.add(s.subject);
             nodes.add(s.object);
           });
-          joins.forEach(s => {
+          join.forEach(s => {
             nodes.add(s.subject);
             nodes.add(s.object);
           });
@@ -199,20 +199,20 @@
           requires.forEach(s => {
             g.setEdge(s.subject.value, s.object.value, {label: 'requires', curve: d3.curveBasis });
           });
-          splits.forEach(s => {
-            g.setEdge(s.subject.value, s.object.value, {label: 'splits', curve: d3.curveBasis });
+          split.forEach(s => {
+            g.setEdge(s.subject.value, s.object.value, {label: 'split', curve: d3.curveBasis });
           });
-          transforms.forEach(s => {
-            g.setEdge(s.subject.value, s.object.value, {label: 'transforms', curve: d3.curveBasis });
+          transform.forEach(s => {
+            g.setEdge(s.subject.value, s.object.value, {label: 'transform', curve: d3.curveBasis });
           });
-          outputs.forEach(s => {
-            g.setEdge(s.subject.value, s.object.value, {label: 'outputs', curve: d3.curveBasis });
+          output.forEach(s => {
+            g.setEdge(s.subject.value, s.object.value, {label: 'output', curve: d3.curveBasis });
           });
-          uploads.forEach(s => {
-            g.setEdge(s.subject.value, s.object.value, {label: 'uploads', curve: d3.curveBasis });
+          upload.forEach(s => {
+            g.setEdge(s.subject.value, s.object.value, {label: 'upload', curve: d3.curveBasis });
           });
-          joins.forEach(s => {
-            g.setEdge(s.subject.value, s.object.value, {label: 'joins', curve: d3.curveBasis });
+          join.forEach(s => {
+            g.setEdge(s.subject.value, s.object.value, {label: 'join', curve: d3.curveBasis });
           });
           scrape.forEach(s => {
             g.setEdge(s.subject.value, s.object.value, {label: 'scrape', curve: d3.curveBasis });

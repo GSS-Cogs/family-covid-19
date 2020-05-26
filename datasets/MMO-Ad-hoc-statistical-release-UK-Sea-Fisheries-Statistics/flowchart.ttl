@@ -35,34 +35,34 @@ cogs:PMD a owl:Class ;
 ###########################################################################################################
 
 cogsgit:top-level a cogs:LandingPage ;
-  rdfs:label "MMO Ad hoc statistical release UK Sea Fisheries Statistics " ;
-  rdfs:comment "https://www.gov.uk/government/collections/ad-hoc-statistical-releases-sea-fisheries-statistics";
+  rdfs:label "Landing Page" ;
+  rdfs:comment "<b>MMO Ad hoc statistical release UK Sea Fisheries Statistics </b> \n https://www.gov.uk/government/collections/ad-hoc-statistical-releases-sea-fisheries-statistics";
   cogs:splits cogsgit:sheet1 ;
 .
 
 cogsgit:sheet1 a cogs:Sheets ;
-  rdfs:label "" ;
+  rdfs:label "Sheets" ;
   rdfs:comment "Table 1, Table 2, Table 3, Table 4" ;
   cogs:transforms cogsgit:dataset1 ;
 .
 
 
 cogsgit:dataset1 a cogs:Datasets ;
-  rdfs:label "" ;
+  rdfs:label "Dataset" ;
   rdfs:comment "MMO Ad-Hoc UK Sea Fisheries Statistical Release" ;
   cogs:outputs cogsgit:columns1 ;
 .
 
 
 cogsgit:columns1 a cogs:Columns ;
-  rdfs:label "" ;
+  rdfs:label "Output Table" ;
   rdfs:comment "Period, ONS Geography Code, Vessel Length, Species Group, Measure Type, Unit, Marker, Value" ;
   cogs:uploads cogsgit:pmd1 ;
 .
 
 
 cogsgit:pmd1 a cogs:PMD ;
-  rdfs:label "" ;
+  rdfs:label "PMD" ;
   rdfs:comment "Publish my Data: http://gss-data.org.uk/data/search" ;
 .
 ###################################################################################################

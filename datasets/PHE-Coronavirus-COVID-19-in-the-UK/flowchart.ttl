@@ -35,34 +35,34 @@ cogs:PMD a owl:Class ;
 ###########################################################################################################
 
 cogsgit:top-level a cogs:LandingPage ;
-  rdfs:label "PHE Coronavirus  COVID-19  in the UK " ;
-  rdfs:comment "https://coronavirus.data.gov.uk/?_ga=2.156389567.589199403.1589439040-1962094972.1582617556";
+  rdfs:label "Landing Page" ;
+  rdfs:comment "<b>PHE Coronavirus  COVID-19  in the UK</b> \n https://coronavirus.data.gov.uk/?_ga=2.156389567.589199403.1589439040-1962094972.1582617556";
   cogs:splits cogsgit:sheet1 ;
 .
 
 cogsgit:sheet1 a cogs:Sheets ;
-  rdfs:label "" ;
+  rdfs:label "Sheets" ;
   rdfs:comment "Also available as JSON, coronavirus-cases_latest.csv -> coronavirus-cases_latest, coronavirus-deaths_latest.csv -> coronavirus-deaths_latest" ;
   cogs:transforms cogsgit:dataset1 ;
 .
 
 
 cogsgit:dataset1 a cogs:Datasets ;
-  rdfs:label "" ;
+  rdfs:label "Dataset" ;
   rdfs:comment "PHE Coronavirus COVID-19 Cases & Deaths in the UK" ;
   cogs:outputs cogsgit:columns1 ;
 .
 
 
 cogsgit:columns1 a cogs:Columns ;
-  rdfs:label "" ;
+  rdfs:label "Output Table" ;
   rdfs:comment "Period, ONS Geography Code, Area Type, Reported Case Type, Measure Type, Unit, Marker, Value" ;
   cogs:uploads cogsgit:pmd1 ;
 .
 
 
 cogsgit:pmd1 a cogs:PMD ;
-  rdfs:label "" ;
+  rdfs:label "PMD" ;
   rdfs:comment "Publish my Data: http://gss-data.org.uk/data/search" ;
 .
 ###################################################################################################

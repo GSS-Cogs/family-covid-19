@@ -35,34 +35,34 @@ cogs:PMD a owl:Class ;
 ###########################################################################################################
 
 cogsgit:top-level a cogs:LandingPage ;
-  rdfs:label "NHS-E COVID-19 Daily Deaths " ;
-  rdfs:comment "https://www.england.nhs.uk/statistics/statistical-work-areas/covid-19-daily-deaths/";
+  rdfs:label "Landing Page" ;
+  rdfs:comment "<b>NHS-E COVID-19 Daily Deaths </b> \n https://www.england.nhs.uk/statistics/statistical-work-areas/covid-19-daily-deaths/";
   cogs:splits cogsgit:sheet1 ;
 .
 
 cogsgit:sheet1 a cogs:Sheets ;
-  rdfs:label "" ;
+  rdfs:label "Sheets" ;
   rdfs:comment "COVID19 total deaths by trust, COVID19 total deaths by region, Deaths by Region - no pos test, COVID19 total deaths by age, COVID19 all deaths by ethnicity, COVID19 all deaths by gender, COVID19 all deaths by condition, COVID19 all deaths condition 2" ;
   cogs:transforms cogsgit:dataset1 ;
 .
 
 
 cogsgit:dataset1 a cogs:Datasets ;
-  rdfs:label "" ;
+  rdfs:label "Dataset" ;
   rdfs:comment "NHS COVID-19 Daily Deaths" ;
   cogs:outputs cogsgit:columns1 ;
 .
 
 
 cogsgit:columns1 a cogs:Columns ;
-  rdfs:label "" ;
+  rdfs:label "Output Table" ;
   rdfs:comment "Period, ONS Geography Code, NHS Hospital Code, Age, Ethnicity, Pre-existing Condition Status, Pre-existing Condition, Measure Type, Unit, Marker, Value" ;
   cogs:uploads cogsgit:pmd1 ;
 .
 
 
 cogsgit:pmd1 a cogs:PMD ;
-  rdfs:label "" ;
+  rdfs:label "PMD" ;
   rdfs:comment "Publish my Data: http://gss-data.org.uk/data/search" ;
 .
 ###################################################################################################

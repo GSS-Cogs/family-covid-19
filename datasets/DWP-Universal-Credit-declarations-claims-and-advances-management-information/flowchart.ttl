@@ -35,34 +35,34 @@ cogs:PMD a owl:Class ;
 ###########################################################################################################
 
 cogsgit:top-level a cogs:LandingPage ;
-  rdfs:label "DWP Universal Credit declarations (claims) and advances: management information" ;
-  rdfs:comment "https://www.gov.uk/government/collections/universal-credit-statistics";
+  rdfs:label "Landing Page" ;
+  rdfs:comment "<b>DWP Universal Credit declarations (claims) and advances: management information</b> \n https://www.gov.uk/government/collections/universal-credit-statistics";
   cogs:splits cogsgit:sheet1 ;
 .
 
 cogsgit:sheet1 a cogs:Sheets ;
-  rdfs:label "" ;
+  rdfs:label "Sheets" ;
   rdfs:comment "1, 2" ;
   cogs:transforms cogsgit:dataset1 ;
 .
 
 
 cogsgit:dataset1 a cogs:Datasets ;
-  rdfs:label "" ;
+  rdfs:label "Dataset" ;
   rdfs:comment "DWP Universal Credit Declarations and Advances - Management Information" ;
   cogs:outputs cogsgit:columns1 ;
 .
 
 
 cogsgit:columns1 a cogs:Columns ;
-  rdfs:label "" ;
+  rdfs:label "Output Table" ;
   rdfs:comment "Period, Universal Credit Stage, Measure Type, Unit, Marker, Value" ;
   cogs:uploads cogsgit:pmd1 ;
 .
 
 
 cogsgit:pmd1 a cogs:PMD ;
-  rdfs:label "" ;
+  rdfs:label "PMD" ;
   rdfs:comment "Publish my Data: http://gss-data.org.uk/data/search" ;
 .
 ###################################################################################################

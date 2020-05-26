@@ -35,34 +35,34 @@ cogs:PMD a owl:Class ;
 ###########################################################################################################
 
 cogsgit:top-level a cogs:LandingPage ;
-  rdfs:label "WG Testing data for coronavirus (COVID-19)" ;
-  rdfs:comment "https://gov.wales/testing-data-coronavirus-covid-19-12-may-2020";
+  rdfs:label "Landing Page" ;
+  rdfs:comment "<b>WG Testing data for coronavirus (COVID-19)</b> \n https://gov.wales/testing-data-coronavirus-covid-19-12-may-2020";
   cogs:splits cogsgit:sheet1 ;
 .
 
 cogsgit:sheet1 a cogs:Sheets ;
-  rdfs:label "" ;
+  rdfs:label "Sheets" ;
   rdfs:comment "Completed_tests, Critical_workers_category, Critical_workers_detail, Location_tests" ;
   cogs:transforms cogsgit:dataset1 ;
 .
 
 
 cogsgit:dataset1 a cogs:Datasets ;
-  rdfs:label "" ;
+  rdfs:label "Dataset" ;
   rdfs:comment "WG Testing data for Coronavirus - COVID-19 " ;
   cogs:outputs cogsgit:columns1 ;
 .
 
 
 cogsgit:columns1 a cogs:Columns ;
-  rdfs:label "" ;
+  rdfs:label "Output Table" ;
   rdfs:comment "Period, Test Outcome, Critical Worker Category, Emergency Services Worker, Test Location, Marker, Measure Type, Unit, Value" ;
   cogs:uploads cogsgit:pmd1 ;
 .
 
 
 cogsgit:pmd1 a cogs:PMD ;
-  rdfs:label "" ;
+  rdfs:label "PMD" ;
   rdfs:comment "Publish my Data: http://gss-data.org.uk/data/search" ;
 .
 ###################################################################################################

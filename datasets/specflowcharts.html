@@ -19,7 +19,7 @@
       <div class="collapse navbar-collapse">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link" href="https://gss-cogs.github.io/gss-data-docs/architecture">Architecture</a>
+            <a class="nav-link" href="https://gss-cogs.github.io/gss-data-docs/architecture">Architecturesss</a>
           </li>
           <li class="nav-item active">
             <a class="nav-link" href="https://gss-cogs.github.io/gss-data-docs/architecture/components.html">Components</a>
@@ -164,7 +164,12 @@
             const tl = store.any(t, RDFS('label'));
             let html = '<div class="card card-node">';
             if (t !== undefined && t.value.startsWith(COGS().value)) {
-              html += '<div class="card-header ' + t.value.substring(COGS().value.length) + '">';
+              if (l !== undefined) {
+                html += '<div class="card-header ' + l.value + '">';
+              }
+              else {
+                html += '<div class="card-header ' + t.value.substring(COGS().value.length) + '">';
+              }
             } else {
               html += '<div class="card-header">';
             }

@@ -44,8 +44,8 @@ cogsgit:top-level a cogs:LandingPage ;
 .
 
 cogsgit:sheet1 a cogs:Sheets ; 
-  rdfs:label "" ; rdfs:comment "Table_1 Notifications of Service User Deaths received from Adult Care Homes" ; 
-  cogs:transforms cogsgit:columns1 ; 
+  rdfs:label "" ; 
+  rdfs:comment "Table_1 Notifications of Service User Deaths received from Adult Care Homes" ; 
 .
 
 

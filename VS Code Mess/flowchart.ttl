@@ -86,7 +86,6 @@ cogsgit:dataset2 a cogs:Datasets ; rdfs:label "Dateset Name 2" ; rdfs:comment "D
 
 cogsgit:pmd1 a cogs:PMD ;
   rdfs:label "PMD" ;
-  rdfs:label2 "Publish my Data" ;
-  rdfs:comment "http://gss-data.org.uk/data/search" ;
+  rdfs:comment "Publish my Data: http://gss-data.org.uk/data/search" ;
 .
 ###################################################################################################

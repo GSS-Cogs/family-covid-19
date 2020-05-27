@@ -3,12 +3,13 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="shortcut icon" href="../favicon.png">
+    <link rel="shortcut icon" href="favicon.png">
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <title>COGS Family Transform Flowcharts</title>
     <script src="https://cdn.jsdelivr.net/npm/rdflib@1.0.4/dist/rdflib.min.js"></script>
     <script src="https://d3js.org/d3.v4.min.js" charset="utf-8"></script>
+    <!--<script src="d3.min.js"></script>-->
     <script src="https://cdn.jsdelivr.net/npm/dagre-d3@0.6.3/dist/dagre-d3.min.js"></script>
   </head>
   <body style="padding-top: 4.5rem;">
@@ -86,9 +87,8 @@
     <script>
       const store = $rdf.graph();
       const fetcher = new $rdf.Fetcher(store, 5000);
-      //const components_url = new URL("familymappings.ttl", window.location);
-      const process = (window.location.search != '' ? window.location.search.substring(1) : 'flowchart.ttl')
-      const info_url = new URL(process, window.location);
+      //const process = new URL("flowchart.ttl", window.location);
+      const info_url = new URL("flowchart.ttl", window.location);
       const COGS = $rdf.Namespace("http://gss-cogs.uk/def/arch/");
       const RDF = $rdf.Namespace("http://www.w3.org/1999/02/22-rdf-syntax-ns#");
       const RDFS = $rdf.Namespace("http://www.w3.org/2000/01/rdf-schema#");
@@ -182,16 +182,7 @@
               html += "<b>" + l2 + "</b><br><br>"
             }
             if (c !== undefined) {
-              if (t.value.substring(COGS().value.length) == 'LandingPage'){
-                html += "<p><a href='spec.html'>Spec</a></p>";
-                html += "<a href='" + c.value + "'>Link</a>";
-              }
-              else if (t.value.substring(COGS().value.length) == 'PMD'){
-                html += "<a href='" + c.value + "'>Link</a>";
-              }
-              else {
-                html += c.value;
-              }
+              html += c.value;
             }
             html += '</p>';
             html += '</div></div>';

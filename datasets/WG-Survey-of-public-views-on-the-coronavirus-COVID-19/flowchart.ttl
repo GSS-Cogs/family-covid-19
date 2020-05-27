@@ -36,7 +36,7 @@ cogs:PMD a owl:Class ;
 
 cogsgit:top-level a cogs:LandingPage ;
   rdfs:label "Landing Page" ;
-  rdfs:label2 "<b>WG Survey of public views on the coronavirus COVID-19</b>";
+  rdfs:label2 "WG Survey of public views on the coronavirus COVID-19";
   rdfs:comment "https://gov.wales/survey-public-views-coronavirus-covid-19";
   cogs:splits cogsgit:sheet1 ;
 .
@@ -64,6 +64,7 @@ cogsgit:columns1 a cogs:Columns ;
 
 cogsgit:pmd1 a cogs:PMD ;
   rdfs:label "PMD" ;
-  rdfs:comment "Publish my Data: http://gss-data.org.uk/data/search" ;
+  rdfs:label2 "Publish my Data" ;
+  rdfs:comment "http://gss-data.org.uk/data/search" ;
 .
 ###################################################################################################

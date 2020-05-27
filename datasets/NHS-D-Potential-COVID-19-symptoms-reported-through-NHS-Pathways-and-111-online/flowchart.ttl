@@ -36,7 +36,7 @@ cogs:PMD a owl:Class ;
 
 cogsgit:top-level a cogs:LandingPage ;
   rdfs:label "Landing Page" ;
-  rdfs:label2 "<b>NHS-D Potential COVID-19 symptoms reported through NHS Pathways and 111 online</b>" ;
+  rdfs:label2 "NHS-D Potential COVID-19 symptoms reported through NHS Pathways and 111 online" ;
   rdfs:comment "https://digital.nhs.uk/data-and-information/publications/statistical/mi-potential-covid-19-symptoms-reported-through-nhs-pathways-and-111-online";
   cogs:splits cogsgit:sheet1 ;
 .
@@ -64,6 +64,7 @@ cogsgit:columns1 a cogs:Columns ;
 
 cogsgit:pmd1 a cogs:PMD ;
   rdfs:label "PMD" ;
-  rdfs:comment "Publish my Data: http://gss-data.org.uk/data/search" ;
+  rdfs:label2 "Publish my Data" ;
+  rdfs:comment "http://gss-data.org.uk/data/search" ;
 .
 ###################################################################################################

@@ -36,7 +36,7 @@ cogs:PMD a owl:Class ;
 
 cogsgit:top-level a cogs:LandingPage ;
   rdfs:label "Landing Page" ;
-  rdfs:label2 "<b>WG NHS activity and capacity during the coronavirus  COVID-19  pandemic</b>";
+  rdfs:label2 "WG NHS activity and capacity during the coronavirus  COVID-19  pandemic";
   rdfs:comment "https://gov.wales/nhs-activity-and-capacity-during-coronavirus-covid-19-pandemic";
   cogs:splits cogsgit:sheet1, cogsgit:sheet2 ;
 .
@@ -69,6 +69,7 @@ cogsgit:columns1 a cogs:Columns ;
 
 cogsgit:pmd1 a cogs:PMD ;
   rdfs:label "PMD" ;
-  rdfs:comment "Publish my Data: http://gss-data.org.uk/data/search" ;
+  rdfs:label2 "Publish my Data" ;
+  rdfs:comment "http://gss-data.org.uk/data/search" ;
 .
 ###################################################################################################

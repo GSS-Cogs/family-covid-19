@@ -36,7 +36,7 @@ cogs:PMD a owl:Class ;
 
 cogsgit:top-level a cogs:LandingPage ;
   rdfs:label "Landing Page" ;
-  rdfs:label2 "<b>MMO Ad hoc statistical release UK Sea Fisheries Statistics</b>";
+  rdfs:label2 "MMO Ad hoc statistical release UK Sea Fisheries Statistics";
   rdfs:comment "https://www.gov.uk/government/collections/ad-hoc-statistical-releases-sea-fisheries-statistics";
   cogs:splits cogsgit:sheet1 ;
 .
@@ -64,6 +64,7 @@ cogsgit:columns1 a cogs:Columns ;
 
 cogsgit:pmd1 a cogs:PMD ;
   rdfs:label "PMD" ;
-  rdfs:comment "Publish my Data: http://gss-data.org.uk/data/search" ;
+  rdfs:label2 "Publish my Data" ;
+  rdfs:comment "http://gss-data.org.uk/data/search" ;
 .
 ###################################################################################################

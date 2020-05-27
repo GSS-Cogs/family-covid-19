@@ -11,6 +11,9 @@
 cogs:SoftwarePackage a owl:Class ;
   rdfs:label "Software package" ;
 .
+cogs:SoftwarePackage a owl:Class ;
+  rdfs:label2 "Label2" ;
+.
 cogs:LandingPage a owl:Class ;
   rdfs:subClassOf cogs:SoftwarePackage ;
   rdfs:label "Landing Page" ;
@@ -21,7 +24,7 @@ cogs:Datasets a owl:Class ;
 .
 cogs:Sheets a owl:Class ;
   rdfs:subClassOf cogs:SoftwarePackage ;
-  rdfs:label "Sheet names to join";
+  rdfs:label "Sheet Name";
 .
 cogs:Columns a owl:Class ;
   rdfs:subClassOf cogs:SoftwarePackage ;
@@ -31,38 +34,57 @@ cogs:PMD a owl:Class ;
   rdfs:subClassOf cogs:SoftwarePackage ;
   rdfs:label "PMD" ;
 .
+cogs:Rename a owl:Class ;
+  rdfs:subClassOf cogs:SoftwarePackage ;
+  rdfs:label "Rename & Add" ;
+  .
 
 ###########################################################################################################
 
 cogsgit:top-level a cogs:LandingPage ;
-  rdfs:label "PASTE TRANSFORM TITLE HERE" ;
-  rdfs:comment "PASTE LANDING PAGE HERE";
-  cogs:splits cogsgit:sheet1 ;
+  rdfs:label "Landing Page" ;
+  rdfs:label2 "NISRA Weekly deaths, Year";
+  rdfs:comment "https://www.nisra.gov.uk/statistics/ni-summary-statistics/coronavirus-covid-19-statistics";
+  cogs:splits cogsgit:sheet1, cogsgit:sheet2, cogsgit:sheet3, cogsgit:sheet4, cogsgit:sheet5, cogsgit:sheet6, cogsgit:sheet7, cogsgit:sheet8, cogsgit:sheet9 ;
 .
 
-cogsgit:sheet1 a cogs:Sheets ;
-  rdfs:label "" ;
-  rdfs:comment "PASTE SHEET NAMES HERE" ;
-  cogs:transforms cogsgit:dataset1 ;
-.
+cogsgit:sheet1 a cogs:Sheets ; rdfs:label "Weekly Deaths_2020" ; rdfs:comment "Deaths registered each week in Northern Ireland 2020" ; cogs:transforms cogsgit:columns1 ; .
+cogsgit:sheet2 a cogs:Sheets ; rdfs:label "Weekly_Deaths_Age by Sex" ; rdfs:comment "Deaths registered each week in Northern Ireland" ; cogs:transforms cogsgit:columns2 ; .
+cogsgit:sheet3 a cogs:Sheets ; rdfs:label "Weekly_Deaths_by_LGD" ; rdfs:comment "Deaths registered in Northern Ireland by Local Government District (LGD)" ; cogs:transforms cogsgit:columns3 ; .
+cogsgit:sheet4 a cogs:Sheets ; rdfs:label "Covid-19_Deaths_age by sex" ; rdfs:comment "Covid-19 Deaths registered each week in Northern Ireland, age by sex" ; cogs:transforms cogsgit:columns4 ; .
+cogsgit:sheet5 a cogs:Sheets ; rdfs:label "Covid-19_Deaths_by_LGD" ; rdfs:comment "Covid-19 Deaths registered in Northern Ireland by Local Government District (LGD)" ; cogs:transforms cogsgit:columns5 ; .
+cogsgit:sheet6 a cogs:Sheets ; rdfs:label " Covid-19_Reg Date & POD" ; rdfs:comment "Covid-19 Deaths registered in Northern Ireland by Place of Death" ; cogs:transforms cogsgit:columns6 ; .
+cogsgit:sheet7 a cogs:Sheets ; rdfs:label "Covid-19 by Week of Death" ; rdfs:comment " Covid-19 Death Occurrences by week of death in Northern Ireland" ; cogs:transforms cogsgit:columns7 ; .
+cogsgit:sheet8 a cogs:Sheets ; rdfs:label " Covid-19 Occurrence Date & POD" ; rdfs:comment "Covid-19 Death Occurrences in Northern Ireland by week of death and Place of Death" ; cogs:transforms cogsgit:columns8 ; .
+cogsgit:sheet9 a cogs:Sheets ; rdfs:label "Covid-19 Date of Death & POD" ; rdfs:comment "Covid-19 Death Occurrences by date and Place of Death in Northern Ireland" ; cogs:transforms cogsgit:columns9 ; .
 
 
-cogsgit:dataset1 a cogs:Datasets ;
-  rdfs:label "" ;
-  rdfs:comment "PASTE OUTPUT DATASET NAME HERE" ;
-  cogs:outputs cogsgit:columns1 ;
-.
+cogsgit:columns1 a cogs:Columns ; rdfs:label "Output Table 1" ; rdfs:comment "Registration Week, Week Ending, Registered Death Type, Measure Type, Unit, Marker, Value" ; cogs:harmonise cogsgit:rename1 ; .
+cogsgit:columns2 a cogs:Columns ; rdfs:label "Output Table 2" ; rdfs:comment "Gender, Age, Week Number, Week Ending, Measure Type, Unit, Marker, Value" ; cogs:harmonise cogsgit:rename2 ; .
+cogsgit:columns3 a cogs:Columns ; rdfs:label "Output Table 3" ; rdfs:comment "Registration Week, Week Ending, Local Government District, Measure Type, Unit, Marker, Value" ; cogs:harmonise cogsgit:rename3 ; .
+cogsgit:columns4 a cogs:Columns ; rdfs:label "Output Table 4" ; rdfs:comment "Gender, Age, Week Number, Week Ending, Measure Type, Unit, Marker, Value" ; cogs:harmonise cogsgit:rename4 ; .
+cogsgit:columns5 a cogs:Columns ; rdfs:label "Output Table 5" ; rdfs:comment "Registration Week, Week Ending, Local Government District, Measure Type, Unit, Marker, Value" ; cogs:harmonise cogsgit:rename5 ; .
+cogsgit:columns6 a cogs:Columns ; rdfs:label "Output Table 6" ; rdfs:comment "Week of Death, Week Ending, Place of Death, Measure Type, Unit, Marker, Value" ; cogs:harmonise cogsgit:rename6 ; .
+cogsgit:columns7 a cogs:Columns ; rdfs:label "Output Table 7" ; rdfs:comment "Week of Death, Week Ending, COVID-19 Deaths, Measure Type, Unit, Marker, Value" ; cogs:harmonise cogsgit:rename7 ; .
+cogsgit:columns8 a cogs:Columns ; rdfs:label "Output Table 8" ; rdfs:comment "Week of Death, Week Ending, Place of Death, Measure Type, Unit, Marker, Value" ; cogs:harmonise cogsgit:rename8 ; .
+cogsgit:columns9 a cogs:Columns ; rdfs:label "Output Table 9" ; rdfs:comment "Date, Place of Death, Measure Type, Unit, Marker, Value" ; cogs:harmonise cogsgit:rename9 ; .
 
 
-cogsgit:columns1 a cogs:Columns ;
-  rdfs:label "" ;
-  rdfs:comment "PASET OUTPUT COLUMNS HERE" ;
-  cogs:uploads cogsgit:pmd1 ;
-.
+cogsgit:rename1 a cogs:Rename ; rdfs:label "Rename & Add" ; rdfs:comment "Not yet specified" ; cogs:joins cogsgit:dataset1 ; .
+cogsgit:rename2 a cogs:Rename ; rdfs:label "Rename & Add" ; rdfs:comment "Not yet specified" ; cogs:joins cogsgit:dataset1 ; .
+cogsgit:rename3 a cogs:Rename ; rdfs:label "Rename & Add" ; rdfs:comment "Not yet specified" ; cogs:joins cogsgit:dataset1 ; .
+cogsgit:rename4 a cogs:Rename ; rdfs:label "Rename & Add" ; rdfs:comment "Not yet specified" ; cogs:joins cogsgit:dataset1 ; .
+cogsgit:rename5 a cogs:Rename ; rdfs:label "Rename & Add" ; rdfs:comment "Not yet specified" ; cogs:joins cogsgit:dataset1 ; .
+cogsgit:rename6 a cogs:Rename ; rdfs:label "Rename & Add" ; rdfs:comment "Not yet specified" ; cogs:joins cogsgit:dataset1 ; .
+cogsgit:rename7 a cogs:Rename ; rdfs:label "Rename & Add" ; rdfs:comment "Not yet specified" ; cogs:joins cogsgit:dataset1 ; .
+cogsgit:rename8 a cogs:Rename ; rdfs:label "Rename & Add" ; rdfs:comment "Not yet specified" ; cogs:joins cogsgit:dataset1 ; .
+cogsgit:rename9 a cogs:Rename ; rdfs:label "Rename & Add" ; rdfs:comment "Not yet specified" ; cogs:joins cogsgit:dataset1 ; .
 
+
+cogsgit:dataset1 a cogs:Datasets ; rdfs:label "Dataset Name 1" ; rdfs:comment "Dataset Name" ; cogs:outputs cogsgit:pmd1 ; .
 
 cogsgit:pmd1 a cogs:PMD ;
-  rdfs:label "" ;
+  rdfs:label "PMD" ;
   rdfs:comment "Publish my Data: http://gss-data.org.uk/data/search" ;
 .
 ###################################################################################################

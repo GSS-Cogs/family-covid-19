@@ -14,7 +14,7 @@
 
 [Open Data Platform](https://www.opendata.nhs.scot/dataset/covid-19-in-scotland)
 
-[Transform Flowchart](https://gss-cogs.github.io/family-covid-19-AIRTABLE/datasets/specflowcharts.html?phs-covid-19-statistical-report/flowchart.ttl)
+[Transform Flowchart](https://gss-cogs.github.io/family-covid-19/datasets/specflowcharts.html?PHS-COVID-19-Statistical-Report/flowchart.ttl)
 
 --------
 

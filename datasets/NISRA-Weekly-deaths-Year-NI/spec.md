@@ -14,7 +14,7 @@
 
 [Landing Page](https://www.nisra.gov.uk/statistics/ni-summary-statistics/coronavirus-covid-19-statistics)
 
-[Transform Flowchart](https://gss-cogs.github.io/family-covid-19/datasets/specflowcharts.html?nisra-weekly-deaths-year-ni/flowchart.ttl)
+[Transform Flowchart](https://gss-cogs.github.io/family-covid-19/datasets/specflowcharts.html?NISRA-Weekly-deaths-Year-NI/flowchart.ttl)
 
 --------
 

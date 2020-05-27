@@ -36,7 +36,8 @@ cogs:PMD a owl:Class ;
 
 cogsgit:top-level a cogs:LandingPage ;
   rdfs:label "Landing Page" ;
-  rdfs:comment "<b>DWP Universal Credit declarations (claims) and advances: management information</b> \n https://www.gov.uk/government/collections/universal-credit-statistics";
+  rdfs:label2 "<b>DWP Universal Credit declarations (claims) and advances: management information</b>";
+  rdfs:comment "https://www.gov.uk/government/collections/universal-credit-statistics";
   cogs:splits cogsgit:sheet1 ;
 .
 

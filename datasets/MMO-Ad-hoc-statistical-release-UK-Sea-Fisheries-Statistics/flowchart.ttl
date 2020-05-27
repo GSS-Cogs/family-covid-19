@@ -36,7 +36,8 @@ cogs:PMD a owl:Class ;
 
 cogsgit:top-level a cogs:LandingPage ;
   rdfs:label "Landing Page" ;
-  rdfs:comment "<b>MMO Ad hoc statistical release UK Sea Fisheries Statistics </b> \n https://www.gov.uk/government/collections/ad-hoc-statistical-releases-sea-fisheries-statistics";
+  rdfs:label2 "<b>MMO Ad hoc statistical release UK Sea Fisheries Statistics</b>";
+  rdfs:comment "https://www.gov.uk/government/collections/ad-hoc-statistical-releases-sea-fisheries-statistics";
   cogs:splits cogsgit:sheet1 ;
 .
 

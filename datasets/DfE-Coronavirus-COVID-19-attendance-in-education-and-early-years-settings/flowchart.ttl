@@ -35,8 +35,9 @@ cogs:PMD a owl:Class ;
 ###########################################################################################################
 
 cogsgit:top-level a cogs:LandingPage ;
-  rdfs:label "DfE Coronavirus (COVID-19): attendance in education and early years settings" ;
-  rdfs:comment "<b>DfE Coronavirus (COVID-19): attendance in education and early years settings</b> \n https://www.gov.uk/government/publications/coronavirus-covid-19-attendance-in-education-and-early-years-settings";
+  rdfs:label "Landing Page" ;
+  rdfs:label2 "<b>DfE Coronavirus (COVID-19): attendance in education and early years settings</b>";
+  rdfs:comment "https://www.gov.uk/government/publications/coronavirus-covid-19-attendance-in-education-and-early-years-settings";
   cogs:splits cogsgit:sheet1 ;
 .
 

@@ -36,7 +36,8 @@ cogs:PMD a owl:Class ;
 
 cogsgit:top-level a cogs:LandingPage ;
   rdfs:label "Landing Page" ;
-  rdfs:comment "<b>WG NHS activity and capacity during the coronavirus  COVID-19  pandemic</b> \n https://gov.wales/nhs-activity-and-capacity-during-coronavirus-covid-19-pandemic";
+  rdfs:label2 "<b>WG NHS activity and capacity during the coronavirus  COVID-19  pandemic</b>";
+  rdfs:comment "https://gov.wales/nhs-activity-and-capacity-during-coronavirus-covid-19-pandemic";
   cogs:splits cogsgit:sheet1, cogsgit:sheet2 ;
 .
 

@@ -36,7 +36,8 @@ cogs:PMD a owl:Class ;
 
 cogsgit:top-level a cogs:LandingPage ;
   rdfs:label "Landing Page" ;
-  rdfs:comment "<b>PHE Coronavirus  COVID-19  in the UK</b> \n https://coronavirus.data.gov.uk/?_ga=2.156389567.589199403.1589439040-1962094972.1582617556";
+  rdfs:label2 "<b>PHE Coronavirus  COVID-19  in the UK</b>";
+  rdfs:comment "https://coronavirus.data.gov.uk/?_ga=2.156389567.589199403.1589439040-1962094972.1582617556";
   cogs:splits cogsgit:sheet1 ;
 .
 

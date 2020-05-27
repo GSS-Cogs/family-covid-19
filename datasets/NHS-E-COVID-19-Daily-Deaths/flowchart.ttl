@@ -36,7 +36,8 @@ cogs:PMD a owl:Class ;
 
 cogsgit:top-level a cogs:LandingPage ;
   rdfs:label "Landing Page" ;
-  rdfs:comment "<b>NHS-E COVID-19 Daily Deaths </b> \n https://www.england.nhs.uk/statistics/statistical-work-areas/covid-19-daily-deaths/";
+  rdfs:label2 "<b>NHS-E COVID-19 Daily Deaths</b>";
+  rdfs:comment "https://www.england.nhs.uk/statistics/statistical-work-areas/covid-19-daily-deaths/";
   cogs:splits cogsgit:sheet1 ;
 .
 

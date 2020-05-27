@@ -4,31 +4,29 @@
 
 [Family Transform Status](https://gss-cogs.github.io/family-covid-19-AIRTABLE/datasets/index.html)
 
+------
+
 ## PHS COVID-19 Statistical Report 
 
 [Landing Page](https://beta.isdscotland.org/find-publications-and-data/population-health/covid-19/covid-19-statistical-report/)
 
+#### Open Data available at:
+
+[Open Data Platform](https://www.opendata.nhs.scot/dataset/covid-19-in-scotland)
+
 [Transform Flowchart](https://gss-cogs.github.io/family-covid-19-AIRTABLE/datasets/specflowcharts.html?phs-covid-19-statistical-report/flowchart.ttl)
 
-### Dataset One
+--------
 
-#### Output Dataset Name:
+### 1. Scrape and Transform
 
-		name
+#### Open Data source needs to be investigated to see what is available 				
+--------
 
-#### Table Structure
+### 2. Harmonise
 
-		Columns, Measure Type, Unit, Marker, Value
-
-#### Sheet: 1
-
-		spec
-
-#### Sheet: 2
-
-		spec
+-----
 
 ##### Footnotes
 
 		footnotes
-

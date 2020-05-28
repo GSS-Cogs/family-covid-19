@@ -29,22 +29,21 @@ def date_time(time_value):
     
 df = pd.DataFrame()
 # -
-
-
-
 for name, tab in tabs.items():
     if 'Index' in name or 'Table 2' in name:
         continue
     period = tab.excel_ref('A4').expand(DOWN).is_not_blank()
-    attendance_in_education = tab.excel_ref('C3').expand(RIGHT).is_not_blank() - tab.excel_ref('L3').expand(RIGHT)
+    attendance_in_education_setting = tab.excel_ref('C3').expand(RIGHT).is_not_blank() - tab.excel_ref('L3').expand(RIGHT)
     marker = tab.excel_ref('L4').expand(DOWN)
     measure_type = 'People' #People or Percentage, will be filtered. 
     unit = 'Count' #Count or Percent, will be filtered. 
-    observations = attendance_in_education.fill(DOWN).is_not_blank()
+    attendance_setting = 'Education'
+    observations = attendance_in_education_setting.fill(DOWN).is_not_blank()
     Dimensions = [
         HDim(period,'Period',DIRECTLY,LEFT),
-        HDim(attendance_in_education,'Attendance in Education Setting',DIRECTLY,ABOVE),
+        HDim(attendance_in_education_setting,'Attendance in Education Setting',DIRECTLY,ABOVE),
         HDim(marker,'DATAMARKER',DIRECTLY,RIGHT),
+        HDimConst('Attendance Setting', attendance_setting),
         HDimConst('Measure Type', measure_type),
         HDimConst('Unit', unit)
     ]
@@ -52,6 +51,31 @@ for name, tab in tabs.items():
     savepreviewhtml(c1, fname=tab.name + "Preview.html")
     new_table = c1.topandas()
     df = pd.concat([df, new_table], sort=False)
+
+for name, tab in tabs.items():
+    if 'Index' in name or 'Table 1' in name:
+        continue
+    period = tab.excel_ref('A4').expand(DOWN).is_not_blank()
+    attendance_in_education_setting = tab.excel_ref('C3').expand(RIGHT).is_not_blank() - tab.excel_ref('L3').expand(RIGHT)
+    attendance_setting = 'Early Years'
+    HDimConst('Attendance Setting', attendance_setting),
+    marker = ''
+    measure_type = 'People' #People or Percentage, will be filtered. 
+    unit = 'Count' #Count or Percent, will be filtered. 
+    observations = attendance_in_education_setting.fill(DOWN).is_not_blank()
+    Dimensions = [
+        HDim(period,'Period',DIRECTLY,LEFT),
+        HDim(attendance_in_education_setting,'Attendance in Education Setting',DIRECTLY,ABOVE),
+        HDimConst('DATAMARKER',marker),
+        HDimConst('Attendance Setting', attendance_setting),
+        HDimConst('Measure Type', measure_type),
+        HDimConst('Unit', unit)
+    ]
+    c1 = ConversionSegment(observations, Dimensions, processTIMEUNIT=True)
+    savepreviewhtml(c1, fname=tab.name + "Preview.html")
+    new_table = c1.topandas()
+    df = pd.concat([df, new_table], sort=False)
+
 
 # +
 import numpy as np
@@ -83,11 +107,11 @@ for col in df:
 df["Period"] = df["Period"].apply(date_time)
 df['Value'] = df['Value'].round(decimals = 2)
 for column in df:
-    if column in ('Attendance in Education Setting'):
+    if column in ('Attendance in Education Setting', 'Attendance Setting'):
         df[column] = df[column].str.lstrip()
         df[column] = df[column].map(lambda x: pathify(x))
 
-tidy = df[['Period', 'Attendance in Education Setting','Marker', 'Measure Type', 'Unit','Value']]
+tidy = df[['Period', 'Attendance Setting', 'Attendance in Education Setting','Marker', 'Measure Type', 'Unit','Value']]
 
 out = Path('out')
 out.mkdir(exist_ok=True)

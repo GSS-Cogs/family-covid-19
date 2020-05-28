@@ -3,13 +3,6 @@
 from gssutils import * 
 import json 
 
-info = json.load(open('info.json')) 
-landingPage = info['landingPage'] 
-landingPage 
-
-# + 
-#### Add transformation script here #### 
-
-scraper = Scraper(landingPage) 
-scraper.select_dataset(latest=True) 
-scraper 
+scrape = Scraper(seed="info.json")   # add dataURL to info.json first!
+scrape.distributions[0].title = "Testing data for coronavirus (COVID-19)"
+scrape

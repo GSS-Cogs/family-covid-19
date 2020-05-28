@@ -1,8 +1,24 @@
+# COGS Dataset Specification
+
+[Home](https://gss-cogs.github.io/family-covid-19/datasets/specmenu.html)
+
+[Family Transform Status](https://gss-cogs.github.io/family-covid-19/datasets/index.html)
+
+## Coronavirus COVID-19 attendance in education and early years settings
+
+### Department for Education
+
+[Landing Page](https://www.gov.uk/government/publications/coronavirus-covid-19-attendance-in-education-and-early-years-settings)
+
+[Transform Flowchart](https://gss-cogs.github.io/family-covid-19/datasets/specflowcharts.html?DfE-Coronavirus-COVID-19-attendance-in-education-and-early-years-settings/flowchart.ttl)
+
+
+### Dataset One
+
 #### Output Dataset Name:
 	DfE Coronavirus COVID-19 attendance in education and early years settings
 
-#### Table Structure
-	Period, Attendance in Education Setting, Marker, Measure Type, Unit, Value (COVID-19) outbreak
+#### Sheet: Table 1 Attendence in education settings
 
 	A3:A37 - Date - Change name to Period and format as required
 	
@@ -20,7 +36,7 @@
 #### Table Structure
 	Period, Attendance in Education Setting, Marker, Measure Type, Unit, Value 
 
-#### Sheet: COVID-19 attendance
+#### Sheet: Table 2 Attendance in early years settings 
 
 	A - Date - Change name to Period and format as required
 	
@@ -34,7 +50,7 @@
 
 #### Table Structure
 	Period, Attendance in Education Setting, Marker, Measure Type, Unit, Value
-	
+
 ##### Footnotes
 	Footnotes need to be added to the metadata and the Notes (Marker) column changed as mentioned above
 		

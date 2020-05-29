@@ -3,6 +3,7 @@
     "publisher": "Welsh Government",
     "description": "Information on public views and behaviours during the coronavirus crisis.",
     "landingPage": "https://gov.wales/survey-public-views-coronavirus-covid-19",
+    "dataURL": "https://gov.wales/sites/default/files/statistics-and-research/2020-05/survey-of-public-views-on-the-coronavirus-covid-19-19-march-to-18-may-2020-120.ods",
     "datasetNotes": [
         "On the landing page scroll to the latest release, this will open another page scroll to data and click on the + the spreadsheet can be found here"
     ],

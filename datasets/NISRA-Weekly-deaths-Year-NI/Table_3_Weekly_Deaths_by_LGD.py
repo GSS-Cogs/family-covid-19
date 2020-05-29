@@ -66,7 +66,6 @@ import numpy as np
 df.rename(columns={'OBS': 'Value', 'DATAMARKER' : 'Marker'}, inplace=True)
 
 ######### Format Week Ending (Period column) ##############
-    
 
 df['Registration Week'] = df.apply(lambda x: x['Registration Week'].replace('.0', ''), axis = 1)
 df = df.replace('', np.nan, regex=True)

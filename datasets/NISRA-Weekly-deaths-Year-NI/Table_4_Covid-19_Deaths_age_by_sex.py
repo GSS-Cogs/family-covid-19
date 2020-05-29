@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # # NISRA Weekly deaths,  Year   NI 
 #
-# ### Sheet : Weekly_Deaths_Age by Sex
+# ### Sheet : Covid-19_Deaths_age by sex
 
 from gssutils import * 
 import json 
@@ -28,20 +28,12 @@ df = pd.DataFrame()
 
 # ##### Table Structure 
 # 	Gender, Age, Week Number, Week Ending, Measure Type, Unit, Marker, Value
-#     
-#     A - Gender
-# 	B - Age (Codelist)
-# 	C3:V3 - Week Number
-# 	C4:V4 - Week Ending (Friday) - C3:4 to be given just the year or a date range
-# 	Measure Type = Deaths
-# 	Unit - Count
-# 	Put Provisional in Marker column
 #
 
 for name, tab in tabs.items():
     if 'Contents' in name or 'Background' in name or 'Definitions' in name:
         continue
-    if name == 'Weekly_Deaths_Age by Sex':
+    if name == 'Covid-19_Deaths_ age by sex':
         gender = tab.excel_ref('A5').expand(DOWN).is_not_blank()
         age = tab.excel_ref('B5').expand(DOWN).is_not_blank()
         week_number = tab.excel_ref('C3').expand(RIGHT) - tab.excel_ref('W3').expand(RIGHT)
@@ -72,8 +64,6 @@ df.rename(columns={'OBS': 'Value', 'DATAMARKER' : 'Marker'}, inplace=True)
 df = df.replace({'Week Ending' : {'' : 'year/2020'}})
 
 ######### Format Week Ending (Period column) #######
-######### Does gender column need to be F M All ########
-######## Does age column need tidying up ########
 
 df['Week Number'] = df.apply(lambda x: x['Week Number'].replace('.0', ''), axis = 1)
 df = df.replace('', np.nan, regex=True)
@@ -97,7 +87,7 @@ tidy = df[['Gender', 'Age', 'Week Number', 'Week Ending', 'Measure Type', 'Unit'
 destinationFolder = Path('out')
 destinationFolder.mkdir(exist_ok=True, parents=True)
 
-TITLE = 'Deaths registered each week in Northern Ireland'
+TITLE = 'Covid-19 Deaths registered each week in Northern Ireland, age by sex'
 OBS_ID = pathify(TITLE)
 import os
 GROUP_ID = pathify(os.environ.get('JOB_NAME', 'gss_data/covid-19/' + Path(os.getcwd()).name))
@@ -120,6 +110,8 @@ tidy
 #additional_metadata = """ Weekly published data are provisional.
 
 #This data is based on registrations of deaths, not occurrences. The majority of deaths are registered within five days in Northern Ireland.
+
+#COVID-19 deaths include any death where Coronavirus or COVID-19 (suspected or confirmed) was mentioned anywhere on the death certificate.
 
 #"""
 #scraper.dataset.description = scraper.dataset.description + additional_metadata

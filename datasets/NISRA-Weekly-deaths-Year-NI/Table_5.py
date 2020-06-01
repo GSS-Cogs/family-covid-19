@@ -6,22 +6,11 @@
 from gssutils import * 
 import json 
 
-# +
-#info = json.load(open('info.json')) 
-#landingPage = info['landingPage'] 
-#landingPage 
+scrape = Scraper(seed="info.json")   
+scrape.distributions[0].title = "Weekly deaths, 2020 (NI)"
+scrape
 
-# +
-#### Add transformation script here #### 
-
-#scraper = Scraper(landingPage) 
-#scraper.select_dataset(latest=True) 
-#scraper 
-# -
-
-data = loadxlstabs("./source/Weekly_Deaths.xls") 
-
-tabs = {tab.name: tab for tab in data}
+tabs = { tab.name: tab for tab in scrape.distributions[0].as_databaker() }
 list(tabs)
 
 df = pd.DataFrame()
@@ -40,10 +29,10 @@ df = pd.DataFrame()
 for name, tab in tabs.items():
     if 'Contents' in name or 'Background' in name or 'Definitions' in name:
         continue
-    if name == 'Covid-19_Deaths_by_LGD':
-        registration_week = tab.excel_ref('A5').expand(DOWN).is_not_blank()
-        week_ending = tab.excel_ref('B5').expand(DOWN).is_not_blank()
-        local_gov_district = tab.excel_ref('C4').expand(RIGHT)
+    if name == 'Table 5':
+        registration_week = tab.excel_ref('A6').expand(DOWN).is_not_blank()
+        week_ending = tab.excel_ref('B6').expand(DOWN).is_not_blank()
+        local_gov_district = tab.excel_ref('C5').expand(RIGHT)
         marker = 'Provisional'
         unit = 'Count'
         measure_type = 'Deaths'
@@ -61,11 +50,21 @@ for name, tab in tabs.items():
         new_table = c1.topandas()
         df = pd.concat([df, new_table], sort=False)
 
+
+def date_time(time_value):
+    date_string = time_value.strip().split(' ')[0]
+    if len(date_string)  == 10:
+        return 'gregorian-day/' + date_string + 'T00:00/P7D'
+    elif len(date_string)  == 0:
+        return 'year/2020'
+
+
+
 # +
 import numpy as np
 df.rename(columns={'OBS': 'Value', 'DATAMARKER' : 'Marker'}, inplace=True)
 
-######### Format Week Ending (Period column) ##############
+df["Week Ending"] = df["Week Ending"].apply(date_time)
 
 df['Registration Week'] = df.apply(lambda x: x['Registration Week'].replace('.0', ''), axis = 1)
 df = df.replace('', np.nan, regex=True)

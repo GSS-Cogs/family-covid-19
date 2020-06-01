@@ -1,67 +1,60 @@
 # -*- coding: utf-8 -*-
 # # NISRA Weekly deaths,  Year   NI 
 #
-# ### Sheet : Weekly Deaths_2020
+# ### Sheet : Covid-19 Date of Death & POD
 
 from gssutils import * 
 import json 
 
-# +
-#info = json.load(open('info.json')) 
-#landingPage = info['landingPage'] 
-#landingPage 
+scrape = Scraper(seed="info.json")   
+scrape.distributions[0].title = "Weekly deaths, 2020 (NI)"
+scrape
 
-# +
-#### Add transformation script here #### 
-
-#scraper = Scraper(landingPage) 
-#scraper.select_dataset(latest=True) 
-#scraper 
-# -
-
-data = loadxlstabs("./source/Weekly_Deaths.xls") 
-
-tabs = {tab.name: tab for tab in data}
+tabs = { tab.name: tab for tab in scrape.distributions[0].as_databaker() }
 list(tabs)
 
 df = pd.DataFrame()
 
-# ##### Table Structure 
-# Registration Week, Week Ending, Registered Death Type, Measure Type, Unit, Marker, Value
-
 for name, tab in tabs.items():
     if 'Contents' in name or 'Background' in name or 'Definitions' in name:
         continue
-    if name == 'Weekly Deaths_2020':
-        registration_week = tab.excel_ref('A4').expand(DOWN).is_not_blank()
-        week_ending = tab.excel_ref('B4').expand(DOWN).is_not_blank()
-        registered_death_type = tab.excel_ref('C3').expand(RIGHT)
-        unit = 'Count'
+    if name == 'Table 10':
+        date = tab.excel_ref('A5').expand(DOWN).is_not_blank()
+        place_of_death = tab.excel_ref('B4').expand(RIGHT)
+        marker = 'Provisional'
+        unit = 'Count' #or Cumulative count, will be filtered after 
         measure_type = 'Deaths'
-        observations = week_ending.fill(RIGHT).is_not_blank()
+        observations = place_of_death.fill(DOWN).is_not_blank()
         Dimensions = [
-            HDim(registration_week,'Registration Week',DIRECTLY,LEFT),
-            HDim(week_ending,'Week Ending',DIRECTLY,LEFT),
-            HDim(registered_death_type,'Registered Death Type',DIRECTLY,ABOVE),
+            HDim(date,'Date',DIRECTLY,LEFT),
+            HDim(place_of_death,'Place of Death',DIRECTLY,ABOVE),
+            HDimConst('DATAMARKER', marker),
             HDimConst('Measure Type', measure_type),
             HDimConst('Unit', unit)
         ]
         c1 = ConversionSegment(observations, Dimensions, processTIMEUNIT=True)
-        savepreviewhtml(c1, fname=tab.name + "Preview.html")
+        savepreviewhtml(c1, fname=tab.name + " Preview.html")
         new_table = c1.topandas()
         df = pd.concat([df, new_table], sort=False)
+
+
+def date_time(time_value):
+    date_string = time_value.strip().split(' ')[0]
+    if len(date_string)  == 10:
+        return 'gregorian-day/' + date_string + 'T00:00/P7D'
+    elif len(date_string)  == 0:
+        return 'year/2020'
+
 
 # +
 import numpy as np
 df.rename(columns={'OBS': 'Value', 'DATAMARKER' : 'Marker'}, inplace=True)
 
-######### Format Week Ending (Period column) ##############
-    
-df = df.replace({'Marker' : {'-' : 'NULL', np.nan : 'Provisional' } } )
-f1=((df['Registered Death Type'] =='Minimum in Previous 5 years') | (df['Registered Death Type'] =='Maximum in Previous 5 years'))
-df.loc[f1,'Marker'] = ''
+f1=((df['Place of Death'] =='Cumulative Total'))
+df.loc[f1,'Unit'] = 'Cumulative Count'
 
-df['Registration Week'] = df.apply(lambda x: x['Registration Week'].replace('.0', ''), axis = 1)
+df["Date"] = df["Date"].apply(date_time)
+
 df = df.replace('', np.nan, regex=True)
 # -
 
@@ -73,17 +66,17 @@ for col in df:
         display(df[col].cat.categories) 
 
 for column in df:
-    if column in ('Registered Death Type'):
+    if column in ('Place of Death'):
         df[column] = df[column].str.lstrip()
         df[column] = df[column].map(lambda x: pathify(x))
 
-tidy = df[['Registration Week', 'Week Ending', 'Registered Death Type', 'Measure Type', 'Unit', 'Marker', 'Value']]
+tidy = df[['Date', 'Place of Death', 'Measure Type', 'Unit', 'Marker', 'Value']]
 
 # +
 destinationFolder = Path('out')
 destinationFolder.mkdir(exist_ok=True, parents=True)
 
-TITLE = 'Deaths registered each week in Northern Ireland 2020'
+TITLE = 'Covid-19 Death Occurrences by date and Place of Death in Northern Ireland'
 OBS_ID = pathify(TITLE)
 import os
 GROUP_ID = pathify(os.environ.get('JOB_NAME', 'gss_data/covid-19/' + Path(os.getcwd()).name))
@@ -102,10 +95,16 @@ tidy.drop_duplicates().to_csv(destinationFolder / f'{OBS_ID}.csv', index = False
 ## Adding short metadata to description
 #additional_metadata = """ Weekly published data are provisional.
 
-#Respiratory deaths include any death where terms directly relating to respiratory causes were mentioned anywhere on the death certificate (this includes COVID-19 deaths). This is not directly comparable to the ONS figures relating to ‘deaths where the underlying cause was respiratory disease’.
+#1 This data is based on the actual date of death, from those deaths registered by GRO up to 20th May 2020. All data in this table are subject to change, as some deaths will have occurred but haven’t been registered yet.
 
-#COVID-19 deaths include any death where Coronavirus or COVID-19 (suspected or confirmed) was mentioned anywhere on the death certificate.
+#2 COVID-19 deaths include any death where Coronavirus or COVID-19 (suspected or confirmed) was mentioned anywhere on the death certificate.
+
+#3Includes deaths in care homes only. Care home residents who have died in a different location will be counted elsewhere in this table. 
+
+#4 The 'Other' category includes deaths at a residential address which was not the usual address of the deceased and all other places.
+
 #"""
+
 #scraper.dataset.description = scraper.dataset.description + additional_metadata
 
 #scraper.dataset.family = 'covid-19'

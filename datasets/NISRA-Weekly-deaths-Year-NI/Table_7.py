@@ -1,79 +1,75 @@
 # -*- coding: utf-8 -*-
 # # NISRA Weekly deaths,  Year   NI 
 #
-# ### Sheet : Weekly_Deaths_Age by Sex
+# ### Sheet : Covid-19 by Week of death
 
 from gssutils import * 
 import json 
 
-# +
-#info = json.load(open('info.json')) 
-#landingPage = info['landingPage'] 
-#landingPage 
+scrape = Scraper(seed="info.json")   
+scrape.distributions[0].title = "Weekly deaths, 2020 (NI)"
+scrape
 
-# +
-#### Add transformation script here #### 
-
-#scraper = Scraper(landingPage) 
-#scraper.select_dataset(latest=True) 
-#scraper 
-# -
-
-data = loadxlstabs("./source/Weekly_Deaths.xls") 
-
-tabs = {tab.name: tab for tab in data}
+tabs = { tab.name: tab for tab in scrape.distributions[0].as_databaker() }
 list(tabs)
 
 df = pd.DataFrame()
 
 # ##### Table Structure 
-# 	Gender, Age, Week Number, Week Ending, Measure Type, Unit, Marker, Value
-#     
-#     A - Gender
-# 	B - Age (Codelist)
-# 	C3:V3 - Week Number
-# 	C4:V4 - Week Ending (Friday) - C3:4 to be given just the year or a date range
+# Week of Death, Week Ending, COVID-19 Deaths, Measure Type, Unit, Marker, Value
+#
+# 	A - Week of Death
+# 	B - Week Ending (Friday)
+# 	C3:H3 - COVID-19 Deaths (Codelist)
 # 	Measure Type = Deaths
-# 	Unit - Count
+# 	Unit - Count and Cumulative Count
 # 	Put Provisional in Marker column
 #
 
 for name, tab in tabs.items():
     if 'Contents' in name or 'Background' in name or 'Definitions' in name:
         continue
-    if name == 'Weekly_Deaths_Age by Sex':
-        gender = tab.excel_ref('A5').expand(DOWN).is_not_blank()
-        age = tab.excel_ref('B5').expand(DOWN).is_not_blank()
-        week_number = tab.excel_ref('C3').expand(RIGHT) - tab.excel_ref('W3').expand(RIGHT)
-        week_ending = tab.excel_ref('C4').expand(RIGHT) - tab.excel_ref('W4').expand(RIGHT)
+    if name == 'Table 7':
+        week_of_death = tab.excel_ref('A5').expand(DOWN).is_not_blank()
+        week_ending = tab.excel_ref('B5').expand(DOWN).is_not_blank()
+        covid_19_deaths = tab.excel_ref('C4').expand(RIGHT)
         marker = 'Provisional'
-        unit = 'Count'
+        unit = 'Count'#or Cummulative, will be filtered
         measure_type = 'Deaths'
-        observations = week_ending.fill(DOWN).is_not_blank()
-        
+        observations = covid_19_deaths.fill(DOWN).is_not_blank()
         Dimensions = [
-            HDim(gender,'Gender',CLOSEST,ABOVE),
-            HDim(age,'Age',DIRECTLY,LEFT),
-            HDim(week_number,'Week Number',DIRECTLY,ABOVE),
-            HDim(week_ending,'Week Ending',DIRECTLY,ABOVE),
+            HDim(week_of_death,'Week of Death',DIRECTLY,LEFT),
+            HDim(week_ending,'Week Ending',DIRECTLY,LEFT),
+            HDim(covid_19_deaths,'Covid-19 Deaths',DIRECTLY,ABOVE),
             HDimConst('DATAMARKER', marker),
             HDimConst('Measure Type', measure_type),
             HDimConst('Unit', unit)
         ]
         c1 = ConversionSegment(observations, Dimensions, processTIMEUNIT=True)
-        savepreviewhtml(c1, fname=tab.name + "Preview.html")
+        savepreviewhtml(c1, fname=tab.name + " Preview.html")
         new_table = c1.topandas()
         df = pd.concat([df, new_table], sort=False)
+
+
+def date_time(time_value):
+    date_string = time_value.strip().split(' ')[0]
+    if len(date_string)  == 10:
+        return 'gregorian-day/' + date_string + 'T00:00/P7D'
+    elif len(date_string)  == 0:
+        return 'year/2020'
+
 
 
 # +
 import numpy as np
 df.rename(columns={'OBS': 'Value', 'DATAMARKER' : 'Marker'}, inplace=True)
-df = df.replace({'Week Ending' : {'' : 'year/2020'}})
 
-######### Format Week Ending (Period column) #######
+f1=((df['Covid-19 Deaths'] =='Cumulative Number of Covid-192 deaths occuring '))
+df.loc[f1,'Unit'] = 'Cumulative Count'
 
-df['Week Number'] = df.apply(lambda x: x['Week Number'].replace('.0', ''), axis = 1)
+df["Week Ending"] = df["Week Ending"].apply(date_time)
+
+df['Week of Death'] = df.apply(lambda x: x['Week of Death'].replace('.0', ''), axis = 1)
 df = df.replace('', np.nan, regex=True)
 # -
 
@@ -85,25 +81,22 @@ for col in df:
         display(df[col].cat.categories) 
 
 for column in df:
-    if column in ('Gender'):
+    if column in ('Covid-19 Deaths'):
         df[column] = df[column].str.lstrip()
         df[column] = df[column].map(lambda x: pathify(x))
 
-tidy = df[['Gender', 'Age', 'Week Number', 'Week Ending', 'Measure Type', 'Unit', 'Marker', 'Value']]
+tidy = df[['Week of Death', 'Week Ending', 'Covid-19 Deaths', 'Measure Type', 'Unit', 'Marker', 'Value']]
 
 # +
 destinationFolder = Path('out')
 destinationFolder.mkdir(exist_ok=True, parents=True)
 
-TITLE = 'Deaths registered each week in Northern Ireland'
+TITLE = 'Covid-19 Death Occurrences by week of death in Northern Ireland'
 OBS_ID = pathify(TITLE)
 import os
 GROUP_ID = pathify(os.environ.get('JOB_NAME', 'gss_data/covid-19/' + Path(os.getcwd()).name))
 
 tidy.drop_duplicates().to_csv(destinationFolder / f'{OBS_ID}.csv', index = False)
-# -
-
-tidy
 
 # +
 ######## BELOW COMMENT OUT FOR NOW ######
@@ -117,9 +110,12 @@ tidy
 ## Adding short metadata to description
 #additional_metadata = """ Weekly published data are provisional.
 
-#This data is based on registrations of deaths, not occurrences. The majority of deaths are registered within five days in Northern Ireland.
+#1 This data is based on the actual date of death, from those deaths registered by GRO up to 20th May 2020. All data in this table are subject to change, as some deaths will have occurred but haven’t been registered yet.
+
+#2 COVID-19 deaths include any death where Coronavirus or COVID-19 (suspected or confirmed) was mentioned anywhere on the death certificate.
 
 #"""
+
 #scraper.dataset.description = scraper.dataset.description + additional_metadata
 
 #scraper.dataset.family = 'covid-19'
@@ -130,4 +126,4 @@ tidy
 #schema.create(destinationFolder / f'{OBS_ID}.csv', destinationFolder / f'{OBS_ID}.csv-schema.json')
 # -
 
-
+tidy

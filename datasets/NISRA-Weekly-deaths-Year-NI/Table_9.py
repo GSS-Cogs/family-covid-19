@@ -1,53 +1,34 @@
 # -*- coding: utf-8 -*-
 # # NISRA Weekly deaths,  Year   NI 
 #
-# ### Sheet : Covid-19 Date of Death & POD
+# ### Sheet 9  : Covid 19 deaths12 of care home residents3 in Northern Ireland, by place of death, 2020P
 
 from gssutils import * 
 import json 
 
-# +
-#info = json.load(open('info.json')) 
-#landingPage = info['landingPage'] 
-#landingPage 
+scrape = Scraper(seed="info.json")   
+scrape.distributions[0].title = "Weekly deaths, 2020 (NI)"
+scrape
 
-# +
-#### Add transformation script here #### 
-
-#scraper = Scraper(landingPage) 
-#scraper.select_dataset(latest=True) 
-#scraper 
-# -
-
-data = loadxlstabs("./source/Weekly_Deaths.xls") 
-
-tabs = {tab.name: tab for tab in data}
+tabs = { tab.name: tab for tab in scrape.distributions[0].as_databaker() }
 list(tabs)
 
 df = pd.DataFrame()
 
-# ##### Table Structure 
-# Date, Place of Death, Measure Type, Unit, Marker, Value
-#
-#     A - Date
-# 	B3:H3 - Place of Death (Codelist)
-# 	Measure Type = Deaths
-# 	Unit - Count and Cumulative Count
-# 	Put Provisional in Marker column
-#
-
 for name, tab in tabs.items():
     if 'Contents' in name or 'Background' in name or 'Definitions' in name:
         continue
-    if name == 'Covid-19 Date of Death & POD':
-        date = tab.excel_ref('A4').expand(DOWN).is_not_blank()
-        place_of_death = tab.excel_ref('B3').expand(RIGHT)
+    if name == 'Table 9':
+        week_of_death = tab.excel_ref('A5').expand(DOWN).is_not_blank()
+        week_ending = tab.excel_ref('B5').expand(DOWN).is_not_blank()
+        place_of_death = tab.excel_ref('C4').expand(RIGHT)
         marker = 'Provisional'
-        unit = 'Count' #or Cumulative count, will be filtered after 
-        measure_type = 'Deaths'
+        unit = 'Count' #Or percent
+        measure_type = 'Deaths' # or percentage 
         observations = place_of_death.fill(DOWN).is_not_blank()
         Dimensions = [
-            HDim(date,'Date',DIRECTLY,LEFT),
+            HDim(week_of_death,'Week of Death',DIRECTLY,LEFT),
+            HDim(week_ending,'Week Ending',DIRECTLY,LEFT),
             HDim(place_of_death,'Place of Death',DIRECTLY,ABOVE),
             HDimConst('DATAMARKER', marker),
             HDimConst('Measure Type', measure_type),
@@ -58,15 +39,26 @@ for name, tab in tabs.items():
         new_table = c1.topandas()
         df = pd.concat([df, new_table], sort=False)
 
+
+def date_time(time_value):
+    date_string = time_value.strip().split(' ')[0]
+    if len(date_string)  == 10:
+        return 'gregorian-day/' + date_string + 'T00:00/P7D'
+    elif len(date_string)  == 0:
+        return 'year/2020'
+
+
+
 # +
 import numpy as np
 df.rename(columns={'OBS': 'Value', 'DATAMARKER' : 'Marker'}, inplace=True)
 
-f1=((df['Place of Death'] =='Cumulative Total'))
-df.loc[f1,'Unit'] = 'Cumulative Count'
+df["Week Ending"] = df["Week Ending"].apply(date_time)
+f1=((df['Place of Death'] =='% of all Covid-19 Hospital Deaths') | (df['Place of Death'] =='% of all Covid-19 Deaths'))
+df.loc[f1,'Measure Type'] = 'percentage'
+df.loc[f1,'Unit'] = 'percent'
 
-######### Format Week Ending (Period column) ##############
-
+df['Week of Death'] = df.apply(lambda x: x['Week of Death'].replace('.0', ''), axis = 1)
 df = df.replace('', np.nan, regex=True)
 # -
 
@@ -82,13 +74,13 @@ for column in df:
         df[column] = df[column].str.lstrip()
         df[column] = df[column].map(lambda x: pathify(x))
 
-tidy = df[['Date', 'Place of Death', 'Measure Type', 'Unit', 'Marker', 'Value']]
+tidy = df[['Week of Death', 'Week Ending', 'Place of Death', 'Measure Type', 'Unit', 'Marker', 'Value']]
 
 # +
 destinationFolder = Path('out')
 destinationFolder.mkdir(exist_ok=True, parents=True)
 
-TITLE = 'Covid-19 Death Occurrences by date and Place of Death in Northern Ireland'
+TITLE = 'Covid-19 Death of care home residents in Northern Irelandby week of death and Place of Death' 
 OBS_ID = pathify(TITLE)
 import os
 GROUP_ID = pathify(os.environ.get('JOB_NAME', 'gss_data/covid-19/' + Path(os.getcwd()).name))
@@ -107,13 +99,11 @@ tidy.drop_duplicates().to_csv(destinationFolder / f'{OBS_ID}.csv', index = False
 ## Adding short metadata to description
 #additional_metadata = """ Weekly published data are provisional.
 
-#1 This data is based on the actual date of death, from those deaths registered by GRO up to 20th May 2020. All data in this table are subject to change, as some deaths will have occurred but haven’t been registered yet.
+#1 This data is based on the actual date of death, from those deaths registered by GRO up to 27th May 2020. All data in this table are subject to change, as some deaths will have occurred but haven’t been registered yet.
 
 #2 COVID-19 deaths include any death where Coronavirus or COVID-19 (suspected or confirmed) was mentioned anywhere on the death certificate.
 
-#3Includes deaths in care homes only. Care home residents who have died in a different location will be counted elsewhere in this table. 
-
-#4 The 'Other' category includes deaths at a residential address which was not the usual address of the deceased and all other places.
+#3 Care home residents have been identified where either (a) the death occurred in a care home, or (b) the death occurred elsewhere but the place of usual residence of the deceased was recorded as a care home. It should be noted that the statistics will not capture those cases where a care home resident died in hospital or another location and the usual address recorded on their death certificate is not a care home. 
 
 #"""
 

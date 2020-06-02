@@ -1,27 +1,16 @@
 # -*- coding: utf-8 -*-
 # # NISRA Weekly deaths,  Year   NI 
 #
-# ### Sheet : Covid-19 Occurrence Date & POD
+# ### Sheet : Covid-19_Reg Date & POD
 
 from gssutils import * 
 import json 
 
-# +
-#info = json.load(open('info.json')) 
-#landingPage = info['landingPage'] 
-#landingPage 
+scrape = Scraper(seed="info.json")   
+scrape.distributions[0].title = "Weekly deaths, 2020 (NI)"
+scrape
 
-# +
-#### Add transformation script here #### 
-
-#scraper = Scraper(landingPage) 
-#scraper.select_dataset(latest=True) 
-#scraper 
-# -
-
-data = loadxlstabs("./source/Weekly_Deaths.xls") 
-
-tabs = {tab.name: tab for tab in data}
+tabs = { tab.name: tab for tab in scrape.distributions[0].as_databaker() }
 list(tabs)
 
 df = pd.DataFrame()
@@ -29,7 +18,7 @@ df = pd.DataFrame()
 # ##### Table Structure 
 # Week of Death, Week Ending, Place of Death, Measure Type, Unit, Marker, Value
 #
-# 	A - Week of Death
+#     A - Week of Death
 # 	B - Week Ending (Friday)
 # 	C3:H3 - Place of Death (Codelist)
 # 	Measure Type = Deaths
@@ -40,10 +29,10 @@ df = pd.DataFrame()
 for name, tab in tabs.items():
     if 'Contents' in name or 'Background' in name or 'Definitions' in name:
         continue
-    if name == 'Covid-19 Occurrence Date & POD':
-        week_of_death = tab.excel_ref('A4').expand(DOWN).is_not_blank()
-        week_ending = tab.excel_ref('B4').expand(DOWN).is_not_blank()
-        place_of_death = tab.excel_ref('C3').expand(RIGHT)
+    if name == 'Table 6':
+        week_of_death = tab.excel_ref('A5').expand(DOWN).is_not_blank()
+        week_ending = tab.excel_ref('B5').expand(DOWN).is_not_blank()
+        place_of_death = tab.excel_ref('C4').expand(RIGHT)
         marker = 'Provisional'
         unit = 'Count'
         measure_type = 'Deaths'
@@ -61,11 +50,21 @@ for name, tab in tabs.items():
         new_table = c1.topandas()
         df = pd.concat([df, new_table], sort=False)
 
+
+def date_time(time_value):
+    date_string = time_value.strip().split(' ')[0]
+    if len(date_string)  == 10:
+        return 'gregorian-day/' + date_string + 'T00:00/P7D'
+    elif len(date_string)  == 0:
+        return 'year/2020'
+
+
+
 # +
 import numpy as np
 df.rename(columns={'OBS': 'Value', 'DATAMARKER' : 'Marker'}, inplace=True)
 
-######### Format Week Ending (Period column) ##############
+df["Week Ending"] = df["Week Ending"].apply(date_time)
 
 df['Week of Death'] = df.apply(lambda x: x['Week of Death'].replace('.0', ''), axis = 1)
 df = df.replace('', np.nan, regex=True)
@@ -89,7 +88,7 @@ tidy = df[['Week of Death', 'Week Ending', 'Place of Death', 'Measure Type', 'Un
 destinationFolder = Path('out')
 destinationFolder.mkdir(exist_ok=True, parents=True)
 
-TITLE = 'Covid-19 Death Occurrences in Northern Ireland by week of death and Place of Death'
+TITLE = 'Covid-19 Deaths registered in Northern Ireland by Place of Death'
 OBS_ID = pathify(TITLE)
 import os
 GROUP_ID = pathify(os.environ.get('JOB_NAME', 'gss_data/covid-19/' + Path(os.getcwd()).name))
@@ -108,12 +107,13 @@ tidy.drop_duplicates().to_csv(destinationFolder / f'{OBS_ID}.csv', index = False
 ## Adding short metadata to description
 #additional_metadata = """ Weekly published data are provisional.
 
-
-#1 This data is based on the actual date of death, from those deaths registered by GRO up to 20th May 2020. All data in this table are subject to change, as some deaths will have occurred but haven’t been registered yet.
+#1 This data is based on registrations of deaths, not occurrences. The majority of deaths are registered within five days in Northern Ireland.
 
 #2 COVID-19 deaths include any death where Coronavirus or COVID-19 (suspected or confirmed) was mentioned anywhere on the death certificate.
 
-#3 The 'Other' category includes deaths at a residential address which was not the usual address of the deceased and all other places.
+#3 Includes deaths in care homes only. Care home residents who have died in a different location will be counted elsewhere in this table. 
+
+#4 The 'Other' category includes deaths at a residential address which was not the usual address of the deceased and all other places.
 
 #"""
 

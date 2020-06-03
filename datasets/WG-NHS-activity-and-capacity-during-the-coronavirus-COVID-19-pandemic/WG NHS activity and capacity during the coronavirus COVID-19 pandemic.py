@@ -7,10 +7,6 @@ scrape = Scraper(seed="info.json")
 scrape.distributions[0].title = "NHS activity and capacity during the coronavirus (COVID-19) pandemic"
 scrape
 
-info = json.load(open('info.json')) 
-landingPage = info['landingPage'] 
-landingPage 
-
 tabs = { tab.name: tab for tab in scrape.distributions[0].as_databaker() }
 list(tabs)
 

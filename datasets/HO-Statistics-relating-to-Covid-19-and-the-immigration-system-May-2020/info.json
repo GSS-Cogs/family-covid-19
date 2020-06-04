@@ -1,21 +1,27 @@
 {
-    "title": "Statistics relating to Covid-19 and the immigration system, May 2020",
+    "title": "Statistics relating to Covid-19 and the immigration system",
     "publisher": "Home Office",
     "description": "A statistical report showing the impact of Covid-19 on the immigration system, up to April 2020.",
     "datasetNotes": [
-        "Due 28 May "
+        "On the landing page scroll to  documents and click on the latest release of Statistics relating to Covid-19 and the immigration system link .  Another page will open scroll to documents and ODS file is located here. "
     ],
-    "published": "",
+    "published": "2020-05-28",
     "families": [
         "COVID-19"
     ],
     "extract": {
-        "source": ""
+        "source": "",
+        "stage": "Documented"
     },
     "transform": {
         "airtable": "recCh0vTQTwQ4rNbY",
-        "main_issue": 61
+        "main_issue": 61,
+        "stage": [
+            "Priority",
+            "To Do"
+        ]
     },
-    "sizingNotes": "",
-    "notes": ""
+    "sizingNotes": "A simple table in ODS",
+    "notes": "",
+    "landingPage": "https://www.gov.uk/government/collections/migration-statistics"
 }

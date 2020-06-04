@@ -1,19 +1,27 @@
 {
     "title": "Which occupations have the highest potential exposure to the coronavirus (COVID-19)?",
     "publisher": "Office for National Statistics",
-    "description": "",
+    "description": "ONS has created an estimate of exposure to generic disease, and physical proximity to others, for UK occupations based on US analysis of these factors.",
     "landingPage": "https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/articles/whichoccupationshavethehighestpotentialexposuretothecoronaviruscovid19/2020-05-11",
-    "published": "",
+    "published": "2020-05-11",
     "families": [
         "COVID-19"
     ],
     "extract": {
-        "source": ""
+        "source": "XLS",
+        "stage": "Documented"
     },
     "transform": {
         "airtable": "rec5JLgajkliNNDm7",
-        "main_issue": 16
+        "main_issue": 16,
+        "stage": [
+            "Priority",
+            "To Do"
+        ]
     },
-    "sizingNotes": "",
-    "notes": ""
+    "sizingNotes": "Simple table structure, straightforward dimensions and few footnotes.",
+    "notes": "",
+    "datasetNotes": [
+        "On landing page scroll down to any chart or table and click on \"Download the data\" link beneath it."
+    ]
 }

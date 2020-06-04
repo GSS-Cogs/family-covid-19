@@ -3,6 +3,7 @@
     "publisher": "Welsh Government",
     "description": "Attendance of children and staff on weekdays (excluding bank holidays) at local authority settings during the ongoing coronavirus pandemic.",
     "landingPage": "https://gov.wales/attendance-local-authority-settings-during-coronavirus-covid-19-pandemic",
+    "dataURL" : "https://gov.wales/sites/default/files/statistics-and-research/2020-06/attendance-at-local-authority-settings-during-the-coronavirus-covid-19-pandemic-26-to-29-may-2020-178.ods",
     "datasetNotes": [
         "On the landing page scroll to the latest release, this will open another page scroll to data and click on the + the spreadsheet can be found here"
     ],

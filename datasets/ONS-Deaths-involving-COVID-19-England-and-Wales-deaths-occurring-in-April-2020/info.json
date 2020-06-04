@@ -1,19 +1,26 @@
 {
-    "title": "Deaths involving COVID-19, England and Wales: deaths occurring in April 2020",
+    "title": "Deaths involving COVID-19, England and Wales",
     "publisher": "Office for National Statistics",
-    "description": "",
-    "landingPage": "https://www.ons.gov.uk/peoplepopulationandcommunity/birthsdeathsandmarriages/deaths/bulletins/deathsinvolvingcovid19englandandwales/deathsoccurringinapril2020",
-    "published": "",
+    "description": "Number of deaths registered each month in England and Wales, including deaths involving the coronavirus (COVID-19), by age, sex and region.",
+    "landingPage": "https://www.ons.gov.uk/peoplepopulationandcommunity/birthsdeathsandmarriages/deaths/datasets/deathsinvolvingcovid19englandandwales",
+    "published": "2020-05-15",
     "families": [
         "COVID-19"
     ],
     "extract": {
-        "source": ""
+        "source": "XLS",
+        "stage": "To document"
     },
     "transform": {
         "airtable": "recxT5QTP96yJRxbQ",
-        "main_issue": 57
+        "main_issue": 57,
+        "stage": [
+            "Priority"
+        ]
     },
-    "sizingNotes": "",
-    "notes": ""
+    "sizingNotes": "Multiple tabs with simple structures and multiple dimensions. Multiple footnotes.",
+    "notes": "",
+    "datasetNotes": [
+        "Dataset is on landing page under heading \"Your download option\"."
+    ]
 }

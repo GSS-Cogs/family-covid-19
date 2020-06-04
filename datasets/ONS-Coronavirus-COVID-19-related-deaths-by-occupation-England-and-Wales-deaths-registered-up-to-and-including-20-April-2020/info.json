@@ -1,19 +1,27 @@
 {
     "title": "Coronavirus (COVID-19) related deaths by occupation, England and Wales: deaths registered up to and including 20 April 2020",
     "publisher": "Office for National Statistics",
-    "description": "",
-    "landingPage": "https://www.ons.gov.uk/peoplepopulationandcommunity/healthandsocialcare/causesofdeath/bulletins/coronaviruscovid19relateddeathsbyoccupationenglandandwales/deathsregistereduptoandincluding20april2020",
-    "published": "",
+    "description": "Provisional analysis of deaths involving the coronavirus (COVID-19), by different occupational groups, among males and females aged 20 to 64 years in England and Wales.",
+    "landingPage": "https://www.ons.gov.uk/peoplepopulationandcommunity/healthandsocialcare/causesofdeath/datasets/coronaviruscovid19relateddeathsbyoccupationenglandandwales",
+    "published": "2020-05-11",
     "families": [
         "COVID-19"
     ],
     "extract": {
-        "source": ""
+        "source": "XLS",
+        "stage": "Documented"
     },
     "transform": {
         "airtable": "rec8PJIJOLGsCmBz2",
-        "main_issue": 17
+        "main_issue": 17,
+        "stage": [
+            "Priority",
+            "To Do"
+        ]
     },
-    "sizingNotes": "",
-    "notes": ""
+    "sizingNotes": "Simple table structures with multiple dimensions & sub-dimensions. Multiple footnotes add to complexity.",
+    "notes": "",
+    "datasetNotes": [
+        "On landing page dataset at bottom of page under heading \"Current\"."
+    ]
 }

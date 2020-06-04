@@ -1,19 +1,26 @@
 {
-    "title": "Deaths involving COVID-19 in the care sector, England and Wales: deaths occurring up to 1 May 2020 and registered up to 9 May 2020 (provisional)",
+    "title": "Deaths involving COVID-19 in the care sector, England and Wales",
     "publisher": "Office for National Statistics",
-    "description": "",
-    "landingPage": "https://www.ons.gov.uk/peoplepopulationandcommunity/birthsdeathsandmarriages/deaths/articles/deathsinvolvingcovid19inthecaresectorenglandandwales/deathsoccurringupto1may2020andregisteredupto9may2020provisional",
-    "published": "",
+    "description": "Provisional counts of the number of deaths and age-standardised mortality rates involving the coronavirus (COVID-19) within the care sector occurring up to 1 May 2020 and registered up to 9 May 2020.",
+    "landingPage": "https://www.ons.gov.uk/peoplepopulationandcommunity/birthsdeathsandmarriages/deaths/datasets/deathsinvolvingcovid19inthecaresectorenglandandwales",
+    "published": "2020-05-15",
     "families": [
         "COVID-19"
     ],
     "extract": {
-        "source": ""
+        "source": "XLS",
+        "stage": "To document"
     },
     "transform": {
         "airtable": "rec1fNhJAawQhyw6q",
-        "main_issue": 37
+        "main_issue": 37,
+        "stage": [
+            "Priority"
+        ]
     },
-    "sizingNotes": "",
-    "notes": ""
+    "sizingNotes": "Multiple tabs with simple structures and multiple dimensions. One tab with multiple tables. Multiple footnotes in tabs.",
+    "notes": "",
+    "datasetNotes": [
+        "Dataset is on landing page under heading \"Your download option\"."
+    ]
 }

@@ -11,14 +11,15 @@
         "COVID-19"
     ],
     "extract": {
-        "source": "XLS, CSV, OD",
-        "stage": "Candidate"
+        "source": "XLS, CSV, OD, PMD",
+        "stage": "Documented"
     },
     "transform": {
         "airtable": "reccCfhxfABKk4IZ0",
         "main_issue": 8,
         "stage": [
-            "Hold"
+            "To Do",
+            "Priority"
         ]
     },
     "sizingNotes": "Already online in Open Data format.",

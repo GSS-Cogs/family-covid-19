@@ -1,19 +1,26 @@
 {
     "title": "Coronavirus and the social impacts on those with a disability in Great Britain",
     "publisher": "Office for National Statistics",
-    "description": "",
-    "landingPage": "https://www.gov.uk/government/statistics/coronavirus-and-the-social-impacts-on-those-with-a-disability-in-great-britain",
-    "published": "",
+    "description": "Indicators from the Office for National Statistics (ONS) Opinions and Lifestyle Survey to understand the impacts of the coronavirus (COVID-19) pandemic on disabled people in Great Britain",
+    "landingPage": "https://www.ons.gov.uk/releases/coronavirusandthesocialimpactsonthosewithadisabilityingreatbritain",
+    "published": "2020-03-24",
     "families": [
         "COVID-19"
     ],
     "extract": {
-        "source": ""
+        "source": "XLS",
+        "stage": "To document"
     },
     "transform": {
         "airtable": "recSDY00FsOlKUMAr",
-        "main_issue": 45
+        "main_issue": 45,
+        "stage": [
+            "Priority"
+        ]
     },
-    "sizingNotes": "",
-    "notes": ""
+    "sizingNotes": "Multiple tabs with some messy structures and multiple dimensions. Footnotes in tabs.",
+    "notes": "",
+    "datasetNotes": [
+        "On landing page scroll towards bottom of page and click link for latest release. Dataset is on new page under heading \"Your download option\"."
+    ]
 }

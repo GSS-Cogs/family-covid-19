@@ -11,7 +11,7 @@
         "COVID-19"
     ],
     "extract": {
-        "source": "XLS",
+        "source": "XLS, PMD",
         "stage": "Documented"
     },
     "transform": {

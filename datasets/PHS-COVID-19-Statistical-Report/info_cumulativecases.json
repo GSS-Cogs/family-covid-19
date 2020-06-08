@@ -3,6 +3,7 @@
     "publisher": "Public Health Scotland",
     "description": "This is the first release by Public Health Scotland on COVID-19 data across NHSScotland.",
     "landingPage": "https://beta.isdscotland.org/find-publications-and-data/population-health/covid-19/covid-19-statistical-report/",
+    "dataURL" : "https://www.opendata.nhs.scot/dataset/b318bddf-a4dc-4262-971f-0ba329e09b87/resource/287fc645-4352-4477-9c8c-55bc054b7e76/download/daily_cumulative_counts_04062020.csv",
     "datasetNotes": [
         "On landing page, link to dataset of on left of page under heading \"Data Files\".  There is an open data platform with the data.  Needs investigating"
     ],

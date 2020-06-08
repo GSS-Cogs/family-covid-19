@@ -8,7 +8,8 @@
         "COVID-19"
     ],
     "extract": {
-        "source": "CMD"
+        "source": "CMD",
+        "stage": "Documented"
     },
     "transform": {
         "airtable": "rechOIXej7QvMnRnz",

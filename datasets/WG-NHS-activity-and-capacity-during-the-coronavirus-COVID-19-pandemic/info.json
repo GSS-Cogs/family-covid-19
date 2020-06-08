@@ -3,6 +3,7 @@
     "publisher": "Welsh Government",
     "description": "Weekly update on coronavirus and NHS activity and capacity.",
     "landingPage": "https://gov.wales/nhs-activity-and-capacity-during-coronavirus-covid-19-pandemic",
+    "dataURL": "https://gov.wales/sites/default/files/statistics-and-research/2020-05/nhs-activity-and-capacity-during-the-coronavirus-covid-19-pandemic-28-may-2020.ods",
     "datasetNotes": [
         "On the landing page scroll to the latest release, this will open another page scroll to data and click on the + the spreadsheet can be found here"
     ],

@@ -18,10 +18,7 @@
 #### Output Dataset Name:
 	DfE Coronavirus COVID-19 attendance in education and early years settings
 
-#### Table Structure
-	Period, Attendance in Education Setting, Marker, Measure Type, Unit, Value 
-
-#### Sheet: COVID-19 attendance
+#### Sheet: Table 1 Attendence in education settings
 
 	A3:A37 - Date - Change name to Period and format as required
 	
@@ -35,6 +32,24 @@
 	Add Measure Type column with values People and Percentage as required
 	
 	Add Unit column with values Count and Percent as required
+
+#### Table Structure
+	Period, Attendance in Education Setting, Marker, Measure Type, Unit, Value 
+
+#### Sheet: Table 2 Attendance in early years settings 
+
+	A - Date - Change name to Period and format as required
+	
+	B - Day - Not needed can be defined from the date
+	
+	C2:K2 - Attendance in Education Setting (codelist)
+		
+	Add Measure Type column with values People and Percentage as required
+	
+	Add Unit column with values Count and Percent as required
+
+#### Table Structure
+	Period, Attendance in Education Setting, Marker, Measure Type, Unit, Value
 
 ##### Footnotes
 	Footnotes need to be added to the metadata and the Notes (Marker) column changed as mentioned above

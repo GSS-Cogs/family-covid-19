@@ -8,12 +8,13 @@
         "COVID-19"
     ],
     "extract": {
-        "source": ""
+        "source": "",
+        "stage": "Candidate"
     },
     "transform": {
         "airtable": "recN8MLXpZ0Dnotop",
         "main_issue": 65
     },
     "sizingNotes": "",
-    "notes": "Although not specifically Covid-19, it is mentioned in the report, the impact of the pandemic may be derived."
+    "notes": "Although not specifically Covid-19, it is mentioned in the report, the impact of the pandemic may be derived.   This is now also on the GSS list."
 }

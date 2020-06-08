@@ -3,6 +3,7 @@
     "publisher": "Northern Ireland Statistics and Research Agency",
     "description": "NISRA weekly provisional death statistics, which are based on death registration information collected by the General Register Office, count all deaths where COVID-19 was mentioned on the death certificate by the doctor who certified the death, whether or not COVID-19 was the primary underlying cause of death.",
     "landingPage": "https://www.nisra.gov.uk/statistics/ni-summary-statistics/coronavirus-covid-19-statistics",
+    "dataURL": "https://www.nisra.gov.uk/sites/nisra.gov.uk/files/publications/Weekly_Deaths.xls",
     "datasetNotes": [
         "On landing page scroll to link \"Weekly Deaths\" under heading \"Weekly Deaths\". On this new page dataset is located under heading \"Documents\" titled \"Weekly Deaths, 2020\"."
     ],

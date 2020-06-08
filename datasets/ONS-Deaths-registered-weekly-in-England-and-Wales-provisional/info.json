@@ -8,11 +8,16 @@
         "COVID-19"
     ],
     "extract": {
-        "source": "CMD"
+        "source": "CMD",
+        "stage": "Documented"
     },
     "transform": {
         "airtable": "recqb90KngZb1RN7k",
-        "main_issue": 31
+        "main_issue": 31,
+        "stage": [
+            "To Do",
+            "Priority"
+        ]
     },
     "sizingNotes": "",
     "notes": ""

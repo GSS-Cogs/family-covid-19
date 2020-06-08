@@ -1,4 +1,4 @@
-# # WG Testing data for coronavirus  COVID-19 
+# # ONS Deaths involving COVID-19 in the care sector, England and Wales 
 
 from gssutils import * 
 import json 

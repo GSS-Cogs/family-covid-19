@@ -35,34 +35,40 @@ cogs:PMD a owl:Class ;
 ###########################################################################################################
 
 cogsgit:top-level a cogs:LandingPage ;
-  rdfs:label "DfE Coronavirus (COVID-19): attendance in education and early years settings" ;
+  rdfs:label "Landing Page" ;
+  rdfs:label2 "DfE Coronavirus (COVID-19): attendance in education and early years settings";
   rdfs:comment "https://www.gov.uk/government/publications/coronavirus-covid-19-attendance-in-education-and-early-years-settings";
-  cogs:splits cogsgit:sheet1 ;
+  cogs:splits cogsgit:sheet1, cogsgit:sheet2 ;
 .
 
 cogsgit:sheet1 a cogs:Sheets ;
-  rdfs:label "" ;
-  rdfs:comment "COVID-19 attendance" ;
+  rdfs:label "Sheets" ;
+  rdfs:comment "Table 1" ;
+  cogs:transforms cogsgit:dataset1 ;
+.
+cogsgit:sheet2 a cogs:Sheets ;
+  rdfs:label "Sheets" ;
+  rdfs:comment "Table 2" ;
   cogs:transforms cogsgit:dataset1 ;
 .
 
-
 cogsgit:dataset1 a cogs:Datasets ;
-  rdfs:label "" ;
-  rdfs:comment "Coronavirus COVID-19 attendance in education and early years settings" ;
+  rdfs:label "Dataset" ;
+  rdfs:comment "(Harmonisation is needed) Coronavirus COVID-19 attendance in education and early years settings" ;
   cogs:outputs cogsgit:columns1 ;
 .
 
 
 cogsgit:columns1 a cogs:Columns ;
-  rdfs:label "" ;
+  rdfs:label "Colunns" ;
   rdfs:comment "Period, Attendance in Education Settings, Marker, Measure Type, Unit, Value" ;
   cogs:uploads cogsgit:pmd1 ;
 .
 
 
 cogsgit:pmd1 a cogs:PMD ;
-  rdfs:label "" ;
-  rdfs:comment "Publish my Data: http://gss-data.org.uk/data/search" ;
+  rdfs:label "PMD" ;
+  rdfs:label2 "Publish my Data" ;
+  rdfs:comment "http://gss-data.org.uk/data/search" ;
 .
 ###################################################################################################

@@ -1,19 +1,26 @@
 {
     "title": "Access to gardens and public green space in Great Britain",
     "publisher": "Office for National Statistics",
-    "description": "",
-    "landingPage": "https://www.ons.gov.uk/releases/accesstogardensandpublicgreenspaceingreatbritain",
-    "published": "",
+    "description": "Analysis of Ordnance Survey (OS) data on access to private gardens, public parks and playing fields in Great Britain, available by country, region, Local Authority and Middle Layer Super Output Area. This page also includes Natural England survey data on garden access in England, broken down by personal characteristics such as age and ethnicity.",
+    "landingPage": "https://www.ons.gov.uk/economy/environmentalaccounts/datasets/accesstogardensandpublicgreenspaceingreatbritain",
+    "published": "2020-05-14",
     "families": [
         "COVID-19"
     ],
     "extract": {
-        "source": ""
+        "source": "XLS",
+        "stage": "Documented"
     },
     "transform": {
         "airtable": "rec3ws3XttvtlV2Hr",
-        "main_issue": 38
+        "main_issue": 38,
+        "stage": [
+            "To Do"
+        ]
     },
-    "sizingNotes": "",
-    "notes": ""
+    "sizingNotes": "Simple structures and multiple dimensions. Multiple tabs.",
+    "notes": "",
+    "datasetNotes": [
+        "Dataset is on landing page under heading \"Your download option\"."
+    ]
 }

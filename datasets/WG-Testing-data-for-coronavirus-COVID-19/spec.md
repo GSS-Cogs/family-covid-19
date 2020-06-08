@@ -17,9 +17,20 @@
 
 #### Output Dataset Name:
 	WG Testing data for Coronavirus - COVID-19 
+ 
+
+#### Sheet: tests_authroised
+
+	A - Date - Change name to Period and format as required
+
+	B - Number of authorised tests
+
+	Add Measure Type Column with value Tests
+
+	Add Unit column with value Cumulative Count
 
 #### Table Structure
-	Period, Test Outcome, Critical Worker Category, Emergency Services Worker, Test Location, Marker, Measure Type, Unit, Value 
+	Period, Authorised Tests, Marker, Measure Type, Unit, Value
 
 #### Sheet: Completed_tests
 
@@ -30,15 +41,12 @@
 		Cumulative individuals tested - Total
 		Cumulative positive cases - Positive
 
-	Add Test Location column with value All
-
-	Add Critical Worker Category column with value All
-
-	Add Emergency Services Worker column with value All
-		
 	Add Measure Type Column with value People
 
 	Add Unit column with value Cumulative Count
+
+#### Table Structure
+	Period, Test Outcome, Marker, Measure Type, Unit, Value
 
 #### Sheet: Critical_workers_category
 
@@ -52,13 +60,12 @@
 		
 	A9:A17 - Critical Worker Category (Codelist)
 
-	Add Emergency Services Worker column with value All
-
-	Add Test Location column with value All
-
 	Add Measure Type Column with value People
 
 	Add Unit column with value Cumulative Count
+
+#### Table Structure
+	Period, Test Outcome, Critical Worker Category, Marker, Measure Type, Unit, Value
 
 #### Sheet: Critical_workers_detail
 
@@ -74,11 +81,10 @@
 
 	B11:B30 - Emergency Services Worker (Codelist)
 
-	Add Test Location column with value All
-
-	Add Measure Type Column with value People
-
 	Add Unit column with value Cumulative Count
+
+#### Table Structure
+	Period, Test Outcome, Critical Worker Category, Emergency Services Worker, Marker, Measure Type, Unit, Value
 
 #### Sheet: Location_tests
 
@@ -96,13 +102,13 @@
 		Tested ar coronavirus testing unit - Coronavirus Testing Unit
 		Testing as drive-through centres - Drive-through Centres
 
-	Add Critical Worker Category column with value All
-
-	Add Emergency Services Worker column with value All
-
 	Add Measure Type Column with value Tests and Percentage where relevant
 
 	Add Unit column with value Count and Percent where relevant	
+
+#### Table Structure
+	Period, Test Outcome, Test Location, Marker, Measure Type, Unit, Value
+
 
 ##### Footnotes
 	Add to Metadata:

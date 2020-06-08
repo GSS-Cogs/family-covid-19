@@ -1,19 +1,26 @@
 {
-    "title": "Life under coronavirus restrictions: How people spent their time between 28 March and 26 April 2020",
+    "title": "Coronavirus and how people spent their time under lockdown",
     "publisher": "Office for National Statistics",
-    "description": "",
-    "landingPage": "https://www.gov.uk/government/statistics/announcements/life-under-coronavirus-restrictions-how-people-spent-their-time-between-28-march-and-26-april-2020",
-    "published": "",
+    "description": "Experimental results of the pilot Office for National Statistics (ONS) online time-use study (collected 28 March to 26 April 2020 across Great Britain) compared with the 2014 to 2015 UK time-use study.",
+    "landingPage": "https://www.ons.gov.uk/economy/nationalaccounts/satelliteaccounts/datasets/coronavirusandhowpeoplespenttheirtimeunderlockdown",
+    "published": "2020-05-27",
     "families": [
         "COVID-19"
     ],
     "extract": {
-        "source": ""
+        "source": "XLS",
+        "stage": "Documented"
     },
     "transform": {
         "airtable": "recegBfqaC8OjchdQ",
-        "main_issue": 68
+        "main_issue": 68,
+        "stage": [
+            "To Do"
+        ]
     },
-    "sizingNotes": "",
-    "notes": ""
+    "sizingNotes": "Simple table structures, no footnotes, straightforward dimensions.",
+    "notes": "",
+    "datasetNotes": [
+        "Dataset is on landing page under heading \"Your download option\"."
+    ]
 }

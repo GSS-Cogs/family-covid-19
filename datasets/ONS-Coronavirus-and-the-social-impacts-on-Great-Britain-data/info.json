@@ -1,19 +1,26 @@
 {
     "title": "Coronavirus and the social impacts on Great Britain data",
     "publisher": "Office for National Statistics",
-    "description": "",
+    "description": "Indicators from the Opinions and Lifestyle Survey to understand the impacts of the coronavirus (COVID-19) pandemic on people, households and communities in Great Britain. Including breakdowns by at-risk age, sex, disability and underlying health condition.",
     "landingPage": "https://www.ons.gov.uk/peoplepopulationandcommunity/healthandsocialcare/healthandwellbeing/datasets/coronavirusandthesocialimpactsongreatbritaindata",
-    "published": "",
+    "published": "2020-05-29",
     "families": [
         "COVID-19"
     ],
     "extract": {
-        "source": ""
+        "source": "XLS",
+        "stage": "To document"
     },
     "transform": {
         "airtable": "recQsjPjrFL8da9EW",
-        "main_issue": 43
+        "main_issue": 43,
+        "stage": [
+            "Priority"
+        ]
     },
-    "sizingNotes": "",
-    "notes": ""
+    "sizingNotes": "Multiple tabs with some messy structures and multiple dimensions. Footnotes in tabs.",
+    "notes": "",
+    "datasetNotes": [
+        "Dataset is on landing page under heading \"Your download option\"."
+    ]
 }

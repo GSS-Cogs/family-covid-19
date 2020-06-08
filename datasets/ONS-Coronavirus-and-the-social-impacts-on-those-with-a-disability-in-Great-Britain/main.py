@@ -1,4 +1,4 @@
-# # WG NHS activity and capacity during the coronavirus  COVID-19  pandemic 
+# # ONS Coronavirus and the social impacts on those with a disability in Great Britain 
 
 from gssutils import * 
 import json 

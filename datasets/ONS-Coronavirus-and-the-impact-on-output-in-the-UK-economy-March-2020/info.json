@@ -1,14 +1,15 @@
 {
     "title": "Coronavirus and the impact on output in the UK economy: March 2020",
     "publisher": "Office for National Statistics",
-    "description": "",
+    "description": "Analysis of monthly growth for the production, services and construction industries in the UK economy between February 2020 and March 2020, highlighting the early impact from the coronavirus (COVID-19) pandemic.",
     "landingPage": "https://www.ons.gov.uk/economy/grossdomesticproductgdp/articles/coronavirusandtheimpactonoutputintheukeconomy/march2020",
     "published": "",
     "families": [
         "COVID-19"
     ],
     "extract": {
-        "source": ""
+        "source": "",
+        "stage": "Not Required"
     },
     "transform": {
         "airtable": "recjn9egqJ5tKCehE",

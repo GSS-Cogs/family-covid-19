@@ -1,19 +1,27 @@
 {
-    "title": "Key workers: population and characteristics, 2019",
+    "title": "Key workers reference tables",
     "publisher": "Office for National Statistics",
-    "description": "",
-    "landingPage": "https://www.ons.gov.uk/releases/keyworkerspopulationandcharacteristics2019",
-    "published": "",
+    "description": "Estimates of the numbers and characteristics of those who could be considered as potential \u201ckey workers\u201d in the response to the coronavirus (COVID-19).",
+    "landingPage": "https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/earningsandworkinghours/datasets/keyworkersreferencetables",
+    "published": "2020-05-15",
     "families": [
         "COVID-19"
     ],
     "extract": {
-        "source": ""
+        "source": "XLS",
+        "stage": "Documented"
     },
     "transform": {
         "airtable": "rectKfeLe05ivHNzA",
-        "main_issue": 55
+        "main_issue": 55,
+        "stage": [
+            "To Do",
+            "Priority"
+        ]
     },
-    "sizingNotes": "",
-    "notes": ""
+    "sizingNotes": "Multiple tabs with simple structures and multiple dimensions. Multiple footnotes in tabs.",
+    "notes": "",
+    "datasetNotes": [
+        "Dataset is on landing page under heading \"Your download option\"."
+    ]
 }

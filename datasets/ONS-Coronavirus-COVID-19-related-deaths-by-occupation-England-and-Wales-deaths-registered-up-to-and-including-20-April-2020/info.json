@@ -15,8 +15,8 @@
         "airtable": "rec8PJIJOLGsCmBz2",
         "main_issue": 17,
         "stage": [
-            "Priority",
-            "To Do"
+            "To Do",
+            "Priority"
         ]
     },
     "sizingNotes": "Simple table structures with multiple dimensions & sub-dimensions. Multiple footnotes add to complexity.",

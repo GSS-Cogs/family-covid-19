@@ -15,8 +15,8 @@
         "airtable": "rec5JLgajkliNNDm7",
         "main_issue": 16,
         "stage": [
-            "Priority",
-            "To Do"
+            "To Do",
+            "Priority"
         ]
     },
     "sizingNotes": "Simple table structure, straightforward dimensions and few footnotes.",

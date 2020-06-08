@@ -9,7 +9,7 @@
     ],
     "extract": {
         "source": "",
-        "stage": "To document"
+        "stage": "Not Required"
     },
     "transform": {
         "airtable": "rec2731fHgz3UTw6L",

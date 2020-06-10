@@ -31,5 +31,30 @@
     "Tech Stage": [
         "To Do",
         "Priority"
-    ]
+    ],
+    "title": "Coronavirus Shielded Patient List Summary Totals, England",
+    "publisher": "NHS Digital",
+    "description": "This is part of [MI] Coronavirus Shielded Patient List Summary Totals, England. Management information data published for the anonymous summary data on patients who have been identified as being on the Coronavirus Shielded Patients List. The Shielded Patients list is a very specific subset of patients judged to be at highest risk should they contract Coronavirus, identified by the Chief Medical Officer. This management information will be updated weekly by NHS Digital to inform the public and support the health and social care system with planning. The open dataset includes regional and local data to allow for analysis, modelling and planning to take place to aid the response to the Coronavirus pandemic. The dashboards provide a count of living patients that are classified as being on the Shielded Patient List by Local Authority of residence or CCG of residence broken down by age band and gender.",
+    "landingPage": "https://digital.nhs.uk/data-and-information/publications/statistical/mi-english-coronavirus-covid-19-shielded-patient-list-summary-totals/latest",
+    "datasetNotes": [
+        "On landing page scroll to bottom of page, dataset found under heading \"Resources\"."
+    ],
+    "published": "2020-05-28",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": "CSV, XLS",
+        "stage": "Documented"
+    },
+    "transform": {
+        "stage": [
+            "To Do",
+            "Priority"
+        ],
+        "airtable": "reclSk50OzW33GXLN",
+        "main_issue": 108
+    },
+    "sizingNotes": "Should be straightforward with CSV.",
+    "notes": ""
 }

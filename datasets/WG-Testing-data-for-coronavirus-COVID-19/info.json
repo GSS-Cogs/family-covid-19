@@ -2,10 +2,10 @@
     "title": "Testing data for coronavirus (COVID-19)",
     "publisher": "Welsh Government",
     "description": "Statistics on coronavirus testing:\n\nnumber of tests completed\nnumber of tests on critical workers\nlocation of tests",
-    "landingPage": "https://gov.wales/testing-data-coronavirus-covid-19-12-may-2020",
+    "landingPage": "https://gov.wales/testing-data-coronavirus-covid-19",
     "dataURL": "https://gov.wales/sites/default/files/statistics-and-research/2020-05/testing-data-for-coronavirus-covid-19-12-may-2020.ods",
     "datasetNotes": [
-        "This is the first publication the landing page may change "
+        "On the landing page scroll to the latest release, this will open another page scroll to data and click on the + the spreadsheet can be found here"
     ],
     "published": "2020-05-12",
     "families": [

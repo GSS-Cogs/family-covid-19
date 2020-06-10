@@ -27,5 +27,30 @@
     "Tech Stage": [
         "To Do",
         "Priority"
-    ]
+    ],
+    "title": "Counts and ratios of coronavirus-related deaths by ethnic group, England and Wales",
+    "publisher": "Office for National Statistics",
+    "description": "Counts and ratios of coronavirus-related deaths by ethnic group and age band in England and Wales.",
+    "landingPage": "https://www.ons.gov.uk/peoplepopulationandcommunity/birthsdeathsandmarriages/deaths/datasets/countsandratiosofcoronavirusrelateddeathsbyethnicgroupenglandandwales",
+    "datasetNotes": [
+        "On landing page "
+    ],
+    "published": "2020-05-07",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": "XLS",
+        "stage": "Documented"
+    },
+    "transform": {
+        "stage": [
+            "To Do",
+            "Priority"
+        ],
+        "airtable": "recobe8txlRPjHTdb",
+        "main_issue": 113
+    },
+    "sizingNotes": "Simple table structure with some footnotes",
+    "notes": ""
 }

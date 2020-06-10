@@ -25,5 +25,30 @@
     "Tech Stage": [
         "To Do",
         "Priority"
-    ]
+    ],
+    "title": "Coronavirus (Covid-19): additional data about adult care homes in Scotland",
+    "publisher": "Scottish Government",
+    "description": "Weekly data on suspected cases of COVID-19 in adult care homes in Scotland.",
+    "landingPage": "https://www.gov.scot/publications/coronavirus-covid-19-additional-data-about-adult-care-homes-in-scotland/",
+    "datasetNotes": [
+        "On landing page scroll down to download "
+    ],
+    "published": "2020-05-27",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": "XLS",
+        "stage": "Documented"
+    },
+    "transform": {
+        "stage": [
+            "To Do",
+            "Priority"
+        ],
+        "airtable": "recL3jfaquYgWnGxH",
+        "main_issue": 87
+    },
+    "sizingNotes": "Simple table structure, with a mixture of figures and & with foot side notes.  2 Tables on tabs and some tabs with only charts which can be discounted.",
+    "notes": ""
 }

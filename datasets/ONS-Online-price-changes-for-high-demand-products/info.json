@@ -29,5 +29,30 @@
     "Tech Stage": [
         "To Do",
         "Priority"
-    ]
+    ],
+    "title": "Online price changes for high-demand products",
+    "publisher": "Office for National Statistics",
+    "description": "The online price changes of selected high demand products (HDP) dataset. These data are experimental estimates developed to deliver timely indicators to help understand the impact of COVID-19.",
+    "landingPage": "https://www.ons.gov.uk/economy/inflationandpriceindices/datasets/onlinepricechangesforhighdemandproducts",
+    "datasetNotes": [
+        "On landing page under your download option"
+    ],
+    "published": "2020-06-04",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": "XLS",
+        "stage": "Documented"
+    },
+    "transform": {
+        "stage": [
+            "To Do",
+            "Priority"
+        ],
+        "airtable": "recYxaK7Iqkx6aoyD",
+        "main_issue": 122
+    },
+    "sizingNotes": "2 simple tables with footnotes on 1 tab",
+    "notes": ""
 }

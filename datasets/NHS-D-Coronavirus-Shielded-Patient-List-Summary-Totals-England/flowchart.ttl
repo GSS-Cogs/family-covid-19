@@ -56,7 +56,7 @@ cogsgit:columns2 a cogs:Columns ; rdfs:label "Output Table 2" ; rdfs:comment "Ex
 
 
 cogsgit:rename1 a cogs:Rename ; rdfs:label "Stage 2: Harmonise" ; rdfs:comment "Not yet defined" ; cogs:joins cogsgit:dataset1 ; .
-cogsgit:rename1 a cogs:Rename ; rdfs:label "Stage 2: Harmonise" ; rdfs:comment "Not yet defined" ; cogs:joins cogsgit:dataset1 ; .
+cogsgit:rename2 a cogs:Rename ; rdfs:label "Stage 2: Harmonise" ; rdfs:comment "Not yet defined" ; cogs:joins cogsgit:dataset1 ; .
 
 
 cogsgit:dataset1 a cogs:Datasets ; rdfs:label "Dataset Name 1" ; rdfs:comment "Not yet defined" ; cogs:outputs cogsgit:pmd1 ; .

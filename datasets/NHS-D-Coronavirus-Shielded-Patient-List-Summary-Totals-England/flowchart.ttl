@@ -47,8 +47,8 @@ cogsgit:top-level a cogs:LandingPage ;
   cogs:scrape cogsgit:sheet1, cogsgit:sheet2 ;
 .
 
-cogsgit:sheet1 a cogs:Sheets ; rdfs:label "Stage 1: Transform" ; rdfs:comment "Filename: Coronavirus Shielded Patient List, England - Open Data - CCG\nSheets: Coronavirus Shielded Patient Li" ; cogs:transforms cogsgit:columns1 ; .
-cogsgit:sheet2 a cogs:Sheets ; rdfs:label "Stage 1: Transform" ; rdfs:comment "Filename: Coronavirus Shielded Patient List, England - Open Data - LA\nSheets: Coronavirus Shielded Patient Li" ; cogs:transforms cogsgit:columns2 ; .
+cogsgit:sheet1 a cogs:Sheets ; rdfs:label "Stage 1: Transform" ; rdfs:comment "Filename: Coronavirus Shielded Patient List, England - Open Data - CCG<br>Sheets: Coronavirus Shielded Patient Li" ; cogs:transforms cogsgit:columns1 ; .
+cogsgit:sheet2 a cogs:Sheets ; rdfs:label "Stage 1: Transform" ; rdfs:comment "Filename: Coronavirus Shielded Patient List, England - Open Data - LA<br>Sheets: Coronavirus Shielded Patient Li" ; cogs:transforms cogsgit:columns2 ; .
 
 
 cogsgit:columns1 a cogs:Columns ; rdfs:label "Output Table 1" ; rdfs:comment "Extract Date, CCG Code, CCG Name, Breakdown Field, Breakdown Value, Patient Count, Measure Type, Unit, Marker, Value" ; cogs:harmonise cogsgit:rename1 ; .

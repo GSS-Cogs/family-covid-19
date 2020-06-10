@@ -9,12 +9,13 @@
     ],
     "extract": {
         "source": "XLS",
-        "stage": "To document"
+        "stage": "Documented"
     },
     "transform": {
         "airtable": "recQsjPjrFL8da9EW",
         "main_issue": 43,
         "stage": [
+            "To Do",
             "Priority"
         ]
     },

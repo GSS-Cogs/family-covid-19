@@ -1,0 +1,35 @@
+{
+    "AirTable Record ID": "reclSk50OzW33GXLN",
+    "AirTable creation date": "2020-06-01T14:13:24.000Z",
+    "BA Stage": "Documented",
+    "Contact": [
+        "recg571slESXBU6ir"
+    ],
+    "Contact Details": "Responsible Statistician: Sharon Thandi\nPublic enquiries: Telephone: 0300 303 5678\nEmail: enquiries@nhsdigital.nhs.uk\nPress enquiries should be made to: Media Relations Manager: telephone 0300 303 3888",
+    "Data type": [
+        "CSV",
+        "XLS"
+    ],
+    "Description": "This is part of [MI] Coronavirus Shielded Patient List Summary Totals, England. Management information data published for the anonymous summary data on patients who have been identified as being on the Coronavirus Shielded Patients List. The Shielded Patients list is a very specific subset of patients judged to be at highest risk should they contract Coronavirus, identified by the Chief Medical Officer. This management information will be updated weekly by NHS Digital to inform the public and support the health and social care system with planning. The open dataset includes regional and local data to allow for analysis, modelling and planning to take place to aid the response to the Coronavirus pandemic. The dashboards provide a count of living patients that are classified as being on the Shielded Patient List by Local Authority of residence or CCG of residence broken down by age band and gender.",
+    "Family": [
+        "family-covid-19-AIRTABLE"
+    ],
+    "Frequency": "Weekly",
+    "GitHub Issue Number": 108,
+    "GitHub Name": "NHS-D-Coronavirus-Shielded-Patient-List-Summary-Totals-England",
+    "Landing Page": "https://digital.nhs.uk/data-and-information/publications/statistical/mi-english-coronavirus-covid-19-shielded-patient-list-summary-totals/latest",
+    "Last Published": "2020-05-28",
+    "Main Issue": "1000000",
+    "Name": "Coronavirus Shielded Patient List Summary Totals, England",
+    "Next Due": "2020-06-04",
+    "Producer": [
+        "NHS-D"
+    ],
+    "Route from landing page to data": "On landing page scroll to bottom of page, dataset found under heading \"Resources\".",
+    "Size": "Small",
+    "Sizing Notes": "Should be straightforward with CSV.",
+    "Tech Stage": [
+        "To Do",
+        "Priority"
+    ]
+}

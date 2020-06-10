@@ -1,0 +1,33 @@
+{
+    "AirTable Record ID": "recLVXRitdNRbhit5",
+    "AirTable creation date": "2020-06-03T06:21:03.000Z",
+    "BA Stage": "Documented",
+    "Contact": [
+        "recT0x5kOFi1InDML"
+    ],
+    "Data type": [
+        "XLS"
+    ],
+    "Description": "Provisional counts of deaths in care homes caused by the coronavirus (COVID-19) by local authority. Published by the Office for National Statistics and Care Quality Commission.",
+    "Family": [
+        "family-covid-19-AIRTABLE"
+    ],
+    "Frequency": "Weekly",
+    "GitHub Issue Number": 89,
+    "GitHub Name": "ONS-Number-of-deaths-in-care-homes-notified-to-the-Care-Quality-Commission-England",
+    "Landing Page": "https://www.ons.gov.uk/peoplepopulationandcommunity/birthsdeathsandmarriages/deaths/datasets/numberofdeathsincarehomesnotifiedtothecarequalitycommissionengland",
+    "Last Published": "2020-06-02",
+    "Main Issue": "1000000",
+    "Name": "Number of deaths in care homes notified to the Care Quality Commission, England",
+    "Next Due": "2020-06-09",
+    "Producer": [
+        "ONS"
+    ],
+    "Route from landing page to data": "On the landing page under your download option ",
+    "Size": "Small",
+    "Sizing Notes": "Simple table structure with footnotes ",
+    "Tech Stage": [
+        "To Do",
+        "Priority"
+    ]
+}

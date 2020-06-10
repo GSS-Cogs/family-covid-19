@@ -1,0 +1,29 @@
+{
+    "AirTable Record ID": "recL3jfaquYgWnGxH",
+    "AirTable creation date": "2020-06-02T05:51:06.000Z",
+    "BA Stage": "Documented",
+    "Data type": [
+        "XLS"
+    ],
+    "Description": "Weekly data on suspected cases of COVID-19 in adult care homes in Scotland.",
+    "Family": [
+        "family-covid-19-AIRTABLE"
+    ],
+    "Frequency": "Weekly",
+    "GitHub Issue Number": 87,
+    "GitHub Name": "SG-Coronavirus-Covid-19-additional-data-about-adult-care-homes-in-Scotland",
+    "Landing Page": "https://www.gov.scot/publications/coronavirus-covid-19-additional-data-about-adult-care-homes-in-scotland/",
+    "Last Published": "2020-05-27",
+    "Main Issue": "1000000",
+    "Name": "Coronavirus (Covid-19): additional data about adult care homes in Scotland",
+    "Producer": [
+        "SG"
+    ],
+    "Route from landing page to data": "On landing page scroll down to download ",
+    "Size": "Medium",
+    "Sizing Notes": "Simple table structure, with a mixture of figures and & with foot side notes.  2 Tables on tabs and some tabs with only charts which can be discounted.",
+    "Tech Stage": [
+        "To Do",
+        "Priority"
+    ]
+}

@@ -1,0 +1,29 @@
+{
+    "AirTable Record ID": "rec7s08KPO2fYIbfV",
+    "AirTable creation date": "2020-05-22T10:10:33.000Z",
+    "BA Stage": "Documented",
+    "Data type": [
+        "ODS"
+    ],
+    "Description": "Weekly number and percentage of care homes reporting a suspected or confirmed outbreak of COVID-19 to PHE by local authorities, regions and PHE centres.",
+    "Family": [
+        "family-covid-19-AIRTABLE"
+    ],
+    "Frequency": "Weekly",
+    "GitHub Issue Number": 79,
+    "GitHub Name": "PHE-COVID-19-number-of-outbreaks-in-care-homes-\u2013-management-information",
+    "Landing Page": "https://www.gov.uk/government/statistical-data-sets/covid-19-number-of-outbreaks-in-care-homes-management-information#history",
+    "Last Published": "2020-05-21",
+    "Main Issue": "1000000",
+    "Name": "COVID-19: number of outbreaks in care homes \u2013 management information",
+    "Producer": [
+        "PHE"
+    ],
+    "Route from landing page to data": "On the landing page ",
+    "Size": "Medium",
+    "Sizing Notes": "Simple table structure, although there are hidden comments in column O & P  on  Upper-tier and Lower-tier spreadsheets. 'Number stored as Text'",
+    "Tech Stage": [
+        "To Do",
+        "Priority"
+    ]
+}

@@ -1,0 +1,23 @@
+{
+    "title": "Universal credit - management information tables: 2 March 2020 to 26 April 2020",
+    "publisher": "Northern Ireland Department for Communities",
+    "description": "The Department, through NISRA, publishes a quarterly statistical bulletin on Universal Credit data. However, that bulletin, covering the current period, is not due to be published until August. The release of this information is to meet the significant interest in Universal Credit applications since March and does not replace the official statistics that will be published in due course.",
+    "landingPage": "https://www.communities-ni.gov.uk/publications/management-information-related-universal-credit-claims-payments-and-advances",
+    "datasetNotes": [
+        "On landing page link to dataset in middle of page."
+    ],
+    "published": "2020-05-06",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": "XLS",
+        "stage": "Not Required"
+    },
+    "transform": {
+        "airtable": "recGsvApkeGLmQp0v",
+        "main_issue": 84
+    },
+    "sizingNotes": "Only one tab with simple tables. Other tabs all charts.",
+    "notes": ""
+}

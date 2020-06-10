@@ -1,0 +1,26 @@
+{
+    "title": "Weekly shipping indicators",
+    "publisher": "Office for National Statistics",
+    "description": "The weekly shipping indicators dataset associated with the faster indicators of UK economic activity Research Output.",
+    "landingPage": "https://www.ons.gov.uk/economy/economicoutputandproductivity/output/datasets/weeklyshippingindicators",
+    "datasetNotes": [
+        "On landing page under your download option"
+    ],
+    "published": "2020-06-04",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": "XLS",
+        "stage": "Documented"
+    },
+    "transform": {
+        "stage": [
+            "To Do"
+        ],
+        "airtable": "reca1DkOG4tp0hxQo",
+        "main_issue": 123
+    },
+    "sizingNotes": "Simple table structure with footnotes",
+    "notes": ""
+}

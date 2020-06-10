@@ -1,0 +1,23 @@
+{
+    "title": "Homeless and rough sleepers in emergency accommodation in COVID-19 crisis",
+    "publisher": "Welsh Government",
+    "description": "Homeless and rough sleepers in emergency accommodation in COVID-19 crisis (management information)",
+    "landingPage": "https://gov.wales/ad-hoc-statistical-requests-3-june-2020",
+    "datasetNotes": [
+        "On the landing page scroll to data and click on the + the spreadsheet can be found here"
+    ],
+    "published": "2020-06-03",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": "ODS",
+        "stage": "Not Required"
+    },
+    "transform": {
+        "airtable": "recHMmw5PudkOHxpr",
+        "main_issue": 86
+    },
+    "sizingNotes": "",
+    "notes": "this is an ad-hoc statistical request"
+}

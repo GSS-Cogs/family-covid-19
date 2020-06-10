@@ -1,0 +1,19 @@
+{
+    "title": "Deaths involving COVID-19 by local area and socioeconomic deprivation",
+    "publisher": "Office for National Statistics",
+    "description": "",
+    "published": "",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": "",
+        "stage": "Candidate"
+    },
+    "transform": {
+        "airtable": "recH9Arh9qB9cdmkE",
+        "main_issue": 85
+    },
+    "sizingNotes": "",
+    "notes": ""
+}

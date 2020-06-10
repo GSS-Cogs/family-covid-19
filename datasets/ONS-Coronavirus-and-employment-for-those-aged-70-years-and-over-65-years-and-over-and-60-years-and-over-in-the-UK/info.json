@@ -1,0 +1,26 @@
+{
+    "title": "Coronavirus and employment for those aged 70 years and over, 65 years and over, and 60 years and over, in the UK",
+    "publisher": "Office for National Statistics",
+    "description": "Share of employment for older workers of different age thresholds by industry, occupation, sector, sex, region and ethnic group.",
+    "landingPage": "https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/datasets/coronavirusandemploymentforthoseaged70yearsandover65yearsandoverand60yearsandoverintheuk",
+    "datasetNotes": [
+        "On the landing page under your download options click on the latest release "
+    ],
+    "published": "2020-03-24",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": "XLS",
+        "stage": "Documented"
+    },
+    "transform": {
+        "stage": [
+            "To Do"
+        ],
+        "airtable": "rec7F43KyY8GRw0IO",
+        "main_issue": 78
+    },
+    "sizingNotes": "Simple table structure with footnotes and a mixture of numbers and %",
+    "notes": ""
+}

@@ -1,0 +1,23 @@
+{
+    "title": "Quarterly traffic estimates (TRA25)",
+    "publisher": "Department for Transport",
+    "description": "Provisional data on road traffic by vehicle type and road class, produced by Department for Transport.",
+    "landingPage": "https://www.gov.uk/government/statistical-data-sets/tra25-quarterly-estimates#history",
+    "datasetNotes": [
+        "On the landing page there are  6 ODS spreadsheets "
+    ],
+    "published": "2020-05-21",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": "ODS",
+        "stage": "Candidate"
+    },
+    "transform": {
+        "airtable": "recbsKtkNztJnSEWR",
+        "main_issue": 99
+    },
+    "sizingNotes": "Simple table structure with footnotes. Although there are 6 ODS spreadsheets it may be possible to reduced this by combining Miles & KM data sets",
+    "notes": "Q1 2020 makes reference to the Covid-19 Pandemic.  Although there are 6 ODS spreadsheets it  may be possible to combine the data sets for Miles & KM for each data set."
+}

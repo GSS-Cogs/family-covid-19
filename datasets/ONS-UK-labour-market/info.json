@@ -1,0 +1,23 @@
+{
+    "title": "UK labour market",
+    "publisher": "Office for National Statistics",
+    "description": "",
+    "landingPage": "https://www.ons.gov.uk/search?q=UK+labour+market",
+    "published": "",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": "CMD",
+        "stage": "Documented"
+    },
+    "transform": {
+        "stage": [
+            "To Do"
+        ],
+        "airtable": "recmbiOBmHlVJXR3L",
+        "main_issue": 74
+    },
+    "sizingNotes": "",
+    "notes": ""
+}

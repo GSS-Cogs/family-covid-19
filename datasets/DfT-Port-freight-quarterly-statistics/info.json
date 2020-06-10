@@ -1,0 +1,19 @@
+{
+    "title": "Port freight quarterly statistics",
+    "publisher": "Department for Transport",
+    "description": "",
+    "published": "",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": "",
+        "stage": "Candidate"
+    },
+    "transform": {
+        "airtable": "recuBtidgozNxCUsh",
+        "main_issue": 119
+    },
+    "sizingNotes": "",
+    "notes": ""
+}

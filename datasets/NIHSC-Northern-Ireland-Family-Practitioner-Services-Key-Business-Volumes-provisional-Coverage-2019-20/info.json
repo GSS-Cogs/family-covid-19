@@ -1,0 +1,23 @@
+{
+    "title": "Northern Ireland Family Practitioner Services \u2013 Key Business Volumes (provisional) Coverage \u2013 2019/20",
+    "publisher": "Health & Social Care (NI)",
+    "description": "The following key business volumes for the BSO Annual Report, published 7th May 2020, should be regarded as provisional.  These will be finalised at a later date.",
+    "landingPage": "http://www.hscbusiness.hscni.net/services/3136.htm",
+    "datasetNotes": [
+        "On landing page, link to dataset towards bottom of page titled \"FPS Key Business Volumes 2019/20 - Provisional\"."
+    ],
+    "published": "",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": "",
+        "stage": "Not Required"
+    },
+    "transform": {
+        "airtable": "recciVWnzs4a2sCtv",
+        "main_issue": 129
+    },
+    "sizingNotes": "",
+    "notes": ""
+}

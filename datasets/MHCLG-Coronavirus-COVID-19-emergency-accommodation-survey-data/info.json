@@ -1,0 +1,23 @@
+{
+    "title": "Coronavirus (COVID-19) emergency accommodation survey data",
+    "publisher": "Ministry for Housing, Communities and Local Government",
+    "description": "New management information about the support for rough sleepers and those at risk of rough sleeping during the COVID-19 pandemic.",
+    "landingPage": "https://www.gov.uk/government/publications/coronavirus-covid-19-rough-sleeper-accommodation-survey-data-may-2020",
+    "datasetNotes": [
+        "On the landing page under documents "
+    ],
+    "published": "",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": "ODS",
+        "stage": "Not Required"
+    },
+    "transform": {
+        "airtable": "recGpT1i3y6VvL8jf",
+        "main_issue": 125
+    },
+    "sizingNotes": "Very small simple table with footnotes",
+    "notes": "This is a new publication which includes figure for London and the rest of England this may be a one off publication"
+}

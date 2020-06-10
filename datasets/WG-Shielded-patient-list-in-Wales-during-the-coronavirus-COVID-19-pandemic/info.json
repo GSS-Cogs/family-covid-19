@@ -1,0 +1,26 @@
+{
+    "title": "Shielded patient list in Wales during the coronavirus (COVID-19) pandemic",
+    "publisher": "Welsh Government",
+    "description": "Summary data of living patients on the Shielded Patient List in Wales as at 1 June 2020.",
+    "landingPage": "https://gov.wales/coronavirus-covid-19-related-statistics-and-research",
+    "datasetNotes": [
+        "On the landing page scroll to Health and social care and click on the link for Shielded patient list in Wales during the coronavirus (COVID-19) pandemic this will open another page scroll to data and click on the +"
+    ],
+    "published": "2020-06-03",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": "ODS",
+        "stage": "Documented"
+    },
+    "transform": {
+        "stage": [
+            "To Do"
+        ],
+        "airtable": "recFB9TIO22RzJKoC",
+        "main_issue": 83
+    },
+    "sizingNotes": "Simple table structure with footnotes",
+    "notes": ""
+}

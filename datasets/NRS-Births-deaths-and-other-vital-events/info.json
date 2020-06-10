@@ -1,0 +1,26 @@
+{
+    "title": "Births, deaths, and other vital events",
+    "publisher": "National Records of  Scotland",
+    "description": "Births, Deaths and Other Vital Events - Quarterly Figures for Scotland.",
+    "landingPage": "https://www.nrscotland.gov.uk/statistics-and-data/statistics/statistics-by-theme/vital-events/general-publications/births-deaths-and-other-vital-events-quarterly-figures",
+    "datasetNotes": [
+        "On landing page scroll down to latest release under heading \"Births, Deaths and Other Vital Events - Quarterly Figures 2019\". This will open a new page with a link to the dataset half way down the page under \"All Tables and Figures\"."
+    ],
+    "published": "2020-03-11",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": "XLS, CSV",
+        "stage": "Documented"
+    },
+    "transform": {
+        "stage": [
+            "To Do"
+        ],
+        "airtable": "recEnfDGHSinWTX2S",
+        "main_issue": 82
+    },
+    "sizingNotes": "Largish tables but simple structures. Footnotes present, multiple dimensions and sub-dimensions.",
+    "notes": ""
+}

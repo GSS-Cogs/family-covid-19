@@ -1,0 +1,23 @@
+{
+    "title": "Apprenticeships and traineeships",
+    "publisher": "Department for Education",
+    "description": "Apprenticeship service data as at April 2020, and apprenticeship starts to March 2020, with separate April 2020 starts covering the coronavirus outbreak.",
+    "landingPage": "https://www.gov.uk/government/collections/further-education-and-skills-statistical-first-release-sfr",
+    "datasetNotes": [
+        "On the landing page scroll to latest release and click on the latest release of  Apprenticeships and traineeships this will open a new page Scroll down to documents "
+    ],
+    "published": "2020-05-29",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": "XLS, ODS, CSV",
+        "stage": "Candidate"
+    },
+    "transform": {
+        "airtable": "recmhByZV40U33mJC",
+        "main_issue": 111
+    },
+    "sizingNotes": "",
+    "notes": ""
+}

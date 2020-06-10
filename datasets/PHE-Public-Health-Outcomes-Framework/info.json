@@ -1,0 +1,24 @@
+{
+    "title": "Public Health Outcomes Framework",
+    "publisher": "Public Health England",
+    "description": "The Public Health Outcomes Framework examines indicators that help us understand trends in public health.",
+    "landingPage": "https://fingertips.phe.org.uk/profile/public-health-outcomes-framework",
+    "datasetNotes": [
+        "On the landing page ",
+        "click on the green Start go to data box."
+    ],
+    "published": "2020-05-05",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": "Fingertips",
+        "stage": "Candidate"
+    },
+    "transform": {
+        "airtable": "rechii30RZFOu6SNG",
+        "main_issue": 106
+    },
+    "sizingNotes": "Fingertips",
+    "notes": ""
+}

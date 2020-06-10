@@ -1,0 +1,26 @@
+{
+    "title": "National Insurance number allocations to adult overseas nationals entering the UK",
+    "publisher": "Department for Work and Pensions",
+    "description": "Statistics on National Insurance number allocations.",
+    "landingPage": "https://www.gov.uk/government/collections/national-insurance-number-allocations-to-adult-overseas-nationals-entering-the-uk",
+    "datasetNotes": [
+        "On the landing page scroll to latest releases and click on the most recent release link this will open another window scroll to documents and an ODS speadsheet is located at the bottom of this section."
+    ],
+    "published": "2020-05-21",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": "ODS",
+        "stage": "Documented"
+    },
+    "transform": {
+        "stage": [
+            "To Do"
+        ],
+        "airtable": "recPlGJXx0PDj1zJZ",
+        "main_issue": 92
+    },
+    "sizingNotes": "Simple table structure with footnotes, although each table is a different shape on each tab.",
+    "notes": "Although not specifically Covid-19 the  spreadsheet may allow the impact of the pandemic to be derived."
+}

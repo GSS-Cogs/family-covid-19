@@ -1,0 +1,23 @@
+{
+    "title": "Weekly death registrations - in total, and caused by respiratory system diseases",
+    "publisher": "National Records of  Scotland",
+    "description": "Information about the total number of deaths registered in Scotland in each week from the start of 2009 to early March 2010, and the numbers of deaths for which the underlying cause was coded to respiratory system diseases, as defined in the International Statistical Classification of Diseases and Related Health Problems (ICD).",
+    "landingPage": "https://www.nrscotland.gov.uk/statistics-and-data/statistics/statistics-by-theme/vital-events/general-publications/weekly-and-monthly-data-on-births-and-deaths/weekly-data-on-births-and-deaths/weekly-death-registrations-in-total-and-caused-by-respiratory-system-diseases",
+    "datasetNotes": [
+        "On landing page scroll to bottom of page. Link to dataset titled \"Weekly death registrations - in total, and caused by respiratory diseases\"."
+    ],
+    "published": "",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": "XLS",
+        "stage": "Not Required"
+    },
+    "transform": {
+        "airtable": "recVnvXQzS4EpKJzm",
+        "main_issue": 95
+    },
+    "sizingNotes": "",
+    "notes": ""
+}

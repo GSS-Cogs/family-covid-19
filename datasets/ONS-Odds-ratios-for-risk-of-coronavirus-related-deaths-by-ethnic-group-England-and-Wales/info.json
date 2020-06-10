@@ -1,0 +1,26 @@
+{
+    "title": "Odds ratios for risk of coronavirus-related deaths by ethnic group, England and Wales",
+    "publisher": "Office for National Statistics",
+    "description": "Odds ratios for the risk of dying from the coronavirus (COVID-19) by ethnicity in England and Wales.",
+    "landingPage": "https://www.ons.gov.uk/peoplepopulationandcommunity/birthsdeathsandmarriages/deaths/datasets/oddsratiosforriskofcoronavirusrelateddeathsbyethnicgroupenglandandwales",
+    "datasetNotes": [
+        "On landing page"
+    ],
+    "published": "2020-05-07",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": "XLS",
+        "stage": "Documented"
+    },
+    "transform": {
+        "stage": [
+            "To Do"
+        ],
+        "airtable": "recD8T7QrmuT5KwsR",
+        "main_issue": 81
+    },
+    "sizingNotes": "Simple table structure with some footnotes and filters",
+    "notes": ""
+}

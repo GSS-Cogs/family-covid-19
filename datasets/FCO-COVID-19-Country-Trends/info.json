@@ -1,0 +1,20 @@
+{
+    "title": "COVID-19 Country Trends",
+    "publisher": "Foreign & Commonwealth Office",
+    "description": "",
+    "landingPage": "https://diplodata.shinyapps.io/covid19countrytrends/",
+    "published": "",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": "",
+        "stage": "Not Required"
+    },
+    "transform": {
+        "airtable": "recu5qKOq7BacseSv",
+        "main_issue": 117
+    },
+    "sizingNotes": "",
+    "notes": ""
+}

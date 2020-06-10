@@ -1,0 +1,23 @@
+{
+    "title": "Land Transaction Tax",
+    "publisher": "Welsh Revenue Authority",
+    "description": "Data includes the number of land and property transactions, tax due and value of property taxed.",
+    "landingPage": "https://gov.wales/land-transaction-tax-statistics",
+    "datasetNotes": [
+        "On landing page scroll to latest release and click on the link a new page will open scroll down to data and click the + there are 2 XLSX spreadsheets "
+    ],
+    "published": "2020-05-22",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": "XLS",
+        "stage": "Candidate"
+    },
+    "transform": {
+        "airtable": "recVWXnukwMsNc84c",
+        "main_issue": 128
+    },
+    "sizingNotes": "Simple table structure  with footnotes with different formats on each tab and spreadsheet",
+    "notes": ""
+}

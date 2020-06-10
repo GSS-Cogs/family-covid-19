@@ -1,0 +1,23 @@
+{
+    "title": "Quarterly bus statistics",
+    "publisher": "Department for Transport",
+    "description": "Quarterly statistics on local bus passenger journeys and fares in Great Britain.",
+    "landingPage": "https://www.gov.uk/government/collections/bus-statistics",
+    "datasetNotes": [
+        "On landing page scroll to latest bus statistics and click on the latest link, a new page will open scroll down to documents and open the zip folder "
+    ],
+    "published": "",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": "ODS",
+        "stage": "Candidate"
+    },
+    "transform": {
+        "airtable": "recVlA6wc9p3ZZI4m",
+        "main_issue": 94
+    },
+    "sizingNotes": "Small table structure in 2 ODS spreadsheets.",
+    "notes": "Stats January - March 2020 - due 25ish June"
+}

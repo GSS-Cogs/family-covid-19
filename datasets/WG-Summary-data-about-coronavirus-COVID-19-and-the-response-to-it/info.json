@@ -3,6 +3,7 @@
     "publisher": "Welsh Government",
     "description": "An overview of statistics about coronavirus and the response to it, including support provided.",
     "landingPage": "https://gov.wales/summary-data-about-coronavirus-covid-19-and-response-it",
+    "dataURL" : "https://gov.wales/sites/default/files/statistics-and-research/2020-06/summary-data-about-coronavirus-covid-19-and-the-response-to-it-1-june-2020.ods",
     "datasetNotes": [
         "On the landing page scroll to the latest release, this will open another page scroll to data and click on the + the spreadsheet can be found here"
     ],

@@ -1,0 +1,23 @@
+{
+    "title": "Coronavirus\n  and loneliness",
+    "publisher": "Office for National Statistics",
+    "description": "Analysis of loneliness in Great Britain during the coronavirus (COVID-19) pandemic from the Opinions and Lifestyle Survey.",
+    "landingPage": "https://www.ons.gov.uk/peoplepopulationandcommunity/wellbeing/datasets/coronavirusandloneliness",
+    "datasetNotes": [
+        "On the landing page under your download option "
+    ],
+    "published": "2020-06-08",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": "XLS",
+        "stage": "Candidate"
+    },
+    "transform": {
+        "airtable": "recu7AfDrPB8sljBJ",
+        "main_issue": 118
+    },
+    "sizingNotes": "Numerous simple tables on numerous tabs with footnotes",
+    "notes": ""
+}

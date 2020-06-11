@@ -1,0 +1,23 @@
+{
+    "title": "Labour Force Survey [NI Monthly]",
+    "publisher": "Northern Ireland Statistics and Research Agency",
+    "description": "The Labour Force Survey (LFS) is a quarterly sample survey carried out by interviewing people about their personal circumstances and work.",
+    "landingPage": "https://www.nisra.gov.uk/statistics/labour-market-and-social-welfare/labour-force-survey",
+    "datasetNotes": [
+        "On landing page scroll down to heading \"Tables\" and click link \"Latest tables from the Labour Force Survey - Monthly\". On new page scroll down to the dataset link under heading \"Documents\"."
+    ],
+    "published": "2020-05-19",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": "XLS, ODS",
+        "stage": "Candidate"
+    },
+    "transform": {
+        "airtable": "rec3DV6PoxpwaCnyM",
+        "main_issue": 77
+    },
+    "sizingNotes": "Several tabs with largish tables and multiple dimensions. Some footnotes but table structures straightforward.",
+    "notes": ""
+}

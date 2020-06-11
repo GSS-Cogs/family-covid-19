@@ -1,0 +1,26 @@
+{
+    "title": "NHS activity and capacity during the coronavirus (COVID-19) pandemic",
+    "publisher": "National Health Service, Wales",
+    "description": "Statistics on coronavirus: \ncases\ndeaths\nhospitalisations\nnew admissions to hospital\ninvasive ventilated beds in Wales\ngeneral and acute beds use in Wales\nambulance calls\n111 and NHS Direct calls\ndaily A&E attendances\nNHS staff absences\nThey have been published to provide latest data. The statistics will be used by the NHS Chief Executive in his weekly press conference.",
+    "landingPage": "https://gov.wales/nhs-activity-and-capacity-during-coronavirus-covid-19-pandemic",
+    "datasetNotes": [
+        "On landing page scroll down to latest release link. On new page dataset can be found towards bottom of page under heading \"Data\"."
+    ],
+    "published": "2020-05-28",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": "ODS",
+        "stage": "Documented"
+    },
+    "transform": {
+        "stage": [
+            "To Do"
+        ],
+        "airtable": "recu11347yrumg2Xc",
+        "main_issue": 116
+    },
+    "sizingNotes": "Several tabs with simple table structures. Multiple dimensions and sub-dimensions. Some footnotes.",
+    "notes": ""
+}

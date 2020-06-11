@@ -1,0 +1,26 @@
+{
+    "title": "Universal Credit Statistics (NI)",
+    "publisher": "Northern Ireland Department for Communities",
+    "description": "Universal Credit is a new payment to help support households that are out of work or are on a low income. Universal Credit was introduced in Northern Ireland on a phased geographical basis from 27 September 2017.",
+    "landingPage": "https://www.communities-ni.gov.uk/articles/universal-credit-statistics#toc-0",
+    "datasetNotes": [
+        "On landing page, scroll down to heading \"Latest Universal Credit Publication\" which has link to latest release page. Dataset on this new page under heading \"Documents\"."
+    ],
+    "published": "2020-05-27",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": "XLS",
+        "stage": "Documented"
+    },
+    "transform": {
+        "stage": [
+            "To Do"
+        ],
+        "airtable": "recjVzzXZmMmVdwKh",
+        "main_issue": 107
+    },
+    "sizingNotes": "Somewhat messy dataset - multiple tabs with tables, multiple tables in tabs. Multiple dimensions with footnotes present.",
+    "notes": ""
+}

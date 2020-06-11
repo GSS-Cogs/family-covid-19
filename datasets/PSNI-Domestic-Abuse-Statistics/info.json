@@ -1,0 +1,26 @@
+{
+    "title": "Domestic Abuse Statistics",
+    "publisher": "Police Service of Northern Ireland",
+    "description": "Exceptional Release, Weekly management information on domestic abuse calls received by police since lockdown measures were introduced on March 23",
+    "landingPage": "https://www.psni.police.uk/inside-psni/Statistics/domestic-abuse-statistics/",
+    "datasetNotes": [
+        "On landing page scroll down to the latest link under quarterly statistics "
+    ],
+    "published": "2020-05-15",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": "XLS, ODS",
+        "stage": "Documented"
+    },
+    "transform": {
+        "stage": [
+            "To Do"
+        ],
+        "airtable": "rec1KPnalawv8iFqZ",
+        "main_issue": 76
+    },
+    "sizingNotes": "Small tables with a mixture of tables and graphs with notes.",
+    "notes": ""
+}

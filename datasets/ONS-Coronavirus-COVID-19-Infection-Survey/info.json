@@ -1,0 +1,27 @@
+{
+    "title": "Coronavirus (COVID-19) Infection Survey",
+    "publisher": "Office for National Statistics",
+    "description": "Findings from the pilot phase of the Coronavirus (COVID-19) Infection Survey, England.",
+    "landingPage": "https://www.ons.gov.uk/peoplepopulationandcommunity/healthandsocialcare/conditionsanddiseases/datasets/coronaviruscovid19infectionsurveydata",
+    "datasetNotes": [
+        "On landing page scroll down to latest version of dataset under heading \"Latest version\"."
+    ],
+    "published": "2020-06-05",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": "XLS",
+        "stage": "Documented"
+    },
+    "transform": {
+        "stage": [
+            "To Do",
+            "Priority"
+        ],
+        "airtable": "recALVfEQmRkYXhpj",
+        "main_issue": 121
+    },
+    "sizingNotes": "Simple tables and structures. Few dimensions and some footnotes.",
+    "notes": ""
+}

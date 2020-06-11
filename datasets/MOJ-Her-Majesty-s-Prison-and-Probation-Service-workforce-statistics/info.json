@@ -1,0 +1,23 @@
+{
+    "title": "Her Majesty\u2019s Prison and Probation Service workforce statistics",
+    "publisher": "Ministry of Justice",
+    "description": "Information on staffing numbers of directly employed staff of Her Majesty\u2019s Prison and Probation Service and formerly the National Offender Management Service.",
+    "landingPage": "https://www.gov.uk/government/collections/national-offender-management-service-workforce-statistics",
+    "datasetNotes": [
+        "On the landing page page scroll to documents and click on the latest release, this will open a new window, the data can be found under documents titled HMPPS workforce statistics bulletin."
+    ],
+    "published": "2020-05-21",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": "XLS",
+        "stage": "Candidate"
+    },
+    "transform": {
+        "airtable": "recX6TNu1zqGMPXCb",
+        "main_issue": 97
+    },
+    "sizingNotes": "A large number of messy tables it may be possible to use the sickness tables rather than the whole spreadsheet",
+    "notes": "Although not specifically Covid-19  the spreadsheets may allow the impact of the pandemic to be derived in the future. The latest version is up to 31 March 2020 and sickness rates are included."
+}

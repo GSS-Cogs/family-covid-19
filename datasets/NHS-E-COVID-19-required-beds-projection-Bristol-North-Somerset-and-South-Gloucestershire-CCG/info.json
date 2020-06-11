@@ -1,0 +1,23 @@
+{
+    "title": "COVID-19 required beds projection  (Bristol, North Somerset and South Gloucestershire CCG)",
+    "publisher": "NHS England",
+    "description": "Looks like one-off publication. To be discussed.",
+    "landingPage": "https://github.com/nhs-bnssg-analytics/covid19-reqd-beds-projection",
+    "datasetNotes": [
+        "On landing page LHS link \"hospitalisations.csv\" containing dataset."
+    ],
+    "published": "2020-04-15",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": "",
+        "stage": "Not Required"
+    },
+    "transform": {
+        "airtable": "recZhiYPRo7K5MOgj",
+        "main_issue": 98
+    },
+    "sizingNotes": "",
+    "notes": ""
+}

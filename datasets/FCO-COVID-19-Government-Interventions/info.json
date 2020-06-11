@@ -1,0 +1,20 @@
+{
+    "title": "COVID-19 Government Interventions",
+    "publisher": "Foreign & Commonwealth Office",
+    "description": "",
+    "landingPage": "https://diplodata.shinyapps.io/covid-19-government-interventions/",
+    "published": "",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": "",
+        "stage": "Not Required"
+    },
+    "transform": {
+        "airtable": "rechib3UOHqbXGpkM",
+        "main_issue": 105
+    },
+    "sizingNotes": "",
+    "notes": ""
+}

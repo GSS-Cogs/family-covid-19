@@ -1,0 +1,56 @@
+{
+    "AirTable Record ID": "recobe8txlRPjHTdb",
+    "AirTable creation date": "2020-06-02T12:12:27.000Z",
+    "BA Stage": "Documented",
+    "Contact": [
+        "rec1Zq0wANHSaCsyl"
+    ],
+    "Data type": [
+        "XLS"
+    ],
+    "Description": "Counts and ratios of coronavirus-related deaths by ethnic group and age band in England and Wales.",
+    "Family": [
+        "family-covid-19-AIRTABLE"
+    ],
+    "GitHub Issue Number": 113,
+    "GitHub Name": "ONS-Counts-and-ratios-of-coronavirus-related-deaths-by-ethnic-group-England-and-Wales",
+    "Landing Page": "https://www.ons.gov.uk/peoplepopulationandcommunity/birthsdeathsandmarriages/deaths/datasets/countsandratiosofcoronavirusrelateddeathsbyethnicgroupenglandandwales",
+    "Last Published": "2020-05-07",
+    "Main Issue": "1000000",
+    "Name": "Counts and ratios of coronavirus-related deaths by ethnic group, England and Wales",
+    "Producer": [
+        "ONS"
+    ],
+    "Route from landing page to data": "On landing page ",
+    "Size": "Small",
+    "Sizing Notes": "Simple table structure with some footnotes",
+    "Tech Stage": [
+        "To Do",
+        "Priority"
+    ],
+    "title": "Counts and ratios of coronavirus-related deaths by ethnic group, England and Wales",
+    "publisher": "Office for National Statistics",
+    "description": "Counts and ratios of coronavirus-related deaths by ethnic group and age band in England and Wales.",
+    "landingPage": "https://www.ons.gov.uk/peoplepopulationandcommunity/birthsdeathsandmarriages/deaths/datasets/countsandratiosofcoronavirusrelateddeathsbyethnicgroupenglandandwales",
+    "datasetNotes": [
+        "On landing page "
+    ],
+    "published": "2020-05-07",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": "XLS",
+        "stage": "Documented"
+    },
+    "transform": {
+        "stage": [
+            "To Do",
+            "Priority"
+        ],
+        "airtable": "recobe8txlRPjHTdb",
+        "main_issue": 113
+    },
+    "sizingNotes": "Simple table structure with some footnotes",
+    "notes": ""
+}

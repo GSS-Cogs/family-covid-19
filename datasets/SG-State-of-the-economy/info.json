@@ -1,0 +1,20 @@
+{
+    "title": "State of the economy",
+    "publisher": "Scottish Government",
+    "description": "",
+    "landingPage": "https://www.gov.scot/collections/state-of-the-economy/",
+    "published": "",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": "",
+        "stage": "Not Required"
+    },
+    "transform": {
+        "airtable": "recBBnhDskjaQfQpr",
+        "main_issue": 80
+    },
+    "sizingNotes": "",
+    "notes": "This is a reports which contains embedded statistics in graph and table format"
+}

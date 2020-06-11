@@ -1,0 +1,23 @@
+{
+    "title": "Statistics on Obesity, Physical Activity and Diet 2020: Data tables",
+    "publisher": "NHS Digital",
+    "description": "Contains tabulated outputs for obesity related hospital admissions and prescriptions for the treatment of obesity.",
+    "landingPage": "https://digital.nhs.uk/data-and-information/publications/statistical/statistics-on-obesity-physical-activity-and-diet/england-2020",
+    "datasetNotes": [
+        "On landing page scroll down to heading \"Data Sets\" for link to latest release."
+    ],
+    "published": "2020-05-05",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": "XLS, CSV",
+        "stage": "Not Required"
+    },
+    "transform": {
+        "airtable": "recO2sLDkUI7zQPWP",
+        "main_issue": 90
+    },
+    "sizingNotes": "Large number of tabs, some tabs simple but some messy structure of tables. Multiple dimension & sub-dimensions. Quite a few footnotes.",
+    "notes": ""
+}

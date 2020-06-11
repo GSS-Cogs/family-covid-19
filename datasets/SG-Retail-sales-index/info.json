@@ -1,0 +1,23 @@
+{
+    "title": "Retail sales index",
+    "publisher": "Scottish Government",
+    "description": "Retail sales index for Scotland (RSIS) statistics",
+    "landingPage": "https://www.gov.scot/collections/economy-statistics/",
+    "datasetNotes": [
+        "On the landing page scroll down to Retail Sales Index for Scotland (RSIS) and click on the latest link this will open another page scroll down to download."
+    ],
+    "published": "2020-04-29",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": "XLS",
+        "stage": "Not Required"
+    },
+    "transform": {
+        "airtable": "recsx9F1KEzvSV7jW",
+        "main_issue": 114
+    },
+    "sizingNotes": "Simple table structure with footnotes and a variety and mixture of figures by different time periods",
+    "notes": ""
+}

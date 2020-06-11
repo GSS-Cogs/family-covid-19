@@ -1,0 +1,26 @@
+{
+    "title": "Transport use during the coronavirus (COVID-19) pandemic",
+    "publisher": "Department for Transport",
+    "description": "To monitor the use of the transport system during the coronavirus (COVID-19) pandemic, DfT provides statistics on transport use by mode, published every Wednesday.",
+    "landingPage": "https://www.gov.uk/government/statistics/transport-use-during-the-coronavirus-covid-19-pandemic",
+    "datasetNotes": [
+        "On the landing page under documents "
+    ],
+    "published": "2020-06-03",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": "ODS",
+        "stage": "Documented"
+    },
+    "transform": {
+        "stage": [
+            "To Do"
+        ],
+        "airtable": "recfMvmIKUeax4aZy",
+        "main_issue": 130
+    },
+    "sizingNotes": "Simple table structure",
+    "notes": ""
+}

@@ -1,0 +1,19 @@
+{
+    "title": "Deaths involving COVID-19 : UK",
+    "publisher": "Office for National Statistics",
+    "description": "",
+    "published": "",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": "",
+        "stage": "Candidate"
+    },
+    "transform": {
+        "airtable": "recoThHhTSjKMT0Kp",
+        "main_issue": 112
+    },
+    "sizingNotes": "",
+    "notes": ""
+}

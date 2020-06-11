@@ -1,0 +1,26 @@
+{
+    "title": "Homeworking in the UK labour market",
+    "publisher": "Office for National Statistics",
+    "description": "Breakdowns of the prevalence of homeworking by industry, occupation, region, age, sex and ethnicity.",
+    "landingPage": "https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/datasets/homeworkingintheuklabourmarket",
+    "datasetNotes": [
+        "On the landing page scroll to your download option and click on the latest optin"
+    ],
+    "published": "2020-03-24",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": "XLS",
+        "stage": "Documented"
+    },
+    "transform": {
+        "stage": [
+            "To Do"
+        ],
+        "airtable": "reclpT0WOf5aJxRey",
+        "main_issue": 109
+    },
+    "sizingNotes": "Simple table structure",
+    "notes": "Although this figures are for 2019 they were used in a a publication by ONS Coronavirus and home-working in the UK labour market: 2019"
+}

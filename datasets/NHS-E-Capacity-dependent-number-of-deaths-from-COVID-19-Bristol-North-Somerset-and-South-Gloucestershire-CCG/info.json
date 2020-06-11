@@ -1,0 +1,23 @@
+{
+    "title": "Capacity-dependent number of deaths from COVID-19 (Bristol, North Somerset and South Gloucestershire CCG)",
+    "publisher": "NHS England",
+    "description": "RDA file. Looks like one-off publication. To be discussed.",
+    "landingPage": "https://github.com/nhs-bnssg-analytics/covid-simr",
+    "datasetNotes": [
+        "On landing page LHS data folder containing dataset titled \"data\"."
+    ],
+    "published": "2020-04-15",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": "",
+        "stage": "Not Required"
+    },
+    "transform": {
+        "airtable": "recLDw77O8uf0lAJ3",
+        "main_issue": 88
+    },
+    "sizingNotes": "",
+    "notes": ""
+}

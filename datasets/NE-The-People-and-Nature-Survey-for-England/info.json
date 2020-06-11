@@ -1,0 +1,26 @@
+{
+    "title": "The People and Nature Survey for England",
+    "publisher": "Natural England",
+    "description": "Interim indicators from the People and Nature Survey, covering the period 2-30 April 2020 to understand the impact of coronavirus (COVID-19) on how people use the natural environment in England.",
+    "landingPage": "https://www.gov.uk/government/statistics/the-people-and-nature-survey-for-england-monthly-interim-indicators-for-april-2020-experimental-statistics",
+    "datasetNotes": [
+        "On landing page under documents there is an ODS and XLS file "
+    ],
+    "published": "2020-06-09",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": "XLS, ODS",
+        "stage": "Documented"
+    },
+    "transform": {
+        "stage": [
+            "To Do"
+        ],
+        "airtable": "recOm3m6AKfqgITVT",
+        "main_issue": 126
+    },
+    "sizingNotes": "Simple table structure",
+    "notes": ""
+}

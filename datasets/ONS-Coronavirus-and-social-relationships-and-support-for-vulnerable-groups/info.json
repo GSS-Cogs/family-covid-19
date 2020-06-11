@@ -1,0 +1,26 @@
+{
+    "title": "Coronavirus and social relationships and support for vulnerable groups",
+    "publisher": "Office for National Statistics",
+    "description": "A summary of social relationships and social support for vulnerable groups, including older adults and those with a self-defined disability or who are Equality Act Disabled.",
+    "landingPage": "https://www.ons.gov.uk/peoplepopulationandcommunity/wellbeing/datasets/coronavirusandsocialrelationshipsandsupportforvulnerablegroups",
+    "datasetNotes": [
+        "On the landing page under your download options click on the latest release "
+    ],
+    "published": "2020-04-08",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": "XLS",
+        "stage": "Documented"
+    },
+    "transform": {
+        "stage": [
+            "To Do"
+        ],
+        "airtable": "receoM4xdRR66CJjk",
+        "main_issue": 103
+    },
+    "sizingNotes": "Simple table structure with footnotes although the structure varies from tab to tab",
+    "notes": ""
+}

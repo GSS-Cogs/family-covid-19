@@ -1,0 +1,21 @@
+{
+    "title": "Youth custody data",
+    "publisher": "Her Majesty\u2019s Prison & Probation Service",
+    "description": "Monthly statistics on the population in custody of children and young people within the secure estate.",
+    "landingPage": "https://www.gov.uk/government/statistics/youth-custody-data#history",
+    "datasetNotes": [
+        "On the landing page under documents the ODS file "
+    ],
+    "published": "2020-06-12",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": "ODS"
+    },
+    "transform": {
+        "airtable": "recb6YoIyHZzxEggH"
+    },
+    "sizingNotes": "A simple CSV",
+    "notes": ""
+}

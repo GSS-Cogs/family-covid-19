@@ -1,0 +1,21 @@
+{
+    "title": "HMCTS weekly management information during coronavirus",
+    "publisher": "HM Courts & Tribunal Services",
+    "description": "The weekly management information used by HMCTS for understanding workload volumes and timeliness at a national level during coronavirus (COVID-19)",
+    "landingPage": "https://www.gov.uk/government/statistical-data-sets/hmcts-weekly-management-information-during-coronavirus-march-to-may-2020",
+    "datasetNotes": [
+        "On the landing page as a XlS or CSV "
+    ],
+    "published": "2020-06-11",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": "XLS, CSV"
+    },
+    "transform": {
+        "airtable": "rec4T7A9pQK9S4TTU"
+    },
+    "sizingNotes": "A number of simple tables with footnotes dimensions may require consideration",
+    "notes": "This is a new publication"
+}

@@ -14,7 +14,8 @@
         "source": "XLS, CSV"
     },
     "transform": {
-        "airtable": "rec4T7A9pQK9S4TTU"
+        "airtable": "rec4T7A9pQK9S4TTU",
+        "main_issue": 131
     },
     "sizingNotes": "A number of simple tables with footnotes dimensions may require consideration",
     "notes": "This is a new publication"

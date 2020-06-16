@@ -14,7 +14,8 @@
         "source": "XLS"
     },
     "transform": {
-        "airtable": "recAIeTjrO6YBEfe3"
+        "airtable": "recAIeTjrO6YBEfe3",
+        "main_issue": 132
     },
     "sizingNotes": "Simple table structure with footnotes although the structure varies from tab to tab with some tabs containing more than 1  table",
     "notes": ""

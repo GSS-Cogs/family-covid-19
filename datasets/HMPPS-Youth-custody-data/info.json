@@ -14,7 +14,8 @@
         "source": "ODS"
     },
     "transform": {
-        "airtable": "recb6YoIyHZzxEggH"
+        "airtable": "recb6YoIyHZzxEggH",
+        "main_issue": 133
     },
     "sizingNotes": "A simple CSV",
     "notes": ""

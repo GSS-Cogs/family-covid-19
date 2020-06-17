@@ -1,19 +1,23 @@
 {
     "title": "Port freight quarterly statistics",
     "publisher": "Department for Transport",
-    "description": "",
-    "published": "",
+    "description": "Provisional quarterly statistics on freight handled by UK major ports",
+    "published": "2020-06-10",
     "families": [
         "COVID-19"
     ],
     "extract": {
-        "source": "",
+        "source": "ODS",
         "stage": "Candidate"
     },
     "transform": {
         "airtable": "recuBtidgozNxCUsh",
         "main_issue": 119
     },
-    "sizingNotes": "",
-    "notes": ""
+    "sizingNotes": "Simple table structure with some footnotes",
+    "notes": "Some of the decreases observed in the first quarter of 2020 could be related to the UK\u2019s departure from the EU, storms Ciara and Dennis and the global coronavirus (COVID-19) pandemic, especially for unitised traffic, which includes passenger vehicles.",
+    "landingPage": "https://www.gov.uk/government/collections/maritime-and-shipping-statistics",
+    "datasetNotes": [
+        "On the landing page scroll to Port and domestic waterborne freight statistics and click on the latest release, this will open a new page scroll to documents and 2 ODS documents are located in a zip file.  If only 2 tabs are visible within the ODS  you will need to right click in one of the visible tabs and the data tab will be displayed. "
+    ]
 }

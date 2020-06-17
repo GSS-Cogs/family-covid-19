@@ -1,0 +1,22 @@
+{
+    "title": "Output in the construction industry",
+    "publisher": "Office for National Statistics",
+    "description": "Monthly construction output for Great Britain at current price and chained volume measures, seasonally adjusted by public and private sector.",
+    "landingPage": "https://www.ons.gov.uk/businessindustryandtrade/constructionindustry/datasets/outputintheconstructionindustry",
+    "datasetNotes": [
+        "On landing page scroll down Your download option and click on current "
+    ],
+    "published": "2020-06-12",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": "XLS"
+    },
+    "transform": {
+        "airtable": "recAIeTjrO6YBEfe3",
+        "main_issue": 132
+    },
+    "sizingNotes": "Simple table structure with footnotes although the structure varies from tab to tab with some tabs containing more than 1  table",
+    "notes": ""
+}

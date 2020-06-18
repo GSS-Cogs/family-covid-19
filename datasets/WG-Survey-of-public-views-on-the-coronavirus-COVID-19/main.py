@@ -78,3 +78,30 @@ tidy = new_table[['Period','Survey Question Category','Survey Question','Average
 out = Path('out')
 out.mkdir(exist_ok=True)
 tidy.drop_duplicates().to_csv(out / 'observations.csv', index = False)
+
+tidy.head(60)
+
+import pandas as pd
+def create_codelist(vals, nme, path):
+    dat = pd.DataFrame(vals.unique())
+    dat = dat.rename(columns={0: 'Label'})
+    dat['Notation'] = dat['Label'].apply(pathify)
+    dat['Parent Notation'] = ''
+    dat['Sort Priority'] = ''
+    dat.to_csv(ref / f'{pathify(nme)}.csv', index = False)
+    return dat
+
+
+# +
+output_data = tidy
+
+ref = Path('reference')
+ref.mkdir(exist_ok=True)
+
+codelists = ['Survey Question','Survey Question Category','Average Response']
+for c in codelists:
+    d = create_codelist(output_data[c], c, ref)
+
+# -
+
+

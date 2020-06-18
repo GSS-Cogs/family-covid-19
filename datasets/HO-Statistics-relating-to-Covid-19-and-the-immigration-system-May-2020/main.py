@@ -8,11 +8,14 @@ landingPage = info['landingPage']
 landingPage 
 
 scraper = Scraper(landingPage) 
-scraper.select_dataset(latest=True) 
 scraper
 
-dist = scraper.distributions[1]
-tabs = (t for t in dist.as_databaker())
+scraper.select_dataset(title=lambda t: 'Statistics relating to Covid-19 and the immigration system' in t)
+scraper
+
+dist = scraper.distribution(mediaType = ODS)
+tabs = {t.name: t for t in dist.as_databaker()}
+tabs.keys()
 
 # +
 df = pd.DataFrame()
@@ -23,40 +26,38 @@ def date_time(time_value):
         return 'year/' + date_string
 
 
-# -
-
+# +
 trace = TransformTrace()
-for tab in tabs:
-    if tab.name == 'Air_01':
-        print(tab.name)
-        
-        datacube_name = "HO Statistics relating to Covid-19 and the immigration system"
-        columns=['Period', 'Air Arrivals', 'Measure Type', 'Unit']
-        trace.start(datacube_name, tab, columns, scraper.distributions[1].downloadURL)
-        
-        trace.Period("Selected as non blank values below and including cell A6 and cell E6")
-        period = tab.excel_ref('A6').expand(DOWN).expand(RIGHT).is_not_blank()  - tab.excel_ref('B6').expand(DOWN) - tab.excel_ref('C6').expand(DOWN) - tab.excel_ref('F6').expand(DOWN) - tab.excel_ref('G6').expand(DOWN)
-        
-        trace.Air_Arrivals("Selected as non blank values across row 5 excluding cells A5 and E5")     
-        air_arrivals = tab.excel_ref('B5').expand(RIGHT).is_not_blank() - tab.excel_ref('E5')
-        
-        trace.OBS('All non-blank values to the right of Period Values.')
-        observations = period.fill(RIGHT).is_not_blank() - period.expand(DOWN)
-        
-        trace.Measure_Type('Hard Coded to {}', var = 'People')
-        trace.Unit('Hard Coded to {}', var = 'Count')
-        
-        dimensions = [
-            HDim(period, 'Period', DIRECTLY, LEFT),
-            HDim(air_arrivals, 'Air Arrivals', DIRECTLY, ABOVE),
-            HDimConst('Measure Type', 'People'),
-            HDimConst('Unit', 'Count'),
-        ]
-        tidy_sheet = ConversionSegment(tab, dimensions, observations)
-        trace.with_preview(tidy_sheet)
-            
-        trace.store("combined_dataframe", tidy_sheet.topandas())
-        
+tab = next(t for t in tabs.values() if t.name.startswith('Air'))
+print(tab.name)
+
+datacube_name = "HO Statistics relating to Covid-19 and the immigration system"
+columns=['Period', 'Air Arrivals', 'Measure Type', 'Unit']
+trace.start(datacube_name, tab, columns, scraper.distributions[1].downloadURL)
+
+trace.Period("Selected as non blank values below and including cell A6 and cell E6")
+period = tab.excel_ref('A6').expand(DOWN).expand(RIGHT).is_not_blank()  - tab.excel_ref('B6').expand(DOWN) - tab.excel_ref('C6').expand(DOWN) - tab.excel_ref('F6').expand(DOWN) - tab.excel_ref('G6').expand(DOWN)
+
+trace.Air_Arrivals("Selected as non blank values across row 5 excluding cells A5 and E5")     
+air_arrivals = tab.excel_ref('B5').expand(RIGHT).is_not_blank() - tab.excel_ref('E5')
+
+trace.OBS('All non-blank values to the right of Period Values.')
+observations = period.fill(RIGHT).is_not_blank() - period.expand(DOWN)
+
+trace.Measure_Type('Hard Coded to {}', var = 'People')
+trace.Unit('Hard Coded to {}', var = 'Count')
+
+dimensions = [
+    HDim(period, 'Period', DIRECTLY, LEFT),
+    HDim(air_arrivals, 'Air Arrivals', DIRECTLY, ABOVE),
+    HDimConst('Measure Type', 'People'),
+    HDimConst('Unit', 'Count'),
+]
+tidy_sheet = ConversionSegment(tab, dimensions, observations)
+trace.with_preview(tidy_sheet)
+
+trace.store("combined_dataframe", tidy_sheet.topandas())
+
 
 # +
 df = trace.combine_and_trace(datacube_name, "combined_dataframe")

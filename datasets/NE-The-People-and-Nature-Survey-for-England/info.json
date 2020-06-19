@@ -16,7 +16,8 @@
     },
     "transform": {
         "stage": [
-            "To Do"
+            "To Do",
+            "Priority"
         ],
         "airtable": "recOm3m6AKfqgITVT",
         "main_issue": 126

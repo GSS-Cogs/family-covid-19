@@ -11,11 +11,15 @@
         "COVID-19"
     ],
     "extract": {
-        "source": "ODS"
+        "source": "ODS",
+        "stage": "Documented"
     },
     "transform": {
         "airtable": "recb6YoIyHZzxEggH",
-        "main_issue": 133
+        "main_issue": 133,
+        "stage": [
+            "To Do"
+        ]
     },
     "sizingNotes": "A simple CSV",
     "notes": ""

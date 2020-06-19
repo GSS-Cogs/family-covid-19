@@ -1,0 +1,21 @@
+{
+    "title": "Statistics: vocational qualifications",
+    "publisher": "Ofqual",
+    "description": "Statistics covering the number of certificates issued for regulated vocational and other qualifications during a given quarter.",
+    "landingPage": "https://www.gov.uk/government/collections/statistics-vocational-qualifications",
+    "datasetNotes": [
+        "On the landing page scroll to 2020 releases & click on the latest release "
+    ],
+    "published": "2020-06-18",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": "XLS"
+    },
+    "transform": {
+        "airtable": "receg2ipnWxODSoG6"
+    },
+    "sizingNotes": "8 Tabs with tables n different structure with graphs and charts on some tabs",
+    "notes": ""
+}

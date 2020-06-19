@@ -1,0 +1,21 @@
+{
+    "title": "Public sector finances bulletin",
+    "publisher": "HM Treasury",
+    "description": "The public sector finances statistical bulletin is published jointly by the Office for National Statistics (ONS) and HM Treasury on a monthly basis and provides the latest available estimates for key public sector finance statistics, such as public sector net borrowing, public sector net debt and public sector current budget deficit/surplus.",
+    "landingPage": "https://www.gov.uk/government/statistics/public-sector-finances-bulletin",
+    "datasetNotes": [
+        "On the landing page under documents "
+    ],
+    "published": "2020-06-19",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": "XLS"
+    },
+    "transform": {
+        "airtable": "recPNFcTgHP5YpLKs"
+    },
+    "sizingNotes": "A  large number of tables with different formats and footnotes, dimensions may need consideration",
+    "notes": ""
+}

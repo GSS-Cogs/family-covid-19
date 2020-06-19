@@ -1,0 +1,21 @@
+{
+    "title": "NHS test and trace statistics (England)",
+    "publisher": "Department of Health & Social Care",
+    "description": "Experimental statistics for weeks 1 and 2 of NHS test and trace contact tracing in England.",
+    "landingPage": "https://www.gov.uk/government/collections/nhs-test-and-trace-statistics-england-weekly-reports",
+    "datasetNotes": [
+        "On the landing page scroll to latest version and click on the link a new page will open the data can be found under documents "
+    ],
+    "published": "2020-06-18",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": "ODS"
+    },
+    "transform": {
+        "airtable": "recrM2jvjE2bBi3EU"
+    },
+    "sizingNotes": "Simple file structure with foot notes",
+    "notes": ""
+}

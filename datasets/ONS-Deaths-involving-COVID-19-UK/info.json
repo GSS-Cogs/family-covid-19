@@ -1,19 +1,23 @@
 {
     "title": "Deaths involving COVID-19 : UK",
     "publisher": "Office for National Statistics",
-    "description": "",
-    "published": "",
+    "description": "Provisional counts of the number of deaths and age-standardised mortality rates (ASMRs) involving the coronavirus (COVID-19) between 1 March and 30 April 2020 in the UK.",
+    "published": "2020-06-12",
     "families": [
         "COVID-19"
     ],
     "extract": {
-        "source": "",
+        "source": "XLS",
         "stage": "Candidate"
     },
     "transform": {
         "airtable": "recoThHhTSjKMT0Kp",
         "main_issue": 112
     },
-    "sizingNotes": "",
-    "notes": ""
+    "sizingNotes": "Multiple tabs with simple structures and multiple dimensions. One tab with multiple tables. Multiple footnotes in tabs.",
+    "notes": "",
+    "landingPage": "https://www.ons.gov.uk/peoplepopulationandcommunity/birthsdeathsandmarriages/deaths/datasets/deathsinvolvingcovid19intheuk",
+    "datasetNotes": [
+        "Data set is on the landing page under your download option "
+    ]
 }

@@ -1,0 +1,25 @@
+{
+    "title": "Earnings and employment from Pay As You Earn Real Time Information",
+    "publisher": "Office for National Statistics",
+    "description": "Experimental monthly estimates of paid employees and their pay from HM Revenue and Customs' (HMRC) Pay As You Earn (PAYE) Real Time Information (RTI) data, including a flash estimate of employment and median pay for the most recent month. This is a joint release between HMRC and the Office for National Statistics (ONS).",
+    "landingPage": "https://www.ons.gov.uk/releases/earningsandemploymentfrompayasyouearnrealtimeinformationukjuly2014toapril2020",
+    "datasetNotes": [
+        "On the landing page scroll down to data and there is a link for seasonally and non-seasonally adjusted.  both of these datasets are required and can be combined.  Click on each of the links and a further page will open  scroll down to your download option and select current from your download option "
+    ],
+    "published": "2020-06-16",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": "XLS",
+        "stage": "Documented"
+    },
+    "transform": {
+        "stage": [
+            "To Do"
+        ],
+        "airtable": "recsYffMYjf6peS8G"
+    },
+    "sizingNotes": "Simple table structure with footnotes.  Please combine seasonally and non-seasonally adjusted datasets into one dataset",
+    "notes": ""
+}

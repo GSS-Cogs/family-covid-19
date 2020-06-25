@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[274]:
+# In[1]:
 
 
 # # ONS Key workers reference tables 
@@ -13,7 +13,6 @@ import warnings
 import pandas as pd
 import json
 import re
-import pypandoc
 
 def left(s, amount):
     return s[:amount]
@@ -82,21 +81,21 @@ landingPage = info['landingPage']
 landingPage 
 
 
-# In[276]:
+# In[2]:
 
 
 scraper = Scraper(landingPage) 
 scraper
 
 
-# In[ ]:
+# In[3]:
 
 
 distribution = scraper.distributions[0]
 display(distribution)
 
 
-# In[279]:
+# In[4]:
 
 
 trace = TransformTrace()
@@ -262,7 +261,7 @@ for tab in tabs:
         continue
 
 
-# In[281]:
+# In[5]:
 
 
 pd.set_option('display.float_format', lambda x: '%.0f' % x)
@@ -291,7 +290,7 @@ df = df[['Period', 'ONS Geography Code', 'Workforce Category', 'Workforce Breakd
 df
 
 
-# In[291]:
+# In[6]:
 
 
 notes = """
@@ -301,7 +300,7 @@ Respondents who did not provide disability status have been excluded.
 """
 
 
-# In[292]:
+# In[7]:
 
 
 from IPython.core.display import HTML
@@ -312,13 +311,7 @@ for col in df:
         display(df[col].cat.categories)
 
 
-# In[295]:
-
-
-
-
-
-# In[293]:
+# In[8]:
 
 
 for column in df:
@@ -326,7 +319,7 @@ for column in df:
         df[column] = df[column].map(lambda x: pathify(x))
 
 
-# In[294]:
+# In[9]:
 
 
 out = Path('out')
@@ -346,16 +339,4 @@ with open(out / f'{title}.csv-metadata.trig', 'wb') as metadata:
 trace.output()
 
 df
-
-
-# In[26]:
-
-
-
-
-
-# In[ ]:
-
-
-
 

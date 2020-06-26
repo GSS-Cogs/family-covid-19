@@ -14,7 +14,8 @@
         "source": "ODS"
     },
     "transform": {
-        "airtable": "recrM2jvjE2bBi3EU"
+        "airtable": "recrM2jvjE2bBi3EU",
+        "main_issue": 140
     },
     "sizingNotes": "Simple file structure with foot notes",
     "notes": ""

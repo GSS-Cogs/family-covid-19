@@ -17,9 +17,11 @@
     "transform": {
         "stage": [
             "To Do",
-            "Priority"
+            "Priority",
+            "Hold"
         ],
-        "airtable": "recLWQH3oLA7BoHEq"
+        "airtable": "recLWQH3oLA7BoHEq",
+        "main_issue": 135
     },
     "sizingNotes": "Simple table structure with footnotes",
     "notes": ""

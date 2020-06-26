@@ -18,7 +18,8 @@
         "stage": [
             "To Do"
         ],
-        "airtable": "recsYffMYjf6peS8G"
+        "airtable": "recsYffMYjf6peS8G",
+        "main_issue": 141
     },
     "sizingNotes": "Simple table structure with footnotes.  Please combine seasonally and non-seasonally adjusted datasets into one dataset",
     "notes": ""

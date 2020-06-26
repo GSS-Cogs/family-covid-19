@@ -1,0 +1,21 @@
+{
+    "title": "Coronavirus and the social impacts on young and older people in Great Britain",
+    "publisher": "Office for National Statistics",
+    "description": "Indicators from the Opinions and Lifestyle Survey on the impact of the coronavirus (COVID-19) pandemic on young people in Great Britain.",
+    "landingPage": "https://www.ons.gov.uk/peoplepopulationandcommunity/birthsdeathsandmarriages/ageing/datasets/coronavirusandthesocialimpactsonyoungandolderpeopleingreatbritain",
+    "datasetNotes": [
+        "On landing page scroll towards bottom of page, dataset is under heading \"Your download option\"."
+    ],
+    "published": "2020-06-22",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": "XLS"
+    },
+    "transform": {
+        "airtable": "recxlOcgMhH1vKxXt"
+    },
+    "sizingNotes": "23 tabs, messy tables with multiple dimensions, sub-dimensions and footnotes.",
+    "notes": ""
+}

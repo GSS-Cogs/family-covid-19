@@ -15,7 +15,8 @@
         "stage": "Candidate"
     },
     "transform": {
-        "airtable": "recuX5iyt4cLmIiig"
+        "airtable": "recuX5iyt4cLmIiig",
+        "main_issue": 148
     },
     "sizingNotes": "23 tabs with varying complexity of tables. Multiple dimensions and sub-dimensions. Several footnotes.",
     "notes": ""

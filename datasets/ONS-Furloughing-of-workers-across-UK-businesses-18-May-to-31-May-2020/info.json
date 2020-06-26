@@ -14,7 +14,8 @@
         "source": "XLS"
     },
     "transform": {
-        "airtable": "recoDfQVdXio3DRAW"
+        "airtable": "recoDfQVdXio3DRAW",
+        "main_issue": 147
     },
     "sizingNotes": "Small tables with simple structures, multiple dimensions and footnotes.",
     "notes": "Data are provided as an update to \"Furloughing of workers across UK businesses: 23 March 2020 to 5 April 2020 \", which was published by ONE as an article on 23/04/2020."

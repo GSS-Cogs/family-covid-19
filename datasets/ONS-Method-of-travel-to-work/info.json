@@ -14,7 +14,8 @@
         "source": "XLS"
     },
     "transform": {
-        "airtable": "recnY4vzo9Mbka7i2"
+        "airtable": "recnY4vzo9Mbka7i2",
+        "main_issue": 146
     },
     "sizingNotes": "Simple table structure, one tab of data already in tidy data like format.",
     "notes": ""

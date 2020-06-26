@@ -14,7 +14,8 @@
         "source": "XLS"
     },
     "transform": {
-        "airtable": "recB9PUBTiq1xwxCT"
+        "airtable": "recB9PUBTiq1xwxCT",
+        "main_issue": 143
     },
     "sizingNotes": "Several tabs, simple table structure and straightforward dimensions.",
     "notes": ""

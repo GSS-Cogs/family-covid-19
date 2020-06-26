@@ -12,7 +12,8 @@
         "stage": "Not Required"
     },
     "transform": {
-        "airtable": "recmax2UJSy8ns4Im"
+        "airtable": "recmax2UJSy8ns4Im",
+        "main_issue": 145
     },
     "sizingNotes": "",
     "notes": ""

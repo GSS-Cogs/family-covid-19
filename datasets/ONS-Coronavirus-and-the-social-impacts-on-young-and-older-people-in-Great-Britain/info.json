@@ -14,7 +14,8 @@
         "source": "XLS"
     },
     "transform": {
-        "airtable": "recxlOcgMhH1vKxXt"
+        "airtable": "recxlOcgMhH1vKxXt",
+        "main_issue": 149
     },
     "sizingNotes": "23 tabs, messy tables with multiple dimensions, sub-dimensions and footnotes.",
     "notes": ""

@@ -99,8 +99,10 @@ scraper.dataset.family = 'covid-19'
 # Output CSV-W metadata (validation, transform and DSD).
 # Output dataset metadata separately for now.
 
+import os
+dataset_path = pathify(os.environ.get('JOB_NAME', 'gss_data/covid-19/' + Path(os.getcwd()).name))
 scraper.set_base_uri('http://gss-data.org.uk')
-scraper.set_dataset_id(f'gss_data/family-covid-19/{pathify(Path(".").absolute().name)}')
+scraper.set_dataset_id(dataset_path)
 csvw_transform = CSVWMapping()
 csvw_transform.set_csv(out / 'observations.csv')
 csvw_transform.set_mapping(json.load(open('info.json')))
@@ -111,10 +113,13 @@ with open(out / 'observations.csv-metadata.trig', 'wb') as metadata:
 
 trace.output()
 
-tidy
+# +
+#tidy
 
-cl = CSVCodelists()
-codelist_data = tidy[['Air Arrivals']]
-cl.create_codelists(codelist_data, out)
+# +
+#cl = CSVCodelists()
+#codelist_data = tidy[['Air Arrivals']]
+#cl.create_codelists(codelist_data, out)
+# -
 
 

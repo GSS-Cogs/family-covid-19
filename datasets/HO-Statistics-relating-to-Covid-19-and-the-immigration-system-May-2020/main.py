@@ -100,13 +100,14 @@ scraper.dataset.family = 'covid-19'
 # Output dataset metadata separately for now.
 
 import os
+from urllib.parse import urljoin
 dataset_path = pathify(os.environ.get('JOB_NAME', 'gss_data/covid-19/' + Path(os.getcwd()).name))
 scraper.set_base_uri('http://gss-data.org.uk')
 scraper.set_dataset_id(dataset_path)
 csvw_transform = CSVWMapping()
 csvw_transform.set_csv(out / 'observations.csv')
 csvw_transform.set_mapping(json.load(open('info.json')))
-csvw_transform.set_dataset_uri(scraper.dataset.uri)
+csvw_transform.set_dataset_uri(urljoin(scraper._base_uri, f'data/{scraper._dataset_id}'))
 csvw_transform.write(out / 'observations.csv-metadata.json')
 with open(out / 'observations.csv-metadata.trig', 'wb') as metadata:
     metadata.write(scraper.generate_trig())
@@ -120,6 +121,3 @@ trace.output()
 #cl = CSVCodelists()
 #codelist_data = tidy[['Air Arrivals']]
 #cl.create_codelists(codelist_data, out)
-# -
-
-

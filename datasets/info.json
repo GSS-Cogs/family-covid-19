@@ -9,8 +9,8 @@
             "COVID-19"
         ]
     },
-    "sparql": "https://production-drafter-ons-alpha.publishmydata.com/v1/sparql/live",
-    "pmd": "http://gss-data.org.uk",
+    "sparql": "https://cogs-staging-drafter.publishmydata.com/v1/sparql/live",
+    "pmd": "http://staging.gss-data.org.uk",
     "pipelines": [
         "BEIS-Building-materials-and-components-monthly-statistics",
         "BEIS-Coronavirus-grant-funding-local-authority-payments-to-small-and-medium-businesses",

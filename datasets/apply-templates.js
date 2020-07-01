@@ -134,10 +134,14 @@ if (dataset) {
                 fetchDatasets.done(function(datasets) {
                     collected = collected.map(p => {
                         p.datasets = datasets.filter(ds => {
-                            if (typeof(p.info.landingPage) == 'string') {
-                                return ds.landingPage === p.info.landingPage
+                            if (p.info.hasOwnProperty('landingPage') && p.info.landingPage !== null) {
+                                if (typeof (p.info.landingPage) == 'string') {
+                                    return ds.landingPage === p.info.landingPage
+                                } else {
+                                    return p.info.landingPage.includes(ds.landingPage)
+                                }
                             } else {
-                                return p.info.landingPage.includes(ds.landingPage)
+                                return false
                             }
                         }).filter(function(ds, i, s) {
                             return s.findIndex(d => d.uri === ds.uri) === i
@@ -155,7 +159,7 @@ if (dataset) {
                                 }, null);
                         if (info.hasOwnProperty('pmd')) {
                             p.datasets = p.datasets.map(ds => {
-                                ds.uri = info.pmd + '/resource?uri=' + encodeURIComponent(ds.uri);
+                                ds.uri = info.pmd + '/dataset/cube?uri=' + encodeURIComponent(ds.uri);
                                 return ds;
                             });
                         };

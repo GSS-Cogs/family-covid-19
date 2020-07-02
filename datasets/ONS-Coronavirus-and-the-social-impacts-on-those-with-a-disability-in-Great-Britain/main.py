@@ -210,7 +210,7 @@ date_inclusive =  df['Period'].iloc[0]
 
 # -
 
-df = df[['Survey Topic', 'Question', 'Disabled Status', 'Value', 'Measure Type', 'Unit', 'Lower CI', 'Upper CI', 'Weighted Count', 'Sample', 'Marker']]
+df = df[['Survey Topic', 'Question', 'Response', 'Disabled Status', 'Value', 'Measure Type', 'Unit', 'Lower CI', 'Upper CI', 'Weighted Count', 'Sample', 'Marker']]
 
 
 from IPython.core.display import HTML

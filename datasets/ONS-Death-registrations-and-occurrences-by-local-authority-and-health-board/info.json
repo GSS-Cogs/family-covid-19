@@ -1,0 +1,22 @@
+{
+    "title": "Death registrations and occurrences by local authority and health board",
+    "publisher": "Office for National Statistics",
+    "description": "Provisional counts of the number of deaths registered in England and Wales, including deaths involving the coronavirus (COVID-19), by local authority, health board and place of death in the latest weeks for which data are available.",
+    "landingPage": "https://www.ons.gov.uk/peoplepopulationandcommunity/healthandsocialcare/causesofdeath/datasets/deathregistrationsandoccurrencesbylocalauthorityandhealthboard/2020",
+    "datasetNotes": [
+        "On landing page scroll down to dataset under heading \"Latest Version\"."
+    ],
+    "published": "2020-06-23",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": "XLS"
+    },
+    "transform": {
+        "airtable": "recB9PUBTiq1xwxCT",
+        "main_issue": 143
+    },
+    "sizingNotes": "Several tabs, simple table structure and straightforward dimensions.",
+    "notes": ""
+}

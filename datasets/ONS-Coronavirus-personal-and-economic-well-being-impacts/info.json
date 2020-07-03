@@ -14,7 +14,8 @@
         "source": "XLS"
     },
     "transform": {
-        "airtable": "recDWNMtzgHnEaaZh"
+        "airtable": "recDWNMtzgHnEaaZh",
+        "main_issue": 134
     },
     "sizingNotes": "Multiple tables on each tab with footnotes",
     "notes": ""

@@ -1,0 +1,20 @@
+{
+    "title": "Coronavirus and the effects on the UK Balance of Payments",
+    "publisher": "Office for National Statistics",
+    "description": "Analysis report with no specific dataset and source data that is present will no doubt be captured elsewhere.",
+    "landingPage": "https://www.ons.gov.uk/economy/nationalaccounts/balanceofpayments/articles/coronavirusandtheeffectsontheukbalanceofpayments/2020-06-22",
+    "published": "",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": "",
+        "stage": "Not Required"
+    },
+    "transform": {
+        "airtable": "recjUPEQ6QL9sq3M3",
+        "main_issue": 144
+    },
+    "sizingNotes": "",
+    "notes": ""
+}

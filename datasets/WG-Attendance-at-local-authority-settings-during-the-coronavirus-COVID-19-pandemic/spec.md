@@ -1,35 +1,68 @@
 # COGS Dataset Specification
 
-[Family Home](https://gss-cogs.github.io/family-covid-19-AIRTABLE/datasets/specmenu.html)
+[Family Home](https://gss-cogs.github.io/family-covid-19/datasets/specmenu.html)
 
-[Family Transform Status](https://gss-cogs.github.io/family-covid-19-AIRTABLE/datasets/index.html)
+[Family Transform Status](https://gss-cogs.github.io/family-covid-19/datasets/index.html)
 
 ## WG Attendance at local authority settings during the coronavirus  COVID-19  pandemic 
 
 
 [Landing Page](https://gov.wales/attendance-local-authority-settings-during-coronavirus-covid-19-pandemic)
 
-[Transform Flowchart](https://gss-cogs.github.io/family-covid-19-AIRTABLE/datasets/specflowcharts.html?wg-attendance-at-local-authority-settings-during-the-coronavirus-covid-19-pandemic/flowchart.ttl)
+[Transform Flowchart](https://gss-cogs.github.io/family-covid-19/datasets/specflowcharts.html?wg-attendance-at-local-authority-settings-during-the-coronavirus-covid-19-pandemic/flowchart.ttl)
 
-### Dataset One
+------
 
-#### Output Dataset Name:
+### Stage 1: Transform
 
-		name
+#### Sheet: Table1_Eng
+
+		A - Date
+		B - Settings
+		C - Percentage of Settings
+		D - Children
+		E - Percentage of Children
+		F - Vulnerable Children
+		G - Percentage of Vulnerable Children
+		H - Staff
+		I - Percentage of Staff
+
+#### Sheet: Table2_Eng
+
+		A - Week Beginning
+		B - Week Ending
+		C - Settings
+		D - Percentage of Settings
+		E - Children
+		F - Percentage of Children
+		G - Vulnerable Children
+		H - Percentage of Vulnerable Children
+		I - Staff
+		J - Percentage of Staff
+
+---------
+
+### Stage 2: Alignment
+
+#### Sheet: Table1_Eng
+
+		Date to be renamed Period
+		Column in range B4:I4 to be flattened with column name: Local Authority Settings
+
+#### Sheet: Table2_Eng
+
+		Week Beginning and Week Ending to be formatted into one column renamed Period
+		Column in range C4:J4 to be flattened with column name: Local Authority Settings
+
+#### Table Joins
+
+		Both tables to be joined and output with name: 
+			Attendance at local authority settings during the coronavirus COVID-19 pandemic.csv
 
 #### Table Structure
 
-		Columns, Measure Type, Unit, Marker, Value
+		Period, Local Authority Settings, Measure Type, Unit, Value, Marker
 
-#### Sheet: 1
+##### DM Notes
 
-		spec
-
-#### Sheet: 2
-
-		spec
-
-##### Footnotes
-
-		footnotes
-
+		Vamshi had already completed the transform before a spec had been written so this is a post-spec

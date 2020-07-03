@@ -14,7 +14,8 @@
         "source": "XLS"
     },
     "transform": {
-        "airtable": "recjPtbg6FfzyEOFq"
+        "airtable": "recjPtbg6FfzyEOFq",
+        "main_issue": 138
     },
     "sizingNotes": "Simple table structure with footnotes",
     "notes": ""

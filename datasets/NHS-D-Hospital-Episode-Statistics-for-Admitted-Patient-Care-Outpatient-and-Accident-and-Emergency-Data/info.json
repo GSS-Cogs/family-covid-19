@@ -18,7 +18,8 @@
         "stage": [
             "To Do"
         ],
-        "airtable": "recn2ma60N1JiWb4T"
+        "airtable": "recn2ma60N1JiWb4T",
+        "main_issue": 139
     },
     "sizingNotes": "There are 5 spreadsheets available, it appears that the top 2 XLS spreadsheets may be available in a CSV 3rd spreadsheet.  May need to consider if all spreadsheets can be used to produce 1 data set.",
     "notes": ""

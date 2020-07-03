@@ -4,53 +4,56 @@
 
 [Family Transform Status](https://gss-cogs.github.io/family-covid-19/datasets/index.html)
 
-----------## ONS Counts and ratios of coronavirus-related deaths by ethnic group, England and Wales 
+----------
+
+## ONS Counts and ratios of coronavirus-related deaths by ethnic group, England and Wales 
 
 [Landing Page](https://www.ons.gov.uk/peoplepopulationandcommunity/birthsdeathsandmarriages/deaths/datasets/countsandratiosofcoronavirusrelateddeathsbyethnicgroupenglandandwales)
 
 [Transform Flowchart](https://gss-cogs.github.io/family-covid-19/datasets/specflowcharts.html?ONS-Counts-and-ratios-of-coronavirus-related-deaths-by-ethnic-group-England-and-Wales/flowchart.ttl)
 
-----------### Stage 1. Transform
 
-#### Sheet: 1
+------
 
-		spec
+### Stage 1: Transform
+
+#### Sheet: Table 1
+
+		A - Ethnicity
+		B - Sex
+		C - Ageband
+		D - Counts of Coronavirus-related deaths
+		
+#### Sheet: Table 2
+
+		A - Ethnicity
+		B - Sex
+		C - Ageband
+		D - Ratio of Coronavirus-related deaths to non Coronavirus-related
+		
+
+---------
+
+### Stage 2: Alignment
+
+#### Sheet: Table1_Eng
+
+		Counts of Coronavirus-related deaths is the Value column with Count put in Measure Type and Deaths in Unit columns	
+
+#### Sheet: Table2_Eng
+
+		Ratio of Coronavirus-related deaths to non Coronavirus-related is the Value column with Ratio put in Measure Type and Deaths in Unit columns
+		
+
+#### Table Joins
+
+		Both tables to be joined and output with name: 
+			ons-counts-and-ratios-of-coronavirus-related-deaths-by-ethnic-group-england-and-wales.csv
 
 #### Table Structure
 
-		Period, Measure Type, Unit, Marker, Value
-
-#### Sheet: 2
-
-		spec
-
-#### Table Structure
-
-		Period, Measure Type, Unit, Marker, Value
-
--------------### Stage 2. Harmonise
-
-#### Sheet: 1
-
-		spec
-
-#### Table Structure
-
-		Period, Measure Type, Unit, Marker, Value
-
-#### Sheet: 2
-
-		spec
-
-----------#### Table Structure
-
-		Period, Measure Type, Unit, Marker, Value
-
---------------##### Footnotes
-
-		footnotes
+		Ethnicity, Sex, Age band, Value, Measure Type, Unit
 
 ##### DM Notes
 
-		notes
-
+		Transform had already been completed before a spec had been written so this is a post-spec

@@ -14,8 +14,9 @@
         "source": "XLS"
     },
     "transform": {
-        "airtable": "receg2ipnWxODSoG6"
+        "airtable": "receg2ipnWxODSoG6",
+        "main_issue": 137
     },
-    "sizingNotes": "8 Tabs with tables n different structure with graphs and charts on some tabs",
+    "sizingNotes": "8 Tabs with tables, different structure with graphs and charts on some tabs",
     "notes": ""
 }

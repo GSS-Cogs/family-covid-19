@@ -1,0 +1,23 @@
+{
+    "title": "Effects of taxes and benefits on household income [Financial Year Ending 2019]",
+    "publisher": "Office for National Statistics",
+    "description": "Average annual incomes, taxes and benefits, and household characteristics of retired and non-retired households in the UK. Data for financial years, by quintile and decile groups, country and region and tenure type.",
+    "landingPage": "https://www.ons.gov.uk/peoplepopulationandcommunity/personalandhouseholdfinances/incomeandwealth/datasets/theeffectsoftaxesandbenefitsonhouseholdincomefinancialyearending2014",
+    "datasetNotes": [
+        "On landing page scroll down to latest dataset under heading \"Your download option\"."
+    ],
+    "published": "2020-06-23",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": "XLS",
+        "stage": "Candidate"
+    },
+    "transform": {
+        "airtable": "recuX5iyt4cLmIiig",
+        "main_issue": 148
+    },
+    "sizingNotes": "23 tabs with varying complexity of tables. Multiple dimensions and sub-dimensions. Several footnotes.",
+    "notes": ""
+}

@@ -14,7 +14,7 @@
 
 --------
 
-### 1. Scrape and Transform
+### 1. Transform
 
 #### Sheet: Table_1 Notifications of Service User Deaths received from Adult Care Homes
 
@@ -133,7 +133,7 @@
 
 --------------------------
 
-### 2. Harmonise 
+### 2. Alignment 
 
 #### Dataset Outputs:
 

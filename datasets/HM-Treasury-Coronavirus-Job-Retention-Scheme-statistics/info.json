@@ -1,0 +1,25 @@
+{
+    "title": "Coronavirus Job Retention Scheme statistics",
+    "publisher": "HM Treasury",
+    "description": "This statistical release provides estimates of the number and value of claims made to the Coronavirus Job Retention Scheme to HMRC by 31 May 2020.",
+    "landingPage": "https://www.gov.uk/government/statistics/coronavirus-job-retention-scheme-statistics-june-2020",
+    "datasetNotes": [
+        "On the landing page under documents "
+    ],
+    "published": "2020-06-11",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": "XLS",
+        "stage": "Documented"
+    },
+    "transform": {
+        "stage": [
+            "To Do"
+        ],
+        "airtable": "recIPPg3Fw0gMJhJf"
+    },
+    "sizingNotes": "Simple table structure with footnotes",
+    "notes": ""
+}

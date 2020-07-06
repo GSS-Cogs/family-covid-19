@@ -6,17 +6,20 @@
     "datasetNotes": [
         "On landing page scroll to latest bus statistics and click on the latest link, a new page will open scroll down to documents and open the zip folder "
     ],
-    "published": "",
+    "published": "2020-06-17",
     "families": [
         "COVID-19"
     ],
     "extract": {
         "source": "ODS",
-        "stage": "Candidate"
+        "stage": "Documented"
     },
     "transform": {
         "airtable": "recVlA6wc9p3ZZI4m",
-        "main_issue": 94
+        "main_issue": 94,
+        "stage": [
+            "To Do"
+        ]
     },
     "sizingNotes": "Small table structure in 2 ODS spreadsheets.",
     "notes": "Stats January - March 2020 - due 25ish June"

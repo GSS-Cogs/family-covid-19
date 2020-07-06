@@ -20,7 +20,7 @@
         ]
     },
     "sizingNotes": "Simple table structures with multiple dimensions & sub-dimensions. Multiple footnotes add to complexity.",
-    "notes": "",
+    "notes": "This dataset includes tables derived from the APS.  This is different from the APS data published elsewhere as it has been cut and weighted for this publication.",
     "datasetNotes": [
         "On landing page dataset at bottom of page under heading \"Current\"."
     ]

@@ -8,11 +8,15 @@
     ],
     "extract": {
         "source": "XLS",
-        "stage": "Candidate"
+        "stage": "Documented"
     },
     "transform": {
         "airtable": "recH9Arh9qB9cdmkE",
-        "main_issue": 85
+        "main_issue": 85,
+        "stage": [
+            "To Do",
+            "Priority"
+        ]
     },
     "sizingNotes": "Simple structures and multiple dimensions. Multiple tabs.",
     "notes": "",

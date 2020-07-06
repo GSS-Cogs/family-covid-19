@@ -1,0 +1,413 @@
+{
+    "title": "Key workers reference tables",
+    "publisher": "Office for National Statistics",
+    "description": "Estimates of the numbers and characteristics of those who could be considered as potential \u201ckey workers\u201d in the response to the coronavirus (COVID-19).",
+    "landingPage": "https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/earningsandworkinghours/datasets/keyworkersreferencetables",
+    "published": "2020-05-15",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": "XLS",
+        "stage": "Documented"
+    },
+    "transform": {
+        "airtable": "rectKfeLe05ivHNzA",
+        "main_issue": 55,
+        "stage": [
+            "To Do",
+            "Priority"
+        ],
+        "transformStage": {
+            "Table 1a": {
+                "name": "Table 1a",
+                "title": "Table 1a: Total key workers in workforce and working age population",
+                "columns": {
+                    "Period": "A2",
+                    "ONS Geography Code": "E92000001",
+                    "Workforce Category": "{A6-A8}",
+                    "Workforce Breakdown": "N/A",
+                    "Measure Type": "Count",
+                    "Unit": "Person"
+                }
+            },
+            "Table 1b": {
+                "name": "Table 1b",
+                "title": "Table 1b: Total key workers by occupation groups",
+                "columns": {
+                    "Period": "A2",
+                    "ONS Geography Code": "E92000001",
+                    "Workforce Category": "{A7-A14}",
+                    "Workforce Breakdown": "{B5-B5}",
+                    "Measure Type": "Count",
+                    "Unit": "Person"
+                }
+            },
+            "Table 2a": {
+                "name": "Table 2a",
+                "title": "Table 2a: Key workers and non-key workers by age bands",
+                "columns": {
+                    "Period": "A2",
+                    "ONS Geography Code": "E92000001",
+                    "Workforce Category": "{A6-A7}",
+                    "Workforce Breakdown": "{B4-X4}",
+                    "Measure Type": "Count",
+                    "Unit": "Person"
+                }
+            },
+            "Table 2b": {
+                "name": "Table 2b",
+                "title": "Table 2b: Key workers by age bands and occupation groups",
+                "columns": {
+                    "Period": "A2",
+                    "ONS Geography Code": "E92000001",
+                    "Workforce Category": "{A6-A13}",
+                    "Workforce Breakdown": "{B4-X4}",
+                    "Measure Type": "Count",
+                    "Unit": "Person"
+                }
+            },
+            "Table 3a": {
+                "name": "Table 3a",
+                "title": "Table 3a: Key workers and non-key workers by ethnicity",
+                "columns": {
+                    "Period": "A2",
+                    "ONS Geography Code": "E92000001",
+                    "Workforce Category": "{A6-A7}",
+                    "Workforce Breakdown": "{B4-J4}",
+                    "Measure Type": "Count",
+                    "Unit": "Person"
+                }
+            },
+            "Table 3b": {
+                "name": "Table 3b",
+                "title": "Table 3b: Key workers by ethnicity and occupation groups",
+                "columns": {
+                    "Period": "A2",
+                    "ONS Geography Code": "E92000001",
+                    "Workforce Category": "{A6-A13}",
+                    "Workforce Breakdown": "{B4-J4}",
+                    "Measure Type": "Count",
+                    "Unit": "Person"
+                }
+            },
+            "Table 4a": {
+                "name": "Table 4a",
+                "title": "Table 4a: Key workers and non-key workers by gender",
+                "columns": {
+                    "Period": "A2",
+                    "ONS Geography Code": "E92000001",
+                    "Workforce Category": "{A6-A7}",
+                    "Workforce Breakdown": "{B4-D4}",
+                    "Measure Type": "Count",
+                    "Unit": "Person"
+                }
+            },
+            "Table 4b": {
+                "name": "Table 4b",
+                "title": "Table 4b: Key workers by gender and occupation groups",
+                "columns": {
+                    "Period": "A2",
+                    "ONS Geography Code": "E92000001",
+                    "Workforce Category": "{A6-A13}",
+                    "Workforce Breakdown": "{B4-D4}",
+                    "Measure Type": "Count",
+                    "Unit": "Person"
+                }
+            },
+            "Table 5a": {
+                "name": "Table 5a",
+                "title": "Table 5a: Key workers and non-key workers by country of birth",
+                "columns": {
+                    "Period": "A2",
+                    "ONS Geography Code": "E92000001",
+                    "Workforce Category": "{A6-A7}",
+                    "Workforce Breakdown": "{B4-F4}",
+                    "Measure Type": "Count",
+                    "Unit": "Person"
+                }
+            },
+            "Table 5b": {
+                "name": "Table 5b",
+                "title": "Table 5b: Key workers by country of birth and occupation groups",
+                "columns": {
+                    "Period": "A2",
+                    "ONS Geography Code": "E92000001",
+                    "Workforce Category": "{A6-A13}",
+                    "Workforce Breakdown": "{B4-F4}",
+                    "Measure Type": "Count",
+                    "Unit": "Person"
+                }
+            },
+            "Table 6a": {
+                "name": "Table 6a",
+                "title": "Table 6a: Key workers and non-key workers by disability status",
+                "columns": {
+                    "Period": "A2",
+                    "ONS Geography Code": "E92000001",
+                    "Workforce Category": "{A6-A7}",
+                    "Workforce Breakdown": "{B4-D4}",
+                    "Measure Type": "Count",
+                    "Unit": "Person"
+                }
+            },
+            "Table 6b": {
+                "name": "Table 6b",
+                "title": "Table 6b: Key workers by disability status and occupation groups",
+                "columns": {
+                    "Period": "A2",
+                    "ONS Geography Code": "E92000001",
+                    "Workforce Category": "{A6-A13}",
+                    "Workforce Breakdown": "{B4-D4}",
+                    "Measure Type": "Count",
+                    "Unit": "Person"
+                }
+            },
+            "Table 7a": {
+                "name": "Table 7a",
+                "title": "Table 7a: Key workers and non-key workers at moderate risk by risk type",
+                "columns": {
+                    "Period": "A2",
+                    "ONS Geography Code": "E92000001",
+                    "Workforce Category": "{A6-A7}",
+                    "Workforce Breakdown": "{B4-L4}",
+                    "Measure Type": "Count",
+                    "Unit": "Person"
+                }
+            },
+            "Table 7b": {
+                "name": "Table 7b",
+                "title": "Table 7b: Key workers at moderate risk by occupation groups",
+                "columns": {
+                    "Period": "A2",
+                    "ONS Geography Code": "E92000001",
+                    "Workforce Category": "{A6-A13}",
+                    "Workforce Breakdown": "{B4-D4}",
+                    "Measure Type": "Count",
+                    "Unit": "Person"
+                }
+            },
+            "Table 8": {
+                "name": "Table 8",
+                "title": "Table 8: Key worker and non-key worker by household type",
+                "columns": {
+                    "Period": "A2",
+                    "ONS Geography Code": "E92000001",
+                    "Workforce Category": "{A5-A9}",
+                    "Workforce Breakdown": "Has Dependant Child(s)",
+                    "Measure Type": "Count",
+                    "Unit": "Person"
+                }
+            },
+            "Table 9a": {
+                "name": "Table 9a",
+                "title": "Table 9a: Key workers and non-key workers with children aged under 4",
+                "columns": {
+                    "Period": "A2",
+                    "ONS Geography Code": "E92000001",
+                    "Workforce Category": "{A6-A7}",
+                    "Workforce Breakdown": "{B4-F4}",
+                    "Measure Type": "Count",
+                    "Unit": "Person"
+                }
+            },
+            "Table 9b": {
+                "name": "Table 9b",
+                "title": "Table 9b: Key workers with children aged under 4 by occupation groups",
+                "columns": {
+                    "Period": "A2",
+                    "ONS Geography Code": "E92000001",
+                    "Workforce Category": "{A6-A13}",
+                    "Workforce Breakdown": "{B4-F4}",
+                    "Measure Type": "Count",
+                    "Unit": "Person"
+                }
+            },
+            "Table 10a": {
+                "name": "Table 10a",
+                "title": "Table 10a: Key workers and non-key workers with children aged under 15",
+                "columns": {
+                    "Period": "A2",
+                    "ONS Geography Code": "E92000001",
+                    "Workforce Category": "{A6-A7}",
+                    "Workforce Breakdown": "{B4-H4}",
+                    "Measure Type": "Count",
+                    "Unit": "Person"
+                }
+            },
+            "Table 10b": {
+                "name": "Table 10b",
+                "title": "Table 10b: Key workers with children under 15 by occupation groups",
+                "columns": {
+                    "Period": "A2",
+                    "ONS Geography Code": "E92000001",
+                    "Workforce Category": "{A6-A13}",
+                    "Workforce Breakdown": "{B4-H4}",
+                    "Measure Type": "Count",
+                    "Unit": "Person"
+                }
+            },
+            "Table 11a": {
+                "name": "Table 11a",
+                "title": "Table 11a: Key worker and non-key worker unpaid carers",
+                "columns": {
+                    "Period": "A2",
+                    "ONS Geography Code": "E92000001",
+                    "Workforce Category": "{A6-A7}",
+                    "Workforce Breakdown": "{B4-D4}",
+                    "Measure Type": "Count",
+                    "Unit": "Person"
+                }
+            },
+            "Table 11b": {
+                "name": "Table 11b",
+                "title": "Table 11b: Key worker unpaid carers by occupation groups",
+                "columns": {
+                    "Period": "A2",
+                    "ONS Geography Code": "E92000001",
+                    "Workforce Category": "{A6-A13}",
+                    "Workforce Breakdown": "{B4-D4}",
+                    "Measure Type": "Count",
+                    "Unit": "Person"
+                }
+            },
+            "Table 12a": {
+                "name": "Table 12a",
+                "title": "Table 12a: Key workers and non-key workers working from home",
+                "columns": {
+                    "Period": "A2",
+                    "ONS Geography Code": "E92000001",
+                    "Workforce Category": "{A6-A7}",
+                    "Workforce Breakdown": "{B4-D4}",
+                    "Measure Type": "Count",
+                    "Unit": "Person"
+                }
+            },
+            "Table 12b": {
+                "name": "Table 12b",
+                "title": "Table 12b: Key workers working from home and occupation groups",
+                "columns": {
+                    "Period": "A2",
+                    "ONS Geography Code": "E92000001",
+                    "Workforce Category": "{A6-A13}",
+                    "Workforce Breakdown": "{B4-D4}",
+                    "Measure Type": "Count",
+                    "Unit": "Person"
+                }
+            },
+            "Table 14a": {
+                "name": "Table 14a",
+                "title": "Table 14a: Key workers and non-key workers travel to work method",
+                "columns": {
+                    "Period": "A2",
+                    "ONS Geography Code": "E92000001",
+                    "Workforce Category": "{A6-A7}",
+                    "Workforce Breakdown": "{B4-R4}",
+                    "Measure Type": "Count",
+                    "Unit": "Person"
+                }
+            },
+            "Table 14a (2)": {
+                "name": "Table 14a (2)",
+                "title": "Table 14a: Key workers and non-key workers summary of travel to work method",
+                "columns": {
+                    "Period": "A2",
+                    "ONS Geography Code": "E92000001",
+                    "Workforce Category": "{A6-A7}",
+                    "Workforce Breakdown": "{B4-F4}",
+                    "Measure Type": "Count",
+                    "Unit": "Person"
+                }
+            },
+            "Table 14b": {
+                "name": "Table 14b",
+                "title": "Table 14b: Key workers travel to work method by occupation groups",
+                "columns": {
+                    "Period": "A2",
+                    "ONS Geography Code": "E92000001",
+                    "Workforce Category": "{A6-A13}",
+                    "Workforce Breakdown": "{B4-R4}",
+                    "Measure Type": "Count",
+                    "Unit": "Person"
+                }
+            },
+            "Table 14b (2)": {
+                "name": "Table 14b (2)",
+                "title": "Table 14b: Key workers summary of travel to work method by occupation groups",
+                "columns": {
+                    "Period": "A2",
+                    "ONS Geography Code": "E92000001",
+                    "Workforce Category": "{A6-A13}",
+                    "Workforce Breakdown": "{B4-F4}",
+                    "Measure Type": "Count",
+                    "Unit": "Person"
+                }
+            },
+            "Table 16a": {
+                "name": "Table 16a",
+                "title": "Table 16a: Key workers and non-key workers by highest qualification",
+                "columns": {
+                    "Period": "A2",
+                    "ONS Geography Code": "E92000001",
+                    "Workforce Category": "{A6-A7}",
+                    "Workforce Breakdown": "{B4-N4}",
+                    "Measure Type": "Count",
+                    "Unit": "Person"
+                }
+            },
+            "Table 16b": {
+                "name": "Table 16b",
+                "title": "Table 16b: Key workers by highest qualification and occupation groups",
+                "columns": {
+                    "Period": "A2",
+                    "ONS Geography Code": "E92000001",
+                    "Workforce Category": "{A6-A13}",
+                    "Workforce Breakdown": "{B4-N4}",
+                    "Measure Type": "Count",
+                    "Unit": "Person"
+                }
+            },
+            "Table 17": {
+                "name": "Table 17",
+                "title": "Table 17: Key workers by region and occupation groups",
+                "columns": {
+                    "Period": "A2",
+                    "ONS Geography Code": "{B4-Z4}",
+                    "Workforce Category": "{A6-A14}",
+                    "Workforce Breakdown": "Key Workers",
+                    "Measure Type": "Count",
+                    "Unit": "Person"
+                }
+            },
+            "Table 18": {
+                "name": "Table 18",
+                "title": "Table 18: Key workers by city region and occupation groups",
+                "columns": {
+                    "Period": "A2",
+                    "ONS Geography Code": "{A6-A20}",
+                    "Workforce Category": "{B4-R4}",
+                    "Workforce Breakdown": "Key Workers",
+                    "Measure Type": "Count",
+                    "Unit": "Person"
+                }
+            },
+            "Table 19": {
+                "name": "Table 19",
+                "title": "Table 19: Key workers by local authority and occupation groups",
+                "columns": {
+                    "Period": "A2",
+                    "ONS Geography Code": "{A6-A383}",
+                    "Workforce Category": "{B4-B4}",
+                    "Workforce Breakdown": "Key Workers",
+                    "Measure Type": "Count",
+                    "Unit": "Person"
+                }
+            }
+        }
+    },
+    "sizingNotes": "Multiple tabs with simple structures and multiple dimensions. Multiple footnotes in tabs.",
+    "notes": "",
+    "datasetNotes": [
+        "Dataset is on landing page under heading \"Your download option\"."
+    ]
+}

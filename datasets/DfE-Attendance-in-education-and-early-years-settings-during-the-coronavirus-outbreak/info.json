@@ -1,0 +1,22 @@
+{
+    "title": "Attendance in education and early years settings during the coronavirus outbreak",
+    "publisher": "Department for Education",
+    "description": "A summary of attendance in education settings up to 11 June 2020. From 23 June this information is published as official statistics.",
+    "landingPage": "https://www.gov.uk/government/publications/coronavirus-covid-19-attendance-in-education-and-early-years-settings#history",
+    "datasetNotes": [
+        "On the landing page under Documents "
+    ],
+    "published": "2020-06-23",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": "XLS, ODS",
+        "stage": "Not Required"
+    },
+    "transform": {
+        "airtable": "rec9LT4DKST21mmWG"
+    },
+    "sizingNotes": "Simple table structure with footnotes.  each table is a different shape.",
+    "notes": "Duplicate"
+}

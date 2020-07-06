@@ -1,0 +1,25 @@
+{
+    "title": "Coronavirus grant funding: local authority payments to small and medium businesses",
+    "publisher": "HM Treasury",
+    "description": "A simple CSV",
+    "landingPage": "https://www.gov.uk/government/publications/coronavirus-grant-funding-local-authority-payments-to-small-and-medium-businesses#history",
+    "datasetNotes": [
+        "On the landing page under documents "
+    ],
+    "published": "2020-06-30",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": "CSV",
+        "stage": "Documented"
+    },
+    "transform": {
+        "stage": [
+            "To Do"
+        ],
+        "airtable": "recBybrpv86Tncokm"
+    },
+    "sizingNotes": "CSV",
+    "notes": ""
+}

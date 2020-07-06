@@ -1,0 +1,26 @@
+{
+    "title": "Coronavirus and shielding of clinically extremely vulnerable people in England",
+    "publisher": "Office for National Statistics",
+    "description": "Data on clinically extremely vulnerable people in England during the coronavirus (COVID-19) pandemic from the Shielding Behavioural Survey. Includes information on their behaviours and well-being since receiving shielding guidance.",
+    "landingPage": "https://www.ons.gov.uk/peoplepopulationandcommunity/healthandsocialcare/conditionsanddiseases/datasets/coronavirusandshieldingofclinicallyextremelyvulnerablepeopleinengland",
+    "datasetNotes": [
+        "On the landing page under your download option"
+    ],
+    "published": "2020-06-15",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": "XLS",
+        "stage": "Documented"
+    },
+    "transform": {
+        "stage": [
+            "To Do",
+            "Priority"
+        ],
+        "airtable": "rec0c1GSt0tASWpdY"
+    },
+    "sizingNotes": "A large number of simple tables with foot notes , each tab has a different structure.",
+    "notes": ""
+}

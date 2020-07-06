@@ -1,0 +1,25 @@
+{
+    "title": "Self-Employment Income Support Scheme statistics",
+    "publisher": "HM Treasury",
+    "description": "The tables in this publication show the number of individuals claiming the Self-Employment Income Support Scheme grant by 31 May 2020, and the value of these claims.",
+    "landingPage": "https://www.gov.uk/government/statistics/self-employment-income-support-scheme-statistics-june-2020",
+    "datasetNotes": [
+        "On the landing page under documents "
+    ],
+    "published": "2020-06-11",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": "XLS",
+        "stage": "Documented"
+    },
+    "transform": {
+        "stage": [
+            "To Do"
+        ],
+        "airtable": "recdvJMib6eWXPMTg"
+    },
+    "sizingNotes": "Simple table structure with footnotes",
+    "notes": ""
+}

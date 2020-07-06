@@ -1,0 +1,22 @@
+{
+    "title": "Personal Social Services: Staff of Social Services Departments, England",
+    "publisher": "NHS Digital",
+    "description": "This report contains information on 112,200 jobs for people employed (directly and indirectly) by local authority adult social services departments in England",
+    "landingPage": "https://digital.nhs.uk/data-and-information/publications/statistical/personal-social-services-staff-of-social-services-departments",
+    "datasetNotes": [
+        "Data can be found on the landing page by clicking on the link under latest version.  2 x XLS Spreadsheets and 1 CSV file can be found under Resources"
+    ],
+    "published": "2019-02-28",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": "XLS, CSV",
+        "stage": "Candidate"
+    },
+    "transform": {
+        "airtable": "recq6TE1eW17Rjkbx"
+    },
+    "sizingNotes": "A large number of complex tables which will require some thought about dimensions.  The dataset may be better suited to the labour market family.",
+    "notes": "This data set is concerned with the employment of people employed by LA socal services departments in England and may therefore sit better within the labour market family."
+}

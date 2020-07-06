@@ -1,0 +1,18 @@
+{
+    "title": "Impact of coronavirus in Care Homes in England (Vivaldi)",
+    "publisher": "Office for National Statistics",
+    "description": "",
+    "published": "2020-07-03",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": "",
+        "stage": "Not Required"
+    },
+    "transform": {
+        "airtable": "recCWBdG84l76IzXR"
+    },
+    "sizingNotes": "",
+    "notes": "This is a publication only"
+}

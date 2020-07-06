@@ -18,7 +18,8 @@
         "stage": [
             "To Do"
         ],
-        "airtable": "recxMqNScHDGaeZvX"
+        "airtable": "recxMqNScHDGaeZvX",
+        "main_issue": 165
     },
     "sizingNotes": "A number of simple tables with footnotes each table is a different format",
     "notes": "The publication is one of a series, with each publication giving detailed information for a single month, and summary time series information"

@@ -18,7 +18,8 @@
         "stage": [
             "To Do"
         ],
-        "airtable": "rechXVrL8qTeluvku"
+        "airtable": "rechXVrL8qTeluvku",
+        "main_issue": 162
     },
     "sizingNotes": "7 XLS spreadsheets with simple table structure and footnotes.  tables have different structures however it may be possible to combine some if not all of the spreadsheets into one dataset?",
     "notes": ""

@@ -19,7 +19,8 @@
             "To Do",
             "Priority"
         ],
-        "airtable": "reccOOaD5Ik6HUbv2"
+        "airtable": "reccOOaD5Ik6HUbv2",
+        "main_issue": 160
     },
     "sizingNotes": "Simple Table which is embedded in the page it may be possible to contact the producer to obtain in a different format.",
     "notes": "When this is due for transformation BAs will contact the producer to see if the data is available in a better format than the embedded tables."

@@ -1,3 +1,4 @@
+<!-- #region -->
 # COGS Dataset Specification
 
 [Family Home](https://gss-cogs.github.io/family-covid-19/datasets/specmenu.html)
@@ -12,21 +13,19 @@
 
 ----------### Stage 1. Transform
 
-#### Sheet: 1
+#### Sheet: Vacancies
 
-		spec
-
-#### Table Structure
-
-		Period, Measure Type, Unit, Marker, Value
-
-#### Sheet: 2
-
-		spec
+        B12:CA12 - Date
+        A13:A42 - Industry 
+        A43:CA43 - Marker (Inputed Values row across relates to the following note: "Furthermore some weeks have no observation. The missing  values have been imputed using linear interpolation, and have been highlighted." Format as required)
+        Add Measure Type Column with value: Adverts
+        Add Unit column with value: Count
 
 #### Table Structure
 
-		Period, Measure Type, Unit, Marker, Value
+		Date, Industry, Value, Marker, Measure Type, Unit
+
+
 
 -------------### Stage 2. Harmonise
 
@@ -54,3 +53,4 @@
 
 		notes
 
+<!-- #endregion -->

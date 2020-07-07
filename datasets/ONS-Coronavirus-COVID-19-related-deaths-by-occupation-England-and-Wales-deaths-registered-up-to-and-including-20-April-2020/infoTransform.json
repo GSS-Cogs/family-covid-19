@@ -1,0 +1,437 @@
+{
+    "title": "Coronavirus (COVID-19) related deaths by occupation, England and Wales: deaths registered up to and including 20 April 2020",
+    "publisher": "Office for National Statistics",
+    "description": "Provisional analysis of deaths involving the coronavirus (COVID-19), by different occupational groups, among males and females aged 20 to 64 years in England and Wales.",
+    "landingPage": "https://www.ons.gov.uk/peoplepopulationandcommunity/healthandsocialcare/causesofdeath/datasets/coronaviruscovid19relateddeathsbyoccupationenglandandwales",
+    "published": "2020-05-11",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": "XLS",
+        "stage": "Documented"
+    },
+    "transform": {
+        "airtable": "rec8PJIJOLGsCmBz2",
+        "main_issue": 17,
+        "stage": [
+            "To Do",
+            "Priority"
+        ],
+        "transformStage": {
+            "Table 1": {
+                "name": "Table 1",
+                "title": "Table 1: Deaths involving COVID-19 and all causes by sex (those aged 20 to 64 years)",
+                "columns": {
+                    "Period": "9th March and 25th May 2020.",
+                    "ONS Geography Code": "england and wales",
+                    "Sex": "{C3-H3}",
+                    "Occupation": "all",
+                    "Standard Occupation Classification": "all",
+                    "Cause of Death": "{B6-B8}",
+                    "Rate": "{D6-I8}",
+                    "Lower CI": "{E6-J8}",
+                    "Upper CI": "{F6-K8}",
+                    "Measure Type": "Count",
+                    "Unit": "Person"
+                }
+            },
+            "Table 3": {
+                "name": "Table 3",
+                "title": "Table 3: Deaths involving COVID-19 and all causes among major occupation groups by sex (those aged 20 to 64 years)",
+                "columns": {
+                    "Period": "9th March and 25th May 2020.",
+                    "ONS Geography Code": "england and wales",
+                    "Sex": "{E5-T5}",
+                    "Age": "{E5-T5}",
+                    "Occupation": "{C9-C17}",
+                    "Standard Occupation Classification": "{B9-B17}",
+                    "Cause of Death": "{E6-AD6}",
+                    "Rate": "{F9-AE17}",
+                    "Lower CI": "{G9-AF17}",
+                    "Upper CI": "{H9-AG17}",
+                    "Measure Type": "Count",
+                    "Unit": "Person"
+                }
+            },
+            "Table 4": {
+                "name": "Table 4",
+                "title": "Table 4: Deaths involving COVID-19 and all causes among sub-major occupation groups by sex (those aged 20 to 64 years)",
+                "columns": {
+                    "Period": "9th March and 25th May 2020.",
+                    "ONS Geography Code": "england and wales",
+                    "Sex": "{E5-W5}",
+                    "Age": "{E5-W5}",
+                    "Occupation": "{C9-C33}",
+                    "Standard Occupation Classification": "{B9-B33}",
+                    "Cause of Death": "{E6-AI6}",
+                    "Rate": "{F9-AJ33}",
+                    "Lower CI": "{G9-AK33}",
+                    "Upper CI": "{H9-AL33}",
+                    "Measure Type": "Count",
+                    "Unit": "Person"
+                }
+            },
+            "Table 5": {
+                "name": "Table 5",
+                "title": "Table 5: Deaths involving COVID-19 and all causes among minor occupation groups by sex (those aged 20 to 64 years)",
+                "columns": {
+                    "Period": "9th March and 25th May 2020.",
+                    "ONS Geography Code": "england and wales",
+                    "Sex": "{E22-W22}",
+                    "Age": "{E22-W22}",
+                    "Occupation": "{C24-C115}",
+                    "Standard Occupation Classification": "{B24-B115}",
+                    "Cause of Death": "{E23-AI23}",
+                    "Rate": "{F26-AJ115}",
+                    "Lower CI": "{G26-AK115}",
+                    "Upper CI": "{H26-AL115}",
+                    "Measure Type": "Count",
+                    "Unit": "Person"
+                }
+            },
+            "Table 6a": {
+                "name": "Table 6a",
+                "title": "Table 6a: Deaths involving COVID-19 and all causes among selected individual occupations",
+                "columns": {
+                    "Period": "9th March and 25th May 2020.",
+                    "ONS Geography Code": "england and wales",
+                    "Sex": "{E25-E25}",
+                    "Age": "{E25-E25}",
+                    "Occupation": "{C27-C132}",
+                    "Standard Occupation Classification": "{B27-B132}",
+                    "Cause of Death": "{E26-Q26}",
+                    "Rate": "{F29-R132}",
+                    "Lower CI": "{G29-S132}",
+                    "Upper CI": "{H29-T132}",
+                    "Measure Type": "Count",
+                    "Unit": "Person"
+                }
+            },
+            "Table 6b": {
+                "name": "Table 6b",
+                "title": "Table 6b: Deaths involving COVID-19 and all causes among selected individual occupations",
+                "columns": {
+                    "Period": "9th March and 25th May 2020.",
+                    "ONS Geography Code": "england and wales",
+                    "Sex": "{E7-E7}",
+                    "Age": "{E7-E7}",
+                    "Occupation": "{C11-C33}",
+                    "Standard Occupation Classification": "{B11-B33}",
+                    "Cause of Death": "{E8-Q8}",
+                    "Rate": "{F11-R33}",
+                    "Lower CI": "{G11-S33}",
+                    "Upper CI": "{H11-T33}",
+                    "Measure Type": "Count",
+                    "Unit": "Person"
+                }
+            },
+            "Table 7": {
+                "name": "Table 7",
+                "title": "Table 7: Deaths involving COVID-19 among health and social care workers (those aged 20 to 64 years)",
+                "columns": {
+                    "Period": "9th March and 25th May 2020.",
+                    "ONS Geography Code": "england and wales",
+                    "Sex": "{C5-R5}",
+                    "Age": "{C5-R5}",
+                    "Occupation": "{B9-B11}",
+                    "Standard Occupation Classification": null,
+                    "Cause of Death": "{C6-AB6}",
+                    "Rate": "{D9-AC11}",
+                    "Lower CI": "{E9-AD11}",
+                    "Upper CI": "{F9-AE11}",
+                    "Measure Type": "Count",
+                    "Unit": "Person"
+                }
+            },
+            "Table 8": {
+                "name": "Table 8",
+                "title": "Table 8: Number of deaths involving COVID-19 and all causes by individual occupations and sex (those aged 20 to 64 years)",
+                "columns": {
+                    "Period": "9th March and 25th May 2020.",
+                    "ONS Geography Code": "england and wales",
+                    "Sex": "{E19-I19}",
+                    "Age": "{E19-I19}",
+                    "Occupation": "{C22-C390}",
+                    "Standard Occupation Classification": "{B22-B390}",
+                    "Cause of Death": "{E20-K20}",
+                    "Rate": null,
+                    "Lower CI": null,
+                    "Upper CI": null,
+                    "Measure Type": "Count",
+                    "Unit": "Person"
+                }
+            },
+            "Table 9": {
+                "name": "Table 9",
+                "title": "Table 9: Number of deaths involving COVID-19 and all causes by individual occupations and sex (those aged 65 years and over)",
+                "columns": {
+                    "Period": "9th March and 25th May 2020.",
+                    "ONS Geography Code": "england and wales",
+                    "Sex": "{E19-I19}",
+                    "Age": "{E19-I19}",
+                    "Occupation": "{C22-C390}",
+                    "Standard Occupation Classification": "{B22-B390}",
+                    "Cause of Death": "{E20-K20}",
+                    "Rate": null,
+                    "Lower CI": null,
+                    "Upper CI": null,
+                    "Measure Type": "Count",
+                    "Unit": "Person"
+                }
+            },
+            "Table 10": {
+                "name": "Table 10",
+                "title": "Table 10: Proportion of working men (those aged 20 to 64 years) in specific occupations by self-reported broad ethnic group",
+                "columns": {
+                    "Period": "2019",
+                    "ONS Geography Code": "england and wales",
+                    "Age": "20 - 64",
+                    "Sex": "Men",
+                    "Ethnicity": "{D7-AB7}",
+                    "Occupation": "{C9-C27}",
+                    "Standard Occupation Classification": "{B9-B27}",
+                    "Lower CI": "{E9-AC27}",
+                    "Upper CI": "{F9-AD27}",
+                    "Measure Type": "Percentage",
+                    "Unit": "Percent"
+                }
+            },
+            "Table 11": {
+                "name": "Table 11",
+                "title": "Table 11: Proportion of working women (those aged 20 to 64 years) in specific occupations by self-reported broad ethnic group",
+                "columns": {
+                    "Period": "2019",
+                    "ONS Geography Code": "england and wales",
+                    "Age": "20 - 64",
+                    "Sex": "Women",
+                    "Ethnicity": "{D6-AB6}",
+                    "Occupation": "{C8-C13}",
+                    "Standard Occupation Classification": "{B8-B13}",
+                    "Lower CI": "{E8-AC13}",
+                    "Upper CI": "{F8-AD13}",
+                    "Measure Type": "Percentage",
+                    "Unit": "Percent"
+                }
+            },
+            "Table 12": {
+                "name": "Table 12",
+                "title": "Table 12: Proportion of health and social care workers (those aged 20 to 64 years) by self-reported broad ethnic group",
+                "columns": {
+                    "Period": "2019",
+                    "ONS Geography Code": "england and wales",
+                    "Age": "20 - 64",
+                    "Sex": "{B7-B13}",
+                    "Ethnicity": "{D5-AB5}",
+                    "Occupation": "{C8-C17}",
+                    "Standard Occupation Classification": null,
+                    "Lower CI": "{E8-AC17}",
+                    "Upper CI": "{F8-AD17}",
+                    "Measure Type": "Percentage",
+                    "Unit": "Percent"
+                }
+            },
+            "Table 13": {
+                "name": "Table 13",
+                "title": "Table 13: Deaths involving COVID-19 among selected individual occupations by sex (those aged 20 to 64 years)",
+                "columns": {
+                    "Period": "9th March and 25th May 2020.",
+                    "ONS Geography Code": "{E5-J5}",
+                    "Sex": "{B7-B12}",
+                    "Age": "20 - 64",
+                    "Occupation": "{D7-D12}",
+                    "Standard Occupation Classification": "{C7-C12}",
+                    "Cause of Death": "Deaths involving COVID-19",
+                    "Rate": "{F7-K12}",
+                    "Lower CI": "{G7-L12}",
+                    "Upper CI": "{H7-M12}",
+                    "Measure Type": "Count",
+                    "Unit": "Person"
+                }
+            },
+            "Table 14": {
+                "name": "Table 14",
+                "title": "Table 14: Deaths involving COVID-19 among health and social care workers (those aged 20 to 64 years)",
+                "columns": {
+                    "Period": "9th March and 25th May 2020.",
+                    "ONS Geography Code": "{C5-R5}",
+                    "Sex": "{C4-M4}",
+                    "Age": "20 - 64",
+                    "Occupation": "{B8-B10}",
+                    "Standard Occupation Classification": null,
+                    "Cause of Death": "Deaths involving COVID-19",
+                    "Rate": "{D8-S10}",
+                    "Lower CI": "{E8-T10}",
+                    "Upper CI": "{F8-U10}",
+                    "Measure Type": "Count",
+                    "Unit": "Person"
+                }
+            },
+            "Table 15": {
+                "name": "Table 15",
+                "title": "Table 15: Deaths involving COVID-19 and all causes by sex (those aged 20 to 64 years)",
+                "columns": {
+                    "Period": "9th March and 25th May 2020.",
+                    "ONS Geography Code": "england",
+                    "Sex": "{C4-H4}",
+                    "Occupation": "all",
+                    "Standard Occupation Classification": "all",
+                    "Cause of Death": "{B7-B9}",
+                    "Rate": "{D7-I9}",
+                    "Lower CI": "{E7-J9}",
+                    "Upper CI": "{F7-K9}",
+                    "Measure Type": "Count",
+                    "Unit": "Person"
+                }
+            },
+            "Table 16": {
+                "name": "Table 16",
+                "title": "Table 16: Deaths involving COVID-19 and all causes among major occupation groups by sex (those aged 20 to 64 years)",
+                "columns": {
+                    "Period": "9th March and 25th May 2020.",
+                    "ONS Geography Code": "england",
+                    "Sex": "{E5-T5}",
+                    "Age": "{E5-T5}",
+                    "Occupation": "{C9-C17}",
+                    "Standard Occupation Classification": "{B9-B17}",
+                    "Cause of Death": "{E6-AD6}",
+                    "Rate": "{F9-AE17}",
+                    "Lower CI": "{G9-AF17}",
+                    "Upper CI": "{H9-AG17}",
+                    "Measure Type": "Count",
+                    "Unit": "Person"
+                }
+            },
+            "Table 17": {
+                "name": "Table 17",
+                "title": "Table 17: Deaths involving COVID-19 and all causes among sub-major occupation groups by sex (those aged 20 to 64 years)",
+                "columns": {
+                    "Period": "9th March and 25th May 2020.",
+                    "ONS Geography Code": "england",
+                    "Sex": "{E5-T5}",
+                    "Age": "{E5-T5}",
+                    "Occupation": "{C9-C33}",
+                    "Standard Occupation Classification": "{B9-B33}",
+                    "Cause of Death": "{E6-AD6}",
+                    "Rate": "{F9-AE33}",
+                    "Lower CI": "{G9-AF33}",
+                    "Upper CI": "{H9-AG33}",
+                    "Measure Type": "Count",
+                    "Unit": "Person"
+                }
+            },
+            "Table 18": {
+                "name": "Table 18",
+                "title": "Table 18: Deaths involving COVID-19 and all causes among minor occupation groups by sex (those aged 20 to 64 years)",
+                "columns": {
+                    "Period": "9th March and 25th May 2020.",
+                    "ONS Geography Code": "england and wales",
+                    "Sex": "{E22-T22}",
+                    "Age": "{E22-T22}",
+                    "Occupation": "{C24-C115}",
+                    "Standard Occupation Classification": "{B24-B115}",
+                    "Cause of Death": "{E23-AD23}",
+                    "Rate": "{F26-AE115}",
+                    "Lower CI": "{G26-AF115}",
+                    "Upper CI": "{H26-AG115}",
+                    "Measure Type": "Count",
+                    "Unit": "Person"
+                }
+            },
+            "Table 19": {
+                "name": "Table 19",
+                "title": "Table 19: Deaths involving COVID-19 among health and social care workers (those aged 20 to 64 years)",
+                "columns": {
+                    "Period": "9th March and 25th May 2020.",
+                    "ONS Geography Code": "england and wales",
+                    "Sex": "{C5-R5}",
+                    "Age": "{C5-R5}",
+                    "Occupation": "{B9-B11}",
+                    "Standard Occupation Classification": null,
+                    "Cause of Death": "{C6-AB6}",
+                    "Rate": "{D9-AC11}",
+                    "Lower CI": "{E9-AD11}",
+                    "Upper CI": "{F9-AE11}",
+                    "Measure Type": "Count",
+                    "Unit": "Person"
+                }
+            },
+            "Table 20": {
+                "name": "Table 20",
+                "title": "Table 20: Number of deaths involving COVID-19 and all causes by individual occupations and sex (those aged 20 to 64 years)",
+                "columns": {
+                    "Period": "9th March and 25th May 2020.",
+                    "ONS Geography Code": "england and wales",
+                    "Sex": "{E17-I17}",
+                    "Age": "{E17-I17}",
+                    "Occupation": "{C19-C387}",
+                    "Standard Occupation Classification": "{B19-B387}",
+                    "Cause of Death": "{E18-K18}",
+                    "Rate": null,
+                    "Lower CI": null,
+                    "Upper CI": null,
+                    "Measure Type": "Count",
+                    "Unit": "Person"
+                }
+            },
+            "Table 22": {
+                "name": "Table 22",
+                "title": "Table 22: Deaths involving COVID-19 and all causes by sex (those aged 20 to 64 years)",
+                "columns": {
+                    "Period": "9th March and 25th May 2020.",
+                    "ONS Geography Code": "wales",
+                    "Sex": "{C4-H4}",
+                    "Occupation": "all",
+                    "Standard Occupation Classification": "all",
+                    "Cause of Death": "{B7-B9}",
+                    "Rate": "{D7-I9}",
+                    "Lower CI": "{E7-J9}",
+                    "Upper CI": "{F7-K9}",
+                    "Measure Type": "Count",
+                    "Unit": "Person"
+                }
+            },
+            "Table 23": {
+                "name": "Table 23",
+                "title": "Table 23: Deaths involving COVID-19 and all causes among major occupation groups by sex (those aged 20 to 64 years)",
+                "columns": {
+                    "Period": "9th March and 25th May 2020.",
+                    "ONS Geography Code": "england and wales",
+                    "Sex": "{E5-T5}",
+                    "Age": "{E5-T5}",
+                    "Occupation": "{C9-C17}",
+                    "Standard Occupation Classification": "{B9-B17}",
+                    "Cause of Death": "{E6-AD6}",
+                    "Rate": "{F9-AE17}",
+                    "Lower CI": "{G9-AF17}",
+                    "Upper CI": "{H9-AG17}",
+                    "Measure Type": "Count",
+                    "Unit": "Person"
+                }
+            },
+            "Table 24": {
+                "name": "Table 24",
+                "title": "Table 24: Deaths involving COVID-19 among health and social care workers (those aged 20 to 64 years)",
+                "columns": {
+                    "Period": "9th March and 25th May 2020.",
+                    "ONS Geography Code": "england and wales",
+                    "Sex": "{C5-R5}",
+                    "Age": "{C5-R5}",
+                    "Occupation": "{B9-B11}",
+                    "Standard Occupation Classification": null,
+                    "Cause of Death": "{C6-AB6}",
+                    "Rate": "{D9-AC11}",
+                    "Lower CI": "{E9-AD11}",
+                    "Upper CI": "{F9-AE11}",
+                    "Measure Type": "Count",
+                    "Unit": "Person"
+                }
+            }
+        }
+    },
+    "sizingNotes": "Simple table structures with multiple dimensions & sub-dimensions. Multiple footnotes add to complexity.",
+    "notes": "",
+    "datasetNotes": [
+        "On landing page dataset at bottom of page under heading \"Current\"."
+    ]
+}

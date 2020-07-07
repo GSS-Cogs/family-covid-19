@@ -15,7 +15,8 @@
         "stage": "Not Required"
     },
     "transform": {
-        "airtable": "rec9LT4DKST21mmWG"
+        "airtable": "rec9LT4DKST21mmWG",
+        "main_issue": 152
     },
     "sizingNotes": "Simple table structure with footnotes.  each table is a different shape.",
     "notes": "Duplicate"

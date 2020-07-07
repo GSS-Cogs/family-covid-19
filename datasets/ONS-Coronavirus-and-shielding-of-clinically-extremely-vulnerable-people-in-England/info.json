@@ -19,7 +19,8 @@
             "To Do",
             "Priority"
         ],
-        "airtable": "rec0c1GSt0tASWpdY"
+        "airtable": "rec0c1GSt0tASWpdY",
+        "main_issue": 150
     },
     "sizingNotes": "A large number of simple tables with foot notes , each tab has a different structure.",
     "notes": ""

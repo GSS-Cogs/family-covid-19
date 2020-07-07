@@ -12,7 +12,8 @@
         "stage": "Not Required"
     },
     "transform": {
-        "airtable": "recG5n0gwcm8BSuyH"
+        "airtable": "recG5n0gwcm8BSuyH",
+        "main_issue": 155
     },
     "sizingNotes": "",
     "notes": "This is a publication with data included in graphs embedded in the landing page, the data is derived from datasets from other organisations and these have been included instead where they are relevant i.e. Monthly property transactions completed in the UK with value of \u00a340,000 or above from HMRC"

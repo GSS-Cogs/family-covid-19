@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[133]:
+# In[54]:
 
 
 # # ONS Coronavirus  COVID-19  related deaths by occupation, England and Wales  deaths registered up to and including 20 April 2020 
@@ -76,26 +76,27 @@ def decimal(s):
     except ValueError:
         return False
 
+
 info = json.load(open('info.json')) 
 landingPage = info['landingPage'] 
 landingPage 
 
 
-# In[134]:
+# In[55]:
 
 
 scraper = Scraper(landingPage) 
 scraper
 
 
-# In[135]:
+# In[56]:
 
 
 distribution = scraper.distributions[0]
 display(distribution)
 
 
-# In[136]:
+# In[57]:
 
 
 trace = TransformTrace()
@@ -175,17 +176,11 @@ for tab in tabs:
 
         title = cellCont(str(tab.excel_ref('B1'))).split(',')[0]
         
-        columnInfo = {'Period' : trace.Period.var,
-                      'ONS Geography Code' : trace.ONS_Geography_Code.var,
-                      'Sex' : trace.Sex.var,
-                      'Occupation' : trace.Occupation.var,
-                      'Standard Occupation Classification' : trace.Standard_Occupation_Classification.var,
-                      'Cause of Death' : trace.Cause_of_Death.var,
-                      'Rate' : trace.Rate.var,
-                      'Lower CI' : trace.Lower_CI.var,
-                      'Upper CI' : trace.Upper_CI.var,
-                      'Measure Type' : trace.Measure_Type.var,
-                      'Unit' : trace.Unit.var}
+        columnInfo = {}
+
+        for i in columns:
+            underI = i.replace(' ', '_')
+            columnInfo[i] = getattr(getattr(trace, underI), 'var')
 
         dicti = {'name' : tab.name, 
                  'title' : title, 
@@ -315,18 +310,12 @@ for tab in tabs:
         trace.Unit('Hardcoded as:', var = unit)
 
         title = cellCont(str(tab.excel_ref('B1'))).split(',')[0]
-        
-        columnInfo = {'Period' : trace.Period.var,
-                      'ONS Geography Code' : trace.ONS_Geography_Code.var,
-                      'Sex' : trace.Sex.var,
-                      'Occupation' : trace.Occupation.var,
-                      'Standard Occupation Classification' : trace.Standard_Occupation_Classification.var,
-                      'Cause of Death' : trace.Cause_of_Death.var,
-                      'Rate' : trace.Rate.var,
-                      'Lower CI' : trace.Lower_CI.var,
-                      'Upper CI' : trace.Upper_CI.var,
-                      'Measure Type' : trace.Measure_Type.var,
-                      'Unit' : trace.Unit.var}
+
+        columnInfo = {}
+
+        for i in columns:
+            underI = i.replace(' ', '_')
+            columnInfo[i] = getattr(getattr(trace, underI), 'var')
 
         dicti = {'name' : tab.name, 
                  'title' : title, 
@@ -459,17 +448,11 @@ for tab in tabs:
 
         title = cellCont(str(tab.excel_ref('B1'))).split(',')[0]
         
-        columnInfo = {'Period' : trace.Period.var,
-                      'ONS Geography Code' : trace.ONS_Geography_Code.var,
-                      'Sex' : trace.Sex.var,
-                      'Occupation' : trace.Occupation.var,
-                      'Standard Occupation Classification' : trace.Standard_Occupation_Classification.var,
-                      'Cause of Death' : trace.Cause_of_Death.var,
-                      'Rate' : trace.Rate.var,
-                      'Lower CI' : trace.Lower_CI.var,
-                      'Upper CI' : trace.Upper_CI.var,
-                      'Measure Type' : trace.Measure_Type.var,
-                      'Unit' : trace.Unit.var}
+        columnInfo = {}
+
+        for i in columns:
+            underI = i.replace(' ', '_')
+            columnInfo[i] = getattr(getattr(trace, underI), 'var')
 
         dicti = {'name' : tab.name, 
                  'title' : title, 
@@ -579,16 +562,11 @@ for tab in tabs:
 
         title = cellCont(str(tab.excel_ref('B1'))).split(',')[0]
         
-        columnInfo = {'Period' : trace.Period.var,
-                      'ONS Geography Code' : trace.ONS_Geography_Code.var,
-                      'Sex' : trace.Sex.var,
-                      'Occupation' : trace.Occupation.var,
-                      'Standard Occupation Classification' : trace.Standard_Occupation_Classification.var,
-                      'Ethnicity' : trace.Ethnicity.var,
-                      'Lower CI' : trace.Lower_CI.var,
-                      'Upper CI' : trace.Upper_CI.var,
-                      'Measure Type' : trace.Measure_Type.var,
-                      'Unit' : trace.Unit.var}
+        columnInfo = {}
+
+        for i in columns:
+            underI = i.replace(' ', '_')
+            columnInfo[i] = getattr(getattr(trace, underI), 'var')
 
         dicti = {'name' : tab.name, 
                  'title' : title, 
@@ -636,7 +614,7 @@ for tab in tabs:
         continue
 
 
-# In[137]:
+# In[58]:
 
 
 pd.set_option('display.float_format', lambda x: '%.0f' % x)
@@ -662,7 +640,7 @@ df = df[['Period','ONS Geography Code','Sex','Age', 'Occupation', 'Standard Occu
 df
 
 
-# In[138]:
+# In[59]:
 
 
 ethDf = trace.combine_and_trace(smallDatasetTitle, "occupationByEthnicity").fillna('')
@@ -682,7 +660,7 @@ ethDf = ethDf[['Period','ONS Geography Code','Sex','Age', 'Occupation', 'Standar
 ethDf
 
 
-# In[139]:
+# In[60]:
 
 
 notes = """
@@ -694,7 +672,7 @@ Analysis is not provided when numbers of deaths are below 10 and have been marke
 """
 
 
-# In[140]:
+# In[61]:
 
 
 from IPython.core.display import HTML
@@ -705,7 +683,7 @@ for col in df:
         display(df[col].cat.categories)
 
 
-# In[141]:
+# In[62]:
 
 
 from IPython.core.display import HTML
@@ -716,7 +694,7 @@ for col in ethDf:
         display(ethDf[col].cat.categories)
 
 
-# In[142]:
+# In[63]:
 
 
 for column in df:
@@ -724,7 +702,7 @@ for column in df:
         df[column] = df[column].map(lambda x: pathify(x))
 
 
-# In[143]:
+# In[64]:
 
 
 for column in ethDf:
@@ -732,7 +710,7 @@ for column in ethDf:
         ethDf[column] = ethDf[column].map(lambda x: pathify(x))
 
 
-# In[144]:
+# In[65]:
 
 
 out = Path('out')

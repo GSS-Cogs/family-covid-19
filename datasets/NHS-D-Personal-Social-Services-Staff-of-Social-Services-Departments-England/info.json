@@ -15,7 +15,8 @@
         "stage": "Candidate"
     },
     "transform": {
-        "airtable": "recq6TE1eW17Rjkbx"
+        "airtable": "recq6TE1eW17Rjkbx",
+        "main_issue": 163
     },
     "sizingNotes": "A large number of complex tables which will require some thought about dimensions.  The dataset may be better suited to the labour market family.",
     "notes": "This data set is concerned with the employment of people employed by LA socal services departments in England and may therefore sit better within the labour market family."

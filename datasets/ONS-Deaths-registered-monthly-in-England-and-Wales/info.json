@@ -19,7 +19,8 @@
             "To Do",
             "Priority"
         ],
-        "airtable": "rec4afd0ckbUA2Wgl"
+        "airtable": "rec4afd0ckbUA2Wgl",
+        "main_issue": 151
     },
     "sizingNotes": "A large number spreadsheets (14) with 1 simple table and footnotes  per spreadsheet. All spreadsheets should be combined to create a time series",
     "notes": ""

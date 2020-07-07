@@ -176,17 +176,11 @@ for tab in tabs:
 
         title = cellCont(str(tab.excel_ref('B1'))).split(',')[0]
         
-        columnInfo = {'Period' : trace.Period.var,
-                      'ONS Geography Code' : trace.ONS_Geography_Code.var,
-                      'Sex' : trace.Sex.var,
-                      'Occupation' : trace.Occupation.var,
-                      'Standard Occupation Classification' : trace.Standard_Occupation_Classification.var,
-                      'Cause of Death' : trace.Cause_of_Death.var,
-                      'Rate' : trace.Rate.var,
-                      'Lower CI' : trace.Lower_CI.var,
-                      'Upper CI' : trace.Upper_CI.var,
-                      'Measure Type' : trace.Measure_Type.var,
-                      'Unit' : trace.Unit.var}
+        columnInfo = {}
+
+        for i in columns:
+            underI = i.replace(' ', '_')
+            columnInfo[i] = getattr(getattr(trace, underI), 'var')
 
         dicti = {'name' : tab.name, 
                  'title' : title, 

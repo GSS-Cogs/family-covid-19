@@ -1,0 +1,26 @@
+{
+    "title": "Vehicle licensing statistics",
+    "publisher": "Department for Transport",
+    "description": "Data on all licensed and registered vehicles, produced by Department for Transport.",
+    "landingPage": "https://www.gov.uk/government/collections/vehicles-statistics",
+    "datasetNotes": [
+        "On the landing page scroll down to 'Latest vehicle licensing statistics' this will open another  page scroll down to documents  and the data can be found in a zip file "
+    ],
+    "published": "2020-06-30",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": "ODS",
+        "stage": "Documented"
+    },
+    "transform": {
+        "stage": [
+            "To Do"
+        ],
+        "airtable": "recGTWhrMItyO4Hi0",
+        "main_issue": 156
+    },
+    "sizingNotes": "24 separate ODS spreadsheets with footnotes, it may be possible t combine into 1 dataset",
+    "notes": "There was a large decrease in new vehicle registrations linked to the measures implemented towards the end of March 2020 to limit the impact of the coronavirus (COVID-19) pandemic."
+}

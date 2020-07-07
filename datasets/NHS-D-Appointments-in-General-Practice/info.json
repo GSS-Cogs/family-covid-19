@@ -1,0 +1,26 @@
+{
+    "title": "Appointments in General Practice",
+    "publisher": "NHS Digital",
+    "description": "The aim of the publication is to inform users about activity and usage of GP appointments historically and how primary care is impacted by seasonal pressures, such as winter.",
+    "landingPage": "https://digital.nhs.uk/data-and-information/publications/statistical/appointments-in-general-practice",
+    "datasetNotes": [
+        "On the landing page scroll to latest version, this will pen another page scroll down to resources select the XLS spreadsheet.  "
+    ],
+    "published": "2020-06-30",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": "XLS",
+        "stage": "Documented"
+    },
+    "transform": {
+        "stage": [
+            "To Do"
+        ],
+        "airtable": "recxMqNScHDGaeZvX",
+        "main_issue": 165
+    },
+    "sizingNotes": "A number of simple tables with footnotes each table is a different format",
+    "notes": "The publication is one of a series, with each publication giving detailed information for a single month, and summary time series information"
+}

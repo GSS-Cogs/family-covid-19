@@ -1,0 +1,27 @@
+{
+    "title": "PPE deliveries statistics (England): weekly reports",
+    "publisher": "Department of Health & Social Care",
+    "description": "Experimental statistics about PPE (personal protective equipment) deliveries and related documents.",
+    "landingPage": "https://www.gov.uk/government/collections/ppe-deliveries-statistics-england-weekly-reports",
+    "datasetNotes": [
+        "On the landing page click on latest report this will open a further page. Scroll to documents and click on the latest link , a  further page will open the data is currently embedded on the page.   "
+    ],
+    "published": "2020-06-30",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": "",
+        "stage": "Documented"
+    },
+    "transform": {
+        "stage": [
+            "To Do",
+            "Priority"
+        ],
+        "airtable": "reccOOaD5Ik6HUbv2",
+        "main_issue": 160
+    },
+    "sizingNotes": "Simple Table which is embedded in the page it may be possible to contact the producer to obtain in a different format.",
+    "notes": "When this is due for transformation BAs will contact the producer to see if the data is available in a better format than the embedded tables."
+}

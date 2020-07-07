@@ -12,11 +12,14 @@
     ],
     "extract": {
         "source": "XLS",
-        "stage": "Candidate"
+        "stage": "Documented"
     },
     "transform": {
         "airtable": "recVWXnukwMsNc84c",
-        "main_issue": 128
+        "main_issue": 128,
+        "stage": [
+            "To Do"
+        ]
     },
     "sizingNotes": "Simple table structure  with footnotes with different formats on each tab and spreadsheet",
     "notes": ""

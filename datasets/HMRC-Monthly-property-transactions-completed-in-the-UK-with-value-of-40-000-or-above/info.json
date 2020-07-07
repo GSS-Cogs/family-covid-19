@@ -1,0 +1,26 @@
+{
+    "title": "Monthly property transactions completed in the UK with value of \u00a340,000 or above",
+    "publisher": "HM Revenue & Customs",
+    "description": "This series looks at monthly property transactions completed in the UK with value of \u00a340,000 or above.",
+    "landingPage": "https://www.gov.uk/government/statistics/monthly-property-transactions-completed-in-the-uk-with-value-40000-or-above",
+    "datasetNotes": [
+        "On the landing page under documents "
+    ],
+    "published": "2020-06-23",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": "XLS",
+        "stage": "Documented"
+    },
+    "transform": {
+        "stage": [
+            "To Do"
+        ],
+        "airtable": "recuMKeLBQyYgS07H",
+        "main_issue": 164
+    },
+    "sizingNotes": "Simple table structure with footnotes",
+    "notes": ""
+}

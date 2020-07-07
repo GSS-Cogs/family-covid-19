@@ -11,11 +11,15 @@
         "COVID-19"
     ],
     "extract": {
-        "source": "XLS"
+        "source": "XLS",
+        "stage": "Documented"
     },
     "transform": {
         "airtable": "recPNFcTgHP5YpLKs",
-        "main_issue": 136
+        "main_issue": 136,
+        "stage": [
+            "To Do"
+        ]
     },
     "sizingNotes": "A  large number of tables with different formats and footnotes, dimensions may need consideration",
     "notes": ""

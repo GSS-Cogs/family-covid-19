@@ -1,0 +1,27 @@
+{
+    "title": "Deaths registered monthly in England and Wales",
+    "publisher": "Office for National Statistics",
+    "description": "Number of deaths registered each month by area of usual residence for England and Wales, by region, county, local and unitary authority, and London borough. These are monthly provisional data covering the month before release",
+    "landingPage": "https://www.ons.gov.uk/peoplepopulationandcommunity/birthsdeathsandmarriages/deaths/datasets/monthlyfiguresondeathsregisteredbyareaofusualresidence",
+    "datasetNotes": [
+        "On the landing page under your download option there is a time series from 2006 to 2020 all datasets should be combined to produce one dataset"
+    ],
+    "published": "2020-06-26",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": "XLS",
+        "stage": "Documented"
+    },
+    "transform": {
+        "stage": [
+            "To Do",
+            "Priority"
+        ],
+        "airtable": "rec4afd0ckbUA2Wgl",
+        "main_issue": 151
+    },
+    "sizingNotes": "A large number spreadsheets (14) with 1 simple table and footnotes  per spreadsheet. All spreadsheets should be combined to create a time series",
+    "notes": ""
+}

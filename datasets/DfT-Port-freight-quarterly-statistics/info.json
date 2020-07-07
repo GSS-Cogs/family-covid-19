@@ -8,11 +8,14 @@
     ],
     "extract": {
         "source": "ODS",
-        "stage": "Candidate"
+        "stage": "Documented"
     },
     "transform": {
         "airtable": "recuBtidgozNxCUsh",
-        "main_issue": 119
+        "main_issue": 119,
+        "stage": [
+            "To Do"
+        ]
     },
     "sizingNotes": "Simple table structure with some footnotes",
     "notes": "Some of the decreases observed in the first quarter of 2020 could be related to the UK\u2019s departure from the EU, storms Ciara and Dennis and the global coronavirus (COVID-19) pandemic, especially for unitised traffic, which includes passenger vehicles.",

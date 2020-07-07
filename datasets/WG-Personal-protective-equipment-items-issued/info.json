@@ -1,0 +1,27 @@
+{
+    "title": "Personal protective equipment items issued",
+    "publisher": "Welsh Government",
+    "description": "Management information update on personal protective equipment (PPE) items issued during the Coronavirus (COVID-19) pandemic up to 21 June 2020",
+    "landingPage": "https://gov.wales/personal-protective-equipment-items-issued-21-june-2020-html",
+    "datasetNotes": [
+        "On the landing page the data is embedded in the page. this is the first publication so the landing page may be subject to change"
+    ],
+    "published": "2020-06-25",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": "",
+        "stage": "Documented"
+    },
+    "transform": {
+        "stage": [
+            "To Do",
+            "Priority"
+        ],
+        "airtable": "recMPRko6f5DcSfl5",
+        "main_issue": 158
+    },
+    "sizingNotes": "Simple Table which is embedded in the page it may be possible to contact the producer to obtain in a different format.",
+    "notes": "When this is due for transformation BAs will contact the producer to see if the data is available in a better format than the embedded tables."
+}

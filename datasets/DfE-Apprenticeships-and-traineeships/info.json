@@ -12,7 +12,7 @@
     ],
     "extract": {
         "source": "XLS, ODS, CSV",
-        "stage": "Candidate"
+        "stage": "To document"
     },
     "transform": {
         "airtable": "recmhByZV40U33mJC",

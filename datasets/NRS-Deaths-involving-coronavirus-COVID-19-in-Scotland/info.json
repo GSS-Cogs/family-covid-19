@@ -1,6 +1,6 @@
 {
     "title": "Deaths involving coronavirus (COVID-19) in Scotland",
-    "publisher": "National Records of Scotland",
+    "publisher": "national-records-of-scotland",
     "description": "Deaths involving coronavirus (COVID-19) in Scotland - Data and Charts.",   
     "dataURL": "https://www.nrscotland.gov.uk/files//statistics/covid19/covid-deaths-data-week-26.xlsx",
     "datasetNotes": [
@@ -20,7 +20,18 @@
         "stage": [
             "To Do",
             "Priority"
-        ]
+        ],
+        "columns": {
+            "Period": {
+                "dimension": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
+                "value": "http://reference.data.gov.uk/id/day/{period}"
+            },
+            "Value": {
+                "unit": "http://gss-data.org.uk/def/concept/measurement-units/deaths",
+                "measure": "http://gss-data.org.uk/def/measure/count",
+                "datatype": "integer"
+            }
+        }
     },
     "sizingNotes": "Already online in Open Data format.",
     "notes": ""

@@ -1,4 +1,9 @@
-const dataset = window.location.search.substring(1);
+let dataset = window.location.search.substring(1);
+let spec = false;
+if (dataset.startsWith('spec=')) {
+    spec = true;
+    dataset = dataset.substring(5);
+}
 
 function datasetFetcher(endpoint, landingPages) {
     let filteredURLs = landingPages.filter(p => {
@@ -41,56 +46,74 @@ ${filteredURLs.map(x => `(<${(new URL(x)).href}>)`).join(' ')}
 };
 
 if (dataset) {
-    Handlebars.registerHelper('ifObject', function(item, options) {
+    Handlebars.registerHelper('ifObject', function (item, options) {
         if (typeof item === "object") {
             return options.fn(this);
         } else {
             return options.inverse(this);
         }
     });
-    $.get({
-        url: "etl.hbs",
-        dataType: "html"
-    }, function(source) {
-        const template = Handlebars.compile(source);
-        $.getJSON('info.json', function(mainInfo) {
-            $.getJSON(dataset + "/info.json", function (info) {
-                let fetchDatasets, lastPublished=null;
-                if (mainInfo.hasOwnProperty('sparql')) {
-                    fetchDatasets = datasetFetcher(mainInfo.sparql, [info.landingPage]);
-                } else {
-                    fetchDatasets = $.Deferred();
-                    fetchDatasets.resolve([]);
-                }
-                fetchDatasets.done(function(datasets) {
-                    if (mainInfo.hasOwnProperty('pmd')) {
-                        datasets = datasets.map(function(ds) {
-                            if ((ds.modified !== null) && ((lastPublished === null) || (lastPublished < ds.modified))) {
-                                lastPublished = ds.modified;
-                            }
-                            return {
-                                uri: mainInfo.pmd + '/resource?uri=' + encodeURIComponent(ds.uri),
-                                label: ds.label,
-                                modified: ds.modified
-                            }
-                        });
-                    }
+    if (spec) {
+        $.get({url: "spec.hbs", dataType: "html"}, function (source) {
+            const template = Handlebars.compile(source);
+            $.getJSON('info.json', function (mainInfo) {
+                let jenkins_job = mainInfo.jenkins.path.map(function (p) {
+                    return 'job/' + p;
+                }).join('/');
+                $.getJSON(jenkins_job + '/lastSuccessfulBuild/artifact/spec.json', function (specs_obj) {
                     $("#body").html(template({
                         "dataset_path": dataset,
                         "main": mainInfo,
-                        "dataset": info,
-                        "jenkins_path": mainInfo.jenkins.path.map(function (p) {
-                            return 'job/' + p;
-                        }).join('/'),
-                        "jenkins_buildicon": 'buildStatus/icon?job=' + encodeURIComponent(mainInfo.jenkins.path.join('/') + '/'),
-                        "datasets": datasets,
-                        "issue_badge_base": `https://img.shields.io/github/issues/detail/state${(new URL(mainInfo.github)).pathname}`
+                        "specs": specs_obj
                     }));
                 });
-                document.title = info.title;
             });
         });
-    });
+    } else {
+        $.get({
+            url: "etl.hbs",
+            dataType: "html"
+        }, function (source) {
+            const template = Handlebars.compile(source);
+            $.getJSON('info.json', function (mainInfo) {
+                $.getJSON(dataset + "/info.json", function (info) {
+                    let fetchDatasets, lastPublished = null;
+                    if (mainInfo.hasOwnProperty('sparql')) {
+                        fetchDatasets = datasetFetcher(mainInfo.sparql, [info.landingPage]);
+                    } else {
+                        fetchDatasets = $.Deferred();
+                        fetchDatasets.resolve([]);
+                    }
+                    fetchDatasets.done(function (datasets) {
+                        if (mainInfo.hasOwnProperty('pmd')) {
+                            datasets = datasets.map(function (ds) {
+                                if ((ds.modified !== null) && ((lastPublished === null) || (lastPublished < ds.modified))) {
+                                    lastPublished = ds.modified;
+                                }
+                                return {
+                                    uri: mainInfo.pmd + '/resource?uri=' + encodeURIComponent(ds.uri),
+                                    label: ds.label,
+                                    modified: ds.modified
+                                }
+                            });
+                        }
+                        $("#body").html(template({
+                            "dataset_path": dataset,
+                            "main": mainInfo,
+                            "dataset": info,
+                            "jenkins_path": mainInfo.jenkins.path.map(function (p) {
+                                return 'job/' + p;
+                            }).join('/'),
+                            "jenkins_buildicon": 'buildStatus/icon?job=' + encodeURIComponent(mainInfo.jenkins.path.join('/') + '/'),
+                            "datasets": datasets,
+                            "issue_badge_base": `https://img.shields.io/github/issues/detail/state${(new URL(mainInfo.github)).pathname}`
+                        }));
+                    });
+                    document.title = info.title;
+                });
+            });
+        });
+    }
 } else {
     Handlebars.registerHelper('rowClass', function(f, i) {
       if (i.hasOwnProperty('families') && !i.families.includes(f)) {

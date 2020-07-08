@@ -141,7 +141,7 @@ def date_time(time_value):
     time_string = str(time_value).replace(".0", "").strip()
     time_len = len(time_string)
     if time_len == 10:       
-        return 'gregorian-day/' + time_string[:10] + 'T00:00:00'
+        return 'gregorian-interval/' + time_string[:10] + 'T00:00:00/P1D'
 next_table["Period"] = next_table["Period"].apply(date_time)
 
 from IPython.core.display import HTML

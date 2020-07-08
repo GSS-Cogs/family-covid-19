@@ -66,6 +66,10 @@ joined_dat['Council Area'] = joined_dat['Council Area'].map(geogsCA.set_index('C
 joined_dat['Sex'] = joined_dat['Sex'].str.strip()
 joined_dat['Sex'] = joined_dat['Sex'].map(sexMap.set_index('Category')['Code'])
 
+for c in joined_dat.columns:
+    if (c != 'Period') & (c != 'Measure Type') & (c != 'Sex') &(c != 'Unit') & (c != 'Value') :
+        joined_dat[c] = joined_dat[c].map(lambda x: pathify(x))
+
 # Output the data to CSV
 out = Path('out')
 out.mkdir(exist_ok=True)

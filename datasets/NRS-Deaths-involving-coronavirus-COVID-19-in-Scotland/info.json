@@ -33,6 +33,7 @@
             }
         }
     },
+    "load": { "publish": true },
     "sizingNotes": "Already online in Open Data format.",
     "notes": ""
 }

@@ -5,14 +5,14 @@ import json
 from datetime import date
 
 # +
-info = json.load(open('info.json')) 
-landingPage = info['landingPage'] 
-print(landingPage)
+#info = json.load(open('info.json')) 
+#landingPage = info['landingPage'] 
+#print(landingPage)
 
 #weekNumber = date.today().isocalendar()[1]
 #print('Week number: ' + str(weekNumber))
 
-landingPage 
+#landingPage 
 # -
 
 scrape = Scraper(seed="info.json")   

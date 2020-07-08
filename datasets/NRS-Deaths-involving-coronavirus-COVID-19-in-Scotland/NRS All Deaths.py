@@ -4,17 +4,6 @@ from gssutils import *
 import json
 from datetime import date
 
-# +
-#info = json.load(open('info.json')) 
-#landingPage = info['landingPage'] 
-#print(landingPage)
-
-#weekNumber = date.today().isocalendar()[1]
-#print('Week number: ' + str(weekNumber))
-
-#landingPage 
-# -
-
 scrape = Scraper(seed="info.json")   
 scrape.distributions[0].title = "COVID-19 Statistical Report"
 scrape
@@ -28,7 +17,8 @@ tab = tabs['Table 2 - All deaths']
 cell = tab.filter('Week beginning')
 cell.assert_one()
 
-date = cell.fill(RIGHT).is_not_blank().is_not_whitespace() 
+date = cell.fill(RIGHT)
+#date = cell.fill(RIGHT).is_not_blank().is_not_whitespace() 
 
 sex = tab.filter('Persons') | tab.filter('Females') | tab.filter('Males')
 

@@ -17,7 +17,8 @@ tab = tabs['Table 1 - COVID deaths']
 cell = tab.filter('Week beginning')
 cell.assert_one()
 
-date = cell.fill(RIGHT).is_not_blank().is_not_whitespace() 
+date = cell.fill(RIGHT)
+#date = cell.fill(RIGHT).is_not_blank().is_not_whitespace() 
 
 sex = tab.filter('Persons') | tab.filter('Females') | tab.filter('Males')
 
@@ -55,6 +56,9 @@ new_table = c1.topandas()
 import numpy as np
 new_table.rename(columns={'OBS': 'Value','DATAMARKER': 'Marker'}, inplace=True)
 next_table = pd.concat([next_table, new_table])
+# -
+
+new_table.head(60)
 
 # +
 observations1 = age.fill(RIGHT).is_not_blank().is_not_whitespace() 

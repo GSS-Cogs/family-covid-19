@@ -2,7 +2,6 @@
     "title": "Deaths involving coronavirus (COVID-19) in Scotland",
     "publisher": "National Records of Scotland",
     "description": "Deaths involving coronavirus (COVID-19) in Scotland - Data and Charts.",   
-    "landingPage": "https://www.nrscotland.gov.uk/covid19stats",
     "dataURL": "https://www.nrscotland.gov.uk/files//statistics/covid19/covid-deaths-data-week-26.xlsx",
     "datasetNotes": [
         "On landing page link to dataset at top of page under heading \"Deaths involving coronavirus (COVID-19) in Scotland\"."

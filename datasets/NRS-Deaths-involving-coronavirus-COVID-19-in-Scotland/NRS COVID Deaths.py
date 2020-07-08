@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # # NRS Deaths involving coronavirus  COVID-19  in Scotland 
 
 from gssutils import * 
@@ -159,4 +160,5 @@ tidy['Deaths Registered'] = tidy['Deaths Registered'].str.replace('-19 - males',
 
 tidy.head(60)
 
-
+# +
+#### "landingPage": "https://www.nrscotland.gov.uk/covid19stats",

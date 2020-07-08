@@ -33,8 +33,8 @@ for name, tab in tabs.items():
     if name == 'Table 2':
         gender = tab.excel_ref('A6').expand(DOWN).is_not_blank()
         age = tab.excel_ref('B6').expand(DOWN).is_not_blank()
-        week_number = tab.excel_ref('C4').expand(RIGHT) 
-        week_ending = tab.excel_ref('C5').expand(RIGHT) 
+        week_number = tab.excel_ref('C4').expand(RIGHT).is_not_blank()
+        week_ending = tab.excel_ref('C5').expand(RIGHT).is_not_blank()
         marker = 'Provisional'
         unit = 'Count'
         measure_type = 'Deaths'
@@ -61,7 +61,6 @@ def date_time(time_value):
         return 'gregorian-day/' + date_string + 'T00:00/P7D'
     elif len(date_string)  == 0:
         return 'year/2020'
-
 
 
 # +

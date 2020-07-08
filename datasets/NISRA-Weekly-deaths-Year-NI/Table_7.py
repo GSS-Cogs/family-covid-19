@@ -20,9 +20,9 @@ df = pd.DataFrame()
 #
 # 	A - Week of Death
 # 	B - Week Ending (Friday)
-# 	C3:H3 - COVID-19 Deaths (Codelist)
+# 	C5:N5 - Local Government District (Codelist or Geography code)
 # 	Measure Type = Deaths
-# 	Unit - Count and Cumulative Count
+# 	Unit - Count 
 # 	Put Provisional in Marker column
 #
 
@@ -30,25 +30,27 @@ for name, tab in tabs.items():
     if 'Contents' in name or 'Background' in name or 'Definitions' in name:
         continue
     if name == 'Table 7':
-        week_of_death = tab.excel_ref('A5').expand(DOWN).is_not_blank()
-        week_ending = tab.excel_ref('B5').expand(DOWN).is_not_blank()
-        covid_19_deaths = tab.excel_ref('C4').expand(RIGHT)
+        week_of_death = tab.filter(contains_string('Registration Week')).shift(0,1).expand(DOWN).is_not_blank()
+        week_ending = tab.filter(contains_string('Week Ending (Friday)')).shift(0,1).expand(DOWN).is_not_blank()
+        local_gov_district = tab.filter(contains_string('Local Government District')).shift(0,1).expand(RIGHT).is_not_blank()
         marker = 'Provisional'
-        unit = 'Count'#or Cummulative, will be filtered
+        unit = 'Count'
         measure_type = 'Deaths'
-        observations = covid_19_deaths.fill(DOWN).is_not_blank()
+        observations = local_gov_district.fill(DOWN).is_not_blank()
         Dimensions = [
             HDim(week_of_death,'Week of Death',DIRECTLY,LEFT),
             HDim(week_ending,'Week Ending',DIRECTLY,LEFT),
-            HDim(covid_19_deaths,'Covid-19 Deaths',DIRECTLY,ABOVE),
+            HDim(local_gov_district,'Local Government District',DIRECTLY,ABOVE),
             HDimConst('DATAMARKER', marker),
             HDimConst('Measure Type', measure_type),
             HDimConst('Unit', unit)
         ]
         c1 = ConversionSegment(observations, Dimensions, processTIMEUNIT=True)
-        savepreviewhtml(c1, fname=tab.name + " Preview.html")
+        #savepreviewhtml(c1)
         new_table = c1.topandas()
         df = pd.concat([df, new_table], sort=False)
+        
+
 
 
 def date_time(time_value):
@@ -59,15 +61,11 @@ def date_time(time_value):
         return 'year/2020'
 
 
-
 # +
 import numpy as np
 df.rename(columns={'OBS': 'Value', 'DATAMARKER' : 'Marker'}, inplace=True)
 
-f1=((df['Covid-19 Deaths'] =='Cumulative Number of Covid-192 deaths occuring '))
-df.loc[f1,'Unit'] = 'Cumulative Count'
-
-df["Week Ending"] = df["Week Ending"].apply(date_time)
+#df["Week Ending"] = df["Week Ending"].apply(date_time)
 
 df['Week of Death'] = df.apply(lambda x: x['Week of Death'].replace('.0', ''), axis = 1)
 df = df.replace('', np.nan, regex=True)
@@ -81,11 +79,11 @@ for col in df:
         display(df[col].cat.categories) 
 
 for column in df:
-    if column in ('Covid-19 Deaths'):
+    if column in ('Local Government District'):
         df[column] = df[column].str.lstrip()
         df[column] = df[column].map(lambda x: pathify(x))
 
-tidy = df[['Week of Death', 'Week Ending', 'Covid-19 Deaths', 'Measure Type', 'Unit', 'Marker', 'Value']]
+tidy = df[['Week of Death', 'Week Ending', 'Local Government District', 'Measure Type', 'Unit', 'Marker', 'Value']]
 
 # +
 destinationFolder = Path('out')

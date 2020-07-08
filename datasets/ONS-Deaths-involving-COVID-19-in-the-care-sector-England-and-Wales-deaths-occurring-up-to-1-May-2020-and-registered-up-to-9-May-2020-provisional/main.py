@@ -12,7 +12,8 @@ import re
 
 scraper = Scraper(seed="info.json") 
 tabs = scraper.distribution(latest=True).as_databaker()
-print("Using source data", scraper.distribution(latest=True).downloadURL)
+source_sheet = scraper.distribution(latest=True).downloadURL
+print("Using source data", source_sheet)
 scraper 
 
 
@@ -96,7 +97,7 @@ def create_tidy(cs, tab_name):
 
     return df
 
-def get_title_and_comments(tab):
+def get_title_and_footnotes(tab):
     """
     Given one tab, get the tab name (minus the comment annotations) and a list of comments
     """
@@ -113,14 +114,27 @@ def get_title_and_comments(tab):
             footnotes[title_cell_split[i]] = ""
         else:
             title = ",".join(title_cell_split[:i])
+            
+    potential_footnotes = find_source_cell(tab).fill(DOWN).is_not_blank()
+    for no in footnotes.keys():
+        footnote_text_cell = [x for x in potential_footnotes if x.value.strip().startswith(no)]
+        assert len(footnote_text_cell) == 1, f"Could not find a distinct foodnote for annotation {no}"
+        footnotes[no] = footnote_text_cell[0].value
     
     return title, footnotes
 
 
 def find_source_cell(tab):
     """what is says"""
-    return tab.excel_ref('A').filter(lambda x: str(x.value).startswith("Source:")).assert_one()
-    
+    try:
+        # in case of multi-table sheets
+        s = tab.excel_ref('A').filter(lambda x: str(x.value).startswith("Source:")).by_index(-1)
+    except xypath.XYPathError:
+        s = tab.excel_ref('A').filter(lambda x: str(x.value).startswith("Source:")).by_index(1)
+    except:
+        raise
+    return s
+
 def get_unwanted(tab):
     """return anything level with or below the source cell"""
     return find_source_cell(tab).expand(DOWN).expand(RIGHT)
@@ -128,14 +142,32 @@ def get_unwanted(tab):
 # TODO
 def apply_measures(df, tab_name):
     """Given a dataframe and the source tab name, add the correct measure types"""
+    df["Measure Type"] = ""
     return df
 
 # TODO
 def apply_markers(df, tab_name):
-    """Given a dataframe and the source tab name, add the correct marker codes"""
+    """Given a dataframe and the source tab name, add our version of the data markers"""
+    
+    if "Marker" not in df.columns.values:
+        return df
+    
+    markers = {
+        ":": "no-data-availible"
+    }
+    df["Marker"] = df["Marker"].map(lambda x: markers.get(x, ""))
     return df
 
-
+def excelRange(bag):
+    min_x = min([cell.x for cell in bag])
+    max_x = max([cell.x for cell in bag])
+    min_y = min([cell.y for cell in bag])
+    max_y = max([cell.y for cell in bag])
+    top_left_cell = xypath.contrib.excel.excel_location(bag.filter(lambda x: x.x == min_x and x.y == min_y))
+    bottom_right_cell = xypath.contrib.excel.excel_location(bag.filter(lambda x: x.x == max_x and x.y == max_y))
+    return f"{top_left_cell}:{bottom_right_cell}"
+    
+trace = TransformTrace()
 # -
 
 # ## Transform: Table 1
@@ -143,7 +175,10 @@ def apply_markers(df, tab_name):
 for tab in tabs_from_named(tabs, "Table 1"):
     
     try:
-        title, footnotes = get_title_and_comments(tab)
+        title, footnotes = get_title_and_footnotes(tab)
+        
+        columns=['Marker', 'Period', 'Category', 'Source', 'Area', 'Measure Type']
+        trace.start(title, tab, columns, source_sheet)
         
         # Start with the date title cell
         date_cell = tab.excel_ref('A').filter("Date").assert_one()
@@ -151,39 +186,44 @@ for tab in tabs_from_named(tabs, "Table 1"):
         # Period
         period = date_cell.fill(DOWN).filter(is_type(datetime.datetime))
         assert_continuous_sequence(period, UP)
+        trace.Period("{} Got period as datatime types in column A", var=excelRange(period))
 
         # Category
         category = date_cell.fill(RIGHT).is_not_blank()
-        assert_one_of(category, "category", ["Deaths involving COVID-19", "All deaths", "2019 Comparison"])
+        accepted_categories = ["Deaths involving COVID-19", "All deaths", "2019 Comparison"]
+        assert_one_of(category, "category", accepted_categories)
+        trace.Category("{} Selected category items as 'Deaths involving COVID-19, 'All deaths'"
+                        "2019 Comparison", var=excelRange(category))
 
         # Source
         source = date_cell.shift(UP).fill(RIGHT).is_not_blank()
-        assert_one_of(source, "source", ["England and Wales (ONS data)", "England (ONS data)", 
-                               "England (CQC data)", "Wales (ONS data)", "Wales (CIW data)"])
+        accepted_source = ["England and Wales (ONS data)", "England (ONS data)", 
+                               "England (CQC data)", "Wales (ONS data)", "Wales (CIW data)"]
+        assert_one_of(source, "source", accepted_source)
+        msg = "Selected source items as '{}'.".format(accepted_source)
+        trace.Source("{} " + msg, var=excelRange(source))
+        
         # observations
         obs = date_cell.shift(DOWN).shift(RIGHT).expand(DOWN).expand(RIGHT).is_not_blank().is_not_whitespace()
+        
         assert_numeric_or_marker(obs, [":"])
+        
+        trace.Area("Hard coding 'Area' dimensions as ONS code {}", var="K0300001")
     
         dimensions = [
             HDim(period, "Period", DIRECTLY, LEFT),
             HDim(category, "Category", DIRECTLY, ABOVE),
             HDim(source, "Source", CLOSEST, LEFT),
-            HDimConst("Geograpahy", "K0300001")
+            HDimConst("Area", trace.Area.var)
         ]
 
         cs = ConversionSegment(obs, dimensions)
-        df = cs.topandas().fillna("")
-
-        # rename stuff
-        df = df.rename(columns={"OBS":"Value", "DATAMARKER":"Marker"})
-        
-        # Markers, measures and output
-        df = apply_measures(df, tab.name)
-        df = apply_markers(df, tab.name)
+        df = create_tidy(cs, tab.name)
         df.to_csv("{}.csv".format(pathify(title)), index=False)
         
     except Exception as e:
-        raise Exception(f"Problem encountered processing cube '{title}' from tab '{tab.name}'.") from e      
+        raise Exception(f"Problem encountered processing cube from tab '{tab.name}'.") from e
+
 
 
 # ## Transform: Table 2
@@ -192,7 +232,10 @@ for tab in tabs_from_named(tabs, "Table 1"):
 for tab in tabs_from_named(tabs, "Table 2"):
     
     try:
-        title, footnotes = get_title_and_comments(tab)
+        title, footnotes = get_title_and_footnotes(tab)
+        
+        columns=['Sex', 'Age', 'Area', 'Measure Type']
+        trace.start(title, tab, columns, source_sheet)
         
         # Start with the first persons cell
         first_persons_cell = tab.excel_ref('B').filter("Persons").assert_one()
@@ -200,15 +243,19 @@ for tab in tabs_from_named(tabs, "Table 2"):
         # Sex
         sex = first_persons_cell.expand(RIGHT).is_not_blank()
         assert_one_of(sex, "sex", ["Persons", "Male", "Female"])
+        trace.Sex("{} Get dimension 'Sex', with values 'Persons', 'Male' and 'Female'", var=excelRange(sex))
         
-        # Geography
-        geography = first_persons_cell.shift(UP).shift(UP).expand(RIGHT).is_not_blank()
-        assert_one_of(geography, "geography", ["England and Wales", "England", "Wales"])
+        # Area
+        area = first_persons_cell.shift(UP).shift(UP).expand(RIGHT).is_not_blank()
+        assert_one_of(area, "area", ["England and Wales", "England", "Wales"])
+        trace.Area("{} Get dimension 'Area' with values 'England and Wales', "
+                    "'England' and 'Wales'", var=excelRange(area))
         
         # Age
         age = tab.excel_ref('A').filter('All ages').expand(DOWN).is_not_blank() - get_unwanted(tab)
         assert_one_of(age, "Age", ["All ages", "0-64", "65-69", "70-74", "75-79", "80-84", "85-89", "90+"])
-        
+        trace.Age("{} Get age dimension from column A, as number range plus 'All ages'", var=excelRange(age))
+       
         # observations
         obs = first_persons_cell.shift(DOWN).expand(DOWN).expand(RIGHT).is_not_blank() \
                 .is_not_whitespace() - get_unwanted(tab)
@@ -217,18 +264,11 @@ for tab in tabs_from_named(tabs, "Table 2"):
         dimensions = [
             HDim(sex, "Sex", DIRECTLY, ABOVE),
             HDim(age, "Age", DIRECTLY, LEFT),
-            HDim(geography, "Geography", CLOSEST, LEFT),
+            HDim(area, "Area", CLOSEST, LEFT)
         ]
 
         cs = ConversionSegment(obs, dimensions)
-        df = cs.topandas().fillna("")
-
-        # rename stuff
-        df = df.rename(columns={"OBS":"Value", "DATAMARKER":"Marker"})
-        
-        # Markers, measures and output
-        df = apply_measures(df, tab.name)
-        df = apply_markers(df, tab.name)
+        df = create_tidy(cs, tab.name)
         df.to_csv("{}.csv".format(pathify(title)), index=False)
 
     except Exception as e:
@@ -236,12 +276,15 @@ for tab in tabs_from_named(tabs, "Table 2"):
 
 # ## Transform: Tables 3 & 4
 
-# +
-cubes34 = []
-cubes34_title = "Number of deaths, age standardised and age specific mortality rates, by sex"
 for tab in tabs_from_named(tabs, ["Table 3", "Table 4"]):
-    
+
     try:
+        title, footnotes = get_title_and_footnotes(tab)
+        
+        columns=['Sex', 'Age', "Rate", {"Lower 95% CI": "Lower_CI"}, {"Lower 95% CI": "Upper_CI"}, 
+                 'Area', 'Category', 'Measure Type']
+        trace.start(title, tab, columns, source_sheet)
+        
         first_death_cells = tab.excel_ref('B').filter("Number of deaths")
         assert len(first_death_cells) == 4, "Aborting, there should be exactly 4 'Number of deaths' cells"
     
@@ -253,15 +296,19 @@ for tab in tabs_from_named(tabs, ["Table 3", "Table 4"]):
         # Sex
         sex = first_death_cells.by_index(1).shift(UP).expand(RIGHT).is_not_blank()
         assert_one_of(sex, "sex", ["Person", "Male", "Female"])
+        trace.Sex("{} Get dimension 'Sex', with values 'Persons', 'Male', 'Females'.", var=excelRange(sex))
         
         # Attributes to pivot later
         attributes = first_death_cells.by_index(1).expand(RIGHT).is_not_blank()
 
         category = tab.excel_ref('A').filter(starts_with("Number of deaths"))
         assert len(category) == 4, "We are expecting 4 categories beginner 'Numbers of deaths' in column A"
+        trace.Category("{} Get dimension 'category' as 'Number of deaths..' etc and things to the right of"
+                       , var=excelRange(category))
         
         # need to use a specific line for closest to avoid equally valid lookups
-        geography = first_death_cells.by_index(1).shift(UP).shift(UP)
+        area = first_death_cells.by_index(1).shift(UP).shift(UP)
+        trace.Area("{} Area is either 'England' or 'Wales'.", var=excelRange(area))
         
         # Obs should be anything outisde of column A that's not selected elsewhere
         obs = first_death_cells.expand(DOWN).expand(RIGHT).is_not_blank() - ignore_for_obs
@@ -269,12 +316,13 @@ for tab in tabs_from_named(tabs, ["Table 3", "Table 4"]):
               
         obs_in_b = obs.filter(lambda x: x.x == 1)
         age = tab.excel_ref('A1').waffle(obs_in_b)
+        trace.Age("{} Dimension 'Age' is from column A", var=excelRange(age))
         
         dimensions = [
             HDim(sex, "Sex", CLOSEST, LEFT),
             HDim(attributes, "TEMP_FOR_ATTRIBUTES", DIRECTLY, ABOVE),
             HDim(age, "Age", DIRECTLY, LEFT),
-            HDim(geography, "Geography", CLOSEST, ABOVE),
+            HDim(area, "Area", CLOSEST, ABOVE),
             HDim(category, "Category", CLOSEST, ABOVE)
         ]
         
@@ -283,10 +331,12 @@ for tab in tabs_from_named(tabs, ["Table 3", "Table 4"]):
         
         # Make a hacky composite key
         df["Composite"] = ""
-        for col in ["Sex", "Age", "Geography", "Category"]:
+        for col in ["Sex", "Age", "Area", "Category"]:
             df["Composite"] = df["Composite"] + df[col]
         
         # Use that composite key to match attributes to obs
+        trace.multi(["Rate", "Lower_CI", "Upper_CI"], "Flatten the observations, pulling these" 
+                    "values into their own appropriate attribute column")
         for attribute in ["Rate", "Lower 95% CI", "Upper 95% CI"]:
             df[attribute] = ""
             for _, row in df[df["TEMP_FOR_ATTRIBUTES"] == attribute].iterrows():
@@ -294,107 +344,116 @@ for tab in tabs_from_named(tabs, ["Table 3", "Table 4"]):
                 
         # Tidy up temporary nonsence
         df = df.drop(["Composite", "TEMP_FOR_ATTRIBUTES"], axis=1)
-
-        cubes34.append(df)
+        df.to_csv("{}.csv".format(pathify(title)), index=False)
         
     except Exception as e:
-        raise Exception(f"Problem encountered processing cube '{cubes34_title}' from tab '{tab.name}'.") from e
-        
-df = pd.concat(cubes34)
-df.to_csv("{}.csv".format(pathify(cubes34_title)), index=False)
-# -
+        raise Exception(f"Problem encountered processing cube '{title}' from tab '{tab.name}'.") from e
+
 # ## Transform: Table 5, 6
 
-# +
-cubes56 = []
-cubes56_title = "Number of deaths of care home residents by place of death"
 for tab in tabs_from_named(tabs, ["Table 5", "Table 6"]):
     
     try:
+        title, footnotes = get_title_and_footnotes(tab)
+        
+        columns=['Period', 'Area', 'Place of death', 'Measure Type']
+        trace.start(title, tab, columns, source_sheet)
+        
         date_cell = tab.excel_ref("A").filter("Date").assert_one()
         
         # Period
         period = date_cell.fill(DOWN).filter(is_type(datetime.datetime)) - get_unwanted(tab)
         period = period | tab.excel_ref("A").filter("Total").assert_one() # Add the non date total
         assert_continuous_sequence(period, UP)
+        trace.Period("{} Period dimension taken as date types from column A plus 'Total'.", \
+                    var=excelRange(period))
         
-        # Geography
-        geography = date_cell.shift(UP).expand(RIGHT).is_not_whitespace()
-        assert_one_of(geography, "geography", ["England and Wales", "England", "Wales"])
+        # Area
+        area = date_cell.shift(UP).expand(RIGHT).is_not_whitespace()
+        assert_one_of(area, "Area", ["England and Wales", "England", "Wales"])
+        trace.Area('{} Area dimension taken as "England and Wales", "England", "Wales"', \
+                  var=excelRange(area))
         
         # Place of death
         place_of_death = date_cell.fill(RIGHT).is_not_whitespace()
         assert_one_of(place_of_death, "place_of_death", ["Care Home", "Hospital", "Elsewhere"])
+        trace.Place_of_death('{} the dimension "Place of death" taken as "Care Home", "Hospital",' \
+                             '"Elsewhere"', var=excelRange(place_of_death))
         
         obs = period.waffle(place_of_death)
         assert_numeric_or_marker(obs, [":"])
         
         dimensions = [
             HDim(period, "Period", DIRECTLY, LEFT),
-            HDim(geography, "Geography", CLOSEST, LEFT),
+            HDim(area, "Area", CLOSEST, LEFT),
             HDim(place_of_death, "Place of death", DIRECTLY, ABOVE),
         ]
         
         cs = ConversionSegment(obs, dimensions)
         df = create_tidy(cs, tab.name)
-        cubes56.append(df)
+        df.to_csv("{}.csv".format(pathify(title)), index=False)
     
     except Exception as e:
-        raise Exception(f"Problem encountered processing cube '{cubes56_title}' from tab '{tab.name}'.") from e
-        
-df = pd.concat(cubes56)
-df.to_csv("{}.csv".format(pathify(cubes56_title)), index=False)
-# -
+        raise Exception(f"Problem encountered processing cube '{title}' from tab '{tab.name}'.") from e
+
 
 # ## Transform: Table 7,8
 
-# +
-cubes78 = []
-cubes78_title = "Number of deaths of care home residents notified to the Care Quality Commission"
 for tab in tabs_from_named(tabs, ["Table 7", "Table 8"]):
     
     try:
+        title, footnotes = get_title_and_footnotes(tab)
+        
+        columns=['Period', 'Place Of Death', 'Cause Of Death', 'Measure Type']
+        trace.start(title, tab, columns, source_sheet)
+        
         date_cell = tab.excel_ref("A").filter("Date").assert_one()
         
         # Period
         period = date_cell.fill(DOWN).filter(is_type(datetime.datetime)) - get_unwanted(tab)
         period = period | tab.excel_ref("A").filter("Total").assert_one() # Add the non date total
         assert_continuous_sequence(period, UP)
+        trace.Period("{} Period dimension taken as date types from column A plus 'Total'.", \
+                    var=excelRange(period))
         
         # Place of death
         place_of_death = date_cell.fill(RIGHT).is_not_whitespace()
         assert_one_of(place_of_death, "place_of_death", ["Care Home", "Hospital", "Elsewhere", "Not Stated"])
+        trace.Place_Of_Death('{} the dimension "Place of death" taken as "Care Home", "Hospital", "Elsewhere",' \
+                             '"Not Stated"', var=excelRange(place_of_death))
         
         # Cause of death
-        category_of_death = date_cell.shift(UP).expand(RIGHT).is_not_whitespace()
-        assert_one_of(category_of_death, "category_of_death", ["All deaths", "COVID-19"])
-        
+        cause_of_death = date_cell.shift(UP).expand(RIGHT).is_not_whitespace()
+        assert_one_of(cause_of_death, "cause_of_death", ["All deaths", "COVID-19"])
+        trace.Cause_Of_Death('{} the dimension "Cause of death" taken as "All deaths", "COVID-19"', \
+                            var=excelRange(cause_of_death))
+
         obs = period.waffle(place_of_death)
         assert_numeric_or_marker(obs, [":"])
         
         dimensions = [
             HDim(period, "Period", DIRECTLY, LEFT),
-            HDim(place_of_death, "Place of Death", DIRECTLY, ABOVE),
-            HDim(category_of_death, "Category Of Death", CLOSEST, LEFT),
+            HDim(place_of_death, "Place Of Death", DIRECTLY, ABOVE),
+            HDim(cause_of_death, "Cause Of Death", CLOSEST, LEFT),
         ]
         
         cs = ConversionSegment(obs, dimensions)
         df = create_tidy(cs, tab.name)
-        cubes78.append(df)
+        df.to_csv("{}.csv".format(pathify(title)), index=False)
 
     except Exception as e:
-        raise Exception(f"Problem encountered processing cube '{cubes78_title}' from tab '{tab.name}'.") from e
+        raise Exception(f"Problem encountered processing cube '{title}' from tab '{tab.name}'.") from e
 
-df = pd.concat(cubes78)
-df.to_csv("{}.csv".format(pathify(cubes78_title)), index=False)
-# -
 
 # ## Transform: Table 9
 
 for tab in tabs_from_named(tabs, ["Table 9"]):
     
     try:
-        title, footnotes = get_title_and_comments(tab)
+        title, footnotes = get_title_and_footnotes(tab)
+        
+        columns=['Period', 'Place Of Death', 'Cause Of Death', 'Measure Type', 'Measure Type']
+        trace.start(title, tab, columns, source_sheet)
         
         date_cell = tab.excel_ref("A").filter("Date").assert_one()
         
@@ -402,22 +461,28 @@ for tab in tabs_from_named(tabs, ["Table 9"]):
         period = date_cell.fill(DOWN).filter(is_type(datetime.datetime)) - get_unwanted(tab)
         period = period | tab.excel_ref("A").filter("Total").assert_one() # Add the non date total
         assert_continuous_sequence(period, UP)
+        trace.Period("{} Period dimension taken as date types from column A plus 'Total'.", \
+                    var=excelRange(period))
         
         # Place of death
         place_of_death = date_cell.fill(RIGHT).is_not_whitespace()
         assert_one_of(place_of_death, "place_of_death", ["Home care", "Hospital", "Elsewhere", "Not Stated"])
+        trace.Place_Of_Death('{} the dimension "Place of death" taken as "Care Home", "Hospital", "Elsewhere",' \
+                             '"Not Stated"', var=excelRange(place_of_death))
         
         # Cause of death
-        category_of_death = date_cell.shift(UP).expand(RIGHT).is_not_whitespace()
-        assert_one_of(category_of_death, "category_of_death", ["All deaths", "COVID-19"])
+        cause_of_death = date_cell.shift(UP).expand(RIGHT).is_not_whitespace()
+        assert_one_of(cause_of_death, "category_of_death", ["All deaths", "COVID-19"])
+        trace.Cause_Of_Death('{} the dimension "Cause of death" taken as "All deaths", "COVID-19"', \
+                            var=excelRange(cause_of_death))
         
         obs = period.waffle(place_of_death)
         assert_numeric_or_marker(obs, [":"])
         
         dimensions = [
             HDim(period, "Period", DIRECTLY, LEFT),
-            HDim(place_of_death, "Place of Death", DIRECTLY, ABOVE),
-            HDim(category_of_death, "Category Of Death", CLOSEST, LEFT),
+            HDim(place_of_death, "Place Of Death", DIRECTLY, ABOVE),
+            HDim(cause_of_death, "Cause Of Death", CLOSEST, LEFT),
         ]
         
         cs = ConversionSegment(obs, dimensions)
@@ -433,17 +498,24 @@ for tab in tabs_from_named(tabs, ["Table 9"]):
 for tab in tabs_from_named(tabs, ["Table 10"]):
     
     try:
-        title, footnotes = get_title_and_comments(tab)
+        title, footnotes = get_title_and_footnotes(tab)
+        
+        columns=['Value', 'Category', 'Period', 'Measure Type']
+        trace.start(title, tab, columns, source_sheet)
         
         date_cell = tab.excel_ref("A").filter("Date").assert_one()
         
         # Period
         period = date_cell.fill(DOWN).filter(is_type(datetime.datetime)) - get_unwanted(tab)
         assert_continuous_sequence(period, UP)
+        trace.Period("{} Period dimension taken as date types from column A plus 'Total'.", \
+                    var=excelRange(period))
         
         # Category
         category = date_cell.fill(RIGHT).is_not_blank()
         assert_one_of(category, "category", ["Care home resident", "Home care service user"])
+        trace.Category("{} dimension 'Category' taken as 'Care home resident' and " \
+                       "'Home care service user'.", var=excelRange(category))
         
         obs = category.waffle(period)
         assert_numeric_or_marker(obs, [":"])
@@ -466,7 +538,10 @@ for tab in tabs_from_named(tabs, ["Table 10"]):
 for tab in tabs_from_named(tabs, ["Table 11"]):
     
     try:
-        title, footnotes = get_title_and_comments(tab)
+        title, footnotes = get_title_and_footnotes(tab)
+        
+        columns=['Category of death', 'Period', 'Area', 'Measure Type']
+        trace.start(title, tab, columns, source_sheet)
         
         first_region = tab.excel_ref("B").filter("East").assert_one()
         
@@ -503,12 +578,13 @@ for tab in tabs_from_named(tabs, ["Table 11"]):
 
 # ## Transform: Tables 12 & 13
 
-# +
-cube12n13 = []
-cube12n13_title = "Number of weekly deaths of care home residents by local authority"
 for tab in tabs_from_named(tabs, ["Table 12", "Table 13"]):
     
     try:
+        title, footnotes = get_title_and_footnotes(tab)
+        
+        columns=['Period', 'Area', 'Week Number', 'Covid-19 Involvement', 'Measure Type']
+        trace.start(title, tab, columns, source_sheet)
         
         area_code_header = tab.excel_ref('A').filter("Area Code").assert_one()
         
@@ -534,23 +610,23 @@ for tab in tabs_from_named(tabs, ["Table 12", "Table 13"]):
         
         cs = ConversionSegment(obs, dimensions)
         df = create_tidy(cs, tab.name)
-        cube12n13.append(df)
+        df.to_csv("{}.csv".format(pathify(title)), index=False)
         
     except Exception as e:
-        raise Exception(f"Problem encountered processing cube '{cube12n13}' from tab '{tab.name}'.") from e
+        raise Exception(f"Problem encountered processing cube '{title}' from tab '{tab.name}'.") from e
 
-df = pd.concat(cube12n13)
-df.to_csv("{}.csv".format(pathify(cube12n13_title)), index=False)
-# -
 
 # ## Tables 14 & 15
 
-# +
 cube14n15 = []
 cube14n15_title = "Number of weekly deaths of care home residents by local authority"
 for tab in tabs_from_named(tabs, ["Table 14", "Table 15"]):
     
     try:
+        title, footnotes = get_title_and_footnotes(tab)
+        
+        columns=['Period', 'Area', 'Week Number', 'Covid-19 Involvement', 'Measure Type']
+        trace.start(title, tab, columns, source_sheet)
         
         # We're gonna anchor to the first instance of "England" in column A
         # that's a bit flimsy so we'll double confirm it
@@ -588,22 +664,21 @@ for tab in tabs_from_named(tabs, ["Table 14", "Table 15"]):
         # Where the period is "Grand Total" set the week no to "All"
         assert "Grand total" in df["Period"].unique(), "The label 'Grand total' is expected and required"
         df["Week Number"][df["Period"] == "Grand total"] = "All"
-        
-        cube14n15.append(df)
+        df.to_csv("{}.csv".format(pathify(title)), index=False)
     
     except Exception as e:
-        raise Exception(f"Problem encountered processing cube '{cube14n15_title}' from tab '{tab.name}'.") from e
+        raise Exception(f"Problem encountered processing cube '{title}' from tab '{tab.name}'.") from e
 
-df = pd.concat(cube14n15)
-df.to_csv("{}.csv".format(pathify(cube14n15_title)), index=False)
-# -
 
 # ## Table 16
 
 for tab in tabs_from_named(tabs, ["Table 16"]):
     
     try:
-        title, footnotes = get_title_and_comments(tab)
+        title, footnotes = get_title_and_footnotes(tab)
+        
+        columns=['Period', 'Area', 'Week Number', 'Measure Type']
+        trace.start(title, tab, columns, source_sheet)
         
         area_code_header = tab.excel_ref('A').filter("Area Code")
         
@@ -641,7 +716,10 @@ for tab in tabs_from_named(tabs, ["Table 16"]):
 for tab in tabs_from_named(tabs, ["Table 17"]):
     
     try:
-        title, footnotes = get_title_and_comments(tab)
+        title, footnotes = get_title_and_footnotes(tab)
+        
+        columns=['Leading cause', 'Sex', 'Area', 'Measure Type']
+        trace.start(title, tab, columns, source_sheet)
         
         leading_cause_code_header = tab.excel_ref('A').filter("Leading cause code").assert_one()
         
@@ -677,7 +755,10 @@ for tab in tabs_from_named(tabs, ["Table 17"]):
 for tab in tabs_from_named(tabs, ["Table 18"]):
     
     try:
-        title, footnotes = get_title_and_comments(tab)
+        title, footnotes = get_title_and_footnotes(tab)
+        
+        columns=['Sex', 'Age Group', 'Pre-existing Condition', 'Measure Type']
+        trace.start(title, tab, columns, source_sheet)
         
         condition_header = tab.excel_ref('A').filter("Main pre-existing condition").assert_one()
             
@@ -708,7 +789,31 @@ for tab in tabs_from_named(tabs, ["Table 18"]):
     except Exception as e:
         raise Exception(f"Problem encountered processing cube '{title}' from tab '{tab.name}'.") from e
 
+# ## Finish
+#
+# Output the tracing stuff, then wrangle it into markdown for the spec.
 
+# +
+trace.output()
 
+# use the tracer to write some simple markdown for spec
+lines = ["----------### Stage 1. Transform", ""]
+for _, details in trace._create_output_dict().items():
+    for cube_title, cube in details.items():   # ['sourced_from', 'id', 'tab', 'column_actions']
+        lines.append("#### Sheet: " + cube[0]["tab"])
+        lines.append("")
+        for column in cube[0]["column_actions"]:
+            lines.append("'{}'".format(column["column_label"]))
+            for comment in [",".join(list(x.values())) for x in column["actions"]]:
+                lines.append(comment)
+            lines.append("")
+        lines.append("")
+        lines.append("#### Table structure")
+        lines.append(", ".join([x["column_label"] for x in cube[0]["column_actions"]]))
+        lines.append("")
+
+for l in lines:
+    print(l)
+# -
 
 

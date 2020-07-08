@@ -3,10 +3,6 @@
 from gssutils import * 
 import json 
 
-#info = json.load(open('info.json')) 
-#landingPage = info['landingPage'] 
-#landingPage 
-
 scrape = Scraper(seed="info.json")   
 scrape.distributions[0].title = "COVID-19 Statistical Report"
 scrape

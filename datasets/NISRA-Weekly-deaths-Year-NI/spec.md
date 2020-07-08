@@ -144,76 +144,93 @@
 
 #### Dataset Outputs:
 
-		d1. dataset output One
+		d1. NISRA Weekly Registered COVID-19 and All Deaths
+		
+			Reformat NaN values in marker column to Empty sting
+			Map Local Government District column to mapping CSV
+			Reformat year to date values (year/2020) with overall range date
+			Remove any superscript values from end of string in columns (eg, 1, 2, 3, P)
+			Replace any Nan value sin Value column with 0 and check a reason why has been put in Marker column
+			
 		d2. dataset output Two
 
 #### Sheet: Weekly Deaths_2020 - Deaths registered each week in Northern Ireland 2020
 
-		Column Additions
-			Add a column
-		
+		Column Addition/Removal/Rename/Reformat
+			Add Sex column with value T
+			Add NISRA Age Band column with value All
+			Remove column Registration Week
+			Rename column Week Ending to Period
+			Add column Local Government District with value All
+			Add Location of Death column with value All
+			
 		Join to Dataset:
-			d#
-		
-##### Table Structure
-
-		Columns 
+			d1
 
 #### Sheet: Weekly Deaths_Age by Sex - Deaths registered each week in Northern Ireland 2020
 
-		Column Additions
-			Add a column
+		Column Addition/Removal/Rename/Reformat
+			Add column Registered Death Type with value All Registered Deaths
+			Remove column Week number
+			Rename column Week Ending to Period
+			Reformat year to date values with overall range date
+			Rename Gender column to Sex and reformat with M, F, T, U
+			Add column Local Government District with value All	
+			Add Location of Death column with value All
 		
 		Join to Dataset:
-			d#
+			d1
 		
-##### Table Structure
-
-		Columns 
-
 #### Sheet: Weekly_Deaths_by_LGD - Deaths registered in Northern Ireland by Local Government District (LGD)
 
-		Column Additions
-			Add a column
+		Column Addition/Removal/Rename/Reformat
+			Add Sex column with value T
+			Add NISRA Age Band column with value All
+			Add column Registered Death Type with value All Registered Deaths
+			Remove column Registration Week
+			Rename column Week Ending to Period
+			Add Location of Death column with value All
 		
 		Join to Dataset:
-			d#
-		
-##### Table Structure
-
-		Columns 
+			d1
 
 #### Sheet: Covid-19_Deaths_age by sex - Covid-19 Deaths registered each week in Northern Ireland, age by sex
 
-		Column Additions
-			Add a column
+		Column Addition/Removal/Rename/Reformat
+			Add column Registered Death Type with value COVID-19 Registered Deaths
+			Add column Local Government District with value All
+			Remove column Week number
+			Rename column Week Ending to Period
+			Add Location of Death column with value All
 		
 		Join to Dataset:
-			d#
-		
-##### Table Structure
-
-		Columns 
+			d1
 
 #### Sheet: Covid-19_Deaths_by_LGD - Covid-19 Deaths registered in Northern Ireland by Local Government District (LGD)
 
-		Column Additions
-			Add a column
+		Column Addition/Removal/Rename/Reformat
+			Add column Registered Death Type with value COVID-19 Registered Deaths
+			Add Sex column with value T
+			Add NISRA Age Band column with value All
+			Remove column Registration Week
+			Rename column Week Ending to Period
+			Add Location of Death column with value All
 		
 		Join to Dataset:
-			d#
-		
-##### Table Structure
-
-		Columns 
+			d1
 
 #### Sheet: Covid-19_Reg Date & POD - Covid-19 Deaths registered in Northern Ireland by Place of Death
 
-		Column Additions
-			Add a column
+		Column Addition/Removal/Rename/Reformat
+			Add column Registered Death Type with value COVID-19 Registered Deaths
+			Add Sex column with value T
+			Add NISRA Age Band column with value All
+			Remove column Week of Death
+			Rename column Week Ending to Period
+			Rename Place of Death column to Location of Death (Just to match up with other COVID-19 datasets)
 		
 		Join to Dataset:
-			d#
+			d1
 		
 ##### Table Structure
 
@@ -221,11 +238,16 @@
 
 #### Sheet: Covid-19 by Week of Death - Covid-19 Death Occurrences by week of death in Northern Ireland 
 
-		Column Additions
-			Add a column
+		Column Addition/Removal/Rename/Reformat
+			Add column Registered Death Type with value COVID-19 Registered Deaths
+			Add Sex column with value T
+			Add NISRA Age Band column with value All
+			Remove column Registration Week
+			Rename column Week Ending to Period
+			Add Location of Death column with value All
 		
 		Join to Dataset:
-			d#
+			d1
 		
 ##### Table Structure
 

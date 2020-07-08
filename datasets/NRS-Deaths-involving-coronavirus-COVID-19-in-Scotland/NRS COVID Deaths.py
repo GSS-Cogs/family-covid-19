@@ -47,7 +47,7 @@ nhs = board.fill(DOWN).is_not_blank().is_not_whitespace() - \
 # +
 observations = deaths.fill(RIGHT).is_not_blank().is_not_whitespace() 
 Dimensions = [
-            HDim(deaths,'COVID 19 Deaths',DIRECTLY,LEFT),
+            HDim(deaths,'Deaths Registered',DIRECTLY,LEFT),
             HDim(date, 'Period',DIRECTLY,ABOVE),
             HDimConst('Unit','Count'),  
             HDimConst('Measure Type','Deaths')
@@ -62,7 +62,7 @@ next_table = pd.concat([next_table, new_table])
 # +
 observations1 = age.fill(RIGHT).is_not_blank().is_not_whitespace() 
 Dimensions1 = [
-            HDim(age,'Deaths by age group',DIRECTLY,LEFT),
+            HDim(age,'NRS Age Group',DIRECTLY,LEFT),
             HDim(sex, 'Deaths by Gender', CLOSEST,ABOVE),
             HDim(date, 'Period',DIRECTLY,ABOVE),
             HDimConst('Unit','Count'),  
@@ -142,19 +142,25 @@ for col in next_table:
         display(HTML(f"<h2>{col}</h2>"))
         display(next_table[col].cat.categories) 
 
-next_table['COVID 19 Deaths'] = next_table['COVID 19 Deaths'].map(
+next_table['Deaths Registered'] = next_table['Deaths Registered'].map(
     lambda x: { 'All' : 'Deaths involving COVID-19' , 
                'Deaths involving COVID-194' : 'Deaths involving COVID-19',
        'Deaths involving COVID-194 - females' : 'Deaths involving COVID-19 - females',
        'Deaths involving COVID-194 - males'  :'Deaths involving COVID-194 - males'       
         }.get(x, x))
 
-tidy = next_table[['Period','COVID 19 Deaths',
+tidy = next_table[['Period','Deaths Registered',
                      'Deaths by Council Area',
                      'Deaths by NHS Board',
-                     'Deaths by age group',
+                     'NRS Age Group',
                      'Deaths by location', 'Deaths by Gender', 'Measure Type','Unit','Value']]
 
-out = Path('out')
-out.mkdir(exist_ok=True)
-tidy.drop_duplicates().to_csv(out / 'NRS COVID deaths.csv', index = False)
+tidy['Deaths Registered'] = tidy['Deaths Registered'].str.replace('-194','-19')
+tidy['Deaths by Gender'][tidy['Deaths Registered'].str.contains('19 - males')] = 'Males'
+tidy['Deaths by Gender'][tidy['Deaths Registered'].str.contains('19 - females')] = 'Females'
+tidy['Deaths Registered'] = tidy['Deaths Registered'].str.replace('-19 - females','-19')
+tidy['Deaths Registered'] = tidy['Deaths Registered'].str.replace('-19 - males','-19')
+
+tidy.head(60)
+
+

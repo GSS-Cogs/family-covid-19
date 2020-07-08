@@ -39,7 +39,7 @@ observations2 = nhs.fill(RIGHT).is_not_blank().is_not_whitespace()
 Dimensions2 = [
             HDim(nhs,'Deaths by NHS Board',DIRECTLY,LEFT),
             HDim(deaths, 'Deaths Registered', CLOSEST, LEFT),
-            HDim(location, 'Deaths by Location', DIRECTLY, ABOVE),
+            HDim(location, 'Deaths by location', DIRECTLY, ABOVE),
             HDimConst('Unit','Count'),  
             HDimConst('Measure Type','Deaths')
 
@@ -59,7 +59,7 @@ observations3 = council.fill(RIGHT).is_not_blank().is_not_whitespace() | allarea
 Dimensions3 = [
             HDim(council,'Deaths by Council Area',DIRECTLY,LEFT),
             HDim(deaths, 'Deaths Registered', CLOSEST, LEFT),
-            HDim(location, 'Deaths by Location', DIRECTLY, ABOVE),
+            HDim(location, 'Deaths by location', DIRECTLY, ABOVE),
             HDimConst('Unit','Count'),  
             HDimConst('Measure Type','Deaths')
 
@@ -80,19 +80,25 @@ for col in next_table:
         display(HTML(f"<h2>{col}</h2>"))
         display(next_table[col].cat.categories) 
 
-next_table['Deaths by Location'] = next_table['Deaths by Location'].map(
+next_table['Deaths by location'] = next_table['Deaths by location'].map(
     lambda x: { 'Care\nHome': 'Care Home', 'Home / Non-institution' : 'Home or Non-institution',
         'Other\ninstitution3'  :  'Other institution'   
         }.get(x, x))
 
 tidy = next_table[['Deaths Registered',
                  'Deaths by Council Area',
-                 'Deaths by Location',
+                 'Deaths by location',
                  'Deaths by NHS Board',
                  'Measure Type',
                  'Unit',
                  'Value']]
 
-out = Path('out')
-out.mkdir(exist_ok=True)
-tidy.drop_duplicates().to_csv(out / 'NRS Registered Deaths.csv', index = False)
+tidy['Deaths Registered'] = tidy['Deaths Registered'].str.replace('Deaths from all causes','Total deaths from all causes')
+
+tidy['Deaths by Council Area'] = tidy['Deaths by Council Area'].str.replace('All areas','All')
+
+# +
+#tidy['Deaths by Council Area'].unique()
+# -
+
+tidy.head(60)

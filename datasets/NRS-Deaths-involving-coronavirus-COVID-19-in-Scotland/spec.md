@@ -78,7 +78,6 @@
 
 #### Sheet: Table 1 - COVID deaths
 
-		'Period' - Date ranges need to be added for 'Year to Date' rows. Needs to reference http://purl.org/linked-data/sdmx/2009/dimension#refPeriod
         	Rename 'COVID 19 Deaths' to 'Deaths Registered'
         	Rename 'Deaths by Gender' to 'Sex. Needs to reference 'http://purl.org/linked-data/sdmx/2009/dimension#sex'. Reformat to F | M | T
         	Rename 'Deaths by Age Group' too 'NRS Age Group'. Needs to reference 'http://purl.org/linked-data/sdmx/2009/dimension#age'
@@ -114,3 +113,4 @@
 		Need to decide if referencing Geography codes 
 
 
+<!-- #endregion -->

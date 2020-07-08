@@ -1,11 +1,19 @@
 # # NRS Deaths in Scotland 
 
 from gssutils import * 
-import json 
+import json
+from datetime import date
 
+# +
 info = json.load(open('info.json')) 
 landingPage = info['landingPage'] 
+print(landingPage)
+
+#weekNumber = date.today().isocalendar()[1]
+#print('Week number: ' + str(weekNumber))
+
 landingPage 
+# -
 
 scrape = Scraper(seed="info.json")   
 scrape.distributions[0].title = "COVID-19 Statistical Report"
@@ -49,7 +57,7 @@ nhs = board.fill(DOWN).is_not_blank().is_not_whitespace() - \
 # +
 observations = deaths.fill(RIGHT).is_not_blank().is_not_whitespace() 
 Dimensions = [
-            HDim(deaths,'COVID 19 Deaths',DIRECTLY,LEFT),
+            HDim(deaths,'Deaths Registered',DIRECTLY,LEFT),
             HDim(date, 'Period',DIRECTLY,ABOVE),
             HDimConst('Unit','Count'),  
             HDimConst('Measure Type','Deaths')
@@ -64,7 +72,7 @@ next_table = pd.concat([next_table, new_table])
 # +
 observations1 = age.fill(RIGHT).is_not_blank().is_not_whitespace() 
 Dimensions1 = [
-            HDim(age,'Deaths by age group',DIRECTLY,LEFT),
+            HDim(age,'NRS Age Group',DIRECTLY,LEFT),
             HDim(sex, 'Deaths by Gender', CLOSEST,ABOVE),
             HDim(date, 'Period',DIRECTLY,ABOVE),
             HDimConst('Unit','Count'),  
@@ -129,6 +137,15 @@ next_table = pd.concat([next_table, new_table4])
 
 next_table.fillna('All', inplace = True)
 
+try:
+    dte = pd.DataFrame(columns=['Per'])
+    dte['Per'] = next_table['Period'].unique()
+    dte['Per'] = pd.to_datetime(dte['Per'][dte['Per'] != 'All'])
+    min_date = dte['Per'].min()
+    date_range = abs((dte['Per'].max() - dte['Per'].min()).days)
+except Exception as e:
+    date_range = 100
+
 
 def date_time(time_value):
     time_string = str(time_value).replace(".0", "").strip()
@@ -144,17 +161,22 @@ for col in next_table:
         display(HTML(f"<h2>{col}</h2>"))
         display(next_table[col].cat.categories) 
 
-next_table['COVID 19 Deaths'] = next_table['COVID 19 Deaths'].map(
+next_table['Deaths Registered'] = next_table['Deaths Registered'].map(
     lambda x: { 'All' : 'Total deaths from all causes' , 
                'Total deaths: average of corresponding' : 'Average deaths of corresonding week of previous year'       
         }.get(x, x))
 
-tidy = next_table[['Period','COVID 19 Deaths',
+tidy = next_table[['Period','Deaths Registered',
                      'Deaths by Council Area',
                      'Deaths by NHS Board',
-                     'Deaths by age group',
+                     'NRS Age Group',
                      'Deaths by location', 'Deaths by Gender', 'Measure Type','Unit','Value']]
 
-out = Path('out')
-out.mkdir(exist_ok=True)
-tidy.drop_duplicates().to_csv(out / 'NRS All Deaths.csv', index = False)
+tidy['Deaths by Gender'][tidy['Deaths Registered'].str.contains('deaths males')] = 'Males'
+tidy['Deaths by Gender'][tidy['Deaths Registered'].str.contains('deaths females')] = 'Females'
+tidy['Deaths Registered'] = tidy['Deaths Registered'].str.replace('females','from all causes')
+tidy['Deaths Registered'] = tidy['Deaths Registered'].str.replace('males','from all causes')
+tidy.head(60)
+
+
+

@@ -115,7 +115,11 @@ def get_title_and_footnotes(tab):
         else:
             title = ",".join(title_cell_split[:i])
             
-    potential_footnotes = find_source_cell(tab).fill(DOWN).is_not_blank()
+    # TODO, why am I needing to set this manually?
+    if len(footnotes) > 0:
+        footnotes["1"] = ""
+            
+    potential_footnotes = find_source_cell(tab).expand(DOWN).is_not_blank()
     for no in footnotes.keys():
         footnote_text_cell = [x for x in potential_footnotes if x.value.strip().startswith(no)]
         assert len(footnote_text_cell) == 1, f"Could not find a distinct foodnote for annotation {no}"
@@ -142,36 +146,21 @@ def get_unwanted(tab):
 # TODO
 def apply_measures(df, tab_name, trace):
     """Given a dataframe and the source tab name, add the correct measure types"""
-    mlookup = {
-        "Count": ["Table 1", "Table 2"]
-    }
-    
-    ulookup = {
-        "People": ["Table 1", "Table 2"]
-    }
-    has_a_multiplier = {}
-    
-    if tab_name not in has_a_multiplier.keys():
-        um = 1
-        df["Unit Multiplier"] = um
-    else:
-        pass #TODO - if/when needed
+
+    # Was expecting some variety, probably doesnt need its own function
+    um = 1
     trace.add_column("Unit Multiplier")
-    trace.Unit_Multiplier("Set unit multiplier to {}.", var=um)
+    trace.Unit_Multiplier("Set unit multiplier to {}.", var=str(um))
     
-    for m, tbls in mlookup.items():
-        if tab_name.strip() in tbls:
-            df["Measure Type"] = m
-            trace.add_column("Measure Type")
-            trace.Measure_Type("Set Measure Type to {}.", var=m)  
-        break  
+    m = "Count"
+    df["Measure Type"] = m
+    trace.add_column("Measure Type")
+    trace.Measure_Type("Set Measure Type to {}.", var=m)    
         
-    for u, tbls in ulookup.items():
-        if tab_name.strip() in tbls:
-            df["Unit of Measure"] = u
-            trace.add_column("Unit of Measure")
-            trace.Unit_of_Measure("Set Unit of Measure to {}.", var=u) 
-        break
+    u = "People"
+    df["Unit of Measure"] = u
+    trace.add_column("Unit of Measure")
+    trace.Unit_of_Measure("Set Unit of Measure to {}.", var=u) 
         
     return df
 
@@ -199,6 +188,7 @@ def excelRange(bag):
     return f"{top_left_cell}:{bottom_right_cell}"
     
 trace = TransformTrace()
+footnotes_dict = {} # comments on approach
 # -
 # ## Transform: Table 1
 
@@ -206,6 +196,7 @@ for tab in tabs_from_named(tabs, "Table 1"):
     
     try:
         title, footnotes = get_title_and_footnotes(tab)
+        footnotes_dict[tab.name] = footnotes
         
         columns=['Marker', 'Period', 'Cause of death', 'Source', 'Area']
         trace.start(title, tab, columns, source_sheet)
@@ -268,10 +259,13 @@ for tab in tabs_from_named(tabs, "Table 1"):
 # ## Transform: Table 2
 
 
+
+
 for tab in tabs_from_named(tabs, "Table 2"):
     
     try:
         title, footnotes = get_title_and_footnotes(tab)
+        footnotes_dict[tab.name] = footnotes
         
         columns=['Sex', 'Age', 'Area']
         trace.start(title, tab, columns, source_sheet)
@@ -315,14 +309,18 @@ for tab in tabs_from_named(tabs, "Table 2"):
 
 # ## Transform: Tables 3 & 4
 
+# +
+cube3n4 = []
+cube3n4_title = "Number of deaths, age standardised and age specific mortality rates, by sex"
 for tab in tabs_from_named(tabs, ["Table 3", "Table 4"]):
 
     try:
         title, footnotes = get_title_and_footnotes(tab)
+        footnotes_dict[tab.name] = footnotes
         
         columns=['Sex', 'Age', "Rate", {"Lower 95% CI": "Lower_CI"}, {"Lower 95% CI": "Upper_CI"}, 
                  'Area', 'Category']
-        trace.start(title, tab, columns, source_sheet)
+        trace.start(cube3n4_title, tab, columns, source_sheet)
         
         first_death_cells = tab.excel_ref('B').filter("Number of deaths")
         assert len(first_death_cells) == 4, "Aborting, there should be exactly 4 'Number of deaths' cells"
@@ -342,7 +340,7 @@ for tab in tabs_from_named(tabs, ["Table 3", "Table 4"]):
 
         category = tab.excel_ref('A').filter(starts_with("Number of deaths"))
         assert len(category) == 4, "We are expecting 4 categories beginner 'Numbers of deaths' in column A"
-        trace.Category("{} Get dimension 'category' as 'Number of deaths..' etc and things to the right of"
+        trace.Category("{} Get dimension 'category' as things starting 'Number of deaths..' from column A."
                        , var=excelRange(category))
         
         # need to use a specific line for closest to avoid equally valid lookups
@@ -380,23 +378,44 @@ for tab in tabs_from_named(tabs, ["Table 3", "Table 4"]):
             df[attribute] = ""
             for _, row in df[df["TEMP_FOR_ATTRIBUTES"] == attribute].iterrows():
                 df[attribute][df["Composite"] == row["Composite"]] = row["Value"]
+
+        # sort out messy categories
+        df["Category"] = df["Category"].map(lambda x: x.split(",")[0])
+        should_be = [
+                'Number of deaths',
+                'Number of deaths of non-care home residents due to COVID-19',
+                'Number of deaths of care home residents from all causes',
+                'Number of deaths of non-care home residents from all causes'
+        ]
+        for item in df["Category"].unique().tolist():
+            assert item in should_be, "Unexpected category. '{}' not in '{}'." \
+                            .format(item, json.dummps(should_be))
+        trace.Category("Shortened categories to remove repeated (and super long) date info."
+                      " Took everything to the left of the first comma")
                 
         # Tidy up temporary nonsence
         df = df.drop(["Composite", "TEMP_FOR_ATTRIBUTES"], axis=1)
-        df.to_csv("{}.csv".format(pathify(title)), index=False)
+        cube3n4.append(df)
         
     except Exception as e:
-        raise Exception(f"Problem encountered processing cube '{title}' from tab '{tab.name}'.") from e
+        raise Exception(f"Problem encountered processing cube '{cube3n4_title}' from tab '{tab.name}'.") from e
+        
+pd.concat(cube3n4).to_csv(f"{pathify(cube3n4_title)}.csv", index=False)
+# -
 
 # ## Transform: Table 5, 6
 
+# +
+cube5n6 = []
+cube5n6_title = "Number of deaths of care home residents by place of death"
 for tab in tabs_from_named(tabs, ["Table 5", "Table 6"]):
     
     try:
         title, footnotes = get_title_and_footnotes(tab)
+        footnotes_dict[tab.name] = footnotes
         
         columns=['Period', 'Area', 'Place of death']
-        trace.start(title, tab, columns, source_sheet)
+        trace.start(cube5n6_title, tab, columns, source_sheet)
         
         date_cell = tab.excel_ref("A").filter("Date").assert_one()
         
@@ -430,21 +449,28 @@ for tab in tabs_from_named(tabs, ["Table 5", "Table 6"]):
         
         cs = ConversionSegment(obs, dimensions)
         df = create_tidy(cs, tab.name, trace)
-        df.to_csv("{}.csv".format(pathify(title)), index=False)
+        cube5n6.append(df)
     
     except Exception as e:
-        raise Exception(f"Problem encountered processing cube '{title}' from tab '{tab.name}'.") from e
+        raise Exception(f"Problem encountered processing cube '{cube5n6_title}' from tab '{tab.name}'.") from e
+        
+pd.concat(cube5n6).to_csv(f"{pathify(cube5n6_title)}.csv", index=False)
+# -
 
 
 # ## Transform: Table 7,8
 
+# +
+cube7n8 = []
+cube7n8_title = "Number of deaths of care home residents notified to the Care Quality Commission"
 for tab in tabs_from_named(tabs, ["Table 7", "Table 8"]):
     
     try:
         title, footnotes = get_title_and_footnotes(tab)
+        footnotes_dict[tab.name] = footnotes
         
         columns=['Period', 'Place Of Death', 'Cause Of Death']
-        trace.start(title, tab, columns, source_sheet)
+        trace.start(cube7n8_title, tab, columns, source_sheet)
         
         date_cell = tab.excel_ref("A").filter("Date").assert_one()
         
@@ -478,10 +504,13 @@ for tab in tabs_from_named(tabs, ["Table 7", "Table 8"]):
         
         cs = ConversionSegment(obs, dimensions)
         df = create_tidy(cs, tab.name, trace)
-        df.to_csv("{}.csv".format(pathify(title)), index=False)
+        cube7n8.append(df)
 
     except Exception as e:
-        raise Exception(f"Problem encountered processing cube '{title}' from tab '{tab.name}'.") from e
+        raise Exception(f"Problem encountered processing cube '{cube7n8_title}' from tab '{tab.name}'.") from e
+        
+pd.concat(cube7n8).to_csv(f"{pathify(cube7n8_title)}.csv", index=False)
+# -
 
 
 # ## Transform: Table 9
@@ -490,6 +519,7 @@ for tab in tabs_from_named(tabs, ["Table 9"]):
     
     try:
         title, footnotes = get_title_and_footnotes(tab)
+        footnotes_dict[tab.name] = footnotes
         
         columns=['Period', 'Place Of Death', 'Cause Of Death']
         trace.start(title, tab, columns, source_sheet)
@@ -538,6 +568,7 @@ for tab in tabs_from_named(tabs, ["Table 10"]):
     
     try:
         title, footnotes = get_title_and_footnotes(tab)
+        footnotes_dict[tab.name] = footnotes
         
         columns=['Value', 'Category', 'Period']
         trace.start(title, tab, columns, source_sheet)
@@ -578,6 +609,7 @@ for tab in tabs_from_named(tabs, ["Table 11"]):
     
     try:
         title, footnotes = get_title_and_footnotes(tab)
+        footnotes_dict[tab.name] = footnotes
         
         columns=['Cause of death', 'Period', 'Area']
         trace.start(title, tab, columns, source_sheet)
@@ -600,7 +632,8 @@ for tab in tabs_from_named(tabs, ["Table 11"]):
         # Category of death
         cause_of_death = first_region.shift(UP).expand(RIGHT).is_not_blank()
         assert_one_of(cause_of_death, "cause_of_death", ["All deaths", "Deaths involving COVID-19"])
-        trace.Cause_of_death('{} "Cause of death" taken as either "All deaths" or "Deaths involving COVID-19".')
+        trace.Cause_of_death('{} "Cause of death" taken as either "All deaths" or "Deaths involving' \
+                            ' COVID-19".', var=excelRange(cause_of_death))
         
         obs = period.waffle(area)
         assert_numeric_or_marker(obs, [":"])
@@ -621,13 +654,17 @@ for tab in tabs_from_named(tabs, ["Table 11"]):
 
 # ## Transform: Tables 12 & 13
 
+# +
+cube12n13 = []
+cube12n13_title = "Number of weekly deaths of care home residents by local authority"
 for tab in tabs_from_named(tabs, ["Table 12", "Table 13"]):
     
     try:
         title, footnotes = get_title_and_footnotes(tab)
+        footnotes_dict[tab.name] = footnotes
         
         columns=['Period', 'Area', 'Week Number', 'Cause of death']
-        trace.start(title, tab, columns, source_sheet)
+        trace.start(cube12n13_title, tab, columns, source_sheet)
         
         area_code_header = tab.excel_ref('A').filter("Area Code").assert_one()
         
@@ -661,23 +698,28 @@ for tab in tabs_from_named(tabs, ["Table 12", "Table 13"]):
         
         cs = ConversionSegment(obs, dimensions)
         df = create_tidy(cs, tab.name, trace)
-        df.to_csv("{}.csv".format(pathify(title)), index=False)
+        cube12n13.append(df)
         
     except Exception as e:
-        raise Exception(f"Problem encountered processing cube '{title}' from tab '{tab.name}'.") from e
+        raise Exception(f"Problem encountered processing cube '{cube12n13_title}' from tab '{tab.name}'.") from e
+        
+pd.concat(cube12n13).to_csv(f"{pathify(cube12n13_title)}.csv", index=False)
+# -
 
 
 # ## Tables 14 & 15
 
+# +
 cube14n15 = []
 cube14n15_title = "Number of weekly deaths of care home residents by local authority"
 for tab in tabs_from_named(tabs, ["Table 14", "Table 15"]):
     
     try:
         title, footnotes = get_title_and_footnotes(tab)
+        footnotes_dict[tab.name] = footnotes
         
         columns=['Period', 'Area', 'Week Number', 'Cause of death']
-        trace.start(title, tab, columns, source_sheet)
+        trace.start(cube14n15_title, tab, columns, source_sheet)
         
         # We're gonna anchor to the first instance of "England" in column A
         # that's a bit flimsy so we'll double confirm it
@@ -720,10 +762,14 @@ for tab in tabs_from_named(tabs, ["Table 14", "Table 15"]):
         # Where the period is "Grand Total" set the week no to "All"
         assert "Grand total" in df["Period"].unique(), "The label 'Grand total' is expected and required"
         df["Week Number"][df["Period"] == "Grand total"] = "All"
-        df.to_csv("{}.csv".format(pathify(title)), index=False)
+        
+        cube14n15.append(df)
     
     except Exception as e:
-        raise Exception(f"Problem encountered processing cube '{title}' from tab '{tab.name}'.") from e
+        raise Exception(f"Problem encountered processing cube '{cube14n15_title}' from tab '{tab.name}'.") from e
+
+pd.concat(cube14n15).to_csv(f"{pathify(cube14n15_title)}.csv", index=False)
+# -
 
 
 # ## Table 16
@@ -732,6 +778,7 @@ for tab in tabs_from_named(tabs, ["Table 16"]):
     
     try:
         title, footnotes = get_title_and_footnotes(tab)
+        footnotes_dict[tab.name] = footnotes
         
         columns=['Period', 'Area', 'Week Number', 'Cause of death']
         trace.start(title, tab, columns, source_sheet)
@@ -781,6 +828,7 @@ for tab in tabs_from_named(tabs, ["Table 17"]):
     
     try:
         title, footnotes = get_title_and_footnotes(tab)
+        footnotes_dict[tab.name] = footnotes
         
         columns=['Leading cause', 'Sex', 'Area']
         trace.start(title, tab, columns, source_sheet)
@@ -826,6 +874,7 @@ for tab in tabs_from_named(tabs, ["Table 18"]):
     
     try:
         title, footnotes = get_title_and_footnotes(tab)
+        footnotes_dict[tab.name] = footnotes
         
         columns=['Sex', 'Age Group', 'Pre-existing Condition']
         trace.start(title, tab, columns, source_sheet)
@@ -874,20 +923,29 @@ trace.output()
 
 # use the tracer to write some simple markdown for spec (because I'm lazy)
 lines = ["----------### Stage 1. Transform", ""]
-for _, details in trace._create_output_dict().items():
-    for cube_title, cube in details.items():   # ['sourced_from', 'id', 'tab', 'column_actions']
-        lines.append("#### Sheet: " + cube[0]["tab"])
-        lines.append("")
-        for column in cube[0]["column_actions"]:
-            lines.append("'{}'".format(column["column_label"]))
-            for comment in [",".join(list(x.values())) for x in column["actions"]]:
-                lines.append(comment)
+for title, details in trace._create_output_dict().items():
+    for cube_title, cubes in details.items():   # ['sourced_from', 'id', 'tab', 'column_actions']
+        lines.append("#### " + cube_title)
+        lines.append("") 
+        for cube in cubes:
+            lines.append("#### Sheet: " + cube["tab"])
             lines.append("")
-        lines.append("")
-        lines.append("#### Table structure")
-        lines.append(", ".join([x["column_label"] for x in cube[0]["column_actions"]]))
-        lines.append("")
-        lines.append("")
+            for column in cube["column_actions"]:
+                lines.append("{}".format(column["column_label"]))
+                for comment in [",".join(list(x.values())) for x in column["actions"]]:
+                    lines.append(comment)
+                lines.append("")
+            lines.append("")
+            lines.append("#### Table structure")
+            lines.append(", ".join([x["column_label"] for x in cube["column_actions"]]))
+            lines.append("")
+            lines.append("####Footnotes")
+            for note in list(footnotes_dict[cube["tab"]].values()):
+                lines.append(note)
+            lines.append("-----")
 
 for l in lines:
     print(l)
+# -
+
+

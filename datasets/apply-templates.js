@@ -57,7 +57,7 @@ if (dataset) {
         $.get({url: "spec.hbs", dataType: "html"}, function (source) {
             const template = Handlebars.compile(source);
             $.getJSON('info.json', function (mainInfo) {
-                let spec_url = mainInfo.jenkins.path.map(function (p) {
+                let spec_url = mainInfo.jenkins.base + '/' + mainInfo.jenkins.path.map(function (p) {
                     return 'job/' + p;
                 }).join('/') + dataset + '/lastBuild/artifact/datasets/' + dataset + '/out/spec.json';
                 $.getJSON(spec_url, function (spec_obj) {
@@ -137,23 +137,36 @@ if (dataset) {
             document.title = "Dataset family: " + info.family;
             const fetches = info.pipelines.map(function (pipeline) {
                 return $.getJSON(pipeline + '/info.json')
-                    .then(function (info) {
+                    .then(function (dsinfo) {
                         return $.ajax({url: pipeline + '/spec.md', method: 'HEAD'})
                             .then(function () {
-                                info.spec = pipeline + '/spec';
-                                return info;
+                                dsinfo.spec = pipeline + '/spec';
+                                return dsinfo;
                             }, function() {
-                                return $.Deferred().resolve(info).promise();
+                                return $.Deferred().resolve(dsinfo).promise();
                             });
                         })
-                    .then(function(info) {
+                    .then(function(dsinfo) {
                         return $.ajax({url: pipeline + '/flowchart.ttl', method: 'HEAD'})
                             .then(function () {
-                                info.flowchart = 'specflowcharts.html?' + pipeline + '/flowchart.ttl';
-                                return info;
+                                dsinfo.flowchart = 'specflowcharts.html?' + pipeline + '/flowchart.ttl';
+                                return dsinfo;
                             }, function() {
-                                return $.Deferred().resolve(info).promise();
+                                return $.Deferred().resolve(dsinfo).promise();
                             });
+                    })
+                    .then(function(dsinfo) {
+                        let spec_url = info.jenkins.base + '/' + info.jenkins.path.map(function (p) {
+                            return 'job/' + p;
+                        }).join('/') + dataset + '/lastBuild/artifact/datasets/' + dataset + '/out/spec.json';
+                        return $.ajax({url: spec_url, method: 'HEAD'})
+                            .then(function () {
+                                dsinfo.jenkinsSpec = '?spec=' + pipeline;
+                                return dsinfo;
+                            }, function() {
+                                return $.Deferred().resolve(dsinfo).promise();
+                            });
+
                     });
             });
             $.when.apply($, fetches).then(function() {

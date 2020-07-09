@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # # NISRA Weekly deaths,  Year   NI 
 #
-# ### Sheet : Table 8
+# ### Sheet : Table 11
 
 # +
 from gssutils import * 
@@ -10,13 +10,11 @@ import numpy as np
 import os
 from datetime import datetime, timedelta
 
-def week_ending_to_week_beginning_date_time (week_ending_date):
-    if len(week_ending_date)  == 10:
-        week_ending_date = datetime.strptime(week_ending_date, "%Y-%m-%d")
-        week_beginning_date = week_ending_date - timedelta(7)
-        week_beginning_date = week_beginning_date.strftime("%Y-%m-%d")
-        return 'gregorian-interval/' + week_beginning_date + 'T00:00:00/P7D'
-    else:
+def date_time(time_value):
+    date_string = time_value.strip().split(' ')[0]
+    if len(date_string)  == 10:
+        return 'gregorian-day/' + date_string 
+    elif len(date_string)  == 0:
         return 'year/2020'
 
 
@@ -34,17 +32,17 @@ df = pd.DataFrame()
 for name, tab in tabs.items():
     if 'Contents' in name or 'Background' in name or 'Definitions' in name:
         continue
-    if name == 'Table 8':
-        week_of_death = tab.excel_ref('A5').expand(DOWN).is_not_blank()
-        week_ending = tab.excel_ref('B5').expand(DOWN).is_not_blank()
-        covid_19_deaths = tab.excel_ref('C4').expand(RIGHT)
-        unit = 'Count'#or Cummulative, will be filtered
+    if name == 'Table 11':
+        date = tab.excel_ref('A5').expand(DOWN).is_not_blank()
+        place_of_death = tab.excel_ref('B4').expand(RIGHT)
+        marker = 'Provisional'
+        unit = 'Count' #or Cumulative count, will be filtered after 
         measure_type = 'Deaths'
-        observations = covid_19_deaths.fill(DOWN).is_not_blank()
+        observations = place_of_death.fill(DOWN).is_not_blank()
         Dimensions = [
-            HDim(week_of_death,'Week of Death',DIRECTLY,LEFT),
-            HDim(week_ending,'Week Ending',DIRECTLY,LEFT),
-            HDim(covid_19_deaths,'Covid-19 Deaths',DIRECTLY,ABOVE),
+            HDim(date,'Date',DIRECTLY,LEFT),
+            HDim(place_of_death,'Place of Death',DIRECTLY,ABOVE),
+            HDimConst('DATAMARKER', marker),
             HDimConst('Measure Type', measure_type),
             HDimConst('Unit', unit)
         ]
@@ -53,13 +51,10 @@ for name, tab in tabs.items():
         new_table = c1.topandas()
         df = pd.concat([df, new_table], sort=False)
 
-import numpy as np
 df.rename(columns={'OBS': 'Value', 'DATAMARKER' : 'Marker'}, inplace=True)
-df['Marker'] = df['Marker'].map(lambda x: "not-applicable" if x == "-" else "provisional")
-f1=((df['Covid-19 Deaths'] =='Cumulative Number of Covid-192 deaths occuring '))
+f1=((df['Place of Death'] =='Cumulative Total'))
 df.loc[f1,'Unit'] = 'Cumulative Count'
-df['Period'] =  df["Week Ending"].apply(week_ending_to_week_beginning_date_time)
-df['Week of Death'] = df.apply(lambda x: x['Week of Death'].replace('.0', ''), axis = 1)
+df['Period'] =  df["Date"].apply(date_time)
 df = df.replace('', np.nan, regex=True)
 
 from IPython.core.display import HTML
@@ -72,22 +67,25 @@ for col in df:
 for column in df:
     if column in ('Place of Death'):
         df[column] = df[column].str.lstrip()
+        df[column] = df[column].str.rstrip()
         df[column] = df[column].map(lambda x: pathify(x))
 
-tidy = df[['Week of Death', 'Period', 'Covid-19 Deaths', 'Measure Type', 'Unit', 'Marker', 'Value']]
+tidy = df[['Period', 'Place of Death', 'Measure Type', 'Unit', 'Marker', 'Value']]
 tidy
 
 destinationFolder = Path('out')
 destinationFolder.mkdir(exist_ok=True, parents=True)
-TITLE = 'Covid-19 death occurrences by week of death'
+TITLE = 'Covid-19 death occurrences by date and place of death in Northern Ireland'
 OBS_ID = pathify(TITLE)
 GROUP_ID = pathify(os.environ.get('JOB_NAME', 'gss_data/covid-19/' + Path(os.getcwd()).name))
 tidy.drop_duplicates().to_csv(destinationFolder / f'{OBS_ID}.csv', index = False)
 
 notes = """
 P Weekly published data are provisional.
-1 This data is based on the actual date of death, from those deaths registered by GRO up to 1st July 2020. All data in this table are subject to change, as some deaths will have occurred but haven’t been registered yet.
+1 This data is based on the actual date of death, from those deaths registered by GRO up to 1st July 2020. All data in this table are subject to change, as some deaths will have occurred but haven’t been registered yet.  The first covid-19 death in Northern Ireland occurred on 18th March 2020.
 2 COVID-19 deaths include any death where Coronavirus or COVID-19 (suspected or confirmed) was mentioned anywhere on the death certificate.
+3Includes deaths in care homes only. Care home residents who have died in a different location will be counted elsewhere in this table.
+4 The 'Other' category includes deaths at a residential address which was not the usual address of the deceased and all other places.
 """
 
 ######## BELOW COMMENT OUT FOR NOW ######

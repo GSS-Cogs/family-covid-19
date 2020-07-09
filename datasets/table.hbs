@@ -13,10 +13,9 @@
         <th>Transform Stage</th>
         <th>Tracking</th>
         <th>Transform Status</th>
+        <th>Specification</th>
         <th>Publish Status</th>
         <th>Publication date</th>
-        <th>Specfication</th>
-        <th>Flowchart</th>
     </tr>
     </thead>
     <tbody>
@@ -38,6 +37,13 @@
                 </a>
             </td>
             <td>
+                {{#if info.spec}}
+                    <a href="{{info.spec}}"><i class="fas fa-clipboard-list"></i></a>
+                {{/if}}
+                {{#if info.flowchart}}
+                    <a href="{{info.flowchart}}"><i class="fas fa-sitemap"></i></a>
+                {{/if}}
+            <td>
                 <div>
                     <ul class="fa-ul">
                         {{#each datasets}}
@@ -48,16 +54,6 @@
             </td>
             <td data-order="{{lastModifiedMillis}}">
                 {{lastModified}}
-            </td>
-            <td>
-                <a href='{{../githubcogs}}/datasets/{{directory}}/spec.html'>
-                    <img src='specicon.png' height='60px' width='100px'/>
-                </a>
-            </td>
-             <td>
-                <a href='{{../githubcogs}}/datasets/specflowcharts.html?{{directory}}/flowchart.ttl'>
-                    <img src='fcicon.png' height='60px' width='60px'/>
-                </a>
             </td>
         </tr>
     {{/each}}

@@ -57,14 +57,14 @@ if (dataset) {
         $.get({url: "spec.hbs", dataType: "html"}, function (source) {
             const template = Handlebars.compile(source);
             $.getJSON('info.json', function (mainInfo) {
-                let jenkins_job = mainInfo.jenkins.path.map(function (p) {
+                let spec_url = mainInfo.jenkins.path.map(function (p) {
                     return 'job/' + p;
-                }).join('/');
-                $.getJSON(jenkins_job + '/lastSuccessfulBuild/artifact/spec.json', function (specs_obj) {
+                }).join('/') + dataset + '/lastBuild/artifact/datasets/' + dataset + '/out/spec.json';
+                $.getJSON(spec_url, function (spec_obj) {
                     $("#body").html(template({
                         "dataset_path": dataset,
                         "main": mainInfo,
-                        "specs": specs_obj
+                        "spec": spec_obj
                     }));
                 });
             });
@@ -119,7 +119,7 @@ if (dataset) {
       if (i.hasOwnProperty('families') && !i.families.includes(f)) {
         return 'text-danger';
       } else if (i.hasOwnProperty('extract') && i.extract.hasOwnProperty('stage')) {
-        if (i.extract.stage == 'Prioritized') {
+        if (i.extract.stage === 'Prioritized') {
           return 'text-body';
         } else {
           return 'text-muted';
@@ -136,7 +136,25 @@ if (dataset) {
         $.getJSON('info.json', function(info) {
             document.title = "Dataset family: " + info.family;
             const fetches = info.pipelines.map(function (pipeline) {
-                return $.getJSON(pipeline + '/info.json');
+                return $.getJSON(pipeline + '/info.json')
+                    .then(function (info) {
+                        return $.ajax({url: pipeline + '/spec.md', method: 'HEAD'})
+                            .then(function () {
+                                info.spec = pipeline + '/spec';
+                                return info;
+                            }, function() {
+                                return $.Deferred().resolve(info).promise();
+                            });
+                        })
+                    .then(function(info) {
+                        return $.ajax({url: pipeline + '/flowchart.ttl', method: 'HEAD'})
+                            .then(function () {
+                                info.flowchart = 'specflowcharts.html?' + pipeline + '/flowchart.ttl';
+                                return info;
+                            }, function() {
+                                return $.Deferred().resolve(info).promise();
+                            });
+                    });
             });
             $.when.apply($, fetches).then(function() {
                 const allInfo = arguments;
@@ -144,7 +162,7 @@ if (dataset) {
                     return {
                         'directory': pipeline,
                         'number': i + 1,
-                        'info': allInfo[i][0]
+                        'info': allInfo[i]
                     };
                 });
                 let fetchDatasets;

@@ -68,7 +68,7 @@ def rangeToDuration(r):
     return f'gregorian-interval/{start.isoformat()}/{isodate.duration_isoformat(end - start)}'
     
 cube2['Notification Date'] = cube2['Notification Date'].map(rangeToDuration)
-pd.
+cube2['Value'] = pd.to_numeric(cube2['Value'], downcast='integer')
 cube2
 # -
 

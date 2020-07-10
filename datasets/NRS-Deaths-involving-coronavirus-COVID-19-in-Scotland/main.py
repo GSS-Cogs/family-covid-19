@@ -23,7 +23,7 @@ all_dat.append(tidy)
 
 print('Date range from NRS All Deaths script: ' + str(date_range) + ' Days')
 print('Minimum date from NRS All Deaths script: ' + str(min_date))
-date_range_str = 'gregorian-day/' + str(min_date).replace(' ','T') + '/P' + str(date_range) + 'D'
+date_range_str = 'gregorian-interval/' + str(min_date).replace(' ','T') + '/P' + str(date_range) + 'D'
 print('Formatted date range string: ' + date_range_str)
 
 # Replace nans in the Period column with the date range value

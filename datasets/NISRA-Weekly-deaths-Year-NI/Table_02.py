@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # # NISRA Weekly deaths,  Year   NI 
 #
-# ### Sheet : Table 4
+# ### Sheet : Table 2
 
 # +
 from gssutils import * 
@@ -13,9 +13,9 @@ from datetime import datetime, timedelta
 def week_ending_to_week_beginning_date_time (week_ending_date):
     if len(week_ending_date)  == 10:
         week_ending_date = datetime.strptime(week_ending_date, "%Y-%m-%d")
-        week_beginning_date = week_ending_date - timedelta(7)
+        week_beginning_date = week_ending_date - timedelta(6)
         week_beginning_date = week_beginning_date.strftime("%Y-%m-%d")
-        return 'gregorian-interval/' + week_beginning_date + 'T00:00:00/P7D'
+        return 'gregorian-interval/' + week_beginning_date + 'T00:00:00/P6D'
     else:
         return 'year/2020'
 
@@ -34,16 +34,16 @@ df = pd.DataFrame()
 for name, tab in tabs.items():
     if 'Contents' in name or 'Background' in name or 'Definitions' in name:
         continue
-    if name == 'Table 4':
+    if name == 'Table 2':
         gender = tab.excel_ref('A6').expand(DOWN).is_not_blank()
         age = tab.excel_ref('B6').expand(DOWN).is_not_blank()
-        week_number = tab.excel_ref('C4').expand(RIGHT) #- tab.excel_ref('W3').expand(RIGHT)
-        week_ending = tab.excel_ref('C5').expand(RIGHT) #- tab.excel_ref('W4').expand(RIGHT)
-        marker = 'Provisional'
+        week_number = tab.excel_ref('C4').expand(RIGHT).is_not_blank()
+        week_ending = tab.excel_ref('C5').expand(RIGHT)
+        marker = 'provisional'
         unit = 'Count'
         measure_type = 'Deaths'
-        observations = week_ending.fill(DOWN).is_not_blank()
-        
+        observations = week_number.shift(0,1).fill(DOWN).is_not_blank()
+        #savepreviewhtml(observations)
         Dimensions = [
             HDim(gender,'Gender',CLOSEST,ABOVE),
             HDim(age,'Age',DIRECTLY,LEFT),
@@ -58,10 +58,10 @@ for name, tab in tabs.items():
         new_table = c1.topandas()
         df = pd.concat([df, new_table], sort=False)
 
-import numpy as np
 df.rename(columns={'OBS': 'Value', 'DATAMARKER' : 'Marker'}, inplace=True)
-df['Period'] =  df["Week Ending"].apply(week_ending_to_week_beginning_date_time)
+df = df.replace({'Week Ending' : {'' : 'Year to Date'}})
 df['Week Number'] = df.apply(lambda x: x['Week Number'].replace('.0', ''), axis = 1)
+df['Period'] =  df["Week Ending"].apply(week_ending_to_week_beginning_date_time)
 df = df.replace('', np.nan, regex=True)
 
 from IPython.core.display import HTML
@@ -79,21 +79,18 @@ for column in df:
 tidy = df[['Gender', 'Age', 'Week Number', 'Period', 'Measure Type', 'Unit', 'Marker', 'Value']]
 tidy
 
-# +
 destinationFolder = Path('out')
 destinationFolder.mkdir(exist_ok=True, parents=True)
-
-TITLE = 'Covid-19 Deaths registered each week in Northern Ireland, age by sex'
+TITLE = 'Deaths registered each week in Northern Ireland'
 OBS_ID = pathify(TITLE)
 GROUP_ID = pathify(os.environ.get('JOB_NAME', 'gss_data/covid-19/' + Path(os.getcwd()).name))
 tidy.drop_duplicates().to_csv(destinationFolder / f'{OBS_ID}.csv', index = False)
-# -
 
 notes = """
 P Weekly published data are provisional.
 1 This data is based on registrations of deaths, not occurrences. The majority of deaths are registered within five days in Northern Ireland.
-2 COVID-19 deaths include any death where Coronavirus or COVID-19 (suspected or confirmed) was mentioned anywhere on the death certificate.
 """
+
 
 ######## BELOW COMMENT OUT FOR NOW ######
 """

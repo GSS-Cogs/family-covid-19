@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # # NISRA Weekly deaths,  Year   NI 
 #
-# ### Sheet   : Table 9
+# ### Sheet : Table 6
 
 # +
 from gssutils import * 
@@ -13,9 +13,9 @@ from datetime import datetime, timedelta
 def week_ending_to_week_beginning_date_time (week_ending_date):
     if len(week_ending_date)  == 10:
         week_ending_date = datetime.strptime(week_ending_date, "%Y-%m-%d")
-        week_beginning_date = week_ending_date - timedelta(7)
+        week_beginning_date = week_ending_date - timedelta(6)
         week_beginning_date = week_beginning_date.strftime("%Y-%m-%d")
-        return 'gregorian-interval/' + week_beginning_date + 'T00:00:00/P7D'
+        return 'gregorian-interval/' + week_beginning_date + 'T00:00:00/P6D'
     else:
         return 'year/2020'
 
@@ -34,13 +34,13 @@ df = pd.DataFrame()
 for name, tab in tabs.items():
     if 'Contents' in name or 'Background' in name or 'Definitions' in name:
         continue
-    if name == 'Table 9':
+    if name == 'Table 6':
         week_of_death = tab.excel_ref('A5').expand(DOWN).is_not_blank()
         week_ending = tab.excel_ref('B5').expand(DOWN).is_not_blank()
         place_of_death = tab.excel_ref('C4').expand(RIGHT)
-        marker = 'provisional'
-        unit = 'Count' 
-        measure_type = 'Deaths' 
+        marker = 'Provisional'
+        unit = 'Count'
+        measure_type = 'Deaths'
         observations = place_of_death.fill(DOWN).is_not_blank()
         Dimensions = [
             HDim(week_of_death,'Week of Death',DIRECTLY,LEFT),
@@ -55,7 +55,6 @@ for name, tab in tabs.items():
         new_table = c1.topandas()
         df = pd.concat([df, new_table], sort=False)
 
-import numpy as np
 df.rename(columns={'OBS': 'Value', 'DATAMARKER' : 'Marker'}, inplace=True)
 df['Period'] =  df["Week Ending"].apply(week_ending_to_week_beginning_date_time)
 df['Week of Death'] = df.apply(lambda x: x['Week of Death'].replace('.0', ''), axis = 1)
@@ -78,16 +77,17 @@ tidy
 
 destinationFolder = Path('out')
 destinationFolder.mkdir(exist_ok=True, parents=True)
-TITLE = 'Covid-19 death occurrences in Northern Ireland, by week of death and place of death, 2020' 
+TITLE = 'Covid-19 Deaths registered in Northern Ireland by Place of Death'
 OBS_ID = pathify(TITLE)
 GROUP_ID = pathify(os.environ.get('JOB_NAME', 'gss_data/covid-19/' + Path(os.getcwd()).name))
 tidy.drop_duplicates().to_csv(destinationFolder / f'{OBS_ID}.csv', index = False)
 
 notes = """
 P Weekly published data are provisional.
-1 This data is based on the actual date of death, from those deaths registered by GRO up to 1st July 2020. All data in this table are subject to change, as some deaths will have occurred but haven’t been registered yet.
+1 This data is based on registrations of deaths, not occurrences. The majority of deaths are registered within five days in Northern Ireland.
 2 COVID-19 deaths include any death where Coronavirus or COVID-19 (suspected or confirmed) was mentioned anywhere on the death certificate.
-3 The 'Other' category includes deaths at a residential address which was not the usual address of the deceased and all other places.
+3Includes deaths in care homes only. Care home residents who have died in a different location will be counted elsewhere in this table.
+4 The 'Other' category includes deaths at a residential address which was not the usual address of the deceased and all other places.
 """
 
 ######## BELOW COMMENT OUT FOR NOW ######

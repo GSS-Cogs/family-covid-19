@@ -68,25 +68,17 @@ tidy1['Value'] = pd.to_numeric(tidy1['Value'], downcast='integer')
 tidy1['Care Provided'] = 'total'
 tidy1['Cause of Death'] = 'total'
 tidy1
+# -
 
-# +
 tidy2 = tables['notifications-of-service-user-deaths-received-from-adult-care-homes'].copy()
+display(tidy2)
 tidy2.drop(columns=['Measure Type', 'Unit'], inplace=True)
 tidy2.rename(columns={'Notification Date Range': 'Notification Date'}, inplace=True)
-
-from datetime import datetime
-import isodate
-
-def rangeToDuration(r):
-    start, end = [datetime.strptime(d.strip(), '%d/%m/%Y') for d in r.split('-')]
-    return f'gregorian-interval/{start.isoformat()}/{isodate.duration_isoformat(end - start)}'
-    
-tidy2['Notification Date'] = tidy2['Notification Date'].map(rangeToDuration)
+tidy2['Notification Date'] = tidy2['Notification Date'].map(lambda x: 'gregorian-interval/' + x)
 tidy2['Value'] = pd.to_numeric(tidy2['Value'], downcast='integer')
 tidy2['Area Code'] = 'W92000004'
 tidy2['Cause of Death'] = 'total'
 tidy2
-# -
 
 tidy3 = tables['notifications-of-deaths-of-residents-from-adult-care-homes-by-date-of-notification-and-cause'].copy()
 tidy3 = tidy3[tidy3['Marker'].isna()]

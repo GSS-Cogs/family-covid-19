@@ -52,13 +52,22 @@ else:
             raise Exception("Expected ref cell not found")
         #Define dimensions and transform
         notification_date_range = ref_cell.shift(0,-2) # Date at end, will need to be filtered out (last 17 )
+        import re
+        DATE_RANGE_RE = re.compile(r'.*([0-9]+/[0-9]+/[0-9]+)[^0-9]+([0-9]+/[0-9]+/[0-9]+)')
+        date_range_match = DATE_RANGE_RE.match(notification_date_range.value)
+        from dateutil.parser import parse
+        start_date = parse(date_range_match.group(1))
+        end_date = parse(date_range_match.group(2))
         location_of_death = ref_cell.expand(DOWN).is_not_blank()
         measure_type = 'Deaths'
         unit = 'Count'
         observations = location_of_death.fill(RIGHT).is_not_blank()
         #savepreviewhtml(observations)
+        import isodate
         dimensions = [
-            HDim(notification_date_range, 'Notification Date Range', CLOSEST, ABOVE),
+            HDimConst(
+                'Notification Date Range',
+                f'{start_date.isoformat()}/{isodate.duration_isoformat(end_date - start_date)}'),
             HDim(location_of_death, 'Location of Death', DIRECTLY, LEFT),
             HDimConst('Measure Type', measure_type),
             HDimConst('Unit', unit),
@@ -66,11 +75,11 @@ else:
         c1 = ConversionSegment(observations, dimensions, processTIMEUNIT=True)
         savepreviewhtml(c1, fname=tab.name + "Preview.html")
         new_table = c1.topandas()
-        df = pd.concat([df, new_table], sort=False)   
+        df = pd.concat([df, new_table], sort=False)
+df
 
 
 df.rename(columns={'OBS': 'Value', 'DATAMARKER' : 'Marker'}, inplace=True)
-df['Notification Date Range'] = [x.strip()[-19:] for x in df['Notification Date Range']]
 df = df.replace('', np.nan, regex=True)
 
 from IPython.core.display import HTML

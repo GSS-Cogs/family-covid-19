@@ -15,7 +15,7 @@ def week_ending_to_week_beginning_date_time (week_ending_date):
         week_ending_date = datetime.strptime(week_ending_date, "%Y-%m-%d")
         week_beginning_date = week_ending_date - timedelta(6)
         week_beginning_date = week_beginning_date.strftime("%Y-%m-%d")
-        return 'gregorian-interval/' + week_beginning_date + 'T00:00:00/P6D'
+        return 'gregorian-interval/' + week_beginning_date + 'T00:00:00/P7D'
     else:
         return 'year/2020'
 

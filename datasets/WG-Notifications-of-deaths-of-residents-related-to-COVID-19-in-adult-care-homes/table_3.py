@@ -4,11 +4,19 @@ from gssutils import *
 import json 
 import numpy as np
 
-scrape = Scraper(seed="info.json")   
-scrape.distributions[0].title = "Notifications of deaths of residents related to COVID-19 in adult care homes"
-scrape
-
-tabs = { tab.name: tab for tab in scrape.distributions[0].as_databaker() }
+if is_interactive():
+    from requests import Session
+    from cachecontrol import CacheControl
+    from cachecontrol.caches.file_cache import FileCache
+    from cachecontrol.heuristics import ExpiresAfter
+    scrape = Scraper(seed="info.json",
+                     session=CacheControl(Session(), cache=FileCache('.cache'), heuristic=ExpiresAfter(days=1))
+    )
+    dist = scrape.distribution(
+        latest=True,
+        title=lambda x: x.startswith('Notifications of deaths of residents related to COVID-19')
+    )
+    tabs = { tab.name: tab for tab in dist.as_databaker() }
 list(tabs)
 
 
@@ -65,17 +73,29 @@ else:
         savepreviewhtml(c1, fname=tab.name + "Preview.html")
         new_table = c1.topandas()
         df = pd.concat([df, new_table], sort=False)   
+df
 
 
 # +
 df.rename(columns={'OBS': 'Value', 'DATAMARKER' : 'Marker'}, inplace=True)
 df['Cause of Death'] =  df['Cause of Death'] + ' ' +  df['Cause of Death 2'] 
 df.drop('Cause of Death 2', axis=1, inplace=True)
-df['Notification Year'] = df.apply(lambda x: x['Notification Year'].replace('.0', ''), axis = 1)
+
+from datetime import date
+def to_date(row):
+    year = row['Notification Year']
+    return f"{year}{row['Notification Day'][4:]}"
+
+
+df['Notification Year'] = pd.to_numeric(df['Notification Year'], downcast='integer')
+df['Notification Day'] = df.apply(to_date, axis=1)
+df.drop('Notification Year', axis=1, inplace=True)
+#df['Notification Year'] = df.apply(lambda x: x['Notification Year'].replace('.0', ''), axis = 1)
 
 ## Anticipating the two 'totals' in the dimension 'Cause of Death' will cause a duplicate key error ##
 
 df = df.replace('', np.nan, regex=True)
+df
 # -
 
 from IPython.core.display import HTML
@@ -90,7 +110,7 @@ for column in df:
         df[column] = df[column].str.lstrip()
         df[column] = df[column].map(lambda x: pathify(x))
 
-tidy = df[['Notification Day', 'Notification Year', 'Cause of Death', 'Measure Type', 'Unit', 'Value', 'Marker']]
+tidy = df[['Notification Day', 'Cause of Death', 'Measure Type', 'Unit', 'Value', 'Marker']]
 
 # +
 destinationFolder = Path('out')

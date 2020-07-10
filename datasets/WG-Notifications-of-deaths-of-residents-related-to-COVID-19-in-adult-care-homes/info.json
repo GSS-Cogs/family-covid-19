@@ -3,7 +3,6 @@
     "publisher": "Welsh Government",
     "description": "Notifications to Care Inspectorate Wales of deaths of residents related to COVID-19 in adult care homes during the coronavirus pandemic",
     "landingPage": "https://gov.wales/notifications-deaths-residents-related-covid-19-adult-care-homes",
-    "dataURL": "https://gov.wales/sites/default/files/statistics-and-research/2020-06/notifications-of-deaths-of-residents-related-to-covid-19-in-adult-care-homes-1-march-to-29-may-2020-138.ods",
     "datasetNotes": [
         "On the landing page scroll to the latest release, this will open another page scroll to data and click on the + the spreadsheet can be found here"
     ],

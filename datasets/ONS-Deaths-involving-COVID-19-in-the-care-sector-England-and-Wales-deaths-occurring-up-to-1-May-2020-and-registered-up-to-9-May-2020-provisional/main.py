@@ -15,6 +15,62 @@ tabs = scraper.distribution(latest=True).as_databaker()
 source_sheet = scraper.distribution(latest=True).downloadURL
 print("Using source data", source_sheet)
 scraper 
+# -
+
+# ## Geography
+#
+# Using a cmd api for this (should probably be the open geography portal) plus some overides to save having to hard code a billion things.
+
+# +
+import requests
+
+class Geography(object):
+    """
+    We're going to 'borrow' a json representation of the admin hierarchy to do
+    some basic lookups of area codes.
+    """
+
+    def __init__(self, url, overrides={}):
+        self.url = url
+        r = requests.get(self.url)
+        if r.status_code != 200:
+            raise Exception("Failed to get geography codes off cmd, status code {},from url {}" \
+                           .format(r.status_code, self.url))
+        self.json = r.json()
+        
+        # Where the same label is used for two codes, we use an overrides dict to pass in 
+        # specific choices
+        self.overrides = overrides
+        
+    def __call__(self, label):
+        
+        if label in self.overrides.keys():
+            return self.overrides[label]
+        else:
+            found = []
+            for item in self.json["items"]:
+                if item["label"].lower().strip() == label.lower().strip():
+                    found.append(item["code"])
+            assert len(found) == 1, f"There is not exactly one code for {label} on {self.url}." \
+                            f" Instead we got: {','.join(found)}"
+            return found[0]
+                
+region_overrides = {
+     'England and Wales': 'K04000001',
+     'England': 'E92000001',
+     'Wales': 'E05001035',
+     'East': 'E12000006'
+}
+get_regions = Geography("https://api.beta.ons.gov.uk/v1/code-lists/regions/editions/2017/codes", 
+                        overrides=region_overrides)
+
+local_authority_overrides = {
+     'England and Wales': 'K04000001',
+     'England': 'E92000001',
+     'Wales': 'E05001035'
+}
+get_local_authorities = Geography("https://api.beta.ons.gov.uk/v1/code-lists/local-authority/editions/2016/codes", 
+                                overrides=local_authority_overrides)
 
 
 # -
@@ -31,6 +87,7 @@ def tabs_from_named(tabs, wanted):
         f"Could not find tab name {','.join(wanted)} in tabs {','.join([x.name for x in tabs])}"
     return wanted_tabs
  
+
 class is_type(object):
     """Filter to match cell on type of cell.value"""
     
@@ -39,6 +96,7 @@ class is_type(object):
         
     def __call__(self, cell):
         return True if type(cell.value) == self.type_wanted else False
+
     
 def assert_one_of(cells, name_of_selection, expected):
     """Given a list of acceptable values, blow up if we get something else"""
@@ -48,7 +106,8 @@ def assert_one_of(cells, name_of_selection, expected):
                 logging.warning(f"When asserting '{name_of_selection}' we matched cell '{cell}' to expected, but with rogue whitepace detected.")
             else:    
                 raise AssertionError(f"When asserting '{name_of_selection}' the cell '{cell}' does not contain a value from {','.join(expected)}")
-    
+
+                
 def assert_numeric_or_marker(cells, acceptable_markers):
     """Given a selection of cells, assert their values are all numeric or a marker from the provided list"""
     for cell in cells:
@@ -63,7 +122,8 @@ def assert_numeric_or_marker(cells, acceptable_markers):
             return
         except Exception as e:
             raise exc from e
-    
+
+            
 def assert_continuous_sequence(cells, direction):
     """Given a bag of cells, assert they form a continuous sequence without gaps"""
     assert direction in [UP, DOWN, LEFT, RIGHT], "You need to supply a direction for assert_continuous_sequence"
@@ -83,7 +143,8 @@ def assert_continuous_sequence(cells, direction):
         for cell in cells:
             if cell.x+1 not in all_x and cell.x-1 not in all_x:
                 raise AssertionError(f"There is a gap in your sequential horizontal selection near {cell}")
-        
+
+
 def create_tidy(cs, tab_name, trace):
     """Wrap some standard operations to avoid repeating ourselves"""
     df = cs.topandas().fillna("")
@@ -96,6 +157,7 @@ def create_tidy(cs, tab_name, trace):
     df = apply_markers(df, tab_name, trace)
 
     return df
+
 
 def get_title_and_footnotes(tab):
     """
@@ -139,9 +201,11 @@ def find_source_cell(tab):
         raise
     return s
 
+
 def get_unwanted(tab):
     """return anything level with or below the source cell"""
     return find_source_cell(tab).expand(DOWN).expand(RIGHT)
+
 
 # TODO
 def apply_measures(df, tab_name, trace):
@@ -164,6 +228,7 @@ def apply_measures(df, tab_name, trace):
         
     return df
 
+
 # TODO
 def apply_markers(df, tab_name, trace):
     """Given a dataframe and the source tab name, add our version of the data markers"""
@@ -178,6 +243,7 @@ def apply_markers(df, tab_name, trace):
     trace.Marker("Converting data markers with the lookup: {}", var=json.dumps(markers))
     return df
 
+
 def excelRange(bag):
     min_x = min([cell.x for cell in bag])
     max_x = max([cell.x for cell in bag])
@@ -187,8 +253,30 @@ def excelRange(bag):
     bottom_right_cell = xypath.contrib.excel.excel_location(bag.filter(lambda x: x.x == max_x and x.y == max_y))
     return f"{top_left_cell}:{bottom_right_cell}"
     
+    
+class format_time(object):
+    """
+    Appliable class for formatting dates based on the style used
+    """
+    
+    def __init__(self, time_style):
+        allowed = { 
+            "specific_day": self._specific_day
+        }
+        assert time_style in allowed.keys(), f"There is no handling for the time style {time_style}"
+        self.date_style = allowed[time_style] 
+        
+    def _specific_day(self, cell_val):
+        # from: 28/12/2019
+        # to:  gregorian/{year}-{month}-{day}
+        return ">>>>"+str(cell_val)
+    
+    def __call__(self, cell_val):
+        return self.date_style(cell_val)
+    
 trace = TransformTrace()
-footnotes_dict = {} # comments on approach
+footnotes_dict = {}
+comments = {}
 # -
 # ## Transform: Table 1
 
@@ -239,6 +327,7 @@ for tab in tabs_from_named(tabs, "Table 1"):
 
         cs = ConversionSegment(obs, dimensions)
         df = create_tidy(cs, tab.name, trace)
+        df["Period"] = df["Period"].apply(format_time("specific_day"))
         
         # Split source and area
         df["Area"] = df["Source"].map(lambda x: x.split("(")[0].strip())
@@ -251,15 +340,16 @@ for tab in tabs_from_named(tabs, "Table 1"):
         trace.multi(["Source", "Area"], "Split the cells extracted as 'Source' into seperate " \
                    "Source and Area columns")
         
+        # Codeify area column
+        df["Area"] = df["Area"].apply(get_regions)
+        trace.Area("Converted all area labels to 9 digit ONS codes.")
+        
         df.to_csv("{}.csv".format(pathify(title)), index=False)
         
     except Exception as e:
         raise Exception(f"Problem encountered processing cube from tab '{tab.name}'.") from e
 
 # ## Transform: Table 2
-
-
-
 
 for tab in tabs_from_named(tabs, "Table 2"):
     
@@ -302,6 +392,11 @@ for tab in tabs_from_named(tabs, "Table 2"):
 
         cs = ConversionSegment(obs, dimensions)
         df = create_tidy(cs, tab.name, trace)
+        
+        # Codeify area column
+        df["Area"] = df["Area"].apply(get_regions)
+        trace.Area("Converted all area labels to 9 digit ONS codes.")
+        
         df.to_csv("{}.csv".format(pathify(title)), index=False)
 
     except Exception as e:
@@ -310,7 +405,6 @@ for tab in tabs_from_named(tabs, "Table 2"):
 # ## Transform: Tables 3 & 4
 
 # +
-cube3n4 = []
 cube3n4_title = "Number of deaths, age standardised and age specific mortality rates, by sex"
 for tab in tabs_from_named(tabs, ["Table 3", "Table 4"]):
 
@@ -395,18 +489,23 @@ for tab in tabs_from_named(tabs, ["Table 3", "Table 4"]):
                 
         # Tidy up temporary nonsence
         df = df.drop(["Composite", "TEMP_FOR_ATTRIBUTES"], axis=1)
-        cube3n4.append(df)
+        
+        # Codeify area column
+        df["Area"] = df["Area"].apply(get_regions)
+        trace.Area("Converted all area labels to 9 digit ONS codes.")
+        
+        trace.store(cube3n4_title, df)
         
     except Exception as e:
         raise Exception(f"Problem encountered processing cube '{cube3n4_title}' from tab '{tab.name}'.") from e
         
-pd.concat(cube3n4).to_csv(f"{pathify(cube3n4_title)}.csv", index=False)
+df = trace.combine_and_trace(cube3n4_title, cube3n4_title)
+df.to_csv(f"{pathify(cube3n4_title)}.csv", index=False)
 # -
 
 # ## Transform: Table 5, 6
 
 # +
-cube5n6 = []
 cube5n6_title = "Number of deaths of care home residents by place of death"
 for tab in tabs_from_named(tabs, ["Table 5", "Table 6"]):
     
@@ -449,19 +548,25 @@ for tab in tabs_from_named(tabs, ["Table 5", "Table 6"]):
         
         cs = ConversionSegment(obs, dimensions)
         df = create_tidy(cs, tab.name, trace)
-        cube5n6.append(df)
-    
+        
+        # Codeify area column
+        df["Area"] = df["Area"].apply(get_regions)
+        trace.Area("Converted all area labels to 9 digit ONS codes.")
+                
+        trace.store(cube5n6_title, df)
+        
     except Exception as e:
         raise Exception(f"Problem encountered processing cube '{cube5n6_title}' from tab '{tab.name}'.") from e
         
-pd.concat(cube5n6).to_csv(f"{pathify(cube5n6_title)}.csv", index=False)
+df = trace.combine_and_trace(cube5n6_title, cube5n6_title)
+df.to_csv(f"{pathify(cube5n6_title)}.csv", index=False)
+
 # -
 
 
 # ## Transform: Table 7,8
 
 # +
-cube7n8 = []
 cube7n8_title = "Number of deaths of care home residents notified to the Care Quality Commission"
 for tab in tabs_from_named(tabs, ["Table 7", "Table 8"]):
     
@@ -469,7 +574,7 @@ for tab in tabs_from_named(tabs, ["Table 7", "Table 8"]):
         title, footnotes = get_title_and_footnotes(tab)
         footnotes_dict[tab.name] = footnotes
         
-        columns=['Period', 'Place Of Death', 'Cause Of Death']
+        columns=['Period', 'Place Of Death', 'Area', 'Cause Of Death']
         trace.start(cube7n8_title, tab, columns, source_sheet)
         
         date_cell = tab.excel_ref("A").filter("Date").assert_one()
@@ -496,20 +601,31 @@ for tab in tabs_from_named(tabs, ["Table 7", "Table 8"]):
         obs = period.waffle(place_of_death)
         assert_numeric_or_marker(obs, [":"])
         
+        area = "England" if tab.name.strip() == "Table 7" else "Wales"
+        trace.Area("Set to 'England for table 7, else 'Wales'.")
+        
         dimensions = [
             HDim(period, "Period", DIRECTLY, LEFT),
             HDim(place_of_death, "Place Of Death", DIRECTLY, ABOVE),
             HDim(cause_of_death, "Cause Of Death", CLOSEST, LEFT),
+            HDimConst("Area", area)
         ]
         
         cs = ConversionSegment(obs, dimensions)
         df = create_tidy(cs, tab.name, trace)
-        cube7n8.append(df)
-
+        
+        # Codeify area column
+        df["Area"] = df["Area"].apply(get_regions)
+        trace.Area("Converted all area labels to 9 digit ONS codes.")
+        
+        trace.store(cube7n8_title, df)
+        
     except Exception as e:
         raise Exception(f"Problem encountered processing cube '{cube7n8_title}' from tab '{tab.name}'.") from e
         
-pd.concat(cube7n8).to_csv(f"{pathify(cube7n8_title)}.csv", index=False)
+df = trace.combine_and_trace(cube7n8_title, cube7n8_title)
+df.to_csv(f"{pathify(cube7n8_title)}.csv", index=False)
+
 # -
 
 
@@ -521,7 +637,7 @@ for tab in tabs_from_named(tabs, ["Table 9"]):
         title, footnotes = get_title_and_footnotes(tab)
         footnotes_dict[tab.name] = footnotes
         
-        columns=['Period', 'Place Of Death', 'Cause Of Death']
+        columns=['Period', 'Place Of Death', 'Area', 'Cause Of Death']
         trace.start(title, tab, columns, source_sheet)
         
         date_cell = tab.excel_ref("A").filter("Date").assert_one()
@@ -547,15 +663,24 @@ for tab in tabs_from_named(tabs, ["Table 9"]):
         
         obs = period.waffle(place_of_death)
         assert_numeric_or_marker(obs, [":"])
+                
+        area = "England"
+        trace.Area("Hard coded Area to {}", var=area)
         
         dimensions = [
             HDim(period, "Period", DIRECTLY, LEFT),
             HDim(place_of_death, "Place Of Death", DIRECTLY, ABOVE),
             HDim(cause_of_death, "Cause Of Death", CLOSEST, LEFT),
+            HDimConst("Area", area)
         ]
         
         cs = ConversionSegment(obs, dimensions)
         df = create_tidy(cs, tab.name, trace)
+        
+        # Codeify area column
+        df["Area"] = df["Area"].apply(get_regions)
+        trace.Area("Converted all area labels to 9 digit ONS codes.")
+        
         df.to_csv("{}.csv".format(pathify(title)), index=False)
 
     except Exception as e:
@@ -570,7 +695,7 @@ for tab in tabs_from_named(tabs, ["Table 10"]):
         title, footnotes = get_title_and_footnotes(tab)
         footnotes_dict[tab.name] = footnotes
         
-        columns=['Value', 'Category', 'Period']
+        columns=['Value', 'Category', 'Period', 'Area']
         trace.start(title, tab, columns, source_sheet)
         
         date_cell = tab.excel_ref("A").filter("Date").assert_one()
@@ -590,13 +715,22 @@ for tab in tabs_from_named(tabs, ["Table 10"]):
         obs = category.waffle(period)
         assert_numeric_or_marker(obs, [":"])
         
+        area = "England"
+        trace.Area("Hard coded Area to {}", var=area)
+        
         dimensions = [
             HDim(category, "Category", DIRECTLY, ABOVE),
-            HDim(period, "Period", DIRECTLY, LEFT)
+            HDim(period, "Period", DIRECTLY, LEFT),
+            HDimConst("Area", area)
         ]
         
         cs = ConversionSegment(obs, dimensions)
         df = create_tidy(cs, tab.name, trace)
+        
+        # Codeify area column
+        df["Area"] = df["Area"].apply(get_regions)
+        trace.Area("Converted all area labels to 9 digit ONS codes.")
+        
         df.to_csv("{}.csv".format(pathify(title)), index=False)
         
     except Exception as e:
@@ -646,6 +780,11 @@ for tab in tabs_from_named(tabs, ["Table 11"]):
 
         cs = ConversionSegment(obs, dimensions)
         df = create_tidy(cs, tab.name, trace)
+        
+        # Codeify area column
+        df["Area"] = df["Area"].apply(get_regions)
+        trace.Area("Converted all area labels to 9 digit ONS codes.")
+        
         df.to_csv("{}.csv".format(pathify(title)), index=False)
         
     except Exception as e:
@@ -655,7 +794,6 @@ for tab in tabs_from_named(tabs, ["Table 11"]):
 # ## Transform: Tables 12 & 13
 
 # +
-cube12n13 = []
 cube12n13_title = "Number of weekly deaths of care home residents by local authority"
 for tab in tabs_from_named(tabs, ["Table 12", "Table 13"]):
     
@@ -698,19 +836,21 @@ for tab in tabs_from_named(tabs, ["Table 12", "Table 13"]):
         
         cs = ConversionSegment(obs, dimensions)
         df = create_tidy(cs, tab.name, trace)
-        cube12n13.append(df)
+        
+        trace.store(cube12n13_title, df)
         
     except Exception as e:
         raise Exception(f"Problem encountered processing cube '{cube12n13_title}' from tab '{tab.name}'.") from e
         
-pd.concat(cube12n13).to_csv(f"{pathify(cube12n13_title)}.csv", index=False)
+df = trace.combine_and_trace(cube12n13_title, cube12n13_title)
+df.to_csv(f"{pathify(cube12n13_title)}.csv", index=False)
+
 # -
 
 
 # ## Tables 14 & 15
 
 # +
-cube14n15 = []
 cube14n15_title = "Number of weekly deaths of care home residents by local authority"
 for tab in tabs_from_named(tabs, ["Table 14", "Table 15"]):
     
@@ -759,16 +899,25 @@ for tab in tabs_from_named(tabs, ["Table 14", "Table 15"]):
         cs = ConversionSegment(obs, dimensions)
         df = create_tidy(cs, tab.name, trace)
         
+        # Make a note about stupid geography
+        if tab.name not in comments.keys():
+            comments[tab.name] = []
+        comments[tab.name].append("Cant codify geography for this. Needs investigating but they seem to be" \
+                              " inventing geographies by ramming some places together randomly. " \
+                               "eg 'Bournemouth, Christchurch and Poole'.")
+        
         # Where the period is "Grand Total" set the week no to "All"
         assert "Grand total" in df["Period"].unique(), "The label 'Grand total' is expected and required"
         df["Week Number"][df["Period"] == "Grand total"] = "All"
         
-        cube14n15.append(df)
-    
+        trace.store(cube14n15_title, df)
+        
     except Exception as e:
         raise Exception(f"Problem encountered processing cube '{cube14n15_title}' from tab '{tab.name}'.") from e
+        
+df = trace.combine_and_trace(cube14n15_title, cube14n15_title)
+df.to_csv(f"{pathify(cube14n15_title)}.csv", index=False)
 
-pd.concat(cube14n15).to_csv(f"{pathify(cube14n15_title)}.csv", index=False)
 # -
 
 
@@ -815,6 +964,7 @@ for tab in tabs_from_named(tabs, ["Table 16"]):
         
         cs = ConversionSegment(obs, dimensions)
         df = create_tidy(cs, tab.name, trace)
+        
         df.to_csv("{}.csv".format(pathify(title)), index=False)
         
     except Exception as e:
@@ -864,6 +1014,11 @@ for tab in tabs_from_named(tabs, ["Table 17"]):
         
         cs = ConversionSegment(obs, dimensions)
         df = create_tidy(cs, tab.name, trace)
+        
+        # Codeify area column
+        df["Area"] = df["Area"].apply(get_regions)
+        trace.Area("Converted all area labels to 9 digit ONS codes.")
+        
         df.to_csv("{}.csv".format(pathify(title)), index=False)
         
     except Exception as e:
@@ -876,7 +1031,7 @@ for tab in tabs_from_named(tabs, ["Table 18"]):
         title, footnotes = get_title_and_footnotes(tab)
         footnotes_dict[tab.name] = footnotes
         
-        columns=['Sex', 'Age Group', 'Pre-existing Condition']
+        columns=['Sex', 'Age Group', 'Pre-existing Condition', 'Area']
         trace.start(title, tab, columns, source_sheet)
         
         condition_header = tab.excel_ref('A').filter("Main pre-existing condition").assert_one()
@@ -899,20 +1054,32 @@ for tab in tabs_from_named(tabs, ["Table 18"]):
         trace.Age_Group('{} dimension "Age Group" taken from horizontal, plus the "All persons"' \
                        " entry from column B (as otherwise it would be blank).", var=excelRange(age_group))
         
+        # Area
+        assert "England and Wales" in tab.excel_ref("A2").value, "Expecting 'England and Wales' in cell A2"
+        area = "England and Wales"
+        trace.Area("Hard coding area to 'England and Wales'")
+        
         obs = condition.waffle(age_group)
         
         dimensions = [
             HDim(sex, "Sex", CLOSEST, LEFT),
             HDim(age_group, "Age Group", DIRECTLY, ABOVE),
-            HDim(condition, "Pre-existing Condition", DIRECTLY, LEFT)
+            HDim(condition, "Pre-existing Condition", DIRECTLY, LEFT),
+            HDimConst("Area", area)
         ]
         
         cs = ConversionSegment(obs, dimensions)
         df = create_tidy(cs, tab.name, trace)
+        
+        # Codeify area column
+        df["Area"] = df["Area"].apply(get_regions)
+        trace.Area("Converted all area labels to 9 digit ONS codes.")
+        
         df.to_csv("{}.csv".format(pathify(title)), index=False)
         
     except Exception as e:
         raise Exception(f"Problem encountered processing cube '{title}' from tab '{tab.name}'.") from e
+
 
 # ## Finish
 #
@@ -939,13 +1106,19 @@ for title, details in trace._create_output_dict().items():
             lines.append("#### Table structure")
             lines.append(", ".join([x["column_label"] for x in cube["column_actions"]]))
             lines.append("")
-            lines.append("####Footnotes")
-            for note in list(footnotes_dict[cube["tab"]].values()):
-                lines.append(note)
-            lines.append("-----")
+            lines.append("#### Footnotes")
+            if cube["tab"] in footnotes_dict.keys():
+                for note in list(footnotes_dict[cube["tab"]].values()):
+                    lines.append(note)
+            if cube["tab"] in comments:
+                lines.append("")
+                lines.append("#### DE notes")
+                for comment in comments[cube["tab"]]:
+                    lines.append(comment)
+            lines.append("")
+        lines.append("-----")
 
 for l in lines:
     print(l)
 # -
-
 

@@ -4,13 +4,20 @@ from gssutils import *
 import json 
 import numpy as np
 
-scrape = Scraper(seed="info.json")   
-scrape.distributions[0].title = "Notifications of deaths of residents related to COVID-19 in adult care homes"
-scrape
-
-tabs = { tab.name: tab for tab in scrape.distributions[0].as_databaker() }
+if is_interactive():
+    from requests import Session
+    from cachecontrol import CacheControl
+    from cachecontrol.caches.file_cache import FileCache
+    from cachecontrol.heuristics import ExpiresAfter
+    scrape = Scraper(seed="info.json",
+                     session=CacheControl(Session(), cache=FileCache('.cache'), heuristic=ExpiresAfter(days=1))
+    )
+    dist = scrape.distribution(
+        latest=True,
+        title=lambda x: x.startswith('Notifications of deaths of residents related to COVID-19')
+    )
+    tabs = { tab.name: tab for tab in dist.as_databaker() }
 list(tabs)
-
 
 tab_name_expected = 'Table_1'
 ref_cell_expected = 'Care Provided'

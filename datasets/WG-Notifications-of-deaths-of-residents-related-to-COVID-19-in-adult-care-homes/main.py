@@ -50,16 +50,14 @@ else:
             if file.startswith("'main") == True:
                 continue
             %run -i $file
-            tables[OBS_ID] = tidy
+            tables[pathify(expected_title.strip())] = tidy
 # +
 from IPython.core.display import HTML
 
 for key, table in tables.items():
     display(HTML(f'<h2>{key}</h2>'))
     display(table)                 
-
-# +
-cubes = Cubes('info.json')
+# -
 
 tidy1 = tables['number-of-notifications-of-deaths-of-adult-care-home-residents-involving-covid-19-both-confirmed-and-suspected-occurring-in-care-homes-by-local-authority-and-day-of-notification'].copy()
 tidy1.drop(columns=['Local Authority', 'Unit'], inplace=True)
@@ -68,7 +66,6 @@ tidy1['Value'] = pd.to_numeric(tidy1['Value'], downcast='integer')
 tidy1['Care Provided'] = 'total'
 tidy1['Cause of Death'] = 'total'
 tidy1
-# -
 
 tidy2 = tables['notifications-of-service-user-deaths-received-from-adult-care-homes'].copy()
 display(tidy2)
@@ -90,5 +87,30 @@ tidy3['Care Provided'] = 'total'
 tidy3['Area Code']  = 'W92000004'
 tidy3
 
-cubes.add_cube(scraper, pd.concat([tidy1, tidy2, tidy3], sort=False), scraper.dataset.title)
-cubes.output_all()
+# +
+#cubes = Cubes('info.json')
+#cubes.add_cube(scraper, pd.concat([tidy1, tidy2, tidy3], sort=False), scraper.dataset.title)
+#cubes.output_all()
+
+# +
+import os
+from urllib.parse import urljoin
+
+out = Path('out')
+out.mkdir(exist_ok=True)
+pd.concat([tidy1, tidy2, tidy3], sort=False).drop_duplicates().to_csv(out / 'observations.csv', index = False)
+scraper.dataset.family = 'covid-19'
+
+dataset_path = pathify(os.environ.get('JOB_NAME', 'gss_data/covid-19/' + Path(os.getcwd()).name))
+scraper.set_base_uri('http://gss-data.org.uk')
+scraper.set_dataset_id(dataset_path)
+csvw_transform = CSVWMapping()
+csvw_transform.set_csv(out / 'observations.csv')
+csvw_transform.set_mapping(json.load(open('info.json')))
+csvw_transform.set_dataset_uri(urljoin(scraper._base_uri, f'data/{scraper._dataset_id}'))
+csvw_transform.write(out / 'observations.csv-metadata.json')
+with open(out / 'observations.csv-metadata.trig', 'wb') as metadata:
+    metadata.write(scraper.generate_trig())
+# -
+
+

@@ -86,19 +86,3 @@ for column in df:
         df[column] = df[column].map(lambda x: pathify(x))
 
 tidy = df[['Notification Date', 'Location of Death', 'Measure Type', 'Unit', 'Value']]
-
-# +
-destinationFolder = Path('out')
-destinationFolder.mkdir(exist_ok=True, parents=True)
-
-TITLE = 'Notifications of deaths of adult care home residents by location of death and date of notification'
-OBS_ID = pathify(TITLE)
-import os
-GROUP_ID = pathify(os.environ.get('JOB_NAME', 'gss_data/covid-19/' + Path(os.getcwd()).name))
-
-tidy.drop_duplicates().to_csv(destinationFolder / f'{OBS_ID}.csv', index = False)
-# -
-
-tidy
-
-

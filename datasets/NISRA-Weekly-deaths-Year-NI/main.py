@@ -142,7 +142,13 @@ joined_dat = joined_dat[['Period', 'Local Government District','Registered Death
 # Hopefully all NaN values have been accounted for in the Marker column
 joined_dat['Value'] = joined_dat['Value'].replace(np.nan,0)
 
-joined_dat.head(60)
+joined_dat['Age'] = joined_dat['Age'].replace('<7 days','less than 7 Days')
+joined_dat['Age'] = joined_dat['Age'].replace('>=7 days and < 1 year','more than equal to 7 days and less than 1 year')
+joined_dat['Age'] = joined_dat['Age'].replace('85+','85 plus')
+joined_dat['Age'] = joined_dat['Age'].apply(pathify)
+
+#joined_dat['Age'] - joined_dat['Age'].apply(pathify)
+joined_dat['Age'].unique()
 
 # Output the data to CSV
 csvName = 'registered-deaths-observations.csv'
@@ -269,6 +275,8 @@ csvw_transform.write(out / f'{csvName}.csv-metadata.json')
 with open(out / f'{csvName}.csv-metadata.trig', 'wb') as metadata:
     metadata.write(scrape.generate_trig())
 # -
+
+
 
 
 

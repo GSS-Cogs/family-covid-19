@@ -123,11 +123,6 @@ def get_date_range(title):
     print(t)
     
     return t
-
-#t = "Number of deaths of care home residents by date of death (ONS) and date of notification (CQC and CIW), from 28 December 2019 to 12 June 2020, registered up to 20 June 2020 1,2,3,4,5,6,7,8"
-#t2 = "Number of deaths of care home residents notified to the Care Inspectorate Wales, by date of notification 1 March 2020 to 19 June 2020, and by place of death, Wales 1,2"
-#t3 = "Number of weekly deaths of care home residents by local authority, occurring from week ending 6 March 2020 to 12 June 2020, registered up to 20 June 2020, England and Wales 1,2,3,4,5"
-#get_date_range(t3)
 # -
 
 # ## Helpers
@@ -135,6 +130,13 @@ def get_date_range(title):
 # +
     
 
+def get_day_from_short_month_time(time_str):
+    """ 6-Mar-2020 etc to period URI """
+    if time_str == "Grand total":
+        return time_str
+    time_str = datetime.datetime.strptime(time_str, '%Y-%m-%d')
+    return "day/" + time_str.strftime('%Y-%m-%dT00:00:00')    
+        
 def tabs_from_named(tabs, wanted):
     """Given all labs and a list of tab names wanted, return the ones we want, raise if they're not here"""
     wanted = [wanted] if not isinstance(wanted, list) else wanted
@@ -342,7 +344,7 @@ for tab in tabs_from_named(tabs, "Table 1"):
         title, footnotes = get_title_and_footnotes(tab)
         footnotes_dict[tab.name] = footnotes
         
-        columns=['Marker', 'Date Of Notification', 'Period', 'Cause of death', 'Source', 'Area']
+        columns=['Marker', 'Date of notification', 'Period', 'Cause of death', 'Source', 'Area']
         trace.start(title, tab, columns, source_sheet)
         
         # Start with the date title cell
@@ -351,7 +353,7 @@ for tab in tabs_from_named(tabs, "Table 1"):
         # Date of notification
         date_of_notification = date_cell.fill(DOWN).filter(is_type(datetime.datetime))
         assert_continuous_sequence(date_of_notification, UP)
-        trace.Date_Of_Notification("{} Got 'Date Of Notification' as datatime types in " \
+        trace.Date_of_notification("{} Got 'Date of notification' as datatime types in " \
                                    "column A", var=excelRange(date_of_notification))
 
         # Cause of death
@@ -377,7 +379,7 @@ for tab in tabs_from_named(tabs, "Table 1"):
         assert_numeric_or_marker(obs, [":"])
         
         dimensions = [
-            HDim(date_of_notification, "Date Of Notification", DIRECTLY, LEFT),
+            HDim(date_of_notification, "Date of notification", DIRECTLY, LEFT),
             HDim(cause_of_death, "Cause of death", DIRECTLY, ABOVE),
             HDim(source, "Source", CLOSEST, LEFT),
             HDimConst("Period", get_date_range(tab.excel_ref('A2').value))
@@ -396,6 +398,10 @@ for tab in tabs_from_named(tabs, "Table 1"):
             assert x in ['ONS data', 'CQC data', 'CIW data'], f"{x} is not an expected Source"
         trace.multi(["Source", "Area"], "Split the cells extracted as 'Source' into seperate " \
                    "Source and Area columns")
+        
+        # to day/{year}-{month}-{day}
+        df["Date of notification"] = df["Date of notification"].map(lambda x: "day/"+x.replace("/", "-"))
+        trace.Date_of_notification("Format to single day URI pattern.")
         
         # Codeify area column
         df["Area"] = df["Area"].apply(get_regions)
@@ -613,6 +619,10 @@ for tab in tabs_from_named(tabs, ["Table 5", "Table 6"]):
         df["Area"] = df["Area"].apply(get_regions)
         trace.Area("Converted all area labels to 9 digit ONS codes.")
                 
+        # to day/{year}-{month}-{day}
+        df["Date of death"] = df["Date of death"].map(lambda x: "day/"+x.replace("/", "-"))
+        trace.Date_of_death("Format to single day URI pattern.")
+            
         trace.store(cube5n6_title, df)
         
     except Exception as e:
@@ -679,6 +689,10 @@ for tab in tabs_from_named(tabs, ["Table 7", "Table 8"]):
         df["Area"] = df["Area"].apply(get_regions)
         trace.Area("Converted all area labels to 9 digit ONS codes.")
         
+        # to day/{year}-{month}-{day}
+        df["Date of notification"] = df["Date of notification"].map(lambda x: "day/"+x.replace("/", "-"))
+        trace.Date_of_notification("Format to single day URI pattern.")
+        
         trace.store(cube7n8_title, df)
         
     except Exception as e:
@@ -739,6 +753,10 @@ for tab in tabs_from_named(tabs, ["Table 9"]):
         cs = ConversionSegment(obs, dimensions)
         df = create_tidy(cs, tab.name, trace)
         
+        # to day/{year}-{month}-{day}
+        df["Date of notification"] = df["Date of notification"].map(lambda x: "day/"+x.replace("/", "-"))
+        trace.Date_of_notification("Format to single day URI pattern.")
+        
         # Codeify area column
         df["Area"] = df["Area"].apply(get_regions)
         trace.Area("Converted all area labels to 9 digit ONS codes.")
@@ -793,6 +811,11 @@ for tab in tabs_from_named(tabs, ["Table 10"]):
         # Codeify area column
         df["Area"] = df["Area"].apply(get_regions)
         trace.Area("Converted all area labels to 9 digit ONS codes.")
+        
+        
+        # to day/{year}-{month}-{day}
+        df["Date of notification"] = df["Date of notification"].map(lambda x: "day/"+x.replace("/", "-"))
+        trace.Date_of_notification("Format to single day URI pattern.")
         
         df.to_csv("{}.csv".format(pathify(title)), index=False)
         
@@ -849,6 +872,10 @@ for tab in tabs_from_named(tabs, ["Table 11"]):
         df["Area"] = df["Area"].apply(get_regions)
         trace.Area("Converted all area labels to 9 digit ONS codes.")
         
+        # to day/{year}-{month}-{day}
+        df["Date of notification"] = df["Date of notification"].map(lambda x: "day/"+x.replace("/", "-"))
+        trace.Date_of_notification("Format to single day URI pattern.")
+        
         df.to_csv("{}.csv".format(pathify(title)), index=False)
         
     except Exception as e:
@@ -902,6 +929,10 @@ for tab in tabs_from_named(tabs, ["Table 12", "Table 13"]):
         cs = ConversionSegment(obs, dimensions)
         df = create_tidy(cs, tab.name, trace)
         
+        # to day/{year}-{month}-{day}
+        df["Date of death"] = df["Date of death"].map(lambda x: "day/"+x.replace("/", "-"))
+        trace.Date_of_death("Format to single day URI pattern.")
+        
         trace.store(cube12n13_title, df)
         
     except Exception as e:
@@ -923,7 +954,7 @@ for tab in tabs_from_named(tabs, ["Table 14", "Table 15"]):
         title, footnotes = get_title_and_footnotes(tab)
         footnotes_dict[tab.name] = footnotes
         
-        columns=['Period', 'Area', 'Week', 'Week Number', 'Cause of death']
+        columns=['Period', 'Area', 'Week Ending', 'Week Number', 'Cause of death']
         trace.start(cube14n15_title, tab, columns, source_sheet)
         
         # We're gonna anchor to the first instance of "England" in column A
@@ -942,12 +973,12 @@ for tab in tabs_from_named(tabs, ["Table 14", "Table 15"]):
         trace.Area("{} Area is taken from column A, below 'England' minus footnotes.", \
                   var=excelRange(area))
         
-        week = big_england.shift(UP).fill(RIGHT).is_not_blank()
-        assert_continuous_sequence(week, RIGHT)
-        trace.Week("{} 'Week' dimension taken as continuous sequence of dates" \
-                     " across the top", var=excelRange(week))
+        week_ending = big_england.shift(UP).fill(RIGHT).is_not_blank()
+        assert_continuous_sequence(week_ending, RIGHT)
+        trace.Week_Ending("{} 'Week' dimension taken as continuous sequence of dates" \
+                     " across the top", var=excelRange(week_ending))
         
-        obs = area.shift(RIGHT).waffle(week - tab.excel_ref('B'))
+        obs = area.shift(RIGHT).waffle(week_ending - tab.excel_ref('B'))
         assert_numeric_or_marker(obs, [":"])
         
         cause_of_death = "Deaths involving COVID-19" if tab.name.strip() == "Table 15" else "All deaths"
@@ -955,7 +986,7 @@ for tab in tabs_from_named(tabs, ["Table 14", "Table 15"]):
                                    var=cause_of_death)
         
         dimensions = [
-            HDim(week, "Week", DIRECTLY, ABOVE),
+            HDim(week_ending, "Week Ending", DIRECTLY, ABOVE),
             HDim(area, "Area", DIRECTLY, LEFT),
             HDim(week_no, "Week Number", DIRECTLY, ABOVE),
             HDimConst("Cause of death", cause_of_death),
@@ -973,10 +1004,12 @@ for tab in tabs_from_named(tabs, ["Table 14", "Table 15"]):
                                "eg 'Bournemouth, Christchurch and Poole'.")
         
         # Where the period is "Grand Total" set the week no to "All"
-        assert "Grand total" in df["Week"].unique(), "The label 'Grand total' is expected and required"
-        df["Week Number"][df["Week"] == "Grand total"] = "All"
-        
-        trace.store(cube14n15_title, df)
+        assert "Grand total" in df["Week Ending"].unique(), "The label 'Grand total' is expected and required"
+        df["Week Number"][df["Week Ending"] == "Grand total"] = "All"
+
+        # to day/{year}-{month}-{day}
+        df["Week Ending"] = df["Week Ending"].apply(get_day_from_short_month_time)
+        trace.Week_Ending("Formatted to single day period URI")
         
     except Exception as e:
         raise Exception(f"Problem encountered processing cube '{cube14n15_title}' from tab '{tab.name}'.") from e
@@ -995,7 +1028,7 @@ for tab in tabs_from_named(tabs, ["Table 16"]):
         title, footnotes = get_title_and_footnotes(tab)
         footnotes_dict[tab.name] = footnotes
         
-        columns=['Period', 'Area', 'Week Number', 'Cause of death']
+        columns=['Period', 'Area', 'Week Ending', 'Week Number', 'Cause of death']
         trace.start(title, tab, columns, source_sheet)
         
         area_code_header = tab.excel_ref('A').filter("Area Code")
@@ -1011,9 +1044,9 @@ for tab in tabs_from_named(tabs, ["Table 16"]):
         trace.Cause_of_death('{} dimension "Cause of death" taken as "All deaths", "COVID-19"', \
                              var=excelRange(cause_of_death))
 
-        week = area_code_header.shift(UP).fill(RIGHT).is_not_blank()
-        trace.Period("{} Period taken as continuous horizontal sequence of dates across " \
-                     " the top.", var=excelRange(week))
+        week_ending = area_code_header.shift(UP).fill(RIGHT).is_not_blank()
+        trace.Week_Ending("{} week_ending taken as continuous horizontal sequence of dates across " \
+                     " the top.", var=excelRange(week_ending))
         
         week_no = area_code_header.shift(UP).shift(UP).expand(RIGHT).is_not_blank()
         trace.Week_Number("{} Week number taken as horizontal sequence of integers across the " \
@@ -1023,7 +1056,7 @@ for tab in tabs_from_named(tabs, ["Table 16"]):
         assert_numeric_or_marker(obs, [":"])
         
         dimensions = [
-            HDim(week, "Week", CLOSEST, LEFT),
+            HDim(week_ending, "Week Ending", CLOSEST, LEFT),
             HDim(area, "Area", DIRECTLY, LEFT),
             HDim(week_no, "Week Number", CLOSEST, LEFT),
             HDimConst("Period", get_date_range(tab.excel_ref('A2').value))
@@ -1031,6 +1064,10 @@ for tab in tabs_from_named(tabs, ["Table 16"]):
         
         cs = ConversionSegment(obs, dimensions)
         df = create_tidy(cs, tab.name, trace)
+        
+        # to day/{year}-{month}-{day}
+        df["Week Ending"] = df["Week Ending"].apply(get_day_from_short_month_time)
+        trace.Week_Ending("Formatted to single day period URI")
         
         df.to_csv("{}.csv".format(pathify(title)), index=False)
         
@@ -1169,7 +1206,7 @@ for title, details in trace._create_output_dict().items():
             for column in cube["column_actions"]:
                 lines.append("{}".format(column["column_label"]))
                 for comment in [",".join(list(x.values())) for x in column["actions"]]:
-                    lines.append(comment)
+                    lines.append("-"+comment)
                 lines.append("")
             lines.append("")
             lines.append("#### Table structure")
@@ -1178,7 +1215,7 @@ for title, details in trace._create_output_dict().items():
             lines.append("#### Footnotes")
             if cube["tab"] in footnotes_dict.keys():
                 for note in list(footnotes_dict[cube["tab"]].values()):
-                    lines.append(note)
+                    lines.append("- "+note)
             if cube["tab"] in comments:
                 lines.append("")
                 lines.append("#### DE notes")

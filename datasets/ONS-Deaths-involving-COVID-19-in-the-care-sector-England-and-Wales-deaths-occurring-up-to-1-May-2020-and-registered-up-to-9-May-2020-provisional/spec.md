@@ -12,7 +12,7 @@
 
 ----------### Stage 1. Transform
 
-### NOTE - ALL period in the datacube have a registered up to registered 'registerd up to' date that is different. We need to account for this somehow/somewhere in the metadata. 
+### NOTE - The perdio within each the datacube has a 'registerd up to' date that is different. We need to account for this somehow/somewhere in the metadata. 
 
 #### Number of deaths of care home residents by leading cause groupings and COVID-19
 

@@ -147,7 +147,7 @@ joined_dat['Age'] = joined_dat['Age'].replace('>=7 days and < 1 year','more than
 joined_dat['Age'] = joined_dat['Age'].replace('85+','85 plus')
 joined_dat['Age'] = joined_dat['Age'].apply(pathify)
 
-#joined_dat['Age'] - joined_dat['Age'].apply(pathify)
+joined_dat['Measure Type'] = 'Deaths'
 joined_dat['Age'].unique()
 
 # Output the data to CSV
@@ -231,9 +231,7 @@ all_dat[10] = all_dat[10].rename(columns={'Place of Death': 'Location of Death'}
 
 joined_dat = pd.concat([all_dat[7], all_dat[8], all_dat[9], all_dat[10]])
 
-# +
-#joined_dat.head(10)
-# -
+joined_dat['Measure Type'] = 'Deaths'
 
 # Hopefully all NaN values have been accounted for in the Marker column
 joined_dat['Value'] = joined_dat['Value'].replace(np.nan,0)

@@ -76,12 +76,14 @@ for column in df:
 tidy = df[['Week of Death', 'Period', 'Place of Death', 'Measure Type', 'Unit', 'Marker', 'Value']]
 tidy
 
-destinationFolder = Path('out')
-destinationFolder.mkdir(exist_ok=True, parents=True)
-TITLE = 'Covid-19 death occurrences in Northern Ireland, by week of death and place of death, 2020' 
-OBS_ID = pathify(TITLE)
-GROUP_ID = pathify(os.environ.get('JOB_NAME', 'gss_data/covid-19/' + Path(os.getcwd()).name))
-tidy.drop_duplicates().to_csv(destinationFolder / f'{OBS_ID}.csv', index = False)
+# +
+#destinationFolder = Path('out')
+#destinationFolder.mkdir(exist_ok=True, parents=True)
+#TITLE = 'Covid-19 death occurrences in Northern Ireland, by week of death and place of death, 2020' 
+#OBS_ID = pathify(TITLE)
+#GROUP_ID = pathify(os.environ.get('JOB_NAME', 'gss_data/covid-19/' + Path(os.getcwd()).name))
+#tidy.drop_duplicates().to_csv(destinationFolder / f'{OBS_ID}.csv', index = False)
+# -
 
 notes = """
 P Weekly published data are provisional.

@@ -62,6 +62,7 @@ df.loc[f1,'Unit'] = 'Percent'
 df.loc[f1,'Measure Type'] = 'Percentage'
 df['Period'] =  df["Week Ending"].apply(week_ending_to_week_beginning_date_time)
 df['Week of Death'] = df.apply(lambda x: x['Week of Death'].replace('.0', ''), axis = 1)
+df['Period'] =  df["Week Ending"].apply(week_ending_to_week_beginning_date_time)
 df = df.replace('', np.nan, regex=True)
 # -
 
@@ -81,12 +82,14 @@ for column in df:
 tidy = df[['Week of Death', 'Week Ending', 'Place of Death', 'Measure Type', 'Unit', 'Marker', 'Value']]
 tidy
 
-destinationFolder = Path('out')
-destinationFolder.mkdir(exist_ok=True, parents=True)
-TITLE = 'Covid 19 deaths of care home residents in Northern Ireland, by place of death, in Northern Ireland'
-OBS_ID = pathify(TITLE)
-GROUP_ID = pathify(os.environ.get('JOB_NAME', 'gss_data/covid-19/' + Path(os.getcwd()).name))
-tidy.drop_duplicates().to_csv(destinationFolder / f'{OBS_ID}.csv', index = False)
+# +
+#destinationFolder = Path('out')
+#destinationFolder.mkdir(exist_ok=True, parents=True)
+#TITLE = 'Covid 19 deaths of care home residents in Northern Ireland, by place of death, in Northern Ireland'
+#OBS_ID = pathify(TITLE)
+#GROUP_ID = pathify(os.environ.get('JOB_NAME', 'gss_data/covid-19/' + Path(os.getcwd()).name))
+#tidy.drop_duplicates().to_csv(destinationFolder / f'{OBS_ID}.csv', index = False)
+# -
 
 notes = """
 P Weekly published data are provisional.
@@ -111,3 +114,7 @@ with open(destinationFolder / f'{OBS_ID}.csv-metadata.trig', 'wb') as metadata:
 schema = CSVWMetadata('https://gss-cogs.github.io/family-covid-19/reference/')
 schema.create(destinationFolder / f'{OBS_ID}.csv', destinationFolder / f'{OBS_ID}.csv-schema.json')
 """
+
+del df['Week Ending']
+
+

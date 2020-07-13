@@ -58,6 +58,17 @@ for name, tab in tabs.items():
         new_table = c1.topandas()
         df = pd.concat([df, new_table], sort=False)
 
+try:
+    dte = pd.DataFrame(columns=['Per'])
+    dte['Per'] = df['Week Ending'].unique()
+    dte['Per'] = pd.to_datetime(dte['Per'][dte['Per'] != 'All'])
+    min_date = dte['Per'].min()
+    date_range = abs((dte['Per'].max() - dte['Per'].min()).days)
+except Exception as e:
+    date_range = 1
+#print(min_date)
+#print(date_range)
+
 df.rename(columns={'OBS': 'Value', 'DATAMARKER' : 'Marker'}, inplace=True)
 df = df.replace({'Week Ending' : {'' : 'Year to Date'}})
 df['Week Number'] = df.apply(lambda x: x['Week Number'].replace('.0', ''), axis = 1)
@@ -79,12 +90,14 @@ for column in df:
 tidy = df[['Gender', 'Age', 'Week Number', 'Period', 'Measure Type', 'Unit', 'Marker', 'Value']]
 tidy
 
-destinationFolder = Path('out')
-destinationFolder.mkdir(exist_ok=True, parents=True)
-TITLE = 'Deaths registered each week in Northern Ireland'
-OBS_ID = pathify(TITLE)
-GROUP_ID = pathify(os.environ.get('JOB_NAME', 'gss_data/covid-19/' + Path(os.getcwd()).name))
-tidy.drop_duplicates().to_csv(destinationFolder / f'{OBS_ID}.csv', index = False)
+# +
+#destinationFolder = Path('out')
+#destinationFolder.mkdir(exist_ok=True, parents=True)
+#TITLE = 'Deaths registered each week in Northern Ireland'
+#OBS_ID = pathify(TITLE)
+#GROUP_ID = pathify(os.environ.get('JOB_NAME', 'gss_data/covid-19/' + Path(os.getcwd()).name))
+#tidy.drop_duplicates().to_csv(destinationFolder / f'{OBS_ID}.csv', index = False)
+# -
 
 notes = """
 P Weekly published data are provisional.

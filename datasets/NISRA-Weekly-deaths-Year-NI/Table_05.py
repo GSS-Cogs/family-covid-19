@@ -75,13 +75,13 @@ tidy = df[['Registration Week', 'Period', 'Local Government District', 'Measure 
 tidy
 
 # +
-destinationFolder = Path('out')
-destinationFolder.mkdir(exist_ok=True, parents=True)
+#destinationFolder = Path('out')
+#destinationFolder.mkdir(exist_ok=True, parents=True)
 
-TITLE = 'Covid-19 Deaths registered in Northern Ireland by Local Government District (LGD)'
-OBS_ID = pathify(TITLE)
-GROUP_ID = pathify(os.environ.get('JOB_NAME', 'gss_data/covid-19/' + Path(os.getcwd()).name))
-tidy.drop_duplicates().to_csv(destinationFolder / f'{OBS_ID}.csv', index = False)
+#TITLE = 'Covid-19 Deaths registered in Northern Ireland by Local Government District (LGD)'
+#OBS_ID = pathify(TITLE)
+#GROUP_ID = pathify(os.environ.get('JOB_NAME', 'gss_data/covid-19/' + Path(os.getcwd()).name))
+#tidy.drop_duplicates().to_csv(destinationFolder / f'{OBS_ID}.csv', index = False)
 # -
 
 notes = """

@@ -80,13 +80,13 @@ tidy = df[['Gender', 'Age', 'Week Number', 'Period', 'Measure Type', 'Unit', 'Ma
 tidy
 
 # +
-destinationFolder = Path('out')
-destinationFolder.mkdir(exist_ok=True, parents=True)
+#destinationFolder = Path('out')
+#destinationFolder.mkdir(exist_ok=True, parents=True)
 
-TITLE = 'Covid-19 Deaths registered each week in Northern Ireland, age by sex'
-OBS_ID = pathify(TITLE)
-GROUP_ID = pathify(os.environ.get('JOB_NAME', 'gss_data/covid-19/' + Path(os.getcwd()).name))
-tidy.drop_duplicates().to_csv(destinationFolder / f'{OBS_ID}.csv', index = False)
+#TITLE = 'Covid-19 Deaths registered each week in Northern Ireland, age by sex'
+#OBS_ID = pathify(TITLE)
+#GROUP_ID = pathify(os.environ.get('JOB_NAME', 'gss_data/covid-19/' + Path(os.getcwd()).name))
+#ßtidy.drop_duplicates().to_csv(destinationFolder / f'{OBS_ID}.csv', index = False)
 # -
 
 notes = """

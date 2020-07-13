@@ -148,13 +148,14 @@
 		
 			Reformat NaN values in marker column to Empty sting
 			Map Local Government District column to mapping CSV
+			Map Sex column to sex_mapping.csv
 			Reformat year to date values (year/2020) with overall range date
 			Remove any superscript values from end of string in columns (eg, 1, 2, 3, P)
 			Replace any Nan value sin Value column with 0 and check a reason why has been put in Marker column
 			
 		d2. dataset output Two
 
-#### Sheet: Weekly Deaths_2020 - Deaths registered each week in Northern Ireland 2020
+#### Sheet: Table 1
 
 		Column Addition/Removal/Rename/Reformat
 			Add Sex column with value T
@@ -167,7 +168,7 @@
 		Join to Dataset:
 			d1
 
-#### Sheet: Weekly Deaths_Age by Sex - Deaths registered each week in Northern Ireland 2020
+#### Sheet: Table 2
 
 		Column Addition/Removal/Rename/Reformat
 			Add column Registered Death Type with value All Registered Deaths
@@ -181,7 +182,7 @@
 		Join to Dataset:
 			d1
 		
-#### Sheet: Weekly_Deaths_by_LGD - Deaths registered in Northern Ireland by Local Government District (LGD)
+#### Sheet: Table 3
 
 		Column Addition/Removal/Rename/Reformat
 			Add Sex column with value T
@@ -194,7 +195,7 @@
 		Join to Dataset:
 			d1
 
-#### Sheet: Covid-19_Deaths_age by sex - Covid-19 Deaths registered each week in Northern Ireland, age by sex
+#### Sheet: Table 4
 
 		Column Addition/Removal/Rename/Reformat
 			Add column Registered Death Type with value COVID-19 Registered Deaths
@@ -206,7 +207,7 @@
 		Join to Dataset:
 			d1
 
-#### Sheet: Covid-19_Deaths_by_LGD - Covid-19 Deaths registered in Northern Ireland by Local Government District (LGD)
+#### Sheet: Table 5
 
 		Column Addition/Removal/Rename/Reformat
 			Add column Registered Death Type with value COVID-19 Registered Deaths
@@ -219,7 +220,7 @@
 		Join to Dataset:
 			d1
 
-#### Sheet: Covid-19_Reg Date & POD - Covid-19 Deaths registered in Northern Ireland by Place of Death
+#### Sheet: Table  6
 
 		Column Addition/Removal/Rename/Reformat
 			Add column Registered Death Type with value COVID-19 Registered Deaths
@@ -232,11 +233,8 @@
 		Join to Dataset:
 			d1
 		
-##### Table Structure
 
-		Columns 
-
-#### Sheet: Covid-19 by Week of Death - Covid-19 Death Occurrences by week of death in Northern Ireland 
+#### Sheet: Table 7
 
 		Column Addition/Removal/Rename/Reformat
 			Add column Registered Death Type with value COVID-19 Registered Deaths
@@ -249,33 +247,39 @@
 		Join to Dataset:
 			d1
 		
-##### Table Structure
-
-		Columns 
 		
-#### Sheet: Covid-19 Occurrence Date & POD - Covid-19 Death Occurrences in Northern Ireland by week of death and Place of Death
+#### Sheet: Table 8
 
-		Column Additions
+		Column Addition/Removal/Rename/Reformat
+			Remove column Week of Death
+			Rename column Place elf Death as Location of Death
+		
+		Join to Dataset:
+			d2
+		
+#### Sheet: Table 9
+
+		Column Addition/Removal/Rename/Reformat
 			Add a column
 		
 		Join to Dataset:
-			d#
+			d2
 		
-##### Table Structure
+#### Sheet: Table 10
 
-		Columns 
-
-#### Sheet: Covid-19 Date of Death & POD - Covid-19 Death Occurrences by date and Place of Death in Northern Ireland
-
-		Column Additions
+		Column Addition/Removal/Rename/Reformat
 			Add a column
 		
 		Join to Dataset:
-			d#
-		
-##### Table Structure
+			d2
 
-		Columns 
+#### Sheet: Table 11
+
+		Column Addition/Removal/Rename/Reformat
+			Add a column
+		
+		Join to Dataset:
+			d2
 
 -----
 

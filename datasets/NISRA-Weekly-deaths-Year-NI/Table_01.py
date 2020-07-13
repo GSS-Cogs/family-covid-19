@@ -77,12 +77,14 @@ for column in df:
 tidy = df[['Registration Week', 'Period', 'Registered Death Type', 'Measure Type', 'Unit', 'Marker', 'Value']]
 tidy
 
-destinationFolder = Path('out')
-destinationFolder.mkdir(exist_ok=True, parents=True)
-TITLE = 'Deaths registered each week in Northern Ireland 2020'
-OBS_ID = pathify(TITLE)
-GROUP_ID = pathify(os.environ.get('JOB_NAME', 'gss_data/covid-19/' + Path(os.getcwd()).name))
-tidy.drop_duplicates().to_csv(destinationFolder / f'{OBS_ID}.csv', index = False)
+# +
+#destinationFolder = Path('out')
+#destinationFolder.mkdir(exist_ok=True, parents=True)
+#TITLE = 'Deaths registered each week in Northern Ireland 2020'
+#OBS_ID = pathify(TITLE)
+#GROUP_ID = pathify(os.environ.get('JOB_NAME', 'gss_data/covid-19/' + Path(os.getcwd()).name))
+#tidy.drop_duplicates().to_csv(destinationFolder / f'{OBS_ID}.csv', index = False)
+# -
 
 ######## BELOW COMMENT OUT FOR NOW ######
 """

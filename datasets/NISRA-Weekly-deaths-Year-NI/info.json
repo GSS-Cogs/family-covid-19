@@ -36,7 +36,10 @@
             },
             "Value": {
                 "unit": "http://gss-data.org.uk/def/concept/measurement-units/deaths",
-                "measure": "http://gss-data.org.uk/def/measure/count",
+                "measure": [
+                    "http://gss-data.org.uk/def/measure/count",
+                    "http://gss-data.org.uk/def/measure/cumulative-count"
+                 ],
                 "datatype": "integer"
             }
         }

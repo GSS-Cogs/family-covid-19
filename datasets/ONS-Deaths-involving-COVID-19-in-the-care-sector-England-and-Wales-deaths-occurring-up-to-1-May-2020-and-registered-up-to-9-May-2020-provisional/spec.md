@@ -10,32 +10,34 @@
 
 [Transform Flowchart](https://gss-cogs.github.io/family-covid-19/datasets/specflowcharts.html?ONS-Deaths-involving-COVID-19-in-the-care-sector-England-and-Wales/flowchart.ttl)
 
+
+
 ----------### Stage 1. Transform
 
-### NOTE - The perdio within each the datacube has a 'registerd up to' date that is different. We need to account for this somehow/somewhere in the metadata. 
+## NOTE - in addition to the period each tab also has a "registered up to" date we need to account for.
 
 #### Number of deaths of care home residents by leading cause groupings and COVID-19
 
 #### Sheet: Table 17
 
 Leading cause
--A6:A74 dimension 'Leading cause' taken as the CODES from column A
+- A6:A74 dimension 'Leading cause' taken as the CODES from column A
 
 Sex
--C5:M5 dimension "Sex" taken from horizontal as "Persons", "Males" or "Females".
+- C5:M5 dimension "Sex" taken from horizontal as "Persons", "Males" or "Females".
 
 Area
--C4:K4 Area code from row near top as "England and Wales", "England" or "Wales".
--Converted all area labels to 9 digit ONS codes.
+- C4:K4 Area code from row near top as "England and Wales", "England" or "Wales".
+- Converted all area labels to 9 digit ONS codes.
 
 Unit Multiplier
--Set unit multiplier to 1.
+- Set unit multiplier to 1.
 
 Measure Type
--Set Measure Type to Count.
+- Set Measure Type to Count.
 
 Unit of Measure
--Set Unit of Measure to People.
+- Set Unit of Measure to People.
 
 
 #### Table structure
@@ -55,25 +57,25 @@ Leading cause, Sex, Area, Unit Multiplier, Measure Type, Unit of Measure
 #### Sheet: Table 2
 
 Sex
--B6:AJ6 Get dimension 'Sex', with values 'Persons', 'Male' and 'Female'
+- B6:AJ6 Get dimension 'Sex', with values 'Persons', 'Male' and 'Female'
 
 Age
--A9:A17 Get age dimension from column A, as number range plus 'All ages'
+- A9:A17 Get age dimension from column A, as number range plus 'All ages'
 
 Area
--B4:Z4 Get dimension 'Area' with values 'England and Wales', 'England' and 'Wales'
--Converted all area labels to 9 digit ONS codes.
+- B4:Z4 Get dimension 'Area' with values 'England and Wales', 'England' and 'Wales'
+- Converted all area labels to 9 digit ONS codes.
 
 Period
 
 Unit Multiplier
--Set unit multiplier to 1.
+- Set unit multiplier to 1.
 
 Measure Type
--Set Measure Type to Count.
+- Set Measure Type to Count.
 
 Unit of Measure
--Set Unit of Measure to People.
+- Set Unit of Measure to People.
 
 
 #### Table structure
@@ -91,45 +93,45 @@ Sex, Age, Area, Period, Unit Multiplier, Measure Type, Unit of Measure
 #### Sheet: Table 7
 
 Period
--ALL: Stored under the identifier 'Number of deaths of care home residents notified to the Care Quality Commission'
--Added to dataframe 'Number of deaths of care home residents notified to the Care Quality Commission'
+- ALL: Stored under the identifier 'Number of deaths of care home residents notified to the Care Quality Commission'
+- Added to dataframe 'Number of deaths of care home residents notified to the Care Quality Commission'
 
 Place of death
--B5:J5 the dimension "Place of death" taken as "Care Home", "Hospital", "Elsewhere","Not Stated"
--ALL: Stored under the identifier 'Number of deaths of care home residents notified to the Care Quality Commission'
--Added to dataframe 'Number of deaths of care home residents notified to the Care Quality Commission'
+- B5:J5 the dimension "Place of death" taken as "Care Home", "Hospital", "Elsewhere","Not Stated"
+- ALL: Stored under the identifier 'Number of deaths of care home residents notified to the Care Quality Commission'
+- Added to dataframe 'Number of deaths of care home residents notified to the Care Quality Commission'
 
 Area
--Set to 'England for table 7, else 'Wales'.
--Converted all area labels to 9 digit ONS codes.
--ALL: Stored under the identifier 'Number of deaths of care home residents notified to the Care Quality Commission'
--Added to dataframe 'Number of deaths of care home residents notified to the Care Quality Commission'
+- Set to 'England for table 7, else 'Wales'.
+- Converted all area labels to 9 digit ONS codes.
+- ALL: Stored under the identifier 'Number of deaths of care home residents notified to the Care Quality Commission'
+- Added to dataframe 'Number of deaths of care home residents notified to the Care Quality Commission'
 
 Cause of death
--B4:G4 the dimension "Cause of death" taken as "All deaths", "COVID-19"
--ALL: Stored under the identifier 'Number of deaths of care home residents notified to the Care Quality Commission'
--Added to dataframe 'Number of deaths of care home residents notified to the Care Quality Commission'
+- B4:G4 the dimension "Cause of death" taken as "All deaths", "COVID-19"
+- ALL: Stored under the identifier 'Number of deaths of care home residents notified to the Care Quality Commission'
+- Added to dataframe 'Number of deaths of care home residents notified to the Care Quality Commission'
 
 Date of notification
--A6:A77 Period dimension taken as date types from column A plus 'Total'.
--Format to single day URI pattern.
--ALL: Stored under the identifier 'Number of deaths of care home residents notified to the Care Quality Commission'
--Added to dataframe 'Number of deaths of care home residents notified to the Care Quality Commission'
+- A6:A77 Period dimension taken as date types from column A plus 'Total'.
+- Format to single day URI pattern.
+- ALL: Stored under the identifier 'Number of deaths of care home residents notified to the Care Quality Commission'
+- Added to dataframe 'Number of deaths of care home residents notified to the Care Quality Commission'
 
 Unit Multiplier
--Set unit multiplier to 1.
--ALL: Stored under the identifier 'Number of deaths of care home residents notified to the Care Quality Commission'
--Added to dataframe 'Number of deaths of care home residents notified to the Care Quality Commission'
+- Set unit multiplier to 1.
+- ALL: Stored under the identifier 'Number of deaths of care home residents notified to the Care Quality Commission'
+- Added to dataframe 'Number of deaths of care home residents notified to the Care Quality Commission'
 
 Measure Type
--Set Measure Type to Count.
--ALL: Stored under the identifier 'Number of deaths of care home residents notified to the Care Quality Commission'
--Added to dataframe 'Number of deaths of care home residents notified to the Care Quality Commission'
+- Set Measure Type to Count.
+- ALL: Stored under the identifier 'Number of deaths of care home residents notified to the Care Quality Commission'
+- Added to dataframe 'Number of deaths of care home residents notified to the Care Quality Commission'
 
 Unit of Measure
--Set Unit of Measure to People.
--ALL: Stored under the identifier 'Number of deaths of care home residents notified to the Care Quality Commission'
--Added to dataframe 'Number of deaths of care home residents notified to the Care Quality Commission'
+- Set Unit of Measure to People.
+- ALL: Stored under the identifier 'Number of deaths of care home residents notified to the Care Quality Commission'
+- Added to dataframe 'Number of deaths of care home residents notified to the Care Quality Commission'
 
 
 #### Table structure
@@ -142,45 +144,45 @@ Period, Place of death, Area, Cause of death, Date of notification, Unit Multipl
 #### Sheet: Table 8
 
 Period
--ALL: Stored under the identifier 'Number of deaths of care home residents notified to the Care Quality Commission'
--Added to dataframe 'Number of deaths of care home residents notified to the Care Quality Commission'
+- ALL: Stored under the identifier 'Number of deaths of care home residents notified to the Care Quality Commission'
+- Added to dataframe 'Number of deaths of care home residents notified to the Care Quality Commission'
 
 Place of death
--B5:J5 the dimension "Place of death" taken as "Care Home", "Hospital", "Elsewhere","Not Stated"
--ALL: Stored under the identifier 'Number of deaths of care home residents notified to the Care Quality Commission'
--Added to dataframe 'Number of deaths of care home residents notified to the Care Quality Commission'
+- B5:J5 the dimension "Place of death" taken as "Care Home", "Hospital", "Elsewhere","Not Stated"
+- ALL: Stored under the identifier 'Number of deaths of care home residents notified to the Care Quality Commission'
+- Added to dataframe 'Number of deaths of care home residents notified to the Care Quality Commission'
 
 Area
--Set to 'England for table 7, else 'Wales'.
--Converted all area labels to 9 digit ONS codes.
--ALL: Stored under the identifier 'Number of deaths of care home residents notified to the Care Quality Commission'
--Added to dataframe 'Number of deaths of care home residents notified to the Care Quality Commission'
+- Set to 'England for table 7, else 'Wales'.
+- Converted all area labels to 9 digit ONS codes.
+- ALL: Stored under the identifier 'Number of deaths of care home residents notified to the Care Quality Commission'
+- Added to dataframe 'Number of deaths of care home residents notified to the Care Quality Commission'
 
 Cause of death
--B4:G4 the dimension "Cause of death" taken as "All deaths", "COVID-19"
--ALL: Stored under the identifier 'Number of deaths of care home residents notified to the Care Quality Commission'
--Added to dataframe 'Number of deaths of care home residents notified to the Care Quality Commission'
+- B4:G4 the dimension "Cause of death" taken as "All deaths", "COVID-19"
+- ALL: Stored under the identifier 'Number of deaths of care home residents notified to the Care Quality Commission'
+- Added to dataframe 'Number of deaths of care home residents notified to the Care Quality Commission'
 
 Date of notification
--A6:A117 Period dimension taken as date types from column A plus 'Total'.
--Format to single day URI pattern.
--ALL: Stored under the identifier 'Number of deaths of care home residents notified to the Care Quality Commission'
--Added to dataframe 'Number of deaths of care home residents notified to the Care Quality Commission'
+- A6:A117 Period dimension taken as date types from column A plus 'Total'.
+- Format to single day URI pattern.
+- ALL: Stored under the identifier 'Number of deaths of care home residents notified to the Care Quality Commission'
+- Added to dataframe 'Number of deaths of care home residents notified to the Care Quality Commission'
 
 Unit Multiplier
--Set unit multiplier to 1.
--ALL: Stored under the identifier 'Number of deaths of care home residents notified to the Care Quality Commission'
--Added to dataframe 'Number of deaths of care home residents notified to the Care Quality Commission'
+- Set unit multiplier to 1.
+- ALL: Stored under the identifier 'Number of deaths of care home residents notified to the Care Quality Commission'
+- Added to dataframe 'Number of deaths of care home residents notified to the Care Quality Commission'
 
 Measure Type
--Set Measure Type to Count.
--ALL: Stored under the identifier 'Number of deaths of care home residents notified to the Care Quality Commission'
--Added to dataframe 'Number of deaths of care home residents notified to the Care Quality Commission'
+- Set Measure Type to Count.
+- ALL: Stored under the identifier 'Number of deaths of care home residents notified to the Care Quality Commission'
+- Added to dataframe 'Number of deaths of care home residents notified to the Care Quality Commission'
 
 Unit of Measure
--Set Unit of Measure to People.
--ALL: Stored under the identifier 'Number of deaths of care home residents notified to the Care Quality Commission'
--Added to dataframe 'Number of deaths of care home residents notified to the Care Quality Commission'
+- Set Unit of Measure to People.
+- ALL: Stored under the identifier 'Number of deaths of care home residents notified to the Care Quality Commission'
+- Added to dataframe 'Number of deaths of care home residents notified to the Care Quality Commission'
 
 
 #### Table structure
@@ -222,26 +224,26 @@ Period, Place of death, Area, Cause of death, Date of notification, Unit Multipl
 Value
 
 Category
--B4:C4 dimension 'Category' taken as 'Care home resident' and 'Home care service user'.
+- B4:C4 dimension 'Category' taken as 'Care home resident' and 'Home care service user'.
 
 Period
 
 Area
--Hard coded Area to England
--Converted all area labels to 9 digit ONS codes.
+- Hard coded Area to England
+- Converted all area labels to 9 digit ONS codes.
 
 Date of notification
--A5:A1270 Period dimension taken as date types from column A.
--Format to single day URI pattern.
+- A5:A1270 Period dimension taken as date types from column A.
+- Format to single day URI pattern.
 
 Unit Multiplier
--Set unit multiplier to 1.
+- Set unit multiplier to 1.
 
 Measure Type
--Set Measure Type to Count.
+- Set Measure Type to Count.
 
 Unit of Measure
--Set Unit of Measure to People.
+- Set Unit of Measure to People.
 
 
 #### Table structure
@@ -257,26 +259,26 @@ Value, Category, Period, Area, Date of notification, Unit Multiplier, Measure Ty
 #### Sheet: Table 11
 
 Cause of death
--B4:M4 "Cause of death" taken as either "All deaths" or "Deaths involving COVID-19".
+- B4:M4 "Cause of death" taken as either "All deaths" or "Deaths involving COVID-19".
 
 Period
--A6:A173 Period dimension taken as date types from column A.
+- A6:A173 Period dimension taken as date types from column A.
 
 Area
--B5:V5 Area dimension is left to right starting from East
--Converted all area labels to 9 digit ONS codes.
+- B5:V5 Area dimension is left to right starting from East
+- Converted all area labels to 9 digit ONS codes.
 
 Date of notification
--Format to single day URI pattern.
+- Format to single day URI pattern.
 
 Unit Multiplier
--Set unit multiplier to 1.
+- Set unit multiplier to 1.
 
 Measure Type
--Set Measure Type to Count.
+- Set Measure Type to Count.
 
 Unit of Measure
--Set Unit of Measure to People.
+- Set Unit of Measure to People.
 
 
 #### Table structure
@@ -294,28 +296,28 @@ Cause of death, Period, Area, Date of notification, Unit Multiplier, Measure Typ
 #### Sheet: Table 18
 
 Sex
--B4:M4 dimension "Sex" taken from horizontal as "All persons", "Males", "Females"
+- B4:M4 dimension "Sex" taken from horizontal as "All persons", "Males", "Females"
 
 Age Group
--B4:T5 dimension "Age Group" taken from horizontal, plus the "All persons" entry from column B (as otherwise it would be blank).
+- B4:T5 dimension "Age Group" taken from horizontal, plus the "All persons" entry from column B (as otherwise it would be blank).
 
 Pre-existing Condition
--A6:A20 dimension 'Pre-existing condition' taken  from column A
+- A6:A20 dimension 'Pre-existing condition' taken  from column A
 
 Period
 
 Area
--Hard coding area to 'England and Wales'
--Converted all area labels to 9 digit ONS codes.
+- Hard coding area to 'England and Wales'
+- Converted all area labels to 9 digit ONS codes.
 
 Unit Multiplier
--Set unit multiplier to 1.
+- Set unit multiplier to 1.
 
 Measure Type
--Set Measure Type to Count.
+- Set Measure Type to Count.
 
 Unit of Measure
--Set Unit of Measure to People.
+- Set Unit of Measure to People.
 
 
 #### Table structure
@@ -333,60 +335,60 @@ Sex, Age Group, Pre-existing Condition, Period, Area, Unit Multiplier, Measure T
 #### Sheet: Table 3
 
 Sex
--B5:N5 Get dimension 'Sex', with values 'Persons', 'Male', 'Females'.
--ALL: Stored under the identifier 'Number of deaths, age standardised and age specific mortality rates, by sex'
--Added to dataframe 'Number of deaths, age standardised and age specific mortality rates, by sex'
+- B5:N5 Get dimension 'Sex', with values 'Persons', 'Male', 'Females'.
+- ALL: Stored under the identifier 'Number of deaths, age standardised and age specific mortality rates, by sex'
+- Added to dataframe 'Number of deaths, age standardised and age specific mortality rates, by sex'
 
 Age
--A8:A58 Dimension 'Age' is from column A
--ALL: Stored under the identifier 'Number of deaths, age standardised and age specific mortality rates, by sex'
--Added to dataframe 'Number of deaths, age standardised and age specific mortality rates, by sex'
+- A8:A58 Dimension 'Age' is from column A
+- ALL: Stored under the identifier 'Number of deaths, age standardised and age specific mortality rates, by sex'
+- Added to dataframe 'Number of deaths, age standardised and age specific mortality rates, by sex'
 
 Rate
--Flatten the observations, pulling thesevalues into their own appropriate attribute column
--ALL: Stored under the identifier 'Number of deaths, age standardised and age specific mortality rates, by sex'
--Added to dataframe 'Number of deaths, age standardised and age specific mortality rates, by sex'
+- Flatten the observations, pulling thesevalues into their own appropriate attribute column
+- ALL: Stored under the identifier 'Number of deaths, age standardised and age specific mortality rates, by sex'
+- Added to dataframe 'Number of deaths, age standardised and age specific mortality rates, by sex'
 
 Lower 95% CI
--Flatten the observations, pulling thesevalues into their own appropriate attribute column
--ALL: Stored under the identifier 'Number of deaths, age standardised and age specific mortality rates, by sex'
--Added to dataframe 'Number of deaths, age standardised and age specific mortality rates, by sex'
+- Flatten the observations, pulling thesevalues into their own appropriate attribute column
+- ALL: Stored under the identifier 'Number of deaths, age standardised and age specific mortality rates, by sex'
+- Added to dataframe 'Number of deaths, age standardised and age specific mortality rates, by sex'
 
 Lower 95% CI
--Flatten the observations, pulling thesevalues into their own appropriate attribute column
--ALL: Stored under the identifier 'Number of deaths, age standardised and age specific mortality rates, by sex'
--Added to dataframe 'Number of deaths, age standardised and age specific mortality rates, by sex'
+- Flatten the observations, pulling thesevalues into their own appropriate attribute column
+- ALL: Stored under the identifier 'Number of deaths, age standardised and age specific mortality rates, by sex'
+- Added to dataframe 'Number of deaths, age standardised and age specific mortality rates, by sex'
 
 Area
--B4:B4 Area is either 'England' or 'Wales'.
--Converted all area labels to 9 digit ONS codes.
--ALL: Stored under the identifier 'Number of deaths, age standardised and age specific mortality rates, by sex'
--Added to dataframe 'Number of deaths, age standardised and age specific mortality rates, by sex'
+- B4:B4 Area is either 'England' or 'Wales'.
+- Converted all area labels to 9 digit ONS codes.
+- ALL: Stored under the identifier 'Number of deaths, age standardised and age specific mortality rates, by sex'
+- Added to dataframe 'Number of deaths, age standardised and age specific mortality rates, by sex'
 
 Category
--A2:A47 Get dimension 'category' as things starting 'Number of deaths..' from column A.
--Shortened categories to remove repeated (and super long) date info. Took everything to the left of the first comma
--ALL: Stored under the identifier 'Number of deaths, age standardised and age specific mortality rates, by sex'
--Added to dataframe 'Number of deaths, age standardised and age specific mortality rates, by sex'
+- A2:A47 Get dimension 'category' as things starting 'Number of deaths..' from column A.
+- Shortened categories to remove repeated (and super long) date info. Took everything to the left of the first comma
+- ALL: Stored under the identifier 'Number of deaths, age standardised and age specific mortality rates, by sex'
+- Added to dataframe 'Number of deaths, age standardised and age specific mortality rates, by sex'
 
 Period
--ALL: Stored under the identifier 'Number of deaths, age standardised and age specific mortality rates, by sex'
--Added to dataframe 'Number of deaths, age standardised and age specific mortality rates, by sex'
+- ALL: Stored under the identifier 'Number of deaths, age standardised and age specific mortality rates, by sex'
+- Added to dataframe 'Number of deaths, age standardised and age specific mortality rates, by sex'
 
 Unit Multiplier
--Set unit multiplier to 1.
--ALL: Stored under the identifier 'Number of deaths, age standardised and age specific mortality rates, by sex'
--Added to dataframe 'Number of deaths, age standardised and age specific mortality rates, by sex'
+- Set unit multiplier to 1.
+- ALL: Stored under the identifier 'Number of deaths, age standardised and age specific mortality rates, by sex'
+- Added to dataframe 'Number of deaths, age standardised and age specific mortality rates, by sex'
 
 Measure Type
--Set Measure Type to Count.
--ALL: Stored under the identifier 'Number of deaths, age standardised and age specific mortality rates, by sex'
--Added to dataframe 'Number of deaths, age standardised and age specific mortality rates, by sex'
+- Set Measure Type to Count.
+- ALL: Stored under the identifier 'Number of deaths, age standardised and age specific mortality rates, by sex'
+- Added to dataframe 'Number of deaths, age standardised and age specific mortality rates, by sex'
 
 Unit of Measure
--Set Unit of Measure to People.
--ALL: Stored under the identifier 'Number of deaths, age standardised and age specific mortality rates, by sex'
--Added to dataframe 'Number of deaths, age standardised and age specific mortality rates, by sex'
+- Set Unit of Measure to People.
+- ALL: Stored under the identifier 'Number of deaths, age standardised and age specific mortality rates, by sex'
+- Added to dataframe 'Number of deaths, age standardised and age specific mortality rates, by sex'
 
 
 #### Table structure
@@ -402,60 +404,60 @@ Sex, Age, Rate, Lower 95% CI, Lower 95% CI, Area, Category, Period, Unit Multipl
 #### Sheet: Table 4 
 
 Sex
--B5:N5 Get dimension 'Sex', with values 'Persons', 'Male', 'Females'.
--ALL: Stored under the identifier 'Number of deaths, age standardised and age specific mortality rates, by sex'
--Added to dataframe 'Number of deaths, age standardised and age specific mortality rates, by sex'
+- B5:N5 Get dimension 'Sex', with values 'Persons', 'Male', 'Females'.
+- ALL: Stored under the identifier 'Number of deaths, age standardised and age specific mortality rates, by sex'
+- Added to dataframe 'Number of deaths, age standardised and age specific mortality rates, by sex'
 
 Age
--A8:A58 Dimension 'Age' is from column A
--ALL: Stored under the identifier 'Number of deaths, age standardised and age specific mortality rates, by sex'
--Added to dataframe 'Number of deaths, age standardised and age specific mortality rates, by sex'
+- A8:A58 Dimension 'Age' is from column A
+- ALL: Stored under the identifier 'Number of deaths, age standardised and age specific mortality rates, by sex'
+- Added to dataframe 'Number of deaths, age standardised and age specific mortality rates, by sex'
 
 Rate
--Flatten the observations, pulling thesevalues into their own appropriate attribute column
--ALL: Stored under the identifier 'Number of deaths, age standardised and age specific mortality rates, by sex'
--Added to dataframe 'Number of deaths, age standardised and age specific mortality rates, by sex'
+- Flatten the observations, pulling thesevalues into their own appropriate attribute column
+- ALL: Stored under the identifier 'Number of deaths, age standardised and age specific mortality rates, by sex'
+- Added to dataframe 'Number of deaths, age standardised and age specific mortality rates, by sex'
 
 Lower 95% CI
--Flatten the observations, pulling thesevalues into their own appropriate attribute column
--ALL: Stored under the identifier 'Number of deaths, age standardised and age specific mortality rates, by sex'
--Added to dataframe 'Number of deaths, age standardised and age specific mortality rates, by sex'
+- Flatten the observations, pulling thesevalues into their own appropriate attribute column
+- ALL: Stored under the identifier 'Number of deaths, age standardised and age specific mortality rates, by sex'
+- Added to dataframe 'Number of deaths, age standardised and age specific mortality rates, by sex'
 
 Lower 95% CI
--Flatten the observations, pulling thesevalues into their own appropriate attribute column
--ALL: Stored under the identifier 'Number of deaths, age standardised and age specific mortality rates, by sex'
--Added to dataframe 'Number of deaths, age standardised and age specific mortality rates, by sex'
+- Flatten the observations, pulling thesevalues into their own appropriate attribute column
+- ALL: Stored under the identifier 'Number of deaths, age standardised and age specific mortality rates, by sex'
+- Added to dataframe 'Number of deaths, age standardised and age specific mortality rates, by sex'
 
 Area
--B4:B4 Area is either 'England' or 'Wales'.
--Converted all area labels to 9 digit ONS codes.
--ALL: Stored under the identifier 'Number of deaths, age standardised and age specific mortality rates, by sex'
--Added to dataframe 'Number of deaths, age standardised and age specific mortality rates, by sex'
+- B4:B4 Area is either 'England' or 'Wales'.
+- Converted all area labels to 9 digit ONS codes.
+- ALL: Stored under the identifier 'Number of deaths, age standardised and age specific mortality rates, by sex'
+- Added to dataframe 'Number of deaths, age standardised and age specific mortality rates, by sex'
 
 Category
--A2:A47 Get dimension 'category' as things starting 'Number of deaths..' from column A.
--Shortened categories to remove repeated (and super long) date info. Took everything to the left of the first comma
--ALL: Stored under the identifier 'Number of deaths, age standardised and age specific mortality rates, by sex'
--Added to dataframe 'Number of deaths, age standardised and age specific mortality rates, by sex'
+- A2:A47 Get dimension 'category' as things starting 'Number of deaths..' from column A.
+- Shortened categories to remove repeated (and super long) date info. Took everything to the left of the first comma
+- ALL: Stored under the identifier 'Number of deaths, age standardised and age specific mortality rates, by sex'
+- Added to dataframe 'Number of deaths, age standardised and age specific mortality rates, by sex'
 
 Period
--ALL: Stored under the identifier 'Number of deaths, age standardised and age specific mortality rates, by sex'
--Added to dataframe 'Number of deaths, age standardised and age specific mortality rates, by sex'
+- ALL: Stored under the identifier 'Number of deaths, age standardised and age specific mortality rates, by sex'
+- Added to dataframe 'Number of deaths, age standardised and age specific mortality rates, by sex'
 
 Unit Multiplier
--Set unit multiplier to 1.
--ALL: Stored under the identifier 'Number of deaths, age standardised and age specific mortality rates, by sex'
--Added to dataframe 'Number of deaths, age standardised and age specific mortality rates, by sex'
+- Set unit multiplier to 1.
+- ALL: Stored under the identifier 'Number of deaths, age standardised and age specific mortality rates, by sex'
+- Added to dataframe 'Number of deaths, age standardised and age specific mortality rates, by sex'
 
 Measure Type
--Set Measure Type to Count.
--ALL: Stored under the identifier 'Number of deaths, age standardised and age specific mortality rates, by sex'
--Added to dataframe 'Number of deaths, age standardised and age specific mortality rates, by sex'
+- Set Measure Type to Count.
+- ALL: Stored under the identifier 'Number of deaths, age standardised and age specific mortality rates, by sex'
+- Added to dataframe 'Number of deaths, age standardised and age specific mortality rates, by sex'
 
 Unit of Measure
--Set Unit of Measure to People.
--ALL: Stored under the identifier 'Number of deaths, age standardised and age specific mortality rates, by sex'
--Added to dataframe 'Number of deaths, age standardised and age specific mortality rates, by sex'
+- Set Unit of Measure to People.
+- ALL: Stored under the identifier 'Number of deaths, age standardised and age specific mortality rates, by sex'
+- Added to dataframe 'Number of deaths, age standardised and age specific mortality rates, by sex'
 
 
 #### Table structure
@@ -502,33 +504,33 @@ Sex, Age, Rate, Lower 95% CI, Area, Category, Period, Unit Multiplier, Measure T
 #### Sheet: Table 1 
 
 Marker
--Converting data markers with the lookup: {":": "no-data-availible"}
+- Converting data markers with the lookup: {":": "no-data-availible"}
 
 Date of notification
--A6:A180 Got 'Date of notification' as datatime types in column A
--Format to single day URI pattern.
+- A6:A180 Got 'Date of notification' as datatime types in column A
+- Format to single day URI pattern.
 
 Period
 
 Cause of death
--B5:T5 Selected category items as 'Deaths involving COVID-19, 'All deaths'2019 Comparison
+- B5:T5 Selected category items as 'Deaths involving COVID-19, 'All deaths'2019 Comparison
 
 Source
--B4:R4 Selected source items as '['England and Wales (ONS data)', 'England (ONS data)', 'England (CQC data)', 'Wales (ONS data)', 'Wales (CIW data)']'. Please note - we'll be splitting these into an area  dimension and a seperate 'Source' attribute in post.
--Split the cells extracted as 'Source' into seperate Source and Area columns
+- B4:R4 Selected source items as '['England and Wales (ONS data)', 'England (ONS data)', 'England (CQC data)', 'Wales (ONS data)', 'Wales (CIW data)']'. Please note - we'll be splitting these into an area  dimension and a seperate 'Source' attribute in post.
+- Split the cells extracted as 'Source' into seperate Source and Area columns
 
 Area
--Split the cells extracted as 'Source' into seperate Source and Area columns
--Converted all area labels to 9 digit ONS codes.
+- Split the cells extracted as 'Source' into seperate Source and Area columns
+- Converted all area labels to 9 digit ONS codes.
 
 Unit Multiplier
--Set unit multiplier to 1.
+- Set unit multiplier to 1.
 
 Measure Type
--Set Measure Type to Count.
+- Set Measure Type to Count.
 
 Unit of Measure
--Set Unit of Measure to People.
+- Set Unit of Measure to People.
 
 
 #### Table structure
@@ -550,52 +552,52 @@ Marker, Date of notification, Period, Cause of death, Source, Area, Unit Multipl
 #### Sheet: Table 12
 
 Period
--ALL: Stored under the identifier 'Number of weekly deaths of care home residents by local authority'
--Added to dataframe 'Number of weekly deaths of care home residents by local authority'
--Added to dataframe 'Number of weekly deaths of care home residents by local authority'
+- ALL: Stored under the identifier 'Number of weekly deaths of care home residents by local authority'
+- Added to dataframe 'Number of weekly deaths of care home residents by local authority'
+- Added to dataframe 'Number of weekly deaths of care home residents by local authority'
 
 Area
--A6:A339 Area code taken as the continusous sequence of codes from column A.
--ALL: Stored under the identifier 'Number of weekly deaths of care home residents by local authority'
--Added to dataframe 'Number of weekly deaths of care home residents by local authority'
--Added to dataframe 'Number of weekly deaths of care home residents by local authority'
+- A6:A339 Area code taken as the continusous sequence of codes from column A.
+- ALL: Stored under the identifier 'Number of weekly deaths of care home residents by local authority'
+- Added to dataframe 'Number of weekly deaths of care home residents by local authority'
+- Added to dataframe 'Number of weekly deaths of care home residents by local authority'
 
 Week Number
--C4:Q4 Week number taken as left-to-right integers across the top.
--ALL: Stored under the identifier 'Number of weekly deaths of care home residents by local authority'
--Added to dataframe 'Number of weekly deaths of care home residents by local authority'
--Added to dataframe 'Number of weekly deaths of care home residents by local authority'
+- C4:Q4 Week number taken as left-to-right integers across the top.
+- ALL: Stored under the identifier 'Number of weekly deaths of care home residents by local authority'
+- Added to dataframe 'Number of weekly deaths of care home residents by local authority'
+- Added to dataframe 'Number of weekly deaths of care home residents by local authority'
 
 Cause of death
--Based on tab name, value set to All deaths.
--ALL: Stored under the identifier 'Number of weekly deaths of care home residents by local authority'
--Added to dataframe 'Number of weekly deaths of care home residents by local authority'
--Added to dataframe 'Number of weekly deaths of care home residents by local authority'
+- Based on tab name, value set to All deaths.
+- ALL: Stored under the identifier 'Number of weekly deaths of care home residents by local authority'
+- Added to dataframe 'Number of weekly deaths of care home residents by local authority'
+- Added to dataframe 'Number of weekly deaths of care home residents by local authority'
 
 Date of death
--B5:Q5 Period taken as continuous honizontal sequence of dates across  the top.
--Format to single day URI pattern.
--ALL: Stored under the identifier 'Number of weekly deaths of care home residents by local authority'
--Added to dataframe 'Number of weekly deaths of care home residents by local authority'
--Added to dataframe 'Number of weekly deaths of care home residents by local authority'
+- B5:Q5 Period taken as continuous honizontal sequence of dates across  the top.
+- Format to single day URI pattern.
+- ALL: Stored under the identifier 'Number of weekly deaths of care home residents by local authority'
+- Added to dataframe 'Number of weekly deaths of care home residents by local authority'
+- Added to dataframe 'Number of weekly deaths of care home residents by local authority'
 
 Unit Multiplier
--Set unit multiplier to 1.
--ALL: Stored under the identifier 'Number of weekly deaths of care home residents by local authority'
--Added to dataframe 'Number of weekly deaths of care home residents by local authority'
--Added to dataframe 'Number of weekly deaths of care home residents by local authority'
+- Set unit multiplier to 1.
+- ALL: Stored under the identifier 'Number of weekly deaths of care home residents by local authority'
+- Added to dataframe 'Number of weekly deaths of care home residents by local authority'
+- Added to dataframe 'Number of weekly deaths of care home residents by local authority'
 
 Measure Type
--Set Measure Type to Count.
--ALL: Stored under the identifier 'Number of weekly deaths of care home residents by local authority'
--Added to dataframe 'Number of weekly deaths of care home residents by local authority'
--Added to dataframe 'Number of weekly deaths of care home residents by local authority'
+- Set Measure Type to Count.
+- ALL: Stored under the identifier 'Number of weekly deaths of care home residents by local authority'
+- Added to dataframe 'Number of weekly deaths of care home residents by local authority'
+- Added to dataframe 'Number of weekly deaths of care home residents by local authority'
 
 Unit of Measure
--Set Unit of Measure to People.
--ALL: Stored under the identifier 'Number of weekly deaths of care home residents by local authority'
--Added to dataframe 'Number of weekly deaths of care home residents by local authority'
--Added to dataframe 'Number of weekly deaths of care home residents by local authority'
+- Set Unit of Measure to People.
+- ALL: Stored under the identifier 'Number of weekly deaths of care home residents by local authority'
+- Added to dataframe 'Number of weekly deaths of care home residents by local authority'
+- Added to dataframe 'Number of weekly deaths of care home residents by local authority'
 
 
 #### Table structure
@@ -611,52 +613,52 @@ Period, Area, Week Number, Cause of death, Date of death, Unit Multiplier, Measu
 #### Sheet: Table 13
 
 Period
--ALL: Stored under the identifier 'Number of weekly deaths of care home residents by local authority'
--Added to dataframe 'Number of weekly deaths of care home residents by local authority'
--Added to dataframe 'Number of weekly deaths of care home residents by local authority'
+- ALL: Stored under the identifier 'Number of weekly deaths of care home residents by local authority'
+- Added to dataframe 'Number of weekly deaths of care home residents by local authority'
+- Added to dataframe 'Number of weekly deaths of care home residents by local authority'
 
 Area
--A6:A339 Area code taken as the continusous sequence of codes from column A.
--ALL: Stored under the identifier 'Number of weekly deaths of care home residents by local authority'
--Added to dataframe 'Number of weekly deaths of care home residents by local authority'
--Added to dataframe 'Number of weekly deaths of care home residents by local authority'
+- A6:A339 Area code taken as the continusous sequence of codes from column A.
+- ALL: Stored under the identifier 'Number of weekly deaths of care home residents by local authority'
+- Added to dataframe 'Number of weekly deaths of care home residents by local authority'
+- Added to dataframe 'Number of weekly deaths of care home residents by local authority'
 
 Week Number
--C4:Q4 Week number taken as left-to-right integers across the top.
--ALL: Stored under the identifier 'Number of weekly deaths of care home residents by local authority'
--Added to dataframe 'Number of weekly deaths of care home residents by local authority'
--Added to dataframe 'Number of weekly deaths of care home residents by local authority'
+- C4:Q4 Week number taken as left-to-right integers across the top.
+- ALL: Stored under the identifier 'Number of weekly deaths of care home residents by local authority'
+- Added to dataframe 'Number of weekly deaths of care home residents by local authority'
+- Added to dataframe 'Number of weekly deaths of care home residents by local authority'
 
 Cause of death
--Based on tab name, value set to All deaths.
--ALL: Stored under the identifier 'Number of weekly deaths of care home residents by local authority'
--Added to dataframe 'Number of weekly deaths of care home residents by local authority'
--Added to dataframe 'Number of weekly deaths of care home residents by local authority'
+- Based on tab name, value set to All deaths.
+- ALL: Stored under the identifier 'Number of weekly deaths of care home residents by local authority'
+- Added to dataframe 'Number of weekly deaths of care home residents by local authority'
+- Added to dataframe 'Number of weekly deaths of care home residents by local authority'
 
 Date of death
--B5:Q5 Period taken as continuous honizontal sequence of dates across  the top.
--Format to single day URI pattern.
--ALL: Stored under the identifier 'Number of weekly deaths of care home residents by local authority'
--Added to dataframe 'Number of weekly deaths of care home residents by local authority'
--Added to dataframe 'Number of weekly deaths of care home residents by local authority'
+- B5:Q5 Period taken as continuous honizontal sequence of dates across  the top.
+- Format to single day URI pattern.
+- ALL: Stored under the identifier 'Number of weekly deaths of care home residents by local authority'
+- Added to dataframe 'Number of weekly deaths of care home residents by local authority'
+- Added to dataframe 'Number of weekly deaths of care home residents by local authority'
 
 Unit Multiplier
--Set unit multiplier to 1.
--ALL: Stored under the identifier 'Number of weekly deaths of care home residents by local authority'
--Added to dataframe 'Number of weekly deaths of care home residents by local authority'
--Added to dataframe 'Number of weekly deaths of care home residents by local authority'
+- Set unit multiplier to 1.
+- ALL: Stored under the identifier 'Number of weekly deaths of care home residents by local authority'
+- Added to dataframe 'Number of weekly deaths of care home residents by local authority'
+- Added to dataframe 'Number of weekly deaths of care home residents by local authority'
 
 Measure Type
--Set Measure Type to Count.
--ALL: Stored under the identifier 'Number of weekly deaths of care home residents by local authority'
--Added to dataframe 'Number of weekly deaths of care home residents by local authority'
--Added to dataframe 'Number of weekly deaths of care home residents by local authority'
+- Set Measure Type to Count.
+- ALL: Stored under the identifier 'Number of weekly deaths of care home residents by local authority'
+- Added to dataframe 'Number of weekly deaths of care home residents by local authority'
+- Added to dataframe 'Number of weekly deaths of care home residents by local authority'
 
 Unit of Measure
--Set Unit of Measure to People.
--ALL: Stored under the identifier 'Number of weekly deaths of care home residents by local authority'
--Added to dataframe 'Number of weekly deaths of care home residents by local authority'
--Added to dataframe 'Number of weekly deaths of care home residents by local authority'
+- Set Unit of Measure to People.
+- ALL: Stored under the identifier 'Number of weekly deaths of care home residents by local authority'
+- Added to dataframe 'Number of weekly deaths of care home residents by local authority'
+- Added to dataframe 'Number of weekly deaths of care home residents by local authority'
 
 
 #### Table structure
@@ -699,26 +701,26 @@ Period, Area, Week Number, Cause of death, Date of death, Unit Multiplier, Measu
 Period
 
 Area
--A6:A155 Area is taken from column A, below 'England' minus footnotes.
+- A6:A155 Area is taken from column A, below 'England' minus footnotes.
 
 Week Ending
--B5:L5 'Week' dimension taken as continuous sequence of dates across the top
--Formatted to single day period URI
+- B5:L5 'Week' dimension taken as continuous sequence of dates across the top
+- Formatted to single day period URI
 
 Week Number
--A4:L4 Week number taken as left-to-right integers across the top.
+- A4:L4 Week number taken as left-to-right integers across the top.
 
 Cause of death
--Based on tab name, value set to All deaths.
+- Based on tab name, value set to All deaths.
 
 Unit Multiplier
--Set unit multiplier to 1.
+- Set unit multiplier to 1.
 
 Measure Type
--Set Measure Type to Count.
+- Set Measure Type to Count.
 
 Unit of Measure
--Set Unit of Measure to People.
+- Set Unit of Measure to People.
 
 
 #### Table structure
@@ -737,26 +739,26 @@ Cant codify geography for this. Needs investigating but they seem to be inventin
 Period
 
 Area
--A6:A155 Area is taken from column A, below 'England' minus footnotes.
+- A6:A155 Area is taken from column A, below 'England' minus footnotes.
 
 Week Ending
--B5:L5 'Week' dimension taken as continuous sequence of dates across the top
--Formatted to single day period URI
+- B5:L5 'Week' dimension taken as continuous sequence of dates across the top
+- Formatted to single day period URI
 
 Week Number
--A4:L4 Week number taken as left-to-right integers across the top.
+- A4:L4 Week number taken as left-to-right integers across the top.
 
 Cause of death
--Based on tab name, value set to Deaths involving COVID-19.
+- Based on tab name, value set to Deaths involving COVID-19.
 
 Unit Multiplier
--Set unit multiplier to 1.
+- Set unit multiplier to 1.
 
 Measure Type
--Set Measure Type to Count.
+- Set Measure Type to Count.
 
 Unit of Measure
--Set Unit of Measure to People.
+- Set Unit of Measure to People.
 
 
 #### Table structure
@@ -778,26 +780,26 @@ Cant codify geography for this. Needs investigating but they seem to be inventin
 Period
 
 Area
--A7:A29 Area code taken as the continuous sequence of codes from column A.
+- A7:A29 Area code taken as the continuous sequence of codes from column A.
 
 Week Ending
--C5:AG5 week_ending taken as continuous horizontal sequence of dates across  the top.
--Formatted to single day period URI
+- C5:AG5 week_ending taken as continuous horizontal sequence of dates across  the top.
+- Formatted to single day period URI
 
 Week Number
--C4:AG4 Week number taken as horizontal sequence of integers across the top.
+- C4:AG4 Week number taken as horizontal sequence of integers across the top.
 
 Cause of death
--C6:AH6 dimension "Cause of death" taken as "All deaths", "COVID-19"
+- C6:AH6 dimension "Cause of death" taken as "All deaths", "COVID-19"
 
 Unit Multiplier
--Set unit multiplier to 1.
+- Set unit multiplier to 1.
 
 Measure Type
--Set Measure Type to Count.
+- Set Measure Type to Count.
 
 Unit of Measure
--Set Unit of Measure to People.
+- Set Unit of Measure to People.
 
 
 #### Table structure
@@ -815,27 +817,27 @@ Period, Area, Week Ending, Week Number, Cause of death, Unit Multiplier, Measure
 Period
 
 Place Of Death
--B5:J5 the dimension "Place of death" taken as "Care Home", "Hospital", "Elsewhere","Not Stated"
+- B5:J5 the dimension "Place of death" taken as "Care Home", "Hospital", "Elsewhere","Not Stated"
 
 Date of notification
--A6:A77 Period dimension taken as date types from column A plus 'Total'.
--Format to single day URI pattern.
+- A6:A77 Period dimension taken as date types from column A plus 'Total'.
+- Format to single day URI pattern.
 
 Area
--Hard coded Area to England
--Converted all area labels to 9 digit ONS codes.
+- Hard coded Area to England
+- Converted all area labels to 9 digit ONS codes.
 
 Cause Of Death
--B4:G4 the dimension "Cause of death" taken as "All deaths", "COVID-19"
+- B4:G4 the dimension "Cause of death" taken as "All deaths", "COVID-19"
 
 Unit Multiplier
--Set unit multiplier to 1.
+- Set unit multiplier to 1.
 
 Measure Type
--Set Measure Type to Count.
+- Set Measure Type to Count.
 
 Unit of Measure
--Set Unit of Measure to People.
+- Set Unit of Measure to People.
 
 
 #### Table structure
@@ -851,40 +853,40 @@ Period, Place Of Death, Date of notification, Area, Cause Of Death, Unit Multipl
 #### Sheet: Table 5
 
 Period
--ALL: Stored under the identifier 'Number of deaths of care home residents by place of death'
--Added to dataframe 'Number of deaths of care home residents by place of death'
+- ALL: Stored under the identifier 'Number of deaths of care home residents by place of death'
+- Added to dataframe 'Number of deaths of care home residents by place of death'
 
 Area
--B4:J4 Area dimension taken as "England and Wales", "England", "Wales"
--Converted all area labels to 9 digit ONS codes.
--ALL: Stored under the identifier 'Number of deaths of care home residents by place of death'
--Added to dataframe 'Number of deaths of care home residents by place of death'
+- B4:J4 Area dimension taken as "England and Wales", "England", "Wales"
+- Converted all area labels to 9 digit ONS codes.
+- ALL: Stored under the identifier 'Number of deaths of care home residents by place of death'
+- Added to dataframe 'Number of deaths of care home residents by place of death'
 
 Place of death
--B5:L5 the dimension "Place of death" taken as "Care Home", "Hospital","Elsewhere"
--ALL: Stored under the identifier 'Number of deaths of care home residents by place of death'
--Added to dataframe 'Number of deaths of care home residents by place of death'
+- B5:L5 the dimension "Place of death" taken as "Care Home", "Hospital","Elsewhere"
+- ALL: Stored under the identifier 'Number of deaths of care home residents by place of death'
+- Added to dataframe 'Number of deaths of care home residents by place of death'
 
 Date of death
--A6:A109 'Date of death' dimension taken as date types from column A plus 'Total'.
--Format to single day URI pattern.
--ALL: Stored under the identifier 'Number of deaths of care home residents by place of death'
--Added to dataframe 'Number of deaths of care home residents by place of death'
+- A6:A109 'Date of death' dimension taken as date types from column A plus 'Total'.
+- Format to single day URI pattern.
+- ALL: Stored under the identifier 'Number of deaths of care home residents by place of death'
+- Added to dataframe 'Number of deaths of care home residents by place of death'
 
 Unit Multiplier
--Set unit multiplier to 1.
--ALL: Stored under the identifier 'Number of deaths of care home residents by place of death'
--Added to dataframe 'Number of deaths of care home residents by place of death'
+- Set unit multiplier to 1.
+- ALL: Stored under the identifier 'Number of deaths of care home residents by place of death'
+- Added to dataframe 'Number of deaths of care home residents by place of death'
 
 Measure Type
--Set Measure Type to Count.
--ALL: Stored under the identifier 'Number of deaths of care home residents by place of death'
--Added to dataframe 'Number of deaths of care home residents by place of death'
+- Set Measure Type to Count.
+- ALL: Stored under the identifier 'Number of deaths of care home residents by place of death'
+- Added to dataframe 'Number of deaths of care home residents by place of death'
 
 Unit of Measure
--Set Unit of Measure to People.
--ALL: Stored under the identifier 'Number of deaths of care home residents by place of death'
--Added to dataframe 'Number of deaths of care home residents by place of death'
+- Set Unit of Measure to People.
+- ALL: Stored under the identifier 'Number of deaths of care home residents by place of death'
+- Added to dataframe 'Number of deaths of care home residents by place of death'
 
 
 #### Table structure
@@ -900,40 +902,40 @@ Period, Area, Place of death, Date of death, Unit Multiplier, Measure Type, Unit
 #### Sheet: Table 6
 
 Period
--ALL: Stored under the identifier 'Number of deaths of care home residents by place of death'
--Added to dataframe 'Number of deaths of care home residents by place of death'
+- ALL: Stored under the identifier 'Number of deaths of care home residents by place of death'
+- Added to dataframe 'Number of deaths of care home residents by place of death'
 
 Area
--B4:J4 Area dimension taken as "England and Wales", "England", "Wales"
--Converted all area labels to 9 digit ONS codes.
--ALL: Stored under the identifier 'Number of deaths of care home residents by place of death'
--Added to dataframe 'Number of deaths of care home residents by place of death'
+- B4:J4 Area dimension taken as "England and Wales", "England", "Wales"
+- Converted all area labels to 9 digit ONS codes.
+- ALL: Stored under the identifier 'Number of deaths of care home residents by place of death'
+- Added to dataframe 'Number of deaths of care home residents by place of death'
 
 Place of death
--B5:L5 the dimension "Place of death" taken as "Care Home", "Hospital","Elsewhere"
--ALL: Stored under the identifier 'Number of deaths of care home residents by place of death'
--Added to dataframe 'Number of deaths of care home residents by place of death'
+- B5:L5 the dimension "Place of death" taken as "Care Home", "Hospital","Elsewhere"
+- ALL: Stored under the identifier 'Number of deaths of care home residents by place of death'
+- Added to dataframe 'Number of deaths of care home residents by place of death'
 
 Date of death
--A6:A109 'Date of death' dimension taken as date types from column A plus 'Total'.
--Format to single day URI pattern.
--ALL: Stored under the identifier 'Number of deaths of care home residents by place of death'
--Added to dataframe 'Number of deaths of care home residents by place of death'
+- A6:A109 'Date of death' dimension taken as date types from column A plus 'Total'.
+- Format to single day URI pattern.
+- ALL: Stored under the identifier 'Number of deaths of care home residents by place of death'
+- Added to dataframe 'Number of deaths of care home residents by place of death'
 
 Unit Multiplier
--Set unit multiplier to 1.
--ALL: Stored under the identifier 'Number of deaths of care home residents by place of death'
--Added to dataframe 'Number of deaths of care home residents by place of death'
+- Set unit multiplier to 1.
+- ALL: Stored under the identifier 'Number of deaths of care home residents by place of death'
+- Added to dataframe 'Number of deaths of care home residents by place of death'
 
 Measure Type
--Set Measure Type to Count.
--ALL: Stored under the identifier 'Number of deaths of care home residents by place of death'
--Added to dataframe 'Number of deaths of care home residents by place of death'
+- Set Measure Type to Count.
+- ALL: Stored under the identifier 'Number of deaths of care home residents by place of death'
+- Added to dataframe 'Number of deaths of care home residents by place of death'
 
 Unit of Measure
--Set Unit of Measure to People.
--ALL: Stored under the identifier 'Number of deaths of care home residents by place of death'
--Added to dataframe 'Number of deaths of care home residents by place of death'
+- Set Unit of Measure to People.
+- ALL: Stored under the identifier 'Number of deaths of care home residents by place of death'
+- Added to dataframe 'Number of deaths of care home residents by place of death'
 
 
 #### Table structure
@@ -968,7 +970,7 @@ Period, Area, Place of death, Date of death, Unit Multiplier, Measure Type, Unit
 
 #### Footnotes
 
------
+
 -------------### Stage 2. Harmonise
 
 #### Sheet: 1

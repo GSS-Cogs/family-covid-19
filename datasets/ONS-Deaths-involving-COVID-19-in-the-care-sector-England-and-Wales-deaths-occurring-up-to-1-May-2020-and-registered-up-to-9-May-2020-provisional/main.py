@@ -1194,37 +1194,40 @@ for tab in tabs_from_named(tabs, ["Table 18"]):
 # +
 trace.output()
 
-# use the tracer to write some simple markdown for spec (because I'm lazy)
-lines = ["----------### Stage 1. Transform", ""]
-for title, details in trace._create_output_dict().items():
-    for cube_title, cubes in details.items():   # ['sourced_from', 'id', 'tab', 'column_actions']
-        lines.append("#### " + cube_title)
-        lines.append("") 
-        for cube in cubes:
-            lines.append("#### Sheet: " + cube["tab"])
-            lines.append("")
-            for column in cube["column_actions"]:
-                lines.append("{}".format(column["column_label"]))
-                for comment in [",".join(list(x.values())) for x in column["actions"]]:
-                    lines.append("-"+comment)
+spec_me = False
+if spec_me:
+    # use the tracer to write some simple markdown for spec (because I'm lazy)
+    lines = ["----------### Stage 1. Transform", ""]
+    for title, details in trace._create_output_dict().items():
+        for cube_title, cubes in details.items():   # ['sourced_from', 'id', 'tab', 'column_actions']
+            lines.append("#### " + cube_title)
+            lines.append("") 
+            for cube in cubes:
+                lines.append("#### Sheet: " + cube["tab"])
                 lines.append("")
-            lines.append("")
-            lines.append("#### Table structure")
-            lines.append(", ".join([x["column_label"] for x in cube["column_actions"]]))
-            lines.append("")
-            lines.append("#### Footnotes")
-            if cube["tab"] in footnotes_dict.keys():
-                for note in list(footnotes_dict[cube["tab"]].values()):
-                    lines.append("- "+note)
-            if cube["tab"] in comments:
+                for column in cube["column_actions"]:
+                    lines.append("{}".format(column["column_label"]))
+                    for comment in [",".join(list(x.values())) for x in column["actions"]]:
+                        lines.append("- "+comment)
+                    lines.append("")
                 lines.append("")
-                lines.append("#### DE notes")
-                for comment in comments[cube["tab"]]:
-                    lines.append(comment)
-            lines.append("")
-        lines.append("-----")
+                lines.append("#### Table structure")
+                lines.append(", ".join([x["column_label"] for x in cube["column_actions"]]))
+                lines.append("")
+                lines.append("#### Footnotes")
+                if cube["tab"] in footnotes_dict.keys():
+                    for note in list(footnotes_dict[cube["tab"]].values()):
+                        lines.append("- "+note)
+                if cube["tab"] in comments:
+                    lines.append("")
+                    lines.append("#### DE notes")
+                    for comment in comments[cube["tab"]]:
+                        lines.append(comment)
+                lines.append("")
+            lines.append("-----")
 
-for l in lines:
-    print(l)
+    for l in lines:
+        print(l)
+
 # -
 

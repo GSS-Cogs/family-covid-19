@@ -5,6 +5,7 @@ import datetime
 import json 
 import logging
 import re
+import isodate
 
 
 # +
@@ -73,11 +74,66 @@ get_local_authorities = Geography("https://api.beta.ons.gov.uk/v1/code-lists/loc
                                 overrides=local_authority_overrides)
 
 
+# +
+
+def get_date_range(title):
+    """
+    Given a title cell, extract a range date for use as period
+    
+    example title cell:
+    -------------------
+    Number of deaths of care home residents by date of death (ONS) and date of notification (CQC and CIW), 
+     from 28 December 2019 to 12 June 2020, registered up to 20 June 2020 1,2,3,4,5,6,7,8
+    """
+    
+    # get rid of rogue whitespace....sigh
+    title = " ".join([x for x in title.split(" ") if len(x) > 0])
+    
+    # Cut out string title so we've mainly time left
+    # TODO - likely to be fragile
+    if "from week ending" in title:
+        title = "".join(title.split("from week ending ")[1:])
+    elif "day of notification" in title:
+        title = "".join(title.split("day of notification ")[1:])
+    elif "from" in title:
+        title = "".join(title.split("from ")[1:])
+    elif "deaths occurring from" in title:
+        title = "".join(title.split("deaths occurring from")[1:])
+    else:
+        title = "".join(title.split("date of notification ")[1:])
+
+    # Use re to check there's the expected date format
+    months = "(January|February|March|April|May|June|July|August|September|October|November|December)"
+    r_query = "\d+ {} \d{} to \d+ {} \d{}".format(months, "{4}", months, "{4}")
+    m = re.match(r'{}'.format(r_query), title)
+    
+    # Assert found and cut the bit we want
+    assert m is not None, f"Cannot find the expected date string in the title '{title}'."
+    date_string = title[:m.span()[1]]
+    
+    # Get and format the start
+    start_of_interval_obj = datetime.datetime.strptime(date_string.split("to")[0].strip(), '%d %B %Y')
+    start_of_interval_str = start_of_interval_obj.strftime('%Y-%m-%dT00:00:00')
+    
+    # Get and format the duration
+    end_of_interval_obj = datetime.datetime.strptime(date_string.split("to")[1].strip(), '%d %B %Y')
+    duration_str = isodate.duration_isoformat(end_of_interval_obj-start_of_interval_obj)
+    
+    t = f"gregorian-interval/{start_of_interval_str}/{duration_str}"
+    print(t)
+    
+    return t
+
+#t = "Number of deaths of care home residents by date of death (ONS) and date of notification (CQC and CIW), from 28 December 2019 to 12 June 2020, registered up to 20 June 2020 1,2,3,4,5,6,7,8"
+#t2 = "Number of deaths of care home residents notified to the Care Inspectorate Wales, by date of notification 1 March 2020 to 19 June 2020, and by place of death, Wales 1,2"
+#t3 = "Number of weekly deaths of care home residents by local authority, occurring from week ending 6 March 2020 to 12 June 2020, registered up to 20 June 2020, England and Wales 1,2,3,4,5"
+#get_date_range(t3)
 # -
 
 # ## Helpers
 
 # +
+    
 
 def tabs_from_named(tabs, wanted):
     """Given all labs and a list of tab names wanted, return the ones we want, raise if they're not here"""
@@ -286,16 +342,17 @@ for tab in tabs_from_named(tabs, "Table 1"):
         title, footnotes = get_title_and_footnotes(tab)
         footnotes_dict[tab.name] = footnotes
         
-        columns=['Marker', 'Period', 'Cause of death', 'Source', 'Area']
+        columns=['Marker', 'Date Of Notification', 'Period', 'Cause of death', 'Source', 'Area']
         trace.start(title, tab, columns, source_sheet)
         
         # Start with the date title cell
         date_cell = tab.excel_ref('A').filter("Date").assert_one() 
-
-        # Period
-        period = date_cell.fill(DOWN).filter(is_type(datetime.datetime))
-        assert_continuous_sequence(period, UP)
-        trace.Period("{} Got period as datatime types in column A", var=excelRange(period))
+        
+        # Date of notification
+        date_of_notification = date_cell.fill(DOWN).filter(is_type(datetime.datetime))
+        assert_continuous_sequence(date_of_notification, UP)
+        trace.Date_Of_Notification("{} Got 'Date Of Notification' as datatime types in " \
+                                   "column A", var=excelRange(date_of_notification))
 
         # Cause of death
         cause_of_death = date_cell.fill(RIGHT).is_not_blank()
@@ -315,19 +372,19 @@ for tab in tabs_from_named(tabs, "Table 1"):
         trace.Source("{} " + msg, var=excelRange(source))
         
         # observations
-        obs = cause_of_death.waffle(period)
+        obs = cause_of_death.waffle(date_of_notification)
         
         assert_numeric_or_marker(obs, [":"])
         
         dimensions = [
-            HDim(period, "Period", DIRECTLY, LEFT),
+            HDim(date_of_notification, "Date Of Notification", DIRECTLY, LEFT),
             HDim(cause_of_death, "Cause of death", DIRECTLY, ABOVE),
-            HDim(source, "Source", CLOSEST, LEFT)
+            HDim(source, "Source", CLOSEST, LEFT),
+            HDimConst("Period", get_date_range(tab.excel_ref('A2').value))
         ]
 
         cs = ConversionSegment(obs, dimensions)
         df = create_tidy(cs, tab.name, trace)
-        df["Period"] = df["Period"].apply(format_time("specific_day"))
         
         # Split source and area
         df["Area"] = df["Source"].map(lambda x: x.split("(")[0].strip())
@@ -357,7 +414,7 @@ for tab in tabs_from_named(tabs, "Table 2"):
         title, footnotes = get_title_and_footnotes(tab)
         footnotes_dict[tab.name] = footnotes
         
-        columns=['Sex', 'Age', 'Area']
+        columns=['Sex', 'Age', 'Area', 'Period']
         trace.start(title, tab, columns, source_sheet)
         
         # Start with the first persons cell
@@ -387,7 +444,8 @@ for tab in tabs_from_named(tabs, "Table 2"):
         dimensions = [
             HDim(sex, "Sex", DIRECTLY, ABOVE),
             HDim(age, "Age", DIRECTLY, LEFT),
-            HDim(area, "Area", CLOSEST, LEFT)
+            HDim(area, "Area", CLOSEST, LEFT),
+            HDimConst("Period", get_date_range(tab.excel_ref('A2').value))
         ]
 
         cs = ConversionSegment(obs, dimensions)
@@ -413,7 +471,7 @@ for tab in tabs_from_named(tabs, ["Table 3", "Table 4"]):
         footnotes_dict[tab.name] = footnotes
         
         columns=['Sex', 'Age', "Rate", {"Lower 95% CI": "Lower_CI"}, {"Lower 95% CI": "Upper_CI"}, 
-                 'Area', 'Category']
+                 'Area', 'Category', 'Period']
         trace.start(cube3n4_title, tab, columns, source_sheet)
         
         first_death_cells = tab.excel_ref('B').filter("Number of deaths")
@@ -454,7 +512,8 @@ for tab in tabs_from_named(tabs, ["Table 3", "Table 4"]):
             HDim(attributes, "TEMP_FOR_ATTRIBUTES", DIRECTLY, ABOVE),
             HDim(age, "Age", DIRECTLY, LEFT),
             HDim(area, "Area", CLOSEST, ABOVE),
-            HDim(category, "Category", CLOSEST, ABOVE)
+            HDim(category, "Category", CLOSEST, ABOVE),
+            HDimConst("Period", get_date_range(tab.excel_ref('A2').value))
         ]
         
         cs = ConversionSegment(obs, dimensions)
@@ -513,17 +572,17 @@ for tab in tabs_from_named(tabs, ["Table 5", "Table 6"]):
         title, footnotes = get_title_and_footnotes(tab)
         footnotes_dict[tab.name] = footnotes
         
-        columns=['Period', 'Area', 'Place of death']
+        columns=['Period', 'Area', 'Place of death', 'Date of death']
         trace.start(cube5n6_title, tab, columns, source_sheet)
         
         date_cell = tab.excel_ref("A").filter("Date").assert_one()
         
-        # Period
-        period = date_cell.fill(DOWN).filter(is_type(datetime.datetime)) - get_unwanted(tab)
-        period = period | tab.excel_ref("A").filter("Total").assert_one() # Add the non date total
-        assert_continuous_sequence(period, UP)
-        trace.Period("{} Period dimension taken as date types from column A plus 'Total'.", \
-                    var=excelRange(period))
+        # Date of death
+        date_of_death = date_cell.fill(DOWN).filter(is_type(datetime.datetime)) - get_unwanted(tab)
+        date_of_death = date_of_death | tab.excel_ref("A").filter("Total").assert_one() # Add the non date total
+        assert_continuous_sequence(date_of_death, UP)
+        trace.Date_of_death("{} 'Date of death' dimension taken as date types from column A plus 'Total'.", \
+                    var=excelRange(date_of_death))
         
         # Area
         area = date_cell.shift(UP).expand(RIGHT).is_not_whitespace()
@@ -537,13 +596,14 @@ for tab in tabs_from_named(tabs, ["Table 5", "Table 6"]):
         trace.Place_of_death('{} the dimension "Place of death" taken as "Care Home", "Hospital",' \
                              '"Elsewhere"', var=excelRange(place_of_death))
         
-        obs = period.waffle(place_of_death)
+        obs = date_of_death.waffle(place_of_death)
         assert_numeric_or_marker(obs, [":"])
         
         dimensions = [
-            HDim(period, "Period", DIRECTLY, LEFT),
+            HDim(date_of_death, "Date of death", DIRECTLY, LEFT),
             HDim(area, "Area", CLOSEST, LEFT),
             HDim(place_of_death, "Place of death", DIRECTLY, ABOVE),
+            HDimConst("Period", get_date_range(tab.excel_ref('A2').value))
         ]
         
         cs = ConversionSegment(obs, dimensions)
@@ -574,41 +634,42 @@ for tab in tabs_from_named(tabs, ["Table 7", "Table 8"]):
         title, footnotes = get_title_and_footnotes(tab)
         footnotes_dict[tab.name] = footnotes
         
-        columns=['Period', 'Place Of Death', 'Area', 'Cause Of Death']
+        columns=['Period', 'Place of death', 'Area', 'Cause of death', 'Date of notification']
         trace.start(cube7n8_title, tab, columns, source_sheet)
         
         date_cell = tab.excel_ref("A").filter("Date").assert_one()
         
-        # Period
-        period = date_cell.fill(DOWN).filter(is_type(datetime.datetime)) - get_unwanted(tab)
-        period = period | tab.excel_ref("A").filter("Total").assert_one() # Add the non date total
-        assert_continuous_sequence(period, UP)
-        trace.Period("{} Period dimension taken as date types from column A plus 'Total'.", \
-                    var=excelRange(period))
+        # Date of death
+        date_of_notification = date_cell.fill(DOWN).filter(is_type(datetime.datetime)) - get_unwanted(tab)
+        date_of_notification = date_of_notification | tab.excel_ref("A").filter("Total").assert_one() # Add the non date total
+        assert_continuous_sequence(date_of_notification, UP)
+        trace.Date_of_notification("{} Period dimension taken as date types from column A plus 'Total'.", \
+                    var=excelRange(date_of_notification))
         
         # Place of death
         place_of_death = date_cell.fill(RIGHT).is_not_whitespace()
         assert_one_of(place_of_death, "place_of_death", ["Care Home", "Hospital", "Elsewhere", "Not Stated"])
-        trace.Place_Of_Death('{} the dimension "Place of death" taken as "Care Home", "Hospital", "Elsewhere",' \
+        trace.Place_of_death('{} the dimension "Place of death" taken as "Care Home", "Hospital", "Elsewhere",' \
                              '"Not Stated"', var=excelRange(place_of_death))
         
         # Cause of death
         cause_of_death = date_cell.shift(UP).expand(RIGHT).is_not_whitespace()
         assert_one_of(cause_of_death, "cause_of_death", ["All deaths", "COVID-19"])
-        trace.Cause_Of_Death('{} the dimension "Cause of death" taken as "All deaths", "COVID-19"', \
+        trace.Cause_of_death('{} the dimension "Cause of death" taken as "All deaths", "COVID-19"', \
                             var=excelRange(cause_of_death))
 
-        obs = period.waffle(place_of_death)
+        obs = date_of_notification.waffle(place_of_death)
         assert_numeric_or_marker(obs, [":"])
         
         area = "England" if tab.name.strip() == "Table 7" else "Wales"
         trace.Area("Set to 'England for table 7, else 'Wales'.")
         
         dimensions = [
-            HDim(period, "Period", DIRECTLY, LEFT),
-            HDim(place_of_death, "Place Of Death", DIRECTLY, ABOVE),
-            HDim(cause_of_death, "Cause Of Death", CLOSEST, LEFT),
-            HDimConst("Area", area)
+            HDim(date_of_notification, "Date of notification", DIRECTLY, LEFT),
+            HDim(place_of_death, "Place of death", DIRECTLY, ABOVE),
+            HDim(cause_of_death, "Cause of death", CLOSEST, LEFT),
+            HDimConst("Area", area),
+            HDimConst("Period", get_date_range(tab.excel_ref('A2').value))
         ]
         
         cs = ConversionSegment(obs, dimensions)
@@ -637,17 +698,17 @@ for tab in tabs_from_named(tabs, ["Table 9"]):
         title, footnotes = get_title_and_footnotes(tab)
         footnotes_dict[tab.name] = footnotes
         
-        columns=['Period', 'Place Of Death', 'Area', 'Cause Of Death']
+        columns=['Period', 'Place Of Death', 'Date of notification', 'Area', 'Cause Of Death']
         trace.start(title, tab, columns, source_sheet)
         
         date_cell = tab.excel_ref("A").filter("Date").assert_one()
         
-        # Period
-        period = date_cell.fill(DOWN).filter(is_type(datetime.datetime)) - get_unwanted(tab)
-        period = period | tab.excel_ref("A").filter("Total").assert_one() # Add the non date total
-        assert_continuous_sequence(period, UP)
-        trace.Period("{} Period dimension taken as date types from column A plus 'Total'.", \
-                    var=excelRange(period))
+        # Date of death
+        date_of_notification = date_cell.fill(DOWN).filter(is_type(datetime.datetime)) - get_unwanted(tab)
+        date_of_notification = date_of_notification | tab.excel_ref("A").filter("Total").assert_one() # Add the non date total
+        assert_continuous_sequence(date_of_notification, UP)
+        trace.Date_of_notification("{} Period dimension taken as date types from column A plus 'Total'.", \
+                    var=excelRange(date_of_notification))
         
         # Place of death
         place_of_death = date_cell.fill(RIGHT).is_not_whitespace()
@@ -661,17 +722,18 @@ for tab in tabs_from_named(tabs, ["Table 9"]):
         trace.Cause_Of_Death('{} the dimension "Cause of death" taken as "All deaths", "COVID-19"', \
                             var=excelRange(cause_of_death))
         
-        obs = period.waffle(place_of_death)
+        obs = date_of_notification.waffle(place_of_death)
         assert_numeric_or_marker(obs, [":"])
                 
         area = "England"
         trace.Area("Hard coded Area to {}", var=area)
         
         dimensions = [
-            HDim(period, "Period", DIRECTLY, LEFT),
+            HDim(date_of_notification, "Date of notification", DIRECTLY, LEFT),
             HDim(place_of_death, "Place Of Death", DIRECTLY, ABOVE),
             HDim(cause_of_death, "Cause Of Death", CLOSEST, LEFT),
-            HDimConst("Area", area)
+            HDimConst("Area", area),
+            HDimConst("Period", get_date_range(tab.excel_ref('A2').value))
         ]
         
         cs = ConversionSegment(obs, dimensions)
@@ -695,16 +757,16 @@ for tab in tabs_from_named(tabs, ["Table 10"]):
         title, footnotes = get_title_and_footnotes(tab)
         footnotes_dict[tab.name] = footnotes
         
-        columns=['Value', 'Category', 'Period', 'Area']
+        columns=['Value', 'Category', 'Period', 'Area', 'Date of notification']
         trace.start(title, tab, columns, source_sheet)
         
         date_cell = tab.excel_ref("A").filter("Date").assert_one()
         
-        # Period
-        period = date_cell.fill(DOWN).filter(is_type(datetime.datetime)) - get_unwanted(tab)
-        assert_continuous_sequence(period, UP)
-        trace.Period("{} Period dimension taken as date types from column A.", \
-                    var=excelRange(period))
+        # Date of notification
+        date_of_notification = date_cell.fill(DOWN).filter(is_type(datetime.datetime)) - get_unwanted(tab)
+        assert_continuous_sequence(date_of_notification, UP)
+        trace.Date_of_notification("{} Period dimension taken as date types from column A.", \
+                    var=excelRange(date_of_notification))
         
         # Category
         category = date_cell.fill(RIGHT).is_not_blank()
@@ -712,7 +774,7 @@ for tab in tabs_from_named(tabs, ["Table 10"]):
         trace.Category("{} dimension 'Category' taken as 'Care home resident' and " \
                        "'Home care service user'.", var=excelRange(category))
         
-        obs = category.waffle(period)
+        obs = category.waffle(date_of_notification)
         assert_numeric_or_marker(obs, [":"])
         
         area = "England"
@@ -720,8 +782,9 @@ for tab in tabs_from_named(tabs, ["Table 10"]):
         
         dimensions = [
             HDim(category, "Category", DIRECTLY, ABOVE),
-            HDim(period, "Period", DIRECTLY, LEFT),
-            HDimConst("Area", area)
+            HDim(date_of_notification, "Date of notification", DIRECTLY, LEFT),
+            HDimConst("Area", area),
+            HDimConst("Period", get_date_range(tab.excel_ref('A2').value))
         ]
         
         cs = ConversionSegment(obs, dimensions)
@@ -745,16 +808,16 @@ for tab in tabs_from_named(tabs, ["Table 11"]):
         title, footnotes = get_title_and_footnotes(tab)
         footnotes_dict[tab.name] = footnotes
         
-        columns=['Cause of death', 'Period', 'Area']
+        columns=['Cause of death', 'Period', 'Area', 'Date of notification']
         trace.start(title, tab, columns, source_sheet)
         
         first_region = tab.excel_ref("B").filter("East").assert_one()
         
-        # Period
-        period = first_region.shift(LEFT).fill(DOWN).filter(is_type(datetime.datetime)) - get_unwanted(tab)
-        assert_continuous_sequence(period, UP)
+        # Date of notification
+        date_of_notification = first_region.shift(LEFT).fill(DOWN).filter(is_type(datetime.datetime)) - get_unwanted(tab)
+        assert_continuous_sequence(date_of_notification, UP)
         trace.Period("{} Period dimension taken as date types from column A.", \
-                    var=excelRange(period))
+                    var=excelRange(date_of_notification))
         
         # Area
         area = first_region.expand(RIGHT).is_not_blank()
@@ -769,13 +832,14 @@ for tab in tabs_from_named(tabs, ["Table 11"]):
         trace.Cause_of_death('{} "Cause of death" taken as either "All deaths" or "Deaths involving' \
                             ' COVID-19".', var=excelRange(cause_of_death))
         
-        obs = period.waffle(area)
+        obs = date_of_notification.waffle(area)
         assert_numeric_or_marker(obs, [":"])
         
         dimensions = [
             HDim(cause_of_death, "Cause of death", CLOSEST, LEFT),
-            HDim(period, "Period", DIRECTLY, LEFT),
-            HDim(area, "Area", DIRECTLY, ABOVE)
+            HDim(area, "Area", DIRECTLY, ABOVE),
+            HDim(date_of_notification, "Date of notification", DIRECTLY, LEFT),
+            HDimConst("Period", get_date_range(tab.excel_ref('A2').value))
         ]
 
         cs = ConversionSegment(obs, dimensions)
@@ -801,7 +865,7 @@ for tab in tabs_from_named(tabs, ["Table 12", "Table 13"]):
         title, footnotes = get_title_and_footnotes(tab)
         footnotes_dict[tab.name] = footnotes
         
-        columns=['Period', 'Area', 'Week Number', 'Cause of death']
+        columns=['Period', 'Area', 'Week Number', 'Cause of death', 'Date of death']
         trace.start(cube12n13_title, tab, columns, source_sheet)
         
         area_code_header = tab.excel_ref('A').filter("Area Code").assert_one()
@@ -815,12 +879,12 @@ for tab in tabs_from_named(tabs, ["Table 12", "Table 13"]):
         trace.Area("{} Area code taken as the continusous sequence of codes from column" \
                    " A.", var=excelRange(area))
         
-        period = area_code_header.fill(RIGHT).is_not_blank()
-        assert_continuous_sequence(period, RIGHT)
-        trace.Period("{} Period taken as continuous honizontal sequence of dates across " \
-                     " the top.", var=excelRange(period))
+        date_of_death = area_code_header.fill(RIGHT).is_not_blank()
+        assert_continuous_sequence(date_of_death, RIGHT)
+        trace.Date_of_death("{} Period taken as continuous honizontal sequence of dates across " \
+                     " the top.", var=excelRange(date_of_death))
         
-        obs = area.shift(RIGHT).waffle(period - tab.excel_ref('B'))
+        obs = area.shift(RIGHT).waffle(date_of_death - tab.excel_ref('B'))
         assert_numeric_or_marker(obs, [":"])
         
         cause_of_death = "Deaths involving COVID-19" if tab.name.strip() == "Table 15" else "All deaths"
@@ -828,10 +892,11 @@ for tab in tabs_from_named(tabs, ["Table 12", "Table 13"]):
                                    var=cause_of_death)
         
         dimensions = [
-            HDim(period, "Period", DIRECTLY, ABOVE),
+            HDim(date_of_death, "Date of death", DIRECTLY, ABOVE),
             HDim(area, "Area", DIRECTLY, LEFT),
             HDim(week_no, "Week Number", DIRECTLY, ABOVE),
-            HDimConst("Cause of death", cause_of_death)
+            HDimConst("Cause of death", cause_of_death),
+            HDimConst("Period", get_date_range(tab.excel_ref('A2').value))
         ]
         
         cs = ConversionSegment(obs, dimensions)
@@ -858,7 +923,7 @@ for tab in tabs_from_named(tabs, ["Table 14", "Table 15"]):
         title, footnotes = get_title_and_footnotes(tab)
         footnotes_dict[tab.name] = footnotes
         
-        columns=['Period', 'Area', 'Week Number', 'Cause of death']
+        columns=['Period', 'Area', 'Week', 'Week Number', 'Cause of death']
         trace.start(cube14n15_title, tab, columns, source_sheet)
         
         # We're gonna anchor to the first instance of "England" in column A
@@ -877,12 +942,12 @@ for tab in tabs_from_named(tabs, ["Table 14", "Table 15"]):
         trace.Area("{} Area is taken from column A, below 'England' minus footnotes.", \
                   var=excelRange(area))
         
-        period = big_england.shift(UP).fill(RIGHT).is_not_blank()
-        assert_continuous_sequence(period, RIGHT)
-        trace.Period("{} 'Period' dimension taken as continuous sequence of dates" \
-                     " across the top", var=excelRange(period))
+        week = big_england.shift(UP).fill(RIGHT).is_not_blank()
+        assert_continuous_sequence(week, RIGHT)
+        trace.Week("{} 'Week' dimension taken as continuous sequence of dates" \
+                     " across the top", var=excelRange(week))
         
-        obs = area.shift(RIGHT).waffle(period - tab.excel_ref('B'))
+        obs = area.shift(RIGHT).waffle(week - tab.excel_ref('B'))
         assert_numeric_or_marker(obs, [":"])
         
         cause_of_death = "Deaths involving COVID-19" if tab.name.strip() == "Table 15" else "All deaths"
@@ -890,10 +955,11 @@ for tab in tabs_from_named(tabs, ["Table 14", "Table 15"]):
                                    var=cause_of_death)
         
         dimensions = [
-            HDim(period, "Period", DIRECTLY, ABOVE),
+            HDim(week, "Week", DIRECTLY, ABOVE),
             HDim(area, "Area", DIRECTLY, LEFT),
             HDim(week_no, "Week Number", DIRECTLY, ABOVE),
-            HDimConst("Cause of death", cause_of_death)
+            HDimConst("Cause of death", cause_of_death),
+            HDimConst("Period", get_date_range(tab.excel_ref('A2').value))
         ]
         
         cs = ConversionSegment(obs, dimensions)
@@ -907,8 +973,8 @@ for tab in tabs_from_named(tabs, ["Table 14", "Table 15"]):
                                "eg 'Bournemouth, Christchurch and Poole'.")
         
         # Where the period is "Grand Total" set the week no to "All"
-        assert "Grand total" in df["Period"].unique(), "The label 'Grand total' is expected and required"
-        df["Week Number"][df["Period"] == "Grand total"] = "All"
+        assert "Grand total" in df["Week"].unique(), "The label 'Grand total' is expected and required"
+        df["Week Number"][df["Week"] == "Grand total"] = "All"
         
         trace.store(cube14n15_title, df)
         
@@ -945,9 +1011,9 @@ for tab in tabs_from_named(tabs, ["Table 16"]):
         trace.Cause_of_death('{} dimension "Cause of death" taken as "All deaths", "COVID-19"', \
                              var=excelRange(cause_of_death))
 
-        period = area_code_header.shift(UP).fill(RIGHT).is_not_blank()
+        week = area_code_header.shift(UP).fill(RIGHT).is_not_blank()
         trace.Period("{} Period taken as continuous horizontal sequence of dates across " \
-                     " the top.", var=excelRange(period))
+                     " the top.", var=excelRange(week))
         
         week_no = area_code_header.shift(UP).shift(UP).expand(RIGHT).is_not_blank()
         trace.Week_Number("{} Week number taken as horizontal sequence of integers across the " \
@@ -957,9 +1023,10 @@ for tab in tabs_from_named(tabs, ["Table 16"]):
         assert_numeric_or_marker(obs, [":"])
         
         dimensions = [
-            HDim(period, "Period", CLOSEST, LEFT),
+            HDim(week, "Week", CLOSEST, LEFT),
             HDim(area, "Area", DIRECTLY, LEFT),
-            HDim(week_no, "Week Number", CLOSEST, LEFT)
+            HDim(week_no, "Week Number", CLOSEST, LEFT),
+            HDimConst("Period", get_date_range(tab.excel_ref('A2').value))
         ]
         
         cs = ConversionSegment(obs, dimensions)
@@ -1009,7 +1076,8 @@ for tab in tabs_from_named(tabs, ["Table 17"]):
         dimensions = [
             HDim(leading_cause, "Leading cause", DIRECTLY, LEFT),
             HDim(sex, "Sex", DIRECTLY, ABOVE),
-            HDim(area, "Area", CLOSEST, LEFT)
+            HDim(area, "Area", CLOSEST, LEFT),
+            HDimConst("Period", get_date_range(tab.excel_ref('A2').value))
         ]
         
         cs = ConversionSegment(obs, dimensions)
@@ -1031,7 +1099,7 @@ for tab in tabs_from_named(tabs, ["Table 18"]):
         title, footnotes = get_title_and_footnotes(tab)
         footnotes_dict[tab.name] = footnotes
         
-        columns=['Sex', 'Age Group', 'Pre-existing Condition', 'Area']
+        columns=['Sex', 'Age Group', 'Pre-existing Condition', 'Period', 'Area']
         trace.start(title, tab, columns, source_sheet)
         
         condition_header = tab.excel_ref('A').filter("Main pre-existing condition").assert_one()
@@ -1065,7 +1133,8 @@ for tab in tabs_from_named(tabs, ["Table 18"]):
             HDim(sex, "Sex", CLOSEST, LEFT),
             HDim(age_group, "Age Group", DIRECTLY, ABOVE),
             HDim(condition, "Pre-existing Condition", DIRECTLY, LEFT),
-            HDimConst("Area", area)
+            HDimConst("Area", area),
+            HDimConst("Period", get_date_range(tab.excel_ref('A2').value))
         ]
         
         cs = ConversionSegment(obs, dimensions)

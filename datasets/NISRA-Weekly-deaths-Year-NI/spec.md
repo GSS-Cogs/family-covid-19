@@ -251,8 +251,8 @@
 #### Sheet: Table 8
 
 		Column Addition/Removal/Rename/Reformat
-			Remove column Week of Death
-			Rename column Place elf Death as Location of Death
+			Remove column Week of Death and Covid-19 Deaths
+			Add column Location of Death
 		
 		Join to Dataset:
 			d2
@@ -260,7 +260,9 @@
 #### Sheet: Table 9
 
 		Column Addition/Removal/Rename/Reformat
-			Add a column
+			Rename column Place of Death to Location of Death
+			Remove column Week of Death
+			Remove supascripts from column Location of Death
 		
 		Join to Dataset:
 			d2
@@ -268,7 +270,9 @@
 #### Sheet: Table 10
 
 		Column Addition/Removal/Rename/Reformat
-			Add a column
+			Rename column Place of Death to Location of Death
+			Remove column Week Ending
+			Remove superscripts from column Location of Death
 		
 		Join to Dataset:
 			d2
@@ -276,12 +280,13 @@
 #### Sheet: Table 11
 
 		Column Addition/Removal/Rename/Reformat
-			Add a column
+			Rename column Place of Death to Location of Death
+			Remove superscripts from column Location of Death
 		
 		Join to Dataset:
 			d2
 
------
+
 
 ##### Footnotes
 

@@ -143,100 +143,142 @@
 
 #### Sheet: Table_1
 
-		Column Additions
-			Add a column
+		Column Additions/Renames/Deletions
+			Period column Gregorian-interval period as stated in column headings
+			Add column Location of Death with value All
+			Add Cause of Death with value All
+			Add column Local Authority with value All
+			Add column Measure Type with value Deaths
+			Add column Unit with value Count 
+
+		Period, Care Provided --> Location of Death, Cause of Death, Local Authority
 			
 		Join to Dataset:
-			d#
-			
-##### Table Structure
-		Notification Date Range, Care Provided, Measure Type, Unit, Marker, Value
+			d1
 
 #### Sheet: Table_2
 
-		Column Additions
-			Add a column
+		Column Additions/Renames/Deletions
+			Period column Gregorian-interval period as stated in title (A1)
+			Add column Cause of Death with value COVID-19
+			Add column Care Provided with value All
+			Add column Local Authority with value All
+			Add column Measure Type with value Deaths
+			Add column Unit with value Count 
+
+		Period, Location of Death --> Care Provided, Cause of Death, Local Authority
 			
 		Join to Dataset:
-			d#
-
-##### Table Structure
-		Notification Date Range, Location of Death, Measure Type, Unit, Marker, Value
+			d1
 
 #### Sheet: Table_3
 
-		Column Additions
-			Add a column
+		Column Additions/Renames/Deletions
+			Period column, join up Year with day to give Gregorian-Day interval
+			Add column Location of Death with value All
+			Add column Care Provided with value All
+			Add column Local Authority with value All
+			Add column Measure Type with value Deaths
+			Add column Unit with value Count 
+			Change "All deaths Total" to "All", "Covid Total" to "COVID-19", "Non-Covid Total" to "Other"
+			Change "Suspected" to "Suspected COVID-19", "Confirmed" to "Confirmed COVID-19"
+
+		Period, Cause of Death --> Location of Death, Care Provided, Local Authority
 			
 		Join to Dataset:
-			d#
-
-##### Table Structure
-		Notification Day, Notification Year, Cause of Death, Measure Type, Unit, Marker, Value
+			d1
 
 #### Sheet: Table_4 
 
-		Column Additions
-			Add a column
+		Column Additions/Renames/Deletions
+			Period column Gregorian-day interval
+			Add column Care Provided with value All
+			Add column Cause of Death with value COVID-19
+			Add column Local Authority with value All
+			Add column Measure Type with value Deaths
+			Add column Unit with value Count 
+
+		Period, Location of Death --> Care Provided, Cause of Death, Local Authority
 			
 		Join to Dataset:
-			d#
-
-##### Table Structure
-		Notification Date, Location of Death, Measure Type, Unit, Marker, Value
+			d1
 
 #### Sheet: Table_5
 
-		Column Additions
-			Add a column
+		Column Additions/Renames/Deletions
+			Period column Gregorian-day interval
+			Add column Care Provided with value All
+			Add column Cause of Death with value All
+			Add column Local Authority with value All
+			Add column Measure Type with value Deaths
+			Add column Unit with value Count 
+
+		Period, Location of Death --> Care Provided, Cause of Death, Local Authority
 			
 		Join to Dataset:
-			d#
-		
-##### Table Structure
-		Notification Date, Location of Death, Measure Type, Unit, Marker, Value
+			d1
 		
 #### Sheet: Table_6 
 
-		Column Additions
-			Add a column
+		Column Additions/Renames/Deletions
+			Period column Gregorian-day interval
+			Add column Location of Death with value Care Home
+			Add column Care Provided with value All
+			Add column Cause of Death with value COVID-19
+			Add column Measure Type with value Deaths
+			Add column Unit with value Count 
+
+		Period, Local Authority --> Location of Death, Care Provided, Cause of Death
 			
 		Join to Dataset:
-			d#
-
-##### Table Structure
-		Area Code, Local Authority, Notification Date, Measure Type, Unit, Marker, Value
+			d1
 
 #### Sheet: Table_7 
 
-		Column Additions
-			Add a column
+		Column Additions/Renames/Deletions
+			Period column Gregorian-day interval
+			Add column Location of Death with value All
+			Add column Care Provided with value All
+			Add column Cause of Death with value COVID-19
+			Add column Measure Type with value Deaths
+			Add column Unit with value Count 
+
+		Period, Local Authority --> Location of Death, Care Provided, Cause of Death
 			
 		Join to Dataset:
-			d#	
-
-##### Table Structure
-		Area Code, Local Authority, Notification Date, Measure Type, Unit, Marker, Value
+			d1
 
 #### Sheet: Table_8
 
-		Column Additions
-			Add a column
+		Column Additions/Renames/Deletions
+			Period column Gregorian-day interval
+			Add column Location of Death with value All
+			Add column Care Provided with value All
+			Add column Cause of Death with value All
+			Add column Measure Type with value Deaths
+			Add column Unit with value Count 
+
+		Period, Local Authority --> Location of Death, Care Provided, Cause of Death
 			
 		Join to Dataset:
-			d#
-
-##### Table Structure
-		Area Code, Local Authority, Notification Date, Measure Type, Unit, Marker, Value
+			d1
 
 #### Sheet: Table_9
 
-		Column Additions
-			Add a column
+		Column Additions/Renames/Deletions
+			Period column Gregorian-day interval
+			Add column Location of Death with value Care Home
+			Add column Care Provided with value All
+			Add column Cause of Death with value All
+			Add column Measure Type with value Deaths
+			Add column Unit with value Count 
+
+		Period, Local Authority --> Location of Death, Care Provided, Cause of Death
 			
 		Join to Dataset:
-			d#
+			d1
 
-##### Table Structure
-		Area Code, Local Authority, Notification Date, Measure Type, Unit, Marker, Value
+#### DM Notes
+
+		Check if metadata mentions that the COVID-19 cases are both confirmed and suspected
 

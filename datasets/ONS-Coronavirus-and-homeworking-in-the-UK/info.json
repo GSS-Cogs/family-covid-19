@@ -18,7 +18,8 @@
         "stage": [
             "To Do"
         ],
-        "airtable": "recV8EBNuEtaDw7iZ"
+        "airtable": "recV8EBNuEtaDw7iZ",
+        "main_issue": 166
     },
     "sizingNotes": "Simple table structure with footnotes",
     "notes": ""

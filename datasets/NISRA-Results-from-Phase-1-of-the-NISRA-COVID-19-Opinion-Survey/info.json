@@ -18,7 +18,8 @@
         "stage": [
             "To Do"
         ],
-        "airtable": "recqosVrZXUPmdZWQ"
+        "airtable": "recqosVrZXUPmdZWQ",
+        "main_issue": 170
     },
     "sizingNotes": "A large number of simple structure tables, with Graphs",
     "notes": "This is survey style data, so should wait until we have the policy / model defined for handling this type of data"

@@ -12,7 +12,8 @@
         "stage": "Not Required"
     },
     "transform": {
-        "airtable": "recZnt2MypJDAeMwh"
+        "airtable": "recZnt2MypJDAeMwh",
+        "main_issue": 167
     },
     "sizingNotes": "",
     "notes": "This is an article"

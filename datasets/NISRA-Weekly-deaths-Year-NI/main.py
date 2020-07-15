@@ -151,7 +151,8 @@ joined_dat['Measure Type'] = 'Deaths'
 joined_dat['Age'].unique()
 
 # Output the data to CSV
-csvName = 'registered-deaths-observations.csv'
+#csvName = 'registered-deaths-observations.csv'
+csvName = 'observations.csv'
 out = Path('out')
 out.mkdir(exist_ok=True)
 joined_dat.drop_duplicates().to_csv(out / csvName, index = False)

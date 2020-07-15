@@ -1,0 +1,19 @@
+{
+    "title": "Deaths of homeless people involving COVID-19, England and Wales",
+    "publisher": "Office for National Statistics",
+    "description": "Deaths of homeless people that involved the coronavirus (COVID-19) registered in England and Wales between 26 March and 26 June 2020.",
+    "landingPage": "https://www.ons.gov.uk/releases/deathsofhomelesspeopleinvolvingcovid19englandandwalesdeathsregisteredupto26june2020",
+    "published": "2020-07-10",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": "",
+        "stage": "Not Required"
+    },
+    "transform": {
+        "airtable": "recZnt2MypJDAeMwh"
+    },
+    "sizingNotes": "",
+    "notes": "This is an article"
+}

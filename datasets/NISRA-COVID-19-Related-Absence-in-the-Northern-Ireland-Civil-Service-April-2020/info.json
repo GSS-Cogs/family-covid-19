@@ -11,7 +11,7 @@
     ],
     "extract": {
         "source": "",
-        "stage": "Candidate"
+        "stage": "Not Required"
     },
     "transform": {
         "airtable": [
@@ -21,9 +21,9 @@
         "main_issue": 71
     },
     "sizingNotes": "",
-    "notes": "",
+    "notes": "Duplicate",
     "landingPage": [
-        "Delayed to July 2020",
+        "",
         "https://www.gov.uk/government/statistics/announcements/covid-19-related-absence-in-the-northern-ireland-civil-service-april-2020#history"
     ]
 }

@@ -1,13 +1,13 @@
 {
     "title": "Impact of coronavirus in Care Homes in England (Vivaldi)",
     "publisher": "Office for National Statistics",
-    "description": "",
+    "description": "First results from the Vivaldi study, a large scale survey which looked at coronavirus (COVID-19) infections in 9,081 care homes providing care for dementia patients and the elderly in England.",
     "published": "2020-07-03",
     "families": [
         "COVID-19"
     ],
     "extract": {
-        "source": "",
+        "source": "XLS, CSV",
         "stage": "Not Required"
     },
     "transform": {
@@ -15,5 +15,9 @@
         "main_issue": 154
     },
     "sizingNotes": "",
-    "notes": "This is a publication only"
+    "notes": "This is a publication only",
+    "landingPage": "https://www.ons.gov.uk/peoplepopulationandcommunity/healthandsocialcare/conditionsanddiseases/articles/impactofcoronavirusincarehomesinenglandvivaldi/26mayto19june2020",
+    "datasetNotes": [
+        "On the landing page data used within the publication can be downloaded as a XLS or CSV."
+    ]
 }

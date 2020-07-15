@@ -1,0 +1,25 @@
+{
+    "title": "HM Prison and Probation Service COVID-19 statistics",
+    "publisher": "Her Majesty\u2019s Prison & Probation Service",
+    "description": "Official statistics release providing weekly data of COVID-19 in HM Prison and Probation Service in England and Wales.",
+    "landingPage": "https://www.gov.uk/government/statistics/hm-prison-and-probation-service-covid-19-statistics#history",
+    "datasetNotes": [
+        "On the landing page under Documents "
+    ],
+    "published": "2020-07-10",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": "ODS",
+        "stage": "Documented"
+    },
+    "transform": {
+        "stage": [
+            "To Do"
+        ],
+        "airtable": "recj5i3tzP2g68He9"
+    },
+    "sizingNotes": "Simple table structure with footnotes",
+    "notes": ""
+}

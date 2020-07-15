@@ -1,0 +1,25 @@
+{
+    "title": "Results from Phase 1 of the NISRA COVID-19 Opinion Survey",
+    "publisher": "Northern Ireland Statistics and Research Agency",
+    "description": "Results from phase 1 of the NISRA COVID-19 Opinion Survey. The survey is designed to measure how the COVID-19 pandemic is affecting peoples\u2019 lives and behaviour in Northern Ireland. The results relate to Phase 1 of the survey and are based on interviews carried out with members of the public between 21 April and 22 June 2020.",
+    "landingPage": "https://www.nisra.gov.uk/publications/nisra-coronavirus-covid-19-opinion-survey",
+    "datasetNotes": [
+        "On the landing page under documents "
+    ],
+    "published": "2020-07-10",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": "XLS, CSV",
+        "stage": "Documented"
+    },
+    "transform": {
+        "stage": [
+            "To Do"
+        ],
+        "airtable": "recqosVrZXUPmdZWQ"
+    },
+    "sizingNotes": "A large number of simple structure tables, with Graphs",
+    "notes": "This is survey style data, so should wait until we have the policy / model defined for handling this type of data"
+}

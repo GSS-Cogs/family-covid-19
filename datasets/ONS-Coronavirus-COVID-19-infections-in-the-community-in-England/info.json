@@ -1,0 +1,26 @@
+{
+    "title": "Coronavirus (COVID-19) infections in the community in England",
+    "publisher": "Office for National Statistics",
+    "description": "Characteristics of people testing positive for the coronavirus (COVID-19) in England taken from the COVID-19 Infection Survey.",
+    "landingPage": "https://www.ons.gov.uk/peoplepopulationandcommunity/healthandsocialcare/conditionsanddiseases/datasets/coronaviruscovid19infectionsinthecommunityinengland",
+    "datasetNotes": [
+        "On the landing page under your download option"
+    ],
+    "published": "2020-07-07",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": "XLS",
+        "stage": "Documented"
+    },
+    "transform": {
+        "stage": [
+            "To Do",
+            "Priority"
+        ],
+        "airtable": "rech3Vt6PmQW6qNZC"
+    },
+    "sizingNotes": "Simple table structure on multple tabs with footnotes",
+    "notes": ""
+}

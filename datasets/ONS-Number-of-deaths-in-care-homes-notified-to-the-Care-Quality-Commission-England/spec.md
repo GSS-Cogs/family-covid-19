@@ -71,28 +71,23 @@
 
 -------------### Stage 2. Harmonise
 
-#### Sheet: 1
+#### Sheet: 1 - Table 1, 2, 3 and 4 to join in one cube.
 
-		spec
+		Date of Notification to include week ending and daily 
+		Location to add value of ONS Geography code England and codelist for Local Authority locations 
+		Place of Occurence add value of Care Home, Hospital, Elsewhere, Not Stated
+		Death Causes with values for COVID-19 and All causes
+		Add Measure Type, Unit as Count, Marker, Value as Deaths
+		Add metadata as an Attribute:
+		Data provided by Care Quality Commission., Figures are for deaths CQC are notified of on the days specified. Figures only include deaths that were notified by 3 Jul 2020, and may be an underestimate due to notification delays., Figures are for persons who were resident and died in a care home., Figures don't include 10 April 2020 as the first full week of data for deaths involving COVID-19 began on 11 April 2020.
+		
 
 #### Table Structure
 
-		Period, Measure Type, Unit, Marker, Value
-
-#### Sheet: 2
-
-		spec
-
-----------#### Table Structure
-
-		Period, Measure Type, Unit, Marker, Value
-
---------------##### Footnotes
-
-		footnotes
+		Date of Notification, Location, Place of Occurence, Death Causes, Measure Type, Unit, Marker, Value
 
 ##### DM Notes
 
-		notes
+		Information tab contains comprehensive info data source and general data information - too long to include in description and as an attribute.
 
 <!-- #endregion -->

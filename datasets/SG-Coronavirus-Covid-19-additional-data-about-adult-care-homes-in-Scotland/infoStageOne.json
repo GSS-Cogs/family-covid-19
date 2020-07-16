@@ -1,0 +1,110 @@
+{
+    "AirTable Record ID": "recL3jfaquYgWnGxH",
+    "AirTable creation date": "2020-06-02T05:51:06.000Z",
+    "BA Stage": "Documented",
+    "Data type": [
+        "XLS"
+    ],
+    "Description": "Weekly data on suspected cases of COVID-19 in adult care homes in Scotland.",
+    "Family": [
+        "family-covid-19-AIRTABLE"
+    ],
+    "Frequency": "Weekly",
+    "GitHub Issue Number": 87,
+    "GitHub Name": "SG-Coronavirus-Covid-19-additional-data-about-adult-care-homes-in-Scotland",
+    "Landing Page": "https://www.gov.scot/publications/coronavirus-covid-19-additional-data-about-adult-care-homes-in-scotland/",
+    "Last Published": "2020-05-27",
+    "Main Issue": "1000000",
+    "Name": "Coronavirus (Covid-19): additional data about adult care homes in Scotland",
+    "Producer": [
+        "SG"
+    ],
+    "Route from landing page to data": "On landing page scroll down to download ",
+    "Size": "Medium",
+    "Sizing Notes": "Simple table structure, with a mixture of figures and & with foot side notes.  2 Tables on tabs and some tabs with only charts which can be discounted.",
+    "Tech Stage": [
+        "To Do",
+        "Priority"
+    ],
+    "title": "Coronavirus (Covid-19): additional data about adult care homes in Scotland",
+    "publisher": "Scottish Government",
+    "description": "Weekly data on suspected cases of COVID-19 in adult care homes in Scotland.",
+    "dataURL": "https://www.gov.scot/binaries/content/documents/govscot/publications/statistics/2020/05/data-on-coronavirus-covid-19-in-adult-care-homes-in-scotland2/documents/coronavirus-covid-19-additional-data-about-adult-care-homes-in-scotland/coronavirus-covid-19-additional-data-about-adult-care-homes-in-scotland/govscot%3Adocument/Covid-19%2Bin%2BScottish%2BAdult%2BCare%2BHomes%2B8%2BJuly%2B2020.xlsx",
+    "datasetNotes": [
+        "On landing page scroll down to download "
+    ],
+    "published": "2020-05-27",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": "XLS",
+        "stage": "Documented"
+    },
+    "transform": {
+        "stage": [
+            "To Do",
+            "Priority"
+        ],
+        "airtable": "recL3jfaquYgWnGxH",
+        "main_issue": 87,
+        "transformStage": [
+            {
+                "name": "Table 1 - Care Home Size",
+                "title": "Table 1 - Weekly cumulative number of suspected COVID-19 cases per 1,000 registered places and proportion of adult care homes with suspected COVID-19 case, by size of care home (bed numbers)",
+                "columns": {
+                    "Period": "{B6-B18}",
+                    "Region": "Scotland",
+                    "Size of Care Home": "{C5-Q5}",
+                    "Measure Type": "Cumulative Count",
+                    "Unit": "Per 1000 Care Homes"
+                }
+            },
+            {
+                "name": "Table 2 - Sector",
+                "title": "Table 2 - Weekly cumulative number of suspected COVID-19 cases per 1,000 registered places and proportion of adult care homes with suspected COVID-19 case, by sector",
+                "columns": {
+                    "Period": "{B6-B18}",
+                    "Region": "Scotland",
+                    "Sector": "{C5-I5}",
+                    "Measure Type": "Cumulative Count",
+                    "Unit": "Per 1000 Care Homes"
+                }
+            },
+            {
+                "name": "Table 3 - Local Authority",
+                "title": "Table 4 - Weekly cumulative number of suspected COVID-19 cases per 1,000 registered places and proportion of adult care homes with suspected COVID-19 case, by Local Authority",
+                "columns": {
+                    "Period": "{C5-O5}",
+                    "Local Authority": "{B6-B78}",
+                    "Measure Type": "Cumulative Count",
+                    "Unit": "Per 1000 Care Homes"
+                }
+            },
+            {
+                "name": "Table 4 - NHS Board",
+                "title": "Table 5 - Weekly cumulative number of suspected COVID-19 cases per 1,000 registered places and proportion of adult care homes with suspected COVID-19 case, by Health Board",
+                "columns": {
+                    "Period": "{C5-O5}",
+                    "NHS Board": "{B6-B42}",
+                    "Measure Type": "Cumulative Count",
+                    "Unit": "Per 1000 Care Homes"
+                }
+            },
+            {
+                "name": "Table 5 - People Tested",
+                "title": "Table 5 - Number of Residents and Staff tested in Adult Care Homes",
+                "columns": {
+                    "Period": "{C4-K4}",
+                    "NHS Board": "{B7-B21}",
+                    "People Tested": "{C6-N6}",
+                    "Measure Type": "Count",
+                    "Unit": "Person"
+                }
+            }
+        ],
+        "Stage One Notes": "\nSize of care homes is determined by number of beds.\nCumulative numbers are counts since data was first reported and will include cases which are no longer active\n'w/c 15th June 2020' Based on return of 966 of Scotland's 1,080 adult care homes\n'w/c 22nd June 2020' Based on return of 987 of Scotland's 1,080 adult care homes\n'w/c 29th June 2020' Based on return of 1,006 of Scotland's 1,080 adult care homes\n"
+    },
+    "sizingNotes": "Simple table structure, with a mixture of figures and & with foot side notes.  2 Tables on tabs and some tabs with only charts which can be discounted.",
+    "notes": ""
+}

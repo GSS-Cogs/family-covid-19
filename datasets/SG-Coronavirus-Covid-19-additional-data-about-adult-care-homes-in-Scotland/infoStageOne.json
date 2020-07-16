@@ -103,6 +103,87 @@
                 }
             }
         ],
+        "Post Transform Changes": [
+            {
+                "name": "Table 1 - Care Home Size",
+                "columns": {
+                    "Period": [],
+                    "Region": [],
+                    "Size of Care Home": [
+                        "Remove 'Beds:' from every entry, leaving only the numbers"
+                    ],
+                    "OBS": [],
+                    "Measure Type": [
+                        "Update Measure Type to 'Cumulative Percentage' for percentage values"
+                    ],
+                    "Unit": [
+                        "Update Unit to 'Percent' for percentage values"
+                    ]
+                }
+            },
+            {
+                "name": "Table 2 - Sector",
+                "columns": {
+                    "Period": [],
+                    "Region": [],
+                    "Sector": [],
+                    "OBS": [],
+                    "Measure Type": [
+                        "Update Measure Type to 'Cumulative Percentage' for percentage values"
+                    ],
+                    "Unit": [
+                        "Update Unit to 'Percent' for percentage values"
+                    ]
+                }
+            },
+            {
+                "name": "Table 3 - Local Authority",
+                "columns": {
+                    "Period": [],
+                    "Local Authority": [],
+                    "OBS": [],
+                    "Marker": [
+                        "Change * DataMarker to 'Statistical Disclosure Applied'"
+                    ],
+                    "Measure Type": [
+                        "Update Measure Type to 'Cumulative Percentage' for percentage values"
+                    ],
+                    "Unit": [
+                        "Update Unit to 'Percent' for percentage values"
+                    ]
+                }
+            },
+            {
+                "name": "Table 4 - NHS Board",
+                "columns": {
+                    "Period": [],
+                    "NHS Board": [],
+                    "OBS": [],
+                    "Marker": [
+                        "Change * DataMarker to 'Statistical Disclosure Applied'"
+                    ],
+                    "Measure Type": [
+                        "Update Measure Type to 'Cumulative Percentage' for percentage values"
+                    ],
+                    "Unit": [
+                        "Update Unit to 'Percent' for percentage values"
+                    ]
+                }
+            },
+            {
+                "name": "Table 5 - People Tested",
+                "columns": {
+                    "Period": [
+                        "Remove superscript ('1,2,3') tags from Period values (add relevant notes to notes section)"
+                    ],
+                    "NHS Board": [],
+                    "Measure": [],
+                    "OBS": [],
+                    "Measure Type": [],
+                    "Unit": []
+                }
+            }
+        ],
         "Stage One Notes": "\nSize of care homes is determined by number of beds.\nCumulative numbers are counts since data was first reported and will include cases which are no longer active\n'w/c 15th June 2020' Based on return of 966 of Scotland's 1,080 adult care homes\n'w/c 22nd June 2020' Based on return of 987 of Scotland's 1,080 adult care homes\n'w/c 29th June 2020' Based on return of 1,006 of Scotland's 1,080 adult care homes\n"
     },
     "sizingNotes": "Simple table structure, with a mixture of figures and & with foot side notes.  2 Tables on tabs and some tabs with only charts which can be discounted.",

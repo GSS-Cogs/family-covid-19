@@ -175,7 +175,7 @@ scrape.dataset.description = 'NISRA Registered Deaths including COVID-19.\n' + n
 import os
 from urllib.parse import urljoin
 
-dataset_path = pathify(os.environ.get('JOB_NAME', 'gss_data/covid-19/' + Path(os.getcwd()).name))
+dataset_path = pathify(os.environ.get('JOB_NAME', 'gss_data/covid-19/' + Path(os.getcwd()).name)) + '-' + pathify(csvName)
 scrape.set_base_uri('http://gss-data.org.uk')
 scrape.set_dataset_id(dataset_path)
 csvw_transform = CSVWMapping()
@@ -263,7 +263,7 @@ scrape.dataset.description = 'NISRA COVID-19 Death Occurrences by Date and Locat
 import os
 from urllib.parse import urljoin
 
-dataset_path = pathify(os.environ.get('JOB_NAME', 'gss_data/covid-19/' + Path(os.getcwd()).name))
+dataset_path = pathify(os.environ.get('JOB_NAME', 'gss_data/covid-19/' + Path(os.getcwd()).name)) + '-' + pathify(csvName)
 scrape.set_base_uri('http://gss-data.org.uk')
 scrape.set_dataset_id(dataset_path)
 csvw_transform = CSVWMapping()
@@ -274,6 +274,12 @@ csvw_transform.write(out / f'{csvName}-metadata.json')
 with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
     metadata.write(scrape.generate_trig())
 # -
+
+
+
+dataset_path
+
+
 
 
 

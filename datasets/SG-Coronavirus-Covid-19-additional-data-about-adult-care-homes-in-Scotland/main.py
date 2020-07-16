@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[99]:
+# In[364]:
 
 
 from gssutils import *
@@ -82,8 +82,20 @@ def dicti(tabName, tabTitle, tabColumns):
 
     return dicti
 
+def dictiComment(tabName, tabTitle, tabColumns):
+    columnInfo = {}
 
-# In[100]:
+    for i in tabColumns:
+        underI = i.replace(' ', '_')
+        columnInfo[i] = re.findall('"([^"]*)"', str(getattr(getattr(trace, underI), 'comments')))
+
+    dicti = {'name' : tabName,
+             'columns' : columnInfo}
+
+    return dicti
+
+
+# In[365]:
 
 
 scraper = Scraper(seed='info.json')
@@ -91,14 +103,14 @@ scraper.distributions[0].title = "Coronavirus (Covid-19): additional data about 
 scraper
 
 
-# In[101]:
+# In[366]:
 
 
 distribution = scraper.distributions[0]
 display(distribution)
 
 
-# In[102]:
+# In[367]:
 
 
 trace = TransformTrace()
@@ -134,22 +146,22 @@ for tab in tabs:
         cell = tab.filter('Date')
 
         period = cell.fill(DOWN).is_not_blank()
-        trace.Period('Values found in range: ', var = excelRange(period))
+        trace.Period('Values found in range: {}', var = excelRange(period))
 
         breakdown = cell.fill(RIGHT).is_not_blank() - remove
         if tab.name.lower().startswith('table 1'):
-            trace.Size_of_Care_Home('Values found in range: ', var = excelRange(breakdown))
+            trace.Size_of_Care_Home('Values found in range: {}', var = excelRange(breakdown))
         else:
-            trace.Sector('Values found in range: ', var = excelRange(breakdown))
+            trace.Sector('Values found in range: {}', var = excelRange(breakdown))
 
         measure = cell.shift(1, -1).expand(RIGHT).is_not_blank() - remove
 
         region = 'Scotland'
-        trace.Region('Hardcoded as: ', var = region)
+        trace.Region('Hardcoded as: {}', var = region)
 
-        trace.Measure_Type('Hard Coded as: ', var = 'Cumulative Count')
+        trace.Measure_Type('Hard Coded as: {}', var = 'Cumulative Count')
 
-        trace.Unit('Hard Coded as: ', var = 'Per 1000 Care Homes')
+        trace.Unit('Hard Coded as: {}', var = 'Per 1000 Care Homes')
 
         tabTitle = tab.filter(contains_string('Table '))
 
@@ -191,16 +203,16 @@ for tab in tabs:
         cell = tab.filter('Local Authority')
 
         locAuth = cell.fill(DOWN).is_not_blank()
-        trace.Local_Authority('Values found in range: ', var = excelRange(locAuth))
+        trace.Local_Authority('Values found in range: {}', var = excelRange(locAuth))
 
         period = cell.fill(RIGHT).is_not_blank() - remove
-        trace.Period('Values found in range: ', var = excelRange(period))
+        trace.Period('Values found in range: {}', var = excelRange(period))
 
         measure = cell.shift(1, -1).expand(RIGHT).is_not_blank() | tab.filter(contains_string('Cumulative %')) - remove
 
-        trace.Measure_Type('Hard Coded as: ', var = 'Cumulative Count')
+        trace.Measure_Type('Hard Coded as: {}', var = 'Cumulative Count')
 
-        trace.Unit('Hard Coded as: ', var = 'Per 1000 Care Homes')
+        trace.Unit('Hard Coded as: {}', var = 'Per 1000 Care Homes')
 
         tabTitle = tab.filter(contains_string('Table '))
 
@@ -231,16 +243,16 @@ for tab in tabs:
         cell = tab.filter('NHS Board')
 
         board = cell.fill(DOWN).is_not_blank()
-        trace.NHS_Board('Values found in range: ', var = excelRange(board))
+        trace.NHS_Board('Values found in range: {}', var = excelRange(board))
 
         period = cell.fill(RIGHT).is_not_blank() - remove
-        trace.Period('Values found in range: ', var = excelRange(period))
+        trace.Period('Values found in range: {}', var = excelRange(period))
 
         measure = cell.shift(1, -1).expand(RIGHT).is_not_blank() | tab.filter(contains_string('Cumulative %')) - remove
 
-        trace.Measure_Type('Hard Coded as: ', var = 'Cumulative Count')
+        trace.Measure_Type('Hard Coded as: {}', var = 'Cumulative Count')
 
-        trace.Unit('Hard Coded as: ', var = 'Per 1000 Care Homes')
+        trace.Unit('Hard Coded as: {}', var = 'Per 1000 Care Homes')
 
         tabTitle = tab.filter(contains_string('Table '))
 
@@ -271,19 +283,19 @@ for tab in tabs:
         cell = tab.filter('NHS Board')
 
         board = cell.fill(DOWN).is_not_blank() - remove
-        trace.NHS_Board('Values found in range: ', var = excelRange(board))
+        trace.NHS_Board('Values found in range: {}', var = excelRange(board))
 
         period = cell.fill(RIGHT).is_not_blank() - remove
-        trace.Period('Values found in range: ', var = excelRange(period))
+        trace.Period('Values found in range: {}', var = excelRange(period))
 
         measure = cell.shift(1, 1).expand(RIGHT).is_not_blank()
 
         tested = cell.shift(1, 2).expand(RIGHT).is_not_blank()
-        trace.People_Tested('Values found in range: ', var = excelRange(tested))
+        trace.People_Tested('Values found in range: {}', var = excelRange(tested))
 
-        trace.Measure_Type('Hard Coded as: ', var = 'Count')
+        trace.Measure_Type('Hard Coded as: {}', var = 'Count')
 
-        trace.Unit('Hard Coded as: ', var = 'Person')
+        trace.Unit('Hard Coded as: {}', var = 'Person')
 
         tabTitle = tab.filter(contains_string('Table '))
 
@@ -306,33 +318,33 @@ for tab in tabs:
         trace.store(pathify(tab.name), tidy_sheet.topandas())
 
 
-# In[103]:
+# In[368]:
 
 
 infoData['transform']['transformStage'] = dictiList
 
 
-# In[104]:
+# In[369]:
 
+
+postTransNotes = []
 
 pd.set_option('display.float_format', lambda x: '%.2f' % x)
 
 out = Path('out')
 out.mkdir(exist_ok=True)
 
-for name, frame in tidied_sheets.items():
+for tab in tabs:
 
-    if name.lower().startswith('table 1'):
+    if tab.name.lower().startswith('table 1'):
+
+        name = tab.name
 
         tableName = pathify(name)
-
-        df = frame
 
         df = trace.combine_and_trace(datasetTitle, tableName).fillna('')
 
         df = df.reset_index(drop=True)
-
-        df = pd.concat(tidied_sheets, ignore_index = True).fillna('')
 
         df['Size of Care Home'] = df.apply(lambda x: right(x['Size of Care Home'], len(x['Size of Care Home']) - 6), axis = 1)
         trace.Size_of_Care_Home("Remove 'Beds:' from every entry, leaving only the numbers")
@@ -347,19 +359,23 @@ for name, frame in tidied_sheets.items():
         df['Unit'] = df.apply(lambda x: 'Percent' if 'Cumulative Percentage' in x['Measure Type'] else x['Unit'], axis = 1)
         trace.Unit("Update Unit to 'Percent' for percentage values")
 
+        df = df.drop(['Measure'], axis=1)
+
         df = df[['Period', 'Region', 'Size of Care Home', 'OBS', 'Measure Type', 'Unit']]
 
         for column in df:
             if column in ('Size of Care Home', 'Marker'):
                 df[column] = df[column].map(lambda x: pathify(x))
 
+        postTransNotes.append(dictiComment(name, tableName, list(df.columns)))
+
         df.drop_duplicates().to_csv(out / f'{tableName}.csv', index = False)
 
-    elif name.lower().startswith('table 2'):
+    elif tab.name.lower().startswith('table 2'):
+
+        name = tab.name
 
         tableName = pathify(name)
-
-        df = frame
 
         df = trace.combine_and_trace(datasetTitle, tableName).fillna('')
 
@@ -375,19 +391,23 @@ for name, frame in tidied_sheets.items():
         df['Unit'] = df.apply(lambda x: 'Percent' if 'Cumulative Percentage' in x['Measure Type'] else x['Unit'], axis = 1)
         trace.Unit("Update Unit to 'Percent' for percentage values")
 
+        df = df.drop(['Measure'], axis=1)
+
         df = df[['Period', 'Region', 'Sector', 'OBS', 'Measure Type', 'Unit']]
 
         for column in df:
             if column in ('Sector', 'Marker'):
                 df[column] = df[column].map(lambda x: pathify(x))
 
+        postTransNotes.append(dictiComment(name, tableName, list(df.columns)))
+
         df.drop_duplicates().to_csv(out / f'{tableName}.csv', index = False)
 
-    elif name.lower().startswith('table 3'):
+    elif tab.name.lower().startswith('table 3'):
+
+        name = tab.name
 
         tableName = pathify(name)
-
-        df = frame
 
         df = trace.combine_and_trace(datasetTitle, tableName).fillna('')
 
@@ -409,19 +429,23 @@ for name, frame in tidied_sheets.items():
         df = df.replace({'Marker' : {'*' : 'Statistical Disclosure Applied'}})
         trace.Marker("Change * DataMarker to 'Statistical Disclosure Applied'")
 
+        df = df.drop(['Measure'], axis=1)
+
         df = df[['Period', 'Local Authority', 'OBS', 'Marker', 'Measure Type', 'Unit']]
 
         for column in df:
             if column in ('Local Authority', 'Marker'):
                 df[column] = df[column].map(lambda x: pathify(x))
 
+        postTransNotes.append(dictiComment(name, tableName, list(df.columns)))
+
         df.drop_duplicates().to_csv(out / f'{tableName}.csv', index = False)
 
-    elif name.lower().startswith('table 4'):
+    elif tab.name.lower().startswith('table 4'):
+
+        name = tab.name
 
         tableName = pathify(name)
-
-        df = frame
 
         df = trace.combine_and_trace(datasetTitle, tableName).fillna('')
 
@@ -449,13 +473,15 @@ for name, frame in tidied_sheets.items():
             if column in ('NHS Board', 'Marker'):
                 df[column] = df[column].map(lambda x: pathify(x))
 
+        postTransNotes.append(dictiComment(name, tableName, list(df.columns)))
+
         df.drop_duplicates().to_csv(out / f'{tableName}.csv', index = False)
 
-    elif name.lower().startswith('table 5'):
+    elif tab.name.lower().startswith('table 5'):
+
+        name = tab.name
 
         tableName = pathify(name)
-
-        df = frame
 
         df = trace.combine_and_trace(datasetTitle, tableName).fillna('')
 
@@ -465,18 +491,28 @@ for name, frame in tidied_sheets.items():
             'w/c 15th June 2020 ¹' : 'w/c 15th June 2020',
             'w/c 22nd June 2020 ²' : 'w/c 22nd June 2020',
             'w/c 29th June 2020 ³' : 'w/c 29th June 2020'}})
-        trace.Period("Remove superscript tags from Period values (add relevant notes to notes section)")
+        trace.Period("Remove superscript ('1,2,3') tags from Period values (add relevant notes to notes section)")
 
         df = df[['Period', 'NHS Board', 'Measure', 'OBS', 'Measure Type', 'Unit']]
+        trace.add_column('Measure')
+        trace.add_column('OBS')
 
         for column in df:
             if column in ('NHS Board', 'Measure'):
                 df[column] = df[column].map(lambda x: pathify(x))
 
+        postTransNotes.append(dictiComment(name, tableName, list(df.columns)))
+
         df.drop_duplicates().to_csv(out / f'{tableName}.csv', index = False)
 
 
-# In[105]:
+# In[370]:
+
+
+infoData['transform']['Post Transform Changes'] = postTransNotes
+
+
+# In[371]:
 
 
 notes = """
@@ -493,7 +529,7 @@ with open('infoStageOne.json', 'w') as info:
         info.write(json.dumps(infoData, indent=4).replace('null', '"Not Applicable"'))
 
 
-# In[106]:
+# In[372]:
 
 
 trace.output()

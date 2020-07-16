@@ -151,8 +151,8 @@ joined_dat['Measure Type'] = 'Deaths'
 joined_dat['Age'].unique()
 
 # Output the data to CSV
-#csvName = 'registered-deaths-observations.csv'
-csvName = 'observations.csv'
+csvName = 'registered-deaths-observations.csv'
+#csvName = 'observations.csv'
 out = Path('out')
 out.mkdir(exist_ok=True)
 joined_dat.drop_duplicates().to_csv(out / csvName, index = False)
@@ -247,30 +247,34 @@ P Weekly published data are provisional.
 4 The 'Other' category includes deaths at a residential address which was not the usual address of the deceased and all other places.
 """
 
-# +
 # Output the data to CSV
-#csvName = 'covid-19-death-occurrences-observations.csv'
-#out = Path('out')
-#out.mkdir(exist_ok=True)
-#joined_dat.drop_duplicates().to_csv(out / csvName, index = False)
+csvName = 'covid-19-death-occurrences-observations.csv'
+out = Path('out')
+out.mkdir(exist_ok=True)
+joined_dat.drop_duplicates().to_csv(out / csvName, index = False)
 
 # +
-#scrape.dataset.family = 'covid-19'
-#scrape.dataset.description = 'NISRA COVID-19 Death Occurrences by Date and Location.\n ' + notes
+scrape.dataset.family = 'covid-19'
+scrape.dataset.description = 'NISRA COVID-19 Death Occurrences by Date and Location.\n ' + notes
 
 # Output CSV-W metadata (validation, transform and DSD).
 # Output dataset metadata separately for now.
 
-#import os
-#from urllib.parse import urljoin
+import os
+from urllib.parse import urljoin
 
-#dataset_path = pathify(os.environ.get('JOB_NAME', 'gss_data/covid-19/' + Path(os.getcwd()).name))
-#scrape.set_base_uri('http://gss-data.org.uk')
-#scrape.set_dataset_id(dataset_path)
-#csvw_transform = CSVWMapping()
-#csvw_transform.set_csv(out / csvName)
-#csvw_transform.set_mapping(json.load(open('info.json')))
-#csvw_transform.set_dataset_uri(urljoin(scrape._base_uri, f'data/{scrape._dataset_id}'))
-#csvw_transform.write(out / f'{csvName}-metadata.json')
-#with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
-#    metadata.write(scrape.generate_trig())
+dataset_path = pathify(os.environ.get('JOB_NAME', 'gss_data/covid-19/' + Path(os.getcwd()).name))
+scrape.set_base_uri('http://gss-data.org.uk')
+scrape.set_dataset_id(dataset_path)
+csvw_transform = CSVWMapping()
+csvw_transform.set_csv(out / csvName)
+csvw_transform.set_mapping(json.load(open('info.json')))
+csvw_transform.set_dataset_uri(urljoin(scrape._base_uri, f'data/{scrape._dataset_id}'))
+csvw_transform.write(out / f'{csvName}-metadata.json')
+with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
+    metadata.write(scrape.generate_trig())
+# -
+
+
+
+

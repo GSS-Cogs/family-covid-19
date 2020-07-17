@@ -13,7 +13,8 @@ from datetime import datetime, timedelta
 def date_time(time_value):
     date_string = time_value.strip().split(' ')[0]
     if len(date_string)  == 10:
-        return 'gregorian-day/' + date_string 
+        #return 'gregorian-day/' + date_string 
+        return 'gregorian-interval/' + date_string + '/P1D' 
     elif len(date_string)  == 0:
         return 'year/2020'
 
@@ -106,3 +107,13 @@ with open(destinationFolder / f'{OBS_ID}.csv-metadata.trig', 'wb') as metadata:
 schema = CSVWMetadata('https://gss-cogs.github.io/family-covid-19/reference/')
 schema.create(destinationFolder / f'{OBS_ID}.csv', destinationFolder / f'{OBS_ID}.csv-schema.json')
 """
+
+# +
+#tidy
+# -
+
+
+
+
+
+

@@ -62,7 +62,7 @@ df.loc[f1,'Unit'] = 'Percent'
 df.loc[f1,'Measure Type'] = 'Percentage'
 df['Period'] =  df["Week Ending"].apply(week_ending_to_week_beginning_date_time)
 df['Week of Death'] = df.apply(lambda x: x['Week of Death'].replace('.0', ''), axis = 1)
-df['Period'] =  df["Week Ending"].apply(week_ending_to_week_beginning_date_time)
+#df['Period'] =  df["Week Ending"].apply(week_ending_to_week_beginning_date_time)
 df = df.replace('', np.nan, regex=True)
 # -
 
@@ -79,7 +79,7 @@ for column in df:
         df[column] = df[column].str.rstrip()
         df[column] = df[column].map(lambda x: pathify(x))
 
-tidy = df[['Week of Death', 'Week Ending', 'Place of Death', 'Measure Type', 'Unit', 'Marker', 'Value']]
+tidy = df[['Week of Death', 'Period', 'Place of Death', 'Measure Type', 'Unit', 'Marker', 'Value']]
 tidy
 
 # +
@@ -116,5 +116,7 @@ schema.create(destinationFolder / f'{OBS_ID}.csv', destinationFolder / f'{OBS_ID
 """
 
 del df['Week Ending']
+
+df.head(60)
 
 

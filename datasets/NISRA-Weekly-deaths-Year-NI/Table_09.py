@@ -108,3 +108,7 @@ with open(destinationFolder / f'{OBS_ID}.csv-metadata.trig', 'wb') as metadata:
 schema = CSVWMetadata('https://gss-cogs.github.io/family-covid-19/reference/')
 schema.create(destinationFolder / f'{OBS_ID}.csv', destinationFolder / f'{OBS_ID}.csv-schema.json')
 """
+
+df
+
+

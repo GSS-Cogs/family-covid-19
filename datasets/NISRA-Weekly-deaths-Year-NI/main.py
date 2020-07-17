@@ -112,7 +112,17 @@ del all_dat[6]['Week of Death']
 #all_dat[6].head(60)
 # -
 
-joined_dat = pd.concat([all_dat[0], all_dat[1], all_dat[2], all_dat[3], all_dat[4], all_dat[5], all_dat[6]])
+cols = ['Period', 'Local Government District','Registered Death Type','Location of Death','Age','Gender','Measure Type','Unit','Marker','Value']
+i = 0
+for t in all_dat:
+    try:
+        all_dat[i] = all_dat[i][cols]
+    except Exception as e:
+        print(' Tables 1 to 7 have been rearranged')
+        break
+    i = i + 1
+
+joined_dat = pd.concat([all_dat[0], all_dat[1], all_dat[2], all_dat[3], all_dat[4], all_dat[5], all_dat[6]], sort=True)
 
 # +
 #print(str(all_dat[0].count()))
@@ -137,8 +147,6 @@ joined_dat['Sex'] = joined_dat['Sex'].map(sexMap.set_index('Category')['Code'])
 joined_dat['Local Government District'] = joined_dat['Local Government District'].str.strip()
 joined_dat['Local Government District'] = joined_dat['Local Government District'].map(niMap.set_index('Category')['Code'])
 
-joined_dat = joined_dat[['Period', 'Local Government District','Registered Death Type','Location of Death','Age','Sex','Measure Type','Unit','Marker','Value']]
-
 # Hopefully all NaN values have been accounted for in the Marker column
 joined_dat['Value'] = joined_dat['Value'].replace(np.nan,0)
 
@@ -151,7 +159,7 @@ joined_dat['Measure Type'] = 'Deaths'
 joined_dat['Age'].unique()
 
 # Output the data to CSV
-csvName = 'registered-deaths-observations.csv'
+csvName = 'registered-date-of-death-covid-19-observations.csv'
 #csvName = 'observations.csv'
 out = Path('out')
 out.mkdir(exist_ok=True)
@@ -167,7 +175,7 @@ P Weekly published data are provisional.
 
 # +
 scrape.dataset.family = 'covid-19'
-scrape.dataset.description = 'NISRA Registered Deaths including COVID-19.\n' + notes
+scrape.dataset.description = 'NISRA Registered Date of Death including COVID-19.\n' + notes
 
 # Output CSV-W metadata (validation, transform and DSD).
 # Output dataset metadata separately for now.
@@ -178,6 +186,7 @@ from urllib.parse import urljoin
 dataset_path = pathify(os.environ.get('JOB_NAME', 'gss_data/covid-19/' + Path(os.getcwd()).name)) + '-' + pathify(csvName)
 scrape.set_base_uri('http://gss-data.org.uk')
 scrape.set_dataset_id(dataset_path)
+scrape.dataset.title = 'NISRA Weekly Deaths - Notification Date of Death including COVID-19'
 csvw_transform = CSVWMapping()
 csvw_transform.set_csv(out / csvName)
 csvw_transform.set_mapping(json.load(open('info.json')))
@@ -200,19 +209,17 @@ all_dat[8]['Place of Death'] = all_dat[8]['Place of Death'].replace('other3','ot
 del all_dat[8]['Week of Death']
 all_dat[8] = all_dat[8].rename(columns={'Place of Death': 'Location of Death'})
 
-# +
-#all_dat[8].head(5)
-# -
+all_dat[8].head(5)
 
 all_dat[9]['Place of Death'] = all_dat[9]['Place of Death'].replace('care-home3a','care-home')
 all_dat[9]['Place of Death'] = all_dat[9]['Place of Death'].replace('hospital3b','hospital')
 all_dat[9]['Place of Death'] = all_dat[9]['Place of Death'].replace('-of-all-covid-19-hospital-deaths','hospital')
 all_dat[9]['Place of Death'] = all_dat[9]['Place of Death'].replace('-of-all-covid-19-deaths','all')
 all_dat[9] = all_dat[9].rename(columns={'Place of Death': 'Location of Death'})
-del all_dat[9]['Week Ending']
+del all_dat[9]['Week of Death']
 
 # +
-#all_dat[9].head(5)
+#all_dat[9].head(50)
 # -
 
 all_dat[10]['Place of Death'] = all_dat[10]['Place of Death'].replace('care-home3','care-home')
@@ -220,15 +227,13 @@ all_dat[10]['Place of Death'] = all_dat[10]['Place of Death'].replace('other4','
 all_dat[10]['Place of Death'] = all_dat[10]['Place of Death'].replace('cumulative-total','all')
 all_dat[10] = all_dat[10].rename(columns={'Place of Death': 'Location of Death'})
 
-# +
-#all_dat[10].head(10)
-
-# +
-#print(all_dat[7].columns)
-#print(all_dat[8].columns)
-#print(all_dat[9].columns)
-#print(all_dat[10].columns)
-# -
+cols = ['Period', 'Location of Death', 'Measure Type', 'Unit', 'Marker', 'Value']
+for i in range(7,10):
+    try:
+        all_dat[i] = all_dat[i][cols]
+    except Exception as e:
+        print(str(e) + ':' + str(i) + ' : Tables 8 to 11 have been rearranged')
+        break
 
 joined_dat = pd.concat([all_dat[7], all_dat[8], all_dat[9], all_dat[10]])
 
@@ -248,14 +253,14 @@ P Weekly published data are provisional.
 """
 
 # Output the data to CSV
-csvName = 'covid-19-death-occurrences-observations.csv'
+csvName = 'date-of-death-occurrences-covid-19-observations.csv'
 out = Path('out')
 out.mkdir(exist_ok=True)
 joined_dat.drop_duplicates().to_csv(out / csvName, index = False)
 
 # +
 scrape.dataset.family = 'covid-19'
-scrape.dataset.description = 'NISRA COVID-19 Death Occurrences by Date and Location.\n ' + notes
+scrape.dataset.description = 'NISRA COVID-19 Date of Death Occurrences Including COVID-19.\n ' + notes
 
 # Output CSV-W metadata (validation, transform and DSD).
 # Output dataset metadata separately for now.
@@ -266,6 +271,7 @@ from urllib.parse import urljoin
 dataset_path = pathify(os.environ.get('JOB_NAME', 'gss_data/covid-19/' + Path(os.getcwd()).name)) + '-' + pathify(csvName)
 scrape.set_base_uri('http://gss-data.org.uk')
 scrape.set_dataset_id(dataset_path)
+scrape.dataset.title = 'NISRA Weekly Deaths - Date of Death including COVID-19'
 csvw_transform = CSVWMapping()
 csvw_transform.set_csv(out / csvName)
 csvw_transform.set_mapping(json.load(open('info.json')))
@@ -273,14 +279,24 @@ csvw_transform.set_dataset_uri(urljoin(scrape._base_uri, f'data/{scrape._dataset
 csvw_transform.write(out / f'{csvName}-metadata.json')
 with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
     metadata.write(scrape.generate_trig())
+# +
+#dataset_path
+
+# +
+#for t in all_dat:
+#    print(list(t.columns))
+#    print('-----------------------------------------')
+
+# +
+#for t in all_dat:
+#    print(list(t['Period'].unique()))
+#    print('---------------------------------------------')
 # -
 
 
 
-dataset_path
-
-
-
-
+# +
+#help(scrape)
+# -
 
 

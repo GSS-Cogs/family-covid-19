@@ -1,7 +1,9 @@
 #!/usr/bin/env python
 # coding: utf-8
+# %%
+#SG-Coronavirus-Covid-19-additional-data-about-adult-care-homes-in-Scotland
 
-# In[364]:
+# %%
 
 
 from gssutils import *
@@ -95,7 +97,7 @@ def dictiComment(tabName, tabTitle, tabColumns):
     return dicti
 
 
-# In[365]:
+# %%
 
 
 scraper = Scraper(seed='info.json')
@@ -103,14 +105,14 @@ scraper.distributions[0].title = "Coronavirus (Covid-19): additional data about 
 scraper
 
 
-# In[366]:
+# %%
 
 
 distribution = scraper.distributions[0]
 display(distribution)
 
 
-# In[367]:
+# %%
 
 
 trace = TransformTrace()
@@ -318,21 +320,21 @@ for tab in tabs:
         trace.store(pathify(tab.name), tidy_sheet.topandas())
 
 
-# In[368]:
+# %%
 
 
 infoData['transform']['transformStage'] = dictiList
 
 
-# In[369]:
+# %%
 
-
+all_tabs = []
 postTransNotes = []
 
 pd.set_option('display.float_format', lambda x: '%.2f' % x)
 
-out = Path('out')
-out.mkdir(exist_ok=True)
+#out = Path('out')
+#out.mkdir(exist_ok=True)
 
 for tab in tabs:
 
@@ -363,13 +365,14 @@ for tab in tabs:
 
         df = df[['Period', 'Region', 'Size of Care Home', 'OBS', 'Measure Type', 'Unit']]
 
-        for column in df:
-            if column in ('Size of Care Home', 'Marker'):
-                df[column] = df[column].map(lambda x: pathify(x))
+        #for column in df:
+        #    if column in ('Size of Care Home', 'Marker'):
+        #        df[column] = df[column].map(lambda x: pathify(x))
 
         postTransNotes.append(dictiComment(name, tableName, list(df.columns)))
 
-        df.drop_duplicates().to_csv(out / f'{tableName}.csv', index = False)
+        #df.drop_duplicates().to_csv(out / f'{tableName}.csv', index = False)
+        all_tabs.append(df)
 
     elif tab.name.lower().startswith('table 2'):
 
@@ -395,13 +398,14 @@ for tab in tabs:
 
         df = df[['Period', 'Region', 'Sector', 'OBS', 'Measure Type', 'Unit']]
 
-        for column in df:
-            if column in ('Sector', 'Marker'):
-                df[column] = df[column].map(lambda x: pathify(x))
+        #for column in df:
+        #    if column in ('Sector', 'Marker'):
+        #        df[column] = df[column].map(lambda x: pathify(x))
 
         postTransNotes.append(dictiComment(name, tableName, list(df.columns)))
 
-        df.drop_duplicates().to_csv(out / f'{tableName}.csv', index = False)
+        #df.drop_duplicates().to_csv(out / f'{tableName}.csv', index = False)
+        all_tabs.append(df)
 
     elif tab.name.lower().startswith('table 3'):
 
@@ -433,13 +437,14 @@ for tab in tabs:
 
         df = df[['Period', 'Local Authority', 'OBS', 'Marker', 'Measure Type', 'Unit']]
 
-        for column in df:
-            if column in ('Local Authority', 'Marker'):
-                df[column] = df[column].map(lambda x: pathify(x))
+        #for column in df:
+        #    if column in ('Local Authority', 'Marker'):
+        #        df[column] = df[column].map(lambda x: pathify(x))
 
         postTransNotes.append(dictiComment(name, tableName, list(df.columns)))
 
-        df.drop_duplicates().to_csv(out / f'{tableName}.csv', index = False)
+        #df.drop_duplicates().to_csv(out / f'{tableName}.csv', index = False)
+        all_tabs.append(df)
 
     elif tab.name.lower().startswith('table 4'):
 
@@ -469,13 +474,14 @@ for tab in tabs:
 
         df = df[['Period', 'NHS Board', 'OBS', 'Marker', 'Measure Type', 'Unit']]
 
-        for column in df:
-            if column in ('NHS Board', 'Marker'):
-                df[column] = df[column].map(lambda x: pathify(x))
+        #for column in df:
+        #    if column in ('NHS Board', 'Marker'):
+        #        df[column] = df[column].map(lambda x: pathify(x))
 
         postTransNotes.append(dictiComment(name, tableName, list(df.columns)))
 
-        df.drop_duplicates().to_csv(out / f'{tableName}.csv', index = False)
+        #df.drop_duplicates().to_csv(out / f'{tableName}.csv', index = False)
+        all_tabs.append(df)
 
     elif tab.name.lower().startswith('table 5'):
 
@@ -497,22 +503,23 @@ for tab in tabs:
         trace.add_column('Measure')
         trace.add_column('OBS')
 
-        for column in df:
-            if column in ('NHS Board', 'Measure'):
-                df[column] = df[column].map(lambda x: pathify(x))
+        #for column in df:
+        #    if column in ('NHS Board', 'Measure'):
+        #        df[column] = df[column].map(lambda x: pathify(x))
 
         postTransNotes.append(dictiComment(name, tableName, list(df.columns)))
 
-        df.drop_duplicates().to_csv(out / f'{tableName}.csv', index = False)
+        #df.drop_duplicates().to_csv(out / f'{tableName}.csv', index = False)
+        all_tabs.append(df)
 
 
-# In[370]:
+# %%
 
 
 infoData['transform']['Post Transform Changes'] = postTransNotes
 
 
-# In[371]:
+# %%
 
 
 notes = """
@@ -529,10 +536,211 @@ with open('infoStageOne.json', 'w') as info:
         info.write(json.dumps(infoData, indent=4).replace('null', '"Not Applicable"'))
 
 
-# In[372]:
-
-
+# %%
 trace.output()
 
-df
 
+# %%
+i = 2
+for c in all_tabs[i].columns:
+    if c != "OBS":
+        print(c)
+        print(all_tabs[i][c].unique())
+        print("-----------------------------------------------------")
+
+# %%
+all_tabs[0]['Sector'] = 'All'
+
+# %%
+all_tabs[0]['Measure Type'][all_tabs[0]['Measure Type'] == 'Cumulative Count'] = "Per 1000 registered places"
+all_tabs[0]['Unit'][all_tabs[0]['Unit'] == 'Per 1000 Care Homes'] = "Cumulative Count"
+
+all_tabs[0]['Measure Type'][all_tabs[0]['Measure Type'] == 'Cumulative Percentage'] = "Adult Care Home"
+all_tabs[0]['Unit'][all_tabs[0]['Unit'] == 'Percent'] = "Cumulative Percentage"
+
+all_tabs[0]['Size of Care Home'][all_tabs[0]['Size of Care Home'] == '-60'] = "More than 60"
+all_tabs[0]['Size of Care Home'] = all_tabs[0]['Size of Care Home'] + ' Beds'
+
+all_tabs[0]['Period'] = pd.to_datetime(all_tabs[0]['Period']).dt.strftime('%Y-%m-%dT%H:%M:%S')
+all_tabs[0]['Period'] = "gregorian-interval/" + all_tabs[0]['Period'] + '/P1D'
+
+all_tabs[0] = all_tabs[0].rename(columns = {'Region' : 'Local Authority'})
+
+# %%
+all_tabs[1]['Size of Care Home'] = 'All'
+
+# %%
+all_tabs[1]['Measure Type'][all_tabs[1]['Measure Type'] == 'Cumulative Count'] = "Per 1000 registered places"
+all_tabs[1]['Unit'][all_tabs[1]['Unit'] == 'Per 1000 Care Homes'] = "Cumulative Count"
+
+all_tabs[1]['Measure Type'][all_tabs[1]['Measure Type'] == 'Cumulative Percentage'] = "Adult Care Home"
+all_tabs[1]['Unit'][all_tabs[1]['Unit'] == 'Percent'] = "Cumulative Percentage"
+
+all_tabs[1]['Period'] = pd.to_datetime(all_tabs[1]['Period']).dt.strftime('%Y-%m-%dT%H:%M:%S')
+all_tabs[1]['Period'] = "gregorian-interval/" + all_tabs[1]['Period'] + '/P1D'
+
+all_tabs[1] = all_tabs[1].rename(columns = {'Region' : 'Local Authority'})
+
+
+# %%
+all_tabs[2]['Sector'] = 'All'
+all_tabs[2]['Size of Care Home'] = 'All'
+
+# %%
+all_tabs[2]['Measure Type'][all_tabs[2]['Measure Type'] == 'Cumulative Count'] = "Per 1000 registered places"
+all_tabs[2]['Unit'][all_tabs[2]['Unit'] == 'Per 1000 Care Homes'] = "Cumulative Count"
+
+all_tabs[2]['Measure Type'][all_tabs[2]['Measure Type'] == 'Cumulative Percentage'] = "Adult Care Home"
+all_tabs[2]['Unit'][all_tabs[2]['Unit'] == 'Percent'] = "Cumulative Percentage"
+
+all_tabs[2]['Period'] = pd.to_datetime(all_tabs[2]['Period']).dt.strftime('%Y-%m-%dT%H:%M:%S')
+all_tabs[2]['Period'] = "gregorian-interval/" + all_tabs[2]['Period'] + '/P1D'
+
+# %%
+all_tabs[3]['Sector'] = 'All'
+all_tabs[3]['Size of Care Home'] = 'All'
+
+# %%
+all_tabs[3]['Measure Type'][all_tabs[3]['Measure Type'] == 'Cumulative Count'] = "Per 1000 registered places"
+all_tabs[3]['Unit'][all_tabs[3]['Unit'] == 'Per 1000 Care Homes'] = "Cumulative Count"
+
+all_tabs[3]['Measure Type'][all_tabs[3]['Measure Type'] == 'Cumulative Percentage'] = "Adult Care Home"
+all_tabs[3]['Unit'][all_tabs[3]['Unit'] == 'Percent'] = "Cumulative Percentage"
+
+all_tabs[3]['Period'] = pd.to_datetime(all_tabs[3]['Period']).dt.strftime('%Y-%m-%dT%H:%M:%S')
+all_tabs[3]['Period'] = "gregorian-interval/" + all_tabs[3]['Period'] + '/P1D'
+
+# %%
+all_tabs[4]['Sector'] = 'All'
+all_tabs[4]['Size of Care Home'] = 'All'
+
+# %%
+#### I know theres probably one line of code that does this but i got carried away lol!
+dtes = all_tabs[4]['Period'].str.split("-", n = 1, expand = True)
+dtes[1] = dtes[1].str.replace('(¹)','')
+dtes[1] = dtes[1].str.replace('(²)','')
+dtes[1] = dtes[1].str.replace('(³)','')
+dtes[1] = dtes[1].str.replace('(⁴)','')
+dtes[1] = dtes[1].str.replace('(4)','')
+dtes[1] = dtes[1].str.strip()
+dtes[0] = dtes[0].str.strip()
+#²³¹⁰ⁱ⁴⁵⁶⁷⁸⁹⁺⁻⁼⁽⁾ⁿ]
+
+# Get the year from the second date and attach it to the first date!!!!!
+dtes2 = dtes[1].str.split(" ", n = 2, expand = True)
+dtes[2] = dtes2[2]
+dtes[0] = dtes[0] + ' ' + dtes[2]
+del dtes2
+del dtes[2]
+dtes[2] = pd.to_datetime(dtes[0])
+dtes[3] = pd.to_datetime(dtes[1])
+
+dtes[4] = (dtes[3]-dtes[2]).astype('timedelta64[D]')
+# Only getting 6 days back but assuming it is 7 to represent a full week
+dtes[4] = (dtes[4] + 1).astype(int).astype(str)
+dtes[5] = 'gregorian-interval/'
+dtes[6] = 'T00:00:00/P'
+dtes[7] = 'D'
+dtes[8] = (dtes[5] + dtes[2].dt.strftime('%Y-%m-%dT%H:%M:%S') + '/P' + dtes[4] + dtes[7])#.replace('/P0 ', '/P')
+
+dtes.head(10)
+all_tabs[4]['Period'] = dtes[8]
+
+# %%
+all_tabs[4] = all_tabs[4].rename(columns = {'NHS Board' : 'Local Authority'})
+all_tabs[3] = all_tabs[3].rename(columns = {'NHS Board' : 'Local Authority'})
+all_tabs[4].head(60)
+
+# %%
+cols = ['Period', 'Local Authority', 'Size of Care Home', 'Sector', 'Measure Type', 'Unit', 'OBS']
+i = 0
+for t in all_tabs:
+    all_tabs[i] = all_tabs[i][cols]
+    print(t.columns)
+    i = i + 1
+
+# %%
+# Pull the mapping files into DataFrames
+geogsHB = pd.read_csv('../../Reference/scottish-health-board-mapping.csv') 
+geogsCA = pd.read_csv('../../Reference/scottish-council-areas-mapping.csv') 
+
+# %%
+for t in all_tabs:
+    t['Local Authority'][t['Local Authority'] == 'SCOTLAND'] = 'Scotland'
+
+# %%
+# Map the Geography codes
+all_tabs[0]['Local Authority'] = all_tabs[0]['Local Authority'].map(geogsCA.set_index('Category')['Code'])
+all_tabs[1]['Local Authority'] = all_tabs[1]['Local Authority'].map(geogsCA.set_index('Category')['Code'])
+all_tabs[2]['Local Authority'] = all_tabs[2]['Local Authority'].map(geogsCA.set_index('Category')['Code'])
+all_tabs[3]['Local Authority'] = all_tabs[3]['Local Authority'].map(geogsHB.set_index('Category')['Code'])
+all_tabs[4]['Local Authority'] = all_tabs[4]['Local Authority'].map(geogsHB.set_index('Category')['Code'])
+
+# %%
+for t in all_tabs:
+    print(t['Local Authority'].unique())
+    print('-----------------')
+
+# %%
+joined_dat = pd.concat(all_tabs)
+
+# %%
+joined_dat.head(10)
+
+# %%
+joined_dat = joined_dat.rename(columns = {'OBS' : 'Value'})
+joined_dat = joined_dat.rename(columns = {'Local Authority' : 'Geography Code'})
+
+# %%
+for c in joined_dat:
+    if c != 'Value':
+        print(c + ' ------------------')
+        print(joined_dat[c].unique())
+
+# %%
+joined_dat['Geography Code'] = joined_dat['Geography Code'].apply(pathify) 
+joined_dat['Size of Care Home'] = joined_dat['Size of Care Home'].apply(pathify) 
+joined_dat['Size of Care Home'][joined_dat['Size of Care Home'] == '-60-beds'] = 'more-than-60-beds'
+joined_dat['Sector'] = joined_dat['Sector'].apply(pathify) 
+
+# %%
+######################################################################
+######################################################################
+## REMOVE MULTIPLE UNITS FOR NOW UNTIL CAN BE PROCESSED IN JENKINS ###
+#print(joined_dat.count())
+joined_dat = joined_dat[joined_dat['Unit'] == 'Person'] 
+#print(joined_dat.count())
+######################################################################
+######################################################################
+joined_dat.head(10)
+
+# %%
+# Output the data to CSV
+csvName = 'obsetvations.csv'
+out = Path('out')
+out.mkdir(exist_ok=True)
+joined_dat.drop_duplicates().to_csv(out / csvName, index = False)
+
+# %%
+scraper.dataset.family = 'covid-19'
+scraper.dataset.description = 'SG Coronavirus COVID-19 additional data about adult care homes- in Scotland.\n ' + notes
+
+# Output CSV-W metadata (validation, transform and DSD).
+# Output dataset metadata separately for now.
+
+import os
+from urllib.parse import urljoin
+
+dataset_path = pathify(os.environ.get('JOB_NAME', 'gss_data/covid-19/' + Path(os.getcwd()).name)) + '-' + pathify(csvName)
+scraper.set_base_uri('http://gss-data.org.uk')
+scraper.set_dataset_id(dataset_path)
+#scrape.dataset.title = ''
+csvw_transform = CSVWMapping()
+csvw_transform.set_csv(out / csvName)
+csvw_transform.set_mapping(json.load(open('info.json')))
+csvw_transform.set_dataset_uri(urljoin(scraper._base_uri, f'data/{scraper._dataset_id}'))
+csvw_transform.write(out / f'{csvName}-metadata.json')
+with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
+    metadata.write(scraper.generate_trig())
+
+# %%

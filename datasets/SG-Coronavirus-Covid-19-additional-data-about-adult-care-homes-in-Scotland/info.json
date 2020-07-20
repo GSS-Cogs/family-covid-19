@@ -12,7 +12,8 @@
     "Frequency": "Weekly",
     "GitHub Issue Number": 87,
     "GitHub Name": "SG-Coronavirus-Covid-19-additional-data-about-adult-care-homes-in-Scotland",
-    "Landing Page": "https://www.gov.scot/publications/coronavirus-covid-19-additional-data-about-adult-care-homes-in-scotland/",
+    "landingPage": "https://www.gov.scot/publications/coronavirus-covid-19-additional-data-about-adult-care-homes-in-scotland/",
+    "dataURL": "https://www.gov.scot/binaries/content/documents/govscot/publications/statistics/2020/05/data-on-coronavirus-covid-19-in-adult-care-homes-in-scotland2/documents/coronavirus-covid-19-additional-data-about-adult-care-homes-in-scotland/coronavirus-covid-19-additional-data-about-adult-care-homes-in-scotland/govscot%3Adocument/Covid-19%2Bin%2BScottish%2BAdult%2BCare%2BHomes%2B15%2BJuly%2B2020.xlsx",
     "Last Published": "2020-05-27",
     "Main Issue": "1000000",
     "Name": "Coronavirus (Covid-19): additional data about adult care homes in Scotland",
@@ -27,7 +28,7 @@
         "Priority"
     ],
     "title": "Coronavirus (Covid-19): additional data about adult care homes in Scotland",
-    "publisher": "Scottish Government",
+    "publisher": "scottish-government",
     "description": "Weekly data on suspected cases of COVID-19 in adult care homes in Scotland.",
     "landingPage": "https://www.gov.scot/publications/coronavirus-covid-19-additional-data-about-adult-care-homes-in-scotland/",
     "datasetNotes": [
@@ -47,8 +48,25 @@
             "Priority"
         ],
         "airtable": "recL3jfaquYgWnGxH",
-        "main_issue": 87
+        "main_issue": 87,
+        "columns": {
+            "Period": {
+                "dimension": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
+                "value": "http://reference.data.gov.uk/id/day/{period}"
+            },
+            "Geography Code": {
+                "dimension": "http://purl.org/linked-data/sdmx/2009/dimension#refArea",
+                "value": "http://statistics.data.gov.uk/id/statistical-geography/{geography_code}"
+            },
+            "Value": {
+                "unit": "http://gss-data.org.uk/def/concept/measurement-units/person",
+                "measure": "http://gss-data.org.uk/def/measure/count",
+                "datatype": "integer"
+            }
+        }
     },
     "sizingNotes": "Simple table structure, with a mixture of figures and & with foot side notes.  2 Tables on tabs and some tabs with only charts which can be discounted.",
     "notes": ""
 }
+
+

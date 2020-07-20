@@ -50,57 +50,111 @@ else:
             if file.startswith("'main") == True:
                 continue
             %run -i $file
-            tables[pathify(expected_title.strip())] = tidy
+            tables[f'{i[:-3]} - {pathify(expected_title.strip())}'] = tidy
 # +
 from IPython.core.display import HTML
 
-for key, table in tables.items():
+for key in sorted(tables.keys()):
     display(HTML(f'<h2>{key}</h2>'))
-    display(table)                 
+    display(tables[key])                 
 # -
 
-tidy1 = tables['number-of-notifications-of-deaths-of-adult-care-home-residents-involving-covid-19-both-confirmed-and-suspected-occurring-in-care-homes-by-local-authority-and-day-of-notification'].copy()
-tidy1.drop(columns=['Local Authority', 'Unit'], inplace=True)
-tidy1['Notification Date'] = tidy1['Notification Date'].map(lambda x: f'day/{x}')
-tidy1['Value'] = pd.to_numeric(tidy1['Value'], downcast='integer')
-tidy1['Care Provided'] = 'total'
-tidy1['Cause of Death'] = 'total'
-tidy1
+merge_cols = ['Notification Date', 'Area Code', 'Location of Death', 'Cause of Death', 'Care Provided', 'Value']
+def add_hidden(df):
+    for col in merge_cols:
+        if col not in df:
+            if col == 'Area Code':
+                df[col] = 'W92000004'
+            else:
+                df[col] = 'total'
+    return df[merge_cols]
+
 
 # +
-tidy2 = tables['notifications-of-service-user-deaths-received-from-adult-care-homes'].copy()
-display(tidy2)
-tidy2.drop(columns=['Measure Type', 'Unit'], inplace=True)
-tidy2.rename(columns={'Notification Date Range': 'Notification Date'}, inplace=True)
+t1 = tables['table_1 - notifications-of-service-user-deaths-received-from-adult-care-homes'].copy()
+t1.drop(columns=['Measure Type', 'Unit'], inplace=True)
+t1.rename(columns={'Notification Date Range': 'Notification Date'}, inplace=True)
 
 from datetime import datetime
 import isodate
 from dateutil.parser import parse
 
 def range_to_duration(r):
-    start, end = [parse(d.strip()) for d in r.split('-')]
+    start, end = [parse(d.strip(), dayfirst=True) for d in r.split('-')]
     return f'gregorian-interval/{start.isoformat()}/{isodate.duration_isoformat(end - start)}'
 
-tidy2['Notification Date'] = tidy2['Notification Date'].map(range_to_duration)
-tidy2['Value'] = pd.to_numeric(tidy2['Value'], downcast='integer')
-tidy2['Area Code'] = 'W92000004'
-tidy2['Cause of Death'] = 'total'
-tidy2
+t1['Notification Date'] = t1['Notification Date'].map(range_to_duration)
+t1['Value'] = pd.to_numeric(t1['Value'], downcast='integer')
+t1 = add_hidden(t1)
+t1
 # -
 
-tidy3 = tables['notifications-of-deaths-of-residents-from-adult-care-homes-by-date-of-notification-and-cause'].copy()
-tidy3 = tidy3[tidy3['Marker'].isna()]
-tidy3.drop(columns=['Marker', 'Measure Type', 'Unit'], inplace=True)
-tidy3['Value'] = pd.to_numeric(tidy3['Value'], downcast='integer')
-tidy3.rename(columns={'Notification Day': 'Notification Date'}, inplace=True)
-tidy3['Notification Date'] = tidy3['Notification Date'].map(lambda x: f'day/{x}')
-tidy3['Care Provided'] = 'total'
-tidy3['Area Code']  = 'W92000004'
-tidy3
+t2 = tables['table_2 - notifications-of-deaths-of-adult-care-home-residents-with-confirmed-or-suspected-covid-19-by-location-of-death'].copy()
+t2.drop(columns=['Measure Type', 'Unit'], inplace=True)
+t2.rename(columns={'Notification Date Range': 'Notification Date'}, inplace=True)
+t2['Value'] = pd.to_numeric(t2['Value'], downcast='integer')
+t2 = add_hidden(t2)
+t2
+
+t3 = tables['table_3 - notifications-of-deaths-of-residents-from-adult-care-homes-by-date-of-notification-and-cause'].copy()
+#tidy3 = tables['notifications-of-deaths-of-residents-from-adult-care-homes-by-date-of-notification-and-cause'].copy()
+t3 = t3[t3['Marker'].isna()]
+t3.drop(columns=['Marker', 'Measure Type', 'Unit'], inplace=True)
+t3['Value'] = pd.to_numeric(t3['Value'], downcast='integer')
+t3.rename(columns={'Notification Day': 'Notification Date'}, inplace=True)
+t3['Notification Date'] = t3['Notification Date'].map(lambda x: f'day/{x}')
+t3 = add_hidden(t3)
+t3
+
+t4 = tables['table_4 - notifications-of-deaths-of-adult-care-home-residents-with-confirmed-or-suspected-covid-19-by-location-of-death-and-date-of-notification'].copy()
+t4.drop(columns=['Measure Type', 'Unit'], inplace=True)
+t4.rename(columns={'Notification Date Range': 'Notification Date'}, inplace=True)
+t4['Value'] = pd.to_numeric(t4['Value'], downcast='integer')
+t4['Notification Date'] = t4['Notification Date'].map(lambda x: f'day/{x}')
+t4 = add_hidden(t4)
+t4
+
+t5 = tables['table_5 - notifications-of-deaths-of-adult-care-home-residents-by-location-of-death-and-date-of-notification'].copy()
+t5.drop(columns=['Measure Type', 'Unit'], inplace=True)
+t5['Value'] = pd.to_numeric(t4['Value'], downcast='integer')
+t5['Notification Date'] = t5['Notification Date'].map(lambda x: f'day/{x}')
+t5 = add_hidden(t5)
+t5
+
+t6 = tables['table_6 - number-of-notifications-of-deaths-of-adult-care-home-residents-involving-covid-19-both-confirmed-and-suspected-occurring-in-care-homes-by-local-authority-and-day-of-notification'].copy()
+t6.drop(columns=['Local Authority', 'Unit'], inplace=True)
+t6['Notification Date'] = t6['Notification Date'].map(lambda x: f'day/{x}')
+t6['Value'] = pd.to_numeric(t6['Value'], downcast='integer')
+t6 = add_hidden(t6)
+t6
+
+t7 = tables['table_7 - number-of-notifications-of-deaths-of-adult-care-home-residents-involving-covid-19-both-confirmed-and-suspected-occurring-in-any-location-by-local-authority-and-day-of-notification'].copy()
+t7.drop(columns=['Local Authority', 'Unit'], inplace=True)
+t7['Notification Date'] = t7['Notification Date'].map(lambda x: f'day/{x}')
+t7['Value'] = pd.to_numeric(t7['Value'], downcast='integer')
+t7 = add_hidden(t7)
+t7
+
+t8 = tables['table_8 - number-of-notifications-of-deaths-of-adult-care-home-residents-by-local-authority-and-day-of-notification'].copy()
+t8.drop(columns=['Local Authority', 'Unit'], inplace=True)
+t8['Notification Date'] = t8['Notification Date'].map(lambda x: f'day/{x}')
+t8['Value'] = pd.to_numeric(t8['Value'], downcast='integer')
+t8 = add_hidden(t8)
+t8
+
+t9 = tables['table_9 - number-of-notifications-of-deaths-of-adult-care-home-residents-occuring-in-care-homes-by-local-authority-and-day-of-notification'].copy()
+t9.drop(columns=['Local Authority', 'Unit'], inplace=True)
+t9['Notification Date'] = t9['Notification Date'].map(lambda x: f'day/{x}')
+t9['Value'] = pd.to_numeric(t9['Value'], downcast='integer')
+t9 = add_hidden(t9)
+t9
 
 # +
+merged = pd.concat([t1, t2, t3, t4, t5, t6, t7, t8, t9], sort=False).drop_duplicates()
+merged
+
 #cubes = Cubes('info.json')
-#cubes.add_cube(scraper, pd.concat([tidy1, tidy2, tidy3], sort=False), scraper.dataset.title)
+#cubes.add_cube(scraper, merged), scraper.dataset.title)
 #cubes.output_all()
 
 # +
@@ -109,7 +163,7 @@ from urllib.parse import urljoin
 
 out = Path('out')
 out.mkdir(exist_ok=True)
-pd.concat([tidy1, tidy2, tidy3], sort=False).drop_duplicates().to_csv(out / 'observations.csv', index = False)
+merged.to_csv(out / 'observations.csv', index = False)
 scraper.dataset.family = 'covid-19'
 
 dataset_path = pathify(os.environ.get('JOB_NAME', 'gss_data/covid-19/' + Path(os.getcwd()).name))

@@ -56,8 +56,8 @@ else:
         DATE_RANGE_RE = re.compile(r'.*([0-9]+/[0-9]+/[0-9]+)[^0-9]+([0-9]+/[0-9]+/[0-9]+)')
         date_range_match = DATE_RANGE_RE.match(notification_date_range.value)
         from dateutil.parser import parse
-        start_date = parse(date_range_match.group(1))
-        end_date = parse(date_range_match.group(2))
+        start_date = parse(date_range_match.group(1), dayfirst=True)
+        end_date = parse(date_range_match.group(2), dayfirst=True)
         location_of_death = ref_cell.expand(DOWN).is_not_blank()
         measure_type = 'Deaths'
         unit = 'Count'

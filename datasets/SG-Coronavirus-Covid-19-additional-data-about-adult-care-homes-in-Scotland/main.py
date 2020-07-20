@@ -499,7 +499,7 @@ for tab in tabs:
             'w/c 29th June 2020 ³' : 'w/c 29th June 2020'}})
         trace.Period("Remove superscript ('1,2,3') tags from Period values (add relevant notes to notes section)")
 
-        df = df[['Period', 'NHS Board', 'Measure', 'OBS', 'Measure Type', 'Unit']]
+        df = df[['Period', 'NHS Board', 'Measure', 'People Tested', 'OBS', 'Measure Type', 'Unit']]
         trace.add_column('Measure')
         trace.add_column('OBS')
 
@@ -539,14 +539,6 @@ with open('infoStageOne.json', 'w') as info:
 # %%
 trace.output()
 
-
-# %%
-i = 2
-for c in all_tabs[i].columns:
-    if c != "OBS":
-        print(c)
-        print(all_tabs[i][c].unique())
-        print("-----------------------------------------------------")
 
 # %%
 all_tabs[0]['Sector'] = 'All'
@@ -611,10 +603,6 @@ all_tabs[3]['Period'] = pd.to_datetime(all_tabs[3]['Period']).dt.strftime('%Y-%m
 all_tabs[3]['Period'] = "gregorian-interval/" + all_tabs[3]['Period'] + '/P1D'
 
 # %%
-all_tabs[4]['Sector'] = 'All'
-all_tabs[4]['Size of Care Home'] = 'All'
-
-# %%
 #### I know theres probably one line of code that does this but i got carried away lol!
 dtes = all_tabs[4]['Period'].str.split("-", n = 1, expand = True)
 dtes[1] = dtes[1].str.replace('(¹)','')
@@ -647,17 +635,17 @@ dtes.head(10)
 all_tabs[4]['Period'] = dtes[8]
 
 # %%
-all_tabs[4] = all_tabs[4].rename(columns = {'NHS Board' : 'Local Authority'})
 all_tabs[3] = all_tabs[3].rename(columns = {'NHS Board' : 'Local Authority'})
-all_tabs[4].head(60)
+all_tabs[4] = all_tabs[4].rename(columns = {'Measure' : 'COVID-19 Confirmed'})
 
 # %%
-cols = ['Period', 'Local Authority', 'Size of Care Home', 'Sector', 'Measure Type', 'Unit', 'OBS']
-i = 0
-for t in all_tabs:
-    all_tabs[i] = all_tabs[i][cols]
-    print(t.columns)
-    i = i + 1
+#all_tabs[0]
+
+# %%
+all_tabs[0] = all_tabs[0][['Period', 'Local Authority', 'Size of Care Home', 'Sector', 'Measure Type', 'Unit', 'OBS']]
+all_tabs[1] = all_tabs[1][['Period', 'Local Authority', 'Size of Care Home', 'Sector', 'Measure Type', 'Unit', 'OBS']]
+all_tabs[2] = all_tabs[2][['Period', 'Local Authority', 'Size of Care Home', 'Sector', 'Measure Type', 'Unit', 'OBS']]
+all_tabs[3] = all_tabs[3][['Period', 'Local Authority', 'Size of Care Home', 'Sector', 'Measure Type', 'Unit', 'OBS']]
 
 # %%
 # Pull the mapping files into DataFrames
@@ -665,8 +653,11 @@ geogsHB = pd.read_csv('../../Reference/scottish-health-board-mapping.csv')
 geogsCA = pd.read_csv('../../Reference/scottish-council-areas-mapping.csv') 
 
 # %%
-for t in all_tabs:
-    t['Local Authority'][t['Local Authority'] == 'SCOTLAND'] = 'Scotland'
+all_tabs[0]['Local Authority'][all_tabs[0]['Local Authority'] == 'SCOTLAND'] = 'Scotland'
+all_tabs[1]['Local Authority'][all_tabs[1]['Local Authority'] == 'SCOTLAND'] = 'Scotland'
+all_tabs[2]['Local Authority'][all_tabs[2]['Local Authority'] == 'SCOTLAND'] = 'Scotland'
+all_tabs[3]['Local Authority'][all_tabs[3]['Local Authority'] == 'SCOTLAND'] = 'Scotland'
+all_tabs[4]['NHS Board'][all_tabs[4]['NHS Board'] == 'SCOTLAND'] = 'Scotland'
 
 # %%
 # Map the Geography codes
@@ -674,56 +665,58 @@ all_tabs[0]['Local Authority'] = all_tabs[0]['Local Authority'].map(geogsCA.set_
 all_tabs[1]['Local Authority'] = all_tabs[1]['Local Authority'].map(geogsCA.set_index('Category')['Code'])
 all_tabs[2]['Local Authority'] = all_tabs[2]['Local Authority'].map(geogsCA.set_index('Category')['Code'])
 all_tabs[3]['Local Authority'] = all_tabs[3]['Local Authority'].map(geogsHB.set_index('Category')['Code'])
-all_tabs[4]['Local Authority'] = all_tabs[4]['Local Authority'].map(geogsHB.set_index('Category')['Code'])
+all_tabs[4]['NHS Board'] = all_tabs[4]['NHS Board'].map(geogsHB.set_index('Category')['Code'])
 
 # %%
-for t in all_tabs:
-    print(t['Local Authority'].unique())
-    print('-----------------')
+joined_dat1 = pd.concat([all_tabs[0],all_tabs[1],all_tabs[2],all_tabs[3]])
+joined_dat2 = pd.concat([all_tabs[4]])
 
 # %%
-joined_dat = pd.concat(all_tabs)
+#joined_dat1.head(10)
 
 # %%
-joined_dat.head(10)
+joined_dat1 = joined_dat1.rename(columns = {'OBS' : 'Value'})
+joined_dat2 = joined_dat2.rename(columns = {'OBS' : 'Value'})
+joined_dat1 = joined_dat1.rename(columns = {'Local Authority' : 'Geography Code'})
+joined_dat2 = joined_dat2.rename(columns = {'NHS Board' : 'NHS Board Code'})
 
 # %%
-joined_dat = joined_dat.rename(columns = {'OBS' : 'Value'})
-joined_dat = joined_dat.rename(columns = {'Local Authority' : 'Geography Code'})
+#for c in joined_dat2:
+#    if c != 'Value':
+#        print(c + ' ------------------')
+#        print(joined_dat2[c].unique())
 
 # %%
-for c in joined_dat:
-    if c != 'Value':
-        print(c + ' ------------------')
-        print(joined_dat[c].unique())
+joined_dat1['Geography Code'] = joined_dat1['Geography Code'].apply(pathify) 
+joined_dat1['Size of Care Home'] = joined_dat1['Size of Care Home'].apply(pathify) 
+joined_dat1['Size of Care Home'][joined_dat1['Size of Care Home'] == '-60-beds'] = 'more-than-60-beds'
+joined_dat1['Sector'] = joined_dat1['Sector'].apply(pathify) 
 
-# %%
-joined_dat['Geography Code'] = joined_dat['Geography Code'].apply(pathify) 
-joined_dat['Size of Care Home'] = joined_dat['Size of Care Home'].apply(pathify) 
-joined_dat['Size of Care Home'][joined_dat['Size of Care Home'] == '-60-beds'] = 'more-than-60-beds'
-joined_dat['Sector'] = joined_dat['Sector'].apply(pathify) 
+joined_dat2['NHS Board Code'] = joined_dat2['NHS Board Code'].apply(pathify) 
+joined_dat2['COVID-19 Confirmed'] = joined_dat2['COVID-19 Confirmed'].apply(pathify) 
+joined_dat2['People Tested'] = joined_dat2['People Tested'].apply(pathify)
 
 # %%
 ######################################################################
 ######################################################################
 ## REMOVE MULTIPLE UNITS FOR NOW UNTIL CAN BE PROCESSED IN JENKINS ###
 #print(joined_dat.count())
-joined_dat = joined_dat[joined_dat['Unit'] == 'Person'] 
+joined_dat1 = joined_dat1[joined_dat1['Unit'] == 'Cumulative Count'] 
 #print(joined_dat.count())
 ######################################################################
 ######################################################################
-joined_dat.head(10)
+#joined_dat1.head(10)
 
 # %%
 # Output the data to CSV
-csvName = 'obsetvations.csv'
+csvName = 'suspected-covid-19-cases-observations.csv'
 out = Path('out')
 out.mkdir(exist_ok=True)
-joined_dat.drop_duplicates().to_csv(out / csvName, index = False)
+joined_dat1.drop_duplicates().to_csv(out / csvName, index = False)
 
 # %%
 scraper.dataset.family = 'covid-19'
-scraper.dataset.description = 'SG Coronavirus COVID-19 additional data about adult care homes- in Scotland.\n ' + notes
+scraper.dataset.description = 'SG Coronavirus COVID-19 additional data about adult care homes in Scotland - Suspected COVID-19 Cases.\n ' + notes
 
 # Output CSV-W metadata (validation, transform and DSD).
 # Output dataset metadata separately for now.
@@ -734,7 +727,7 @@ from urllib.parse import urljoin
 dataset_path = pathify(os.environ.get('JOB_NAME', 'gss_data/covid-19/' + Path(os.getcwd()).name)) + '-' + pathify(csvName)
 scraper.set_base_uri('http://gss-data.org.uk')
 scraper.set_dataset_id(dataset_path)
-#scrape.dataset.title = ''
+scraper.dataset.title = 'SG Covid-19 additional data about adult care homes - Suspected COVID-19 Cases'
 csvw_transform = CSVWMapping()
 csvw_transform.set_csv(out / csvName)
 csvw_transform.set_mapping(json.load(open('info.json')))
@@ -742,5 +735,36 @@ csvw_transform.set_dataset_uri(urljoin(scraper._base_uri, f'data/{scraper._datas
 csvw_transform.write(out / f'{csvName}-metadata.json')
 with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
     metadata.write(scraper.generate_trig())
+
+# %%
+# Output the data to CSV
+csvName = 'residents-and-staff-tested-for-covid-19-observations.csv'
+out = Path('out')
+out.mkdir(exist_ok=True)
+joined_dat2.drop_duplicates().to_csv(out / csvName, index = False)
+
+# %%
+scraper.dataset.family = 'covid-19'
+scraper.dataset.description = 'SG Coronavirus COVID-19 additional data about adult care homes in Scotland - Residents and Staff Tested.\n ' + notes
+
+# Output CSV-W metadata (validation, transform and DSD).
+# Output dataset metadata separately for now.
+
+import os
+from urllib.parse import urljoin
+
+dataset_path = pathify(os.environ.get('JOB_NAME', 'gss_data/covid-19/' + Path(os.getcwd()).name)) + '-' + pathify(csvName)
+scraper.set_base_uri('http://gss-data.org.uk')
+scraper.set_dataset_id(dataset_path)
+scraper.dataset.title = 'SG Covid-19 additional data about adult care homes - Residents and Staff Tested'
+csvw_transform = CSVWMapping()
+csvw_transform.set_csv(out / csvName)
+csvw_transform.set_mapping(json.load(open('info.json')))
+csvw_transform.set_dataset_uri(urljoin(scraper._base_uri, f'data/{scraper._dataset_id}'))
+csvw_transform.write(out / f'{csvName}-metadata.json')
+with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
+    metadata.write(scraper.generate_trig())
+
+# %%
 
 # %%

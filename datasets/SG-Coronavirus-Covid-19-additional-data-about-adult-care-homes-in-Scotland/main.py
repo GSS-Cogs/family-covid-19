@@ -432,6 +432,7 @@ for tab in tabs:
 
         df = df.replace({'Marker' : {'*' : 'Statistical Disclosure Applied'}})
         trace.Marker("Change * DataMarker to 'Statistical Disclosure Applied'")
+        df = df.replace({'OBS' : {'' : '0'}})
 
         df = df.drop(['Measure'], axis=1)
 
@@ -471,6 +472,7 @@ for tab in tabs:
 
         df = df.replace({'Marker' : {'*' : 'Statistical Disclosure Applied'}})
         trace.Marker("Change * DataMarker to 'Statistical Disclosure Applied'")
+        
 
         df = df[['Period', 'NHS Board', 'OBS', 'Marker', 'Measure Type', 'Unit']]
 
@@ -639,13 +641,16 @@ all_tabs[3] = all_tabs[3].rename(columns = {'NHS Board' : 'Local Authority'})
 all_tabs[4] = all_tabs[4].rename(columns = {'Measure' : 'COVID-19 Confirmed'})
 
 # %%
-#all_tabs[0]
+all_tabs[0]['Marker'] = ''
+all_tabs[1]['Marker'] = ''
+all_tabs[4]['Marker'] = ''
+all_tabs[4].head(5)
 
 # %%
-all_tabs[0] = all_tabs[0][['Period', 'Local Authority', 'Size of Care Home', 'Sector', 'Measure Type', 'Unit', 'OBS']]
-all_tabs[1] = all_tabs[1][['Period', 'Local Authority', 'Size of Care Home', 'Sector', 'Measure Type', 'Unit', 'OBS']]
-all_tabs[2] = all_tabs[2][['Period', 'Local Authority', 'Size of Care Home', 'Sector', 'Measure Type', 'Unit', 'OBS']]
-all_tabs[3] = all_tabs[3][['Period', 'Local Authority', 'Size of Care Home', 'Sector', 'Measure Type', 'Unit', 'OBS']]
+all_tabs[0] = all_tabs[0][['Period', 'Local Authority', 'Size of Care Home', 'Sector', 'Measure Type', 'Unit', 'Marker', 'OBS']]
+all_tabs[1] = all_tabs[1][['Period', 'Local Authority', 'Size of Care Home', 'Sector', 'Measure Type', 'Unit', 'Marker', 'OBS']]
+all_tabs[2] = all_tabs[2][['Period', 'Local Authority', 'Size of Care Home', 'Sector', 'Measure Type', 'Unit', 'Marker', 'OBS']]
+all_tabs[3] = all_tabs[3][['Period', 'Local Authority', 'Size of Care Home', 'Sector', 'Measure Type', 'Unit', 'Marker', 'OBS']]
 
 # %%
 # Pull the mapping files into DataFrames
@@ -681,10 +686,6 @@ joined_dat1 = joined_dat1.rename(columns = {'Local Authority' : 'Geography Code'
 joined_dat2 = joined_dat2.rename(columns = {'NHS Board' : 'NHS Board Code'})
 
 # %%
-#for c in joined_dat2:
-#    if c != 'Value':
-#        print(c + ' ------------------')
-#        print(joined_dat2[c].unique())
 
 # %%
 joined_dat1['Geography Code'] = joined_dat1['Geography Code'].apply(pathify) 
@@ -764,6 +765,8 @@ csvw_transform.set_dataset_uri(urljoin(scraper._base_uri, f'data/{scraper._datas
 csvw_transform.write(out / f'{csvName}-metadata.json')
 with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
     metadata.write(scraper.generate_trig())
+
+# %%
 
 # %%
 

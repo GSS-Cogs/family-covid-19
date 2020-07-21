@@ -689,7 +689,9 @@ joined_dat2 = joined_dat2.rename(columns = {'NHS Board' : 'NHS Board Code'})
 joined_dat1['Geography Code'] = joined_dat1['Geography Code'].apply(pathify) 
 joined_dat1['Size of Care Home'] = joined_dat1['Size of Care Home'].apply(pathify) 
 joined_dat1['Size of Care Home'][joined_dat1['Size of Care Home'] == '-60-beds'] = 'more-than-60-beds'
-joined_dat1['Sector'] = joined_dat1['Sector'].apply(pathify) 
+joined_dat1['Sector'] = joined_dat1['Sector'].apply(pathify)
+joined_dat1['Measure Type'] = joined_dat1['Measure Type'].apply(pathify)
+joined_dat1['Unit'] = joined_dat1['Unit'].apply(pathify)
 
 joined_dat2['NHS Board Code'] = joined_dat2['NHS Board Code'].apply(pathify) 
 joined_dat2['COVID-19 Confirmed'] = joined_dat2['COVID-19 Confirmed'].apply(pathify) 

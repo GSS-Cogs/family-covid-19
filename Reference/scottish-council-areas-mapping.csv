@@ -1,42 +1,38 @@
-Category,Code
+Category,Code,
 Scotland,S04000001
 All,S04000001
-Aberdeen City,S05000001
-Aberdeenshire,S05000002
-Angus,S05000003
-Argyll & Bute,S05000004
-Argyll and Bute,S05000004
-Clackmannanshire,S05000005
-Dumfries & Galloway,S05000006
-Dumfries and Galloway,S05000006
-Dundee City,S05000007
-East Ayrshire,S05000008
-East Dunbartonshire,S05000009
-East Lothian,S05000010
-East Renfrewshire,S05000011
-Edinburgh,S05000012
-City of Edinburgh,S05000012
-Eilean Siar,S12000013
+Clackmannanshire,S12000005
+Dumfries and Galloway,S12000006
+Dumfries & Galloway,S12000006
+East Ayrshire,S12000008
+East Lothian,S12000010
+East Renfrewshire,S12000011
 Na h-Eileanan Siar,S12000013
-Falkirk,S05000013
-Fife,S05000014
-Glasgow City,S05000015
-Highland,S05000016
-Inverclyde,S05000017
-Midlothian,S05000018
+Falkirk,S12000014
+Highland,S12000017
+Inverclyde,S12000018
+Midlothian,S12000019
 Moray,S12000020
-North Ayrshire,S05000019
-North Lanarkshire,S05000020
-Orkney,S08000025
-Orkney Islands,S08000025
-Perth & Kinross,S05000021
-Perth and Kinross,S05000021
-Renfrewshire,S05000022
+North Ayrshire,S12000021
+Orkney Islands,S12000023
 Scottish Borders,S12000026
-Shetland,S05000023
-Shetland Islands,S05000023
-South Ayrshire,S05000025
-South Lanarkshire,S05000026
-Stirling,S05000024
-West Dunbartonshire,S05000027
-West Lothian,S05000028
+Shetland Islands,S12000027
+South Ayrshire,S12000028
+South Lanarkshire,S12000029
+Stirling,S12000030
+Aberdeen City,S12000033
+Aberdeenshire,S12000034
+Argyll and Bute,S12000035
+Argyll & Bute,S12000035
+City of Edinburgh,S12000036
+Renfrewshire,S12000038
+West Dunbartonshire,S12000039
+West Lothian,S12000040
+Angus,S12000041
+Dundee City,S12000042
+East Dunbartonshire,S12000045
+Fife,S12000047
+Perth and Kinross,S12000048
+Perth & Kinross,S12000048
+Glasgow City,S12000049
+North Lanarkshire,S12000050

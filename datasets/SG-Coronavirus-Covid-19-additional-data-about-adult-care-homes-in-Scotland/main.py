@@ -670,7 +670,7 @@ all_tabs[0]['Local Authority'] = all_tabs[0]['Local Authority'].map(geogsCA.set_
 all_tabs[1]['Local Authority'] = all_tabs[1]['Local Authority'].map(geogsCA.set_index('Category')['Code'])
 all_tabs[2]['Local Authority'] = all_tabs[2]['Local Authority'].map(geogsCA.set_index('Category')['Code'])
 all_tabs[3]['Local Authority'] = all_tabs[3]['Local Authority'].map(geogsHB.set_index('Category')['Code'])
-all_tabs[4]['NHS Board'] = all_tabs[4]['NHS Board'].map(geogsHB.set_index('Category')['Code'])
+all_tabs[4]['NHS Board2'] = all_tabs[4]['NHS Board'].map(geogsHB.set_index('Category')['Code'])
 
 # %%
 joined_dat1 = pd.concat([all_tabs[0],all_tabs[1],all_tabs[2],all_tabs[3]])
@@ -684,8 +684,6 @@ joined_dat1 = joined_dat1.rename(columns = {'OBS' : 'Value'})
 joined_dat2 = joined_dat2.rename(columns = {'OBS' : 'Value'})
 joined_dat1 = joined_dat1.rename(columns = {'Local Authority' : 'Geography Code'})
 joined_dat2 = joined_dat2.rename(columns = {'NHS Board' : 'NHS Board Code'})
-
-# %%
 
 # %%
 joined_dat1['Geography Code'] = joined_dat1['Geography Code'].apply(pathify) 

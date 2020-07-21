@@ -1,21 +1,20 @@
-Category,Code
-Scotland,S04000001
-All,S04000001
-Ayrshire & Arran,S08000015
-Ayrshire and Arran,S08000015
-Borders,S08000016
-Dumfries & Galloway,S08000017
-Dumfries and Galloway,S08000017
-Fife,S08000029
-Forth Valley,S08000019
-Grampian,S08000020
-Greater Glasgow & Clyde,S08000031
-Greater Glasgow and Clyde,S08000031
-Highland,S08000022
-Lanarkshire,S08000032
-South Lanarkshire,S08000032
-Lothian,S08000024
-Orkney,S08000025
-Shetland,S08000026
-Tayside,S08000030
-Western Isles,S08000028
+Label,Code,Category
+Scotland,S04000001,Scotland
+All,S04000001,All
+NHS Forth Valley,S08000019,Forth Valley
+NHS Dumfries and Galloway,S08000017,Dumfries and Galloway
+NHS Dumfries & Galloway,S08000017,Dumfries & Galloway
+NHS Ayrshire and Arran,S08000015,Ayrshire and Arran
+NHS Ayrshire & Arran,S08000015,Ayrshire & Arran
+NHS Lothian,S08000024,Lothian
+NHS Western Isles,S08000028,Western Isles
+NHS Highland,S08000022,Highland
+NHS Greater Glasgow and Clyde,S08000031,Greater Glasgow and Clyde
+NHS Greater Glasgow & Clyde,S08000031,Greater Glasgow & Clyde
+NHS Grampian,S08000020,Grampian
+NHS Orkney,S08000025,Orkney
+NHS Borders,S08000016,Borders
+NHS Shetland,S08000026,Shetland
+NHS Lanarkshire,S08000032,Lanarkshire
+NHS Tayside,S08000030,Tayside
+NHS Fife,S08000029,Fife

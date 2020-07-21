@@ -89,7 +89,7 @@ from urllib.parse import urljoin
 dataset_path = pathify(os.environ.get('JOB_NAME', 'gss_data/covid-19/' + Path(os.getcwd()).name))
 scrape.set_base_uri('http://gss-data.org.uk')
 scrape.set_dataset_id(dataset_path)
-scraper.dataset.title = 'NRS Deaths involving COVID-19 in Scotland'
+scrape.dataset.title = 'NRS Deaths involving COVID-19 in Scotland'
 csvw_transform = CSVWMapping()
 csvw_transform.set_csv(out / 'observations.csv')
 csvw_transform.set_mapping(json.load(open('info.json')))

@@ -63,8 +63,8 @@
                 "value": "http://statistics.data.gov.uk/id/statistical-geography/{nhs_board_code}"
             },
             "Value": {
-                "unit": "http://gss-data.org.uk/def/concept/measurement-units/person",
-                "measure": "http://gss-data.org.uk/def/measure/count",
+                "unit": "http://gss-data.org.uk/def/concept/measurement-units/per-1000-registered-places",
+                "measure": "http://gss-data.org.uk/def/measure/cumulative-count",
                 "datatype": "integer"
             }
         }

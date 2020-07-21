@@ -65,7 +65,7 @@
             "Value": {
                 "unit": "http://gss-data.org.uk/def/concept/measurement-units/per-1000-registered-places",
                 "measure": "http://gss-data.org.uk/def/measure/cumulative-count",
-                "datatype": "integer"
+                "datatype": "double"
             }
         }
     },

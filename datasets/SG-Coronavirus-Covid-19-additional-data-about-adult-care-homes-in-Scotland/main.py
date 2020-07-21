@@ -739,12 +739,13 @@ with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
 
 # %%
 # Output the data to CSV
-csvName = 'residents-and-staff-tested-for-covid-19-observations.csv'
-out = Path('out')
-out.mkdir(exist_ok=True)
-joined_dat2.drop_duplicates().to_csv(out / csvName, index = False)
+#csvName = 'residents-and-staff-tested-for-covid-19-observations.csv'
+#out = Path('out')
+#out.mkdir(exist_ok=True)
+#joined_dat2.drop_duplicates().to_csv(out / csvName, index = False)
 
 # %%
+"""
 scraper.dataset.family = 'covid-19'
 scraper.dataset.description = 'SG Coronavirus COVID-19 additional data about adult care homes in Scotland - Residents and Staff Tested.\n ' + notes
 
@@ -765,6 +766,7 @@ csvw_transform.set_dataset_uri(urljoin(scraper._base_uri, f'data/{scraper._datas
 csvw_transform.write(out / f'{csvName}-metadata.json')
 with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
     metadata.write(scraper.generate_trig())
+"""
 
 # %%
 

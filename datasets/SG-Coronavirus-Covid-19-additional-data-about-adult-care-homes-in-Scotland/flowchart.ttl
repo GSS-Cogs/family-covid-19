@@ -42,24 +42,22 @@ cogs:Rename a owl:Class ;
 
 cogsgit:top-level a cogs:LandingPage ;
   rdfs:label "Landing Page" ;
-  rdfs:label2 "<b>TITLE HERE</b>" ;
-  rdfs:comment "LINK HERE";
-  cogs:scrape cogsgit:sheet1 ;
+  rdfs:label2 "<b>SG Coronavirus Covid-19 additional data about adult care homes in Scotland</b>" ;
+  rdfs:comment <https://www.gov.scot/publications/coronavirus-covid-19-additional-data-about-adult-care-homes-in-scotland/>;
+  cogs:scrape cogsgit:sheet1, cogsgit:sheet2 ;
 .
 
-cogsgit:sheet1 a cogs:Sheets ; rdfs:label "SHEET NAME HERE" ; rdfs:comment "SHEET TITLE HERE" ; cogs:transforms cogsgit:columns1 ; .
+cogsgit:sheet1 a cogs:Sheets ; rdfs:label "Sheets" ; rdfs:label2 "Measures Cases of supected COVID-19" ; rdfs:comment "Table 1 - Care Home Size<BR>Table 2 - Sector<BR>Table 3 - Local Authority<BR>Table 4 - NHS Board" ; cogs:transforms cogsgit:dataset1 ; .
+cogsgit:sheet2 a cogs:Sheets ; rdfs:label "Sheets" ; rdfs:label2 "Measures People tested for COVID-19" ;rdfs:comment "Table 5 - People tested" ; cogs:transforms cogsgit:dataset2 ; .
 
+cogsgit:dataset1 a cogs:Datasets ; rdfs:label "Output Dataset" ; rdfs:comment "SG Covid-19 additional data about adult care homes - Suspected COVID-19 Cases" ; cogs:outputs cogsgit:columns1 ; .
+cogsgit:dataset2 a cogs:Datasets ; rdfs:label "Output Dataset" ; rdfs:comment "SG Covid-19 additional data about adult care homes - Residents and Staff Tested" ; cogs:outputs cogsgit:columns2 ; .
 
-cogsgit:columns1 a cogs:Columns ; rdfs:label "Output Table 1" ; rdfs:comment "COLUMN LIST HERE" ; cogs:harmonise cogsgit:rename1 ; .
-
-
-cogsgit:rename1 a cogs:Rename ; rdfs:label "Rename & Add" ; rdfs:comment "Not yet specified" ; cogs:joins cogsgit:dataset1 ; .
-
-
-cogsgit:dataset1 a cogs:Datasets ; rdfs:label "Dataset Name 1" ; rdfs:comment "Dataset Name" ; cogs:outputs cogsgit:pmd1 ; .
+cogsgit:columns1 a cogs:Columns ; rdfs:label "Table" ; rdfs:comment "Period, Geography Code, Size of Care Home, Sector, Measure Type, Unit, Marker, Value" ; cogs:uploads cogsgit:pmd1; .
+cogsgit:columns2 a cogs:Columns ; rdfs:label "Table" ; rdfs:comment "Period, NHS Board Code, COVID-19 Confirmed, People Tested, Measure Type, Unit, Marker, Value" ; cogs:uploads cogsgit:pmd1 ; .
 
 cogsgit:pmd1 a cogs:PMD ;
-  rdfs:label "PMD" ;
-  rdfs:comment "Publish my Data: http://gss-data.org.uk/data/search" ;
+  rdfs:label "Publish my Data" ;
+  rdfs:comment <https://staging.gss-data.org.uk/datasets> ;
 .
 ###################################################################################################

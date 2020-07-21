@@ -42,24 +42,19 @@ cogs:Rename a owl:Class ;
 
 cogsgit:top-level a cogs:LandingPage ;
   rdfs:label "Landing Page" ;
-  rdfs:label2 "<b>TITLE HERE</b>" ;
-  rdfs:comment "LINK HERE";
-  cogs:scrape cogsgit:sheet1 ;
+  rdfs:label2 "<b>NRS Deaths involving coronavirus (COVID-19) in Scotland</b>" ;
+  rdfs:comment <https://www.nrscotland.gov.uk/covid19stats>;
+  cogs:scrape cogsgit:sheet1;
 .
 
-cogsgit:sheet1 a cogs:Sheets ; rdfs:label "SHEET NAME HERE" ; rdfs:comment "SHEET TITLE HERE" ; cogs:transforms cogsgit:columns1 ; .
+cogsgit:sheet1 a cogs:Sheets ; rdfs:label "Sheets" ; rdfs:label2 "Measures Deaths" ; rdfs:comment "Table 1 - COVID Deaths<BR>Table 2 - All Deaths<BR>Table 3 - Deaths by Location" ; cogs:transforms cogsgit:dataset1 ; .
 
+cogsgit:dataset1 a cogs:Datasets ; rdfs:label "Output Dataset" ; rdfs:comment "NRS Deaths involving COVID-19 in Scotland" ; cogs:outputs cogsgit:columns1 ; .
 
-cogsgit:columns1 a cogs:Columns ; rdfs:label "Output Table 1" ; rdfs:comment "COLUMN LIST HERE" ; cogs:harmonise cogsgit:rename1 ; .
-
-
-cogsgit:rename1 a cogs:Rename ; rdfs:label "Rename & Add" ; rdfs:comment "Not yet specified" ; cogs:joins cogsgit:dataset1 ; .
-
-
-cogsgit:dataset1 a cogs:Datasets ; rdfs:label "Dataset Name 1" ; rdfs:comment "Dataset Name" ; cogs:outputs cogsgit:pmd1 ; .
+cogsgit:columns1 a cogs:Columns ; rdfs:label "Table" ; rdfs:comment "Period, Registered Death Type, Council Area, NHS Board, NRS Age Group, Location of Death, Sex, Measure Type, Unit, Value" ; cogs:uploads cogsgit:pmd1; .
 
 cogsgit:pmd1 a cogs:PMD ;
-  rdfs:label "PMD" ;
-  rdfs:comment "Publish my Data: http://gss-data.org.uk/data/search" ;
+  rdfs:label "Publish my Data" ;
+  rdfs:comment <https://staging.gss-data.org.uk/datasets> ;
 .
 ###################################################################################################

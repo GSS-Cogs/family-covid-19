@@ -556,7 +556,7 @@ all_tabs[0]['Size of Care Home'][all_tabs[0]['Size of Care Home'] == '-60'] = "M
 all_tabs[0]['Size of Care Home'] = all_tabs[0]['Size of Care Home'] + ' Beds'
 
 all_tabs[0]['Period'] = pd.to_datetime(all_tabs[0]['Period']).dt.strftime('%Y-%m-%dT%H:%M:%S')
-all_tabs[0]['Period'] = "gregorian-interval/" + all_tabs[0]['Period'] + '/P1D'
+all_tabs[0]['Period'] = "gregorian-interval/" + all_tabs[0]['Period'] + '/P7D'
 
 all_tabs[0] = all_tabs[0].rename(columns = {'Region' : 'Local Authority'})
 
@@ -571,7 +571,7 @@ all_tabs[1]['Measure Type'][all_tabs[1]['Measure Type'] == 'Cumulative Percentag
 all_tabs[1]['Unit'][all_tabs[1]['Unit'] == 'Percent'] = "Cumulative Percentage"
 
 all_tabs[1]['Period'] = pd.to_datetime(all_tabs[1]['Period']).dt.strftime('%Y-%m-%dT%H:%M:%S')
-all_tabs[1]['Period'] = "gregorian-interval/" + all_tabs[1]['Period'] + '/P1D'
+all_tabs[1]['Period'] = "gregorian-interval/" + all_tabs[1]['Period'] + '/P7D'
 
 all_tabs[1] = all_tabs[1].rename(columns = {'Region' : 'Local Authority'})
 
@@ -588,7 +588,7 @@ all_tabs[2]['Measure Type'][all_tabs[2]['Measure Type'] == 'Cumulative Percentag
 all_tabs[2]['Unit'][all_tabs[2]['Unit'] == 'Percent'] = "Cumulative Percentage"
 
 all_tabs[2]['Period'] = pd.to_datetime(all_tabs[2]['Period']).dt.strftime('%Y-%m-%dT%H:%M:%S')
-all_tabs[2]['Period'] = "gregorian-interval/" + all_tabs[2]['Period'] + '/P1D'
+all_tabs[2]['Period'] = "gregorian-interval/" + all_tabs[2]['Period'] + '/P7D'
 
 # %%
 all_tabs[3]['Sector'] = 'All'
@@ -602,7 +602,7 @@ all_tabs[3]['Measure Type'][all_tabs[3]['Measure Type'] == 'Cumulative Percentag
 all_tabs[3]['Unit'][all_tabs[3]['Unit'] == 'Percent'] = "Cumulative Percentage"
 
 all_tabs[3]['Period'] = pd.to_datetime(all_tabs[3]['Period']).dt.strftime('%Y-%m-%dT%H:%M:%S')
-all_tabs[3]['Period'] = "gregorian-interval/" + all_tabs[3]['Period'] + '/P1D'
+all_tabs[3]['Period'] = "gregorian-interval/" + all_tabs[3]['Period'] + '/P7D'
 
 # %%
 #### I know theres probably one line of code that does this but i got carried away lol!
@@ -697,6 +697,9 @@ joined_dat1['Marker'] = joined_dat1['Marker'].apply(pathify)
 joined_dat2['NHS Board Code'] = joined_dat2['NHS Board Code'].apply(pathify) 
 joined_dat2['COVID-19 Confirmed'] = joined_dat2['COVID-19 Confirmed'].apply(pathify) 
 joined_dat2['People Tested'] = joined_dat2['People Tested'].apply(pathify)
+joined_dat2['Measure Type'] = joined_dat2['Measure Type'].apply(pathify)
+joined_dat2['Unit'] = joined_dat2['Unit'].apply(pathify)
+joined_dat2['Marker'] = joined_dat2['Marker'].apply(pathify)
 
 # %%
 ######################################################################

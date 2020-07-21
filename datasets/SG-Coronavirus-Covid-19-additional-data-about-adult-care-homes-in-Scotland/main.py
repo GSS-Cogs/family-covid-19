@@ -702,7 +702,7 @@ joined_dat2['People Tested'] = joined_dat2['People Tested'].apply(pathify)
 ######################################################################
 ## REMOVE MULTIPLE UNITS FOR NOW UNTIL CAN BE PROCESSED IN JENKINS ###
 #print(joined_dat.count())
-joined_dat1 = joined_dat1[joined_dat1['Unit'] == 'Cumulative Count'] 
+joined_dat1 = joined_dat1[joined_dat1['Unit'] == 'cumulative-count'] 
 #print(joined_dat.count())
 ######################################################################
 ######################################################################

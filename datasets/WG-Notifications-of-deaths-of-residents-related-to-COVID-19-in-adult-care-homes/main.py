@@ -169,6 +169,7 @@ scraper.dataset.family = 'covid-19'
 dataset_path = pathify(os.environ.get('JOB_NAME', 'gss_data/covid-19/' + Path(os.getcwd()).name))
 scraper.set_base_uri('http://gss-data.org.uk')
 scraper.set_dataset_id(dataset_path)
+scraper.dataset.title = 'WG Notifications of deaths of residents related to COVID-19 in adult care homes'
 csvw_transform = CSVWMapping()
 csvw_transform.set_csv(out / 'observations.csv')
 csvw_transform.set_mapping(json.load(open('info.json')))

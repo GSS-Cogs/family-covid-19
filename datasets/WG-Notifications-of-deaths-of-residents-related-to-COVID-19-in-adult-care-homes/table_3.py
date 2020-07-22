@@ -55,7 +55,7 @@ else:
         notification_day = ref_cell.shift(-3,0).expand(DOWN).is_not_blank()
         notification_year = ref_cell.shift(-3, -2).expand(RIGHT).is_not_blank()
         #Due to the 'Cause of Death' dimension being across two rows, I identify them seperately then will add them together. 
-        cause_of_death_1 = ref_cell.shift(-2,-1).expand(RIGHT)
+        cause_of_death_1 = ref_cell.shift(-2,-1).expand(RIGHT).is_not_blank()
         cause_of_death_2 = ref_cell.shift(-2,0).expand(RIGHT)
         measure_type = 'Deaths'
         unit = 'Count'
@@ -64,13 +64,13 @@ else:
         dimensions = [
             HDim(notification_day, 'Notification Day', DIRECTLY, LEFT),
             HDim(notification_year, 'Notification Year', CLOSEST, LEFT),
-            HDim(cause_of_death_1, 'Cause of Death', DIRECTLY, ABOVE),
+            HDim(cause_of_death_1, 'Cause of Death', CLOSEST, LEFT),
             HDim(cause_of_death_2, 'Cause of Death 2', DIRECTLY, ABOVE),
             HDimConst('Measure Type', measure_type),
             HDimConst('Unit', unit),
         ]
         c1 = ConversionSegment(observations, dimensions, processTIMEUNIT=True)
-        savepreviewhtml(c1, fname=tab.name + "Preview.html")
+        #savepreviewhtml(c1)
         new_table = c1.topandas()
         df = pd.concat([df, new_table], sort=False)   
 df
@@ -78,7 +78,17 @@ df
 
 # +
 df.rename(columns={'OBS': 'Value', 'DATAMARKER' : 'Marker'}, inplace=True)
-df['Cause of Death'] =  df['Cause of Death'] + ' ' +  df['Cause of Death 2'] 
+
+def cause(row):
+    causes = [c for c in [row['Cause of Death'], row['Cause of Death 2']] if type(c) == str]
+    assert len(causes) != 0, 'Should be at least one cause'
+    reason = ' '.join(causes)
+    if reason == 'All deaths Total':
+        return 'Total'
+    else:
+        return reason
+
+df['Cause of Death'] =  df.apply(cause, axis=1)
 df.drop('Cause of Death 2', axis=1, inplace=True)
 
 from datetime import date
@@ -90,10 +100,6 @@ def to_date(row):
 df['Notification Year'] = pd.to_numeric(df['Notification Year'], downcast='integer')
 df['Notification Day'] = df.apply(to_date, axis=1)
 df.drop('Notification Year', axis=1, inplace=True)
-#df['Notification Year'] = df.apply(lambda x: x['Notification Year'].replace('.0', ''), axis = 1)
-
-## Anticipating the two 'totals' in the dimension 'Cause of Death' will cause a duplicate key error ##
-
 df = df.replace('', np.nan, regex=True)
 df
 # -

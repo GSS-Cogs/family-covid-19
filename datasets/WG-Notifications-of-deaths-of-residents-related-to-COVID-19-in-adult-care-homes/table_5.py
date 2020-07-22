@@ -65,9 +65,10 @@ else:
             HDimConst('Unit', unit),
         ]
         c1 = ConversionSegment(observations, dimensions, processTIMEUNIT=True)
-        savepreviewhtml(c1, fname=tab.name + "Preview.html")
+        savepreviewhtml(c1)
         new_table = c1.topandas()
         df = pd.concat([df, new_table], sort=False)   
+df
 
 
 df.rename(columns={'OBS': 'Value', 'DATAMARKER' : 'Marker'}, inplace=True)
@@ -86,3 +87,6 @@ for column in df:
         df[column] = df[column].map(lambda x: pathify(x))
 
 tidy = df[['Notification Date', 'Location of Death', 'Measure Type', 'Unit', 'Value']]
+tidy
+
+

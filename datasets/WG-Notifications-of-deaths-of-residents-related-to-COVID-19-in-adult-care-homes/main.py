@@ -93,6 +93,7 @@ t2 = tables['table_2 - notifications-of-deaths-of-adult-care-home-residents-with
 t2.drop(columns=['Measure Type', 'Unit'], inplace=True)
 t2.rename(columns={'Notification Date Range': 'Notification Date'}, inplace=True)
 t2['Value'] = pd.to_numeric(t2['Value'], downcast='integer')
+t2['Cause of Death'] = 'covid-total'
 t2 = add_hidden(t2)
 t2
 
@@ -103,6 +104,7 @@ t3.drop(columns=['Marker', 'Measure Type', 'Unit'], inplace=True)
 t3['Value'] = pd.to_numeric(t3['Value'], downcast='integer')
 t3.rename(columns={'Notification Day': 'Notification Date'}, inplace=True)
 t3['Notification Date'] = t3['Notification Date'].map(lambda x: f'day/{x}')
+#t3['Cause of Death'].cat.rename_categories({'total': 'all', 'confirmes': 'covid-confirmed', 'all-deaths-total': 'all'})
 t3 = add_hidden(t3)
 t3
 
@@ -111,13 +113,15 @@ t4.drop(columns=['Measure Type', 'Unit'], inplace=True)
 t4.rename(columns={'Notification Date Range': 'Notification Date'}, inplace=True)
 t4['Value'] = pd.to_numeric(t4['Value'], downcast='integer')
 t4['Notification Date'] = t4['Notification Date'].map(lambda x: f'day/{x}')
+t4['Cause of Death'] = 'covid-total'
 t4 = add_hidden(t4)
 t4
 
 t5 = tables['table_5 - notifications-of-deaths-of-adult-care-home-residents-by-location-of-death-and-date-of-notification'].copy()
 t5.drop(columns=['Measure Type', 'Unit'], inplace=True)
-t5['Value'] = pd.to_numeric(t4['Value'], downcast='integer')
+t5['Value'] = pd.to_numeric(t5['Value'], downcast='integer')
 t5['Notification Date'] = t5['Notification Date'].map(lambda x: f'day/{x}')
+# assume this is all deaths, not just COVID-19 related.
 t5 = add_hidden(t5)
 t5
 
@@ -125,6 +129,7 @@ t6 = tables['table_6 - number-of-notifications-of-deaths-of-adult-care-home-resi
 t6.drop(columns=['Local Authority', 'Unit'], inplace=True)
 t6['Notification Date'] = t6['Notification Date'].map(lambda x: f'day/{x}')
 t6['Value'] = pd.to_numeric(t6['Value'], downcast='integer')
+t6['Cause of Death'] = 'covid-total'
 t6 = add_hidden(t6)
 t6
 
@@ -132,6 +137,7 @@ t7 = tables['table_7 - number-of-notifications-of-deaths-of-adult-care-home-resi
 t7.drop(columns=['Local Authority', 'Unit'], inplace=True)
 t7['Notification Date'] = t7['Notification Date'].map(lambda x: f'day/{x}')
 t7['Value'] = pd.to_numeric(t7['Value'], downcast='integer')
+t7['Cause of Death'] = 'covid-total'
 t7 = add_hidden(t7)
 t7
 
@@ -139,6 +145,7 @@ t8 = tables['table_8 - number-of-notifications-of-deaths-of-adult-care-home-resi
 t8.drop(columns=['Local Authority', 'Unit'], inplace=True)
 t8['Notification Date'] = t8['Notification Date'].map(lambda x: f'day/{x}')
 t8['Value'] = pd.to_numeric(t8['Value'], downcast='integer')
+# assuming all causes
 t8 = add_hidden(t8)
 t8
 
@@ -146,11 +153,22 @@ t9 = tables['table_9 - number-of-notifications-of-deaths-of-adult-care-home-resi
 t9.drop(columns=['Local Authority', 'Unit'], inplace=True)
 t9['Notification Date'] = t9['Notification Date'].map(lambda x: f'day/{x}')
 t9['Value'] = pd.to_numeric(t9['Value'], downcast='integer')
+# assuming all causes
 t9 = add_hidden(t9)
 t9
 
 # +
+#t1['table'] = 1
+#t2['table'] = 2
+#t3['table'] = 3
+#t4['table'] = 4
+#t5['table'] = 5
+#t6['table'] = 6
+#t7['table'] = 7
+#t8['table'] = 8
+#t9['table'] = 9
 merged = pd.concat([t1, t2, t3, t4, t5, t6, t7, t8, t9], sort=False).drop_duplicates()
+#merged = merged.drop_duplicates(subset=merged.columns.difference(['table']))
 merged
 
 #cubes = Cubes('info.json')
@@ -169,7 +187,6 @@ scraper.dataset.family = 'covid-19'
 dataset_path = pathify(os.environ.get('JOB_NAME', 'gss_data/covid-19/' + Path(os.getcwd()).name))
 scraper.set_base_uri('http://gss-data.org.uk')
 scraper.set_dataset_id(dataset_path)
-scraper.dataset.title = 'WG Notifications of deaths of residents related to COVID-19 in adult care homes'
 csvw_transform = CSVWMapping()
 csvw_transform.set_csv(out / 'observations.csv')
 csvw_transform.set_mapping(json.load(open('info.json')))

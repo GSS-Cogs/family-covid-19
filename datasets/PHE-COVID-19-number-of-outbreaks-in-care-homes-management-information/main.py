@@ -205,7 +205,7 @@ except Exception as e:
     min_date1 = ''
     date_range1 = 1
 
-date_range_str1 = 'gregorian-interval/' + str(min_date).replace(' ','T') + '/P' + str(date_range) + 'D'
+date_range_str1 = 'gregorian-interval/' + str(min_date1).replace(' ','T') + '/P' + str(date_range1) + 'D'
 
 try:
     dte = pd.DataFrame(columns=['Per'])
@@ -218,7 +218,7 @@ except Exception as e:
     min_date2 = ''
     date_range2 = 1
 
-date_range_str2 = 'gregorian-interval/' + str(min_date).replace(' ','T') + '/P' + str(date_range) + 'D'
+date_range_str2 = 'gregorian-interval/' + str(min_date2).replace(' ','T') + '/P' + str(date_range2) + 'D'
 # -
 
 for df in tidied_sheets:
@@ -285,10 +285,9 @@ joined_dat = pd.concat([tidy_1_2, tidy_3_4])
 joined_dat = joined_dat.rename(columns={'Categorised by': 'Area Type'})
 
 ##################################################################################################
-##### REMOVING PERCENTAGE VALUES FOR NOW AS JENKINS CAN'T CURRENTLY COPE WITH MORE THAN ONE ######
+# #### REMOVING PERCENTAGE VALUES FOR NOW AS JENKINS CAN'T CURRENTLY COPE WITH MORE THAN ONE ######
 joined_dat = joined_dat[joined_dat['Unit'] != 'percentage']
-##################################################################################################
-
+""
 notes = """
 Weekly number and percentage of care homes reporting a suspected or confirmed outbreak of COVID-19 to 
 PHE by local authorities, regions and PHE centres.
@@ -325,4 +324,7 @@ with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
 
 
 
+
+
+""
 

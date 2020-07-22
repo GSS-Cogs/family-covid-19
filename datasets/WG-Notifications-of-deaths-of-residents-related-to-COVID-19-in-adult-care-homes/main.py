@@ -130,6 +130,7 @@ t6.drop(columns=['Local Authority', 'Unit'], inplace=True)
 t6['Notification Date'] = t6['Notification Date'].map(lambda x: f'day/{x}')
 t6['Value'] = pd.to_numeric(t6['Value'], downcast='integer')
 t6['Cause of Death'] = 'covid-total'
+t6['Location of Death'] = 'at-the-service'
 t6 = add_hidden(t6)
 t6
 
@@ -154,26 +155,35 @@ t9.drop(columns=['Local Authority', 'Unit'], inplace=True)
 t9['Notification Date'] = t9['Notification Date'].map(lambda x: f'day/{x}')
 t9['Value'] = pd.to_numeric(t9['Value'], downcast='integer')
 # assuming all causes
+t9['Location of Death'] = 'at-the-service'
 t9 = add_hidden(t9)
 t9
 
 # +
-#t1['table'] = 1
-#t2['table'] = 2
-#t3['table'] = 3
-#t4['table'] = 4
-#t5['table'] = 5
-#t6['table'] = 6
-#t7['table'] = 7
-#t8['table'] = 8
-#t9['table'] = 9
+t1['table'] = 1
+t2['table'] = 2
+t3['table'] = 3
+t4['table'] = 4
+t5['table'] = 5
+t6['table'] = 6
+t7['table'] = 7
+t8['table'] = 8
+t9['table'] = 9
 merged = pd.concat([t1, t2, t3, t4, t5, t6, t7, t8, t9], sort=False).drop_duplicates()
-#merged = merged.drop_duplicates(subset=merged.columns.difference(['table']))
+merged = merged.drop_duplicates(subset=merged.columns.difference(['table']))
 merged
 
 #cubes = Cubes('info.json')
 #cubes.add_cube(scraper, merged), scraper.dataset.title)
 #cubes.output_all()
+
+# +
+out = Path('out')
+out.mkdir(exist_ok=True)
+
+merged[merged.duplicated(subset=merged.columns.difference(['table', 'Value']))].to_csv(out / 'multi-valued-observations.csv')
+merged.drop(columns=['table'], inplace=True)
+merged = merged.drop_duplicates(subset=merged.columns.difference(['table', 'Value']), keep='last')
 
 # +
 import os

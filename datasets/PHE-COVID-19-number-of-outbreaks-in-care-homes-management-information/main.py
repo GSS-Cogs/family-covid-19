@@ -186,12 +186,40 @@ for name, tab in tabs.items():
         trace.with_preview(tidy_sheet)
         savepreviewhtml(tidy_sheet) 
         trace.store("sheets_3_4", tidy_sheet.topandas())
-        
+
 
 # +
 df_1_2 = trace.combine_and_trace(datasetTitle, "sheets_1_2")
 df_3_4 = trace.combine_and_trace(datasetTitle, "sheets_3_4")
 tidied_sheets = [df_1_2, df_3_4]
+
+# Get Min and Max dates to calculate overall range
+try:
+    dte = pd.DataFrame(columns=['Per'])
+    dte['Per'] = df_1_2['Week commencing'].unique()
+    dte['Per'] = pd.to_datetime(dte['Per'][dte['Per'] != 'All'])
+    min_date1 = dte['Per'].min()
+    date_range1 = abs((dte['Per'].max() - dte['Per'].min()).days)
+except Exception as e:
+    print(str(e))
+    min_date1 = ''
+    date_range1 = 1
+
+date_range_str1 = 'gregorian-interval/' + str(min_date).replace(' ','T') + '/P' + str(date_range) + 'D'
+
+try:
+    dte = pd.DataFrame(columns=['Per'])
+    dte['Per'] = df_3_4['Week commencing'].unique()
+    dte['Per'] = pd.to_datetime(dte['Per'][dte['Per'] != 'All'])
+    min_date2 = dte['Per'].min()
+    date_range2 = abs((dte['Per'].max() - dte['Per'].min()).days)
+except Exception as e:
+    print(str(e))
+    min_date2 = ''
+    date_range2 = 1
+
+date_range_str2 = 'gregorian-interval/' + str(min_date).replace(' ','T') + '/P' + str(date_range) + 'D'
+# -
 
 for df in tidied_sheets:
     df.rename(columns={'OBS' : 'Value'}, inplace=True)
@@ -202,13 +230,99 @@ for df in tidied_sheets:
     df['Week commencing'] =  df["Week commencing"].apply(date_time)
     trace.Week_commencing("Renaming label to Period")
     df.rename(columns={'Week commencing' : 'Period'}, inplace=True)
-# -
 
 tidy_1_2 = df_1_2[["Period", 'Value', "Categorised by", "Region","Area code", "Measure Type", "Unit", "All outbreaks", "Number of care homes", "Percentage of care homes that have reported an outbreak"]]
 tidy_3_4 = df_3_4[["Period", 'Value', "Categorised by", "Region","Area code", "Measure Type", "Unit", "All outbreaks", "Number of care homes"]]
 
 out = Path('out')
 out.mkdir(exist_ok=True)
-title = pathify(datasetTitle)
-tidy_1_2.drop_duplicates().to_csv(out / f'{title}_1.csv', index = False)
-tidy_3_4.drop_duplicates().to_csv(out / f'{title}_2.csv', index = False)
+#title = pathify(datasetTitle)
+#tidy_1_2.drop_duplicates().to_csv(out / f'{title}_1.csv', index = False)
+#tidy_3_4.drop_duplicates().to_csv(out / f'{title}_2.csv', index = False)
+
+main_dat1 = df_1_2[['Period', 'Value', 'Categorised by', 'Area code', 'Measure Type', 'Unit', 'Number of care homes']]
+temp_dat1 = df_1_2[['Period', 'Categorised by', 'Area code', 'Measure Type', 'Unit', 'All outbreaks', 'Number of care homes']]
+temp_dat2 = df_1_2[['Period', 'Categorised by', 'Area code', 'Measure Type', 'Unit', 'Percentage of care homes that have reported an outbreak', 'Number of care homes']]
+
+main_dat1.head(5)
+
+# +
+temp_dat1['Period'] = date_range_str1
+temp_dat2['Period'] = date_range_str1
+temp_dat1['Measure Type'] = 'care-home-covid-19-outbreaks'
+temp_dat2['Measure Type'] = 'care-home-covid-19-outbreaks'
+main_dat1['Measure Type'] = 'care-home-covid-19-outbreaks'
+temp_dat2['Unit'] = 'percentage'
+temp_dat1 = temp_dat1.rename(columns={'All outbreaks': 'Value'})
+temp_dat2 = temp_dat2.rename(columns={'Percentage of care homes that have reported an outbreak': 'Value'})
+
+cols = ['Period','Categorised by','Area code','Number of care homes','Measure Type','Unit','Value']
+main_dat1 = main_dat1[cols]
+temp_dat1 = temp_dat1[cols]
+temp_dat2 = temp_dat2[cols]
+# -
+
+tidy_1_2 = pd.concat([main_dat1, temp_dat1, temp_dat2])
+del main_dat1, temp_dat1, temp_dat2
+
+main_dat1 = df_3_4[['Period', 'Value', 'Categorised by', 'Area code', 'Measure Type', 'Unit', 'Number of care homes']]
+temp_dat1 = df_3_4[['Period', 'Categorised by', 'Area code', 'Measure Type', 'Unit', 'All outbreaks', 'Number of care homes']]
+
+# +
+temp_dat1['Period'] = date_range_str2
+temp_dat1['Measure Type'] = 'care-home-covid-19-outbreaks'
+main_dat1['Measure Type'] = 'care-home-covid-19-outbreaks'
+temp_dat1 = temp_dat1.rename(columns={'All outbreaks': 'Value'})
+
+main_dat1 = main_dat1[cols]
+temp_dat1 = temp_dat1[cols]
+# -
+
+tidy_3_4 = pd.concat([main_dat1, temp_dat1])
+del main_dat1, temp_dat1
+
+joined_dat = pd.concat([tidy_1_2, tidy_3_4])
+joined_dat = joined_dat.rename(columns={'Categorised by': 'Area Type'})
+
+##################################################################################################
+##### REMOVING PERCENTAGE VALUES FOR NOW AS JENKINS CAN'T CURRENTLY COPE WITH MORE THAN ONE ######
+joined_dat = joined_dat[joined_dat['Unit'] != 'percentage']
+##################################################################################################
+
+notes = """
+Weekly number and percentage of care homes reporting a suspected or confirmed outbreak of COVID-19 to 
+PHE by local authorities, regions and PHE centres.
+"""
+
+# Output the data to CSV
+csvName = 'observations.csv'
+out = Path('out')
+out.mkdir(exist_ok=True)
+joined_dat.drop_duplicates().to_csv(out / csvName, index = False)
+
+# +
+scrape.dataset.family = 'covid-19'
+scrape.dataset.description = 'PHE COVID-19 number of outbreaks in care homes – Management Information/n' + notes
+
+# Output CSV-W metadata (validation, transform and DSD).
+# Output dataset metadata separately for now.
+
+import os
+from urllib.parse import urljoin
+
+dataset_path = pathify(os.environ.get('JOB_NAME', 'gss_data/covid-19/' + Path(os.getcwd()).name)) + '-' + pathify(csvName)
+scrape.set_base_uri('http://gss-data.org.uk')
+scrape.set_dataset_id(dataset_path)
+scrape.dataset.title = 'PHE COVID-19 number of outbreaks in care homes – Management Information'
+csvw_transform = CSVWMapping()
+csvw_transform.set_csv(out / csvName)
+csvw_transform.set_mapping(json.load(open('info.json')))
+csvw_transform.set_dataset_uri(urljoin(scrape._base_uri, f'data/{scrape._dataset_id}'))
+csvw_transform.write(out / f'{csvName}-metadata.json')
+with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
+    metadata.write(scrape.generate_trig())
+# -
+
+
+
+

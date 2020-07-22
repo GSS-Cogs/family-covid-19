@@ -124,19 +124,12 @@ for t in all_dat:
 
 joined_dat = pd.concat([all_dat[0], all_dat[1], all_dat[2], all_dat[3], all_dat[4], all_dat[5], all_dat[6]], sort=True)
 
-# +
-#print(str(all_dat[0].count()))
-#print(str(all_dat[1].count()))
-#print(str(all_dat[2].count()))
-#print(str(all_dat[3].count()))
-#print(str(all_dat[4].count()))
-#print(str(all_dat[5].count()))
-#print(str(all_dat[6].count()))
-#print(str(joined_dat.count()))
+joined_dat['Local Government District'] = joined_dat['Local Government District'].apply(pathify)
+joined_dat['Measure Type'] = joined_dat['Measure Type'].apply(pathify)
+joined_dat['Unit'] = joined_dat['Unit'].apply(pathify)
+joined_dat.head(10)
 
-# +
-#test_dat = joined_dat
-# -
+
 
 # Sex Mapping
 joined_dat = joined_dat.rename(columns={'Gender': 'Sex'})
@@ -246,6 +239,10 @@ joined_dat = joined_dat[['Period','Location of Death','Measure Type','Unit','Mar
 
 joined_dat['Unit'] = 'Count'
 
+joined_dat['Measure Type'] = joined_dat['Measure Type'].apply(pathify)
+joined_dat['Unit'] = joined_dat['Unit'].apply(pathify)
+joined_dat.head(10)
+
 notes = """
 P Weekly published data are provisional.
 1 This data is based on the actual date of death, from those deaths registered by GRO up to 1st July 2020. All data in this table are subject to change, as some deaths will have occurred but haven’t been registered yet.  The first covid-19 death in Northern Ireland occurred on 18th March 2020.
@@ -281,24 +278,5 @@ csvw_transform.set_dataset_uri(urljoin(scrape._base_uri, f'data/{scrape._dataset
 csvw_transform.write(out / f'{csvName}-metadata.json')
 with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
     metadata.write(scrape.generate_trig())
-# +
-#dataset_path
-
-# +
-#for t in all_dat:
-#    print(list(t.columns))
-#    print('-----------------------------------------')
-
-# +
-#for t in all_dat:
-#    print(list(t['Period'].unique()))
-#    print('---------------------------------------------')
 # -
-
-
-
-# +
-#help(scrape)
-# -
-
 

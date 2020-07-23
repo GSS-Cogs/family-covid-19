@@ -1,0 +1,4 @@
+Label,Notation,Parent Notation,Sort Priority
+Total,total,,0
+With nursing,with-nursing,total,1
+Without nursing,without-nursing,total,2

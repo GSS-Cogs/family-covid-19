@@ -176,7 +176,7 @@ for tab in tabs:
         trace.with_preview(tidy_sheet)
        # savepreviewhtml(tidy_sheet) 
         trace.store("combined_dataframe", tidy_sheet.topandas())
-        
+
 
 # +
 df = trace.combine_and_trace(datacube_name, "combined_dataframe")
@@ -214,7 +214,7 @@ notes = """
 
 # Output Tidy data : tables 1,2,3
 
-# +
+"""
 out = Path('out')
 out.mkdir(exist_ok=True)
 title = pathify(datasetTitle)
@@ -227,8 +227,12 @@ df.drop_duplicates().to_csv(out / f'{title}.csv', index = False)
 with open(out / f'{title}.csv-metadata.trig', 'wb') as metadata:
     metadata.write(scraper.generate_trig())
 trace.output()
-tidy
-# -
+"""
+
+df = df.rename(columns={'Date of notification': 'Period', 'Death Causes': 'Cause of Death', 'Place of Occurrence': 'Location of Death'})
+df['Period'] = 'gregorian-interval/' + df['Period'].str.strip() + 'T00:00:00/P1D'
+df = df[df['Location of Death'] != 'Location not stated']
+df1 = df
 
 # Table 4
 
@@ -243,12 +247,13 @@ columns=["Week Ending", "Place of Occurrence","Death Causes","Local Authority", 
 trace.start(datacube_name, tab, columns, scraper.distributions[0].downloadURL)
 
 #Week ending
-week_ending = tab.filter(contains_string('Week ending')).shift(1,0).expand(RIGHT).is_not_blank()
+week_ending = tab.filter(contains_string('Week Ending')).shift(1,0).expand(RIGHT).is_not_blank()
+print(week_ending)
 trace.Week_Ending('Date of notification given at cell range: {}', var = excelRange(week_ending))
         
 death_cause_options = ['All deaths', 'Deaths involving COVID-19']
-death_causes = tab.filter(contains_string('Week ending')).expand(DOWN).one_of(death_cause_options)
-trace.Death_Causes('Death Cuases given at cell range: {}', var = excelRange(death_causes)) 
+death_causes = tab.filter(contains_string('All deaths')).expand(DOWN).one_of(death_cause_options)
+trace.Death_Causes('Death Causes given at cell range: {}', var = excelRange(death_causes)) 
         
 place_of_occurrrence = tab.filter(contains_string('All deaths')).expand(DOWN).is_not_blank() - death_causes
 trace.Place_of_Occurrence('Place of Occurrence given at cell range: {}', var = excelRange(place_of_occurrrence))
@@ -270,10 +275,11 @@ dimensions = [
     HDimConst('Unit', unit),
     ]
 tidy_sheet = ConversionSegment(tab, dimensions, observations)
+
 trace.with_preview(tidy_sheet)
-#savepreviewhtml(tidy_sheet) 
+savepreviewhtml(tidy_sheet) 
 trace.store("combined_dataframe", tidy_sheet.topandas())
-        
+
 
 # +
 df = trace.combine_and_trace(datacube_name, "combined_dataframe")
@@ -309,19 +315,84 @@ notes = """
 4. Figures don't include 10 April 2020 as the first full week of data for deaths involving COVID-19 began on 11 April 2020.
 """
 
-# Output Tidy data : Table 4
+from datetime import datetime, timedelta
+df = df.rename(columns={'Week Ending': 'Period', 'Death Causes': 'Cause of Death', 'Place of Occurrence': 'Location of Death'})
+df['Period'] = pd.to_datetime(df['Period'])
+df['Period'] = df['Period'] - timedelta(days=6)
+df['Period'] = df['Period'].dt.strftime('%Y-%m-%d')
+df['Period'] = 'gregorian-interval/' + df['Period'].str.strip() + 'T00:00:00/P7D'
+df2 = df
+
+cols = ['Period', 'Location of Death', 'Local Authority', 'Cause of Death', 'Measure Type', 'Unit', 'Value']
+
+df1 = df1[cols]
+df2 = df2[cols]
 
 # +
+#print(df1.columns)
+#print(df2.columns)
+# -
+
+joined_dat = pd.concat([df1, df2])
+
+from rdflib import Graph
+import rdflib as rd
+g = Graph()
+g.parse("../../Reference/reference-geography.ttl", format="ttl")
+
+laslist = list(joined_dat['Local Authority'].unique())
+las = pd.DataFrame(joined_dat['Local Authority'].unique())
+las.rename(columns={0 : 'Category'}, inplace=True)
+las['Code'] = ''
+
+for la in laslist:
+    q = (f"SELECT ?s ?p ?o WHERE  {{ ?s ?p '{la.strip()}' . ?s <http://www.w3.org/2000/01/rdf-schema#label> ?o . }}")
+    try:
+        qres = g.query(q)
+        for row in qres:
+            las['Code'][las['Category'] == la.strip()] = row[2].strip()
+            break
+    except Exception as e:
+        print("No Match!")
+
+joined_dat['Local Authority'] = joined_dat['Local Authority'].map(las.set_index('Category')['Code'])
+
+#joined_dat['Local Authority'].unique()
+joined_dat['Location of Death'] = joined_dat['Location of Death'].apply(pathify)
+joined_dat['Local Authority'] = joined_dat['Local Authority'].apply(pathify)
+joined_dat['Cause of Death'] = joined_dat['Cause of Death'].apply(pathify)
+joined_dat['Measure Type'] = joined_dat['Measure Type'].apply(pathify)
+joined_dat['Unit'] = joined_dat['Unit'].apply(pathify)
+
+# Output the data to CSV
+csvName = 'observations.csv'
 out = Path('out')
 out.mkdir(exist_ok=True)
-title = pathify(datasetTitle)
-scraper.dataset.comment = notes
-df.drop_duplicates().to_csv(out / f'{title}.csv', index = False)
+joined_dat.drop_duplicates().to_csv(out / csvName, index = False)
+
+# +
 scraper.dataset.family = 'covid-19'
+scraper.dataset.description = 'ONS Number of deaths in care homes notified to the Care Quality Commission, England.\n ' + notes
+
+# Output CSV-W metadata (validation, transform and DSD).
+# Output dataset metadata separately for now.
 
 import os
-df.drop_duplicates().to_csv(out / f'{title}.csv', index = False)
-with open(out / f'{title}.csv-metadata.trig', 'wb') as metadata:
+from urllib.parse import urljoin
+
+dataset_path = pathify(os.environ.get('JOB_NAME', 'gss_data/covid-19/' + Path(os.getcwd()).name)) + '-' + pathify(csvName)
+scraper.set_base_uri('http://gss-data.org.uk')
+scraper.set_dataset_id(dataset_path)
+#### scraper.dataset.title = 'ONS Number of deaths in care homes notified to the Care Quality Commission'
+csvw_transform = CSVWMapping()
+csvw_transform.set_csv(out / csvName)
+csvw_transform.set_mapping(json.load(open('info.json')))
+csvw_transform.set_dataset_uri(urljoin(scraper._base_uri, f'data/{scraper._dataset_id}'))
+csvw_transform.write(out / f'{csvName}-metadata.json')
+with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
     metadata.write(scraper.generate_trig())
-trace.output()
-tidy
+# -
+
+joined_dat.head(6)
+
+

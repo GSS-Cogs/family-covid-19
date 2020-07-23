@@ -51,7 +51,22 @@
             "Priority"
         ],
         "airtable": "recLVXRitdNRbhit5",
-        "main_issue": 89
+        "main_issue": 89,
+        "columns": {
+            "Period": {
+                "dimension": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
+                "value": "http://reference.data.gov.uk/id/day/{period}"
+            },
+            "Local Authority": {
+                "dimension": "http://purl.org/linked-data/sdmx/2009/dimension#refArea",
+                "value": "http://statistics.data.gov.uk/id/statistical-geography/{local_authority}"
+            },
+            "Value": {
+                "unit": "http://gss-data.org.uk/def/concept/measurement-units/deaths",
+                "measure": "http://gss-data.org.uk/def/measure/cumulative-count",
+                "datatype": "double"
+            }
+        }
     },
     "sizingNotes": "Simple table structure with footnotes",
     "notes": ""

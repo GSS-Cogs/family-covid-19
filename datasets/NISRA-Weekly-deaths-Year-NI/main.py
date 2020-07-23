@@ -191,9 +191,6 @@ with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
 del joined_dat
 del all_dat[7]['Week of Death']
 del all_dat[7]['Covid-19 Deaths']
-#### REMOVE ROWS WITH 'CUMULATIVE COUNT' IN THE UNIT COLUMN AS CAUSING DUPLICATES IN JENKINS AND CAN BE DERIVED ANYWAY
-all_dat[7] = all_dat[7][all_dat[7]['Unit'] == 'Count']
-####################################################################################################
 all_dat[7].insert(3,'Location of Death', 'all')
 
 all_dat[7].head(5)
@@ -221,6 +218,11 @@ all_dat[10]['Place of Death'] = all_dat[10]['Place of Death'].replace('other4','
 all_dat[10]['Place of Death'] = all_dat[10]['Place of Death'].replace('cumulative-total','all')
 all_dat[10] = all_dat[10].rename(columns={'Place of Death': 'Location of Death'})
 
+
+# +
+#all_dat[10].head(50)
+# -
+
 cols = ['Period', 'Location of Death', 'Measure Type', 'Unit', 'Marker', 'Value']
 for i in range(7,10):
     try:
@@ -230,6 +232,11 @@ for i in range(7,10):
         break
 
 joined_dat = pd.concat([all_dat[7], all_dat[8], all_dat[9], all_dat[10]])
+
+#### REMOVE ROWS WITH 'CUMULATIVE COUNT' IN THE UNIT COLUMN AS CAUSING DUPLICATES IN JENKINS AND CAN BE DERIVED ANYWAY
+joined_dat = joined_dat[joined_dat['Unit'] == 'Count']
+####################################################################################################
+joined_dat['Unit'].unique()
 
 joined_dat['Measure Type'] = 'Deaths'
 

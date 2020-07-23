@@ -105,7 +105,7 @@ del all_dat[5]['Week of Death']
 all_dat[6].insert(3,'Gender', 'total')
 all_dat[6].insert(3,'Age', 'All')
 all_dat[6].insert(3,'Registered Death Type', 'covid-19-registered-deaths')
-all_dat[6].insert(3,'Location of Death', 'all')
+all_dat[6].insert(3,'Location of Death', 'care-home')
 del all_dat[6]['Week of Death']
 
 # +
@@ -127,9 +127,7 @@ joined_dat = pd.concat([all_dat[0], all_dat[1], all_dat[2], all_dat[3], all_dat[
 joined_dat['Local Government District'] = joined_dat['Local Government District'].apply(pathify)
 joined_dat['Measure Type'] = joined_dat['Measure Type'].apply(pathify)
 joined_dat['Unit'] = joined_dat['Unit'].apply(pathify)
-joined_dat.head(10)
-
-
+#joined_dat.head(10)
 
 # Sex Mapping
 joined_dat = joined_dat.rename(columns={'Gender': 'Sex'})
@@ -179,7 +177,7 @@ from urllib.parse import urljoin
 dataset_path = pathify(os.environ.get('JOB_NAME', 'gss_data/covid-19/' + Path(os.getcwd()).name)) + '-' + pathify(csvName)
 scrape.set_base_uri('http://gss-data.org.uk')
 scrape.set_dataset_id(dataset_path)
-scrape.dataset.title = 'NISRA Weekly Deaths - Notification Date of Death including COVID-19'
+scrape.dataset.title = 'Weekly Deaths - Notification Date of Death including COVID-19'
 csvw_transform = CSVWMapping()
 csvw_transform.set_csv(out / csvName)
 csvw_transform.set_mapping(json.load(open('info.json')))
@@ -194,7 +192,9 @@ del all_dat[7]['Covid-19 Deaths']
 all_dat[7].insert(3,'Location of Death', 'all')
 all_dat[7].insert(3,'Person Type', 'all')
 
-all_dat[7].head(5)
+# +
+#all_dat[7].head(5)
+# -
 
 
 all_dat[8]['Place of Death'] = all_dat[8]['Place of Death'].replace('other3','other')
@@ -202,7 +202,9 @@ del all_dat[8]['Week of Death']
 all_dat[8] = all_dat[8].rename(columns={'Place of Death': 'Location of Death'})
 all_dat[8].insert(3,'Person Type', 'all')
 
-all_dat[8].head(5)
+# +
+#all_dat[8].head(5)
+# -
 
 all_dat[9]['Place of Death'] = all_dat[9]['Place of Death'].replace('care-home3a','care-home')
 all_dat[9]['Place of Death'] = all_dat[9]['Place of Death'].replace('hospital3b','hospital')
@@ -212,7 +214,9 @@ all_dat[9] = all_dat[9].rename(columns={'Place of Death': 'Location of Death'})
 del all_dat[9]['Week of Death']
 all_dat[9].insert(3,'Person Type', 'care-home-residents')
 
-all_dat[9].head(5)
+# +
+#all_dat[9].head(5)
+# -
 
 all_dat[10]['Place of Death'] = all_dat[10]['Place of Death'].replace('care-home3','care-home')
 all_dat[10]['Place of Death'] = all_dat[10]['Place of Death'].replace('other4','other')
@@ -220,7 +224,9 @@ all_dat[10]['Place of Death'] = all_dat[10]['Place of Death'].replace('cumulativ
 all_dat[10] = all_dat[10].rename(columns={'Place of Death': 'Location of Death'})
 all_dat[10].insert(3,'Person Type', 'all')
 
-all_dat[10].head(50)
+# +
+#all_dat[10].head(50)
+# -
 
 cols = ['Period', 'Location of Death', 'Person Type', 'Measure Type', 'Unit', 'Marker', 'Value']
 for i in range(7,10):
@@ -235,7 +241,7 @@ joined_dat = pd.concat([all_dat[7], all_dat[8], all_dat[9], all_dat[10]])
 #### REMOVE ROWS WITH 'CUMULATIVE COUNT' IN THE UNIT COLUMN AS CAUSING DUPLICATES IN JENKINS AND CAN BE DERIVED ANYWAY
 joined_dat = joined_dat[joined_dat['Unit'] == 'Count']
 ####################################################################################################
-joined_dat['Unit'].unique()
+#joined_dat['Unit'].unique()
 
 joined_dat['Measure Type'] = 'Deaths'
 
@@ -248,7 +254,7 @@ joined_dat['Unit'] = 'Count'
 
 joined_dat['Measure Type'] = joined_dat['Measure Type'].apply(pathify)
 joined_dat['Unit'] = joined_dat['Unit'].apply(pathify)
-joined_dat.head(10)
+#joined_dat.head(10)
 
 notes = """
 P Weekly published data are provisional.
@@ -277,7 +283,7 @@ from urllib.parse import urljoin
 dataset_path = pathify(os.environ.get('JOB_NAME', 'gss_data/covid-19/' + Path(os.getcwd()).name)) + '-' + pathify(csvName)
 scrape.set_base_uri('http://gss-data.org.uk')
 scrape.set_dataset_id(dataset_path)
-scrape.dataset.title = 'NISRA Weekly Deaths - Date of Death including COVID-19'
+scrape.dataset.title = 'Weekly Deaths - Date of Death including COVID-19'
 csvw_transform = CSVWMapping()
 csvw_transform.set_csv(out / csvName)
 csvw_transform.set_mapping(json.load(open('info.json')))

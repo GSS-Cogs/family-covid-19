@@ -30,7 +30,7 @@
         },
         "required": false,
         "propertyUrl": "skos:broader",
-        "valueUrl": "#concept/cause-of-death/{parent_notation}"
+        "valueUrl": "http://gss-data.org.uk/data/gss_data/covid-19/wg-notifications-of-deaths-of-residents-related-to-covid-19-in-adult-care-homes#concept/cause-of-death/{parent_notation}"
       },
       {
         "titles": "Sort Priority",

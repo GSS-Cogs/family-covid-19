@@ -192,6 +192,7 @@ del joined_dat
 del all_dat[7]['Week of Death']
 del all_dat[7]['Covid-19 Deaths']
 all_dat[7].insert(3,'Location of Death', 'all')
+all_dat[7].insert(3,'Person Type', 'all')
 
 all_dat[7].head(5)
 
@@ -199,6 +200,7 @@ all_dat[7].head(5)
 all_dat[8]['Place of Death'] = all_dat[8]['Place of Death'].replace('other3','other')
 del all_dat[8]['Week of Death']
 all_dat[8] = all_dat[8].rename(columns={'Place of Death': 'Location of Death'})
+all_dat[8].insert(3,'Person Type', 'all')
 
 all_dat[8].head(5)
 
@@ -208,22 +210,19 @@ all_dat[9]['Place of Death'] = all_dat[9]['Place of Death'].replace('-of-all-cov
 all_dat[9]['Place of Death'] = all_dat[9]['Place of Death'].replace('-of-all-covid-19-deaths','all')
 all_dat[9] = all_dat[9].rename(columns={'Place of Death': 'Location of Death'})
 del all_dat[9]['Week of Death']
+all_dat[9].insert(3,'Person Type', 'care-home-residents')
 
-# +
-#all_dat[9].head(50)
-# -
+all_dat[9].head(5)
 
 all_dat[10]['Place of Death'] = all_dat[10]['Place of Death'].replace('care-home3','care-home')
 all_dat[10]['Place of Death'] = all_dat[10]['Place of Death'].replace('other4','other')
 all_dat[10]['Place of Death'] = all_dat[10]['Place of Death'].replace('cumulative-total','all')
 all_dat[10] = all_dat[10].rename(columns={'Place of Death': 'Location of Death'})
+all_dat[10].insert(3,'Person Type', 'all')
 
+all_dat[10].head(50)
 
-# +
-#all_dat[10].head(50)
-# -
-
-cols = ['Period', 'Location of Death', 'Measure Type', 'Unit', 'Marker', 'Value']
+cols = ['Period', 'Location of Death', 'Person Type', 'Measure Type', 'Unit', 'Marker', 'Value']
 for i in range(7,10):
     try:
         all_dat[i] = all_dat[i][cols]
@@ -243,7 +242,7 @@ joined_dat['Measure Type'] = 'Deaths'
 # Hopefully all NaN values have been accounted for in the Marker column
 joined_dat['Value'] = joined_dat['Value'].replace(np.nan,0)
 
-joined_dat = joined_dat[['Period','Location of Death','Measure Type','Unit','Marker','Value']]
+joined_dat = joined_dat[['Period','Location of Death','Person Type','Measure Type','Unit','Marker','Value']]
 
 joined_dat['Unit'] = 'Count'
 
@@ -287,4 +286,6 @@ csvw_transform.write(out / f'{csvName}-metadata.json')
 with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
     metadata.write(scrape.generate_trig())
 # -
+
+
 

@@ -191,11 +191,12 @@ with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
 del joined_dat
 del all_dat[7]['Week of Death']
 del all_dat[7]['Covid-19 Deaths']
+#### REMOVE ROWS WITH 'CUMULATIVE COUNT' IN THE UNIT COLUMN AS CAUSING DUPLICATES IN JENKINS AND CAN BE DERIVED ANYWAY
+all_dat[7] = all_dat[7][all_dat[7]['Unit'] == 'Count']
+####################################################################################################
 all_dat[7].insert(3,'Location of Death', 'all')
 
-# +
-#all_dat[7].head(5)
-# -
+all_dat[7].head(5)
 
 
 all_dat[8]['Place of Death'] = all_dat[8]['Place of Death'].replace('other3','other')

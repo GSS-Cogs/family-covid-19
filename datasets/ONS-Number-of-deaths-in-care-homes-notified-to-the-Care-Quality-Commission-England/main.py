@@ -212,27 +212,25 @@ notes = """
 3. Figures are for persons who were resident in and died in a care home.
 """
 
-# Output Tidy data : tables 1,2,3
+# +
+dte = pd.DataFrame(columns=['Per'])
+dte['Per'] = pd.to_datetime(df['Date of notification'][df['Date of notification'] != 'All Deaths'].unique())
+min_date = dte['Per'].min()
+date_range = abs((dte['Per'].max() - dte['Per'].min()).days)
 
-"""
-out = Path('out')
-out.mkdir(exist_ok=True)
-title = pathify(datasetTitle)
-scraper.dataset.comment = notes
-df.drop_duplicates().to_csv(out / f'{title}.csv', index = False)
-scraper.dataset.family = 'covid-19'
-
-import os
-df.drop_duplicates().to_csv(out / f'{title}.csv', index = False)
-with open(out / f'{title}.csv-metadata.trig', 'wb') as metadata:
-    metadata.write(scraper.generate_trig())
-trace.output()
-"""
+print('Date range from Table_02 script: ' + str(date_range) + ' Days')
+print('Minimum date from Table_02 script: ' + str(min_date))
+date_range_str = 'gregorian-interval/' + str(min_date).replace(' ','T') + '/P' + str(date_range) + 'D'
+print('Formatted date range string: ' + date_range_str)
+df = df.rename(columns={'Date of notification': 'Period', 'Death Causes': 'Cause of Death', 'Place of Occurrence': 'Location of Death'})
+# -
 
 df = df.rename(columns={'Date of notification': 'Period', 'Death Causes': 'Cause of Death', 'Place of Occurrence': 'Location of Death'})
 df['Period'] = 'gregorian-interval/' + df['Period'].str.strip() + 'T00:00:00/P1D'
 df = df[df['Location of Death'] != 'Location not stated']
 df1 = df
+
+df['Period'][df['Period'].str.contains('All Deaths')] = date_range_str
 
 # Table 4
 
@@ -391,8 +389,12 @@ csvw_transform.set_dataset_uri(urljoin(scraper._base_uri, f'data/{scraper._datas
 csvw_transform.write(out / f'{csvName}-metadata.json')
 with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
     metadata.write(scraper.generate_trig())
-# -
 
-joined_dat.head(6)
+# +
+#joined_dat.head(6)
+
+# +
+#joined_dat['Period'].unique()
+# -
 
 

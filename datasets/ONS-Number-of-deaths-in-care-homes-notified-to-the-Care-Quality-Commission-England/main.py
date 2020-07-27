@@ -401,9 +401,9 @@ print(codelistcreation)
 codeclass = CSVCodelists()
 for cl in codelistcreation:
     if cl in df.columns:
-        df[cl] = df[cl].str.replace("-"," ")
-        df[cl] = df[cl].str.capitalize()
-        codeclass.create_codelists(pd.DataFrame(df[cl]), 'codelists', scraper.dataset.family, Path(os.getcwd()).name)
+        joined_dat[cl] = joined_dat[cl].str.replace("-"," ")
+        joined_dat[cl] = joined_dat[cl].str.capitalize()
+        codeclass.create_codelists(pd.DataFrame(joined_dat[cl]), 'codelists', scraper.dataset.family, Path(os.getcwd()).name)
 
 
 

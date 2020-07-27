@@ -59,7 +59,7 @@ class Geography(object):
 region_overrides = {
      'England and Wales': 'K04000001',
      'England': 'E92000001',
-     'Wales': 'E05001035',
+     'Wales': 'W92000004',
      'East': 'E12000006'
 }
 get_regions = Geography("https://api.beta.ons.gov.uk/v1/code-lists/regions/editions/2017/codes", 
@@ -68,7 +68,7 @@ get_regions = Geography("https://api.beta.ons.gov.uk/v1/code-lists/regions/editi
 local_authority_overrides = {
      'England and Wales': 'K04000001',
      'England': 'E92000001',
-     'Wales': 'E05001035'
+     'Wales': 'W92000004'
 }
 get_local_authorities = Geography("https://api.beta.ons.gov.uk/v1/code-lists/local-authority/editions/2016/codes", 
                                 overrides=local_authority_overrides)
@@ -336,6 +336,8 @@ trace = TransformTrace()
 footnotes_dict = {}
 comments = {}
 # -
+all_dat = []
+
 # ## Transform: Table 1
 
 for tab in tabs_from_named(tabs, "Table 1"):
@@ -408,7 +410,7 @@ for tab in tabs_from_named(tabs, "Table 1"):
         trace.Area("Converted all area labels to 9 digit ONS codes.")
         
         df.to_csv("{}.csv".format(pathify(title)), index=False)
-        
+        all_dat.append(df)
     except Exception as e:
         raise Exception(f"Problem encountered processing cube from tab '{tab.name}'.") from e
 
@@ -420,7 +422,7 @@ for tab in tabs_from_named(tabs, "Table 2"):
         title, footnotes = get_title_and_footnotes(tab)
         footnotes_dict[tab.name] = footnotes
         
-        columns=['Sex', 'Age', 'Area', 'Period']
+        columns=['Sex', 'Age', 'Area', 'Period', 'Cause of Death']
         trace.start(title, tab, columns, source_sheet)
         
         # Start with the first persons cell
@@ -430,6 +432,12 @@ for tab in tabs_from_named(tabs, "Table 2"):
         sex = first_persons_cell.expand(RIGHT).is_not_blank()
         assert_one_of(sex, "sex", ["Persons", "Male", "Female"])
         trace.Sex("{} Get dimension 'Sex', with values 'Persons', 'Male' and 'Female'", var=excelRange(sex))
+        
+        # Cause of Death
+        causeofdeath = tab.excel_ref('B5').expand(RIGHT).is_not_blank()
+        assert_one_of(causeofdeath, "Cause of death", ["All deaths", "Deaths involving COVID-19", "Proportion of deaths involving COVID-19 (%)"])
+        #trace.causeofdeath("{} Get dimension 'Cause of Death' with values 'All deaths', 'Deaths involving COVID-19', "
+        #           "'Proportion of deaths involving COVID-19 (%)'", var=excelRange(causeofdeath))
         
         # Area
         area = first_persons_cell.shift(UP).shift(UP).expand(RIGHT).is_not_blank()
@@ -451,6 +459,7 @@ for tab in tabs_from_named(tabs, "Table 2"):
             HDim(sex, "Sex", DIRECTLY, ABOVE),
             HDim(age, "Age", DIRECTLY, LEFT),
             HDim(area, "Area", CLOSEST, LEFT),
+            HDim(causeofdeath, "Cause of death", CLOSEST, LEFT),
             HDimConst("Period", get_date_range(tab.excel_ref('A2').value))
         ]
 
@@ -462,7 +471,7 @@ for tab in tabs_from_named(tabs, "Table 2"):
         trace.Area("Converted all area labels to 9 digit ONS codes.")
         
         df.to_csv("{}.csv".format(pathify(title)), index=False)
-
+        all_dat.append(df)
     except Exception as e:
         raise Exception(f"Problem encountered processing cube '{title}' from tab '{tab.name}'.") from e
 
@@ -568,6 +577,8 @@ df = trace.combine_and_trace(cube3n4_title, cube3n4_title)
 df.to_csv(f"{pathify(cube3n4_title)}.csv", index=False)
 # -
 
+df.head(6)
+
 # ## Transform: Table 5, 6
 
 # +
@@ -624,7 +635,7 @@ for tab in tabs_from_named(tabs, ["Table 5", "Table 6"]):
         trace.Date_of_death("Format to single day URI pattern.")
             
         trace.store(cube5n6_title, df)
-        
+        all_dat.append(df)
     except Exception as e:
         raise Exception(f"Problem encountered processing cube '{cube5n6_title}' from tab '{tab.name}'.") from e
         
@@ -694,7 +705,7 @@ for tab in tabs_from_named(tabs, ["Table 7", "Table 8"]):
         trace.Date_of_notification("Format to single day URI pattern.")
         
         trace.store(cube7n8_title, df)
-        
+        all_dat.append(df)
     except Exception as e:
         raise Exception(f"Problem encountered processing cube '{cube7n8_title}' from tab '{tab.name}'.") from e
         
@@ -762,7 +773,7 @@ for tab in tabs_from_named(tabs, ["Table 9"]):
         trace.Area("Converted all area labels to 9 digit ONS codes.")
         
         df.to_csv("{}.csv".format(pathify(title)), index=False)
-
+        all_dat.append(df)
     except Exception as e:
         raise Exception(f"Problem encountered processing cube '{title}' from tab '{tab.name}'.") from e
 
@@ -818,7 +829,7 @@ for tab in tabs_from_named(tabs, ["Table 10"]):
         trace.Date_of_notification("Format to single day URI pattern.")
         
         df.to_csv("{}.csv".format(pathify(title)), index=False)
-        
+        all_dat.append(df)
     except Exception as e:
         raise Exception(f"Problem encountered processing cube '{title}' from tab '{tab.name}'.") from e
 
@@ -877,7 +888,7 @@ for tab in tabs_from_named(tabs, ["Table 11"]):
         trace.Date_of_notification("Format to single day URI pattern.")
         
         df.to_csv("{}.csv".format(pathify(title)), index=False)
-        
+        all_dat.append(df)
     except Exception as e:
         raise Exception(f"Problem encountered processing cube '{title}' from tab '{tab.name}'.") from e
 
@@ -934,7 +945,7 @@ for tab in tabs_from_named(tabs, ["Table 12", "Table 13"]):
         trace.Date_of_death("Format to single day URI pattern.")
         
         trace.store(cube12n13_title, df)
-        
+        all_dat.append(df)
     except Exception as e:
         raise Exception(f"Problem encountered processing cube '{cube12n13_title}' from tab '{tab.name}'.") from e
         
@@ -1010,7 +1021,7 @@ for tab in tabs_from_named(tabs, ["Table 14", "Table 15"]):
         # to day/{year}-{month}-{day}
         df["Week Ending"] = df["Week Ending"].apply(get_day_from_short_month_time)
         trace.Week_Ending("Formatted to single day period URI")
-        
+        all_dat.append(df)
     except Exception as e:
         raise Exception(f"Problem encountered processing cube '{cube14n15_title}' from tab '{tab.name}'.") from e
         
@@ -1070,7 +1081,7 @@ for tab in tabs_from_named(tabs, ["Table 16"]):
         trace.Week_Ending("Formatted to single day period URI")
         
         df.to_csv("{}.csv".format(pathify(title)), index=False)
-        
+        all_dat.append(df)
     except Exception as e:
         raise Exception(f"Problem encountered processing cube '{title}' from tab '{tab.name}'.") from e
 
@@ -1125,7 +1136,7 @@ for tab in tabs_from_named(tabs, ["Table 17"]):
         trace.Area("Converted all area labels to 9 digit ONS codes.")
         
         df.to_csv("{}.csv".format(pathify(title)), index=False)
-        
+        all_dat.append(df)
     except Exception as e:
         raise Exception(f"Problem encountered processing cube '{title}' from tab '{tab.name}'.") from e
 
@@ -1182,7 +1193,7 @@ for tab in tabs_from_named(tabs, ["Table 18"]):
         trace.Area("Converted all area labels to 9 digit ONS codes.")
         
         df.to_csv("{}.csv".format(pathify(title)), index=False)
-        
+        all_dat.append(df)
     except Exception as e:
         raise Exception(f"Problem encountered processing cube '{title}' from tab '{tab.name}'.") from e
 
@@ -1230,4 +1241,53 @@ if spec_me:
         print(l)
 
 # -
+# TABLE 1
+del all_dat[0]['Period']
+
+all_dat[0]['Value'][all_dat[0]['Value'] == ''] = 0 
+#all_dat[0]['Area'][all_dat[0]['Area'] == 'E05001035'] = 'W92000004'
+all_dat[0]['Age'] = 'All ages'
+all_dat[0]['Sex'] = 'Persons'
+all_dat[0] = all_dat[0].rename(columns={'Date of notification': 'Period', 'Unit of Measure': 'Unit'})
+
+# TABLE 2
+all_dat[1]['Value'][all_dat[1]['Value'] == ''] = 0 
+#all_dat[1]['Area'][all_dat[1]['Area'] == 'E05001035'] = 'W92000004'
+all_dat[1] = all_dat[1].rename(columns={'Unit of Measure': 'Unit'})
+all_dat[1]['Marker'] = ''
+
+cols = ['Period','Cause of death','Sex','Age','Area','Measure Type','Unit','Marker','Value']
+all_dat[0] = all_dat[0][cols]
+all_dat[1] = all_dat[1][cols]
+joined_dat1 = pd.concat([all_dat[0], all_dat[1]])
+
+# TABLE 3
+all_dat[2] = all_dat[2].rename(columns={'Value': 'Number of deaths', 'Rate': 'Value', 'Unit of Measure': 'Unit'})
+all_dat[2]['Unit'] = 'Deaths'
+all_dat[2]['Measure Type'] = 'Ratio'
+all_dat[2]['Cause of death'] = 'Deaths involving COVID-19'
+
+# TABLE 4
+all_dat[3] = all_dat[3].rename(columns={'Value': 'Number of deaths', 'Rate': 'Value', 'Unit of Measure': 'Unit'})
+all_dat[3]['Unit'] = 'Deaths'
+all_dat[3]['Measure Type'] = 'Ratio'
+all_dat[3]['Cause of death'] = 'Deaths involving COVID-19'
+
+cols = ['Period','Cause of death','Sex','Age','Area','Category','Lower 95% CI','Upper 95% CI','Number of deaths','Measure Type','Unit','Value']
+all_dat[2] = all_dat[2][cols]
+all_dat[3] = all_dat[3][cols]
+joined_dat2 = pd.concat([all_dat[2], all_dat[3]])
+
+# +
+#################################################################################################################
+#### SOMETHING HAS GONE WRONG WHEN TRANSFORMING TABLES 3 & 4. EXTRA 3 ROWS FOR EVERY VALUE, NUMBER OF DEATHS
+#### INCLUDE THE RATE AND THE CONFIDENCE INTERVALS SO VALUES ARE REPEATED ALL THE WAY DOWN.
+#################################################################################################################
+# -
+
+print(all_dat[2].columns)
+print(all_dat[3].columns)
+
+joined_dat2.head(20)
+
 

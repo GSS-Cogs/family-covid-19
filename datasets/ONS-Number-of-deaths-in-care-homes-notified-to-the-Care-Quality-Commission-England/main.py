@@ -389,12 +389,21 @@ csvw_transform.set_dataset_uri(urljoin(scraper._base_uri, f'data/{scraper._datas
 csvw_transform.write(out / f'{csvName}-metadata.json')
 with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
     metadata.write(scraper.generate_trig())
-
-# +
-#joined_dat.head(6)
-
-# +
-#joined_dat['Period'].unique()
 # -
+
+joined_dat.head(6)
+
+info = json.load(open('info.json')) 
+codelistcreation = info['transform']['codelists'] 
+print(codelistcreation)
+
+
+codeclass = CSVCodelists()
+for cl in codelistcreation:
+    if cl in df.columns:
+        df[cl] = df[cl].str.replace("-"," ")
+        df[cl] = df[cl].str.capitalize()
+        codeclass.create_codelists(pd.DataFrame(df[cl]), 'codelists', scraper.dataset.family, Path(os.getcwd()).name)
+
 
 

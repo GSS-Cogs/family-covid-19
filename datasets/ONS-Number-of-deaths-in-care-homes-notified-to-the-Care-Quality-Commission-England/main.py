@@ -378,7 +378,7 @@ scraper.dataset.description = 'ONS Number of deaths in care homes notified to th
 import os
 from urllib.parse import urljoin
 
-dataset_path = pathify(os.environ.get('JOB_NAME', 'gss_data/covid-19/' + Path(os.getcwd()).name)) #+ '-' + pathify(csvName)
+dataset_path = pathify(os.environ.get('JOB_NAME', 'gss_data/covid-19/' + Path(os.getcwd()).name)).lower() #+ '-' + pathify(csvName)
 scraper.set_base_uri('http://gss-data.org.uk')
 scraper.set_dataset_id(dataset_path)
 #### scraper.dataset.title = 'ONS Number of deaths in care homes notified to the Care Quality Commission'
@@ -393,21 +393,23 @@ with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
 # +
 #Path(os.getcwd()).name.lower()
 #dataset_path
+
+# +
+#info = json.load(open('info.json')) 
+#codelistcreation = info['transform']['codelists'] 
+#print(codelistcreation)
+#print("-------------------------------------------------------")
+#print(joined_dat.columns)
+
+
+# +
+#codeclass = CSVCodelists()
+#for cl in codelistcreation:
+#    if cl in joined_dat.columns:
+#        joined_dat[cl] = joined_dat[cl].str.replace("-"," ")
+#        joined_dat[cl] = joined_dat[cl].str.capitalize()
+#        codeclass.create_codelists(pd.DataFrame(joined_dat[cl]), 'codelists', scraper.dataset.family, Path(os.getcwd()).name.lower())
 # -
-
-info = json.load(open('info.json')) 
-codelistcreation = info['transform']['codelists'] 
-print(codelistcreation)
-print("-------------------------------------------------------")
-print(joined_dat.columns)
-
-
-codeclass = CSVCodelists()
-for cl in codelistcreation:
-    if cl in joined_dat.columns:
-        joined_dat[cl] = joined_dat[cl].str.replace("-"," ")
-        joined_dat[cl] = joined_dat[cl].str.capitalize()
-        codeclass.create_codelists(pd.DataFrame(joined_dat[cl]), 'codelists', scraper.dataset.family, Path(os.getcwd()).name.lower())
 
 
 

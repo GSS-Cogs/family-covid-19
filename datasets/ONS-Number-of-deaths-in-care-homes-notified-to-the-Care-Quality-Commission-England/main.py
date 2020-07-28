@@ -356,9 +356,11 @@ joined_dat['Cause of Death'] = joined_dat['Cause of Death'].apply(pathify)
 joined_dat['Measure Type'] = joined_dat['Measure Type'].apply(pathify)
 joined_dat['Unit'] = joined_dat['Unit'].apply(pathify)
 
-joined_dat = joined_dat.rename(columns={'Cause of Death' : 'ONS Cause of Death'})
-joined_dat = joined_dat.rename(columns={'Location of Death' : 'ONS Location of Death'})
-joined_dat.head(10)
+# +
+#joined_dat = joined_dat.rename(columns={'Cause of Death' : 'ONS Cause of Death'})
+#joined_dat = joined_dat.rename(columns={'Location of Death' : 'ONS Location of Death'})
+#joined_dat.head(10)
+# -
 
 # Output the data to CSV
 csvName = 'observations.csv'
@@ -376,7 +378,7 @@ scraper.dataset.description = 'ONS Number of deaths in care homes notified to th
 import os
 from urllib.parse import urljoin
 
-dataset_path = pathify(os.environ.get('JOB_NAME', 'gss_data/covid-19/' + Path(os.getcwd()).name)) + '-' + pathify(csvName)
+dataset_path = pathify(os.environ.get('JOB_NAME', 'gss_data/covid-19/' + Path(os.getcwd()).name)) #+ '-' + pathify(csvName)
 scraper.set_base_uri('http://gss-data.org.uk')
 scraper.set_dataset_id(dataset_path)
 #### scraper.dataset.title = 'ONS Number of deaths in care homes notified to the Care Quality Commission'
@@ -387,9 +389,11 @@ csvw_transform.set_dataset_uri(urljoin(scraper._base_uri, f'data/{scraper._datas
 csvw_transform.write(out / f'{csvName}-metadata.json')
 with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
     metadata.write(scraper.generate_trig())
-# -
 
-joined_dat.head(6)
+# +
+#Path(os.getcwd()).name.lower()
+#dataset_path
+# -
 
 info = json.load(open('info.json')) 
 codelistcreation = info['transform']['codelists'] 
@@ -403,7 +407,7 @@ for cl in codelistcreation:
     if cl in joined_dat.columns:
         joined_dat[cl] = joined_dat[cl].str.replace("-"," ")
         joined_dat[cl] = joined_dat[cl].str.capitalize()
-        codeclass.create_codelists(pd.DataFrame(joined_dat[cl]), 'codelists', scraper.dataset.family, Path(os.getcwd()).name)
+        codeclass.create_codelists(pd.DataFrame(joined_dat[cl]), 'codelists', scraper.dataset.family, Path(os.getcwd()).name.lower())
 
 
 

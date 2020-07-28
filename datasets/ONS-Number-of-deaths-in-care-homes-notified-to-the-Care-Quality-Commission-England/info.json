@@ -67,7 +67,7 @@
                 "datatype": "double"
             }
         },
-        "codelists": ["Location of Death", "Cause of Death"]
+        "codelists": ["ONS Location of Death", "ONS Cause of Death"]
     },
     "sizingNotes": "Simple table structure with footnotes",
     "notes": ""

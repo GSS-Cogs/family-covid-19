@@ -326,11 +326,6 @@ cols = ['Period', 'Location of Death', 'Local Authority', 'Cause of Death', 'Mea
 df1 = df1[cols]
 df2 = df2[cols]
 
-# +
-#print(df1.columns)
-#print(df2.columns)
-# -
-
 joined_dat = pd.concat([df1, df2])
 
 from rdflib import Graph
@@ -355,12 +350,15 @@ for la in laslist:
 
 joined_dat['Local Authority'] = joined_dat['Local Authority'].map(las.set_index('Category')['Code'])
 
-#joined_dat['Local Authority'].unique()
 joined_dat['Location of Death'] = joined_dat['Location of Death'].apply(pathify)
 joined_dat['Local Authority'] = joined_dat['Local Authority'].apply(pathify)
 joined_dat['Cause of Death'] = joined_dat['Cause of Death'].apply(pathify)
 joined_dat['Measure Type'] = joined_dat['Measure Type'].apply(pathify)
 joined_dat['Unit'] = joined_dat['Unit'].apply(pathify)
+
+joined_dat = joined_dat.rename(columns={'Cause of Death' : 'ONS Cause of Death'})
+joined_dat = joined_dat.rename(columns={'Location of Death' : 'ONS Location of Death'})
+joined_dat.head(10)
 
 # Output the data to CSV
 csvName = 'observations.csv'
@@ -396,11 +394,13 @@ joined_dat.head(6)
 info = json.load(open('info.json')) 
 codelistcreation = info['transform']['codelists'] 
 print(codelistcreation)
+print("-------------------------------------------------------")
+print(joined_dat.columns)
 
 
 codeclass = CSVCodelists()
 for cl in codelistcreation:
-    if cl in df.columns:
+    if cl in joined_dat.columns:
         joined_dat[cl] = joined_dat[cl].str.replace("-"," ")
         joined_dat[cl] = joined_dat[cl].str.capitalize()
         codeclass.create_codelists(pd.DataFrame(joined_dat[cl]), 'codelists', scraper.dataset.family, Path(os.getcwd()).name)

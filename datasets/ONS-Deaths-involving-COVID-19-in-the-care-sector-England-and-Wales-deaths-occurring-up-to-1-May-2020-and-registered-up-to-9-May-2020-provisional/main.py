@@ -1395,6 +1395,11 @@ all_dat[ind].insert(1, 'Place of death', 'All')
 all_dat[ind].insert(1, 'Recorded Death Type', 'Date of Death')
 all_dat[ind].insert(1, 'Person Type', 'Care Home Resident')
 
+##########################################################################################
+# Removing wales data as it does not match up with the same data in Table 1
+# Question sent to BAs about this
+all_dat[ind] = all_dat[ind][all_dat[ind]['Area'] != 'W92000004']
+##########################################################################################
 
 def formatWeekEnding(col):
     try:

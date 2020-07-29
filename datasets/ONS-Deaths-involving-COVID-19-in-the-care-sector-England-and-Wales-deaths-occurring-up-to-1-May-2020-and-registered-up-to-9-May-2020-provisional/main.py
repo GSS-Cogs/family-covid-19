@@ -1539,8 +1539,9 @@ for i in range(4, 15):
         #print(cols)
         #print('------------------------------------------------------------')
         all_dat[i] = all_dat[i][cols]
-        joined_dat3 = pd.concat([joined_dat3, all_dat[i]])
-        print(str(i) + ': ' + str(joined_dat3['Value'].count()))
+        if i != 9:
+            joined_dat3 = pd.concat([joined_dat3, all_dat[i]])
+            print(str(i) + ': ' + str(joined_dat3['Value'].count()))
 
 
 # Table 17
@@ -1562,8 +1563,10 @@ joined_dat5 = all_dat[ind][['Period', 'Main Pre-existing Condition', 'Sex', 'Age
 
 joined_dat3['Unit'] = 'Deaths'
 
-print(joined_dat1.columns)
-print(joined_dat3.columns)
+# +
+#print(joined_dat1.columns)
+#print(joined_dat3.columns)
+# -
 
 joined_dat1.insert(1, 'Person Type', 'Care Home Resident')
 joined_dat1.insert(1, 'Place of death', 'All')

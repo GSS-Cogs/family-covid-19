@@ -1,0 +1,14 @@
+Label,Notation,Parent Notation,Sort Priority
+All,all,,1
+0 64,0-64,,2
+65 69,65-69,,3
+70 74,70-74,,4
+75 79,75-79,,5
+80 84,80-84,,6
+85 89,85-89,,7
+65 74,65-74,,8
+75 84,75-84,,9
+85 plus,85-plus,,10
+90 plus,90-plus,,11
+All males,all-males,,12
+All females,all-females,,13

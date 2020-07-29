@@ -971,29 +971,41 @@ Period, Area, Place of death, Date of death, Unit Multiplier, Measure Type, Unit
 #### Footnotes
 
 
--------------### Stage 2. Harmonise
+-------------
 
-#### Sheet: 1
+### Stage 2. Harmonise
 
-		spec
+		Changed Area values of 'E05001035' (Electoral Ward in Rotherham called Wales) to 'W92000004' in the method definition
 
-#### Table Structure
+#### Sheet: Table 1
 
-		Period, Measure Type, Unit, Marker, Value
+		Set Value to 0 where not value present
+		Alter source column, remove word data
+		Delete 'Period' column as it s not needed, day date is already in data
+		Rename 'Unit of Measure' column to 'Unit
 
-#### Sheet: 2
+#### Sheet: Table 2
 
-		spec
+		Set Value to 0 where not value present, if any.
+		Add source column with value ONS
+		Added 'Cause of Death' column row 5
+		Rename 'Unit of Measure' column to 'Unit'
+		Add 'Marker' column
 
-----------#### Table Structure
+#### Sheet: Table 1 & 2 - Joined
 
-		Period, Measure Type, Unit, Marker, Value
+		Add 'Recorded Death Type column with values based on Source column	
+	
+#### Sheet: Table 3 & 4
 
---------------##### Footnotes
+		The main measure here is the rate not the number of deaths so rename 'Value' column as 'Number of Deaths' and 'Rate' column as 'Value'
+		Rename 'Unit of Measure' column to 'Unit
+		Transform needs to be changed for these tables as Number of deaths also includes the Rate and Confidence Interval values so rows are being repeated
+		Altered Cause of death column based on values in Category column 
+		Changed name of Category column to Person Type and changed values to Care Home Resident or Non-Care Home Resident.
 
-		footnotes
+### Sheet: Table 5
 
-##### DM Notes
-
-		notes
+		Remove Period column and rename Date of Death column to Period.
+				
 

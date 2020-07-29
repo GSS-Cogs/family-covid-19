@@ -1,7 +1,8 @@
-# # ONS Deaths involving COVID-19 in the care sector, England and Wales 
+# ONS Deaths involving COVID-19 in the care sector, England and Wales 
 
 from gssutils import *
 import datetime
+from datetime import timedelta
 import json 
 import logging
 import re
@@ -409,7 +410,7 @@ for tab in tabs_from_named(tabs, "Table 1"):
         df["Area"] = df["Area"].apply(get_regions)
         trace.Area("Converted all area labels to 9 digit ONS codes.")
         
-        df.to_csv("{}.csv".format(pathify(title)), index=False)
+        #df.to_csv("{}.csv".format(pathify(title)), index=False)
         all_dat.append(df)
     except Exception as e:
         raise Exception(f"Problem encountered processing cube from tab '{tab.name}'.") from e
@@ -470,7 +471,7 @@ for tab in tabs_from_named(tabs, "Table 2"):
         df["Area"] = df["Area"].apply(get_regions)
         trace.Area("Converted all area labels to 9 digit ONS codes.")
         
-        df.to_csv("{}.csv".format(pathify(title)), index=False)
+        #df.to_csv("{}.csv".format(pathify(title)), index=False)
         all_dat.append(df)
     except Exception as e:
         raise Exception(f"Problem encountered processing cube '{title}' from tab '{tab.name}'.") from e
@@ -567,14 +568,14 @@ for tab in tabs_from_named(tabs, ["Table 3", "Table 4"]):
         # Codeify area column
         df["Area"] = df["Area"].apply(get_regions)
         trace.Area("Converted all area labels to 9 digit ONS codes.")
-        
+        all_dat.append(df)
         trace.store(cube3n4_title, df)
         
     except Exception as e:
         raise Exception(f"Problem encountered processing cube '{cube3n4_title}' from tab '{tab.name}'.") from e
         
 df = trace.combine_and_trace(cube3n4_title, cube3n4_title)
-df.to_csv(f"{pathify(cube3n4_title)}.csv", index=False)
+#df.to_csv(f"{pathify(cube3n4_title)}.csv", index=False)
 # -
 
 df.head(6)
@@ -640,7 +641,7 @@ for tab in tabs_from_named(tabs, ["Table 5", "Table 6"]):
         raise Exception(f"Problem encountered processing cube '{cube5n6_title}' from tab '{tab.name}'.") from e
         
 df = trace.combine_and_trace(cube5n6_title, cube5n6_title)
-df.to_csv(f"{pathify(cube5n6_title)}.csv", index=False)
+#df.to_csv(f"{pathify(cube5n6_title)}.csv", index=False)
 
 # -
 
@@ -710,7 +711,7 @@ for tab in tabs_from_named(tabs, ["Table 7", "Table 8"]):
         raise Exception(f"Problem encountered processing cube '{cube7n8_title}' from tab '{tab.name}'.") from e
         
 df = trace.combine_and_trace(cube7n8_title, cube7n8_title)
-df.to_csv(f"{pathify(cube7n8_title)}.csv", index=False)
+#df.to_csv(f"{pathify(cube7n8_title)}.csv", index=False)
 
 # -
 
@@ -772,7 +773,7 @@ for tab in tabs_from_named(tabs, ["Table 9"]):
         df["Area"] = df["Area"].apply(get_regions)
         trace.Area("Converted all area labels to 9 digit ONS codes.")
         
-        df.to_csv("{}.csv".format(pathify(title)), index=False)
+        #df.to_csv("{}.csv".format(pathify(title)), index=False)
         all_dat.append(df)
     except Exception as e:
         raise Exception(f"Problem encountered processing cube '{title}' from tab '{tab.name}'.") from e
@@ -828,7 +829,7 @@ for tab in tabs_from_named(tabs, ["Table 10"]):
         df["Date of notification"] = df["Date of notification"].map(lambda x: "day/"+x.replace("/", "-"))
         trace.Date_of_notification("Format to single day URI pattern.")
         
-        df.to_csv("{}.csv".format(pathify(title)), index=False)
+        #df.to_csv("{}.csv".format(pathify(title)), index=False)
         all_dat.append(df)
     except Exception as e:
         raise Exception(f"Problem encountered processing cube '{title}' from tab '{tab.name}'.") from e
@@ -887,7 +888,7 @@ for tab in tabs_from_named(tabs, ["Table 11"]):
         df["Date of notification"] = df["Date of notification"].map(lambda x: "day/"+x.replace("/", "-"))
         trace.Date_of_notification("Format to single day URI pattern.")
         
-        df.to_csv("{}.csv".format(pathify(title)), index=False)
+        #df.to_csv("{}.csv".format(pathify(title)), index=False)
         all_dat.append(df)
     except Exception as e:
         raise Exception(f"Problem encountered processing cube '{title}' from tab '{tab.name}'.") from e
@@ -950,7 +951,7 @@ for tab in tabs_from_named(tabs, ["Table 12", "Table 13"]):
         raise Exception(f"Problem encountered processing cube '{cube12n13_title}' from tab '{tab.name}'.") from e
         
 df = trace.combine_and_trace(cube12n13_title, cube12n13_title)
-df.to_csv(f"{pathify(cube12n13_title)}.csv", index=False)
+#df.to_csv(f"{pathify(cube12n13_title)}.csv", index=False)
 
 # -
 
@@ -1026,7 +1027,7 @@ for tab in tabs_from_named(tabs, ["Table 14", "Table 15"]):
         raise Exception(f"Problem encountered processing cube '{cube14n15_title}' from tab '{tab.name}'.") from e
         
 df = trace.combine_and_trace(cube14n15_title, cube14n15_title)
-df.to_csv(f"{pathify(cube14n15_title)}.csv", index=False)
+#df.to_csv(f"{pathify(cube14n15_title)}.csv", index=False)
 
 # -
 
@@ -1070,7 +1071,9 @@ for tab in tabs_from_named(tabs, ["Table 16"]):
             HDim(week_ending, "Week Ending", CLOSEST, LEFT),
             HDim(area, "Area", DIRECTLY, LEFT),
             HDim(week_no, "Week Number", CLOSEST, LEFT),
+            HDim(cause_of_death, "Cause of death", CLOSEST, LEFT),
             HDimConst("Period", get_date_range(tab.excel_ref('A2').value))
+            
         ]
         
         cs = ConversionSegment(obs, dimensions)
@@ -1080,7 +1083,7 @@ for tab in tabs_from_named(tabs, ["Table 16"]):
         df["Week Ending"] = df["Week Ending"].apply(get_day_from_short_month_time)
         trace.Week_Ending("Formatted to single day period URI")
         
-        df.to_csv("{}.csv".format(pathify(title)), index=False)
+        #df.to_csv("{}.csv".format(pathify(title)), index=False)
         all_dat.append(df)
     except Exception as e:
         raise Exception(f"Problem encountered processing cube '{title}' from tab '{tab.name}'.") from e
@@ -1135,7 +1138,7 @@ for tab in tabs_from_named(tabs, ["Table 17"]):
         df["Area"] = df["Area"].apply(get_regions)
         trace.Area("Converted all area labels to 9 digit ONS codes.")
         
-        df.to_csv("{}.csv".format(pathify(title)), index=False)
+        #df.to_csv("{}.csv".format(pathify(title)), index=False)
         all_dat.append(df)
     except Exception as e:
         raise Exception(f"Problem encountered processing cube '{title}' from tab '{tab.name}'.") from e
@@ -1192,7 +1195,7 @@ for tab in tabs_from_named(tabs, ["Table 18"]):
         df["Area"] = df["Area"].apply(get_regions)
         trace.Area("Converted all area labels to 9 digit ONS codes.")
         
-        df.to_csv("{}.csv".format(pathify(title)), index=False)
+        #df.to_csv("{}.csv".format(pathify(title)), index=False)
         all_dat.append(df)
     except Exception as e:
         raise Exception(f"Problem encountered processing cube '{title}' from tab '{tab.name}'.") from e
@@ -1240,27 +1243,36 @@ if spec_me:
     for l in lines:
         print(l)
 
+
 # -
+
 # TABLE 1
 del all_dat[0]['Period']
 
+# +
 all_dat[0]['Value'][all_dat[0]['Value'] == ''] = 0 
-#all_dat[0]['Area'][all_dat[0]['Area'] == 'E05001035'] = 'W92000004'
 all_dat[0]['Age'] = 'All ages'
 all_dat[0]['Sex'] = 'Persons'
 all_dat[0] = all_dat[0].rename(columns={'Date of notification': 'Period', 'Unit of Measure': 'Unit'})
-
+all_dat[0]['Source'] = all_dat[0]['Source'].str.replace('data','').str.strip()
 # TABLE 2
 all_dat[1]['Value'][all_dat[1]['Value'] == ''] = 0 
-#all_dat[1]['Area'][all_dat[1]['Area'] == 'E05001035'] = 'W92000004'
 all_dat[1] = all_dat[1].rename(columns={'Unit of Measure': 'Unit'})
 all_dat[1]['Marker'] = ''
+all_dat[1]['Source'] = 'ONS'
 
-cols = ['Period','Cause of death','Sex','Age','Area','Measure Type','Unit','Marker','Value']
+cols = ['Period','Source','Cause of death','Sex','Age','Area','Measure Type','Unit','Marker','Value']
 all_dat[0] = all_dat[0][cols]
 all_dat[1] = all_dat[1][cols]
 joined_dat1 = pd.concat([all_dat[0], all_dat[1]])
+joined_dat1['Unit'] = 'Deaths'
 
+joined_dat1.insert(1, 'Recorded Death Type', '')
+joined_dat1['Recorded Death Type'][joined_dat1['Source'] == 'ONS'] = 'Date of Death'
+joined_dat1['Recorded Death Type'][joined_dat1['Source'] == 'CQC'] = 'Date of Notification'
+joined_dat1['Recorded Death Type'][joined_dat1['Source'] == 'CIW'] = 'Date of Notification'
+
+# +
 # TABLE 3
 all_dat[2] = all_dat[2].rename(columns={'Value': 'Number of deaths', 'Rate': 'Value', 'Unit of Measure': 'Unit'})
 all_dat[2]['Unit'] = 'Deaths'
@@ -1277,17 +1289,505 @@ cols = ['Period','Cause of death','Sex','Age','Area','Category','Lower 95% CI','
 all_dat[2] = all_dat[2][cols]
 all_dat[3] = all_dat[3][cols]
 joined_dat2 = pd.concat([all_dat[2], all_dat[3]])
+joined_dat2['Unit'] = 'Deaths'
 
 # +
-#################################################################################################################
-#### SOMETHING HAS GONE WRONG WHEN TRANSFORMING TABLES 3 & 4. EXTRA 3 ROWS FOR EVERY VALUE, NUMBER OF DEATHS
-#### INCLUDE THE RATE AND THE CONFIDENCE INTERVALS SO VALUES ARE REPEATED ALL THE WAY DOWN.
-#################################################################################################################
+joined_dat2['Cause of death'][joined_dat2['Category'] == 'Number of deaths'] = 'COVID-19'
+joined_dat2['Cause of death'][joined_dat2['Category'] == 'Number of deaths of non-care home residents due to COVID-19'] = 'COVID-19'
+joined_dat2['Cause of death'][joined_dat2['Category'] == 'Number of deaths of care home residents from all causes'] = 'All Causes'
+joined_dat2['Cause of death'][joined_dat2['Category'] == 'Number of deaths of non-care home residents from all causes'] = 'All Causes'
+
+joined_dat2 = joined_dat2.rename(columns={'Category': 'Person Type'})
+joined_dat2['Person Type'][joined_dat2['Person Type'] == 'Number of deaths'] = 'Care Home Resident'
+joined_dat2['Person Type'][joined_dat2['Person Type'] == 'Number of deaths of non-care home residents due to COVID-19'] = 'Non-Care Home Resident'
+joined_dat2['Person Type'][joined_dat2['Person Type'] == 'Number of deaths of care home residents from all causes'] = 'Care Home Resident'
+joined_dat2['Person Type'][joined_dat2['Person Type'] == 'Number of deaths of non-care home residents from all causes'] = 'Non-Care Home Resident'
 # -
 
-print(all_dat[2].columns)
-print(all_dat[3].columns)
+joined_dat2.insert(1, 'Source', 'ONS')
+joined_dat2.insert(1, 'Recorded Death Type', 'Date of Death')
+#joined_dat2.head(10)
 
-joined_dat2.head(20)
+# Table 5
+all_dat[4]['Date of death'][all_dat[4]['Date of death'] == 'day/Total'] = all_dat[4]['Period']
+
+del all_dat[4]['Period']
+
+all_dat[4] = all_dat[4].rename(columns={'Date of death': 'Period', 'Unit of Measure': 'Unit'})
+all_dat[4]['Cause of death'] = 'All Causes'
+all_dat[4].insert(1, 'Person Type', 'Care Home Resident')
+all_dat[4].insert(1, 'Source', 'ONS')
+all_dat[4].insert(1, 'Recorded Death Type', 'Date of Death')
+
+# Table 6
+all_dat[5]['Date of death'][all_dat[5]['Date of death'] == 'day/Total'] = all_dat[5]['Period']
+
+del all_dat[5]['Period']
+
+# +
+all_dat[5] = all_dat[5].rename(columns={'Date of death': 'Period', 'Unit of Measure': 'Unit'})
+all_dat[5]['Cause of death'] = 'COVID-19'
+
+all_dat[5].insert(1, 'Person Type', 'Care Home Resident')
+all_dat[5].insert(1, 'Source', 'ONS')
+all_dat[5].insert(1, 'Recorded Death Type', 'Date of Death')
+# -
+
+# Table 7
+all_dat[6]['Date of notification'][all_dat[6]['Date of notification'].str.strip() == 'day/Total'] = all_dat[6]['Period']
+del all_dat[6]['Period']
+all_dat[6] = all_dat[6].rename(columns={'Date of notification': 'Period', 'Unit of Measure': 'Unit'})
+
+all_dat[6].insert(1, 'Person Type', 'Care Home Resident')
+all_dat[6].insert(1, 'Source', 'CQC')
+all_dat[6].insert(1, 'Recorded Death Type', 'Date of Notification')
+
+# Table 8
+all_dat[7]['Date of notification'][all_dat[7]['Date of notification'].str.strip() == 'day/Total'] = all_dat[7]['Period']
+del all_dat[7]['Period']
+all_dat[7] = all_dat[7].rename(columns={'Date of notification': 'Period', 'Unit of Measure': 'Unit'})
+
+all_dat[7].insert(1, 'Person Type', 'Care Home Resident')
+all_dat[7].insert(1, 'Source', 'CIW')
+all_dat[7].insert(1, 'Recorded Death Type', 'Date of Notification')
+
+# Table 9
+all_dat[8]['Date of notification'][all_dat[8]['Date of notification'].str.strip() == 'day/Total'] = all_dat[8]['Period']
+del all_dat[8]['Period']
+all_dat[8] = all_dat[8].rename(columns={'Date of notification': 'Period', 'Unit of Measure': 'Unit', 'Cause Of Death': 'Cause of death', 'Place Of Death': 'Place of death'})
+
+all_dat[8].insert(1, 'Person Type', 'Home Care service user')
+all_dat[8].insert(1, 'Source', 'CQC')
+all_dat[8].insert(1, 'Recorded Death Type', 'Date of Notification')
+
+# Table 10
+ind = 9
+
+all_dat[ind]['Date of notification'][all_dat[ind]['Date of notification'].str.strip() == 'day/Total'] = all_dat[ind]['Period']
+del all_dat[ind]['Period']
+all_dat[ind] = all_dat[ind].rename(columns={'Date of notification': 'Period', 'Unit of Measure': 'Unit', 'Category': 'Person Type'})
+
+all_dat[ind].insert(1, 'Source', 'CQC')
+all_dat[ind].insert(1, 'Cause of death', 'All Causes')
+all_dat[ind].insert(1, 'Place of death', 'All')
+all_dat[ind].insert(1, 'Recorded Death Type', 'Date of Notification')
+
+# Table 11
+ind = 10
+
+all_dat[ind]['Date of notification'][all_dat[ind]['Date of notification'].str.strip() == 'day/Total'] = all_dat[ind]['Period']
+del all_dat[ind]['Period']
+all_dat[ind] = all_dat[ind].rename(columns={'Date of notification': 'Period', 'Unit of Measure': 'Unit'})
+
+all_dat[ind].insert(1, 'Source', 'ONS')
+all_dat[ind].insert(1, 'Place of death', 'All')
+all_dat[ind].insert(1, 'Recorded Death Type', 'Date of Death')
+all_dat[ind].insert(1, 'Person Type', 'Care Home Resident')
+
+
+def formatWeekEnding(col):
+    try:
+        c = col.columns[0]
+        ret = pd.DataFrame(columns=[c])
+        ret[c] = pd.to_datetime(col[c])
+        ret[c] = ret[c] - timedelta(days=6)
+        ret[c] = ret[c].dt.strftime('%Y-%m-%d')
+        ret[c] = 'gregorian-interval/' + ret[c].str.strip() + 'T00:00:00/P7D'
+        return ret
+    except Exception as e:
+        return col
+
+
+# +
+from rdflib import Graph
+import rdflib as rd
+import numpy as np
+
+def mapPlaceNamesWithCodes(placeNames):
+    try:
+        g = Graph()
+        g.parse("../../Reference/reference-geography.ttl", format="ttl")
+        
+        c = placeNames.columns[0]
+        las = pd.DataFrame(placeNames[c].unique())
+        laslist = list(placeNames[c].unique())
+        las.rename(columns={0 : 'Category'}, inplace=True)
+        las['Code'] = ''
+        for la in laslist:
+            q = (f"SELECT ?s ?p ?o WHERE  {{ ?s ?p '{la.strip()}' . ?s <http://www.w3.org/2000/01/rdf-schema#label> ?o . }}")
+            try:
+                qres = g.query(q)
+                for row in qres:
+                    las['Code'][las['Category'] == la.strip()] = row[2].strip()
+                    break
+            except Exception as e:
+                print("No Match!: " + str(e))
+                return placeNames[c]
+        placeNames[c] = placeNames[c].map(las.set_index('Category')['Code'])
+        return placeNames[c]
+    except Exception as e:
+        print('Main Error: ' + str(e))
+        return placeNames[c]
+
+
+# -
+
+# Table 12
+ind = 11
+
+all_dat[ind]['Date of death'] = all_dat[ind]['Date of death'].str.replace('day/','')
+
+all_dat[ind]['Date of death'] = formatWeekEnding(pd.DataFrame(all_dat[ind]['Date of death']))
+
+del all_dat[ind]['Period']
+del all_dat[ind]['Week Number']
+all_dat[ind] = all_dat[ind].rename(columns={'Date of death': 'Period', 'Unit of Measure': 'Unit'})
+
+all_dat[ind].insert(1, 'Source', 'ONS')
+all_dat[ind].insert(1, 'Place of death', 'All')
+all_dat[ind].insert(1, 'Recorded Death Type', 'Date of Death')
+all_dat[ind].insert(1, 'Person Type', 'Care Home Resident')
+
+# Table 13
+ind = 12
+
+all_dat[ind]['Date of death'] = all_dat[ind]['Date of death'].str.replace('day/','')
+
+all_dat[ind]['Date of death'] = formatWeekEnding(pd.DataFrame(all_dat[ind]['Date of death']))
+
+del all_dat[ind]['Period']
+del all_dat[ind]['Week Number']
+all_dat[ind] = all_dat[ind].rename(columns={'Date of death': 'Period', 'Unit of Measure': 'Unit'})
+
+all_dat[ind].insert(1, 'Source', 'ONS')
+all_dat[ind].insert(1, 'Place of death', 'All')
+all_dat[ind].insert(1, 'Recorded Death Type', 'Date of Death')
+all_dat[ind].insert(1, 'Person Type', 'Care Home Resident')
+
+# Table 14
+ind = 13
+
+all_dat[ind]['Week Ending'][all_dat[ind]['Week Ending'].str.strip() == 'Grand total'] = all_dat[ind]['Period']
+all_dat[ind]['Week Ending'] = all_dat[ind]['Week Ending'].str.replace('day/','')
+
+all_dat[ind]['Week Ending'] = formatWeekEnding(pd.DataFrame(all_dat[ind]['Week Ending']))
+
+del all_dat[ind]['Period']
+del all_dat[ind]['Week Number']
+all_dat[ind] = all_dat[ind].rename(columns={'Week Ending': 'Period', 'Unit of Measure': 'Unit'})
+
+all_dat[ind].insert(1, 'Source', 'CQC')
+all_dat[ind].insert(1, 'Place of death', 'Care Home')
+all_dat[ind].insert(1, 'Recorded Death Type', 'Date of Notification')
+all_dat[ind].insert(1, 'Person Type', 'Care Home Resident')
+
+all_dat[ind]['Area'] = mapPlaceNamesWithCodes(pd.DataFrame(all_dat[ind]['Area']))
+
+# Table 15
+ind = 14
+
+all_dat[ind]['Week Ending'][all_dat[ind]['Week Ending'].str.strip() == 'Grand total'] = all_dat[ind]['Period']
+all_dat[ind]['Week Ending'] = all_dat[ind]['Week Ending'].str.replace('day/','')
+
+all_dat[ind]['Week Ending'] = formatWeekEnding(pd.DataFrame(all_dat[ind]['Week Ending']))
+
+del all_dat[ind]['Period']
+del all_dat[ind]['Week Number']
+all_dat[ind] = all_dat[ind].rename(columns={'Week Ending': 'Period', 'Unit of Measure': 'Unit'})
+
+all_dat[ind].insert(1, 'Source', 'CQC')
+all_dat[ind].insert(1, 'Place of death', 'Care Home')
+all_dat[ind].insert(1, 'Recorded Death Type', 'Date of Notification')
+all_dat[ind].insert(1, 'Person Type', 'Care Home Resident')
+all_dat[ind]['Cause of death'] = 'COVID-19'
+
+all_dat[ind]['Area'] = mapPlaceNamesWithCodes(pd.DataFrame(all_dat[ind]['Area']))
+
+# Table 16
+ind = 15
+
+all_dat[ind]['Week Ending'] = all_dat[ind]['Week Ending'].str.replace('day/','')
+
+all_dat[ind]['Week Ending'] = formatWeekEnding(pd.DataFrame(all_dat[ind]['Week Ending']))
+
+del all_dat[ind]['Period']
+del all_dat[ind]['Week Number']
+all_dat[ind] = all_dat[ind].rename(columns={'Week Ending': 'Period', 'Unit of Measure': 'Unit'})
+
+all_dat[ind].insert(1, 'Source', 'CIW')
+all_dat[ind].insert(1, 'Place of death', 'Care Home')
+all_dat[ind].insert(1, 'Recorded Death Type', 'Date of Notification')
+all_dat[ind].insert(1, 'Person Type', 'Care Home Resident')
+
+all_dat[ind]['Area'] = mapPlaceNamesWithCodes(pd.DataFrame(all_dat[ind]['Area']))
+
+cols = ['Period', 'Recorded Death Type', 'Source', 'Person Type', 'Area', 'Place of death', 'Cause of death', 'Measure Type', 'Unit', 'Value']
+joined_dat3 = pd.DataFrame(columns=cols)
+for i in range(4, 15):
+        #print(all_dat[i].columns)
+        #print(cols)
+        #print('------------------------------------------------------------')
+        all_dat[i] = all_dat[i][cols]
+        joined_dat3 = pd.concat([joined_dat3, all_dat[i]])
+        print(str(i) + ': ' + str(joined_dat3['Value'].count()))
+
+
+# Table 17
+ind = 16
+
+all_dat[ind] = all_dat[ind].rename(columns={'Unit of Measure': 'Unit', 'Leading cause': 'Leading cause of Death'})
+all_dat[ind]['Unit'] = 'Deaths'
+
+joined_dat4 = all_dat[ind][['Period', 'Leading cause of Death', 'Sex', 'Area', 'Measure Type', 'Unit', 'Value']]
+
+# Table 18
+ind = 17
+
+all_dat[ind] = all_dat[ind].rename(columns={'Unit of Measure': 'Unit', 'Pre-existing Condition': 'Main Pre-existing Condition'})
+all_dat[ind]['Measure Type'] = 'Percentage'
+all_dat[ind]['Unit'] = 'Deaths'
+
+joined_dat5 = all_dat[ind][['Period', 'Main Pre-existing Condition', 'Sex', 'Age Group', 'Area', 'Measure Type', 'Unit', 'Value']]
+
+joined_dat3['Unit'] = 'Deaths'
+
+print(joined_dat1.columns)
+print(joined_dat3.columns)
+
+joined_dat1.insert(1, 'Person Type', 'Care Home Resident')
+joined_dat1.insert(1, 'Place of death', 'All')
+
+joined_dat3.insert(1, 'Sex', 'T')
+joined_dat3.insert(1, 'Age', 'All')
+
+cols = ['Period', 'Recorded Death Type', 'Source', 'Person Type', 'Sex', 'Age', 'Area', 'Place of death', 'Cause of death', 'Measure Type', 'Unit', 'Value']
+joined_dat1 = joined_dat1[cols]
+joined_dat3 = joined_dat3[cols]
+
+joined_dat1and3 = pd.concat([joined_dat1, joined_dat3])
+
+# +
+joined_dat1and3['Unit'] = 'Deaths'
+joined_dat1and3['Measure Type'][joined_dat1and3['Cause of death'] == 'Proportion of deaths involving COVID-19 (%)'] = 'Percentage'
+
+causeofdeaths = {
+     'Deaths involving COVID-19': 'COVID-19',
+     'All deaths': 'All',
+     '2019 Comparison': 'All',
+     'Proportion of deaths involving COVID-19 (%)': 'COVID-19',
+     'All Causes': 'All'
+}
+joined_dat1and3 = joined_dat1and3.replace({"Cause of death": causeofdeaths})
+
+sexcode = {
+     'Persons': 'T',
+     'All persons': 'T',
+     'Person': 'T',
+     'Male': 'M',
+     'Males': 'M',
+     'Female': 'F',
+     'Females': 'F'
+}
+joined_dat1and3 = joined_dat1and3.replace({"Sex": sexcode})
+joined_dat2 = joined_dat2.replace({"Sex": sexcode})
+joined_dat4 = joined_dat4.replace({"Sex": sexcode})
+joined_dat5 = joined_dat5.replace({"Sex": sexcode})
+
+# +
+joined_dat1and3 = joined_dat1and3.rename(columns={'Area': 'Local Authority'})
+for c in joined_dat1and3.columns:
+    if c != 'Value':
+        try:
+            joined_dat1and3[c] = joined_dat1and3[c].apply(pathify)
+        except Exception as e:
+            i = 1
+
+agecode = {
+    '90': '90-plus',
+    'all-ages': 'all',
+    '85': '85-plus',
+    '90+': '90-plus',
+    'all-persons': 'all'
+}           
+joined_dat1and3 = joined_dat1and3.replace({"Age": agecode})
+
+# +
+joined_dat2 = joined_dat2.rename(columns={'Area': 'Local Authority'})
+for c in joined_dat2.columns:
+    if c != 'Value':
+        try:
+            joined_dat2[c] = joined_dat2[c].apply(pathify)
+        except Exception as e:
+            i = 1
+    
+joined_dat2 = joined_dat2.replace({"Age": agecode})
+# -
+
+joined_dat4 = joined_dat4.rename(columns={'Area': 'Local Authority'})
+for c in joined_dat4.columns:
+    if c != 'Value':
+        try:
+            joined_dat4[c] = joined_dat4[c].apply(pathify)
+        except Exception as e:
+            i = 1
+
+joined_dat5 = joined_dat5.rename(columns={'Age Group': 'Age'})
+joined_dat5 = joined_dat5.rename(columns={'Area': 'Local Authority'})
+for c in joined_dat5.columns:
+    if c != 'Value':
+        try:
+            joined_dat5[c] = joined_dat5[c].apply(pathify)
+        except Exception as e:
+            i = 1
+joined_dat5 = joined_dat5.replace({"Age": agecode})
+
+# +
+notes = ''
+
+# Output the data to CSV
+csvName = 'covid-19-deaths-in-the-care-sector-observations.csv'
+out = Path('out')
+out.mkdir(exist_ok=True)
+joined_dat1and3.drop_duplicates().to_csv(out / csvName, index = False)
+
+# +
+scraper.dataset.family = 'covid-19'
+scraper.dataset.description = 'Deaths involving COVID-19 in the care sector for England and Wales.\n ' + notes
+
+# Output CSV-W metadata (validation, transform and DSD).
+# Output dataset metadata separately for now.
+
+import os
+from urllib.parse import urljoin
+
+dataset_path = pathify(os.environ.get('JOB_NAME', 'gss_data/covid-19/' + Path(os.getcwd()).name)).lower()
+scraper.set_base_uri('http://gss-data.org.uk')
+scraper.set_dataset_id(dataset_path)
+scraper.dataset.title = 'Deaths involving COVID-19 in the care sector for England and Wales'
+csvw_transform = CSVWMapping()
+csvw_transform.set_csv(out / csvName)
+csvw_transform.set_mapping(json.load(open('info.json')))
+csvw_transform.set_dataset_uri(urljoin(scraper._base_uri, f'data/{scraper._dataset_id}'))
+csvw_transform.write(out / f'{csvName}-metadata.json')
+with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
+    metadata.write(scraper.generate_trig())
+
+
+# +
+#notes = ''
+
+## Output the data to CSV
+#csvName = 'deaths-in-the-care-sector-age-standardised-observations.csv'
+#out = Path('out')
+#out.mkdir(exist_ok=True)
+#joined_dat2.drop_duplicates().to_csv(out / csvName, index = False)
+
+# +
+#scraper.dataset.family = 'covid-19'
+#scraper.dataset.description = 'Deaths in the care sector for England and Wales - Age standardised mortality rates by Age\n ' + notes
+
+# Output CSV-W metadata (validation, transform and DSD).
+# Output dataset metadata separately for now.
+
+#import os
+#from urllib.parse import urljoin
+
+#dataset_path = pathify(os.environ.get('JOB_NAME', 'gss_data/covid-19/' + Path(os.getcwd()).name)).lower()
+#scraper.set_base_uri('http://gss-data.org.uk')
+#scraper.set_dataset_id(dataset_path)
+#scraper.dataset.title = 'Deaths in the care sector for England and Wales - Age standardised mortality rates by Age'
+#csvw_transform = CSVWMapping()
+#csvw_transform.set_csv(out / csvName)
+#csvw_transform.set_mapping(json.load(open('info.json')))
+#csvw_transform.set_dataset_uri(urljoin(scraper._base_uri, f'data/{scraper._dataset_id}'))
+#csvw_transform.write(out / f'{csvName}-metadata.json')
+#with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
+#    metadata.write(scraper.generate_trig())
+
+# +
+notes = ''
+
+# Output the data to CSV
+csvName = 'covid-19-deaths-in-the-care-sector-observations-leading-cause-groupings.csv'
+out = Path('out')
+out.mkdir(exist_ok=True)
+joined_dat4.drop_duplicates().to_csv(out / csvName, index = False)
+
+# +
+scraper.dataset.family = 'covid-19'
+scraper.dataset.description = 'Deaths in the care sector for England and Wales by leasing cause groupings.\n ' + notes
+
+# Output CSV-W metadata (validation, transform and DSD).
+# Output dataset metadata separately for now.
+
+import os
+from urllib.parse import urljoin
+
+dataset_path = pathify(os.environ.get('JOB_NAME', 'gss_data/covid-19/' + Path(os.getcwd()).name)).lower()
+scraper.set_base_uri('http://gss-data.org.uk')
+scraper.set_dataset_id(dataset_path)
+scraper.dataset.title = 'Deaths in the care sector for England and Wales by leading cause groupings'
+csvw_transform = CSVWMapping()
+csvw_transform.set_csv(out / csvName)
+csvw_transform.set_mapping(json.load(open('info.json')))
+csvw_transform.set_dataset_uri(urljoin(scraper._base_uri, f'data/{scraper._dataset_id}'))
+csvw_transform.write(out / f'{csvName}-metadata.json')
+with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
+    metadata.write(scraper.generate_trig())
+
+
+# +
+#notes = ''
+
+# Output the data to CSV
+#csvName = 'covid-19-deaths-in-the-care-sector-observations-main-preexisting-condition.csv'
+#out = Path('out')
+#out.mkdir(exist_ok=True)
+#oined_dat5.drop_duplicates().to_csv(out / csvName, index = False)
+
+# +
+#scraper.dataset.family = 'covid-19'
+#scraper.dataset.description = 'Proportion of Deaths in the care sector for England and Wales by by main pre-existing condition.\n ' + notes
+
+# Output CSV-W metadata (validation, transform and DSD).
+# Output dataset metadata separately for now.
+
+#import os
+#from urllib.parse import urljoin
+
+#dataset_path = pathify(os.environ.get('JOB_NAME', 'gss_data/covid-19/' + Path(os.getcwd()).name)).lower()
+#scraper.set_base_uri('http://gss-data.org.uk')
+#scraper.set_dataset_id(dataset_path)
+#scraper.dataset.title = 'Proportion of Deaths in the care sector for England and Wales by by main pre-existing condition'
+#csvw_transform = CSVWMapping()
+#csvw_transform.set_csv(out / csvName)
+#csvw_transform.set_mapping(json.load(open('info.json')))
+#csvw_transform.set_dataset_uri(urljoin(scraper._base_uri, f'data/{scraper._dataset_id}'))
+#csvw_transform.write(out / f'{csvName}-metadata.json')
+#with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
+#    metadata.write(scraper.generate_trig())
+
+# +
+#joined_dat5.head(3)
+
+# +
+#joined_dat = joined_dat5
+
+#info = json.load(open('info.json')) 
+#codelistcreation = info['transform']['codelists'] 
+#print(codelistcreation)
+#print("-------------------------------------------------------")
+#print(joined_dat.columns)
+
+# +
+#codeclass = CSVCodelists()
+#for cl in codelistcreation:
+#    if cl in joined_dat.columns:
+#        joined_dat[cl] = joined_dat[cl].str.replace("-"," ")
+#        joined_dat[cl] = joined_dat[cl].str.capitalize()
+#        codeclass.create_codelists(pd.DataFrame(joined_dat[cl]), 'codelists5', scraper.dataset.family, Path(os.getcwd()).name.lower())
+# -
+
+
 
 

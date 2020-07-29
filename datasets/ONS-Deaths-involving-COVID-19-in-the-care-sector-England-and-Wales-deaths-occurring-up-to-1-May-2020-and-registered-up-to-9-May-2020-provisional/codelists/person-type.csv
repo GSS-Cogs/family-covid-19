@@ -1,0 +1,4 @@
+Label,Notation,Parent Notation,Sort Priority
+Care home resident,care-home-resident,,1
+Non care home resident,non-care-home-resident,,2
+Home care service user,home-care-service-user,,3

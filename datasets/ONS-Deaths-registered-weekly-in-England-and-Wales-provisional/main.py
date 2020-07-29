@@ -1,15 +1,13 @@
+# -*- coding: utf-8 -*-
 # # ONS Deaths registered weekly in England and Wales, provisional 
 
-from gssutils import * 
-import json 
+# +
+import glob
 
-info = json.load(open('info.json')) 
-landingPage = info['landingPage'] 
-landingPage 
+py_files = [i for i in glob.glob('*.{}'.format('py'))]
 
-# + 
-#### Add transformation script here #### 
-
-scraper = Scraper(landingPage) 
-scraper.select_dataset(latest=True) 
-scraper 
+for i in py_files:
+    file = "'" + i + "'"
+    if file.startswith("'main") == True:
+        continue
+    %run $file

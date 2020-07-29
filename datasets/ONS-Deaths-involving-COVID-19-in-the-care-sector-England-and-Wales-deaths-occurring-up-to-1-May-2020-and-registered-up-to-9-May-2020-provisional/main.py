@@ -1474,6 +1474,7 @@ all_dat[ind]['Date of death'] = formatWeekEnding(pd.DataFrame(all_dat[ind]['Date
 del all_dat[ind]['Period']
 del all_dat[ind]['Week Number']
 all_dat[ind] = all_dat[ind].rename(columns={'Date of death': 'Period', 'Unit of Measure': 'Unit'})
+all_dat[ind]['Cause of death'] = 'COVID-19'
 
 all_dat[ind].insert(1, 'Source', 'ONS')
 all_dat[ind].insert(1, 'Place of death', 'All')

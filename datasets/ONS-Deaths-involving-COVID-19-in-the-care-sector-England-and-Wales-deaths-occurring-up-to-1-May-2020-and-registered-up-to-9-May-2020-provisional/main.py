@@ -1596,7 +1596,7 @@ joined_dat5 = joined_dat5.replace({"Sex": sexcode})
 # +
 joined_dat1and3 = joined_dat1and3.rename(columns={'Area': 'Local Authority'})
 for c in joined_dat1and3.columns:
-    if c != 'Value':
+    if (c != 'Value') & (c != 'Period'):
         try:
             joined_dat1and3[c] = joined_dat1and3[c].apply(pathify)
         except Exception as e:

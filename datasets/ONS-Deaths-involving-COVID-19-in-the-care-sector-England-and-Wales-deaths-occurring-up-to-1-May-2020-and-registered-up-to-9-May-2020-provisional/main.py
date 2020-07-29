@@ -1247,14 +1247,22 @@ if spec_me:
 # -
 
 # TABLE 1
-del all_dat[0]['Period']
+ind = 0
+del all_dat[ind]['Period']
+
+all_dat[ind]['Value'][all_dat[ind]['Value'] == ''] = 0 
+all_dat[ind]['Age'] = 'All ages'
+all_dat[ind]['Sex'] = 'Persons'
+all_dat[ind] = all_dat[ind].rename(columns={'Date of notification': 'Period', 'Unit of Measure': 'Unit'})
+all_dat[ind]['Source'] = all_dat[ind]['Source'].str.replace('data','').str.strip()
+
+all_dat[ind]['Period2'] = pd.to_datetime(all_dat[ind]['Period'].str.replace('day/','')) - timedelta(days=365)
+all_dat[ind]['Period2']  = 'day/' + all_dat[ind]['Period2'].dt.strftime('%Y-%m-%d')
+all_dat[ind]['Period'][all_dat[ind]['Cause of death'].str.strip() == '2019 Comparison'] = all_dat[ind]['Period2']
+del all_dat[ind]['Period2']
+#all_dat[0].head(50)
 
 # +
-all_dat[0]['Value'][all_dat[0]['Value'] == ''] = 0 
-all_dat[0]['Age'] = 'All ages'
-all_dat[0]['Sex'] = 'Persons'
-all_dat[0] = all_dat[0].rename(columns={'Date of notification': 'Period', 'Unit of Measure': 'Unit'})
-all_dat[0]['Source'] = all_dat[0]['Source'].str.replace('data','').str.strip()
 # TABLE 2
 all_dat[1]['Value'][all_dat[1]['Value'] == ''] = 0 
 all_dat[1] = all_dat[1].rename(columns={'Unit of Measure': 'Unit'})
@@ -1596,7 +1604,7 @@ joined_dat5 = joined_dat5.replace({"Sex": sexcode})
 # +
 joined_dat1and3 = joined_dat1and3.rename(columns={'Area': 'Local Authority'})
 for c in joined_dat1and3.columns:
-    if (c != 'Value') & (c != 'Period'):
+    if (c != 'Value') & (c != 'Period') & (c != 'Sex'):
         try:
             joined_dat1and3[c] = joined_dat1and3[c].apply(pathify)
         except Exception as e:

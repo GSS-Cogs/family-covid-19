@@ -1370,6 +1370,7 @@ all_dat[8].insert(1, 'Recorded Death Type', 'Date of Notification')
 
 # Table 10
 ind = 9
+all_dat[ind].head(10)
 
 all_dat[ind]['Date of notification'][all_dat[ind]['Date of notification'].str.strip() == 'day/Total'] = all_dat[ind]['Period']
 del all_dat[ind]['Period']
@@ -1377,8 +1378,10 @@ all_dat[ind] = all_dat[ind].rename(columns={'Date of notification': 'Period', 'U
 
 all_dat[ind].insert(1, 'Source', 'CQC')
 all_dat[ind].insert(1, 'Cause of death', 'All Causes')
-all_dat[ind].insert(1, 'Place of death', 'All')
 all_dat[ind].insert(1, 'Recorded Death Type', 'Date of Notification')
+all_dat[ind].insert(1, 'Place of death', 'All')
+all_dat[ind]['Place of death'][all_dat[ind]['Person Type'] == 'Care home resident'] = 'Care Home' 
+all_dat[ind]['Place of death'][all_dat[ind]['Person Type'] == 'Home care service user'] = 'Home care'
 
 # Table 11
 ind = 10

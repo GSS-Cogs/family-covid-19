@@ -220,8 +220,8 @@ for name, tab in tabs.items():
         sex = tab.filter(contains_string('Persons - UK')).expand(DOWN).is_not_blank() - tab.filter(contains_string('Deaths by age group'))  - remove_footnotes - age_group
         trace.Sex('Sex given at cell range: {}', var = excelRange(sex))
         
-        region = 'England and Wales'
-        trace.Region('Hardcoded value as: England and Wales to represent all values')
+        region = 'All UK'
+        trace.Region('Hardcoded value as: All UK')
         
         observations = age_group.fill(RIGHT).is_not_blank()
         dimensions = [

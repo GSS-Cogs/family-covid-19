@@ -78,6 +78,11 @@ trace = TransformTrace()
 df = pd.DataFrame()
 list(tabs)
 
+# +
+###  Sheet : Weekly figures 2020
+##### Structure : Week number, Week ended, Sex, Age Group, Region, Weekly registrations or occurrences , Death grouped by, Death cause, Value, Measure Type, Unit
+# -
+
 for name, tab in tabs.items():
     if (name == 'Weekly figures 2020'):
         columns=["Week number", "Week ended", "Weekly registrations or occurrences", "Sex", "Age group", "Region", "Death grouped by", "Death cause", "Marker", "Measure Type", "Unit"]

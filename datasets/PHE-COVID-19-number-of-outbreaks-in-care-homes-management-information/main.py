@@ -297,10 +297,13 @@ PHE by local authorities, regions and PHE centres.
 """
 
 # +
-#del joined_dat['Measure Type']
-#del joined_dat['Unit']
+joined_dat['Measure Type'] = 'Deaths'
+#joined_dat['Age'].unique()
 
-joined_dat.head(10)
+del joined_dat['Measure Type']
+del joined_dat['Unit']
+
+joined_dat['Value'] = pd.to_numeric(joined_dat['Value'], downcast='integer')
 # -
 
 # Output the data to CSV

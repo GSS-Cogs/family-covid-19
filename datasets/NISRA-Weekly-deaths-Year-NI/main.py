@@ -256,6 +256,13 @@ joined_dat['Measure Type'] = joined_dat['Measure Type'].apply(pathify)
 joined_dat['Unit'] = joined_dat['Unit'].apply(pathify)
 #joined_dat.head(10)
 
+# +
+del joined_dat['Measure Type']
+del joined_dat['Unit']
+
+joined_dat['Value'] = pd.to_numeric(joined_dat['Value'], downcast='integer')
+# -
+
 notes = """
 P Weekly published data are provisional.
 1 This data is based on the actual date of death, from those deaths registered by GRO up to 1st July 2020. All data in this table are subject to change, as some deaths will have occurred but haven’t been registered yet.  The first covid-19 death in Northern Ireland occurred on 18th March 2020.

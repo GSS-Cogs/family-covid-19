@@ -362,9 +362,6 @@ joined_dat['Unit'] = joined_dat['Unit'].apply(pathify)
 #joined_dat.head(10)
 
 # +
-joined_dat['Measure Type'] = 'Deaths'
-#joined_dat['Age'].unique()
-
 del joined_dat['Measure Type']
 del joined_dat['Unit']
 

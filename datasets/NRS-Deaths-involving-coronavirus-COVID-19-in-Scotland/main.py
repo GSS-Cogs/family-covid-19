@@ -70,6 +70,13 @@ for c in joined_dat.columns:
     if (c != 'Period') & (c != 'Measure Type') & (c != 'Sex') &(c != 'Unit') & (c != 'Value') :
         joined_dat[c] = joined_dat[c].map(lambda x: pathify(x))
 
+# +
+del joined_dat['Measure Type']
+del joined_dat['Unit']
+
+joined_dat['Value'] = pd.to_numeric(joined_dat['Value'], downcast='integer')
+# -
+
 # Output the data to CSV
 out = Path('out')
 out.mkdir(exist_ok=True)

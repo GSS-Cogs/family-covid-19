@@ -297,9 +297,6 @@ PHE by local authorities, regions and PHE centres.
 """
 
 # +
-joined_dat['Measure Type'] = 'Deaths'
-#joined_dat['Age'].unique()
-
 del joined_dat['Measure Type']
 del joined_dat['Unit']
 

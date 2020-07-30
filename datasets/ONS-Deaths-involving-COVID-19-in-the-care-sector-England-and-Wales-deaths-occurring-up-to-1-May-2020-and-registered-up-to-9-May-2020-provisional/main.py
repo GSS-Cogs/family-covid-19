@@ -1663,16 +1663,7 @@ joined_dat5 = joined_dat5.replace({"Age": agecode})
 del joined_dat1and3['Measure Type']
 del joined_dat1and3['Unit']
 
-del joined_dat2['Measure Type']
-del joined_dat2['Unit']
-
-del joined_dat4['Measure Type']
-del joined_dat4['Unit']
-
-del joined_dat5['Measure Type']
-del joined_dat5['Unit']
-
-#joined_dat5.head(10)
+joined_dat1and3['Value'] = pd.to_numeric(joined_dat1and3['Value'], downcast='integer')
 
 # +
 notes = ''
@@ -1704,7 +1695,11 @@ csvw_transform.set_dataset_uri(urljoin(scraper._base_uri, f'data/{scraper._datas
 csvw_transform.write(out / f'{csvName}-metadata.json')
 with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
     metadata.write(scraper.generate_trig())
+# -
 
+
+del joined_dat2['Measure Type']
+del joined_dat2['Unit']
 
 # +
 #notes = ''
@@ -1738,6 +1733,12 @@ with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
 #    metadata.write(scraper.generate_trig())
 
 # +
+del joined_dat4['Measure Type']
+del joined_dat4['Unit']
+
+joined_dat4['Value'] = pd.to_numeric(joined_dat4['Value'], downcast='integer')
+
+# +
 notes = ''
 
 # Output the data to CSV
@@ -1767,7 +1768,11 @@ csvw_transform.set_dataset_uri(urljoin(scraper._base_uri, f'data/{scraper._datas
 csvw_transform.write(out / f'{csvName}-metadata.json')
 with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
     metadata.write(scraper.generate_trig())
+# -
 
+
+del joined_dat5['Measure Type']
+del joined_dat5['Unit']
 
 # +
 #notes = ''

@@ -323,7 +323,7 @@ for tab in tabs:
 # %%
 
 
-infoData['transform']['transformStage'] = dictiList
+#infoData['transform']['transformStage'] = dictiList
 
 
 # %%
@@ -713,6 +713,12 @@ joined_dat1 = joined_dat1[joined_dat1['Unit'] == 'cumulative-count']
 #joined_dat1.head(10)
 
 # %%
+del joined_dat1['Measure Type']
+del joined_dat1['Unit']
+
+joined_dat1['Value'] = pd.to_numeric(joined_dat1['Value'], downcast='integer')
+
+# %%
 # Output the data to CSV
 csvName = 'suspected-covid-19-cases-observations.csv'
 out = Path('out')
@@ -740,6 +746,12 @@ csvw_transform.set_dataset_uri(urljoin(scraper._base_uri, f'data/{scraper._datas
 csvw_transform.write(out / f'{csvName}-metadata.json')
 with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
     metadata.write(scraper.generate_trig())
+
+# %%
+del joined_dat2['Measure Type']
+del joined_dat2['Unit']
+
+joined_dat2['Value'] = pd.to_numeric(joined_dat2['Value'], downcast='integer')
 
 # %%
 # Output the data to CSV

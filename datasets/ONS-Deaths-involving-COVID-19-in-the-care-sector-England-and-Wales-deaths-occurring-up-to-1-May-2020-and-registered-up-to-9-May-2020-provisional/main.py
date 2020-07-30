@@ -1702,7 +1702,7 @@ with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
 
 # +
 #scraper.dataset.family = 'covid-19'
-#scraper.dataset.description = 'Deaths in the care sector for England and Wales - Age standardised mortality rates by Age\n ' + notes
+#scraper.dataset.description = 'Deaths in the care sector for England and Wales - Age standardised mortality rates by Age & Sex\n ' + notes
 
 # Output CSV-W metadata (validation, transform and DSD).
 # Output dataset metadata separately for now.
@@ -1713,7 +1713,7 @@ with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
 #dataset_path = pathify(os.environ.get('JOB_NAME', 'gss_data/covid-19/' + Path(os.getcwd()).name)).lower()
 #scraper.set_base_uri('http://gss-data.org.uk')
 #scraper.set_dataset_id(dataset_path)
-#scraper.dataset.title = 'Deaths in the care sector for England and Wales - Age standardised mortality rates by Age'
+#scraper.dataset.title = 'Deaths in the care sector for England and Wales - Age standardised mortality rates by Age & Sex'
 #csvw_transform = CSVWMapping()
 #csvw_transform.set_csv(out / csvName)
 #csvw_transform.set_mapping(json.load(open('info.json')))
@@ -1765,7 +1765,7 @@ with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
 
 # +
 #scraper.dataset.family = 'covid-19'
-#scraper.dataset.description = 'Proportion of Deaths in the care sector for England and Wales by by main pre-existing condition.\n ' + notes
+#scraper.dataset.description = 'Proportion of Deaths in the care sector for England and Wales by main pre-existing condition.\n ' + notes
 
 # Output CSV-W metadata (validation, transform and DSD).
 # Output dataset metadata separately for now.
@@ -1776,7 +1776,7 @@ with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
 #dataset_path = pathify(os.environ.get('JOB_NAME', 'gss_data/covid-19/' + Path(os.getcwd()).name)).lower()
 #scraper.set_base_uri('http://gss-data.org.uk')
 #scraper.set_dataset_id(dataset_path)
-#scraper.dataset.title = 'Proportion of Deaths in the care sector for England and Wales by by main pre-existing condition'
+#scraper.dataset.title = 'Proportion of Deaths in the care sector for England and Wales by main pre-existing condition'
 #csvw_transform = CSVWMapping()
 #csvw_transform.set_csv(out / csvName)
 #csvw_transform.set_mapping(json.load(open('info.json')))
@@ -1807,11 +1807,7 @@ with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
 # -
 
 
+print(joined_dat5.columns)
 
 
-
-""
-
-
-""
 

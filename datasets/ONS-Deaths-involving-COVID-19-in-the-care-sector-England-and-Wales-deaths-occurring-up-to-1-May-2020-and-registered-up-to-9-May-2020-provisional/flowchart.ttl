@@ -37,29 +37,36 @@ cogs:PMD a owl:Class ;
 cogs:Rename a owl:Class ;
   rdfs:subClassOf cogs:SoftwarePackage ;
   rdfs:label "Rename & Add" ;
-.
+  .
+
 ###########################################################################################################
 
 cogsgit:top-level a cogs:LandingPage ;
   rdfs:label "Landing Page" ;
-  rdfs:label2 "<b>TITLE HERE</b>" ;
-  rdfs:comment "LINK HERE";
-  cogs:scrape cogsgit:sheet1 ;
+  rdfs:label2 "Deaths involving COVID-19 in the care sector, England and Wales";
+  rdfs:comment <https://www.ons.gov.uk/peoplepopulationandcommunity/birthsdeathsandmarriages/deaths/datasets/deathsinvolvingcovid19inthecaresectorenglandandwales>;
+  cogs:splits cogsgit:sheet1 ;
 .
 
-cogsgit:sheet1 a cogs:Sheets ; rdfs:label "SHEET NAME HERE" ; rdfs:comment "SHEET TITLE HERE" ; cogs:transforms cogsgit:columns1 ; .
+cogsgit:sheet1 a cogs:Sheets ; rdfs:label "Sheets" ; rdfs:label2 "Measures Deaths in the care sector from 3 sources (ONS, CQC, CIW)" ; rdfs:comment "Table 1, Table 2, Table 5, Table 6, Table 7, Table 8, Table 9, Table 10, Table 11, Table 12, Table 13, Table 14, Table 15, Table 16" ; cogs:transforms cogsgit:dataset1 ; .
+cogsgit:sheet2 a cogs:Sheets ; rdfs:label "Sheets" ; rdfs:label2 "Measures Age standardised mortality rates by Age & Sex" ; rdfs:comment "Table 3, Table 4" ; cogs:transforms cogsgit:dataset2 ; .
+cogsgit:sheet3 a cogs:Sheets ; rdfs:label "Sheets" ; rdfs:label2 "Measures Deaths by leading cause groupings" ; rdfs:comment "Table 17" ; cogs:transforms cogsgit:dataset3 ; .
+cogsgit:sheet4 a cogs:Sheets ; rdfs:label "Sheets" ; rdfs:label2 "Measures proportion of deaths Deaths from COVID-19 by main pre-existing condition" ; rdfs:comment "Table 18" ; cogs:transforms cogsgit:dataset4 ; .
 
+cogsgit:dataset1 a cogs:Datasets ; rdfs:label "Output Dataset" ; rdfs:comment "Deaths involving COVID-19 in the care sector for England and Wales" ; cogs:outputs cogsgit:columns1 ; .
+cogsgit:dataset2 a cogs:Datasets ; rdfs:label "Output Dataset" ; rdfs:comment "Deaths in the care sector for England and Wales - Age standardised mortality rates by Age & Sex" ; cogs:outputs cogsgit:columns2 ; .
+cogsgit:dataset3 a cogs:Datasets ; rdfs:label "Output Dataset" ; rdfs:comment "Deaths in the care sector for England and Wales by leading cause groupings" ; cogs:outputs cogsgit:columns3 ; .
+cogsgit:dataset4 a cogs:Datasets ; rdfs:label "Output Dataset" ; rdfs:comment "Proportion of Deaths in the care sector for England and Wales by main pre-existing condition" ; cogs:outputs cogsgit:columns4 ; .
 
-cogsgit:columns1 a cogs:Columns ; rdfs:label "Output Table 1" ; rdfs:comment "COLUMN LIST HERE" ; cogs:harmonise cogsgit:rename1 ; .
-
-
-cogsgit:rename1 a cogs:Rename ; rdfs:label "Rename & Add" ; rdfs:comment "Not yet specified" ; cogs:joins cogsgit:dataset1 ; .
-
-
-cogsgit:dataset1 a cogs:Datasets ; rdfs:label "Dataset Name 1" ; rdfs:comment "Dataset Name" ; cogs:outputs cogsgit:pmd1 ; .
+cogsgit:columns1 a cogs:Columns ; rdfs:label "Table" ; rdfs:comment "Period, Recorded Death Type, Source, Person Type, Sex, Age, Area, Place of death, Cause of death, Measure Type, Unit, Value" ; cogs:uploads cogsgit:pmd1; .
+cogsgit:columns2 a cogs:Columns ; rdfs:label "Table" ; rdfs:comment "Period, Recorded Death Type, Source, Cause of death, Sex, Age, Local Authority, Person Type, Lower 95% CI, Upper 95% CI, Number of deaths, Measure Type, Unit, Value" ; cogs:uploads cogsgit:pmd1; .
+cogsgit:columns3 a cogs:Columns ; rdfs:label "Table" ; rdfs:comment "Period, Leading cause of Death, Sex, Area, Measure Type, Unit, Value" ; cogs:uploads cogsgit:pmd1; .
+cogsgit:columns4 a cogs:Columns ; rdfs:label "Table" ; rdfs:comment "Period, Main Pre-existing Condition, Sex, Age, Local Authority, Measure Type, Unit, Value" ; cogs:uploads cogsgit:pmd1; .
 
 cogsgit:pmd1 a cogs:PMD ;
-  rdfs:label "PMD" ;
-  rdfs:comment "Publish my Data: http://gss-data.org.uk/data/search" ;
+  rdfs:label "Publish my Data" ;
+  rdfs:comment <https://staging.gss-data.org.uk/datasets> ;
 .
+
+
 ###################################################################################################

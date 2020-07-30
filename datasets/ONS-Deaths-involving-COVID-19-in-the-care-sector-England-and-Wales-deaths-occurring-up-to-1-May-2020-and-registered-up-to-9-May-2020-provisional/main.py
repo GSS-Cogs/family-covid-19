@@ -1807,7 +1807,7 @@ with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
 # -
 
 
-print(joined_dat5.columns)
+
 
 
 

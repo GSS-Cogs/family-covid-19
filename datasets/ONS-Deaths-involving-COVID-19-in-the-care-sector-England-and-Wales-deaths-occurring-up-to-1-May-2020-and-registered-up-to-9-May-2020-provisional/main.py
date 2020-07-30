@@ -1395,12 +1395,10 @@ all_dat[ind].insert(1, 'Place of death', 'All')
 all_dat[ind].insert(1, 'Recorded Death Type', 'Date of Death')
 all_dat[ind].insert(1, 'Person Type', 'Care Home Resident')
 
-##########################################################################################
-# Removing wales data as it does not match up with the same data in Table 1
-# Question sent to BAs about this
+""
+#Removing wales data as it does not match up with the same data in Table 1 Question sent to BAs about this
 all_dat[ind] = all_dat[ind][all_dat[ind]['Area'] != 'W92000004']
-##########################################################################################
-
+""
 def formatWeekEnding(col):
     try:
         c = col.columns[0]
@@ -1634,7 +1632,7 @@ joined_dat1and3 = joined_dat1and3.replace({"Age": agecode})
 # +
 joined_dat2 = joined_dat2.rename(columns={'Area': 'Local Authority'})
 for c in joined_dat2.columns:
-    if c != 'Value':
+    if (c != 'Value') & (c != 'Period') & (c != 'Sex'):
         try:
             joined_dat2[c] = joined_dat2[c].apply(pathify)
         except Exception as e:
@@ -1645,7 +1643,7 @@ joined_dat2 = joined_dat2.replace({"Age": agecode})
 
 joined_dat4 = joined_dat4.rename(columns={'Area': 'Local Authority'})
 for c in joined_dat4.columns:
-    if c != 'Value':
+    if (c != 'Value') & (c != 'Period') & (c != 'Sex'):
         try:
             joined_dat4[c] = joined_dat4[c].apply(pathify)
         except Exception as e:
@@ -1654,7 +1652,7 @@ for c in joined_dat4.columns:
 joined_dat5 = joined_dat5.rename(columns={'Age Group': 'Age'})
 joined_dat5 = joined_dat5.rename(columns={'Area': 'Local Authority'})
 for c in joined_dat5.columns:
-    if c != 'Value':
+    if (c != 'Value') & (c != 'Period') & (c != 'Sex'):
         try:
             joined_dat5[c] = joined_dat5[c].apply(pathify)
         except Exception as e:
@@ -1810,4 +1808,10 @@ with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
 
 
 
+
+
+""
+
+
+""
 

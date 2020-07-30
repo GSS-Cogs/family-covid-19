@@ -296,6 +296,13 @@ Weekly number and percentage of care homes reporting a suspected or confirmed ou
 PHE by local authorities, regions and PHE centres.
 """
 
+# +
+#del joined_dat['Measure Type']
+#del joined_dat['Unit']
+
+joined_dat.head(10)
+# -
+
 # Output the data to CSV
 csvName = 'observations.csv'
 out = Path('out')

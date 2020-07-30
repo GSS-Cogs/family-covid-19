@@ -1260,7 +1260,11 @@ all_dat[ind]['Period2'] = pd.to_datetime(all_dat[ind]['Period'].str.replace('day
 all_dat[ind]['Period2']  = 'day/' + all_dat[ind]['Period2'].dt.strftime('%Y-%m-%d')
 all_dat[ind]['Period'][all_dat[ind]['Cause of death'].str.strip() == '2019 Comparison'] = all_dat[ind]['Period2']
 del all_dat[ind]['Period2']
-#all_dat[0].head(50)
+
+#------------------------------------------------------------------------------------------------------------------
+# REMOVE PROPORTIONS UNTIL JENKINS PIPELINES CAN HANDLE MULTIPLE UNITS
+all_dat[1] = all_dat[1][all_dat[1]['Cause of death'].str.strip() != 'Proportion of deaths involving COVID-19 (%)']
+#------------------------------------------------------------------------------------------------------------------
 
 # +
 # TABLE 2
@@ -1314,7 +1318,9 @@ joined_dat2['Person Type'][joined_dat2['Person Type'] == 'Number of deaths of no
 
 joined_dat2.insert(1, 'Source', 'ONS')
 joined_dat2.insert(1, 'Recorded Death Type', 'Date of Death')
-#joined_dat2.head(10)
+
+joined_dat2.head(10)
+joined_dat2['Measure Type'].unique()
 
 # Table 5
 all_dat[4]['Date of death'][all_dat[4]['Date of death'] == 'day/Total'] = all_dat[4]['Period']

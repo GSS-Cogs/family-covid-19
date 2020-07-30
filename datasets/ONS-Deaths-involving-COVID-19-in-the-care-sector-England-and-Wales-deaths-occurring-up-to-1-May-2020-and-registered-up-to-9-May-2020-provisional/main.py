@@ -1660,6 +1660,21 @@ for c in joined_dat5.columns:
 joined_dat5 = joined_dat5.replace({"Age": agecode})
 
 # +
+del joined_dat1and3['Measure Type']
+del joined_dat1and3['Unit']
+
+del joined_dat2['Measure Type']
+del joined_dat2['Unit']
+
+del joined_dat4['Measure Type']
+del joined_dat4['Unit']
+
+del joined_dat5['Measure Type']
+del joined_dat5['Unit']
+
+#joined_dat5.head(10)
+
+# +
 notes = ''
 
 # Output the data to CSV

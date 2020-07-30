@@ -146,15 +146,8 @@ joined_dat['Age'] = joined_dat['Age'].replace('>=7 days and < 1 year','more than
 joined_dat['Age'] = joined_dat['Age'].replace('85+','85 plus')
 joined_dat['Age'] = joined_dat['Age'].apply(pathify)
 
-# +
 joined_dat['Measure Type'] = 'Deaths'
-#joined_dat['Age'].unique()
-
-del joined_dat['Measure Type']
-del joined_dat['Unit']
-
-joined_dat['Value'] = pd.to_numeric(joined_dat['Value'], downcast='integer')
-# -
+joined_dat['Age'].unique()
 
 # Output the data to CSV
 csvName = 'registered-date-of-death-covid-19-observations.csv'
@@ -262,16 +255,6 @@ joined_dat['Unit'] = 'Count'
 joined_dat['Measure Type'] = joined_dat['Measure Type'].apply(pathify)
 joined_dat['Unit'] = joined_dat['Unit'].apply(pathify)
 #joined_dat.head(10)
-
-# +
-joined_dat['Measure Type'] = 'Deaths'
-#joined_dat['Age'].unique()
-
-del joined_dat['Measure Type']
-del joined_dat['Unit']
-
-joined_dat['Value'] = pd.to_numeric(joined_dat['Value'], downcast='integer')
-# -
 
 notes = """
 P Weekly published data are provisional.

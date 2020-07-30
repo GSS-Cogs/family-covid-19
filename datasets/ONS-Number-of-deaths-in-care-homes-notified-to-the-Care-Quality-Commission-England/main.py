@@ -360,11 +360,16 @@ joined_dat['Unit'] = joined_dat['Unit'].apply(pathify)
 #joined_dat = joined_dat.rename(columns={'Cause of Death' : 'ONS Cause of Death'})
 #joined_dat = joined_dat.rename(columns={'Location of Death' : 'ONS Location of Death'})
 #joined_dat.head(10)
-# -
+
+# +
+joined_dat['Measure Type'] = 'Deaths'
+#joined_dat['Age'].unique()
 
 del joined_dat['Measure Type']
 del joined_dat['Unit']
-joined_dat.head(10)
+
+joined_dat['Value'] = pd.to_numeric(joined_dat['Value'], downcast='integer')
+# -
 
 # Output the data to CSV
 csvName = 'observations.csv'

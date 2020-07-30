@@ -362,6 +362,10 @@ joined_dat['Unit'] = joined_dat['Unit'].apply(pathify)
 #joined_dat.head(10)
 # -
 
+del joined_dat['Measure Type']
+del joined_dat['Unit']
+joined_dat.head(10)
+
 # Output the data to CSV
 csvName = 'observations.csv'
 out = Path('out')

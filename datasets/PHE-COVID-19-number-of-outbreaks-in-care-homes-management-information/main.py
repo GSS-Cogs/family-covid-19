@@ -296,12 +296,10 @@ Weekly number and percentage of care homes reporting a suspected or confirmed ou
 PHE by local authorities, regions and PHE centres.
 """
 
-# +
 del joined_dat['Measure Type']
 del joined_dat['Unit']
-
+joined_dat.rename(columns={'Area Unit' : 'Unit', 'Area code': 'Geography Code', 'Area Type': 'Region Type'}, inplace=True)
 joined_dat['Value'] = pd.to_numeric(joined_dat['Value'], downcast='integer')
-# -
 
 # Output the data to CSV
 csvName = 'observations.csv'
@@ -330,14 +328,19 @@ csvw_transform.set_dataset_uri(urljoin(scrape._base_uri, f'data/{scrape._dataset
 csvw_transform.write(out / f'{csvName}-metadata.json')
 with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
     metadata.write(scrape.generate_trig())
-# -
+# +
+#info = json.load(open('info.json')) 
+#codelistcreation = info['transform']['codelists'] 
+#print(codelistcreation)
+#print("-------------------------------------------------------")
+#print(joined_dat.columns)
 
+#codeclass = CSVCodelists()
+#for cl in codelistcreation:
+#    if cl in joined_dat.columns:
+#        joined_dat[cl] = joined_dat[cl].str.replace("-"," ")
+#        joined_dat[cl] = joined_dat[cl].str.capitalize()
+#        codeclass.create_codelists(pd.DataFrame(joined_dat[cl]), 'codelists', scrape.dataset.family, Path(os.getcwd()).name.lower())
 
-
-
-
-""
-joined_dat.head(60)
-
-""
-
+# +
+#joined_dat.head(60)

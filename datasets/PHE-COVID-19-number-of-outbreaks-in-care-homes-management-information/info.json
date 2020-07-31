@@ -27,16 +27,17 @@
                 "dimension": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
                 "value": "http://reference.data.gov.uk/id/{+period}"
             },
-            "Area code": {
+            "Geography Code": {
                 "dimension": "http://purl.org/linked-data/sdmx/2009/dimension#refArea",
-                "value": "http://statistics.data.gov.uk/id/statistical-geography/{area_code}"
+                "value": "http://statistics.data.gov.uk/id/statistical-geography/{geography_code}"
             },
             "Value": {
                 "unit": "http://gss-data.org.uk/def/concept/measurement-units/count",
                 "measure": "http://gss-data.org.uk/def/measure/care-home-covid-19-outbreaks",
-                "datatype": "double"
+                "datatype": "integer"
             }
-        }
+        },
+        "codelists": ["Region Type"]
     },
     "sizingNotes": "Simple table structure, although there are hidden comments in column O & P  on  Upper-tier and Lower-tier spreadsheets. 'Number stored as Text'",
     "notes": ""

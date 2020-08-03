@@ -73,10 +73,12 @@ def date_time (date):
 # -
 
 scrape = Scraper(seed="info.json")   
-scrape.distributions[0].title = "PHE COVID-19 number of outbreaks in care homes – management information"
 scrape
 
-tabs = { tab.name: tab for tab in scrape.distributions[0].as_databaker() }
+dist = scrape.distribution(mediaType=ODS)
+dist
+
+tabs = { tab.name: tab for tab in dist.as_databaker() }
 datasetTitle = 'PHE COVID-19 number of outbreaks in care homes – management information'
 trace = TransformTrace()
 df = pd.DataFrame()
@@ -310,7 +312,7 @@ joined_dat.drop_duplicates().to_csv(out / csvName, index = False)
 
 # +
 scrape.dataset.family = 'covid-19'
-scrape.dataset.description = 'PHE COVID-19 number of outbreaks in care homes – Management Information/n' + notes
+#scrape.dataset.description = 'PHE COVID-19 number of outbreaks in care homes – Management Information/n' + notes
 
 # Output CSV-W metadata (validation, transform and DSD).
 # Output dataset metadata separately for now.
@@ -321,7 +323,7 @@ from urllib.parse import urljoin
 dataset_path = pathify(os.environ.get('JOB_NAME', 'gss_data/covid-19/' + Path(os.getcwd()).name)) + '-' + pathify(csvName)
 scrape.set_base_uri('http://gss-data.org.uk')
 scrape.set_dataset_id(dataset_path)
-scrape.dataset.title = 'PHE COVID-19 number of outbreaks in care homes – Management Information'
+#scrape.dataset.title = 'PHE COVID-19 number of outbreaks in care homes – Management Information'
 csvw_transform = CSVWMapping()
 csvw_transform.set_csv(out / csvName)
 csvw_transform.set_mapping(json.load(open('info.json')))

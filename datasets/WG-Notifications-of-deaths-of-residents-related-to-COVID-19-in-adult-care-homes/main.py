@@ -92,6 +92,7 @@ t1
 t2 = tables['table_2 - notifications-of-deaths-of-adult-care-home-residents-with-confirmed-or-suspected-covid-19-by-location-of-death'].copy()
 t2.drop(columns=['Measure Type', 'Unit'], inplace=True)
 t2.rename(columns={'Notification Date Range': 'Notification Date'}, inplace=True)
+t2['Notification Date'] = t2['Notification Date'].map(lambda x: f'gregorian-interval/{x}')
 t2['Value'] = pd.to_numeric(t2['Value'], downcast='integer')
 t2['Cause of Death'] = 'covid-total'
 t2 = add_hidden(t2)

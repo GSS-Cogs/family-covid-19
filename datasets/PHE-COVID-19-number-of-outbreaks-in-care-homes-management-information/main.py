@@ -284,17 +284,18 @@ del main_dat1, temp_dat1
 joined_dat = pd.concat([tidy_1_2, tidy_3_4])
 joined_dat = joined_dat.rename(columns={'Categorised by': 'Area Type'})
 
+# +
 ##################################################################################################
 # #### REMOVING PERCENTAGE VALUES FOR NOW AS JENKINS CAN'T CURRENTLY COPE WITH MORE THAN ONE ######
 joined_dat = joined_dat[joined_dat['Unit'] != 'percentage']
 joined_dat['Area Type'] = joined_dat['Area Type'].apply(pathify)
-joined_dat['Area code'] = joined_dat['Area code'].apply(pathify)
 joined_dat['Area Unit'] = joined_dat['Unit'].apply(pathify)
-""
+
 notes = """
 Weekly number and percentage of care homes reporting a suspected or confirmed outbreak of COVID-19 to 
 PHE by local authorities, regions and PHE centres.
 """
+# -
 
 del joined_dat['Measure Type']
 del joined_dat['Unit']
@@ -344,3 +345,6 @@ with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
 
 # +
 #joined_dat.head(60)
+# -
+
+

@@ -19,7 +19,8 @@
             "To Do",
             "Priority"
         ],
-        "airtable": "recULCs4TO2Y5P34G"
+        "airtable": "recULCs4TO2Y5P34G",
+        "main_issue": 173
     },
     "sizingNotes": "Data is in both open and CSV format, so should be straightforward transfer into PMD.",
     "notes": ""

@@ -547,7 +547,6 @@ for tab in tabs_from_named(tabs, ["Table 3", "Table 4"]):
             df[attribute] = ""
             for _, row in df[df["TEMP_FOR_ATTRIBUTES"] == attribute].iterrows():
                 df[attribute][df["Composite"] == row["Composite"]] = row["Value"]
-        # df = df[df["TEMP_FOR_ATTRIBUTES"] == 
 
         # sort out messy categories
         df["Category"] = df["Category"].map(lambda x: x.split(",")[0])
@@ -578,7 +577,7 @@ for tab in tabs_from_named(tabs, ["Table 3", "Table 4"]):
         raise Exception(f"Problem encountered processing cube '{cube3n4_title}' from tab '{tab.name}'.") from e
         
 df = trace.combine_and_trace(cube3n4_title, cube3n4_title)
-df.to_csv(f"{pathify(cube3n4_title)}.csv", index=False)
+#df.to_csv(f"{pathify(cube3n4_title)}.csv", index=False)
 # -
 
 df.head(6)

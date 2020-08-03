@@ -1,0 +1,26 @@
+{
+    "title": "Daily COVID-19 Cases in Scotland",
+    "publisher": "Public Health Scotland",
+    "description": "This dataset replaces the \"COVID-19 Statistical report\" dataset and provides information on number of new daily confirmed cases, negative cases and deaths from novel coronavirus (COVID-19) in Scotland, including cumulative totals and population rates at Scotland, NHS Board and Council Area levels.",
+    "landingPage": "https://www.opendata.nhs.scot/dataset/covid-19-in-scotland",
+    "datasetNotes": [
+        "On landing page, scroll down to dataset under heading \"Data and Resources\"."
+    ],
+    "published": "2020-08-02",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": "CSV, OD",
+        "stage": "Documented"
+    },
+    "transform": {
+        "stage": [
+            "To Do",
+            "Priority"
+        ],
+        "airtable": "recULCs4TO2Y5P34G"
+    },
+    "sizingNotes": "Data is in both open and CSV format, so should be straightforward transfer into PMD.",
+    "notes": ""
+}

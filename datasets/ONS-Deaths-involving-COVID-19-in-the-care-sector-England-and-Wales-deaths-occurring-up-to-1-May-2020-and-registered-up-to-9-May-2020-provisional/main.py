@@ -1249,6 +1249,7 @@ if spec_me:
 # TABLE 1
 ind = 0
 del all_dat[ind]['Period']
+all_dat[ind]['Measure Type'] = 'Cumulative count'
 
 all_dat[ind]['Value'][all_dat[ind]['Value'] == ''] = 0 
 all_dat[ind]['Age'] = 'All ages'
@@ -1276,13 +1277,18 @@ all_dat[1]['Source'] = 'ONS'
 cols = ['Period','Source','Cause of death','Sex','Age','Area','Measure Type','Unit','Marker','Value']
 all_dat[0] = all_dat[0][cols]
 all_dat[1] = all_dat[1][cols]
-joined_dat1 = pd.concat([all_dat[0], all_dat[1]])
+
+joined_dat0 = all_dat[0]
+joined_dat1 = all_dat[1]
 joined_dat1['Unit'] = 'Deaths'
 
+joined_dat0.insert(1, 'Recorded Death Type', '')
 joined_dat1.insert(1, 'Recorded Death Type', '')
+joined_dat0['Recorded Death Type'][joined_dat0['Source'] == 'ONS'] = 'Date of Death'
+joined_dat0['Recorded Death Type'][joined_dat0['Source'] == 'CQC'] = 'Date of Notification'
+joined_dat0['Recorded Death Type'][joined_dat0['Source'] == 'CIW'] = 'Date of Notification'
+
 joined_dat1['Recorded Death Type'][joined_dat1['Source'] == 'ONS'] = 'Date of Death'
-joined_dat1['Recorded Death Type'][joined_dat1['Source'] == 'CQC'] = 'Date of Notification'
-joined_dat1['Recorded Death Type'][joined_dat1['Source'] == 'CIW'] = 'Date of Notification'
 
 # +
 # TABLE 3
@@ -1386,11 +1392,10 @@ all_dat[ind].insert(1, 'Source', 'CQC')
 all_dat[ind].insert(1, 'Cause of death', 'All Causes')
 all_dat[ind].insert(1, 'Recorded Death Type', 'Date of Notification')
 all_dat[ind].insert(1, 'Place of death', 'All')
-all_dat[ind]['Place of death'][all_dat[ind]['Person Type'] == 'Care home resident'] = 'Care Home' 
-all_dat[ind]['Place of death'][all_dat[ind]['Person Type'] == 'Home care service user'] = 'Home care'
 
 # Table 11
 ind = 10
+all_dat[ind].head(10)
 
 all_dat[ind]['Date of notification'][all_dat[ind]['Date of notification'].str.strip() == 'day/Total'] = all_dat[ind]['Period']
 del all_dat[ind]['Period']
@@ -1398,7 +1403,7 @@ all_dat[ind] = all_dat[ind].rename(columns={'Date of notification': 'Period', 'U
 
 all_dat[ind].insert(1, 'Source', 'ONS')
 all_dat[ind].insert(1, 'Place of death', 'All')
-all_dat[ind].insert(1, 'Recorded Death Type', 'Date of Death')
+all_dat[ind].insert(1, 'Recorded Death Type', 'Date of Notification')
 all_dat[ind].insert(1, 'Person Type', 'Care Home Resident')
 
 ""
@@ -1549,9 +1554,9 @@ for i in range(4, 15):
         #print(cols)
         #print('------------------------------------------------------------')
         all_dat[i] = all_dat[i][cols]
-        if i != 9:
-            joined_dat3 = pd.concat([joined_dat3, all_dat[i]])
-            print(str(i) + ': ' + str(joined_dat3['Value'].count()))
+        #if i != 9:
+        joined_dat3 = pd.concat([joined_dat3, all_dat[i]])
+        print(str(i) + ': ' + str(joined_dat3['Value'].count()))
 
 
 # Table 17
@@ -1616,11 +1621,21 @@ joined_dat1and3 = joined_dat1and3.replace({"Sex": sexcode})
 joined_dat2 = joined_dat2.replace({"Sex": sexcode})
 joined_dat4 = joined_dat4.replace({"Sex": sexcode})
 joined_dat5 = joined_dat5.replace({"Sex": sexcode})
+# -
+
+joined_dat0 = joined_dat0.rename(columns={'Area': 'Local Authority'})
+for c in joined_dat0.columns:
+    if (c != 'Value') & (c != 'Period') & (c != 'Sex') & (c != 'Local Authority'):
+        try:
+            joined_dat0[c] = joined_dat0[c].apply(pathify)
+        except Exception as e:
+            i = 1
+#joined_dat0.head()
 
 # +
 joined_dat1and3 = joined_dat1and3.rename(columns={'Area': 'Local Authority'})
 for c in joined_dat1and3.columns:
-    if (c != 'Value') & (c != 'Period') & (c != 'Sex'):
+    if (c != 'Value') & (c != 'Period') & (c != 'Sex') & (c != 'Local Authority'):
         try:
             joined_dat1and3[c] = joined_dat1and3[c].apply(pathify)
         except Exception as e:
@@ -1638,7 +1653,7 @@ joined_dat1and3 = joined_dat1and3.replace({"Age": agecode})
 # +
 joined_dat2 = joined_dat2.rename(columns={'Area': 'Local Authority'})
 for c in joined_dat2.columns:
-    if (c != 'Value') & (c != 'Period') & (c != 'Sex'):
+    if (c != 'Value') & (c != 'Period') & (c != 'Sex') & (c != 'Local Authority'):
         try:
             joined_dat2[c] = joined_dat2[c].apply(pathify)
         except Exception as e:
@@ -1649,7 +1664,7 @@ joined_dat2 = joined_dat2.replace({"Age": agecode})
 
 joined_dat4 = joined_dat4.rename(columns={'Area': 'Local Authority'})
 for c in joined_dat4.columns:
-    if (c != 'Value') & (c != 'Period') & (c != 'Sex'):
+    if (c != 'Value') & (c != 'Period') & (c != 'Sex') & (c != 'Local Authority'):
         try:
             joined_dat4[c] = joined_dat4[c].apply(pathify)
         except Exception as e:
@@ -1658,12 +1673,49 @@ for c in joined_dat4.columns:
 joined_dat5 = joined_dat5.rename(columns={'Age Group': 'Age'})
 joined_dat5 = joined_dat5.rename(columns={'Area': 'Local Authority'})
 for c in joined_dat5.columns:
-    if (c != 'Value') & (c != 'Period') & (c != 'Sex'):
+    if (c != 'Value') & (c != 'Period') & (c != 'Sex') & (c != 'Local Authority'):
         try:
             joined_dat5[c] = joined_dat5[c].apply(pathify)
         except Exception as e:
             i = 1
 joined_dat5 = joined_dat5.replace({"Age": agecode})
+
+# +
+del joined_dat0['Measure Type']
+del joined_dat0['Unit']
+
+joined_dat0['Value'] = pd.to_numeric(joined_dat0['Value'], downcast='integer')
+
+# +
+#notes = ''
+
+# Output the data to CSV
+#csvName = 'cumulative-covid-19-deaths-in-the-care-sector-observations.csv'
+#out = Path('out')
+#out.mkdir(exist_ok=True)
+#joined_dat1and3.drop_duplicates().to_csv(out / csvName, index = False)
+
+# +
+#scraper.dataset.family = 'covid-19'
+#scraper.dataset.description = 'Cumulative Deaths involving COVID-19 in the care sector for England and Wales.\n ' + notes
+
+# Output CSV-W metadata (validation, transform and DSD).
+# Output dataset metadata separately for now.
+
+#import os
+#from urllib.parse import urljoin
+
+#dataset_path = pathify(os.environ.get('JOB_NAME', 'gss_data/covid-19/' + Path(os.getcwd()).name)).lower()
+#scraper.set_base_uri('http://gss-data.org.uk')
+#scraper.set_dataset_id(dataset_path)
+#scraper.dataset.title = 'Cumulative Deaths involving COVID-19 in the care sector for England and Wales'
+#csvw_transform = CSVWMapping()
+#csvw_transform.set_csv(out / csvName)
+#csvw_transform.set_mapping(json.load(open('info.json')))
+#csvw_transform.set_dataset_uri(urljoin(scraper._base_uri, f'data/{scraper._dataset_id}'))
+#csvw_transform.write(out / f'{csvName}-metadata.json')
+#with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
+#    metadata.write(scraper.generate_trig())
 
 # +
 del joined_dat1and3['Measure Type']
@@ -1815,6 +1867,7 @@ del joined_dat5['Unit']
 #joined_dat5.head(3)
 
 # +
+# CODE TO CREATE CODELISTS, DOES NOT NEED TO BE UNCOMMENTED
 #joined_dat = joined_dat5
 
 #info = json.load(open('info.json')) 
@@ -1835,5 +1888,9 @@ del joined_dat5['Unit']
 
 
 
+
+
+
+print(list(joined_dat5['Period'].unique()))
 
 

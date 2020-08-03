@@ -547,6 +547,7 @@ for tab in tabs_from_named(tabs, ["Table 3", "Table 4"]):
             df[attribute] = ""
             for _, row in df[df["TEMP_FOR_ATTRIBUTES"] == attribute].iterrows():
                 df[attribute][df["Composite"] == row["Composite"]] = row["Value"]
+        # df = df[df["TEMP_FOR_ATTRIBUTES"] == 
 
         # sort out messy categories
         df["Category"] = df["Category"].map(lambda x: x.split(",")[0])
@@ -563,11 +564,13 @@ for tab in tabs_from_named(tabs, ["Table 3", "Table 4"]):
                       " Took everything to the left of the first comma")
                 
         # Tidy up temporary nonsence
+        df = df[df["TEMP_FOR_ATTRIBUTES"] == "Number of deaths"]
         df = df.drop(["Composite", "TEMP_FOR_ATTRIBUTES"], axis=1)
         
         # Codeify area column
         df["Area"] = df["Area"].apply(get_regions)
         trace.Area("Converted all area labels to 9 digit ONS codes.")
+        
         all_dat.append(df)
         trace.store(cube3n4_title, df)
         
@@ -575,7 +578,7 @@ for tab in tabs_from_named(tabs, ["Table 3", "Table 4"]):
         raise Exception(f"Problem encountered processing cube '{cube3n4_title}' from tab '{tab.name}'.") from e
         
 df = trace.combine_and_trace(cube3n4_title, cube3n4_title)
-#df.to_csv(f"{pathify(cube3n4_title)}.csv", index=False)
+df.to_csv(f"{pathify(cube3n4_title)}.csv", index=False)
 # -
 
 df.head(6)

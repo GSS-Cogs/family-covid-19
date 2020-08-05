@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[27]:
+# In[111]:
 
 
 from gssutils import *
@@ -141,7 +141,7 @@ def infoNotes(notes):
         info.write(json.dumps(infoData, indent=4).replace('null', '"Not Applicable"'))
 
 
-# In[28]:
+# In[112]:
 
 
 info = json.load(open('info.json'))
@@ -149,21 +149,21 @@ landingPage = info['landingPage']
 landingPage
 
 
-# In[29]:
+# In[113]:
 
 
 scraper = Scraper(landingPage)
 scraper
 
 
-# In[30]:
+# In[114]:
 
 
 distribution = scraper.distributions[0]
 display(distribution)
 
 
-# In[31]:
+# In[115]:
 
 
 trace = TransformTrace()
@@ -312,7 +312,7 @@ for tab in tabs:
         trace.store(pathify(tab.name), tidy_sheet.topandas())
 
 
-# In[32]:
+# In[116]:
 
 
 pd.set_option('display.float_format', lambda x: '%.2f' % x)
@@ -497,12 +497,19 @@ for tab in tabs:
         df = df.replace({'Lower CI' : {
             '' : 0},
                          'Upper CI' : {
-            '' : 0}})
+            '' : 0},
+                        'DATAMARKER' : {
+            '**' : 'p value = 0.08 comparing last 2 week periods'
+                        }})
 
         df['Weighted'] = 'FALSE'
         trace.add_column('Weighted')
         trace.Weighted("Add column filled on condition that values are weighted or not from sheet (replace with check)")
         trace.add_column('OBS')
+
+        df = df.rename(columns = {'DATAMARKER' : 'Marker'})
+        trace.add_column('Marker')
+        trace.Marker("Replace '**' with 'p value = 0.08 comparing last 2 week periods' as per sheet notes")
 
         infoComments(name, list(df.columns))
 
@@ -527,12 +534,19 @@ for tab in tabs:
         df = df.replace({'Lower CI' : {
             '' : 0},
                          'Upper CI' : {
-            '' : 0}})
+            '' : 0},
+                        'DATAMARKER' : {
+            '**' : 'p value = 0.08 comparing last 2 week periods'
+                        }})
 
         df['Weighted'] = 'FALSE'
         trace.add_column('Weighted')
         trace.Weighted("Add column filled on condition that values are weighted or not from sheet (replace with check)")
         trace.add_column('OBS')
+
+        df = df.rename(columns = {'DATAMARKER' : 'Marker'})
+        trace.add_column('Marker')
+        trace.Marker("Replace '**' with 'p value = 0.08 comparing last 2 week periods' as per sheet notes")
 
         infoComments(name, list(df.columns))
 
@@ -643,7 +657,7 @@ for tab in tabs:
         df.drop_duplicates().to_csv(out / f'{tableName}.csv', index = False)
 
 
-# In[33]:
+# In[117]:
 
 
 notes = """
@@ -659,7 +673,7 @@ Only people aged sixteen and over are included in our blood test. Therefore, the
 infoNotes(notes)
 
 
-# In[34]:
+# In[118]:
 
 
 trace.output()

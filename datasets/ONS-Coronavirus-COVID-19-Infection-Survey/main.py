@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 # coding: utf-8
+# %%
 
-# In[111]:
+# %%
 
 
 from gssutils import *
@@ -141,7 +142,7 @@ def infoNotes(notes):
         info.write(json.dumps(infoData, indent=4).replace('null', '"Not Applicable"'))
 
 
-# In[112]:
+# %%
 
 
 info = json.load(open('info.json'))
@@ -149,21 +150,21 @@ landingPage = info['landingPage']
 landingPage
 
 
-# In[113]:
+# %%
 
 
 scraper = Scraper(landingPage)
 scraper
 
 
-# In[114]:
+# %%
 
 
 distribution = scraper.distributions[0]
 display(distribution)
 
 
-# In[115]:
+# %%
 
 
 trace = TransformTrace()
@@ -312,8 +313,8 @@ for tab in tabs:
         trace.store(pathify(tab.name), tidy_sheet.topandas())
 
 
-# In[116]:
-
+# %%
+all_dat = []
 
 pd.set_option('display.float_format', lambda x: '%.2f' % x)
 
@@ -350,8 +351,9 @@ for tab in tabs:
 
         infoComments(name, list(df.columns))
 
-        df.drop_duplicates().to_csv(out / f'{tableName}.csv', index = False)
-
+        #df.drop_duplicates().to_csv(out / f'{tableName}.csv', index = False)
+        df.drop_duplicates()
+        all_dat.append(df)
     elif tab.name in ['2']:#2
 
         name = tab.name
@@ -380,7 +382,9 @@ for tab in tabs:
 
         infoComments(name, list(df.columns))
 
-        df.drop_duplicates().to_csv(out / f'{tableName}.csv', index = False)
+        #df.drop_duplicates().to_csv(out / f'{tableName}.csv', index = False)
+        df.drop_duplicates()
+        all_dat.append(df)
 
     elif tab.name in ['3']:#3
 
@@ -422,7 +426,9 @@ for tab in tabs:
 
         infoComments(name, list(df.columns))
 
-        df.drop_duplicates().to_csv(out / f'{tableName}.csv', index = False)
+        #df.drop_duplicates().to_csv(out / f'{tableName}.csv', index = False)
+        df.drop_duplicates()
+        all_dat.append(df)
 
     elif tab.name in ['4']:#4
 
@@ -451,7 +457,9 @@ for tab in tabs:
 
         infoComments(name, list(df.columns))
 
-        df.drop_duplicates().to_csv(out / f'{tableName}.csv', index = False)
+        #df.drop_duplicates().to_csv(out / f'{tableName}.csv', index = False)
+        df.drop_duplicates()
+        all_dat.append(df)
 
     elif tab.name in ['5']:#5
 
@@ -476,7 +484,9 @@ for tab in tabs:
 
         infoComments(name, list(df.columns))
 
-        df.drop_duplicates().to_csv(out / f'{tableName}.csv', index = False)
+        #df.drop_duplicates().to_csv(out / f'{tableName}.csv', index = False)
+        df.drop_duplicates()
+        all_dat.append(df)
 
     elif tab.name in ['6']:#6
 
@@ -513,7 +523,9 @@ for tab in tabs:
 
         infoComments(name, list(df.columns))
 
-        df.drop_duplicates().to_csv(out / f'{tableName}.csv', index = False)
+        #df.drop_duplicates().to_csv(out / f'{tableName}.csv', index = False)
+        df.drop_duplicates()
+        all_dat.append(df)
 
     elif tab.name in ['7']:#7
 
@@ -550,7 +562,9 @@ for tab in tabs:
 
         infoComments(name, list(df.columns))
 
-        df.drop_duplicates().to_csv(out / f'{tableName}.csv', index = False)
+        #df.drop_duplicates().to_csv(out / f'{tableName}.csv', index = False)
+        df.drop_duplicates()
+        all_dat.append(df)
 
     elif tab.name in ['8']:#8
 
@@ -580,7 +594,9 @@ for tab in tabs:
 
         infoComments(name, list(df.columns))
 
-        df.drop_duplicates().to_csv(out / f'{tableName}.csv', index = False)
+        #df.drop_duplicates().to_csv(out / f'{tableName}.csv', index = False)
+        df.drop_duplicates()
+        all_dat.append(df)
 
     elif tab.name in ['9']:#9
 
@@ -610,8 +626,9 @@ for tab in tabs:
 
         infoComments(name, list(df.columns))
 
-        df.drop_duplicates().to_csv(out / f'{tableName}.csv', index = False)
-
+        #df.drop_duplicates().to_csv(out / f'{tableName}.csv', index = False)
+        df.drop_duplicates()
+        all_dat.append(df)
     elif tab.name in ['10']:#10
 
         name = tab.name
@@ -654,10 +671,12 @@ for tab in tabs:
 
         infoComments(name, list(df.columns))
 
-        df.drop_duplicates().to_csv(out / f'{tableName}.csv', index = False)
+        #df.drop_duplicates().to_csv(out / f'{tableName}.csv', index = False)
+        df.drop_duplicates()
+        all_dat.append(df)
 
 
-# In[117]:
+# %%
 
 
 notes = """
@@ -673,10 +692,15 @@ Only people aged sixteen and over are included in our blood test. Therefore, the
 infoNotes(notes)
 
 
-# In[118]:
-
-
+# %%
 trace.output()
 
-df
+#df
 
+
+# %%
+#all_dat[9].head(60)
+
+# %%
+
+# %%

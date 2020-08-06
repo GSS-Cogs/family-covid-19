@@ -699,8 +699,11 @@ trace.output()
 
 
 # %%
-#all_dat[9].head(60)
+all_dat[8].head(6)
 
 # %%
+for t in all_dat:
+    print('------------')
+    print(t.columns)
 
 # %%

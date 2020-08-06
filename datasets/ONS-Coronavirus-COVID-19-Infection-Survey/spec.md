@@ -42,7 +42,6 @@
 		Rename column 'Survey Measure Type' to 'Modelled Estimate Type'
 		Rename 'OBS' to 'Value' 
 		Change 'Measure Type' column value 'Percentage' to 'Percentage Rate'
-		Rename 'OBS' to 'Value' 
 		
 		Output as own dataset with name:
 			'Coronavirus COVID-19 Infection Survey - Modelled daily rates of the population testing positive in England'
@@ -57,7 +56,7 @@
 		Change 'Measure Type' column value 'Count' to 'Sample Count'
 		Rename column 'Survey Measure Type' to 'Modelled Estimate Type'
 		Change'Measure Type' column value 'Percentage' to 'Percentage Rate'
-		Remove '(modelled)' from 'Modelled Estimate Type' column
+		Remove '(modelled)' from 'Modelled Estimate Type' column values
 		Rename 'OBS' to 'Value' 
 		
 		Output as own dataset with name:
@@ -98,6 +97,7 @@
 		Rename 'OBS' to 'Value'
 		Rename 'Lower CI' to 'Credible Lower Interval'
 		Rename 'Upper CI' to 'Credible Upper Interval'
+		Rename column 'Survey Measure Type' to 'Modelled Estimate Type'
 		Remove 'Weighted' column
 
 		Output as own dataset with name:

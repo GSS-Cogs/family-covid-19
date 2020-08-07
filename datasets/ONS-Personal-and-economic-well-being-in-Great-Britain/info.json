@@ -11,7 +11,6 @@
     ],
     "GitHub Issue Number": 72,
     "GitHub Name": "ONS-Personal-and-economic-well-being-in-Great-Britain",
-    "Landing Page": "https://www.ons.gov.uk/peoplepopulationandcommunity/wellbeing/bulletins/personalandeconomicwellbeingintheuk/previousReleases",
     "Last Published": "2020-05-04",
     "Main Issue": "1000000",
     "Name": "Personal and economic well-being in Great Britain",
@@ -25,7 +24,7 @@
     "title": "Personal and economic well-being in Great Britain",
     "publisher": "Office for National Statistics",
     "description": "Estimates looking across personal well-being and economic well-being covering the period October 2019 to April 2020 to understand the impact of the coronavirus (COVID-19) pandemic on people and households in Great Britain.",
-    "landingPage": "https://www.ons.gov.uk/peoplepopulationandcommunity/wellbeing/bulletins/personalandeconomicwellbeingintheuk/previousReleases",
+    "landingPage": "https://www.ons.gov.uk/peoplepopulationandcommunity/wellbeing/datasets/coronaviruspersonalandeconomicwellbeingimpacts",
     "published": "2020-05-04",
     "families": [
         "COVID-19"

@@ -117,6 +117,9 @@ df.to_csv(out / f"{pathify(LA_TITLE)}.csv", index=False)
 
 # -
 
+df['Area'].unique()
+#df.head(60)
+
 # ## Scrape: Coronavirus Shielded Patient List Summary Totals, CCG, England
 
 # +
@@ -164,3 +167,13 @@ df.to_csv(out / f"{pathify(CCG_TITLE)}.csv", index=False)
 # -
 
 trace.output()
+
+df.head(60)
+
+df['Age'].unique()
+
+df.columns
+
+
+
+

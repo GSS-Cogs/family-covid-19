@@ -33,7 +33,18 @@
                 "datatype": "double"
             }
         },
-        "codelists": ["Recorded Death Type","Source","Person Type","Sex","Age","Local Authority","Place of death","Cause of death","Leading cause of Death","Main Pre-existing Condition"]
+        "codelists": [
+            "Recorded Death Type",
+            "Source",
+            "Person Type",
+            "Sex",
+            "Age",
+            "Local Authority",
+            "Place of death",
+            "Cause of death",
+            "Leading cause of Death",
+            "Main Pre-existing Condition"
+        ]
     },
     "sizingNotes": "Multiple tabs with simple structures and multiple dimensions. One tab with multiple tables. Multiple footnotes in tabs.",
     "notes": "",

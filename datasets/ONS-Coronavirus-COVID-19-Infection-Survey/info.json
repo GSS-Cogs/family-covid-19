@@ -20,7 +20,315 @@
             "Priority"
         ],
         "airtable": "recALVfEQmRkYXhpj",
-        "main_issue": 121
+        "main_issue": 121,
+        "transformStage": [
+            {
+                "name": "1",
+                "title": "Modelled mid-week estimates of the number of COVID-19 infections",
+                "columns": {
+                    "Period": "{A7-A19}",
+                    "Survey Measure Type": "{A5-K5}",
+                    "Lower CI": "{C7-K19}",
+                    "Upper CI": "{D7-L19}",
+                    "Measure Type": "temp",
+                    "Unit": "temp"
+                },
+                "postTransformNotes": {
+                    "name": "1",
+                    "columns": {
+                        "OBS": [
+                            "'Multiple values by 100 if they are Percentages to correct from Excel formatting"
+                        ],
+                        "Lower CI": [
+                            "'Multiple values by 100 if they are Percentages to correct from Excel formatting"
+                        ],
+                        "Upper CI": [
+                            "'Multiple values by 100 if they are Percentages to correct from Excel formatting"
+                        ],
+                        "Measure Type": [
+                            "Replace temp values with 'Estimated Percentage' and 'Estimated Average Count' where applicable"
+                        ],
+                        "Unit": [
+                            "Replace temp values with 'Percent' and 'Person' where applicable"
+                        ]
+                    }
+                }
+            },
+            {
+                "name": "2",
+                "title": "Modelled daily rates of the percentage of the population testing positive for COVID-19, England",
+                "columns": {
+                    "Period": "{A7-A98}",
+                    "Survey Measure Type": "{A5-C5}",
+                    "Lower CI": "{C7-C98}",
+                    "Upper CI": "{D7-D98}",
+                    "Measure Type": "Percentage",
+                    "Unit": "Percent"
+                },
+                "postTransformNotes": {
+                    "name": "2",
+                    "columns": {
+                        "OBS": [
+                            "'Multiple values by 100 if they are Percentages to correct from Excel formatting"
+                        ],
+                        "Lower CI": [
+                            "'Multiple values by 100 if they are Percentages to correct from Excel formatting"
+                        ],
+                        "Upper CI": [
+                            "'Multiple values by 100 if they are Percentages to correct from Excel formatting"
+                        ],
+                        "Measure Type": [
+                            "Replace temp values with 'Estimated Percentage' and 'Estimated Average Count' where applicable"
+                        ],
+                        "Unit": [
+                            "Replace temp values with 'Percent' and 'Person' where applicable"
+                        ]
+                    }
+                }
+            },
+            {
+                "name": "3",
+                "title": "Overall number of COVID-19 infections by non-overlapping 14 day periods (weighted)",
+                "columns": {
+                    "Period": "{A8-A13}",
+                    "Survey Measure Type": "{B6-H6}",
+                    "Lower CI": "{C8-C13}",
+                    "Upper CI": "{D8-D13}",
+                    "Measure Type": "temp",
+                    "Unit": "temp"
+                },
+                "postTransformNotes": {
+                    "name": "3",
+                    "columns": {
+                        "OBS": [
+                            "'Multiple values by 100 if they are Percentages to correct from Excel formatting"
+                        ],
+                        "Lower CI": [
+                            "'Multiple values by 100 if they are Percentages to correct from Excel formatting"
+                        ],
+                        "Upper CI": [
+                            "'Multiple values by 100 if they are Percentages to correct from Excel formatting"
+                        ],
+                        "Measure Type": [
+                            "Replace temp values with 'Estimated Percentage' and 'Estimated Average Count' where applicable"
+                        ],
+                        "Unit": [
+                            "Replace temp values with 'Percent' and 'Person' where applicable"
+                        ],
+                        "Weighted": [
+                            "'Add column filled on condition that values are weighted or not from sheet (replace with check)"
+                        ]
+                    }
+                }
+            },
+            {
+                "name": "4",
+                "title": "Modelled number of new COVID-19 infections, England",
+                "columns": {
+                    "Period": "{A8-A18}",
+                    "Survey Measure Type": "{A6-K6}",
+                    "Lower CI": "{C8-K18}",
+                    "Upper CI": "{D8-L18}",
+                    "Measure Type": "temp",
+                    "Unit": "temp"
+                },
+                "postTransformNotes": {
+                    "name": "4",
+                    "columns": {
+                        "Measure Type": [
+                            "Replace temp values with 'Rate per 10000' and 'Estimated Count' where applicable"
+                        ],
+                        "Unit": [
+                            "Replace temp values with 'Person per 10000' and 'Person' where applicable"
+                        ],
+                        "Weighted": [
+                            "'Add column filled on condition that values are weighted or not from sheet (replace with check)"
+                        ]
+                    }
+                }
+            },
+            {
+                "name": "5",
+                "title": "Modelled daily incidence rate per 10,000 people per day, England",
+                "columns": {
+                    "Period": "{A8-A84}",
+                    "Survey Measure Type": "{A6-C6}",
+                    "Lower CI": "{C8-C84}",
+                    "Upper CI": "{D8-D84}",
+                    "Measure Type": "temp",
+                    "Unit": "temp"
+                },
+                "postTransformNotes": {
+                    "name": "5",
+                    "columns": {
+                        "Measure Type": [
+                            "Replace temp values with 'Rate per 10000' where applicable"
+                        ],
+                        "Unit": [
+                            "Replace temp values with 'Person' where applicable"
+                        ],
+                        "Weighted": [
+                            "'Add column filled on condition that values are weighted or not from sheet (replace with check)"
+                        ]
+                    }
+                }
+            },
+            {
+                "name": "6",
+                "title": "Incidence rate and estimated number of new COVID-19 infections for individuals in England per week (unweighted) by non-overlapping two week time periods",
+                "columns": {
+                    "Period": "{A8-A14}",
+                    "Survey Measure Type": "{B5-I6}",
+                    "Lower CI": "{C8-F12}",
+                    "Upper CI": "{D8-G12}",
+                    "Measure Type": "temp",
+                    "Unit": "temp"
+                },
+                "postTransformNotes": {
+                    "name": "6",
+                    "columns": {
+                        "Marker": [
+                            "Replace '**' with 'p value = 0.08 comparing last 2 week periods' as per sheet notes"
+                        ],
+                        "Measure Type": [
+                            "Replace temp values with 'Rate per 10000', 'Count', or 'Estimated Average Count' where applicable"
+                        ],
+                        "Unit": [
+                            "Replace temp values with 'Person' where applicable"
+                        ],
+                        "Weighted": [
+                            "'Add column filled on condition that values are weighted or not from sheet (replace with check)"
+                        ]
+                    }
+                }
+            },
+            {
+                "name": "7",
+                "title": "Incidence rate and estimated number of new COVID-19 infections for households in England per week (unweighted) by non-overlapping two week time periods",
+                "columns": {
+                    "Period": "{A8-A14}",
+                    "Survey Measure Type": "{B5-I6}",
+                    "Lower CI": "{C8-F12}",
+                    "Upper CI": "{D8-G12}",
+                    "Measure Type": "temp",
+                    "Unit": "temp"
+                },
+                "postTransformNotes": {
+                    "name": "7",
+                    "columns": {
+                        "Marker": [
+                            "Replace '**' with 'p value = 0.08 comparing last 2 week periods' as per sheet notes"
+                        ],
+                        "Measure Type": [
+                            "Replace temp values with 'Rate per 10000', 'Count', or 'Estimated Average Count' where applicable"
+                        ],
+                        "Unit": [
+                            "Replace temp values with 'Household' where applicable"
+                        ],
+                        "Weighted": [
+                            "'Add column filled on condition that values are weighted or not from sheet (replace with check)"
+                        ]
+                    }
+                }
+            },
+            {
+                "name": "8",
+                "title": "Modelled estimated % testing positive for COVID-19 by region, England ",
+                "columns": {
+                    "Period": "23 July 2020 (mid point of most recent week)",
+                    "Survey Measure Type": "{C5-D5}",
+                    "Lower CI": "{D7-D15}",
+                    "Upper CI": "{E7-E15}",
+                    "Measure Type": "temp",
+                    "Unit": "temp"
+                },
+                "postTransformNotes": {
+                    "name": "8",
+                    "columns": {
+                        "OBS": [
+                            "'Multiple values by 100 if they are Percentages to correct from Excel formatting"
+                        ],
+                        "Lower CI": [
+                            "'Multiple values by 100 if they are Percentages to correct from Excel formatting"
+                        ],
+                        "Upper CI": [
+                            "'Multiple values by 100 if they are Percentages to correct from Excel formatting"
+                        ],
+                        "Measure Type": [
+                            "Replace temp values with 'Estimated Percentage' and 'Estimated Average Count' where applicable"
+                        ],
+                        "Unit": [
+                            "Replace temp values with 'Percent' and 'Person' where applicable"
+                        ]
+                    }
+                }
+            },
+            {
+                "name": "9",
+                "title": "Modelled daily average percentage and number of individuals testing positive for COVID-19 by region ",
+                "columns": {
+                    "Period": "{A8-A49}",
+                    "Survey Measure Type": "{A6-AA6}",
+                    "Lower CI": "{C8-AA49}",
+                    "Upper CI": "{D8-AB49}",
+                    "Measure Type": "temp",
+                    "Unit": "temp"
+                },
+                "postTransformNotes": {
+                    "name": "9",
+                    "columns": {
+                        "OBS": [
+                            "'Multiple values by 100 if they are Percentages to correct from Excel formatting"
+                        ],
+                        "Lower CI": [
+                            "'Multiple values by 100 if they are Percentages to correct from Excel formatting"
+                        ],
+                        "Upper CI": [
+                            "'Multiple values by 100 if they are Percentages to correct from Excel formatting"
+                        ],
+                        "Measure Type": [
+                            "Replace temp values with 'Estimated Percentage' and 'Estimated Average Count' where applicable"
+                        ],
+                        "Unit": [
+                            "Replace temp values with 'Percent' and 'Person' where applicable"
+                        ]
+                    }
+                }
+            },
+            {
+                "name": "10",
+                "title": "Percentage of individuals ever testing positive for antibodies (weighted)",
+                "columns": {
+                    "Period": "between 26 April to 26 July",
+                    "Survey Measure Type": "{A7-A10}",
+                    "Lower CI": "{D7-D11}",
+                    "Upper CI": "{E7-E11}",
+                    "Measure Type": "temp",
+                    "Unit": "temp"
+                },
+                "postTransformNotes": {
+                    "name": "10",
+                    "columns": {
+                        "OBS": [
+                            "'Multiple values by 100 if they are Percentages to correct from Excel formatting"
+                        ],
+                        "Lower CI": [
+                            "'Multiple values by 100 if they are Percentages to correct from Excel formatting"
+                        ],
+                        "Upper CI": [
+                            "'Multiple values by 100 if they are Percentages to correct from Excel formatting"
+                        ],
+                        "Measure Type": [
+                            "Replace temp values with 'Estimated Percentage' and 'Estimated Average Count' where applicable"
+                        ],
+                        "Unit": [
+                            "Replace temp values with 'Percent' and 'Person' where applicable"
+                        ]
+                    }
+                }
+            }
+        ],
+        "Stage One Notes": "\nThese statistics refer to infections reported in the community, by which we mean private households. These figures exclude infections reported in hospitals, care homes or other institutional settings.\nThis analysis is based on statistical modelling conducted by our research partners at the University of Oxford.\nThe method combines a statistical modelling approach with population information used in standard population weighting.\nAs this is based on Bayesian analysis, the appropriate uncertainty measure to use is credible intervals rather than confidence intervals. However they can be interpreted in the same way.\nEstimates are presented for the mid-point (Thursday) of each week over the period.\nThe England population used in this analysis relates to the community population aged two years and over. It is not the same as the total population of England as reported in our mid-year population estimates.\nOnly people aged sixteen and over are included in our blood test. Therefore, the English population estimates used included only those aged 16 and over. This population is 45,042,000\n"
     },
     "sizingNotes": "Simple tables and structures. Few dimensions and some footnotes.",
     "notes": ""

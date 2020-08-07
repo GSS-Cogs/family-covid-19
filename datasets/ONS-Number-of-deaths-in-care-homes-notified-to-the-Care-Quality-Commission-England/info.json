@@ -33,9 +33,9 @@
     "title": "Number of deaths in care homes notified to the Care Quality Commission, England",
     "publisher": "Office for National Statistics",
     "description": "Provisional counts of deaths in care homes caused by the coronavirus (COVID-19) by local authority. Published by the Office for National Statistics and Care Quality Commission.",
-    "landingPage": "https://www.ons.gov.uk/peoplepopulationandcommunity/birthsdeathsandmarriages/deaths/datasets/numberofdeathsincarehomesnotifiedtothecarequalitycommissionengland",
+    "landingPage": "https://www.ons.gov.uk/peoplepopulationandcommunity/birthsdeathsandmarriages/deaths/datasets/numberofdeathsincarehomesnotifiedtothecarequalitycommissionengland/2020",
     "datasetNotes": [
-        "On the landing page under your download option "
+        "On the landing page click on the ltest version "
     ],
     "published": "2020-06-02",
     "families": [
@@ -67,8 +67,11 @@
                 "datatype": "double"
             }
         },
-        "codelists": ["ONS Location of Death", "ONS Cause of Death"]
+        "codelists": [
+            "ONS Location of Death",
+            "ONS Cause of Death"
+        ]
     },
     "sizingNotes": "Simple table structure with footnotes",
-    "notes": ""
+    "notes": "Data viz"
 }

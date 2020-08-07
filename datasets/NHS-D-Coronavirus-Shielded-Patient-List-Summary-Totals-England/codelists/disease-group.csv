@@ -1,0 +1,14 @@
+Label,Notation,Parent Notation,Sort Priority
+Transplants (Solid),transplants-solid,,1
+Cancer (Solid with Chemotherapy),cancer-solid-with-chemotherapy,,2
+Cancer (Lung with Radical Radiotherapy),cancer-lung-with-radical-radiotherapy,,3
+Cancer (Haematological within 24 months),Cancer-haematological-within-24-months,,4
+Transplants (Haematological within 6 months),transplants-haematological-within-6-months,,5
+Transplants (Haematological with Immunosuppression),transplants-haematological-with-immunosuppression,,6
+Respiratory (Severe Asthma),respiratory-severe-asthma,,7
+Respiratory (Severe COPD),respiratory-severe-copd,,8
+Respiratory (Severe Permanent),respiratory-severe-permanent,,9
+Corticosteroid Safety Card,corticosteroid-safety-card,,10
+Rare genetic metabolic and autoimmune diseases,rare-genetic-metabolic-and-autoimmune-diseases,,11
+Immunosuppression Therapy,immunosuppression-therapy,,12
+Pregnant with Congenital Heart Defect,pregnant-with-congenital-heart-defect,,13

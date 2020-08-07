@@ -271,31 +271,46 @@ Period, Area, Age, Gender, Measure Type, Unit of measure, Unit multiplier, Value
 
 -------------
 
-### Stage 2. Harmonise
+### Stage 2. Alignment
 
-#### Sheet: 1
+	Hardcoded URL used for both sheets where date of data is 1 July 2020. Latest data has date of 23 July 2020 when checked on 5 August 2020. 
 
-		spec
+#### Coronavirus Shielded patient list, England, Local Authority
 
-#### Table Structure
+		'Disease Group' from column 'Breakdown Field' has been removed. Data needs to be added back in as a column 'Disease Group' with value 'All' in 'Age' and 'Gender' columns and vice versa
+		'Gender' column to be renamed 'Sex' and values changed to All = T, Male = M, Female = F
+		'Age' column, 70+ to be changed to 70plus
+		'Unit' column to be changed to 'Patients'
+		'Area' column to be renamed 'Geography Area'
+		'Geography Type' column to be added with value 'Local Authority'
+		Rename "Period" column as "Extract Date"
 
-		Period, Measure Type, Unit, Marker, Value
 
-#### Sheet: 2
+#### Coronavirus Shielded patient list, England, CCG
 
-		spec
+		'Disease Group' from column 'Breakdown Field' has been removed. Data needs to be added back in as a column 'Disease Group' with value 'All' in 'Age' and 'Gender' columns and vice versa
+		'Gender' column to be renamed 'Sex' and values changed to All = t, Male = M, Female = F
+		'Age' column, 70+ to be changed to 70plus
+		'Unit' column to be changed to 'Patients'
+		'Area' column to be renamed 'Geography Code and CCG Name column to be mapped to ONS Geography codes instead. The file reference-geography.ttl is in the Reference folder and should hold all the codes for CCGs. 
+		See the following example starting at line 1433 of how to query it using SPAQL if needed: https://github.com/GSS-Cogs/family-covid-19/blob/master/datasets/ONS-Deaths-involving-COVID-19-in-the-care-sector-England-and-Wales-deaths-occurring-up-to-1-May-2020-and-registered-up-to-9-May-2020-provisional/main.py
+		'Geography Type' column to be added with value 'Clinical Commissioning Group'
+		Rename "Period" column as "Extract Date"
+
+#### Join
+
+		Both tables to be joined and output with Title 'Coronavirus Shielded Patient List Summary Totals, England by Clinical Commissioning Group and Local Authority'
+		output csv file to be called 'observations'
+		Pathify things except for Sex and Geography Code columns
 
 ----------
 
 #### Table Structure
 
-		Period, Measure Type, Unit, Marker, Value
+		Extract Date, Geography Code, Geography Type, Disease Group, Sex, Age, Measure Type, Unit, Value
 
---------------##### Footnotes
-
-		footnotes
 
 ##### DM Notes
 
-		notes
+		info.json file has been updated with mapping information
 

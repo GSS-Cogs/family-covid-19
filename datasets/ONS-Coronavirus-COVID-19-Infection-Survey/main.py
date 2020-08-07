@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 # coding: utf-8
+# %%
 
-# In[27]:
+# %%
 
 
 from gssutils import *
@@ -141,7 +142,7 @@ def infoNotes(notes):
         info.write(json.dumps(infoData, indent=4).replace('null', '"Not Applicable"'))
 
 
-# In[28]:
+# %%
 
 
 info = json.load(open('info.json'))
@@ -149,21 +150,21 @@ landingPage = info['landingPage']
 landingPage
 
 
-# In[29]:
+# %%
 
 
 scraper = Scraper(landingPage)
 scraper
 
 
-# In[30]:
+# %%
 
 
 distribution = scraper.distributions[0]
 display(distribution)
 
 
-# In[31]:
+# %%
 
 
 trace = TransformTrace()
@@ -312,8 +313,8 @@ for tab in tabs:
         trace.store(pathify(tab.name), tidy_sheet.topandas())
 
 
-# In[32]:
-
+# %%
+all_dat = []
 
 pd.set_option('display.float_format', lambda x: '%.2f' % x)
 
@@ -350,8 +351,9 @@ for tab in tabs:
 
         infoComments(name, list(df.columns))
 
-        df.drop_duplicates().to_csv(out / f'{tableName}.csv', index = False)
-
+        #df.drop_duplicates().to_csv(out / f'{tableName}.csv', index = False)
+        df.drop_duplicates()
+        all_dat.append(df)
     elif tab.name in ['2']:#2
 
         name = tab.name
@@ -380,7 +382,9 @@ for tab in tabs:
 
         infoComments(name, list(df.columns))
 
-        df.drop_duplicates().to_csv(out / f'{tableName}.csv', index = False)
+        #df.drop_duplicates().to_csv(out / f'{tableName}.csv', index = False)
+        df.drop_duplicates()
+        all_dat.append(df)
 
     elif tab.name in ['3']:#3
 
@@ -422,7 +426,9 @@ for tab in tabs:
 
         infoComments(name, list(df.columns))
 
-        df.drop_duplicates().to_csv(out / f'{tableName}.csv', index = False)
+        #df.drop_duplicates().to_csv(out / f'{tableName}.csv', index = False)
+        df.drop_duplicates()
+        all_dat.append(df)
 
     elif tab.name in ['4']:#4
 
@@ -451,7 +457,9 @@ for tab in tabs:
 
         infoComments(name, list(df.columns))
 
-        df.drop_duplicates().to_csv(out / f'{tableName}.csv', index = False)
+        #df.drop_duplicates().to_csv(out / f'{tableName}.csv', index = False)
+        df.drop_duplicates()
+        all_dat.append(df)
 
     elif tab.name in ['5']:#5
 
@@ -476,7 +484,9 @@ for tab in tabs:
 
         infoComments(name, list(df.columns))
 
-        df.drop_duplicates().to_csv(out / f'{tableName}.csv', index = False)
+        #df.drop_duplicates().to_csv(out / f'{tableName}.csv', index = False)
+        df.drop_duplicates()
+        all_dat.append(df)
 
     elif tab.name in ['6']:#6
 
@@ -497,16 +507,25 @@ for tab in tabs:
         df = df.replace({'Lower CI' : {
             '' : 0},
                          'Upper CI' : {
-            '' : 0}})
+            '' : 0},
+                        'DATAMARKER' : {
+            '**' : 'p value = 0.08 comparing last 2 week periods'
+                        }})
 
         df['Weighted'] = 'FALSE'
         trace.add_column('Weighted')
         trace.Weighted("Add column filled on condition that values are weighted or not from sheet (replace with check)")
         trace.add_column('OBS')
 
+        df = df.rename(columns = {'DATAMARKER' : 'Marker'})
+        trace.add_column('Marker')
+        trace.Marker("Replace '**' with 'p value = 0.08 comparing last 2 week periods' as per sheet notes")
+
         infoComments(name, list(df.columns))
 
-        df.drop_duplicates().to_csv(out / f'{tableName}.csv', index = False)
+        #df.drop_duplicates().to_csv(out / f'{tableName}.csv', index = False)
+        df.drop_duplicates()
+        all_dat.append(df)
 
     elif tab.name in ['7']:#7
 
@@ -527,16 +546,25 @@ for tab in tabs:
         df = df.replace({'Lower CI' : {
             '' : 0},
                          'Upper CI' : {
-            '' : 0}})
+            '' : 0},
+                        'DATAMARKER' : {
+            '**' : 'p value = 0.08 comparing last 2 week periods'
+                        }})
 
         df['Weighted'] = 'FALSE'
         trace.add_column('Weighted')
         trace.Weighted("Add column filled on condition that values are weighted or not from sheet (replace with check)")
         trace.add_column('OBS')
 
+        df = df.rename(columns = {'DATAMARKER' : 'Marker'})
+        trace.add_column('Marker')
+        trace.Marker("Replace '**' with 'p value = 0.08 comparing last 2 week periods' as per sheet notes")
+
         infoComments(name, list(df.columns))
 
-        df.drop_duplicates().to_csv(out / f'{tableName}.csv', index = False)
+        #df.drop_duplicates().to_csv(out / f'{tableName}.csv', index = False)
+        df.drop_duplicates()
+        all_dat.append(df)
 
     elif tab.name in ['8']:#8
 
@@ -566,7 +594,9 @@ for tab in tabs:
 
         infoComments(name, list(df.columns))
 
-        df.drop_duplicates().to_csv(out / f'{tableName}.csv', index = False)
+        #df.drop_duplicates().to_csv(out / f'{tableName}.csv', index = False)
+        df.drop_duplicates()
+        all_dat.append(df)
 
     elif tab.name in ['9']:#9
 
@@ -596,8 +626,9 @@ for tab in tabs:
 
         infoComments(name, list(df.columns))
 
-        df.drop_duplicates().to_csv(out / f'{tableName}.csv', index = False)
-
+        #df.drop_duplicates().to_csv(out / f'{tableName}.csv', index = False)
+        df.drop_duplicates()
+        all_dat.append(df)
     elif tab.name in ['10']:#10
 
         name = tab.name
@@ -640,10 +671,12 @@ for tab in tabs:
 
         infoComments(name, list(df.columns))
 
-        df.drop_duplicates().to_csv(out / f'{tableName}.csv', index = False)
+        #df.drop_duplicates().to_csv(out / f'{tableName}.csv', index = False)
+        df.drop_duplicates()
+        all_dat.append(df)
 
 
-# In[33]:
+# %%
 
 
 notes = """
@@ -659,10 +692,18 @@ Only people aged sixteen and over are included in our blood test. Therefore, the
 infoNotes(notes)
 
 
-# In[34]:
-
-
+# %%
 trace.output()
 
-df
+#df
 
+
+# %%
+all_dat[8].head(6)
+
+# %%
+for t in all_dat:
+    print('------------')
+    print(t.columns)
+
+# %%

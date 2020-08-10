@@ -21,7 +21,100 @@
             "Hold"
         ],
         "airtable": "recLWQH3oLA7BoHEq",
-        "main_issue": 135
+        "main_issue": 135,
+        "transformStage": [
+            {
+                "name": "Loneliness",
+                "title": "Average anxiety ratings broken down by loneliness, Great Britain, 20 March to 10 May",
+                "columns": {
+                    "Period": "{A7-A13}",
+                    "Breakdown Category": "Loneliness",
+                    "Breakdown Response": "{B4-Q4}",
+                    "Sample Size": "{Q7-U13}",
+                    "Lower CI": "{C7-O13}",
+                    "Upper CI": "{D7-P13}",
+                    "Value": "Not Applicable",
+                    "Measure Type": "Average Anxiety",
+                    "Unit": "0 to 10 Scale"
+                }
+            },
+            {
+                "name": "Sex",
+                "title": "Average anxiety ratings broken down by sex, Great Britain, 20 March to 10 May",
+                "columns": {
+                    "Period": "{A7-A13}",
+                    "Breakdown Category": "Sex",
+                    "Breakdown Response": "{B4-H4}",
+                    "Sample Size": "{H7-I13}",
+                    "Lower CI": "{C7-F13}",
+                    "Upper CI": "{D7-G13}",
+                    "Value": "Not Applicable",
+                    "Measure Type": "Average Anxiety",
+                    "Unit": "0 to 10 Scale"
+                }
+            },
+            {
+                "name": "Marital Status",
+                "title": "Average anxiety ratings broken down by marital status, Great Britain, 20 March to 10 May",
+                "columns": {
+                    "Period": "{A7-A13}",
+                    "Breakdown Category": "Marital Status",
+                    "Breakdown Response": "{B4-N4}",
+                    "Sample Size": "{N7-Q13}",
+                    "Lower CI": "{C7-L13}",
+                    "Upper CI": "{D7-M13}",
+                    "Value": "Not Applicable",
+                    "Measure Type": "Average Anxiety",
+                    "Unit": "0 to 10 Scale"
+                }
+            },
+            {
+                "name": "Feeling safe",
+                "title": "Average anxiety ratings broken down by feelings of safety, Great Britain, 20 March to 10 May",
+                "columns": {
+                    "Period": "{A7-A13}",
+                    "Breakdown Category": "Feeling safe",
+                    "Breakdown Response": "{B4-N4}",
+                    "Sample Size": "{N7-Q13}",
+                    "Lower CI": "{C7-L13}",
+                    "Upper CI": "{D7-M13}",
+                    "Value": "Not Applicable",
+                    "Measure Type": "Average Anxiety",
+                    "Unit": "0 to 10 Scale"
+                }
+            },
+            {
+                "name": "Work affected",
+                "title": "Average anxiety ratings broken down by whether work has been affected, Great Britain, 20 March to 10 May",
+                "columns": {
+                    "Period": "{A7-A13}",
+                    "Breakdown Category": "Work affected",
+                    "Breakdown Response": "{B4-H4}",
+                    "Sample Size": "{H7-I13}",
+                    "Lower CI": "{C7-F13}",
+                    "Upper CI": "{D7-G13}",
+                    "Value": "Not Applicable",
+                    "Measure Type": "Average Anxiety",
+                    "Unit": "0 to 10 Scale"
+                }
+            },
+            {
+                "name": "Disability",
+                "title": "Average anxiety ratings broken down by disability, Great Britain, 20 March to 10 May",
+                "columns": {
+                    "Period": "{A7-A13}",
+                    "Breakdown Category": "Disability",
+                    "Breakdown Response": "{B4-K4}",
+                    "Sample Size": "{K7-M13}",
+                    "Lower CI": "{C7-I13}",
+                    "Upper CI": "{D7-J13}",
+                    "Value": "Not Applicable",
+                    "Measure Type": "Average Anxiety",
+                    "Unit": "0 to 10 Scale"
+                }
+            }
+        ],
+        "Stage One Notes": "\nRespondents were asked \u201cOverall, how anxious did you feel yesterday?\u201d and answered on a scale of 0 to 10, where 0 is \u201cnot at all\u201d and 10 is \u201ccompletely\u201d.\nBroken down by \"How often do you feel lonely?\", Gender, Marital Status, \"How safe or unsafe do you feel in your home since the Coronavirus (COVID-19) outbreak?\", Whether their work is affected, and Disability.\nComparisons must be made with caution as these estimates are provided from a sample survey. As such, confidence intervals are produced to present the sampling variability which should be taken into account when assessing change, as true differences may not exist.\n"
     },
     "sizingNotes": "Simple table structure with footnotes",
     "notes": ""

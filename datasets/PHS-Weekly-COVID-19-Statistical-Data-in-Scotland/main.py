@@ -2,10 +2,13 @@
 # Temp scraper here.
 # TODO - move it into gss-utils
 
+from gssutils import *
 from gssutils.metadata.dcat import Distribution
 from gssutils.metadata.mimetype import CSV
 from dateutil.parser import parse
 from lxml import html 
+import json
+import pandas as pd
 
 
 # TODO - when we're happy his works, move it into gss-utils!
@@ -59,11 +62,53 @@ def opendata_nhs(scraper, tree):
 # -
 
 
+# # Statistical Qualifiers
+#
+# The data makes use of "statistical qualifiers" (data markers to us). Rather than hard code them we're going to pull hte table in each tranform (in case something changes).
+
+# +
+
+# note - got download link from page: https://www.opendata.nhs.scot/dataset/statistical-qualifiers/resource/b80f9af0-b115-4245-b591-fb22775226c4
+stat_qualifier_df = pd.read_csv("https://www.opendata.nhs.scot/dataset/2b6f00ec-fee3-4828-9303-89f31b436d2a/resource/b80f9af0-b115-4245-b591-fb22775226c4/download/statisticalqualifiers24052019.csv", encoding = "ISO-8859-1")
+stat_qualifier_df
+
+# +
+pathified_qualifiers = dict(zip(stat_qualifier_df["Qualifier"], stat_qualifier_df["QualifierName"].apply(pathify)))
+
+from pprint import pprint
+pprint(pathified_qualifiers)
+
+def get_pathified_qualifier(marker):
+    """
+    For a given data marker/qualifier, get the pathified version of its qualifier name
+    """
+    if marker != "":
+        try:
+            marker = pathified_qualifiers[marker]
+        except Exception as e:
+            raise Exception("Unable to find qualifier for data marker {} in {}" \
+                            .format(marker, json.dumps(pathified_qualifiers, indent=2))) from e
+    return marker
+
+
+# -
+
 # ## Helpers & Handlers
 
 # +
-def format_daily_dates(date):
+
+def get_weekly_date(issued):
+    """
+    Where no observation level date has been inlcuded, use the issued date of the data to get
+    the week in question
+    """
+    return issued
     
+def format_daily_dates(date):
+    """
+    Where the data has a specific daily datelisted (in the form '20201201', i.e the 1st December 2020)
+    convert to appropriately formatted period.
+    """
     # Confirm the input is what we think it is
     try:
         int(date) # Cast it, make sure it fits as an int
@@ -79,60 +124,75 @@ def format_daily_dates(date):
     # day/{year}-{month}-{day}
     return "day/{}-{}-{}".format(year, month, day)
 
-def handler_weekly_covid19_statistical_data_in_scotland_cumulative_cases_by_age_and_sex(df):
+def handler_cumulative_cases_by_age_and_sex(df):
     """
     Makes appropriate changes for the source dataset titles 'Cumulative Cases By Age and Sex'
     """
     rate_df = df.drop("TotalCases", axis=1)
     rate_df = rate_df.rename(columns={"Rate": "Value"})
     rate_df["Measure Type"] = "Rate"
+    rate_df["Unit Of Measure"] = "Cases"
     
     total_case_df = df.drop("Rate", axis=1)
     total_case_df = total_case_df.rename(columns={"TotalCases": "Value"})
-    total_case_df["Measure Type"] = "TotalCases"
+    total_case_df["Measure Type"] = "Count"
+    total_case_df["Unit Of Measure"] = "Cases"
     
     df = pd.concat([rate_df, total_case_df])
+    
+    # Set a period, then format appropriately
+    df["Period"] = distro.issued
+    df["Period"] = df["Period"].apply(get_weekly_date)
+    
     return df
     
 
-def handler_weekly_covid19_statistical_data_in_scotland_daily_and_cumulative_cases(df):
+def handler_daily_and_cumulative_cases(df):
     """
     Makes appropriate changes for the source dataset:
     Weekly COVID-19 Statistical Data in Scotland - Daily and Cumulative Cases - Scottish Health and Social Care Open Data
     """
     daily_df = df.drop("CumulativeCases", axis=1)
-    daily_df["Cases"] = "Daily"
+    daily_df["Case Type"] = "Daily"
     daily_df = daily_df.rename(columns={"DailyCases": "Value"})
         
     cumulative_df = df.drop("DailyCases", axis=1)
-    cumulative_df["Cases"] = "Cumulative"
+    cumulative_df["Case Type"] = "Cumulative"
     cumulative_df = cumulative_df.rename(columns={"CumulativeCases": "Value"})
-        
+
     df = pd.concat([daily_df, cumulative_df])
+
+    df["Measure Type"] = "Count"
+    df["Unit Of Measure"] = "Cases"
+    
     return df
 
 
-def handler_weekly_covid19_statistical_data_in_scotland_cumulative_cases_by_deprivation(df):
+def handler_cumulative_cases_by_deprivation(df):
     """
     Makes appropriate changes for the source dataset:
     Weekly COVID-19 Statistical Data in Scotland - Cumulative Cases by Deprivation - Scottish Health and Social Care Open Data
     """
     
-    # TODO - stupidly tiny....is there any point?
+    df["Period"] = distro.issued
+    df["Period"] = df["Period"].apply(get_weekly_date)
+    
+    df["Measure Type"] = "Count"
+    df["Unit Of Measure"] = "Cases"
+    
     return df
 
 
-def handler_weekly_covid19_statistical_data_in_scotland_daily_covid19_hospital_admissions(df):
+def handler_daily_covid19_hospital_admissions(df):
     """
     Makes appropriate changes for the source dataset:
     Weekly COVID-19 Statistical Data in Scotland - Daily COVID-19 Hospital Admissions - Scottish Health and Social Care Open Data
     """
-    
-    #need to fillna
+    df = df.rename(columns={"SaveDayAverage": "Value"})
     return df
 
 
-def handler_weekly_covid19_statistical_data_in_scotland_cumulative_covid19_hospital_admissions_by_age_sex(df):
+def handler_cumulative_covid19_hospital_admissions_by_age_sex(df):
     """
     Makes appropriate changes for the source dataset:
     Weekly COVID-19 Statistical Data in Scotland - Daily COVID-19 Hospital Admissions - Scottish Health and Social Care Open Data
@@ -146,56 +206,121 @@ def handler_weekly_covid19_statistical_data_in_scotland_cumulative_covid19_hospi
     total_case_df["Measure Type"] = "NumberAdmitted"
     
     df = pd.concat([rate_df, total_case_df])
+    
+    # Set a period, then format appropriately
+    df["Period"] = distro.issued
+    df["Period"] = df["Period"].apply(get_weekly_date)
+    
     return df
 
-def handler_weekly_covid19_statistical_data_in_scotland_cumulative_covid19_hospital_admissions_by_deprivation(df):
+def handler_cumulative_covid19_hospital_admissions_by_deprivation(df):
     """
     Makes appropriate changes for the source dataset:
     Weekly COVID-19 Statistical Data in Scotland - Cumulative COVID-19 Hospital Admissions By Deprivation - Scottish Health and Social Care Open Data
     """
     
+    # Set a period, then format appropriately
+    df["Period"] = distro.issued
+    df["Period"] = df["Period"].apply(get_weekly_date)
+    
     return df
 
-def handler_weekly_covid19_statistical_data_in_scotland_daily_icu_admissions_for_new_covid19_patients(df):
+def handler_daily_icu_admissions_for_new_covid19_patients(df):
     """
     Weekly COVID-19 Statistical Data in Scotland - Daily ICU Admissions for new COVID-19 Patients - Scottish Health and Social Care Open Data
     """
+    
+    rate_df = df.drop("NumberAdmitted", axis=1)
+    rate_df = rate_df.rename(columns={"SevenDayAverage": "Value"})
+    rate_df["Measure Type"] = "SevenDayAverage"
+    
+    total_case_df = df.drop("SevenDayAverage", axis=1)
+    total_case_df = total_case_df.rename(columns={"NumberAdmitted": "Value"})
+    total_case_df["Measure Type"] = "NumberAdmitted"
+    
+    df = pd.concat([rate_df, total_case_df])
+    
     return df
 
-def handler_weekly_covid19_statistical_data_in_scotland_cumulative_admissions_to_icu(df):
+def handler_cumulative_admissions_to_icu(df):
     """
     Weekly COVID-19 Statistical Data in Scotland - Cumulative Admissions to ICU - Scottish Health and Social Care Open Data
     """
+    
+    # Pivot multiple obs columns
+    rate_df = df.drop("NumberAdmitted", axis=1)
+    rate_df = rate_df.rename(columns={"RateAdmitted": "Value"})
+    rate_df["Measure Type"] = "RateAdmitted"
+    
+    total_case_df = df.drop("RateAdmitted", axis=1)
+    total_case_df = total_case_df.rename(columns={"NumberAdmitted": "Value"})
+    total_case_df["Measure Type"] = "NumberAdmitted"
+    
+    df = pd.concat([rate_df, total_case_df])
+    
+    # Set a period, then format appropriately
+    df["Period"] = distro.issued
+    df["Period"] = df["Period"].apply(get_weekly_date)
+    
     return df
 
-def handler_weekly_covid19_statistical_data_in_scotland_daily_nhs24_covid19_calls(df):
+def handler_daily_nhs24_covid19_calls(df):
     """
     Weekly COVID-19 Statistical Data in Scotland - Daily NHS24 COVID-19 Calls - Scottish Health and Social Care Open Data
     """
+    df = df.rename(columns={"NHS24CovidCalls": "Value"})
     return df
 
-def handler_weekly_covid19_statistical_data_in_scotland_daily_consultations_by_contact_type(df):
+
+def handler_daily_consultations_by_contact_type(df):
     """
     Weekly COVID-19 Statistical Data in Scotland - Daily Consultations by Contact Type - Scottish Health and Social Care Open Data
     """
+    df = df.rename({"NumberOfConsultation": "Value"})
     return df
 
-def handler_weekly_covid19_statistical_data_in_scotland_daily_sas_incidents(df):
-    """
+def handler_daily_sas_incidents(df):
+    """  
     Weekly COVID-19 Statistical Data in Scotland - Daily SAS Incidents - Scottish Health and Social Care Open Data
     """
+
+    columns_to_pivot = ["AllSASIncidents", "COVIDAll", "COVIDAttended", "COVIDConveyed"]
+    
     return df
 
-def handler_weekly_covid19_statistical_data_in_scotland_cumulative_suspected_covid19_sas_incidents_by_age(df):
+def handler_cumulative_suspected_covid19_sas_incidents_by_age(df):
     """
     Weekly COVID-19 Statistical Data in Scotland - Cumulative Suspected COVID-19 SAS Incidents By Age - Scottish Health and Social Care Open Data
     """
+    
+    # Pivot multiple obs columns
+    rate_df = df.drop("Incidents", axis=1)
+    rate_df = rate_df.rename(columns={"Rate": "Value"})
+    rate_df["Measure Type"] = "Rate"
+    
+    total_case_df = df.drop("Rate", axis=1)
+    total_case_df = total_case_df.rename(columns={"Incidents": "Value"})
+    total_case_df["Measure Type"] = "Incidents"
+    total_case_df["RateQF"] = ""   # dont apply rate markers to incidents
+    
+    df = pd.concat([rate_df, total_case_df])
+    df = df.rename(columns={"RateQF": "Marker"})
+    
+    # Set a period, then format appropriately
+    df["Period"] = distro.issued
+    df["Period"] = df["Period"].apply(get_weekly_date)
+    
     return df
 
-def handler_weekly_covid19_statistical_data_in_scotland_cumulative_suspected_covid19_sas_incidents_by_deprivation(df):
+def handler_cumulative_suspected_covid19_sas_incidents_by_deprivation(df):
     """
     Weekly COVID-19 Statistical Data in Scotland - Cumulative Suspected COVID-19 SAS Incidents By Deprivation - Scottish Health and Social Care Open Data
     """
+
+    # Set a period, then format appropriately
+    df["Period"] = distro.issued
+    df["Period"] = df["Period"].apply(get_weekly_date)
+    
     return df
 
 
@@ -209,32 +334,37 @@ scraper
 # +
 
 # A certain amount of nonsense to focus the scraper on each distribution in turn
-for distro_title in [x.description for x in scraper.distributions]:
+for distro_title in [x.title for x in scraper.distributions]:
     
     # Note: filter by desription as they're reusing the same title more than once for different data ...
-    distro = scraper.distribution(description=distro_title)
+    distro = scraper.distribution(title=distro_title)
     
-    df = distro.as_pandas()
+    df = distro.as_pandas().fillna("")
     
-    # Date
+    # Everything needs the same date handling
     for col in df.columns.values.tolist():
         if col == "Date":
             df[col] = df[col].apply(format_daily_dates)
+            
+    # Everything needs the same qualifier handling
+    for col in df.columns.values.tolist():
+        if col.strip().endswith("QF"):
+            df[col] = df[col].apply(get_pathified_qualifier)
     
     # Define handlers
-    handlers = { 'Weekly COVID-19 Statistical Data in Scotland - Cumulative Admissions to ICU - Scottish Health and Social Care Open Data': handler_weekly_covid19_statistical_data_in_scotland_cumulative_admissions_to_icu,
-                 'Weekly COVID-19 Statistical Data in Scotland - Cumulative COVID-19 Hospital Admissions By Age, Sex - Scottish Health and Social Care Open Data': handler_weekly_covid19_statistical_data_in_scotland_cumulative_covid19_hospital_admissions_by_age_sex,
-                 'Weekly COVID-19 Statistical Data in Scotland - Cumulative COVID-19 Hospital Admissions By Deprivation - Scottish Health and Social Care Open Data': handler_weekly_covid19_statistical_data_in_scotland_cumulative_covid19_hospital_admissions_by_deprivation,
-                 'Weekly COVID-19 Statistical Data in Scotland - Cumulative Cases By Age and Sex - Scottish Health and Social Care Open Data': handler_weekly_covid19_statistical_data_in_scotland_cumulative_cases_by_age_and_sex,
-                 'Weekly COVID-19 Statistical Data in Scotland - Cumulative Cases by Deprivation - Scottish Health and Social Care Open Data': handler_weekly_covid19_statistical_data_in_scotland_cumulative_cases_by_deprivation,
-                 'Weekly COVID-19 Statistical Data in Scotland - Cumulative Suspected COVID-19 SAS Incidents By Age - Scottish Health and Social Care Open Data': handler_weekly_covid19_statistical_data_in_scotland_cumulative_suspected_covid19_sas_incidents_by_age,
-                 'Weekly COVID-19 Statistical Data in Scotland - Cumulative Suspected COVID-19 SAS Incidents By Deprivation - Scottish Health and Social Care Open Data': handler_weekly_covid19_statistical_data_in_scotland_cumulative_suspected_covid19_sas_incidents_by_deprivation,
-                 'Weekly COVID-19 Statistical Data in Scotland - Daily COVID-19 Hospital Admissions - Scottish Health and Social Care Open Data': handler_weekly_covid19_statistical_data_in_scotland_daily_covid19_hospital_admissions,
-                 'Weekly COVID-19 Statistical Data in Scotland - Daily Consultations by Contact Type - Scottish Health and Social Care Open Data': handler_weekly_covid19_statistical_data_in_scotland_daily_consultations_by_contact_type,
-                 'Weekly COVID-19 Statistical Data in Scotland - Daily ICU Admissions for new COVID-19 Patients - Scottish Health and Social Care Open Data': handler_weekly_covid19_statistical_data_in_scotland_daily_icu_admissions_for_new_covid19_patients,
-                 'Weekly COVID-19 Statistical Data in Scotland - Daily NHS24 COVID-19 Calls - Scottish Health and Social Care Open Data': handler_weekly_covid19_statistical_data_in_scotland_daily_nhs24_covid19_calls,
-                 'Weekly COVID-19 Statistical Data in Scotland - Daily SAS Incidents - Scottish Health and Social Care Open Data': handler_weekly_covid19_statistical_data_in_scotland_daily_sas_incidents,
-                 'Weekly COVID-19 Statistical Data in Scotland - Daily and Cumulative Cases - Scottish Health and Social Care Open Data': handler_weekly_covid19_statistical_data_in_scotland_daily_and_cumulative_cases
+    handlers = { 'Weekly COVID-19 Statistical Data in Scotland - Cumulative Admissions to ICU - Scottish Health and Social Care Open Data': handler_cumulative_admissions_to_icu,
+                 'Weekly COVID-19 Statistical Data in Scotland - Cumulative COVID-19 Hospital Admissions By Age, Sex - Scottish Health and Social Care Open Data': handler_cumulative_covid19_hospital_admissions_by_age_sex,
+                 'Weekly COVID-19 Statistical Data in Scotland - Cumulative COVID-19 Hospital Admissions By Deprivation - Scottish Health and Social Care Open Data': handler_cumulative_covid19_hospital_admissions_by_deprivation,
+                 'Weekly COVID-19 Statistical Data in Scotland - Cumulative Cases By Age and Sex - Scottish Health and Social Care Open Data': handler_cumulative_cases_by_age_and_sex,
+                 'Weekly COVID-19 Statistical Data in Scotland - Cumulative Cases by Deprivation - Scottish Health and Social Care Open Data': handler_cumulative_cases_by_deprivation,
+                 'Weekly COVID-19 Statistical Data in Scotland - Cumulative Suspected COVID-19 SAS Incidents By Age - Scottish Health and Social Care Open Data': handler_cumulative_suspected_covid19_sas_incidents_by_age,
+                 'Weekly COVID-19 Statistical Data in Scotland - Cumulative Suspected COVID-19 SAS Incidents By Deprivation - Scottish Health and Social Care Open Data': handler_cumulative_suspected_covid19_sas_incidents_by_deprivation,
+                 'Weekly COVID-19 Statistical Data in Scotland - Daily COVID-19 Hospital Admissions - Scottish Health and Social Care Open Data': handler_daily_covid19_hospital_admissions,
+                 'Weekly COVID-19 Statistical Data in Scotland - Daily Consultations by Contact Type - Scottish Health and Social Care Open Data': handler_daily_consultations_by_contact_type,
+                 'Weekly COVID-19 Statistical Data in Scotland - Daily ICU Admissions for new COVID-19 Patients - Scottish Health and Social Care Open Data': handler_daily_icu_admissions_for_new_covid19_patients,
+                 'Weekly COVID-19 Statistical Data in Scotland - Daily NHS24 COVID-19 Calls - Scottish Health and Social Care Open Data': handler_daily_nhs24_covid19_calls,
+                 'Weekly COVID-19 Statistical Data in Scotland - Daily SAS Incidents - Scottish Health and Social Care Open Data': handler_daily_sas_incidents,
+                 'Weekly COVID-19 Statistical Data in Scotland - Daily and Cumulative Cases - Scottish Health and Social Care Open Data': handler_daily_and_cumulative_cases
                }
     
     if distro.title.strip() not in handlers.keys():
@@ -243,10 +373,15 @@ for distro_title in [x.description for x in scraper.distributions]:
 
     # Handle
     df = handlers[distro.title](df)
-    df.to_csv("{}.csv".format(pathify(distro.title.strip())), index=False)
+    
+    # Shorter output title
+    otitle = distro.title.replace("Weekly COVID-19 Statistical Data in Scotland - ", "")
+    otitle = otitle.replace(" - Scottish Health and Social Care Open Data", "")
+    otitle = otitle.strip()
+    df.to_csv("./out/{}.csv".format(pathify(otitle.strip())), index=False)
 
+    distro.as_pandas().fillna("").to_csv("./out/{}_OLD.csv".format(pathify(otitle.strip())), index=False)
 
-    print("Processed: " + distro.title)
 
 
 # -

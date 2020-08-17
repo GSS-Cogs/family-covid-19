@@ -1,35 +1,4 @@
 {
-    "AirTable Record ID": "recYxaK7Iqkx6aoyD",
-    "AirTable creation date": "2020-06-05T07:26:50.000Z",
-    "BA Stage": "Documented",
-    "Contact": [
-        "recNpB1Z0uH4M09b2"
-    ],
-    "Data type": [
-        "XLS"
-    ],
-    "Description": "The online price changes of selected high demand products (HDP) dataset. These data are experimental estimates developed to deliver timely indicators to help understand the impact of COVID-19.",
-    "Family": [
-        "family-covid-19-AIRTABLE"
-    ],
-    "Frequency": "Weekly",
-    "GitHub Issue Number": 122,
-    "GitHub Name": "ONS-Online-price-changes-for-high-demand-products",
-    "Landing Page": "https://www.ons.gov.uk/economy/inflationandpriceindices/datasets/onlinepricechangesforhighdemandproducts",
-    "Last Published": "2020-06-04",
-    "Main Issue": "1000000",
-    "Name": "Online price changes for high-demand products",
-    "Next Due": "2020-06-11",
-    "Producer": [
-        "ONS"
-    ],
-    "Route from landing page to data": "On landing page under your download option",
-    "Size": "Medium",
-    "Sizing Notes": "2 simple tables with footnotes on 1 tab ",
-    "Tech Stage": [
-        "To Do",
-        "Priority"
-    ],
     "title": "Online price changes for high-demand products",
     "publisher": "Office for National Statistics",
     "description": "The online price changes of selected high demand products (HDP) dataset. These data are experimental estimates developed to deliver timely indicators to help understand the impact of COVID-19.",

@@ -32,7 +32,7 @@
             },
             "Number of care homes": {
                 "attribute": "http://gss-data.org.uk/def/attribute/number-of-care-homes",
-                "datatype": "integer" 
+                "datatype": "integer"
             },
             "Value": {
                 "unit": "http://gss-data.org.uk/def/concept/measurement-units/count",

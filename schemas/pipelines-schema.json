@@ -53,11 +53,11 @@
         "type": "string"
       },
       "uniqueItems": true
-    },
-    "required": [
-      "family",
-      "github",
-      "jenkins"
-    ]
-  }
+    }
+  },
+  "required": [
+    "family",
+    "github",
+    "jenkins"
+  ]
 }

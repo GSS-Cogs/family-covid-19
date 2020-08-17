@@ -33,6 +33,11 @@
         }
       ]
     },
+    "dataURL": {
+      "description": "Provide a temporary direct download URL when there's no scraper available",
+      "type": "string",
+      "format": "uri"
+    },
     "datasetNotes": {
       "description": "Notes about how to find the data from the landing page and what to do with it",
       "type": "array",
@@ -108,7 +113,56 @@
                 "type": "string"
               },
               {
-                "type": "object"
+                "type": "object",
+                "properties": {
+                  "description": {
+                    "description": "Definition of this dimension.",
+                    "type": "string"
+                  },
+                  "dimension": {
+                    "description": "The URI for this dimension.",
+                    "type": "string",
+                    "format": "uri"
+                  },
+                  "parent": {
+                    "description": "The URI of a parent dimension.",
+                    "type": "string",
+                    "format": "uri"
+                  },
+                  "value": {
+                    "description": "The URI template for values in this column.",
+                    "type": "string",
+                    "format": "uri-template"
+                  },
+                  "unit": {
+                    "description": "The URI of the measurement units for this measure.",
+                    "type": "string",
+                    "format": "uri"
+                  },
+                  "measure": {
+                    "description": "The URI of the measure.",
+                    "type": "string",
+                    "format": "uri"
+                  },
+                  "datatype": {
+                    "description": "The data type for this measure.",
+                    "type": "string",
+                    "enum": ["number", "binary", "datetime", "any", "xml", "html", "json",
+                      "anyAtomicType", "anyURI", "base64Binary", "boolean", "date", "dateTime", "dateTimeStamp",
+                      "decimal", "integer", "long", "int", "short", "byte", "nonNegativeInteger", "positiveInteger",
+                      "unsignedLong", "unsignedInt", "unsignedShort", "unsignedByte", "nonPositiveInteger",
+                      "negativeInteger",
+                      "double", "duration", "dayTimeDuration", "yearMonthDuration", "float",
+                      "gDay", "gMonth", "gYear", "gYearMonth", "hexBinary", "QName",
+                      "string", "normalizedString", "token", "language", "Name", "NMTOKEN", "time"]
+                  }
+                },
+                "oneOf": [
+                  {"required": ["parent", "value"]},
+                  {"required": ["dimension", "value"]},
+                  {"required": ["measure", "unit"]}
+                ],
+                "additionalProperties": false
               }
             ]
           }
@@ -135,5 +189,6 @@
       "type": "string"
     }
   },
-  "required": ["title", "publisher", "families", "transform"]
+  "required": ["title", "publisher", "families"],
+  "additionalProperties": false
 }

@@ -81,6 +81,7 @@
                 "measure": "http://gss-data.org.uk/def/measure/count",
                 "datatype": "integer"
             }
+        }
     },
     "sizingNotes": "Should be straightforward with CSV.",
     "notes": ""

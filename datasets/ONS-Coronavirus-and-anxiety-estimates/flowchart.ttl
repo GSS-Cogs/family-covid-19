@@ -38,7 +38,7 @@ cogsgit:top-level a cogs:LandingPage ;
   rdfs:label "Landing Page" ;
   rdfs:label2 "ONS Coronavirus and anxiety estimates";
   rdfs:comment <https://www.ons.gov.uk/peoplepopulationandcommunity/wellbeing/datasets/coronavirusandanxietyestimates>;
-  cogs:splits cogsgit:sheet1, cogsgit:sheet2 ;
+  cogs:splits cogsgit:sheet1 ;
 .
 
 cogsgit:sheet1 a cogs:Sheets ;

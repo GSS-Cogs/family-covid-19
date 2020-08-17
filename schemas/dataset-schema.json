@@ -124,6 +124,11 @@
                     "type": "string",
                     "format": "uri"
                   },
+                  "attribute": {
+                    "description": "The URI for this attribute.",
+                    "type": "string",
+                    "format": "uri"
+                  },
                   "parent": {
                     "description": "The URI of a parent dimension.",
                     "type": "string",
@@ -160,6 +165,8 @@
                 "oneOf": [
                   {"required": ["parent", "value"]},
                   {"required": ["dimension", "value"]},
+                  {"required": ["attribute", "value"]},
+                  {"required": ["attribute", "datatype"]},
                   {"required": ["measure", "unit"]}
                 ],
                 "additionalProperties": false

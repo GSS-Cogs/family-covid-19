@@ -304,6 +304,14 @@ del joined_dat['Unit']
 joined_dat.rename(columns={'Area Unit' : 'Unit', 'Area code': 'Geography Code', 'Area Type': 'Region Type'}, inplace=True)
 joined_dat['Value'] = pd.to_numeric(joined_dat['Value'], downcast='integer')
 
+# As we're currently outputting just one measure, the Unit is declared in `info.json` mapping so drop it from here.
+#
+# Todo: revisit if we add percentages back.
+
+del joined_dat['Unit']
+
+# The number of carehomes in a region is not a dimension, but either an extra measure for each observation, or an attribute.
+
 # Output the data to CSV
 csvName = 'observations.csv'
 out = Path('out')

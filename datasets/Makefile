@@ -1,6 +1,12 @@
 datasets = $(sort $(dir $(wildcard */info.json)))
 transforms = $(sort $(dir $(wildcard */main.py)))
 
+test_info:
+	ajv -s ../schemas/pipelines-schema.json -d info.json
+	for info in */info.json; do \
+  		ajv -s ../schemas/dataset-schema.json -d "$$info" ; \
+  	done
+
 %.ipynb : %.py
 	jupytext --to notebook $<
 

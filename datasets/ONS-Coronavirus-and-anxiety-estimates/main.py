@@ -288,7 +288,7 @@ df = df.reset_index(drop=True)
 
 df = df.rename(columns={'OBS' : 'Value'})
 
-df = df[['Period', 'Breakdown Category', 'Breakdown Response', 'Sample Size', 'Value', 'Lower CI', 'Upper CI', 'Value', 'Measure Type', 'Unit']]
+df = df[['Period', 'Breakdown Category', 'Breakdown Response', 'Sample Size', 'Lower CI', 'Upper CI', 'Value', 'Measure Type', 'Unit']]
 
 for column in df:
     if column in ('Period', 'Breakdown Category', 'Breakdown Response', 'Measure Type', 'Unit'):

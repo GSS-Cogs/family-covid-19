@@ -1,35 +1,4 @@
 {
-    "AirTable Record ID": "rec2UiBp6T5n6qYb1",
-    "AirTable creation date": "2020-06-05T07:42:43.000Z",
-    "BA Stage": "Documented",
-    "Contact": [
-        "recLcnD9nZC3IHu5A"
-    ],
-    "Data type": [
-        "XLS"
-    ],
-    "Description": "Experimental job advert indices covering the UK job market",
-    "Family": [
-        "family-covid-19-AIRTABLE"
-    ],
-    "Frequency": "Weekly",
-    "GitHub Issue Number": 120,
-    "GitHub Name": "ONS-Online-job-advert-estimates",
-    "Landing Page": "https://www.ons.gov.uk/economy/economicoutputandproductivity/output/datasets/onlinejobadvertestimates",
-    "Last Published": "2020-06-04",
-    "Main Issue": "1000000",
-    "Name": "Online job advert estimates",
-    "Next Due": "2020-06-11",
-    "Producer": [
-        "ONS"
-    ],
-    "Route from landing page to data": "On landing page under your download option",
-    "Size": "Medium",
-    "Sizing Notes": "Simple table structure with footnotes, however some of the figures are highlighted with comments on row 41 in some case this refers to the whole column but in other cases this is just an individual figure therefore manual intervention may be required. ",
-    "Tech Stage": [
-        "To Do",
-        "Priority"
-    ],
     "title": "Online job advert estimates",
     "publisher": "Office for National Statistics",
     "description": "Experimental job advert indices covering the UK job market",

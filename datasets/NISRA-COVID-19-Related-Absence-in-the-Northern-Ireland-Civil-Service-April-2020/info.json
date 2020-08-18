@@ -22,8 +22,5 @@
     },
     "sizingNotes": "",
     "notes": "Duplicate",
-    "landingPage": [
-        "",
-        "https://www.gov.uk/government/statistics/announcements/covid-19-related-absence-in-the-northern-ireland-civil-service-april-2020#history"
-    ]
+    "landingPage": "https://www.gov.uk/government/statistics/announcements/covid-19-related-absence-in-the-northern-ireland-civil-service-april-2020#history"
 }

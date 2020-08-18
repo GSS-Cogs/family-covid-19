@@ -42,24 +42,22 @@ cogs:Rename a owl:Class ;
 
 cogsgit:top-level a cogs:LandingPage ;
   rdfs:label "Landing Page" ;
-  rdfs:label2 "<b>TITLE HERE</b>" ;
-  rdfs:comment "LINK HERE";
-  cogs:scrape cogsgit:sheet1 ;
+  rdfs:label2 "<b>Which occupations have the highest potential exposure to the coronavirus (COVID-19)?</b>" ;
+  rdfs:comment <https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/articles/whichoccupationshavethehighestpotentialexposuretothecoronaviruscovid19/2020-05-11>;
+  cogs:scrape cogsgit:sheet1, cogsgit:sheet2 ;
 .
 
-cogsgit:sheet1 a cogs:Sheets ; rdfs:label "SHEET NAME HERE" ; rdfs:comment "SHEET TITLE HERE" ; cogs:transforms cogsgit:columns1 ; .
+cogsgit:sheet1 a cogs:Sheets ; rdfs:label "Sheet" ; rdfs:comment "Occupations and exposure" ; cogs:transforms cogsgit:dataset1 ; .
+cogsgit:sheet2 a cogs:Sheets ; rdfs:label "Sheet" ; rdfs:comment "Total workforce population" ; cogs:transforms cogsgit:dataset2 ; .
 
 
-cogsgit:columns1 a cogs:Columns ; rdfs:label "Output Table 1" ; rdfs:comment "COLUMN LIST HERE" ; cogs:harmonise cogsgit:rename1 ; .
+cogsgit:dataset1 a cogs:Datasets ; rdfs:label "Dataset 1" ; rdfs:comment "Which occupations have the highest potential exposure to the coronavirus COVID-19" ; cogs:outputs cogsgit:columns1 ; .
+cogsgit:dataset2 a cogs:Datasets ; rdfs:label "Dataset 2" ; rdfs:comment "Which occupations have the highest potential exposure to the coronavirus COVID-19 - Total Workforce Population" ; cogs:outputs cogsgit:columns2 ; .
 
 
-cogsgit:rename1 a cogs:Rename ; rdfs:label "Rename & Add" ; rdfs:comment "Not yet specified" ; cogs:joins cogsgit:dataset1 ; .
+cogsgit:columns1 a cogs:Columns ; rdfs:label "Output Table 1" ; rdfs:comment "UK SOC 2010 Code, Occupation, Total in employment, Median hourly pay, Percentage Workforce Female, Percentage Workforce Aged 55plus, Percentage Workforce BAME, Working Condition Category, Measure type, Unit, Value" ; cogs:uploads cogsgit:pmd1 ; .
+cogsgit:columns2 a cogs:Columns ; rdfs:label "Output Table 2" ; rdfs:comment "Workforce Category, Measure Type, Unit, Value" ; cogs:uploads cogsgit:pmd1 ; .
 
 
-cogsgit:dataset1 a cogs:Datasets ; rdfs:label "Dataset Name 1" ; rdfs:comment "Dataset Name" ; cogs:outputs cogsgit:pmd1 ; .
-
-cogsgit:pmd1 a cogs:PMD ;
-  rdfs:label "PMD" ;
-  rdfs:comment "Publish my Data: http://gss-data.org.uk/data/search" ;
-.
+cogsgit:pmd1 a cogs:PMD ; rdfs:label "PMD" ; rdfs:comment <https://staging.gss-data.org.uk/datasets> ; .
 ###################################################################################################

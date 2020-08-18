@@ -55,8 +55,8 @@ cogsgit:dataset1 a cogs:Datasets ; rdfs:label "Dataset 1" ; rdfs:comment "Which 
 cogsgit:dataset2 a cogs:Datasets ; rdfs:label "Dataset 2" ; rdfs:comment "Which occupations have the highest potential exposure to the coronavirus COVID-19 - Total Workforce Population" ; cogs:outputs cogsgit:columns2 ; .
 
 
-cogsgit:columns1 a cogs:Columns ; rdfs:label "Output Table 1" ; rdfs:comment "UK SOC 2010 Code, Occupation, Total in employment, Median hourly pay, Percentage Workforce Female, Percentage Workforce Aged 55plus, Percentage Workforce BAME, Working Condition Category, Measure type, Unit, Value" ; cogs:uploads cogsgit:PMD1 ; .
-cogsgit:columns2 a cogs:Columns ; rdfs:label "Output Table 2" ; rdfs:comment "Workforce Category, Measure Type, Unit, Value" ; cogs:uploads cogsgit:PMD1 ; .
+cogsgit:columns1 a cogs:Columns ; rdfs:label "Output Table 1" ; rdfs:comment "UK SOC 2010 Code, Occupation, Total in employment, Median hourly pay, Percentage Workforce Female, Percentage Workforce Aged 55plus, Percentage Workforce BAME, Working Condition Category, Measure type, Unit, Value" ; cogs:uploads cogsgit:pmd1 ; .
+cogsgit:columns2 a cogs:Columns ; rdfs:label "Output Table 2" ; rdfs:comment "Workforce Category, Measure Type, Unit, Value" ; cogs:uploads cogsgit:pmd1 ; .
 
 
 cogsgit:pmd1 a cogs:PMD ; rdfs:label "PMD" ; rdfs:comment <https://staging.gss-data.org.uk/datasets> ; .

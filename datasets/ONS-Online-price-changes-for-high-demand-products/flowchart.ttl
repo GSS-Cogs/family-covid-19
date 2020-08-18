@@ -42,24 +42,19 @@ cogs:Rename a owl:Class ;
 
 cogsgit:top-level a cogs:LandingPage ;
   rdfs:label "Landing Page" ;
-  rdfs:label2 "<b>TITLE HERE</b>" ;
-  rdfs:comment "LINK HERE";
+  rdfs:label2 "<b>ONS Online price changes for high-demand products</b>" ;
+  rdfs:comment <https://www.ons.gov.uk/economy/inflationandpriceindices/datasets/onlinepricechangesforhighdemandproducts>;
   cogs:scrape cogsgit:sheet1 ;
 .
 
-cogsgit:sheet1 a cogs:Sheets ; rdfs:label "SHEET NAME HERE" ; rdfs:comment "SHEET TITLE HERE" ; cogs:transforms cogsgit:columns1 ; .
+cogsgit:sheet1 a cogs:Sheets ; rdfs:label "Sheet" ; rdfs:comment "Online Price Change of HDP" ; cogs:transforms cogsgit:dataset1 ; .
 
 
-cogsgit:columns1 a cogs:Columns ; rdfs:label "Output Table 1" ; rdfs:comment "COLUMN LIST HERE" ; cogs:harmonise cogsgit:rename1 ; .
+cogsgit:dataset1 a cogs:Datasets ; rdfs:label "Dataset 1" ; rdfs:comment "Online price changes for high-demand products" ; cogs:outputs cogsgit:columns1 ; .
 
 
-cogsgit:rename1 a cogs:Rename ; rdfs:label "Rename & Add" ; rdfs:comment "Not yet specified" ; cogs:joins cogsgit:dataset1 ; .
+cogsgit:columns1 a cogs:Columns ; rdfs:label "Output Table 1" ; rdfs:comment "Period, Week, Product, Measure Type, Unit, Value" ; cogs:uploads cogsgit:pmd1 ; .
 
 
-cogsgit:dataset1 a cogs:Datasets ; rdfs:label "Dataset Name 1" ; rdfs:comment "Dataset Name" ; cogs:outputs cogsgit:pmd1 ; .
-
-cogsgit:pmd1 a cogs:PMD ;
-  rdfs:label "PMD" ;
-  rdfs:comment "Publish my Data: http://gss-data.org.uk/data/search" ;
-.
+cogsgit:pmd1 a cogs:PMD ; rdfs:label "PMD" ; rdfs:comment <https://staging.gss-data.org.uk/datasets> ; .
 ###################################################################################################

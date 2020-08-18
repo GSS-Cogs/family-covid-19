@@ -1,11 +1,11 @@
-<!-- #region -->
 # COGS Dataset Specification
 
 [Family Home](https://gss-cogs.github.io/family-covid-19/datasets/specmenu.html)
 
 [Family Transform Status](https://gss-cogs.github.io/family-covid-19/datasets/index.html)
 
-----------## ONS Online price changes for high-demand products 
+----------
+## ONS Online price changes for high-demand products 
 
 [Landing Page](https://www.ons.gov.uk/economy/inflationandpriceindices/datasets/onlinepricechangesforhighdemandproducts)
 
@@ -27,25 +27,21 @@
 
 ### Stage 2. Harmonise
 
-#### Sheet: 1
+#### Sheet: Online Price Change of HDP
 
-		spec
+		Remove the string 'week' from 'Week' column and convert to Integer. Kept this column as it is important in reference to the first week, which will always be 100.
+		Rename 'Products' column to 'Product' (I know, its petty!)
 
 #### Table Structure
 
-		Period, Measure Type, Unit, Marker, Value
+		Period, Week, Product, Measure Type, Unit, Value
+
+#### Dataset Output Name
+
+		Online price changes for high-demand products
 
 
 ##### DM Notes
 
-		notes
+		Second table of week 2 vs week 1 has been removed as per Github comments (derivable)
 
-<!-- #endregion -->
-
-```python
-
-```
-
-```python
-
-```

@@ -9,6 +9,8 @@
 
 [Landing Page](https://www.ons.gov.uk/economy/inflationandpriceindices/datasets/onlinepricechangesforhighdemandproducts)
 
+[Transform Flowchart](https://gss-cogs.github.io/family-covid-19/datasets/specflowcharts.html?ONS-Online-price-changes-for-high-demand-products/flowchart.ttl)
+
 ### Stage 1. Transform
 
 #### Sheet: Online Price Change of HDP

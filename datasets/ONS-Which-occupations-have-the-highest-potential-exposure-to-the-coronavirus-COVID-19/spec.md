@@ -1,4 +1,3 @@
-<!-- #region -->
 # COGS Dataset Specification
 
 [Family Home](https://gss-cogs.github.io/family-covid-19/datasets/specmenu.html)
@@ -9,7 +8,7 @@
 
 [Landing Page](https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/articles/whichoccupationshavethehighestpotentialexposuretothecoronaviruscovid19/2020-05-11)
 
-[Transform Flowchart]
+[Transform Flowchart](https://gss-cogs.github.io/family-covid-19/datasets/specflowcharts.html?ONS-Which-occupations-have-the-highest-potential-exposure-to-the-coronavirus-COVID-19/flowchart.ttl)
 
 ### Stage 1. Transform
 
@@ -32,7 +31,7 @@
 
 ##### Notes 
     The observations are those values that fall below the two Measure types (Proximity to others, Exposure to disease)
-    These are measured using a sandardised scale;
+    These are measured using a standardised scale;
     
     The standardised exposure to disease or infections measure is defined by:
     0 – Never
@@ -51,37 +50,67 @@
         Add Unit column with value: Percent
 
 #### Table Structure
-    Occupation title , Workforce category, Measure type, Unit, Value
+    Occupation title, Workforce category, Measure type, Unit, Value
 
 
 ### Stage 2. Harmonise
 
-#### Sheet: 1
+#### Sheet: Occupations and exposure
 
-		spec
+		Convert column 'UK SOC 2010 Code' to an Integer
+		Change name of 'Measure Type' column to 'Working Condition Category' (will have problems with duplicate rows otherwise)
+		Change the following column names
+			'Occupation title' --> 'Occupation'
+			'Median hourly pay (£)' --> 'Median hourly pay'
+			'Percentage of the workforce that are female' --> 'Percentage Workforce Female'
+			'Percentage of the workforce that are aged 55+' --> 'Percentage Workforce Aged 55plus'
+			'Percentage of the workforce that are BAME' --> 'Percentage Workforce BAME'
+		Create new 'Measure Type' column with values:
+				Proximity to others = Proximity
+				Exposure to Disease = Exposure
+		Change 'Unit' column value to 'Standardised Scale'
+
+		If not already in the metadata add link to report/methodology:
+		https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/articles/whichoccupationshavethehighestpotentialexposuretothecoronaviruscovid19/2020-05-11
+		Also add the footnotes to the metadata
+		
 
 #### Table Structure
 
-		Period, Measure Type, Unit, Marker, Value
+		UK SOC 2010 Code, Occupation, Total in employment, Median hourly pay, Percentage Workforce Female, Percentage Workforce Aged 55plus, Percentage Workforce BAME, Working Condition Category, Measure type, Unit, Value
 
-#### Sheet: 2
+#### Output Dataset Name
 
-		spec
+		Which occupations have the highest potential exposure to the coronavirus COVID-19
 
-----------#### Table Structure
+	
+#### Sheet: Total workforce population
 
-		Period, Measure Type, Unit, Marker, Value
+		Remove column 'Occupation Title'
+		Change 'Workforce Category' values to:
+			'Percentage of the workforce that are female(%)' --> 'Females'
+			'Percentage of the workforce that are aged 55+ (%)' --> 'Aged 55plus'
+			'Percentage of the workforce that are BAME (%)' --> 'BAME'
 
---------------##### Footnotes
+		If not already in the metadata add link to report/methodology:
+		https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/articles/whichoccupationshavethehighestpotentialexposuretothecoronaviruscovid19/2020-05-11
+
+#### Table Structure
+
+		Workforce Category, Measure Type, Unit, Value
+
+#### Output Dataset Name
+
+		Which occupations have the highest potential exposure to the coronavirus COVID-19 - Total Workforce Population
+
+##### Footnotes
 
 		footnotes
 
+--------------
+
 ##### DM Notes
 
-		notes
+		Will have to check to see if the Occupation data is already available as an ontology that can be referenced rather than create out own
+		Could have flattened everything but then everything would be from different distributions and it looks better as it is.
 
-<!-- #endregion -->
-
-```python
-
-```

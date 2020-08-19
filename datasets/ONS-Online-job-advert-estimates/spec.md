@@ -1,17 +1,18 @@
-<!-- #region -->
 # COGS Dataset Specification
 
 [Family Home](https://gss-cogs.github.io/family-covid-19/datasets/specmenu.html)
 
 [Family Transform Status](https://gss-cogs.github.io/family-covid-19/datasets/index.html)
 
-----------## ONS Online job advert estimates 
+----------
+## ONS Online job advert estimates 
 
 [Landing Page](https://www.ons.gov.uk/economy/economicoutputandproductivity/output/datasets/onlinejobadvertestimates)
 
 [Transform Flowchart](https://gss-cogs.github.io/family-covid-19/datasets/specflowcharts.html?ONS-Online-job-advert-estimates/flowchart.ttl)
 
-----------### Stage 1. Transform
+----------
+### Stage 1. Transform
 
 #### Sheet: Vacancies
 
@@ -25,32 +26,43 @@
 
 		Date, Industry, Value, Marker, Measure Type, Unit
 
+-------------
 
+### Stage 2. Alignment
 
--------------### Stage 2. Harmonise
+#### Sheet: Vacancies by Adzuna Category
 
-#### Sheet: 1
+		Format 'Date' column as a day. Adverts are a snapshot of that day
+		Change 'Maker' columns value to 'Imputed' where necessary and change all NaNs to empty string. Footnote should cover why and how values have been Imputed.
+		I'm a bit confused as to why a count of job adverts can have a decimal place but values are coming through as integers. Can we change back to decimal.
+		Add column 'NUTS1 Region' with value 'K02000001'
 
-		spec
+#### Sheet: Vacancies by NUTS1 Region
+
+		Not sure if this sheet has been scrapped?
+		
+		Columns: Date, NUTS1 Region, Marker, Measure Type, Unit, Value
+		Format 'Date' column as a day. Adverts are a snapshot of that day
+		Change 'Maker' columns value to 'Imputed' where necessary and change all NaNs to empty string. Footnote should cover why and how values have been Imputed.
+		Add column 'Industry' with value 'All'
+
+	Join both tables
+
+#### Dataset Name
+
+		Online job advert estimates
 
 #### Table Structure
 
-		Period, Measure Type, Unit, Marker, Value
+		Date, Industry, NUTS1 Region, Marker, Measure Type, Unit, Value
 
-#### Sheet: 2
+##### Footnotes
 
-		spec
+		footnotes from both sheets should be added to metadata
 
-----------#### Table Structure
-
-		Period, Measure Type, Unit, Marker, Value
-
---------------##### Footnotes
-
-		footnotes
+--------------
 
 ##### DM Notes
 
 		notes
 
-<!-- #endregion -->

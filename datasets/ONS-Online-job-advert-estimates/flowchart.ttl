@@ -11,9 +11,6 @@
 cogs:SoftwarePackage a owl:Class ;
   rdfs:label "Software package" ;
 .
-cogs:SoftwarePackage a owl:Class ;
-  rdfs:label2 "Label2" ;
-.
 cogs:LandingPage a owl:Class ;
   rdfs:subClassOf cogs:SoftwarePackage ;
   rdfs:label "Landing Page" ;
@@ -24,7 +21,7 @@ cogs:Datasets a owl:Class ;
 .
 cogs:Sheets a owl:Class ;
   rdfs:subClassOf cogs:SoftwarePackage ;
-  rdfs:label "Sheet Name";
+  rdfs:label "Sheet names to join";
 .
 cogs:Columns a owl:Class ;
   rdfs:subClassOf cogs:SoftwarePackage ;
@@ -34,32 +31,41 @@ cogs:PMD a owl:Class ;
   rdfs:subClassOf cogs:SoftwarePackage ;
   rdfs:label "PMD" ;
 .
-cogs:Rename a owl:Class ;
-  rdfs:subClassOf cogs:SoftwarePackage ;
-  rdfs:label "Rename & Add" ;
-.
+
 ###########################################################################################################
 
 cogsgit:top-level a cogs:LandingPage ;
   rdfs:label "Landing Page" ;
-  rdfs:label2 "<b>TITLE HERE</b>" ;
-  rdfs:comment "LINK HERE";
-  cogs:scrape cogsgit:sheet1 ;
+  rdfs:label2 "ONS Online job advert estimates";
+  rdfs:comment <https://www.ons.gov.uk/economy/economicoutputandproductivity/output/datasets/onlinejobadvertestimates>;
+  cogs:splits cogsgit:sheet1 ;
 .
 
-cogsgit:sheet1 a cogs:Sheets ; rdfs:label "SHEET NAME HERE" ; rdfs:comment "SHEET TITLE HERE" ; cogs:transforms cogsgit:columns1 ; .
+
+cogsgit:sheet1 a cogs:Sheets ;
+  rdfs:label "Sheets" ;
+  rdfs:comment "Vacancies by Adzuna Category, Vacancies by NUTS1 Region" ;
+  cogs:transforms cogsgit:dataset1 ;
+.
 
 
-cogsgit:columns1 a cogs:Columns ; rdfs:label "Output Table 1" ; rdfs:comment "COLUMN LIST HERE" ; cogs:harmonise cogsgit:rename1 ; .
+cogsgit:dataset1 a cogs:Datasets ;
+  rdfs:label "Dataset" ;
+  rdfs:comment "Online job advert estimates" ;
+  cogs:outputs cogsgit:columns1 ;
+.
 
 
-cogsgit:rename1 a cogs:Rename ; rdfs:label "Rename & Add" ; rdfs:comment "Not yet specified" ; cogs:joins cogsgit:dataset1 ; .
+cogsgit:columns1 a cogs:Columns ;
+  rdfs:label "Table" ;
+  rdfs:comment "Date, Industry, NUTS1 Region, Marker, Measure Type, Unit, Value" ;
+  cogs:uploads cogsgit:pmd1 ;
+.
 
-
-cogsgit:dataset1 a cogs:Datasets ; rdfs:label "Dataset Name 1" ; rdfs:comment "Dataset Name" ; cogs:outputs cogsgit:pmd1 ; .
 
 cogsgit:pmd1 a cogs:PMD ;
   rdfs:label "PMD" ;
-  rdfs:comment "Publish my Data: http://gss-data.org.uk/data/search" ;
+  rdfs:label2 "Publish my Data" ;
+  rdfs:comment <http://gss-data.org.uk/data/search> ;
 .
 ###################################################################################################

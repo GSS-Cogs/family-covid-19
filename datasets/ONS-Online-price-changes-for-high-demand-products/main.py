@@ -115,7 +115,7 @@ trace.Unit('Hardcoded value as: Percent')
 dimensions = [
     HDim(week, 'Week', DIRECTLY, LEFT),
     HDim(date, 'Period', DIRECTLY, LEFT),
-    HDim(products, 'Products', DIRECTLY, ABOVE),
+    HDim(products, 'Product', DIRECTLY, ABOVE),
     HDimConst('Measure Type', measure_type),
     HDimConst('Unit', unit),
     ]
@@ -134,24 +134,36 @@ trace.Value("Rename databaker columns OBS to Value")
 trace.Date("Formating to gregorian-interval/YYY-MM-DDT00:00:00/P7D")
 df['Period'] =  df["Period"].apply(date_time)
 
-tidy = df[['Week', 'Period', 'Products', 'Value', 'Measure Type', 'Unit']]
+df["Week"] = df["Week"].str.replace("Week ", "")
+df['Week'] = df['Week'].astype(int)
 
 # -
 
+
+from IPython.core.display import HTML
+for col in df:
+    if col not in ['Value']:
+        df[col] = df[col].astype('category')
+        display(HTML(f"<h2>{col}</h2>"))
+        display(df[col].cat.categories) 
+
+# +
+tidy = df[['Period', 'Week', 'Product', 'Measure Type', 'Unit', 'Value']]
 
 trace.Week("Remove any prefixed whitespace from all values in column and pathify")
 trace.Products("Remove any prefixed whitespace from all values in column and pathify")
 trace.Measure_Type("Remove any prefixed whitespace from all values in column and pathify")
 trace.Unit("Remove any prefixed whitespace from all values in column and pathify")
 for column in tidy:
-    if column in ('Week', 'Products', 'Measure Type', 'Unit'):
+    if column in ('Product', 'Measure Type', 'Unit'):
         tidy[column] = tidy[column].str.lstrip()
         tidy[column] = tidy[column].str.rstrip()
         tidy[column] = tidy[column].map(lambda x: pathify(x))
+# -
 
 out = Path('out')
 out.mkdir(exist_ok=True)
-tidy.drop_duplicates().to_csv(out / 'observations.csv', index = False)
+tidy.to_csv(out / f"{pathify(datasetTitle)}.csv", index=False)
 
 tidy
 

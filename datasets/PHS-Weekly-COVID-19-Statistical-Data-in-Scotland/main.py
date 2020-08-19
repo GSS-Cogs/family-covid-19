@@ -10,8 +10,10 @@ from lxml import html
 import json
 import pandas as pd
 
+trace = TransformTrace()
+comments = {} # per tab, capture some nuances
 
-# TODO - when we're happy his works, move it into gss-utils!
+# TODO - when we're happy this works, move it into gss-utils!
 def opendata_nhs(scraper, tree):
 
     # TODO - this feels more like a catalogue than a list of distributions, investigate
@@ -59,6 +61,7 @@ def opendata_nhs(scraper, tree):
         scraper.distributions.append(this_distribution)
 
 
+
 # -
 
 
@@ -97,11 +100,18 @@ def get_pathified_qualifier(marker):
 
 # +
 
+# Unsure how to describe this in the tracer at time of writing so using a variable (so I don't have to change it in twenty places when I decide)
+WEEKLY_HANDLING_DESC = "No date provided against observations. Set as the issued date"
+
 def get_weekly_date(issued):
     """
     Where no observation level date has been inlcuded, use the issued date of the data to get
     the week in question
     """
+    
+    # TODO - pull it out, not a lot of point in parsing the same date for every tab
+    issued = "week/" + issued.strftime("%Y-%U")
+    
     return issued
     
 def format_daily_dates(date):
@@ -124,34 +134,47 @@ def format_daily_dates(date):
     # day/{year}-{month}-{day}
     return "day/{}-{}-{}".format(year, month, day)
 
-def handler_cumulative_cases_by_age_and_sex(df):
+def handler_cumulative_cases_by_age_and_sex(df, trace, comments_for_cube):
     """
     Makes appropriate changes for the source dataset titles 'Cumulative Cases By Age and Sex'
     """
+    
+    trace.Measure_Type("Move Rate and Total cases to Value column, differentiate them via Measure Type as: {}", var=["Rate", "Count"])
+    trace.Unit_of_Measure("Set to Cases")
     rate_df = df.drop("TotalCases", axis=1)
     rate_df = rate_df.rename(columns={"Rate": "Value"})
     rate_df["Measure Type"] = "Rate"
     rate_df["Unit Of Measure"] = "Cases"
     
     total_case_df = df.drop("Rate", axis=1)
+    total_case_df["RateQF"] = ""
     total_case_df = total_case_df.rename(columns={"TotalCases": "Value"})
     total_case_df["Measure Type"] = "Count"
     total_case_df["Unit Of Measure"] = "Cases"
     
     df = pd.concat([rate_df, total_case_df])
     
+    trace.add_column("Marker")
+    trace.Marker("Renamed RateQF to Marker")
+    df = df.rename(columns={"RateQF": "Marker"})
+    
     # Set a period, then format appropriately
+    trace.Period(WEEKLY_HANDLING_DESC)
     df["Period"] = distro.issued
     df["Period"] = df["Period"].apply(get_weekly_date)
     
-    return df
+    return df, trace, comments_for_cube
     
 
-def handler_daily_and_cumulative_cases(df):
+def handler_daily_and_cumulative_cases(df, trace, comments_for_cube):
     """
     Makes appropriate changes for the source dataset:
     Weekly COVID-19 Statistical Data in Scotland - Daily and Cumulative Cases - Scottish Health and Social Care Open Data
     """
+    
+    trace.add_column("Case Type")
+    trace.Case_Type("Added a 'Case Type' dimension so we can differentiate between a daily count of" \
+                   + "cases and a cumulative count of cases")
     daily_df = df.drop("CumulativeCases", axis=1)
     daily_df["Case Type"] = "Daily"
     daily_df = daily_df.rename(columns={"DailyCases": "Value"})
@@ -162,166 +185,289 @@ def handler_daily_and_cumulative_cases(df):
 
     df = pd.concat([daily_df, cumulative_df])
 
+    trace.Measure_Type("Set to Count")
     df["Measure Type"] = "Count"
-    df["Unit Of Measure"] = "Cases"
     
-    return df
+    trace.Unit_of_Measure("Set to Cases")
+    df["Unit of Measure"] = "Cases"
+    
+    return df, trace, comments_for_cube
 
 
-def handler_cumulative_cases_by_deprivation(df):
+def handler_cumulative_cases_by_deprivation(df, trace, comments_for_cube):
     """
     Makes appropriate changes for the source dataset:
     Weekly COVID-19 Statistical Data in Scotland - Cumulative Cases by Deprivation - Scottish Health and Social Care Open Data
     """
     
+    trace.Period(WEEKLY_HANDLING_DESC)
     df["Period"] = distro.issued
     df["Period"] = df["Period"].apply(get_weekly_date)
     
+    trace.Measure_Type("Set to Count")
     df["Measure Type"] = "Count"
-    df["Unit Of Measure"] = "Cases"
     
-    return df
+    trace.Unit_of_Measure("Set to Cases")
+    df["Unit of Measure"] = "Cases"
+    
+    return df, trace, comments_for_cube
 
 
-def handler_daily_covid19_hospital_admissions(df):
+def handler_daily_covid19_hospital_admissions(df, trace, comments_for_cube):
     """
     Makes appropriate changes for the source dataset:
     Weekly COVID-19 Statistical Data in Scotland - Daily COVID-19 Hospital Admissions - Scottish Health and Social Care Open Data
     """
-    df = df.rename(columns={"SaveDayAverage": "Value"})
-    return df
+
+    trace.Measure_Type("Move NumberAdmitted and SevenDayAverage cases to Value column, differentiate them via Measure Type as: {}", var=["SevenDayAverage", "Count"])
+    trace.Unit_of_Measure("Set to Admissions")
+    
+    seven_day_df = df.drop("NumberAdmitted", axis=1)
+    seven_day_df = seven_day_df.rename(columns={"SevenDayAverage": "Value"})
+    seven_day_df["Measure Type"] = "SevenDayAverage"
+    seven_day_df["Unit of Measure"] = "Admissions"
+    
+    num_df = df.drop("SevenDayAverage", axis=1)
+    num_df = num_df.rename(columns={"NumberAdmitted": "Value"})
+    num_df["Measure Type"] = "Count"
+    num_df["Unit of Measure"] = "Admissions"
+
+    df = pd.concat([seven_day_df, num_df])
+    
+    return df, trace, comments_for_cube
 
 
-def handler_cumulative_covid19_hospital_admissions_by_age_sex(df):
+def handler_cumulative_covid19_hospital_admissions_by_age_sex(df, trace, comments_for_cube):
     """
     Makes appropriate changes for the source dataset:
     Weekly COVID-19 Statistical Data in Scotland - Daily COVID-19 Hospital Admissions - Scottish Health and Social Care Open Data
     """
+    
+    trace.Measure_Type("Move NumberAdmitted and Rate cases to Value column, differentiate them via Measure Type as: {}", var=["SevenDayAverage", "Rate"])
+    trace.Unit_of_Measure("Cases")
+    
     rate_df = df.drop("NumberAdmitted", axis=1)
     rate_df = rate_df.rename(columns={"Rate": "Value"})
     rate_df["Measure Type"] = "Rate"
+    rate_df["Unit Of Measure"] = "Cases"
     
     total_case_df = df.drop("Rate", axis=1)
     total_case_df = total_case_df.rename(columns={"NumberAdmitted": "Value"})
-    total_case_df["Measure Type"] = "NumberAdmitted"
+    total_case_df["Measure Type"] = "Count"
+    total_case_df["Unit Of Measure"] = "Cases"
     
     df = pd.concat([rate_df, total_case_df])
+    trace.add_column("Marker")
+    trace.Marker("Renamed RateQF to Marker, as it not only applies to Rate observations (i.e contents of Value)")
+    df.rename(columns={"RateQF":"Marker"})
     
     # Set a period, then format appropriately
+    trace.Period(WEEKLY_HANDLING_DESC)
     df["Period"] = distro.issued
     df["Period"] = df["Period"].apply(get_weekly_date)
     
-    return df
+    return df, trace, comments_for_cube
 
-def handler_cumulative_covid19_hospital_admissions_by_deprivation(df):
+
+def handler_cumulative_covid19_hospital_admissions_by_deprivation(df, trace, comments_for_cube):
     """
     Makes appropriate changes for the source dataset:
     Weekly COVID-19 Statistical Data in Scotland - Cumulative COVID-19 Hospital Admissions By Deprivation - Scottish Health and Social Care Open Data
     """
     
     # Set a period, then format appropriately
+    trace.Period(WEEKLY_HANDLING_DESC)
     df["Period"] = distro.issued
     df["Period"] = df["Period"].apply(get_weekly_date)
     
-    return df
+    trace.Measure_Type("Set to Count")
+    df["Measure Type"] = "Count"
+    
+    trace.Unit_of_Measure("Set to Cases")
+    df["Unit of Measure"] = "Cases"
+    
+    return df, trace, comments_for_cube
 
-def handler_daily_icu_admissions_for_new_covid19_patients(df):
+
+def handler_daily_icu_admissions_for_new_covid19_patients(df, trace, comments_for_cube):
     """
     Weekly COVID-19 Statistical Data in Scotland - Daily ICU Admissions for new COVID-19 Patients - Scottish Health and Social Care Open Data
     """
     
-    rate_df = df.drop("NumberAdmitted", axis=1)
-    rate_df = rate_df.rename(columns={"SevenDayAverage": "Value"})
-    rate_df["Measure Type"] = "SevenDayAverage"
+    trace.Measure_Type("Move NumberAdmitted and SevenDayAverage admissions to Value column, differentiate them via Measure Type as: {}", var=["SevenDayAverage", "Count"])
+    trace.Unit_of_Measure("Admissions")
     
-    total_case_df = df.drop("SevenDayAverage", axis=1)
-    total_case_df = total_case_df.rename(columns={"NumberAdmitted": "Value"})
-    total_case_df["Measure Type"] = "NumberAdmitted"
+    seven_day_df = df.drop("NumberAdmitted", axis=1)
+    seven_day_df = seven_day_df.rename(columns={"SevenDayAverage": "Value"})
+    seven_day_df["Measure Type"] = "SevenDayAverage"
+    seven_day_df["Unit of Measure"] = "Admissions"
     
-    df = pd.concat([rate_df, total_case_df])
+    num_df = df.drop("SevenDayAverage", axis=1)
+    num_df = num_df.rename(columns={"NumberAdmitted": "Value"})
+    num_df["Measure Type"] = "Count"
+    num_df["Unit of Measure"] = "Admissions"
     
-    return df
+    df = pd.concat([seven_day_df, num_df]) 
+    
+    return df, trace, comments_for_cube
 
-def handler_cumulative_admissions_to_icu(df):
+
+def handler_cumulative_admissions_to_icu(df, trace, comments_for_cube):
     """
     Weekly COVID-19 Statistical Data in Scotland - Cumulative Admissions to ICU - Scottish Health and Social Care Open Data
     """
     
+    trace.Measure_Type("Move NumberAdmitted and Rate Admitted admissions to Value column, differentiate them via Measure Type as: {}", var=["Rate", "Count"])
+    trace.Unit_of_Measure("Admissions")
+    
     # Pivot multiple obs columns
     rate_df = df.drop("NumberAdmitted", axis=1)
     rate_df = rate_df.rename(columns={"RateAdmitted": "Value"})
-    rate_df["Measure Type"] = "RateAdmitted"
+    rate_df["Measure Type"] = "Rate"
+    rate_df["Unit of Measure"] = "Admissions"
     
     total_case_df = df.drop("RateAdmitted", axis=1)
     total_case_df = total_case_df.rename(columns={"NumberAdmitted": "Value"})
-    total_case_df["Measure Type"] = "NumberAdmitted"
+    total_case_df["Measure Type"] = "Count"
+    total_case_df["Unit of Measure"] = "Admissions"
     
     df = pd.concat([rate_df, total_case_df])
     
     # Set a period, then format appropriately
+    trace.Period(WEEKLY_HANDLING_DESC)
     df["Period"] = distro.issued
     df["Period"] = df["Period"].apply(get_weekly_date)
     
-    return df
+    return df, trace, comments_for_cube
 
-def handler_daily_nhs24_covid19_calls(df):
+
+def handler_daily_nhs24_covid19_calls(df, trace, comments_for_cube):
     """
     Weekly COVID-19 Statistical Data in Scotland - Daily NHS24 COVID-19 Calls - Scottish Health and Social Care Open Data
     """
+    
+    trace.add_column("NHS24CovidCalls")
+    trace.NHS24CovidCalls("Renamed to Value")
+    
     df = df.rename(columns={"NHS24CovidCalls": "Value"})
-    return df
+    
+    trace.Measure_Type("Set to Count")
+    df["Measure Type"] = "Count"
+    
+    trace.Unit_of_Measure("Set to Phone Calls")
+    df["Unit of Measure"] = "Phone Calls"
+    
+    return df, trace, comments_for_cube
 
 
-def handler_daily_consultations_by_contact_type(df):
+def handler_daily_consultations_by_contact_type(df, trace, comments_for_cube):
     """
     Weekly COVID-19 Statistical Data in Scotland - Daily Consultations by Contact Type - Scottish Health and Social Care Open Data
     """
-    df = df.rename({"NumberOfConsultation": "Value"})
-    return df
+    
+    trace.add_column("NumberOfConsultations")
+    trace.NumberOfConsultations("Renamed to Value")
+    
+    df = df.rename(columns={"NumberOfConsultations": "Value"})
+    
+    trace.Measure_Type("Set to Count")
+    df["Measure Type"] = "Count"
+    
+    trace.Unit_of_Measure("Set to Consulations")
+    df["Unit of Measure"] = "Consultations"
+    
+    return df, trace, comments_for_cube
 
-def handler_daily_sas_incidents(df):
+
+def handler_daily_sas_incidents(df, trace, comments_for_cube):
     """  
     Weekly COVID-19 Statistical Data in Scotland - Daily SAS Incidents - Scottish Health and Social Care Open Data
     """
 
-    columns_to_pivot = ["AllSASIncidents", "COVIDAll", "COVIDAttended", "COVIDConveyed"]
+    column_details = [
+        "AllSASIncidents",
+        "COVIDAll",
+        "COVIDAttended",
+        "COVIDConveyed"
+    ]
     
-    return df
+    slices = []
+    
+    trace.add_column("Incident Type")
+    trace.Incident_Type("Created an 'Incident Type' column and pivotted the following column into it: '{}'.".format(column_details))
+    
+    for col in column_details:
+        temp_df = df.copy()
+        cols_to_drop = [x for x in column_details if x != col]
+        temp_df = temp_df.drop(cols_to_drop, axis=1)
+        temp_df = temp_df.rename(columns={col: "Value"})
+        temp_df["Incident Type"] = col
+        slices.append(temp_df.copy())
+        
+    df = pd.concat(slices)
+    
+    trace.Measure_Type("Set to Count")
+    df["Measure Type"] = "Count"
+    
+    trace.Unit_of_Measure("Set to Incidents")
+    df["Unit of Measure"] = "Incidents"
+    
+    return df, trace, comments_for_cube
 
-def handler_cumulative_suspected_covid19_sas_incidents_by_age(df):
+def handler_cumulative_suspected_covid19_sas_incidents_by_age(df, trace, comments_for_cube):
     """
     Weekly COVID-19 Statistical Data in Scotland - Cumulative Suspected COVID-19 SAS Incidents By Age - Scottish Health and Social Care Open Data
     """
+
+    trace.Measure_Type("Move Incidents and Rate to Value column, differentiate them via Measure Type as: {}", var=["Rate", "Count"])
+    trace.Unit_of_Measure("Incidents")
     
     # Pivot multiple obs columns
     rate_df = df.drop("Incidents", axis=1)
     rate_df = rate_df.rename(columns={"Rate": "Value"})
     rate_df["Measure Type"] = "Rate"
+    rate_df["Unit of Measure"] = "Incidents"
     
     total_case_df = df.drop("Rate", axis=1)
     total_case_df = total_case_df.rename(columns={"Incidents": "Value"})
-    total_case_df["Measure Type"] = "Incidents"
+    total_case_df["Measure Type"] = "Count"
+    total_case_df["Unit of Measure"] = "Incidents"
     total_case_df["RateQF"] = ""   # dont apply rate markers to incidents
     
     df = pd.concat([rate_df, total_case_df])
+    
+    trace.add_column("Marker")
+    trace.Marker("Renamed RateQF to Marker, as it not only applies to Rate observations (i.e contents of Value)")
     df = df.rename(columns={"RateQF": "Marker"})
     
     # Set a period, then format appropriately
+    trace.Period(WEEKLY_HANDLING_DESC)
     df["Period"] = distro.issued
     df["Period"] = df["Period"].apply(get_weekly_date)
     
-    return df
+    return df, trace, comments_for_cube
 
-def handler_cumulative_suspected_covid19_sas_incidents_by_deprivation(df):
+
+def handler_cumulative_suspected_covid19_sas_incidents_by_deprivation(df, trace, comments_for_cube):
     """
     Weekly COVID-19 Statistical Data in Scotland - Cumulative Suspected COVID-19 SAS Incidents By Deprivation - Scottish Health and Social Care Open Data
     """
 
     # Set a period, then format appropriately
+    trace.Period(WEEKLY_HANDLING_DESC)
     df["Period"] = distro.issued
     df["Period"] = df["Period"].apply(get_weekly_date)
     
-    return df
+    trace.Measure_Type("Set to Count")
+    df["Measure Type"] = "Count"
+    
+    trace.Unit_of_Measure("Set to Incidents")
+    df["Unit of Measure"] = "Incidents"
+    
+    trace.ALL("Renamed Incidents column to Value")
+    df = df.rename(columns={"Incidents": "Value"})
+    
+    return df, trace, comments_for_cube
 
 
 
@@ -336,20 +482,30 @@ scraper
 # A certain amount of nonsense to focus the scraper on each distribution in turn
 for distro_title in [x.title for x in scraper.distributions]:
     
-    # Note: filter by desription as they're reusing the same title more than once for different data ...
     distro = scraper.distribution(title=distro_title)
-    
     df = distro.as_pandas().fillna("")
+    
+    # Shorter output title
+    otitle = distro_title.replace("Weekly COVID-19 Statistical Data in Scotland - ", "")
+    otitle = otitle.replace(" - Scottish Health and Social Care Open Data", "")
+    otitle = otitle.strip()
+    
+    # Columns vary so for the trace we'll start with the minimum columns and apply as needed
+    columns = ["Period", "Value", "Measure Type", "Unit of Measure"] + [x for x in df.columns.values.tolist() if x.endswith("QF")]
+    trace.start(otitle, distro_title, columns, distro.downloadURL)
     
     # Everything needs the same date handling
     for col in df.columns.values.tolist():
         if col == "Date":
             df[col] = df[col].apply(format_daily_dates)
+            df.rename({"Date": "Period"})
+            trace.Period("Converted Period to /day format.")
             
     # Everything needs the same qualifier handling
     for col in df.columns.values.tolist():
         if col.strip().endswith("QF"):
             df[col] = df[col].apply(get_pathified_qualifier)
+            trace.multi([col], "Applied pathified qualifiers lookup (i.e data markers).")
     
     # Define handlers
     handlers = { 'Weekly COVID-19 Statistical Data in Scotland - Cumulative Admissions to ICU - Scottish Health and Social Care Open Data': handler_cumulative_admissions_to_icu,
@@ -368,23 +524,56 @@ for distro_title in [x.title for x in scraper.distributions]:
                }
     
     if distro.title.strip() not in handlers.keys():
-        import sys
-        sys.exit(1)
+        raise Exception("The distribution '{}' is new or something has been renamed - cannot identify a handler for it.".format(distro.title.strip()))
 
-    # Handle
-    df = handlers[distro.title](df)
+    out = Path('out')
+    out.mkdir(exist_ok=True)
     
-    # Shorter output title
-    otitle = distro.title.replace("Weekly COVID-19 Statistical Data in Scotland - ", "")
-    otitle = otitle.replace(" - Scottish Health and Social Care Open Data", "")
-    otitle = otitle.strip()
-    df.to_csv("./out/{}.csv".format(pathify(otitle.strip())), index=False)
-
-    distro.as_pandas().fillna("").to_csv("./out/{}_OLD.csv".format(pathify(otitle.strip())), index=False)
-
-
+    # ----- IMPORTANT -----
+    # uncomment the below to ouput the before as well as the after (these ones are confusing, it helps a lot)
+    df.to_csv(out / "{}_OLD.csv".format(pathify(otitle.strip())), index=False)
+    
+    # Capture any comments for the spec
+    comments[distro_title] = []
+    
+    # Handle
+    df, trace, _ = handlers[distro.title](df, trace, comments[distro_title])
+    
+    # Output
+    df.to_csv(out / "{}.csv".format(pathify(otitle.strip())), index=False)
+    
+trace.output()
 
 # -
+spec_me = False
+if spec_me:
+    # use the tracer to write some simple markdown for spec (because I'm lazy)
+    lines = ["----------### Stage 1. Transform", ""]
+    for title, details in trace._create_output_dict().items():
+        for cube_title, cubes in details.items():   # ['sourced_from', 'id', 'tab', 'column_actions']
+            lines.append("#### " + cube_title)
+            lines.append("") 
+            for cube in cubes:
+                lines.append("#### Sheet: " + cube["tab"])
+                lines.append("")
+                for column in cube["column_actions"]:
+                    lines.append("{}".format(column["column_label"]))
+                    for comment in [",".join(list(x.values())) for x in column["actions"]]:
+                        lines.append("- "+comment)
+                    lines.append("")
+                lines.append("#### Table structure")
+                lines.append(", ".join([x["column_label"] for x in cube["column_actions"]]))
+                if cube["tab"] in comments:
+                    lines.append("")
+                    if len(comments[cube["tab"]]) > 0:
+                        lines.append("#### DE notes")
+                        for comment in comments[cube["tab"]]:
+                            lines.append(comment)
+                lines.append("")
+            lines.append("-----")
+
+    for l in lines:
+        print(l)
 
 
 

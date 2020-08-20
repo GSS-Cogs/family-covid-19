@@ -35,15 +35,17 @@
 		Format 'Date' column as a day. Adverts are a snapshot of that day
 		Change 'Maker' columns value to 'Imputed' where necessary and change all NaNs to empty string. Footnote should cover why and how values have been Imputed.
 		I'm a bit confused as to why a count of job adverts can have a decimal place but values are coming through as integers. Can we change back to decimal.
-		Add column 'NUTS1 Region' with value 'K02000001'
+		For 'Industry' column change 'All Industries' to All
+		Add column 'NUTS1 Region' with value 'United Kingdom'. See next why not using codes
 
 #### Sheet: Vacancies by NUTS1 Region
 
-		Not sure if this sheet has been scrapped?
+		they appear to have added another sheet!!!!
 		
 		Columns: Date, NUTS1 Region, Marker, Measure Type, Unit, Value
 		Format 'Date' column as a day. Adverts are a snapshot of that day
 		Change 'Maker' columns value to 'Imputed' where necessary and change all NaNs to empty string. Footnote should cover why and how values have been Imputed.
+		Keep 'NUTS1 Region' as is, DO NOT use geography codes as their are values we will not be able to get codes for, 'Unmatched' and 'All Countries and Regions'. Can't use 'United Kingdom' instead of 'All Countries and Regions' as it is referring to the countries and regions that have been matched not everything.
 		Add column 'Industry' with value 'All'
 
 	Join both tables

@@ -28,13 +28,16 @@
                 "title": "Average anxiety ratings broken down by loneliness, Great Britain, 20 March to 10 May",
                 "columns": {
                     "Period": "{A7-A13}",
-                    "Breakdown Category": "Loneliness",
-                    "Breakdown Response": "{B4-Q4}",
-                    "Sample Size": "{Q7-U13}",
+                    "Loneliness": "{B4-Q4}",
+                    "Sex": "T",
+                    "Marital Status": "All",
+                    "Feeling Safe": "All",
+                    "Work Affected": "All",
+                    "Disability": "All",
                     "Lower CI": "{C7-O13}",
                     "Upper CI": "{D7-P13}",
-                    "Measure Type": "Average Anxiety",
-                    "Unit": "0 to 10 Scale"
+                    "Measure Type": "Anxiety",
+                    "Unit": "Rating Scale"
                 }
             },
             {
@@ -42,13 +45,16 @@
                 "title": "Average anxiety ratings broken down by sex, Great Britain, 20 March to 10 May",
                 "columns": {
                     "Period": "{A7-A13}",
-                    "Breakdown Category": "Sex",
-                    "Breakdown Response": "{B4-H4}",
-                    "Sample Size": "{H7-I13}",
+                    "Loneliness": "All",
+                    "Sex": "{B4-H4}",
+                    "Marital Status": "All",
+                    "Feeling Safe": "All",
+                    "Work Affected": "All",
+                    "Disability": "All",
                     "Lower CI": "{C7-F13}",
                     "Upper CI": "{D7-G13}",
-                    "Measure Type": "Average Anxiety",
-                    "Unit": "0 to 10 Scale"
+                    "Measure Type": "Anxiety",
+                    "Unit": "Rating Scale"
                 }
             },
             {
@@ -56,13 +62,16 @@
                 "title": "Average anxiety ratings broken down by marital status, Great Britain, 20 March to 10 May",
                 "columns": {
                     "Period": "{A7-A13}",
-                    "Breakdown Category": "Marital Status",
-                    "Breakdown Response": "{B4-N4}",
-                    "Sample Size": "{N7-Q13}",
+                    "Loneliness": "All",
+                    "Sex": "T",
+                    "Marital Status": "{B4-N4}",
+                    "Feeling Safe": "All",
+                    "Work Affected": "All",
+                    "Disability": "All",
                     "Lower CI": "{C7-L13}",
                     "Upper CI": "{D7-M13}",
-                    "Measure Type": "Average Anxiety",
-                    "Unit": "0 to 10 Scale"
+                    "Measure Type": "Anxiety",
+                    "Unit": "Rating Scale"
                 }
             },
             {
@@ -70,13 +79,16 @@
                 "title": "Average anxiety ratings broken down by feelings of safety, Great Britain, 20 March to 10 May",
                 "columns": {
                     "Period": "{A7-A13}",
-                    "Breakdown Category": "Feeling safe",
-                    "Breakdown Response": "{B4-N4}",
-                    "Sample Size": "{N7-Q13}",
+                    "Loneliness": "All",
+                    "Sex": "T",
+                    "Marital Status": "All",
+                    "Feeling Safe": "{B4-N4}",
+                    "Work Affected": "All",
+                    "Disability": "All",
                     "Lower CI": "{C7-L13}",
                     "Upper CI": "{D7-M13}",
-                    "Measure Type": "Average Anxiety",
-                    "Unit": "0 to 10 Scale"
+                    "Measure Type": "Anxiety",
+                    "Unit": "Rating Scale"
                 }
             },
             {
@@ -84,13 +96,16 @@
                 "title": "Average anxiety ratings broken down by whether work has been affected, Great Britain, 20 March to 10 May",
                 "columns": {
                     "Period": "{A7-A13}",
-                    "Breakdown Category": "Work affected",
-                    "Breakdown Response": "{B4-H4}",
-                    "Sample Size": "{H7-I13}",
+                    "Loneliness": "All",
+                    "Sex": "T",
+                    "Marital Status": "All",
+                    "Feeling Safe": "All",
+                    "Work Affected": "{B4-H4}",
+                    "Disability": "All",
                     "Lower CI": "{C7-F13}",
                     "Upper CI": "{D7-G13}",
-                    "Measure Type": "Average Anxiety",
-                    "Unit": "0 to 10 Scale"
+                    "Measure Type": "Anxiety",
+                    "Unit": "Rating Scale"
                 }
             },
             {
@@ -98,13 +113,16 @@
                 "title": "Average anxiety ratings broken down by disability, Great Britain, 20 March to 10 May",
                 "columns": {
                     "Period": "{A7-A13}",
-                    "Breakdown Category": "Disability",
-                    "Breakdown Response": "{B4-K4}",
-                    "Sample Size": "{K7-M13}",
+                    "Loneliness": "All",
+                    "Sex": "T",
+                    "Marital Status": "All",
+                    "Feeling Safe": "All",
+                    "Work Affected": "All",
+                    "Disability": "{B4-K4}",
                     "Lower CI": "{C7-I13}",
                     "Upper CI": "{D7-J13}",
-                    "Measure Type": "Average Anxiety",
-                    "Unit": "0 to 10 Scale"
+                    "Measure Type": "Anxiety",
+                    "Unit": "Rating Scale"
                 }
             }
         ],

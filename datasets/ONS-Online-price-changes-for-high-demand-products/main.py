@@ -8,6 +8,9 @@ import warnings
 import pandas as pd
 import json
 import numpy as np
+from urllib.parse import urljoin
+import os
+
 
 def left(s, amount):
     return s[:amount]
@@ -81,8 +84,8 @@ info = json.load(open('info.json'))
 landingPage = info['landingPage'] 
 landingPage 
 
-scraper = Scraper(landingPage)  
-distribution = scraper.distributions[0]
+scrape = Scraper(landingPage)  
+distribution = scrape.distributions[0]
 
 datasetTitle = 'Online price changes for high-demand products'
 tabs = { tab: tab for tab in distribution.as_databaker() }
@@ -93,7 +96,7 @@ df = pd.DataFrame()
 tab = next(t for t in tabs.values() if t.name.startswith('Online Price Change of HDP'))
 
 columns=["Week", "Date", "Products", 'Marker', "Measure Type", "Unit"]
-trace.start(datasetTitle, tab, columns, scraper.distributions[0].downloadURL)
+trace.start(datasetTitle, tab, columns, scrape.distributions[0].downloadURL)
 
 remove_perentage_data = tab.filter(contains_string('percentage change weekly')).expand(RIGHT).expand(DOWN)
 
@@ -161,10 +164,46 @@ for column in tidy:
         tidy[column] = tidy[column].map(lambda x: pathify(x))
 # -
 
+#SET UP OUTPUT FOLDER AND OUTPUT DATA TO CSV
+csvName = 'observations.csv'
 out = Path('out')
 out.mkdir(exist_ok=True)
-tidy.to_csv(out / f"{pathify(datasetTitle)}.csv", index=False)
+tidy.drop_duplicates().to_csv(out / csvName, index = False)
 
+#SET VARIOUS ATTRIBUTES OF THE SCRAPER
+scrape.dataset.family = 'covid-19'
+scrape.dataset.title = datasetTitle
+dataset_path = pathify(os.environ.get('JOB_NAME', 'gss_data/covid-19/' + Path(os.getcwd()).name)) + '-' + pathify(csvName)
+scrape.set_base_uri('http://gss-data.org.uk')
+scrape.set_dataset_id(dataset_path)
+
+# CREATE MAPPING CLASS INSTANCE, SET UP VARIABLES AND WRITE FILES
+csvw_transform = CSVWMapping()
+csvw_transform.set_csv(out / csvName)
+csvw_transform.set_mapping(json.load(open('info.json')))
+csvw_transform.set_dataset_uri(urljoin(scrape._base_uri, f'data/{scrape._dataset_id}'))
+csvw_transform.write(out / f'{csvName}-metadata.json')
+
+# CREATE AND OUTPUT TRIG FILE
+with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
+    metadata.write(scrape.generate_trig())
+
+
+trace.output()
 tidy
+
+# +
+#info = json.load(open('info.json')) 
+#codelistcreation = info['transform']['codelists'] 
+#print(codelistcreation)
+#print("-------------------------------------------------------")
+
+#codeclass = CSVCodelists()
+#for cl in codelistcreation:
+#    if cl in tidy.columns:
+#        tidy[cl] = tidy[cl].str.replace("-"," ")
+#        tidy[cl] = tidy[cl].str.capitalize()
+#        codeclass.create_codelists(pd.DataFrame(tidy[cl]), 'codelists', scrape.dataset.family, Path(os.getcwd()).name.lower())
+# -
 
 

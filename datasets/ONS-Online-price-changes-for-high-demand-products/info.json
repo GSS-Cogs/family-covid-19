@@ -20,7 +20,25 @@
             "Priority"
         ],
         "airtable": "recYxaK7Iqkx6aoyD",
-        "main_issue": 122
+        "main_issue": 122 ,
+        "columns": {
+            "Period": {
+                "dimension": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
+                "value": "http://reference.data.gov.uk/id/gregorian-interval/{+period}"
+            },
+            "Week": {
+                "attribute": "http://gss-data.org.uk/def/attribute/week",
+                "datatype": "integer"
+            },
+            "Value": {
+                "unit": "http://gss-data.org.uk/def/concept/measurement-units/percent",
+                "measure": "http://gss-data.org.uk/def/measure/price-indice-change",
+                "datatype": "integer"
+            }
+        },
+        "codelists": [
+            "Product"
+        ]
     },
     "sizingNotes": "2 simple tables with footnotes on 1 tab",
     "notes": ""

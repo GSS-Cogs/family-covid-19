@@ -30,21 +30,23 @@
 
 ### Stage 2. Harmonise
 
-#### Sheet: 1
+#### Sheet: Passengers arriving in the UK by air routes
 
-		spec
+		Format 'Date'column as a day. Number of air arrivals are for each day.
+		
 
 #### Table Structure
 
-		Period, Measure Type, Unit, Marker, Value
+		Date, Total air arrivals, Of which British Nationals, Measure Type, Unit, Marker, Value
 
 --------------
 
 ##### Footnotes
 
-		footnotes
+		Notes sheet - add point 2 as a footnote. 
+		Points 1, 3 and 4 add as description of the trig file.
 
 ##### DM Notes
 
-		notes
+		
 

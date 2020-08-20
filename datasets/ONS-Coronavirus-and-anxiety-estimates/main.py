@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[321]:
+# In[125]:
 
 
 from gssutils import *
@@ -10,36 +10,28 @@ import json
 import os
 import string
 import re
-
 def left(s, amount):
     return s[:amount]
-
 def right(s, amount):
     return s[-amount:]
-
 def mid(s, offset, amount):
     return s[offset:offset+amount]
-
 def cellLoc(cell):
     return right(str(cell), len(str(cell)) - 2).split(" ", 1)[0]
-
 def cellCont(cell):
     return re.findall(r"'([^']*)'", cell)[0]
-
 def col2num(col):
     num = 0
     for c in col:
         if c in string.ascii_letters:
             num = num * 26 + (ord(c.upper()) - ord('A')) + 1
     return num
-
 def colnum_string(n):
     string = ""
     while n > 0:
         n, remainder = divmod(n - 1, 26)
         string = chr(65 + remainder) + string
     return string
-
 def excelRange(bag):
     xvalues = []
     yvalues = []
@@ -62,7 +54,6 @@ def excelRange(bag):
     lowy = str(min(yvalues))
 
     return '{' + lowx + lowy + '-' + highx + highy + '}'
-
 def infoTransform(tabName, tabTitle, tabColumns):
 
     dictList = []
@@ -97,7 +88,6 @@ def infoTransform(tabName, tabTitle, tabColumns):
 
     with open('info.json', 'w') as info:
         info.write(json.dumps(infoData, indent=4).replace('null', '"Not Applicable"'))
-
 def infoComments(tabName, tabColumns):
 
     with open('info.json') as info:
@@ -132,7 +122,6 @@ def infoComments(tabName, tabColumns):
 
     with open('info.json', 'w') as info:
         info.write(json.dumps(infoData, indent=4).replace('null', '"Not Applicable"'))
-
 def infoNotes(notes):
 
     with open('info.json') as info:
@@ -144,9 +133,16 @@ def infoNotes(notes):
 
     with open('info.json', 'w') as info:
         info.write(json.dumps(infoData, indent=4).replace('null', '"Not Applicable"'))
+from datetime import date
+
+def twoDates(startMonth, startDay, endMonth, endDate, year = 2020):
+    d0 = date(year, startMonth, startDay)
+    d1 = date(year, endMonth, endDate)
+    delta = d1 - d0
+    print(delta.days)
 
 
-# In[322]:
+# In[126]:
 
 
 info = json.load(open('info.json'))
@@ -154,21 +150,21 @@ landingPage = info['landingPage']
 landingPage
 
 
-# In[323]:
+# In[127]:
 
 
 scraper = Scraper(landingPage)
 scraper
 
 
-# In[324]:
+# In[128]:
 
 
 distribution = scraper.distributions[0]
 display(distribution)
 
 
-# In[325]:
+# In[129]:
 
 
 tabs = { tab: tab for tab in distribution.as_databaker() if tab.name != 'Contents' }
@@ -176,7 +172,7 @@ for i in tabs:
     print(i.name)
 
 
-# In[326]:
+# In[130]:
 
 
 trace = TransformTrace()
@@ -188,7 +184,9 @@ link = distribution.downloadURL
 
 for tab in tabs:
 
-    columns = ['Period', 'Breakdown Category', 'Breakdown Response', 'Sample Size', 'Lower CI', 'Upper CI', 'Value', 'Measure Type', 'Unit']
+    print(tab.name)
+
+    columns = ['Period', 'Loneliness', 'Sex', 'Marital Status', 'Feeling Safe', 'Work Affected', 'Disability', 'Lower CI', 'Upper CI', 'Measure Type', 'Unit']
     trace.start(datasetTitle, tab, columns, link)
 
     pivot = tab.filter('95% confidence intervals')
@@ -198,8 +196,84 @@ for tab in tabs:
     period = pivot.shift(-1, 3).expand(DOWN).is_not_blank() - remove
     trace.Period('Values given at cell range: {}', var = excelRange(period))
 
-    breakdown = pivot.shift(DOWN).expand(RIGHT).is_not_blank()
-    trace.Breakdown_Response('Values given at cell range: {}', var = excelRange(breakdown))
+    if tab.name in ['Loneliness']:
+        loneliness = pivot.shift(DOWN).expand(RIGHT).is_not_blank()
+        trace.Loneliness('Values given at cell range: {}', var = excelRange(loneliness))
+        sex = 'T'
+        trace.Sex('Hardcoded for Tab as: {}', var = sex)
+        maritalStatus = 'All'
+        trace.Marital_Status('Hardcoded for Tab as: {}', var = maritalStatus)
+        feelingSafe = 'All'
+        trace.Feeling_Safe('Hardcoded for Tab as: {}', var = feelingSafe)
+        workAffected = 'All'
+        trace.Work_Affected('Hardcoded for Tab as: {}', var = workAffected)
+        disability = 'All'
+        trace.Disability('Hardcoded for Tab as: {}', var = disability)
+    elif tab.name in ['Sex']:
+        loneliness = 'All'
+        trace.Loneliness('Hardcoded for Tab as: {}', var = loneliness)
+        sex = pivot.shift(DOWN).expand(RIGHT).is_not_blank()
+        trace.Sex('Values given at cell range: {}', var = excelRange(sex))
+        maritalStatus = 'All'
+        trace.Marital_Status('Hardcoded for Tab as: {}', var = maritalStatus)
+        feelingSafe = 'All'
+        trace.Feeling_Safe('Hardcoded for Tab as: {}', var = feelingSafe)
+        workAffected = 'All'
+        trace.Work_Affected('Hardcoded for Tab as: {}', var = workAffected)
+        disability = 'All'
+        trace.Disability('Hardcoded for Tab as: {}', var = disability)
+    elif tab.name in ['Marital Status']:
+        loneliness = 'All'
+        trace.Loneliness('Hardcoded for Tab as: {}', var = loneliness)
+        sex = 'T'
+        trace.Sex('Hardcoded for Tab as: {}', var = sex)
+        maritalStatus = pivot.shift(DOWN).expand(RIGHT).is_not_blank()
+        trace.Marital_Status('Values given at cell range: {}', var = excelRange(maritalStatus))
+        feelingSafe = 'All'
+        trace.Feeling_Safe('Hardcoded for Tab as: {}', var = feelingSafe)
+        workAffected = 'All'
+        trace.Work_Affected('Hardcoded for Tab as: {}', var = workAffected)
+        disability = 'All'
+        trace.Disability('Hardcoded for Tab as: {}', var = disability)
+    elif tab.name in ['Feeling safe']:
+        loneliness = 'All'
+        trace.Loneliness('Hardcoded for Tab as: {}', var = loneliness)
+        sex = 'T'
+        trace.Sex('Hardcoded for Tab as: {}', var = sex)
+        maritalStatus = 'All'
+        trace.Marital_Status('Hardcoded for Tab as: {}', var = maritalStatus)
+        feelingSafe = pivot.shift(DOWN).expand(RIGHT).is_not_blank()
+        trace.Feeling_Safe('Values given at cell range: {}', var = excelRange(feelingSafe))
+        workAffected = 'All'
+        trace.Work_Affected('Hardcoded for Tab as: {}', var = workAffected)
+        disability = 'All'
+        trace.Disability('Hardcoded for Tab as: {}', var = disability)
+    elif tab.name in ['Work affected']:
+        loneliness = 'All'
+        trace.Loneliness('Hardcoded for Tab as: {}', var = loneliness)
+        sex = 'T'
+        trace.Sex('Hardcoded for Tab as: {}', var = sex)
+        maritalStatus = 'All'
+        trace.Marital_Status('Hardcoded for Tab as: {}', var = maritalStatus)
+        feelingSafe = 'All'
+        trace.Feeling_Safe('Hardcoded for Tab as: {}', var = feelingSafe)
+        workAffected = pivot.shift(DOWN).expand(RIGHT).is_not_blank()
+        trace.Work_Affected('Values given at cell range: {}', var = excelRange(workAffected))
+        disability = 'All'
+        trace.Disability('Hardcoded for Tab as: {}', var = disability)
+    elif tab.name in ['Disability']:
+        loneliness = 'All'
+        trace.Loneliness('Hardcoded for Tab as: {}', var = loneliness)
+        sex = 'T'
+        trace.Sex('Hardcoded for Tab as: {}', var = sex)
+        maritalStatus = 'All'
+        trace.Marital_Status('Hardcoded for Tab as: {}', var = maritalStatus)
+        feelingSafe = 'All'
+        trace.Feeling_Safe('Hardcoded for Tab as: {}', var = feelingSafe)
+        workAffected = 'All'
+        trace.Work_Affected('Hardcoded for Tab as: {}', var = workAffected)
+        disability = pivot.shift(DOWN).expand(RIGHT).is_not_blank()
+        trace.Disability('Values given at cell range: {}', var = excelRange(disability))
 
     upper = tab.filter('Upper Interval').fill(DOWN).is_not_blank() - remove
     trace.Upper_CI('Values given at cell range: {}', var = excelRange(upper))
@@ -207,76 +281,114 @@ for tab in tabs:
     lower = tab.filter('Lower Interval').fill(DOWN).is_not_blank() - remove
     trace.Lower_CI('Values given at cell range: {}', var = excelRange(lower))
 
-    measure_type= 'Average Anxiety'
+    measure_type= 'Anxiety'
     trace.Measure_Type('Hardcoded as: {}', var = measure_type)
 
-    unit = '0 to 10 Scale'
+    unit = 'Rating Scale'
     trace.Unit('Hardcoded as: {}', var = unit)
-
-    breakdownCategory = tab.name
-    trace.Breakdown_Category('Values taken from Tab Names: {}', var = breakdownCategory)
 
     observations = tab.filter('Mean average').fill(DOWN).is_not_blank() - remove
 
     tabTitle = tab.filter(contains_string('Average anxiety ratings'))
+    print(tabTitle)
 
-    dimensions = [
+    if tab.name in ['Loneliness']:
+        dimensions = [
                 HDim(period, 'Period', DIRECTLY, LEFT),
-                HDimConst('Breakdown Category', breakdownCategory),
-                HDim(breakdown, 'Breakdown Response', CLOSEST, LEFT),
+                HDim(loneliness, 'Loneliness', CLOSEST, LEFT),
+                HDimConst('Sex', sex),
+                HDimConst('Marital Status', maritalStatus),
+                HDimConst('Feeling Safe', feelingSafe),
+                HDimConst('Work Affected', workAffected),
+                HDimConst('Disability', disability),
                 HDim(upper, 'Upper CI', DIRECTLY, RIGHT),
                 HDim(lower, 'Lower CI', DIRECTLY, RIGHT),
                 HDimConst('Measure Type', measure_type),
                 HDimConst('Unit', unit)
-    ]
-
-    tidy_sheet = ConversionSegment(tab, dimensions, observations)
-
-    main = tidy_sheet.topandas()
-
-    main["Breakdown Response"] = main["Breakdown Response"].str.lower()
-
-    indexNames = main[ main['Lower CI'] == 'x' ].index
-    main.drop(indexNames, inplace = True)
-
-    pivot = tab.filter('Sample Size')
-
-    period = tab.filter('95% confidence intervals').shift(-1, 3).expand(DOWN).is_not_blank() - remove
-
-    breakdown = pivot.shift(DOWN).expand(RIGHT).is_not_blank()
-
-    observations = breakdown.fill(DOWN).is_not_blank() - remove
-    trace.Sample_Size('Values taken from: {}', excelRange(observations))
-
-    dimensions = [
+        ]
+    elif tab.name in ['Sex']:
+        dimensions = [
                 HDim(period, 'Period', DIRECTLY, LEFT),
-                HDim(breakdown, 'Breakdown Response', CLOSEST, LEFT)
-    ]
+                HDimConst('Loneliness', loneliness),
+                HDim(sex, 'Sex', CLOSEST, LEFT),
+                HDimConst('Marital Status', maritalStatus),
+                HDimConst('Feeling Safe', feelingSafe),
+                HDimConst('Work Affected', workAffected),
+                HDimConst('Disability', disability),
+                HDim(upper, 'Upper CI', DIRECTLY, RIGHT),
+                HDim(lower, 'Lower CI', DIRECTLY, RIGHT),
+                HDimConst('Measure Type', measure_type),
+                HDimConst('Unit', unit)
+        ]
+    elif tab.name in ['Marital Status']:
+        dimensions = [
+                HDim(period, 'Period', DIRECTLY, LEFT),
+                HDimConst('Loneliness', loneliness),
+                HDimConst('Sex', sex),
+                HDim(maritalStatus, 'Marital Status', CLOSEST, LEFT),
+                HDimConst('Feeling Safe', feelingSafe),
+                HDimConst('Work Affected', workAffected),
+                HDimConst('Disability', disability),
+                HDim(upper, 'Upper CI', DIRECTLY, RIGHT),
+                HDim(lower, 'Lower CI', DIRECTLY, RIGHT),
+                HDimConst('Measure Type', measure_type),
+                HDimConst('Unit', unit)
+        ]
+    elif tab.name in ['Feeling safe']:
+        dimensions = [
+                HDim(period, 'Period', DIRECTLY, LEFT),
+                HDimConst('Loneliness', loneliness),
+                HDimConst('Sex', sex),
+                HDimConst('Marital Status', maritalStatus),
+                HDim(feelingSafe, 'Feeling Safe', CLOSEST, LEFT),
+                HDimConst('Work Affected', workAffected),
+                HDimConst('Disability', disability),
+                HDim(upper, 'Upper CI', DIRECTLY, RIGHT),
+                HDim(lower, 'Lower CI', DIRECTLY, RIGHT),
+                HDimConst('Measure Type', measure_type),
+                HDimConst('Unit', unit)
+        ]
+    elif tab.name in ['Work affected']:
+        dimensions = [
+                HDim(period, 'Period', DIRECTLY, LEFT),
+                HDimConst('Loneliness', loneliness),
+                HDimConst('Sex', sex),
+                HDimConst('Marital Status', maritalStatus),
+                HDimConst('Feeling Safe', feelingSafe),
+                HDim(workAffected, 'Work Affected', CLOSEST, LEFT),
+                HDimConst('Disability', disability),
+                HDim(upper, 'Upper CI', DIRECTLY, RIGHT),
+                HDim(lower, 'Lower CI', DIRECTLY, RIGHT),
+                HDimConst('Measure Type', measure_type),
+                HDimConst('Unit', unit)
+        ]
+    elif tab.name in ['Disability']:
+        dimensions = [
+                HDim(period, 'Period', DIRECTLY, LEFT),
+                HDimConst('Loneliness', loneliness),
+                HDimConst('Sex', sex),
+                HDimConst('Marital Status', maritalStatus),
+                HDimConst('Feeling Safe', feelingSafe),
+                HDimConst('Work Affected', workAffected),
+                HDim(disability, 'Disability', CLOSEST, LEFT),
+                HDim(upper, 'Upper CI', DIRECTLY, RIGHT),
+                HDim(lower, 'Lower CI', DIRECTLY, RIGHT),
+                HDimConst('Measure Type', measure_type),
+                HDimConst('Unit', unit)
+        ]
+
+    print(period.table)
 
     tidy_sheet = ConversionSegment(tab, dimensions, observations)
-    savepreviewhtml(tidy_sheet, fname="Preview.html")
-
-    samples = tidy_sheet.topandas()
-
-    samples = samples.rename(columns = {'OBS' : 'Sample Size'})
-
-    samples["Breakdown Response"] = samples["Breakdown Response"].str.lower()
-
-    samples = samples.replace({'Breakdown Response' : {
-        'ocassionally' : 'occasionally',
-        'not, work being affected' : 'not, my work is being affected',
-        'work being affected' : 'my work is being affected'}})
-
-    merged_left = pd.merge(left=main, right=samples, how='left', left_on=['Period', 'Breakdown Response'], right_on=['Period', 'Breakdown Response'])
 
     trace.with_preview(tidy_sheet)
 
     infoTransform(tab.name, cellCont(str(tabTitle)), columns)
 
-    trace.store('anxiety_estimates', merged_left)
+    trace.store('anxiety_estimates', tidy_sheet.topandas())
 
 
-# In[327]:
+# In[131]:
 
 
 out = Path('out')
@@ -288,16 +400,43 @@ df = df.reset_index(drop=True)
 
 df = df.rename(columns={'OBS' : 'Value'})
 
-df = df[['Period', 'Breakdown Category', 'Breakdown Response', 'Sample Size', 'Lower CI', 'Upper CI', 'Value', 'Measure Type', 'Unit']]
+df['Opinions and Lifestyle Survey'] = df.apply(lambda x: left(x['Period'], 10), axis = 1)
+
+df['Period'] = df.apply(lambda x: str(x['Period']).strip(), axis = 1)
+
+df = df.replace({'Period' : {
+        'OPN Lite 1 (20th Mar – 29th Mar)' : 'gregorian-interval/2020-03-20T00:00:00/P9D',
+        'OPN Lite 2 (27th Mar – 5th Apr)' : 'gregorian-interval/2020-03-27T00:00:00/P9D',
+        'OPN Lite 3 (3rd Apr – 12th Apr)' : 'gregorian-interval/2020-04-03T00:00:00/P9D',
+        'OPN Lite 4 (9th Apr – 19th Apr)' : 'gregorian-interval/2020-04-09T00:00:00/P10D',
+        'OPN Lite 5 (17th Apr – 26th Apr)' : 'gregorian-interval/2020-04-17T00:00:00/P9D',
+        'OPN Lite 6 (24th Apr – 3rd May)' : 'gregorian-interval/2020-04-24T00:00:00/P9D',
+        'OPN Lite 7 (30th Apr - 10th May)' : 'gregorian-interval/2020-04-30T00:00:00/P11D'},
+                'Sex' : {
+        'Male' : 'M',
+        'Female' : 'F'}})
+
+df = df[['Period', 'Loneliness', 'Sex', 'Marital Status', 'Feeling Safe', 'Work Affected', 'Disability', 'Value', 'Lower CI', 'Upper CI', 'Measure Type', 'Unit']]
 
 for column in df:
-    if column in ('Period', 'Breakdown Category', 'Breakdown Response', 'Measure Type', 'Unit'):
+    if column in ('Period', 'Loneliness', 'Sex', 'Marital Status', 'Feeling Safe', 'Work Affected', 'Disability', 'Measure Type', 'Unit'):
         df[column] = df[column].map(lambda x: pathify(x))
 
 df.drop_duplicates().to_csv(out / 'observations.csv', index = False)
 
 
-# In[328]:
+# In[132]:
+
+
+from IPython.core.display import HTML
+for col in df:
+    if col not in ['Value']:
+        df[col] = df[col].astype('category')
+        display(HTML(f"<h2>{col}</h2>"))
+        display(df[col].cat.categories)
+
+
+# In[133]:
 
 
 notes = """

@@ -173,7 +173,7 @@ tidy.drop_duplicates().to_csv(out / csvName, index = False)
 #SET VARIOUS ATTRIBUTES OF THE SCRAPER
 scrape.dataset.family = 'covid-19'
 scrape.dataset.title = datasetTitle
-dataset_path = pathify(os.environ.get('JOB_NAME', 'gss_data/covid-19/' + Path(os.getcwd()).name)) + '-' + pathify(csvName)
+dataset_path = pathify(os.environ.get('JOB_NAME', 'gss_data/covid-19/' + Path(os.getcwd()).name))
 scrape.set_base_uri('http://gss-data.org.uk')
 scrape.set_dataset_id(dataset_path)
 

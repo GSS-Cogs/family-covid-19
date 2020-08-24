@@ -105,9 +105,11 @@ csvw_transform.set_dataset_uri(urljoin(scrape._base_uri, f'data/{scrape._dataset
 csvw_transform.write(out / 'observations.csv-metadata.json')
 with open(out / 'observations.csv-metadata.trig', 'wb') as metadata:
     metadata.write(scrape.generate_trig())
+# -
+
+info = json.load(open('info.json')) 
 
 # +
-#info = json.load(open('info.json')) 
 #codelistcreation = info['transform']['codelists'] 
 #print(codelistcreation)
 #print("-------------------------------------------------------")
@@ -127,16 +129,22 @@ newTxt = ''
 
 dsname = 'nrs-deaths-involving-coronavirus-covid-19-in-scotland'
 
-mt = 'Count'
-mtp = pathify(mt)
+mtp = info['transform']['columns']['Value']['measure'].replace('http://gss-data.org.uk/def/measure/','')  #'Count'
+mt = mtp.capitalize()
 mtpath = f'''"@id": "http://gss-data.org.uk/def/measure/{mtp}",'''
 
+unt = info['transform']['columns']['Value']['unit'].replace('http://gss-data.org.uk/def/concept/measurement-units/','')  #'Percent'
+un = unt.capitalize()
+unpath = '''"@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure",'''
 
 with open("out/observations.csv-metadata.json") as fp: 
     for line in fp: 
         if mtpath in line.strip():
             print(line)
             newTxt = newTxt + line + '''\t"rdfs:label": "''' + mt + '''",\n'''
+        elif unpath in line.strip():
+            print(line)
+            newTxt = newTxt + line + '''\t"rdfs:label": "''' + un + '''",\n'''
         else:
             newTxt += line
 # -

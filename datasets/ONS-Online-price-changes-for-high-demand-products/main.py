@@ -166,7 +166,6 @@ for column in tidy:
 
 del tidy['Measure Type']
 del tidy['Unit']
-tidy.head()
 
 #SET UP OUTPUT FOLDER AND OUTPUT DATA TO CSV
 csvName = 'observations.csv'
@@ -217,12 +216,18 @@ mt = 'Price Indice Change'
 mtp = pathify(mt)
 mtpath = f'''"@id": "http://gss-data.org.uk/def/measure/{mtp}",'''
 
+un = 'Percent'
+unt = pathify(un)
+unpath = '''"@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure",'''
 
 with open("out/observations.csv-metadata.json") as fp: 
     for line in fp: 
         if mtpath in line.strip():
             print(line)
             newTxt = newTxt + line + '''\t"rdfs:label": "''' + mt + '''",\n'''
+        elif unpath in line.strip():
+            print(line)
+            newTxt = newTxt + line + '''\t"rdfs:label": "''' + un + '''",\n'''
         else:
             newTxt += line
 # -

@@ -1,0 +1,5 @@
+Label,Notation,Parent Notation,Sort Priority
+Deaths involving covid 19,deaths-involving-covid-19,,1
+Total deaths from all causes,total-deaths-from-all-causes,,2
+Average deaths of corresonding week of previous year,average-deaths-of-corresonding-week-of-previous-year,,3
+Deaths where covid 19 was mentioned on the death certificate,deaths-where-covid-19-was-mentioned-on-the-death-certificate,,4

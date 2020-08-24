@@ -1,0 +1,8 @@
+Label,Notation,Parent Notation,Sort Priority
+All,all,,1
+Care home,care-home,,2
+Home / non institution,home-/-non-institution,,3
+Hospital,hospital,,4
+Other institution,other-institution,,5
+Home or non institution,home-or-non-institution,,6
+All locations,all-locations,,7

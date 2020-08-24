@@ -204,19 +204,26 @@ trace.output()
 #        tidy[cl] = tidy[cl].str.replace("-"," ")
 #        tidy[cl] = tidy[cl].str.capitalize()
 #        codeclass.create_codelists(pd.DataFrame(tidy[cl]), 'codelists', scrape.dataset.family, Path(os.getcwd()).name.lower())
-# -
+# +
 newTxt = ''
 mt = 'Price Indice Change'
 mtp = pathify(mt)
 mtpath = f'''"@id": "http://gss-data.org.uk/def/measure/{mtp}",'''
+
+u = 'Percent'
+up = pathify(u)
+upath = '''"@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure",'''
+
 with open("out/observations.csv-metadata.json") as fp: 
     for line in fp: 
         if mtpath in line.strip():
             print(line)
-            #line = '\t\t\t\t\t\t' + mtpath + ',\n'
-            newTxt = newTxt + line + '''\t\t\t\t\t\t"rdfs:label": "''' + mt + '''",\n'''
+            newTxt = newTxt + line + '''\t\t"rdfs:label": "''' + mt + '''",\n'''
+        elif upath in line.strip():
+            newTxt = newTxt + line + '''\t\t"rdfs:label": "''' + u + '''",\n'''
         else:
             newTxt += line
+# -
 
 
 f = open("out/observations.csv-metadata.json", "w")

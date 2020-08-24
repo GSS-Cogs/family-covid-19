@@ -208,12 +208,13 @@ trace.output()
 newTxt = ''
 mt = 'Price Indice Change'
 mtp = pathify(mt)
-mtpath = '''"valueUrl": "http://gss-data.org.uk/def/measure/''' + mtp + '''"'''
+mtpath = f'''"@id": "http://gss-data.org.uk/def/measure/{mtp}",'''
 with open("out/observations.csv-metadata.json") as fp: 
     for line in fp: 
         if mtpath in line.strip():
-            line = '\t\t\t\t\t\t' + mtpath + ',\n'
-            newTxt = newTxt + line + '''\t\t\t\t\t\t"titles" : "''' + mt + '''"\n'''
+            print(line)
+            #line = '\t\t\t\t\t\t' + mtpath + ',\n'
+            newTxt = newTxt + line + '''\t\t\t\t\t\t"rdfs:label": "''' + mt + '''",\n'''
         else:
             newTxt += line
 

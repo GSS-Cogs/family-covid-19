@@ -9,7 +9,7 @@
             "COVID-19"
         ]
     },
-    "sparql": "https://cogs-staging-drafter.publishmydata.com/v1/sparql/live",
+    "sparql": "https://staging.gss-data.org.uk/sparql",
     "pmd": "http://staging.gss-data.org.uk",
     "pipelines": [
         "BEIS-Building-materials-and-components-monthly-statistics",

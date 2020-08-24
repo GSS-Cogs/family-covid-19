@@ -119,6 +119,11 @@
                     "description": "Definition of this dimension.",
                     "type": "string"
                   },
+                  "source": {
+                    "description": "Source (URL) of the definition of this dimension.",
+                    "type": "string",
+                    "format": "uri"
+                  },
                   "dimension": {
                     "description": "The URI for this dimension.",
                     "type": "string",
@@ -162,13 +167,6 @@
                       "string", "normalizedString", "token", "language", "Name", "NMTOKEN", "time"]
                   }
                 },
-                "oneOf": [
-                  {"required": ["parent", "value"]},
-                  {"required": ["dimension", "value"]},
-                  {"required": ["attribute", "value"]},
-                  {"required": ["attribute", "datatype"]},
-                  {"required": ["measure", "unit"]}
-                ],
                 "additionalProperties": false
               }
             ]

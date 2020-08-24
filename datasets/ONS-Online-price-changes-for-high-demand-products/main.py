@@ -212,12 +212,12 @@ newTxt = ''
 
 dsname = 'ons-online-price-changes-for-high-demand-products'
 
-mt = 'Price Indice Change'
-mtp = pathify(mt)
+mtp = info['transform']['columns']['Value']['measure'].replace('http://gss-data.org.uk/def/measure/','')
+mt = mtp.capitalize().replace('-',' ')
 mtpath = f'''"@id": "http://gss-data.org.uk/def/measure/{mtp}",'''
 
-un = 'Percent'
-unt = pathify(un)
+unt = info['transform']['columns']['Value']['unit'].replace('http://gss-data.org.uk/def/concept/measurement-units/','')
+un = unt.capitalize().replace('-',' ')
 unpath = '''"@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure",'''
 
 with open("out/observations.csv-metadata.json") as fp: 

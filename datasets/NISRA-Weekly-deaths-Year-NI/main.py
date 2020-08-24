@@ -185,7 +185,35 @@ csvw_transform.set_dataset_uri(urljoin(scrape._base_uri, f'data/{scrape._dataset
 csvw_transform.write(out / f'{csvName}-metadata.json')
 with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
     metadata.write(scrape.generate_trig())
+# +
+newTxt = ''
+
+info = json.load(open('info.json')) 
+mtp = info['transform']['columns']['Value']['measure'].replace('http://gss-data.org.uk/def/measure/','')
+mt = mtp.capitalize().replace('-',' ')
+mtpath = f'''"@id": "http://gss-data.org.uk/def/measure/{mtp}",'''
+
+unt = info['transform']['columns']['Value']['unit'].replace('http://gss-data.org.uk/def/concept/measurement-units/','')
+un = unt.capitalize().replace('-',' ')
+unpath = '''"@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure",'''
+
+with open("out/registered-date-of-death-covid-19-observations.csv-metadata.json") as fp: 
+    for line in fp: 
+        if mtpath in line.strip():
+            print(line)
+            newTxt = newTxt + line + '''\t"rdfs:label": "''' + mt + '''",\n'''
+        elif unpath in line.strip():
+            print(line)
+            newTxt = newTxt + line + '''\t"rdfs:label": "''' + un + '''",\n'''
+        else:
+            newTxt += line
+            
 # -
+
+f = open("out/registered-date-of-death-covid-19-observations.csv-metadata.json", "w")
+f.write(newTxt)
+f.close()
+
 del joined_dat
 del all_dat[7]['Week of Death']
 del all_dat[7]['Covid-19 Deaths']
@@ -298,7 +326,48 @@ csvw_transform.set_dataset_uri(urljoin(scrape._base_uri, f'data/{scrape._dataset
 csvw_transform.write(out / f'{csvName}-metadata.json')
 with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
     metadata.write(scrape.generate_trig())
+# +
+newTxt = ''
+
+#dsname = 'ons-online-price-changes-for-high-demand-products'
+info = json.load(open('info.json')) 
+mtp = info['transform']['columns']['Value']['measure'].replace('http://gss-data.org.uk/def/measure/','')
+mt = mtp.capitalize().replace('-',' ')
+mtpath = f'''"@id": "http://gss-data.org.uk/def/measure/{mtp}",'''
+
+unt = info['transform']['columns']['Value']['unit'].replace('http://gss-data.org.uk/def/concept/measurement-units/','')
+un = unt.capitalize().replace('-',' ')
+unpath = '''"@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure",'''
+
+with open("out/date-of-death-occurrences-covid-19-observations.csv-metadata.json") as fp: 
+    for line in fp: 
+        if mtpath in line.strip():
+            print(line)
+            newTxt = newTxt + line + '''\t"rdfs:label": "''' + mt + '''",\n'''
+        elif unpath in line.strip():
+            print(line)
+            newTxt = newTxt + line + '''\t"rdfs:label": "''' + un + '''",\n'''
+        else:
+            newTxt += line
+          
 # -
 
+f = open("out/date-of-death-occurrences-covid-19-observations.csv-metadata.json", "w")
+f.write(newTxt)
+f.close()
+
+# +
+#info = json.load(open('info.json')) 
+#codelistcreation = ['Location of Death'] 
+#print(codelistcreation)
+#print("-------------------------------------------------------")
+#tidy = joined_dat
+#codeclass = CSVCodelists()
+#for cl in codelistcreation:
+#    if cl in tidy.columns:
+#        tidy[cl] = tidy[cl].str.replace("-"," ")
+#        tidy[cl] = tidy[cl].str.capitalize()
+#        codeclass.create_codelists(pd.DataFrame(tidy[cl]), 'codelists', scrape.dataset.family, Path(os.getcwd()).name.lower())
+# -
 
 

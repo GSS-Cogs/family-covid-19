@@ -213,17 +213,12 @@ mt = 'Price Indice Change'
 mtp = pathify(mt)
 mtpath = f'''"@id": "http://gss-data.org.uk/def/measure/{mtp}",'''
 
-#u = 'Percent'
-#up = pathify(u)
-#upath = '''"@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure",'''
 
 with open("out/observations.csv-metadata.json") as fp: 
     for line in fp: 
         if mtpath in line.strip():
             print(line)
             newTxt = newTxt + line + '''\t"rdfs:label": "''' + mt + '''",\n'''
-        #elif upath in line.strip():
-        #    newTxt = newTxt + line + '''\t\t"rdfs:label": "''' + u + '''",\n'''
         else:
             newTxt += line
 # -

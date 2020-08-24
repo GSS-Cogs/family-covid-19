@@ -164,6 +164,10 @@ for column in tidy:
         tidy[column] = tidy[column].map(lambda x: pathify(x))
 # -
 
+del tidy['Measure Type']
+del tidy['Unit']
+tidy.head()
+
 #SET UP OUTPUT FOLDER AND OUTPUT DATA TO CSV
 csvName = 'observations.csv'
 out = Path('out')

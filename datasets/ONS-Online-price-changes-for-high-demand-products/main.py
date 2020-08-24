@@ -190,7 +190,7 @@ with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
 
 
 trace.output()
-tidy
+#tidy
 
 # +
 #info = json.load(open('info.json')) 
@@ -205,5 +205,23 @@ tidy
 #        tidy[cl] = tidy[cl].str.capitalize()
 #        codeclass.create_codelists(pd.DataFrame(tidy[cl]), 'codelists', scrape.dataset.family, Path(os.getcwd()).name.lower())
 # -
+newTxt = ''
+mt = 'Price Indice Change'
+mtp = pathify(mt)
+mtpath = '''"valueUrl": "http://gss-data.org.uk/def/measure/''' + mtp + '''"'''
+with open("out/observations.csv-metadata.json") as fp: 
+    for line in fp: 
+        if mtpath in line.strip():
+            line = '\t\t\t\t\t\t' + mtpath + ',\n'
+            newTxt = newTxt + line + '''\t\t\t\t\t\t"titles" : "''' + mt + '''"\n'''
+        else:
+            newTxt += line
+
+
+f = open("out/observations.csv-metadata.json", "w")
+f.write(newTxt)
+f.close()
+
+
 
 

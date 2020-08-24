@@ -82,7 +82,8 @@ out = Path('out')
 out.mkdir(exist_ok=True)
 joined_dat.drop_duplicates().to_csv(out / 'observations.csv', index = False)
 
-joined_dat.head(60)
+# +
+#joined_dat.head(6)
 
 # +
 scrape.dataset.family = 'covid-19'
@@ -106,11 +107,43 @@ with open(out / 'observations.csv-metadata.trig', 'wb') as metadata:
     metadata.write(scrape.generate_trig())
 
 # +
-#help(scrape)
+#info = json.load(open('info.json')) 
+#codelistcreation = info['transform']['codelists'] 
+#print(codelistcreation)
+#print("-------------------------------------------------------")
+#tidy = joined_dat
+
+#codeclass = CSVCodelists()
+#for cl in codelistcreation:
+#    if cl in tidy.columns:
+#        tidy[cl] = tidy[cl].str.replace("-"," ")
+#        tidy[cl] = tidy[cl].str.capitalize()
+#        codeclass.create_codelists(pd.DataFrame(tidy[cl]), 'codelists', scrape.dataset.family, Path(os.getcwd()).name.lower())
+
+#un = pd.DataFrame(np.array([["Count"]]), columns=['Unit'])
+#codeclass.create_codelists(pd.DataFrame(un['Unit']), 'codelists', scrape.dataset.family, Path(os.getcwd()).name.lower())
+# +
+newTxt = ''
+
+dsname = 'nrs-deaths-involving-coronavirus-covid-19-in-scotland'
+
+mt = 'Count'
+mtp = pathify(mt)
+mtpath = f'''"@id": "http://gss-data.org.uk/def/measure/{mtp}",'''
+
+
+with open("out/observations.csv-metadata.json") as fp: 
+    for line in fp: 
+        if mtpath in line.strip():
+            print(line)
+            newTxt = newTxt + line + '''\t"rdfs:label": "''' + mt + '''",\n'''
+        else:
+            newTxt += line
 # -
 
-
-
+f = open("out/observations.csv-metadata.json", "w")
+f.write(newTxt)
+f.close()
 
 
 

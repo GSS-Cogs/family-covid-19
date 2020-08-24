@@ -230,6 +230,7 @@ with open("out/observations.csv-metadata.json") as fp:
             newTxt = newTxt + line + '''\t"rdfs:label": "''' + un + '''",\n'''
         else:
             newTxt += line
+            
 # -
 
 

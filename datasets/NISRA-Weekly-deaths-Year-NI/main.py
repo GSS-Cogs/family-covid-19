@@ -298,63 +298,62 @@ P Weekly published data are provisional.
 4 The 'Other' category includes deaths at a residential address which was not the usual address of the deceased and all other places.
 """
 
-# +
 # Output the data to CSV
-#csvName = 'date-of-death-occurrences-covid-19-observations.csv'
-#out = Path('out')
-#out.mkdir(exist_ok=True)
-#joined_dat.drop_duplicates().to_csv(out / csvName, index = False)
+csvName = 'date-of-death-occurrences-covid-19-observations.csv'
+out = Path('out')
+out.mkdir(exist_ok=True)
+joined_dat.drop_duplicates().to_csv(out / csvName, index = False)
 
 # +
-#scrape.dataset.family = 'covid-19'
-#scrape.dataset.description = 'NISRA COVID-19 Date of Death Occurrences Including COVID-19.\n ' + notes
-#scrape.dataset.comment = 'Weekly death occurrances in Northern Ireland'
-## Output CSV-W metadata (validation, transform and DSD).
-## Output dataset metadata separately for now.
+scrape.dataset.family = 'covid-19'
+scrape.dataset.description = 'NISRA COVID-19 Date of Death Occurrences Including COVID-19.\n ' + notes
+scrape.dataset.comment = 'Weekly death occurrances in Northern Ireland'
+# Output CSV-W metadata (validation, transform and DSD).
+# Output dataset metadata separately for now.
 
-#import os
-#from urllib.parse import urljoin
+import os
+from urllib.parse import urljoin
 
-#dataset_path = pathify(os.environ.get('JOB_NAME', 'gss_data/covid-19/' + Path(os.getcwd()).name))
-#scrape.set_base_uri('http://gss-data.org.uk')
-#scrape.set_dataset_id(dataset_path)
-##scrape.dataset.title = 'Weekly Deaths - Date of Death including COVID-19'
-#csvw_transform = CSVWMapping()
-#csvw_transform.set_csv(out / csvName)
-#csvw_transform.set_mapping(json.load(open('info.json')))
-#csvw_transform.set_dataset_uri(urljoin(scrape._base_uri, f'data/{scrape._dataset_id}'))
-#csvw_transform.write(out / f'{csvName}-metadata.json')
-#with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
-#    metadata.write(scrape.generate_trig())
+dataset_path = pathify(os.environ.get('JOB_NAME', 'gss_data/covid-19/' + Path(os.getcwd()).name))
+scrape.set_base_uri('http://gss-data.org.uk')
+scrape.set_dataset_id(dataset_path)
+scrape.dataset.title = 'Weekly Deaths - Date of Death including COVID-19'
+csvw_transform = CSVWMapping()
+csvw_transform.set_csv(out / csvName)
+csvw_transform.set_mapping(json.load(open('info.json')))
+csvw_transform.set_dataset_uri(urljoin(scrape._base_uri, f'data/{scrape._dataset_id}'))
+csvw_transform.write(out / f'{csvName}-metadata.json')
+with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
+    metadata.write(scrape.generate_trig())
 # +
-#newTxt = ''
+newTxt = ''
 
-##dsname = 'ons-online-price-changes-for-high-demand-products'
-#info = json.load(open('info.json')) 
-#mtp = info['transform']['columns']['Value']['measure'].replace('http://gss-data.org.uk/def/measure/','')
-#mt = mtp.capitalize().replace('-',' ')
-#mtpath = f'''"@id": "http://gss-data.org.uk/def/measure/{mtp}",'''
+#dsname = 'ons-online-price-changes-for-high-demand-products'
+info = json.load(open('info.json')) 
+mtp = info['transform']['columns']['Value']['measure'].replace('http://gss-data.org.uk/def/measure/','')
+mt = mtp.capitalize().replace('-',' ')
+mtpath = f'''"@id": "http://gss-data.org.uk/def/measure/{mtp}",'''
 
-#unt = info['transform']['columns']['Value']['unit'].replace('http://gss-data.org.uk/def/concept/measurement-units/','')
-#un = unt.capitalize().replace('-',' ')
-#unpath = '''"@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure",'''
+unt = info['transform']['columns']['Value']['unit'].replace('http://gss-data.org.uk/def/concept/measurement-units/','')
+un = unt.capitalize().replace('-',' ')
+unpath = '''"@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure",'''
 
-#with open("out/date-of-death-occurrences-covid-19-observations.csv-metadata.json") as fp: 
-#    for line in fp: 
-#        if mtpath in line.strip():
-#            print(line)
-#            newTxt = newTxt + line + '''\t"rdfs:label": "''' + mt + '''",\n'''
-#        elif unpath in line.strip():
-#            print(line)
-#            newTxt = newTxt + line + '''\t"rdfs:label": "''' + un + '''",\n'''
-#        else:
-#            newTxt += line
+with open("out/date-of-death-occurrences-covid-19-observations.csv-metadata.json") as fp: 
+    for line in fp: 
+        if mtpath in line.strip():
+            print(line)
+            newTxt = newTxt + line + '''\t"rdfs:label": "''' + mt + '''",\n'''
+        elif unpath in line.strip():
+            print(line)
+            newTxt = newTxt + line + '''\t"rdfs:label": "''' + un + '''",\n'''
+        else:
+            newTxt += line
           
+# -
 
-# +
-#f = open("out/date-of-death-occurrences-covid-19-observations.csv-metadata.json", "w")
-#f.write(newTxt)
-#f.close()
+f = open("out/date-of-death-occurrences-covid-19-observations.csv-metadata.json", "w")
+f.write(newTxt)
+f.close()
 
 # +
 #info = json.load(open('info.json')) 

@@ -46,7 +46,7 @@ print(list(all_dat[2]))
 # Join all the tables together
 joined_dat = pd.concat(all_dat)
 joined_dat['Deaths Registered'] = joined_dat['Deaths Registered'].str.replace('-194','-19')
-joined_dat['Deaths Registered'].unique()
+#joined_dat['Deaths Registered'].unique()
 
 # Rename some columns
 joined_dat = joined_dat.rename(columns={'Deaths by Gender': 'Sex', 'Deaths by Council Area': 'Council Area',
@@ -67,7 +67,7 @@ joined_dat['Sex'] = joined_dat['Sex'].str.strip()
 joined_dat['Sex'] = joined_dat['Sex'].map(sexMap.set_index('Category')['Code'])
 
 for c in joined_dat.columns:
-    if (c != 'Period') & (c != 'Measure Type') & (c != 'Sex') &(c != 'Unit') & (c != 'Value') :
+    if (c != 'Period') & (c != 'Measure Type') & (c != 'Sex') &(c != 'Unit') & (c != 'Value')  & (c != 'Council Area') & (c != 'NHS Board') :
         joined_dat[c] = joined_dat[c].map(lambda x: pathify(x))
 
 # +
@@ -82,12 +82,11 @@ out = Path('out')
 out.mkdir(exist_ok=True)
 joined_dat.drop_duplicates().to_csv(out / 'observations.csv', index = False)
 
-# +
-#joined_dat.head(6)
+joined_dat.head(6)
 
 # +
 scrape.dataset.family = 'covid-19'
-
+scrape.dataset.comment = 'This statistical report includes provisional statistics on the number of deaths associated with coronavirus (COVID-19) and the total number of deaths registered in Scotland'
 # Output CSV-W metadata (validation, transform and DSD).
 # Output dataset metadata separately for now.
 
@@ -110,41 +109,19 @@ with open(out / 'observations.csv-metadata.trig', 'wb') as metadata:
 info = json.load(open('info.json')) 
 
 # +
-#codelistcreation = info['transform']['codelists'] 
-#print(codelistcreation)
-#print("-------------------------------------------------------")
-#tidy = joined_dat
-
-#codeclass = CSVCodelists()
-#for cl in codelistcreation:
-#    if cl in tidy.columns:
-#        tidy[cl] = tidy[cl].str.replace("-"," ")
-#        tidy[cl] = tidy[cl].str.capitalize()
-#        codeclass.create_codelists(pd.DataFrame(tidy[cl]), 'codelists', scrape.dataset.family, Path(os.getcwd()).name.lower())
-
-#un = pd.DataFrame(np.array([["Count"]]), columns=['Unit'])
-#codeclass.create_codelists(pd.DataFrame(un['Unit']), 'codelists', scrape.dataset.family, Path(os.getcwd()).name.lower())
-# +
 newTxt = ''
 
-dsname = 'nrs-deaths-involving-coronavirus-covid-19-in-scotland'
 
 mtp = info['transform']['columns']['Value']['measure'].replace('http://gss-data.org.uk/def/measure/','')  #'Count'
 mt = mtp.capitalize()
 mtpath = f'''"@id": "http://gss-data.org.uk/def/measure/{mtp}",'''
-
-unt = info['transform']['columns']['Value']['unit'].replace('http://gss-data.org.uk/def/concept/measurement-units/','')  #'Percent'
-un = unt.capitalize()
-unpath = '''"@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure",'''
+h = '''"@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure",'''
 
 with open("out/observations.csv-metadata.json") as fp: 
     for line in fp: 
         if mtpath in line.strip():
             print(line)
             newTxt = newTxt + line + '''\t"rdfs:label": "''' + mt + '''",\n'''
-        elif unpath in line.strip():
-            print(line)
-            newTxt = newTxt + line + '''\t"rdfs:label": "''' + un + '''",\n'''
         else:
             newTxt += line
 # -

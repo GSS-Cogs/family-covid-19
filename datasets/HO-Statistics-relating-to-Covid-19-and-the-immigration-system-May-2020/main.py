@@ -99,6 +99,10 @@ scraper.dataset.family = 'covid-19'
 # Output CSV-W metadata (validation, transform and DSD).
 # Output dataset metadata separately for now.
 
+# +
+scraper.dataset.family = 'covid-19'
+scraper.dataset.comment = 'A statistical report showing the impact of Covid-19 on the immigration system.'
+
 import os
 from urllib.parse import urljoin
 dataset_path = pathify(os.environ.get('JOB_NAME', 'gss_data/covid-19/' + Path(os.getcwd()).name))
@@ -111,21 +115,22 @@ csvw_transform.set_dataset_uri(urljoin(scraper._base_uri, f'data/{scraper._datas
 csvw_transform.write(out / 'observations.csv-metadata.json')
 with open(out / 'observations.csv-metadata.trig', 'wb') as metadata:
     metadata.write(scraper.generate_trig())
+# -
 
 trace.output()
 
 # +
-codelistcreation = tidy[['Air Arrivals']]
-print(codelistcreation)
-print("-------------------------------------------------------")
-print(tidy.columns)
+#codelistcreation = tidy[['Air Arrivals']]
+#print(codelistcreation)
+#print("-------------------------------------------------------")
+#print(tidy.columns)
 
-codeclass = CSVCodelists()
-for cl in codelistcreation:
-    if cl in tidy.columns:
-        tidy[cl] = tidy[cl].str.replace("-"," ")
-        tidy[cl] = tidy[cl].str.capitalize()
-        codeclass.create_codelists(pd.DataFrame(tidy[cl]), 'codelists', scraper.dataset.family, Path(os.getcwd()).name.lower())
+#codeclass = CSVCodelists()
+#for cl in codelistcreation:
+#    if cl in tidy.columns:
+#        tidy[cl] = tidy[cl].str.replace("-"," ")
+#        tidy[cl] = tidy[cl].str.capitalize()
+#        codeclass.create_codelists(pd.DataFrame(tidy[cl]), 'codelists', scraper.dataset.family, Path(os.getcwd()).name.lower())
 
 # +
 newTxt = ''

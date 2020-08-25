@@ -321,7 +321,7 @@ joined_dat.drop_duplicates().to_csv(out / csvName, index = False)
 # +
 scrape.dataset.family = 'covid-19'
 #scrape.dataset.description = 'PHE COVID-19 number of outbreaks in care homes – Management Information/n' + notes
-
+scrape.dataset.comment = 'Weekly number and percentage of care homes reporting a suspected or confirmed outbreak of COVID-19 to PHE by local authorities, regions and PHE centres.'
 # Output CSV-W metadata (validation, transform and DSD).
 # Output dataset metadata separately for now.
 

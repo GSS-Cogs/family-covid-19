@@ -328,7 +328,7 @@ scrape.dataset.comment = 'Weekly number and percentage of care homes reporting a
 import os
 from urllib.parse import urljoin
 
-dataset_path = pathify(os.environ.get('JOB_NAME', 'gss_data/covid-19/' + Path(os.getcwd()).name)) + '-' + pathify(csvName)
+dataset_path = pathify(os.environ.get('JOB_NAME', 'gss_data/covid-19/' + Path(os.getcwd()).name))
 scrape.set_base_uri('http://gss-data.org.uk')
 scrape.set_dataset_id(dataset_path)
 #scrape.dataset.title = 'PHE COVID-19 number of outbreaks in care homes – Management Information'

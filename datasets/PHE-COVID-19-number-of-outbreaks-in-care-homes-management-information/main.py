@@ -308,7 +308,7 @@ joined_dat['Value'] = pd.to_numeric(joined_dat['Value'], downcast='integer')
 #
 # Todo: revisit if we add percentages back.
 
-del joined_dat['Unit']
+joined_dat.head(10)
 
 # The number of carehomes in a region is not a dimension, but either an extra measure for each observation, or an attribute.
 
@@ -354,7 +354,23 @@ with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
 #        codeclass.create_codelists(pd.DataFrame(joined_dat[cl]), 'codelists', scrape.dataset.family, Path(os.getcwd()).name.lower())
 
 # +
-#joined_dat.head(60)
+newTxt = ''
+info = json.load(open('info.json')) 
+mtp = info['transform']['columns']['Value']['measure'].replace('http://gss-data.org.uk/def/measure/','')
+mt = mtp.capitalize().replace('-',' ')
+mtpath = f'''"@id": "http://gss-data.org.uk/def/measure/{mtp}",'''
+
+with open("out/observations.csv-metadata.json") as fp: 
+    for line in fp: 
+        if mtpath in line.strip():
+            print(line)
+            newTxt = newTxt + line + '''\t"rdfs:label": "''' + mt + '''",\n'''
+        else:
+            newTxt += line
+ 
+f = open("out/observations.csv-metadata.json", "w")
+f.write(newTxt)
+f.close()
 # -
 
 

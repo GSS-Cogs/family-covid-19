@@ -177,7 +177,7 @@ from urllib.parse import urljoin
 dataset_path = pathify(os.environ.get('JOB_NAME', 'gss_data/covid-19/' + Path(os.getcwd()).name))
 scrape.set_base_uri('http://gss-data.org.uk')
 scrape.set_dataset_id(dataset_path)
-#scrape.dataset.title = 'Weekly Deaths - Notification Date of Death including COVID-19'
+scrape.dataset.title = 'Weekly Deaths - Notification Date of Death including COVID-19'
 csvw_transform = CSVWMapping()
 csvw_transform.set_csv(out / csvName)
 csvw_transform.set_mapping(json.load(open('info.json')))

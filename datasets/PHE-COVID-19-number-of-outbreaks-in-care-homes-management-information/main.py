@@ -299,10 +299,10 @@ PHE by local authorities, regions and PHE centres.
 """
 # -
 
-del joined_dat['Measure Type']
-del joined_dat['Unit']
 joined_dat.rename(columns={'Area Unit' : 'Unit', 'Area code': 'Geography Code', 'Area Type': 'Region Type'}, inplace=True)
 joined_dat['Value'] = pd.to_numeric(joined_dat['Value'], downcast='integer')
+del joined_dat['Measure Type']
+del joined_dat['Unit']
 
 # As we're currently outputting just one measure, the Unit is declared in `info.json` mapping so drop it from here.
 #

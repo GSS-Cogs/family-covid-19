@@ -112,7 +112,7 @@ del all_dat[6]['Week of Death']
 #all_dat[6].head(60)
 # -
 
-cols = ['Period', 'Local Government District','Registered Death Type','Location of Death','Age','Gender','Measure Type','Unit','Marker','Value']
+cols = ['Period', 'Local Government District','Registered Death Type','Location of Death','Age','Gender','Marker','Value']
 i = 0
 for t in all_dat:
     try:
@@ -125,8 +125,8 @@ for t in all_dat:
 joined_dat = pd.concat([all_dat[0], all_dat[1], all_dat[2], all_dat[3], all_dat[4], all_dat[5], all_dat[6]], sort=True)
 
 joined_dat['Local Government District'] = joined_dat['Local Government District'].apply(pathify)
-joined_dat['Measure Type'] = joined_dat['Measure Type'].apply(pathify)
-joined_dat['Unit'] = joined_dat['Unit'].apply(pathify)
+#joined_dat['Measure Type'] = joined_dat['Measure Type'].apply(pathify)
+#joined_dat['Unit'] = joined_dat['Unit'].apply(pathify)
 #joined_dat.head(10)
 
 # Sex Mapping
@@ -146,8 +146,8 @@ joined_dat['Age'] = joined_dat['Age'].replace('>=7 days and < 1 year','more than
 joined_dat['Age'] = joined_dat['Age'].replace('85+','85 plus')
 joined_dat['Age'] = joined_dat['Age'].apply(pathify)
 
-joined_dat['Measure Type'] = 'Deaths'
-joined_dat['Age'].unique()
+joined_dat = joined_dat[['Period','Location of Death','Local Government District','Registered Death Type', 'Age','Sex','Marker','Value']]
+joined_dat.head(10)
 
 # Output the data to CSV
 csvName = 'registered-date-of-death-covid-19-observations.csv'
@@ -276,17 +276,16 @@ joined_dat['Measure Type'] = 'Deaths'
 # Hopefully all NaN values have been accounted for in the Marker column
 joined_dat['Value'] = joined_dat['Value'].replace(np.nan,0)
 
-joined_dat = joined_dat[['Period','Location of Death','Person Type','Measure Type','Unit','Marker','Value']]
+joined_dat = joined_dat[['Period','Location of Death','Person Type','Marker','Value']]
 
-joined_dat['Unit'] = 'Count'
-
-joined_dat['Measure Type'] = joined_dat['Measure Type'].apply(pathify)
-joined_dat['Unit'] = joined_dat['Unit'].apply(pathify)
+# +
+#joined_dat['Measure Type'] = joined_dat['Measure Type'].apply(pathify)
+#joined_dat['Unit'] = joined_dat['Unit'].apply(pathify)
 #joined_dat.head(10)
 
 # +
-del joined_dat['Measure Type']
-del joined_dat['Unit']
+#del joined_dat['Measure Type']
+#del joined_dat['Unit']
 
 joined_dat['Value'] = pd.to_numeric(joined_dat['Value'], downcast='integer')
 # -

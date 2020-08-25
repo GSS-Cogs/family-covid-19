@@ -1,0 +1,32 @@
+Label,Notation,Parent Notation,Sort Priority
+Manufacturing,manufacturing,,1
+Energy / oil gas,energy-/-oil-gas,,2
+Construction / trades,construction-/-trades,,3
+Wholesale and retail,wholesale-and-retail,,4
+Graduate,graduate,,5
+Transport / logistics / warehouse,transport-/-logistics-/-warehouse,,6
+Travel / tourism,travel-/-tourism,,7
+Catering and hospitality,catering-and-hospitality,,8
+It / computing / software,it-/-computing-/-software,,9
+Accounting / finance,accounting-/-finance,,10
+Property,property,,11
+Engineering,engineering,,12
+Legal,legal,,13
+Management / exec / consulting,management-/-exec-/-consulting,,14
+Marketing / advertising / pr,marketing-/-advertising-/-pr,,15
+Scientific / qa,scientific-/-qa,,16
+Admin / clerical / secretarial,admin-/-clerical-/-secretarial,,17
+Customer service / support,customer-service-/-support,,18
+Facilities / maintenance,facilities-/-maintenance,,19
+Hr recruitment,hr-recruitment,,20
+Education,education,,21
+Part time / weekend,part-time-/-weekend,,22
+Charity / voluntary,charity-/-voluntary,,23
+Healthcare and social care,healthcare-and-social-care,,24
+Creative / design / arts media,creative-/-design-/-arts-media,,25
+Other / general,other-/-general,,26
+Sales,sales,,27
+Domestic help,domestic-help,,28
+Unknown,unknown,,29
+All industries,all-industries,,30
+All,all,,31

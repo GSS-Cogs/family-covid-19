@@ -8,6 +8,8 @@ import warnings
 import pandas as pd
 import json
 import numpy as np
+from urllib.parse import urljoin
+import os
 
 def left(s, amount):
     return s[:amount]
@@ -62,14 +64,15 @@ def excelRange(bag):
     return '{' + lowx + lowy + '-' + highx + highy + '}'
 
 
+
 # -
 
 info = json.load(open('info.json')) 
 landingPage = info['landingPage'] 
 landingPage 
 
-scraper = Scraper(landingPage)  
-distribution = scraper.distributions[0]
+scrape = Scraper(landingPage)  
+distribution = scrape.distributions[0]
 
 datasetTitle = 'Online job advert estimates'
 tabs = { tab: tab for tab in distribution.as_databaker() }
@@ -77,62 +80,88 @@ trace = TransformTrace()
 df = pd.DataFrame()
 
 # +
-tab = next(t for t in tabs.values() if t.name.startswith('Vacancies'))
-datacube_name = "Online job advert estimates"
-columns=["Date", "Industry", 'Marker', "Measure Type", "Unit"]
-trace.start(datacube_name, tab, columns, scraper.distributions[0].downloadURL)
+for tab in tabs:
+   
+    columns=["Date", "Industry", "NUTS1 Region", 'Marker', "Measure Type", "Unit"]
+    trace.start(datasetTitle, tab, columns, scrape.distributions[0].downloadURL)
+    
+    remove_notes = tab.filter(contains_string('Notes')).expand(RIGHT).expand(DOWN)
+    measure_type = 'Job Advert Indices'
+    trace.Measure_Type('Hardcoded value as: Adverts')
+    unit = 'Percent'
+    trace.Unit('Hardcoded value as: Count')
+    
+    if tab.name == 'Vacancies by Adzuna Category':
+        
+        date = tab.filter(contains_string('Date')).shift(1,0).expand(RIGHT).is_not_blank()
+        trace.Date('Date given at cell range: {}', var = excelRange(date))
 
-date = tab.filter(contains_string('Date')).shift(1,0).expand(RIGHT).is_not_blank()
-trace.Date('Date given at cell range: {}', var = excelRange(date))
+        imputed_values = tab.filter(contains_string('Imputed values')).shift(1,0).expand(RIGHT)
+        trace.Marker('Imputed Values given at cell range: {}', var = excelRange(date))
+        
+        industry = tab.filter(contains_string('Date')).shift(0,1).expand(DOWN).is_not_blank() - tab.filter(contains_string('Imputed values')).expand(RIGHT).expand(DOWN)
+        trace.Industry('Industry given at cell range: {}', var = excelRange(date))
 
-industry = tab.filter(contains_string('Date')).shift(0,1).expand(DOWN).is_not_blank()
-trace.Industry('Industry given at cell range: {}', var = excelRange(date))
+        nuts1_region = "United Kingdom"
+        trace.NUTS1_Region("Hardcoded as United Kingdom")
+        
+        observations = industry.fill(RIGHT).is_not_blank() 
+        dimensions = [
+            HDim(date, 'Date', DIRECTLY, ABOVE),
+            HDim(industry, 'Industry', DIRECTLY, LEFT),
+            HDim(imputed_values, 'Marker', DIRECTLY, BELOW),
+            HDimConst('NUTS1 Region', nuts1_region),
+            HDimConst('Measure Type', measure_type),
+            HDimConst('Unit', unit),
+            ]
+        tidy_sheet = ConversionSegment(tab, dimensions, observations)
+        trace.with_preview(tidy_sheet)
+       # savepreviewhtml(tidy_sheet) 
+        trace.store("combined_dataframe", tidy_sheet.topandas())
+    
+    if tab.name == 'Vacancies by NUTS1 Region':
+       
+        date = tab.filter(contains_string('Date')).shift(1,0).expand(RIGHT).is_not_blank()
+        trace.Date('Date given at cell range: {}', var = excelRange(date))
+        
+        imputed_values = tab.filter(contains_string('Imputed values')).shift(1,0).expand(RIGHT)
+        trace.Marker('Imputed Values given at cell range: {}', var = excelRange(date))
 
-imputed_values = tab.filter(contains_string('Imputed values')).shift(1,0).expand(RIGHT)
-trace.Marker('Imputed Values given at cell range: {}', var = excelRange(date))
-
-measure_type = 'Adverts'
-trace.Measure_Type('Hardcoded value as: Adverts')
-unit = 'Count'
-trace.Unit('Hardcoded value as: Count')
-observations = industry.fill(RIGHT).is_not_blank() - imputed_values
-
-dimensions = [
-    HDim(date, 'Date', DIRECTLY, ABOVE),
-    HDim(industry, 'Industry', DIRECTLY, LEFT),
-    HDim(imputed_values, 'Marker', DIRECTLY, BELOW),
-    HDimConst('Measure Type', measure_type),
-    HDimConst('Unit', unit),
-    ]
-tidy_sheet = ConversionSegment(tab, dimensions, observations)
-trace.with_preview(tidy_sheet)
-#savepreviewhtml(tidy_sheet) 
-trace.store("combined_dataframe", tidy_sheet.topandas())
-
+        nuts1_region = tab.filter(contains_string('Date')).shift(0,1).expand(DOWN).is_not_blank() - tab.filter(contains_string('Imputed values')).expand(RIGHT).expand(DOWN)
+        trace.NUTS1_Region('Industry given at cell range: {}', var = excelRange(date))
+        
+        industry = "All"
+        trace.Industry("Hardcoded as All")
+      
+        observations = nuts1_region.fill(RIGHT).is_not_blank() 
+        dimensions = [
+            HDim(date, 'Date', DIRECTLY, ABOVE),
+            HDim(nuts1_region, 'NUTS1 Region', DIRECTLY, LEFT),
+            HDim(imputed_values, 'Marker', DIRECTLY, BELOW),
+            HDimConst('Industry', industry),
+            HDimConst('Measure Type', measure_type),
+            HDimConst('Unit', unit),
+            ]
+        tidy_sheet = ConversionSegment(tab, dimensions, observations)
+        trace.with_preview(tidy_sheet)
+        #savepreviewhtml(tidy_sheet) 
+        trace.store("combined_dataframe", tidy_sheet.topandas())
+        
+        
+        
 
 # +
-df = trace.combine_and_trace(datacube_name, "combined_dataframe")
+df = trace.combine_and_trace(datasetTitle, "combined_dataframe")
 df.rename(columns={'OBS' : 'Value'}, inplace=True)
+
+#imputed values are highlighted in spreadsheet
+f1=((df['Marker'] !='') )
+df.loc[f1,'Marker'] = 'Imputed'
+
 trace.add_column("Value")
 trace.Value("Rename databaker columns OBS to Value")
-
-trace.Marker("Fixing up marker column with information taken from the notes : 'Furthermore some weeks have no observation. The missing values have been imputed using linear interpolation, and have been highlighted.'")
-f1=((df['Marker'] =='Education only') & (df['Industry'] =='Education'))
-df.loc[f1,'Marker'] = 'Values have been imputed using linear interpolation'
-
-df = df.replace({'Marker' : {'All' : 'Values have been imputed using linear interpolation', 'Education only' : np.nan, '' : np.nan }})
-
-tidy = df[["Date", "Industry",'Value', "Marker", "Measure Type", "Unit"]]
-
-
-trace.Industry("Remove any prefixed whitespace from all values in column and pathify")
-for column in tidy:
-    if column in ('Industry'):
-        tidy[column] = tidy[column].str.lstrip()
-        tidy[column] = tidy[column].str.rstrip()
-        tidy[column] = tidy[column].map(lambda x: pathify(x))
-tidy['Value'] = tidy['Value'].astype(int)
-
+trace.Date("Formating to day/YYY-MM-DD")
+df['Date'] = df['Date'].map(lambda x: f'day/{x}')
 # -
 
 from IPython.core.display import HTML
@@ -141,6 +170,21 @@ for col in df:
         df[col] = df[col].astype('category')
         display(HTML(f"<h2>{col}</h2>"))
         display(df[col].cat.categories) 
+
+# +
+tidy = df[['Date', 'Industry', 'NUTS1 Region', 'Measure Type', 'Unit', 'Value', 'Marker']]
+
+trace.Industry("Remove any prefixed whitespace from all values in column and pathify")
+trace.NUTS1_Region("Remove any prefixed whitespace from all values in column and pathify")
+for column in tidy:
+    if column in ('Industry', 'NUTS1 Region'):
+        tidy[column] = tidy[column].str.lstrip()
+        tidy[column] = tidy[column].str.rstrip()
+        tidy[column] = tidy[column].map(lambda x: pathify(x))
+# -
+
+del tidy['Measure Type']
+del tidy['Unit']
 
 # Notes taken from tab: Vacancies
 
@@ -156,19 +200,52 @@ Total job adverts by Adzuna Category, Index 2019 average = 100
 
 """
 
-# Output Tidy data
-
-# +
+#SET UP OUTPUT FOLDER AND OUTPUT DATA TO CSV
+csvName = 'observations.csv'
 out = Path('out')
 out.mkdir(exist_ok=True)
-title = pathify(datasetTitle)
-scraper.dataset.comment = notes
-df.drop_duplicates().to_csv(out / f'{title}.csv', index = False)
-scraper.dataset.family = 'covid-19'
+tidy.drop_duplicates().to_csv(out / csvName, index = False)
 
-import os
-df.drop_duplicates().to_csv(out / f'{title}.csv', index = False)
-with open(out / f'{title}.csv-metadata.trig', 'wb') as metadata:
-    metadata.write(scraper.generate_trig())
+#SET VARIOUS ATTRIBUTES OF THE SCRAPER
+scrape.dataset.family = 'covid-19'
+scrape.dataset.title = datasetTitle
+scrape.dataset.comment = notes
+dataset_path = pathify(os.environ.get('JOB_NAME', 'gss_data/covid-19/' + Path(os.getcwd()).name))
+scrape.set_base_uri('http://gss-data.org.uk')
+scrape.set_dataset_id(dataset_path)
+
+# CREATE MAPPING CLASS INSTANCE, SET UP VARIABLES AND WRITE FILES
+csvw_transform = CSVWMapping()
+csvw_transform.set_csv(out / csvName)
+csvw_transform.set_mapping(json.load(open('info.json')))
+csvw_transform.set_dataset_uri(urljoin(scrape._base_uri, f'data/{scrape._dataset_id}'))
+csvw_transform.write(out / f'{csvName}-metadata.json')
+
+# CREATE AND OUTPUT TRIG FILE
+with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
+    metadata.write(scrape.generate_trig())
+
+# +
+newTxt = ''
+info = json.load(open('info.json')) 
+mtp = info['transform']['columns']['Value']['measure'].replace('http://gss-data.org.uk/def/measure/','')
+mt = mtp.capitalize()
+mtpath = f'''"@id": "http://gss-data.org.uk/def/measure/{mtp}",'''
+h = '''"@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure",'''
+
+with open("out/observations.csv-metadata.json") as fp: 
+    for line in fp: 
+        if mtpath in line.strip():
+            print(line)
+            newTxt = newTxt + line + '''\t"rdfs:label": "''' + mt + '''",\n'''
+        else:
+            newTxt += line
+            
+f = open("out/observations.csv-metadata.json", "w")
+f.write(newTxt)
+f.close()
+# -
+
 trace.output()
-tidy
+
+

@@ -20,7 +20,24 @@
             "Priority"
         ],
         "airtable": "rec2UiBp6T5n6qYb1",
-        "main_issue": 120
+        "main_issue": 120 ,
+        "columns": {
+            "Date": {
+                "source": "https://www.ons.gov.uk/economy/economicoutputandproductivity/output/datasets/onlinejobadvertestimates",
+                "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
+                "value": "http://reference.data.gov.uk/id/{+date}"
+            },
+            "Value": {
+                "unit": "http://gss-data.org.uk/def/concept/measurement-units/percent",
+                "measure": "http://gss-data.org.uk/def/measure/job-advert-indices",
+                "datatype": "float64"
+            }
+        },
+        "codelists": [
+            "Industry",
+            "NUTS1 Region",
+            "Marker"
+        ]
     },
     "sizingNotes": "Simple table structure with footnotes, however some of the figures are highlighted with comments on row 41 in some case this refers to the whole column but in other cases this is just an individual figure therefore manual intervention may be required.",
     "notes": ""

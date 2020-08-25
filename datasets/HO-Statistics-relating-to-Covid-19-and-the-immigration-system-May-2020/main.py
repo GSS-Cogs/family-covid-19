@@ -115,9 +115,39 @@ with open(out / 'observations.csv-metadata.trig', 'wb') as metadata:
 trace.output()
 
 # +
-#tidy
+codelistcreation = tidy[['Air Arrivals']]
+print(codelistcreation)
+print("-------------------------------------------------------")
+print(tidy.columns)
+
+codeclass = CSVCodelists()
+for cl in codelistcreation:
+    if cl in tidy.columns:
+        tidy[cl] = tidy[cl].str.replace("-"," ")
+        tidy[cl] = tidy[cl].str.capitalize()
+        codeclass.create_codelists(pd.DataFrame(tidy[cl]), 'codelists', scraper.dataset.family, Path(os.getcwd()).name.lower())
 
 # +
-#cl = CSVCodelists()
-#codelist_data = tidy[['Air Arrivals']]
-#cl.create_codelists(codelist_data, out)
+newTxt = ''
+info = json.load(open('info.json')) 
+mtp = info['transform']['columns']['Value']['measure'].replace('http://gss-data.org.uk/def/measure/','')
+mt = mtp.capitalize().replace('-',' ')
+mtpath = f'''"@id": "http://gss-data.org.uk/def/measure/{mtp}",'''
+
+with open("out/observations.csv-metadata.json") as fp: 
+    for line in fp: 
+        if mtpath in line.strip():
+            print(line)
+            newTxt = newTxt + line + '''\t"rdfs:label": "''' + mt + '''",\n'''
+        else:
+            newTxt += line
+ 
+
+f = open("out/observations.csv-metadata.json", "w")
+f.write(newTxt)
+f.close()
+# -
+
+
+
+

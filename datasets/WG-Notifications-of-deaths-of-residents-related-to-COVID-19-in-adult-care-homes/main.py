@@ -194,7 +194,7 @@ out = Path('out')
 out.mkdir(exist_ok=True)
 merged.to_csv(out / 'observations.csv', index = False)
 scraper.dataset.family = 'covid-19'
-
+scraper.dataset.comment = 'The data presented here are based on the Notifications of Service User Deaths received by Care Inspectorate Wales (CIW) from adult care homes which relate to their residents. The location of death may be in the care home, in hospital or another location.'
 dataset_path = pathify(os.environ.get('JOB_NAME', 'gss_data/covid-19/' + Path(os.getcwd()).name))
 scraper.set_base_uri('http://gss-data.org.uk')
 scraper.set_dataset_id(dataset_path)
@@ -205,6 +205,30 @@ csvw_transform.set_dataset_uri(urljoin(scraper._base_uri, f'data/{scraper._datas
 csvw_transform.write(out / 'observations.csv-metadata.json')
 with open(out / 'observations.csv-metadata.trig', 'wb') as metadata:
     metadata.write(scraper.generate_trig())
+# +
+newTxt = ''
+import json
+info = json.load(open('info.json')) 
+mtp = info['transform']['columns']['Value']['measure'].replace('http://gss-data.org.uk/def/measure/','')  #'Count'
+mt = mtp.capitalize()
+mtpath = f'''"@id": "http://gss-data.org.uk/def/measure/{mtp}",'''
+h = '''"@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure",'''
+
+with open("out/observations.csv-metadata.json") as fp: 
+    for line in fp: 
+        if mtpath in line.strip():
+            print(line)
+            newTxt = newTxt + line + '''\t"rdfs:label": "''' + mt + '''",\n'''
+        else:
+            newTxt += line
+            
+            
+f = open("out/observations.csv-metadata.json", "w")
+f.write(newTxt)
+f.close()
 # -
+
+
+
 
 

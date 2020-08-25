@@ -6,8 +6,10 @@ import json
 
 scrape = Scraper(seed="info.json")   
 scrape.distributions[0].title = "Weekly deaths, 2020 (NI)"
+print(dir(scrape))
 scrape
 
+scrape.distributions = [x for x in scrape.distributions if x.mediaType == Excel]
 tabs = { tab.name: tab for tab in scrape.distributions[0].as_databaker() }
 list(tabs)
 

@@ -69,8 +69,10 @@ landingPage = info['landingPage']
 landingPage 
 # -
 
-scraper = Scraper(landingPage) 
-scraper 
+#scraper = Scraper(landingPage) 
+scraper = Scraper(seed="info.json")
+scraper.distributions[0].title = "Number of deaths in care homes notified to the Care Quality Commission, England"
+scraper
 
 distribution = scraper.distributions[0]
 
@@ -189,7 +191,7 @@ trace.Place_of_Occurrence("Remove any prefixed whitespace from all values in col
 trace.Death_Causes("Remove any prefixed whitespace from all values in column and pathify")
 trace.Local_Authority("Remove any prefixed whitespace from all values in column and pathify")
 for column in tidy:
-    if column in ('Place of Occurrence', 'Death Causes', "Local Authority"):
+    if column in ('Place of Occurrence', 'Death Causes'):
         tidy[column] = tidy[column].str.lstrip()
         tidy[column] = tidy[column].str.rstrip()
         tidy[column] = tidy[column].map(lambda x: pathify(x))
@@ -290,7 +292,7 @@ trace.Place_of_Occurrence("Remove any prefixed whitespace from all values in col
 trace.Death_Causes("Remove any prefixed whitespace from all values in column and pathify")
 trace.Local_Authority("Remove any prefixed whitespace from all values in column and pathify")
 for column in tidy:
-    if column in ('Place of Occurrence', 'Death Causes', "Local Authority"):
+    if column in ('Place of Occurrence', 'Death Causes'):
         tidy[column] = tidy[column].str.lstrip()
         tidy[column] = tidy[column].str.rstrip()
         tidy[column] = tidy[column].map(lambda x: pathify(x))
@@ -351,7 +353,7 @@ for la in laslist:
 joined_dat['Local Authority'] = joined_dat['Local Authority'].map(las.set_index('Category')['Code'])
 
 joined_dat['Location of Death'] = joined_dat['Location of Death'].apply(pathify)
-joined_dat['Local Authority'] = joined_dat['Local Authority'].apply(pathify)
+#joined_dat['Local Authority'] = joined_dat['Local Authority'].apply(pathify)
 joined_dat['Cause of Death'] = joined_dat['Cause of Death'].apply(pathify)
 joined_dat['Measure Type'] = joined_dat['Measure Type'].apply(pathify)
 joined_dat['Unit'] = joined_dat['Unit'].apply(pathify)
@@ -377,7 +379,7 @@ joined_dat.drop_duplicates().to_csv(out / csvName, index = False)
 # +
 scraper.dataset.family = 'covid-19'
 scraper.dataset.description = 'ONS Number of deaths in care homes notified to the Care Quality Commission, England.\n ' + notes
-
+scraper.dataset.comment = 'Provisional counts of deaths in care homes caused by the coronavirus (COVID-19) by local authority. Published by the Office for National Statistics and Care Quality Commission.'
 # Output CSV-W metadata (validation, transform and DSD).
 # Output dataset metadata separately for now.
 
@@ -397,8 +399,25 @@ with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
     metadata.write(scraper.generate_trig())
 
 # +
-#Path(os.getcwd()).name.lower()
-#dataset_path
+newTxt = ''
+
+info = json.load(open('info.json')) 
+mtp = info['transform']['columns']['Value']['measure'].replace('http://gss-data.org.uk/def/measure/','')
+mt = mtp.capitalize().replace('-',' ')
+mtpath = f'''"@id": "http://gss-data.org.uk/def/measure/{mtp}",'''
+
+with open("out/observations.csv-metadata.json") as fp: 
+    for line in fp: 
+        if mtpath in line.strip():
+            print(line)
+            newTxt = newTxt + line + '''\t"rdfs:label": "''' + mt + '''",\n'''
+        else:
+            newTxt += line
+ 
+
+f = open("out/observations.csv-metadata.json", "w")
+f.write(newTxt)
+f.close()
 
 # +
 #info = json.load(open('info.json')) 

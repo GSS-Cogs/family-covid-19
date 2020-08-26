@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 # coding: utf-8
+# %%
 
-# In[101]:
+# %%
 
 
 from gssutils import *
@@ -144,7 +145,7 @@ def infoNotes(notes):
         info.write(json.dumps(infoData, indent=4).replace('null', '"Not Applicable"'))
 
 
-# In[102]:
+# %%
 
 
 info = json.load(open('info.json'))
@@ -152,23 +153,19 @@ landingPage = info['landingPage']
 landingPage
 
 
-# In[103]:
-
-
-
-scraper = Scraper(landingPage)
+# %%
+#scraper = Scraper(landingPage)
+scraper = Scraper(seed="info.json")
 scraper.dataset.title = 'ONS Coronavirus and Homeworking in the UK'
 scraper
 
 
-# In[104]:
-
-
+# %%
 distribution = scraper.distributions[0]
 display(distribution)
 
 
-# In[105]:
+# %%
 
 
 trace = TransformTrace()
@@ -229,7 +226,7 @@ for tab in tabs:
         trace.store('Homeworking', tidy_sheet.topandas())
 
 
-# In[106]:
+# %%
 
 
 df = trace.combine_and_trace(datasetTitle, 'Homeworking').fillna('')
@@ -305,7 +302,7 @@ df.drop_duplicates().to_csv(out / 'observations.csv', index = False)
 df
 
 
-# In[107]:
+# %%
 
 
 notes = """

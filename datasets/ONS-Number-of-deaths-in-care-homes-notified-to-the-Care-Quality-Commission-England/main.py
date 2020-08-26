@@ -69,9 +69,9 @@ landingPage = info['landingPage']
 landingPage 
 # -
 
-#scraper = Scraper(landingPage) 
-scraper = Scraper(seed="info.json")
-scraper.distributions[0].title = "Number of deaths in care homes notified to the Care Quality Commission, England"
+scraper = Scraper(landingPage) 
+#scraper = Scraper(seed="info.json")
+#scraper.distributions[0].title = "Number of deaths in care homes notified to the Care Quality Commission, England"
 scraper
 
 distribution = scraper.distributions[0]

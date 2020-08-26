@@ -355,17 +355,18 @@ f.close()
 
 # +
 #scrape._dataset_id
-# -
 
-codelistcreation = ['Age'] 
-print(codelistcreation)
-print("-------------------------------------------------------")
-tidy = joined_dat
-codeclass = CSVCodelists()
-for cl in codelistcreation:
-    if cl in tidy.columns:
-        tidy[cl] = tidy[cl].str.replace("-"," ")
-        tidy[cl] = tidy[cl].str.capitalize()
-        codeclass.create_codelists(pd.DataFrame(tidy[cl]), 'codelists', scrape.dataset.family, Path(os.getcwd()).name.lower())
+# +
+#codelistcreation = ['Age'] 
+#print(codelistcreation)
+#print("-------------------------------------------------------")
+#tidy = joined_dat
+#codeclass = CSVCodelists()
+#for cl in codelistcreation:
+#    if cl in tidy.columns:
+#        tidy[cl] = tidy[cl].str.replace("-"," ")
+#        tidy[cl] = tidy[cl].str.capitalize()
+#        codeclass.create_codelists(pd.DataFrame(tidy[cl]), 'codelists', scrape.dataset.family, Path(os.getcwd()).name.lower())
+# -
 
 

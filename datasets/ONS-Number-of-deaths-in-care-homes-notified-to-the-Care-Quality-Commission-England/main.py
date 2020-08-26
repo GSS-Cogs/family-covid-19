@@ -389,7 +389,7 @@ scraper.dataset.comment = 'Provisional counts of deaths in care homes caused by 
 import os
 from urllib.parse import urljoin
 
-dataset_path = pathify(os.environ.get('JOB_NAME', 'gss_data/covid-19/' + Path(os.getcwd()).name)).lower() #+ '-' + pathify(csvName)
+dataset_path = pathify(os.environ.get('JOB_NAME', 'gss_data/covid-19/' + Path(os.getcwd()).name)).lower() 
 scraper.set_base_uri('http://gss-data.org.uk')
 scraper.set_dataset_id(dataset_path)
 #### scraper.dataset.title = 'ONS Number of deaths in care homes notified to the Care Quality Commission'
@@ -438,6 +438,6 @@ f.close()
 #        joined_dat[cl] = joined_dat[cl].str.capitalize()
 #        codeclass.create_codelists(pd.DataFrame(joined_dat[cl]), 'codelists', scraper.dataset.family, Path(os.getcwd()).name.lower())
 # -
-
+joined_dat.head(10)
 
 

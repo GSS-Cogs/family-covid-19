@@ -176,10 +176,10 @@ scrape.dataset.comment = 'Weekly death registrations in Northern Ireland'
 import os
 from urllib.parse import urljoin
 
-dataset_path = pathify(os.environ.get('JOB_NAME', 'gss_data/covid-19/' + Path(os.getcwd()).name))
+scrape.dataset.title = 'Weekly Deaths - Notification Date of Death including COVID-19'
+dataset_path = pathify(os.environ.get('JOB_NAME', 'gss_data/covid-19/' + scrape.dataset.title)) 
 scrape.set_base_uri('http://gss-data.org.uk')
 scrape.set_dataset_id(dataset_path)
-scrape.dataset.title = 'Weekly Deaths - Notification Date of Death including COVID-19'
 csvw_transform = CSVWMapping()
 csvw_transform.set_csv(out / csvName)
 csvw_transform.set_mapping(json.load(open('info.json')))
@@ -316,10 +316,11 @@ scrape.dataset.comment = 'Weekly death occurrances in Northern Ireland'
 import os
 from urllib.parse import urljoin
 
-dataset_path = pathify(os.environ.get('JOB_NAME', 'gss_data/covid-19/' + Path(os.getcwd()).name))
+scrape.dataset.title = 'Weekly Deaths - Date of Death including COVID-19'
+dataset_path = pathify(os.environ.get('JOB_NAME', 'gss_data/covid-19/' + scrape.dataset.title)) 
 scrape.set_base_uri('http://gss-data.org.uk')
 scrape.set_dataset_id(dataset_path)
-scrape.dataset.title = 'Weekly Deaths - Date of Death including COVID-19'
+
 csvw_transform = CSVWMapping()
 csvw_transform.set_csv(out / csvName)
 csvw_transform.set_mapping(json.load(open('info.json')))
@@ -356,19 +357,3 @@ with open("out/date-of-death-occurrences-covid-19-observations.csv-metadata.json
 f = open("out/date-of-death-occurrences-covid-19-observations.csv-metadata.json", "w")
 f.write(newTxt)
 f.close()
-
-# +
-#info = json.load(open('info.json')) 
-#codelistcreation = ['Location of Death'] 
-#print(codelistcreation)
-#print("-------------------------------------------------------")
-#tidy = joined_dat
-#codeclass = CSVCodelists()
-#for cl in codelistcreation:
-#    if cl in tidy.columns:
-#        tidy[cl] = tidy[cl].str.replace("-"," ")
-#        tidy[cl] = tidy[cl].str.capitalize()
-#        codeclass.create_codelists(pd.DataFrame(tidy[cl]), 'codelists', scrape.dataset.family, Path(os.getcwd()).name.lower())
-# -
-
-

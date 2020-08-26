@@ -370,6 +370,9 @@ del joined_dat['Unit']
 joined_dat['Value'] = pd.to_numeric(joined_dat['Value'], downcast='integer')
 # -
 
+joined_dat['Cause of Death'][joined_dat['Cause of Death'] == 'deaths-involving-covid-19'] = 'involving-covid-19'
+joined_dat['Cause of Death'].unique()
+
 # Output the data to CSV
 csvName = 'observations.csv'
 out = Path('out')

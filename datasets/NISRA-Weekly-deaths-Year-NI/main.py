@@ -149,7 +149,7 @@ joined_dat['Age'] = joined_dat['Age'].replace('85+','85 plus')
 joined_dat['Age'] = joined_dat['Age'].apply(pathify)
 
 joined_dat = joined_dat[['Period','Location of Death','Local Government District','Registered Death Type', 'Age','Sex','Marker','Value']]
-joined_dat.head(10)
+joined_dat['Age'].unique()
 
 # Output the data to CSV
 csvName = 'registered-date-of-death-covid-19-observations.csv'
@@ -209,12 +209,14 @@ with open("out/registered-date-of-death-covid-19-observations.csv-metadata.json"
             newTxt = newTxt + line + '''\t"rdfs:label": "''' + un + '''",\n'''
         else:
             newTxt += line
-            
-# -
+ 
 
 f = open("out/registered-date-of-death-covid-19-observations.csv-metadata.json", "w")
 f.write(newTxt)
 f.close()
+# -
+
+
 
 del joined_dat
 del all_dat[7]['Week of Death']
@@ -354,5 +356,16 @@ f.close()
 # +
 #scrape._dataset_id
 # -
+
+codelistcreation = ['Age'] 
+print(codelistcreation)
+print("-------------------------------------------------------")
+tidy = joined_dat
+codeclass = CSVCodelists()
+for cl in codelistcreation:
+    if cl in tidy.columns:
+        tidy[cl] = tidy[cl].str.replace("-"," ")
+        tidy[cl] = tidy[cl].str.capitalize()
+        codeclass.create_codelists(pd.DataFrame(tidy[cl]), 'codelists', scrape.dataset.family, Path(os.getcwd()).name.lower())
 
 

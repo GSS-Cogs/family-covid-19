@@ -1825,8 +1825,9 @@ csvName = 'covid-19-deaths-in-the-care-sector-observations-leading-cause-groupin
 out = Path('out')
 out.mkdir(exist_ok=True)
 joined_dat4.drop_duplicates().to_csv(out / csvName, index = False)
+# -
 
-# +
+"""
 scraper.dataset.family = 'covid-19'
 scraper.dataset.description = 'Deaths in the care sector for England and Wales by leasing cause groupings.\n ' + notes
 scraper.dataset.comment = 'Provisional counts of the number of deaths and age-standardised mortality rates involving the coronavirus (COVID-19) within the care sector'
@@ -1847,9 +1848,10 @@ csvw_transform.set_dataset_uri(urljoin(scraper._base_uri, f'data/{scraper._datas
 csvw_transform.write(out / f'{csvName}-metadata.json')
 with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
     metadata.write(scraper.generate_trig())
+"""
 
 
-# +
+"""
 newTxt = ''
 info = json.load(open('info.json')) 
 mtp = info['transform']['columns']['Value']['measure'].replace('http://gss-data.org.uk/def/measure/','')
@@ -1867,7 +1869,7 @@ with open(f"out/{csvName}-metadata.json") as fp:
 f = open(f"out/{csvName}-metadata.json", "w")
 f.write(newTxt)
 f.close()
-# -
+"""
 
 del joined_dat5['Measure Type']
 del joined_dat5['Unit']

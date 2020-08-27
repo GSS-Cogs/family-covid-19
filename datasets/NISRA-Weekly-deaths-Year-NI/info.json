@@ -30,8 +30,12 @@
                 "value": "http://purl.org/linked-data/sdmx/2009/code#sex-{sex}"
             },
             "Local Government District": {
-                "dimension": "http://purl.org/linked-data/sdmx/2009/dimension#refArea",
+                "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refArea",
                 "value": "http://statistics.data.gov.uk/id/statistical-geography/{local_government_district}"
+            },
+            "Marker": {
+                "attribute": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",
+                "value": "http://gss-data.org.uk/def/concept/marker/{marker}"
             },
             "Value": {
                 "unit": "http://gss-data.org.uk/def/concept/measurement-units/deaths",
@@ -39,6 +43,9 @@
                 "datatype": "float64"
             }
         }
+    },
+    "load": {
+        "publish": true
     },
     "sizingNotes": "Simple table structure with multiple dimensions and some footnotes.",
     "notes": "Data viz\n\nThe Northern Ireland weekly deaths statistics have been extended to include information relating to respiratory and COVID-19 related deaths.",

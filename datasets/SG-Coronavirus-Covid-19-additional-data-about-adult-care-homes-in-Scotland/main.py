@@ -277,7 +277,7 @@ joined_dat1['Period'] = joined_dat1['Period'].str.strip()
 #joined_dat1['Period'].unique()
 
 # %%
-joined_dat1 = joined_dat1.rename(columns = {'OBS' : 'Value'})
+joined_dat1 = joined_dat1.rename(columns = {'OBS' : 'Value', 'Measure': 'Test Outcome'})
 #joined_dat1.head(5)
 
 # %%

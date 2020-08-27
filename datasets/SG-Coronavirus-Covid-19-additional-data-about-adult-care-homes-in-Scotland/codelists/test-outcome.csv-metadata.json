@@ -1,7 +1,7 @@
 {
   "@context": "http://www.w3.org/ns/csvw",
   "@id": "http://gss-data.org.uk/data/gss_data/covid-19/sg-coronavirus-covid-19-additional-data-about-adult-care-homes-in-scotland#schema",
-  "url": "measure.csv",
+  "url": "test-outcome.csv",
   "tableSchema": {
     "columns": [
       {
@@ -30,7 +30,7 @@
         },
         "required": false,
         "propertyUrl": "skos:broader",
-        "valueUrl": "http://gss-data.org.uk/data/gss_data/covid-19/sg-coronavirus-covid-19-additional-data-about-adult-care-homes-in-scotland#concept/measure/{parent_notation}"
+        "valueUrl": "http://gss-data.org.uk/data/gss_data/covid-19/sg-coronavirus-covid-19-additional-data-about-adult-care-homes-in-scotland#concept/test-outcome/{parent_notation}"
       },
       {
         "titles": "Sort Priority",
@@ -54,16 +54,16 @@
       {
         "virtual": true,
         "propertyUrl": "skos:inScheme",
-        "valueUrl": "http://gss-data.org.uk/data/gss_data/covid-19/sg-coronavirus-covid-19-additional-data-about-adult-care-homes-in-scotland#scheme/measure"
+        "valueUrl": "http://gss-data.org.uk/data/gss_data/covid-19/sg-coronavirus-covid-19-additional-data-about-adult-care-homes-in-scotland#scheme/test-outcome"
       }
     ],
     "primaryKey": "notation",
-    "aboutUrl": "http://gss-data.org.uk/data/gss_data/covid-19/sg-coronavirus-covid-19-additional-data-about-adult-care-homes-in-scotland#concept/measure/{notation}"
+    "aboutUrl": "http://gss-data.org.uk/data/gss_data/covid-19/sg-coronavirus-covid-19-additional-data-about-adult-care-homes-in-scotland#concept/test-outcome/{notation}"
   },
   "prov:hadDerivation": {
-    "@id": "http://gss-data.org.uk/data/gss_data/covid-19/sg-coronavirus-covid-19-additional-data-about-adult-care-homes-in-scotland#scheme/measure",
+    "@id": "http://gss-data.org.uk/data/gss_data/covid-19/sg-coronavirus-covid-19-additional-data-about-adult-care-homes-in-scotland#scheme/test-outcome",
     "@type": "skos:ConceptScheme",
-    "rdfs:label": "Measure",
-    "skos:hasTopConcept": "http://gss-data.org.uk/data/gss_data/covid-19/sg-coronavirus-covid-19-additional-data-about-adult-care-homes-in-scotland#concept/measure/all"
+    "rdfs:label": "test-outcome",
+    "skos:hasTopConcept": "http://gss-data.org.uk/data/gss_data/covid-19/sg-coronavirus-covid-19-additional-data-about-adult-care-homes-in-scotland#concept/test-outcome/all"
   }
 }

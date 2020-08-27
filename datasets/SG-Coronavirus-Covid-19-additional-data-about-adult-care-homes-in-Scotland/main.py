@@ -336,7 +336,7 @@ scraper.dataset.comment = 'Testing for COVID-19 in adult care homes in Scotland:
 import os
 from urllib.parse import urljoin
 
-dataset_path = pathify(os.environ.get('JOB_NAME', 'gss_data/covid-19/' + Path(os.getcwd()).name)) + '-' + pathify(csvName)
+dataset_path = pathify(os.environ.get('JOB_NAME', 'gss_data/covid-19/' + Path(os.getcwd()).name)) 
 scraper.set_base_uri('http://gss-data.org.uk')
 scraper.set_dataset_id(dataset_path)
 #scraper.dataset.title = 'SG Covid-19 additional data about adult care homes - Suspected COVID-19 Cases'

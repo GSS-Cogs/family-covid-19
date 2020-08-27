@@ -31,8 +31,8 @@
                 "datatype": "integer"
             },
             "Value": {
-                "unit": "http://gss-data.org.uk/def/concept/measurement-units/percent",
-                "measure": "http://gss-data.org.uk/def/measure/price-indice-change",
+                "unit": "http://gss-data.org.uk/def/concept/measurement-units/price-indice-change",
+                "measure": "http://gss-data.org.uk/def/measure/percent",
                 "datatype": "float64"
             }
         },

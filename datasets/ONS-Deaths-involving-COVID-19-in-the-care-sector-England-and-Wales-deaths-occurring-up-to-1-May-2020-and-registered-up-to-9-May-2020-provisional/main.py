@@ -1737,7 +1737,7 @@ joined_dat1and3.drop_duplicates().to_csv(out / csvName, index = False)
 # +
 scraper.dataset.family = 'covid-19'
 scraper.dataset.description = 'Deaths involving COVID-19 in the care sector for England and Wales.\n ' + notes
-
+scraper.dataset.comment = 'Provisional counts of the number of deaths and age-standardised mortality rates involving the coronavirus (COVID-19) within the care sector'
 # Output CSV-W metadata (validation, transform and DSD).
 # Output dataset metadata separately for now.
 
@@ -1755,8 +1755,27 @@ csvw_transform.set_dataset_uri(urljoin(scraper._base_uri, f'data/{scraper._datas
 csvw_transform.write(out / f'{csvName}-metadata.json')
 with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
     metadata.write(scraper.generate_trig())
-# -
 
+
+# +
+newTxt = ''
+info = json.load(open('info.json')) 
+mtp = info['transform']['columns']['Value']['measure'].replace('http://gss-data.org.uk/def/measure/','')
+mt = mtp.capitalize().replace('-',' ')
+mtpath = f'''"@id": "http://gss-data.org.uk/def/measure/{mtp}",'''
+
+with open(f"out/{csvName}-metadata.json") as fp: 
+    for line in fp: 
+        if mtpath in line.strip():
+            print(line)
+            newTxt = newTxt + line + '''\t"rdfs:label": "''' + mt + '''",\n'''
+        else:
+            newTxt += line
+ 
+f = open(f"out/{csvName}-metadata.json", "w")
+f.write(newTxt)
+f.close()
+# -
 
 del joined_dat2['Measure Type']
 del joined_dat2['Unit']
@@ -1810,7 +1829,7 @@ joined_dat4.drop_duplicates().to_csv(out / csvName, index = False)
 # +
 scraper.dataset.family = 'covid-19'
 scraper.dataset.description = 'Deaths in the care sector for England and Wales by leasing cause groupings.\n ' + notes
-
+scraper.dataset.comment = 'Provisional counts of the number of deaths and age-standardised mortality rates involving the coronavirus (COVID-19) within the care sector'
 # Output CSV-W metadata (validation, transform and DSD).
 # Output dataset metadata separately for now.
 
@@ -1828,8 +1847,27 @@ csvw_transform.set_dataset_uri(urljoin(scraper._base_uri, f'data/{scraper._datas
 csvw_transform.write(out / f'{csvName}-metadata.json')
 with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
     metadata.write(scraper.generate_trig())
-# -
 
+
+# +
+newTxt = ''
+info = json.load(open('info.json')) 
+mtp = info['transform']['columns']['Value']['measure'].replace('http://gss-data.org.uk/def/measure/','')
+mt = mtp.capitalize().replace('-',' ')
+mtpath = f'''"@id": "http://gss-data.org.uk/def/measure/{mtp}",'''
+
+with open(f"out/{csvName}-metadata.json") as fp: 
+    for line in fp: 
+        if mtpath in line.strip():
+            print(line)
+            newTxt = newTxt + line + '''\t"rdfs:label": "''' + mt + '''",\n'''
+        else:
+            newTxt += line
+ 
+f = open(f"out/{csvName}-metadata.json", "w")
+f.write(newTxt)
+f.close()
+# -
 
 del joined_dat5['Measure Type']
 del joined_dat5['Unit']

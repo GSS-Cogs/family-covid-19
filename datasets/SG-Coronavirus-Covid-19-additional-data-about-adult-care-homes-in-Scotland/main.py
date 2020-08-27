@@ -282,7 +282,7 @@ joined_dat1 = joined_dat1.rename(columns = {'OBS' : 'Value', 'Measure': 'Test Ou
 
 # %%
 joined_dat1['People Tested'] = joined_dat1['People Tested'].apply(pathify) 
-joined_dat1['Measure'] = joined_dat1['Measure'].apply(pathify) 
+joined_dat1['Test Outcome'] = joined_dat1['Test Outcome'].apply(pathify) 
 
 # %%
 #joined_dat1['Measure'].unique()

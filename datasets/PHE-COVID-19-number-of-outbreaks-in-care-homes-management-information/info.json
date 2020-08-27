@@ -35,8 +35,8 @@
                 "datatype": "integer"
             },
             "Value": {
-                "unit": "http://gss-data.org.uk/def/concept/measurement-units/count",
-                "measure": "http://gss-data.org.uk/def/measure/covid-19-outbreaks",
+                "unit": "http://gss-data.org.uk/def/concept/measurement-units/outbreaks",
+                "measure": "http://gss-data.org.uk/def/measure/count",
                 "datatype": "integer"
             }
         },

@@ -291,14 +291,15 @@ P Weekly published data are provisional.
 4 The 'Other' category includes deaths at a residential address which was not the usual address of the deceased and all other places.
 """
 
-# Output the data to CSV
-csvName = 'date-of-death-occurrences-covid-19-observations.csv'
-out = Path('out')
-out.mkdir(exist_ok=True)
-joined_dat.drop_duplicates().to_csv(out / csvName, index = False)
-
 # +
+# Output the data to CSV
+#csvName = 'date-of-death-occurrences-covid-19-observations.csv'
+#out = Path('out')
+#out.mkdir(exist_ok=True)
+#joined_dat.drop_duplicates().to_csv(out / csvName, index = False)
+# -
 
+"""
 scrape.dataset.family = 'covid-19'
 scrape.dataset.description = 'NISRA COVID-19 Date of Death Occurrences Including COVID-19.\n ' + notes
 scrape.dataset.comment = 'Weekly death occurrances in Northern Ireland'
@@ -339,6 +340,7 @@ with open("out/date-of-death-occurrences-covid-19-observations.csv-metadata.json
 f = open("out/date-of-death-occurrences-covid-19-observations.csv-metadata.json", "w")
 f.write(newTxt)
 f.close()
+"""
 
 
 # +

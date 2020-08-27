@@ -31,9 +31,9 @@
                 "dimension": "http://purl.org/linked-data/sdmx/2009/dimension#refArea",
                 "value": "http://statistics.data.gov.uk/id/statistical-geography/{geography_code}"
             },
-            "NHS Board Code": {
+            "NHS Board": {
                 "dimension": "http://purl.org/linked-data/sdmx/2009/dimension#refArea",
-                "value": "http://statistics.data.gov.uk/id/statistical-geography/{nhs_board_code}"
+                "value": "http://statistics.data.gov.uk/id/statistical-geography/{nhs_board}"
             },
             "Value": {
                 "unit": "http://gss-data.org.uk/def/concept/measurement-units/tests",

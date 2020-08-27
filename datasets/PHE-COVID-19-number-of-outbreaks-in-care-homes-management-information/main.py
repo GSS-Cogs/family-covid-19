@@ -352,8 +352,9 @@ with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
 #        joined_dat[cl] = joined_dat[cl].str.replace("-"," ")
 #        joined_dat[cl] = joined_dat[cl].str.capitalize()
 #        codeclass.create_codelists(pd.DataFrame(joined_dat[cl]), 'codelists', scrape.dataset.family, Path(os.getcwd()).name.lower())
+# -
 
-# +
+"""
 newTxt = ''
 info = json.load(open('info.json')) 
 mtp = info['transform']['columns']['Value']['measure'].replace('http://gss-data.org.uk/def/measure/','')
@@ -371,6 +372,6 @@ with open("out/observations.csv-metadata.json") as fp:
 f = open("out/observations.csv-metadata.json", "w")
 f.write(newTxt)
 f.close()
-# -
+"""
 
 

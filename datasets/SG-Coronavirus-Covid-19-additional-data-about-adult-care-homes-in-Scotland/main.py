@@ -317,7 +317,7 @@ dtes[8] = (dtes[5] + dtes[2].dt.strftime('%Y-%m-%dT%H:%M:%S') + '/P' + dtes[4] +
 
 #dtes
 joined_dat1['Period'] = dtes[8]
-#joined_dat1['Period'].unique()
+joined_dat1['Value'] = joined_dat1['Value'].astype(int)
 
 # %%
 # Output the data to CSV

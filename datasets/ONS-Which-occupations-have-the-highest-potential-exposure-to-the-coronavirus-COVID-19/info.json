@@ -55,6 +55,9 @@
             "Priority"
         ]
     },
+        "load": {
+        "publish": true
+    },
     "sizingNotes": "Simple table structure, straightforward dimensions and few footnotes.",
     "notes": "",
     "datasetNotes": [

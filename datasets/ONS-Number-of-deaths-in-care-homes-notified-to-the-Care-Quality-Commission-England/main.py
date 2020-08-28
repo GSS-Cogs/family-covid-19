@@ -400,8 +400,9 @@ csvw_transform.set_dataset_uri(urljoin(scraper._base_uri, f'data/{scraper._datas
 csvw_transform.write(out / f'{csvName}-metadata.json')
 with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
     metadata.write(scraper.generate_trig())
+# -
 
-# +
+"""
 newTxt = ''
 
 info = json.load(open('info.json')) 
@@ -421,6 +422,7 @@ with open("out/observations.csv-metadata.json") as fp:
 f = open("out/observations.csv-metadata.json", "w")
 f.write(newTxt)
 f.close()
+"""
 
 # +
 #info = json.load(open('info.json')) 
@@ -437,7 +439,8 @@ f.close()
 #        joined_dat[cl] = joined_dat[cl].str.replace("-"," ")
 #        joined_dat[cl] = joined_dat[cl].str.capitalize()
 #        codeclass.create_codelists(pd.DataFrame(joined_dat[cl]), 'codelists', scraper.dataset.family, Path(os.getcwd()).name.lower())
+# +
+#joined_dat.head(10)
 # -
-joined_dat.head(10)
 
 

@@ -148,7 +148,7 @@ for tab in tabs:
         trace.store("combined_dataframe", tidy_sheet.topandas())
         
         
-        
+
 
 # +
 df = trace.combine_and_trace(datasetTitle, "combined_dataframe")
@@ -185,6 +185,9 @@ for column in tidy:
 
 del tidy['Measure Type']
 del tidy['Unit']
+
+tidy['Marker'] = tidy['Marker'].str.lower()
+tidy.head(60)
 
 # Notes taken from tab: Vacancies
 

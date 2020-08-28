@@ -207,7 +207,8 @@ trace.output()
 #        tidy[cl] = tidy[cl].str.replace("-"," ")
 #        tidy[cl] = tidy[cl].str.capitalize()
 #        codeclass.create_codelists(pd.DataFrame(tidy[cl]), 'codelists', scrape.dataset.family, Path(os.getcwd()).name.lower())
-# +
+# -
+"""
 newTxt = ''
 
 dsname = 'ons-online-price-changes-for-high-demand-products'
@@ -223,13 +224,14 @@ with open("out/observations.csv-metadata.json") as fp:
             newTxt = newTxt + line + '''\t"rdfs:label": "''' + mt + '''",\n'''
         else:
             newTxt += line
-            
+"""           
+
+
+# +
+#f = open("out/observations.csv-metadata.json", "w")
+#f.write(newTxt)
+#f.close()
 # -
-
-
-f = open("out/observations.csv-metadata.json", "w")
-f.write(newTxt)
-f.close()
 
 
 

@@ -187,7 +187,8 @@ csvw_transform.set_dataset_uri(urljoin(scrape._base_uri, f'data/{scrape._dataset
 csvw_transform.write(out / f'{csvName}-metadata.json')
 with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
     metadata.write(scrape.generate_trig())
-# +
+# -
+"""
 newTxt = ''
 
 info = json.load(open('info.json')) 
@@ -206,7 +207,7 @@ with open("out/registered-date-of-death-covid-19-observations.csv-metadata.json"
 f = open("out/registered-date-of-death-covid-19-observations.csv-metadata.json", "w")
 f.write(newTxt)
 f.close()
-# -
+"""
 del joined_dat
 del all_dat[7]['Week of Death']
 del all_dat[7]['Covid-19 Deaths']

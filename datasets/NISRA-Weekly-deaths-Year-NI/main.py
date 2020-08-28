@@ -124,7 +124,17 @@ for t in all_dat:
 
 joined_dat = pd.concat([all_dat[0], all_dat[1], all_dat[2], all_dat[3], all_dat[4], all_dat[5], all_dat[6]], sort=True)
 
-
+joined_dat[joined_dat['Registered Death Type'] == 'covid-19-deaths-registered'] = 'covid-19-registered-deaths'
+joined_dat[joined_dat['Marker'] == 'provisional'] = 'Provisional'
+joined_dat = joined_dat.drop_duplicates()
+t = joined_dat[joined_dat['Value'] == 1.0]
+t = t[t['Age'] == 'All']
+t = t[t['Registered Death Type'] == 'covid-19-registered-deaths']
+t = t[t['Local Government District'] == 'total']
+t = t[t['Location of Death'] == 'all']
+t = t[t['Gender'] == 'total']
+t.head(60)
+#joined_dat['Registered Death Type'].unique()
 
 joined_dat['Local Government District'] = joined_dat['Local Government District'].apply(pathify)
 #joined_dat['Measure Type'] = joined_dat['Measure Type'].apply(pathify)
@@ -149,7 +159,7 @@ joined_dat['Age'] = joined_dat['Age'].replace('85+','85 plus')
 joined_dat['Age'] = joined_dat['Age'].apply(pathify)
 
 joined_dat = joined_dat[['Period','Location of Death','Local Government District','Registered Death Type', 'Age','Sex','Marker','Value']]
-joined_dat = joined_dat.drop_duplicates()
+
 
 # Output the data to CSV
 csvName = 'registered-date-of-death-covid-19-observations.csv'

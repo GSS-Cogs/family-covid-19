@@ -108,7 +108,7 @@ with open(out / 'observations.csv-metadata.trig', 'wb') as metadata:
 
 info = json.load(open('info.json')) 
 
-# +
+"""
 newTxt = ''
 
 
@@ -124,11 +124,13 @@ with open("out/observations.csv-metadata.json") as fp:
             newTxt = newTxt + line + '''\t"rdfs:label": "''' + mt + '''",\n'''
         else:
             newTxt += line
-# -
+"""
 
-f = open("out/observations.csv-metadata.json", "w")
-f.write(newTxt)
-f.close()
+# +
+#f = open("out/observations.csv-metadata.json", "w")
+#f.write(newTxt)
+#f.close()
+# -
 
 
 

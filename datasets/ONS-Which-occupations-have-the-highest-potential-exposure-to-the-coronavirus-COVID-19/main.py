@@ -156,7 +156,7 @@ tidy = df[['UK SOC 2010 Code', 'Occupation','Total in employment', 'Median hourl
 
 trace.Occupation_title("Remove any prefixed whitespace from all values in column and pathify")
 for column in tidy:
-    if column in ('Occupation'):
+    if column in ('Occupation', 'Working Condition Category'):
         tidy[column] = tidy[column].str.lstrip()
         tidy[column] = tidy[column].str.rstrip()
         tidy[column] = tidy[column].map(lambda x: pathify(x))
@@ -178,12 +178,24 @@ df.drop(df[df['Measure type'] == 'Proximity'].index, inplace=True)
 del tidy['Measure type']
 del tidy['Unit']
 
+notes = """Some occupations are excluded due to no exposure and/or proximity measures being available
+Please note the exposure to disease and proximity to others data was calculated by O*NET prior to the coronavirus (COVID-19) outbreak, therefore will not reflect any changes to working practices implemented since the outbreak.
+The BAME group includes: Mixed/Multiple ethnic groups; Indian; Pakistani; Bangladeshi; Chinese; any other Asian background; Black/African/Caribbean/Black British
+This measure of pay comes from the Annual Survey of Hours and Earnings (ASHE). It is hourly earnings excluding overtime. It's calculated as (gross pay excluding overtime/basic paid hours). The pay period in question was not affected by absence. It includes people aged 16+ both full-time and part-time.
+For the percentage of women in each occupation, figures have been grouped together for percentages greater than 95% for disclosure reasons
+
+please follow link for more information on how The standardised exposure to disease or infections measure is defined:
+https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/articles/whichoccupationshavethehighestpotentialexposuretothecoronaviruscovid19/2020-05-11
+"""
+
 # +
 #SET UP OUTPUT FOLDER AND OUTPUT DATA TO CSV
 csvName = 'observations.csv'
 out = Path('out')
 out.mkdir(exist_ok=True)
 tidy.drop_duplicates().to_csv(out / csvName, index = False)
+scrape.dataset.family = 'covid-19'
+scrape.dataset.comment = notes
 
 # CREATE MAPPING CLASS INSTANCE, SET UP VARIABLES AND WRITE FILES
 csvw_transform = CSVWMapping()
@@ -212,40 +224,13 @@ trace.output()
 #    if cl in tidy.columns:
 #        tidy[cl] = tidy[cl].str.replace("-"," ")
 #        tidy[cl] = tidy[cl].str.capitalize()
-#        codeclass.create_codelists(pd.DataFrame(tidy[cl]), 'codelists', scrape.dataset.family, Path(os.getcwd()).name.lower())
+#        codeclass.create_codelists(pd.DataFrame(tidy[cl]), 'codelists', 'covid-19', Path(os.getcwd()).name.lower())
 # -
 
 
 
 
 # Notes taken from Tables / https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/articles/whichoccupationshavethehighestpotentialexposuretothecoronaviruscovid19/2020-05-11
-
-notes = """https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/articles/whichoccupationshavethehighestpotentialexposuretothecoronaviruscovid19/2020-05-11
-Some occupations are excluded due to no exposure and/or proximity measures being available
-Please note the exposure to disease and proximity to others data was calculated by O*NET prior to the coronavirus (COVID-19) outbreak, therefore will not reflect any changes to working practices implemented since the outbreak.
-The BAME group includes: Mixed/Multiple ethnic groups; Indian; Pakistani; Bangladeshi; Chinese; any other Asian background; Black/African/Caribbean/Black British
-This measure of pay comes from the Annual Survey of Hours and Earnings (ASHE). It is hourly earnings excluding overtime. It's calculated as (gross pay excluding overtime/basic paid hours). The pay period in question was not affected by absence. It includes people aged 16+ both full-time and part-time.
-For the percentage of women in each occupation, figures have been grouped together for percentages greater than 95% for disclosure reasons
-
-The standardised exposure to disease or infections measure is defined by:
-0 – Never
-25 – Once a year or more but not every month
-50 – Once a month or more but not every week
-75 – Once a week or more but not every day
-100 – Every day
-please follow link for more information. 
-https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/articles/whichoccupationshavethehighestpotentialexposuretothecoronaviruscovid19/2020-05-11
-
-"""
-
-
-
-
-
-
-
-
-
 
 
 

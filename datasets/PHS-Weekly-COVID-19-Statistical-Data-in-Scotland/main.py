@@ -531,7 +531,7 @@ for distro_title in [x.title for x in scraper.distributions]:
     
     # ----- IMPORTANT -----
     # uncomment the below to ouput the before as well as the after (these ones are confusing, it helps a lot)
-    df.to_csv(out / "{}_OLD.csv".format(pathify(otitle.strip())), index=False)
+    #df.to_csv(out / "{}_OLD.csv".format(pathify(otitle.strip())), index=False)
     
     # Capture any comments for the spec
     comments[distro_title] = []

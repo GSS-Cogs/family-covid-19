@@ -127,7 +127,7 @@ for t in all_dat:
 joined_dat = pd.concat([all_dat[0], all_dat[1], all_dat[2], all_dat[3], all_dat[4], all_dat[5], all_dat[6]], sort=True)
 
 joined_dat['Registered Death Type'][joined_dat['Registered Death Type'] == 'covid-19-deaths-registered'] = 'covid-19-registered-deaths'
-joined_dat['Marker'][joined_dat['Marker'] == 'provisional'] = 'Provisional'
+joined_dat['Marker'][joined_dat['Marker'] == 'Provisional'] = 'provisional'
 # Lots of duplicates that are not being removed when outputting as CSV but this seems to work
 joined_dat = joined_dat.drop_duplicates()
 # Getting duplicate rows but with differenct Marker values, which are not counted during tests in Jenkins. removing and keeping last row

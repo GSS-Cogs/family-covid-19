@@ -15,6 +15,41 @@
     "transform": {
         "airtable": "rec5JLgajkliNNDm7",
         "main_issue": 16,
+         "columns": {
+            "UK SOC 2010 Code": {
+                "attribute": "http://gss-data.org.uk/def/attribute/uk-soc-2010-code",
+                "datatype": "integer"
+            },
+            "Total in employment": {
+                "attribute": "http://gss-data.org.uk/def/attribute/total-in-employment",
+                "datatype": "double"
+            },
+            "Median hourly pay": {
+                "attribute": "http://gss-data.org.uk/def/attribute/median-hourly-pay",
+                "datatype": "double"
+            },
+            "Percentage Workforce Female": {
+                "attribute": "http://gss-data.org.uk/def/attribute/percentage-workforce-female",
+                "datatype": "double"
+            },
+            "Percentage Workforce Aged 55plus": {
+                "attribute": "http://gss-data.org.uk/def/attribute/percentage-workforce-aged-55plus",
+                "datatype": "double"
+            },
+            "Percentage Workforce BAME": {
+                "attribute": "http://gss-data.org.uk/def/attribute/percentage-workforce-bame",
+                "datatype": "double"
+            },             
+            "Value": {
+                "unit": "http://gss-data.org.uk/def/concept/measurement-units/standardised-scale",
+                "measure": "http://gss-data.org.uk/def/measure/exposure",
+                "datatype": "double"
+            }
+        },
+        "codelists": [
+            "Occupation",
+            "Working Condition Category"
+        ],
         "stage": [
             "To Do",
             "Priority"

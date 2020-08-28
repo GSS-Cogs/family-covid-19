@@ -73,7 +73,7 @@
 		If not already in the metadata add link to report/methodology:
 		https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/articles/whichoccupationshavethehighestpotentialexposuretothecoronaviruscovid19/2020-05-11
 		Also add the footnotes to the metadata
-		
+
 
 #### Table Structure
 
@@ -83,7 +83,7 @@
 
 		Which occupations have the highest potential exposure to the coronavirus COVID-19
 
-	
+
 #### Sheet: Total workforce population
 
 		Remove column 'Occupation Title'

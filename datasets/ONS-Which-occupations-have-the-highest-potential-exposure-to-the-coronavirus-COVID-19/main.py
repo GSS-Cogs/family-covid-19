@@ -10,6 +10,8 @@ import pandas as pd
 import json
 import re
 from datetime import datetime
+from urllib.parse import urljoin
+import os
 
 def left(s, amount):
     return s[:amount]
@@ -110,7 +112,7 @@ trace.Percentage_of_the_workforce_that_are_aged_55_plus('Percentage of the workf
 workforce_bame = cell.shift(8,3).expand(DOWN).is_not_blank()
 trace.Percentage_of_the_workforce_that_are_BAME('Percentage of the workforce that are BAME given at cell range: {}', var = excelRange(workforce_bame))
 
-unit = 'standardised to a scale'
+unit = 'Standardised Scale'
 trace.Unit('Hardcoded as : standardised to a scale')
 trace.Unit("Information regarding The standardised exposure to disease / infections measure found here: https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/articles/whichoccupationshavethehighestpotentialexposuretothecoronaviruscovid19/2020-05-11 ")
 
@@ -118,13 +120,14 @@ observations = measure_type.fill(DOWN).is_not_blank()
 
 dimensions = [
     HDim(soc_codes, 'UK SOC 2010 Code', DIRECTLY, LEFT),
-    HDim(occupation_title, 'Occupation title', DIRECTLY, LEFT),
+    HDim(occupation_title, 'Occupation', DIRECTLY, LEFT),
     HDim(measure_type, 'Measure type', DIRECTLY, ABOVE),
+    HDim(measure_type, 'Working Condition Category', DIRECTLY, ABOVE),
     HDim(total_employment, 'Total in employment', DIRECTLY, RIGHT),
-    HDim(median_hourly_pay, 'Median hourly pay (£)', DIRECTLY, RIGHT),
-    HDim(workforce_female, 'Percentage of the workforce that are female', DIRECTLY, RIGHT),
-    HDim(workforce_55_plus, 'Percentage of the workforce that are aged 55+', DIRECTLY, RIGHT),
-    HDim(workforce_bame, 'Percentage of the workforce that are BAME', DIRECTLY, RIGHT),
+    HDim(median_hourly_pay, 'Median hourly pay', DIRECTLY, RIGHT),
+    HDim(workforce_female, 'Percentage Workforce Female', DIRECTLY, RIGHT),
+    HDim(workforce_55_plus, 'Percentage Workforce Aged 55plus', DIRECTLY, RIGHT),
+    HDim(workforce_bame, 'Percentage Workforce BAME', DIRECTLY, RIGHT),
     HDimConst('Unit', unit),
 ]
 tidy_sheet = ConversionSegment(tab, dimensions, observations)
@@ -136,6 +139,9 @@ df = trace.combine_and_trace(datacube_name, "combined_dataframe")
 trace.add_column("Value")
 trace.multi([ "Value"], "Rename databaker columns OBS to Value")
 df.rename(columns={'OBS' : 'Value'}, inplace=True)
+df["UK SOC 2010 Code"] = pd.to_numeric(df["UK SOC 2010 Code"])
+df["UK SOC 2010 Code"] = df["UK SOC 2010 Code"].astype(int)
+df = df.replace({'Measure type' : {'Proximity to others' : 'Proximity', 'Exposure to disease' : 'Exposure'}})
 # -
 
 from IPython.core.display import HTML
@@ -145,12 +151,74 @@ for col in df:
         display(HTML(f"<h2>{col}</h2>"))
         display(df[col].cat.categories) 
 
-tidy = df[['UK SOC 2010 Code', 'Occupation title', 'Total in employment', 'Median hourly pay (£)', 'Percentage of the workforce that are female', 'Percentage of the workforce that are aged 55+', 'Percentage of the workforce that are BAME', 'Measure type', 'Unit', 'Value']]
+# +
+tidy = df[['UK SOC 2010 Code', 'Occupation','Total in employment', 'Median hourly pay', 'Percentage Workforce Female', 'Percentage Workforce Aged 55plus', 'Percentage Workforce BAME', 'Working Condition Category', 'Measure type', 'Unit', 'Value']]
+
+trace.Occupation_title("Remove any prefixed whitespace from all values in column and pathify")
+for column in tidy:
+    if column in ('Occupation'):
+        tidy[column] = tidy[column].str.lstrip()
+        tidy[column] = tidy[column].str.rstrip()
+        tidy[column] = tidy[column].map(lambda x: pathify(x))
+
+
+# -
+
+
+# ________________________________________________________________________
+# REMOVING OBS WITH MEASURETYPE "PROXIMITY TO OTHERS" FOR NOW DUE TO NOT CURRENTLY BEING ABLE TO HANDEL MULTPLE MEASURE TYPES. WILL NEED TO BE ADDED BACK IN. 
+# _________________________________________________________________________
+
+df.drop(df[df['Measure type'] == 'Proximity'].index, inplace=True)
+
+
+# _______________________________________________________________________________________________________________
+
+#Removing columns as they are defined in info.json 
+del tidy['Measure type']
+del tidy['Unit']
+
+# +
+#SET UP OUTPUT FOLDER AND OUTPUT DATA TO CSV
+csvName = 'observations.csv'
+out = Path('out')
+out.mkdir(exist_ok=True)
+tidy.drop_duplicates().to_csv(out / csvName, index = False)
+
+# CREATE MAPPING CLASS INSTANCE, SET UP VARIABLES AND WRITE FILES
+csvw_transform = CSVWMapping()
+csvw_transform.set_csv(out / csvName)
+csvw_transform.set_mapping(json.load(open('info.json')))
+csvw_transform.set_dataset_uri(urljoin(scrape._base_uri, f'data/{scrape._dataset_id}'))
+csvw_transform.write(out / f'{csvName}-metadata.json')
+
+# CREATE AND OUTPUT TRIG FILE
+with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
+    metadata.write(scrape.generate_trig())
+# -
+trace.output()
+#tidy
+
+# +
+info = json.load(open('info.json')) 
+codelistcreation = info['transform']['codelists'] 
+print(codelistcreation)
+print("-------------------------------------------------------")
+
+codeclass = CSVCodelists()
+for cl in codelistcreation:
+    if cl in tidy.columns:
+        tidy[cl] = tidy[cl].str.replace("-"," ")
+        tidy[cl] = tidy[cl].str.capitalize()
+        codeclass.create_codelists(pd.DataFrame(tidy[cl]), 'codelists', scrape.dataset.family, Path(os.getcwd()).name.lower())
+# -
+
+
 
 
 # Notes taken from Tables / https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/articles/whichoccupationshavethehighestpotentialexposuretothecoronaviruscovid19/2020-05-11
 
-notes = """
+notes = """https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/articles/whichoccupationshavethehighestpotentialexposuretothecoronaviruscovid19/2020-05-11
 Some occupations are excluded due to no exposure and/or proximity measures being available
 Please note the exposure to disease and proximity to others data was calculated by O*NET prior to the coronavirus (COVID-19) outbreak, therefore will not reflect any changes to working practices implemented since the outbreak.
 The BAME group includes: Mixed/Multiple ethnic groups; Indian; Pakistani; Bangladeshi; Chinese; any other Asian background; Black/African/Caribbean/Black British
@@ -168,71 +236,60 @@ https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemplo
 
 """
 
-# +
-out = Path('out')
-out.mkdir(exist_ok=True)
-scrape.dataset.comment = notes
-tidy.drop_duplicates().to_csv(out / 'observations.csv', index = False)
-scrape.dataset.family = 'covid-19'
 
-trace.output()
-tidy
 
-# -
+
+
+
+
+
+
+
+
 
 # #### Sheet : Total workforce data
+#
+# COMMENTED OUT FOR NOW, ONLY 3 OBSERVATIONS AND THEY ARE DERRIABLE FROM SHEET ABOVE 
 
-# +
-tab = tabs['Total_workforce_population']
-datacube_name = "Which occupations have the highest potential exposure to the coronavirus (COVID-19)?"
-columns=['Occupation title', 'Workforce category',  'Unit', 'Measure type']
-trace.start(datacube_name, tab, columns, scrape.distributions[0].downloadURL)
+# tab = tabs['Total_workforce_population']
+# datacube_name = "Which occupations have the highest potential exposure to the coronavirus (COVID-19)?"
+# columns=['Occupation title', 'Workforce category',  'Unit', 'Measure type']
+# trace.start(datacube_name, tab, columns, scrape.distributions[0].downloadURL)
+#
+# cell = tab.filter(contains_string('Total workforce population'))
+# cell.assert_one()
+#
+# workforce_cat = cell.shift(1,-1).expand(RIGHT).is_not_blank()
+# trace.Workforce_category('Workforce category given at cell range: {}', var = excelRange(workforce_cat))
+#
+# unit = 'Percent'
+# trace.Unit('Hardcoded as : Percent')
+# measure_type = 'Percentage'
+# trace.Unit('Hardcoded as : Percentage')
+#
+# observations = workforce_cat.fill(DOWN).is_not_blank()
+# dimensions = [
+#     HDim(workforce_cat, 'Workforce Category', DIRECTLY, ABOVE),
+#     HDimConst('Measure type', measure_type),
+#     HDimConst('Unit', unit),
+# ]
+# tidy_sheet = ConversionSegment(tab, dimensions, observations)
+# trace.with_preview(tidy_sheet)
+# #savepreviewhtml(tidy_sheet) 
+# trace.store("combined_dataframe_2", tidy_sheet.topandas())
+#
+# df = trace.combine_and_trace(datacube_name, "combined_dataframe_2")
+# trace.add_column("Value")
+# trace.multi([ "Value"], "Rename databaker columns OBS to Value")
+# df.rename(columns={'OBS' : 'Value'}, inplace=True)
+# df = df.replace({'Workforce Category' : {'Percentage of the workforce that are female(%)' : 'Females', 
+#                                    'Percentage of the workforce that are BAME (%)' : 'BAME',
+#                                    'Percentage of the workforce that are aged 55+ (%)': 'Aged 55plus'}})
+#
+#
+# tidy = df[['Workforce Category', 'Measure type', 'Unit', 'Value']]
 
-cell = tab.filter(contains_string('Total workforce population'))
-cell.assert_one()
 
-occupation_title = cell
-trace.Occupation_title('Occupation title given at cell range: {}', var = excelRange(occupation_title))
-
-workforce_cat = cell.shift(1,-1).expand(RIGHT).is_not_blank()
-trace.Workforce_category('Workforce category given at cell range: {}', var = excelRange(workforce_cat))
-
-unit = 'Percent'
-trace.Unit('Hardcoded as : Percent')
-measure_type = 'Percentage'
-trace.Unit('Hardcoded as : Percentage')
-
-observations = workforce_cat.fill(DOWN).is_not_blank()
-dimensions = [
-    HDim(occupation_title, 'Occupation title', DIRECTLY, LEFT),
-    HDim(workforce_cat, 'Workforce category', DIRECTLY, ABOVE),
-    HDimConst('Measure type', measure_type),
-    HDimConst('Unit', unit),
-]
-tidy_sheet = ConversionSegment(tab, dimensions, observations)
-trace.with_preview(tidy_sheet)
-#savepreviewhtml(tidy_sheet) 
-trace.store("combined_dataframe_2", tidy_sheet.topandas())
-
-df = trace.combine_and_trace(datacube_name, "combined_dataframe_2")
-trace.add_column("Value")
-trace.multi([ "Value"], "Rename databaker columns OBS to Value")
-df.rename(columns={'OBS' : 'Value'}, inplace=True)
-
-tidy = df[['Occupation title', 'Workforce category', 'Measure type', 'Unit', 'Value']]
-
-
-# +
-out = Path('out')
-out.mkdir(exist_ok=True)
-scrape.dataset.comment = notes
-tidy.drop_duplicates().to_csv(out / 'observations_1.csv', index = False)
-scrape.dataset.family = 'covid-19'
-
-trace.output()
-tidy
-
-# -
 
 
 

@@ -131,8 +131,9 @@ trace.output()
 #        tidy[cl] = tidy[cl].str.replace("-"," ")
 #        tidy[cl] = tidy[cl].str.capitalize()
 #        codeclass.create_codelists(pd.DataFrame(tidy[cl]), 'codelists', scraper.dataset.family, Path(os.getcwd()).name.lower())
+# -
 
-# +
+"""
 newTxt = ''
 info = json.load(open('info.json')) 
 mtp = info['transform']['columns']['Value']['measure'].replace('http://gss-data.org.uk/def/measure/','')
@@ -151,7 +152,7 @@ with open("out/observations.csv-metadata.json") as fp:
 f = open("out/observations.csv-metadata.json", "w")
 f.write(newTxt)
 f.close()
-# -
+"""
 
 
 

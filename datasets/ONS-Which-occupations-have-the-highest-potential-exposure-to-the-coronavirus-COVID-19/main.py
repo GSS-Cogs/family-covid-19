@@ -192,25 +192,27 @@ csvw_transform.set_mapping(json.load(open('info.json')))
 csvw_transform.set_dataset_uri(urljoin(scrape._base_uri, f'data/{scrape._dataset_id}'))
 csvw_transform.write(out / f'{csvName}-metadata.json')
 
+
+# -
 # CREATE AND OUTPUT TRIG FILE
 with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
     metadata.write(scrape.generate_trig())
-# -
+
 trace.output()
 #tidy
 
 # +
-info = json.load(open('info.json')) 
-codelistcreation = info['transform']['codelists'] 
-print(codelistcreation)
-print("-------------------------------------------------------")
+#info = json.load(open('info.json')) 
+#codelistcreation = info['transform']['codelists'] 
+#print(codelistcreation)
+#print("-------------------------------------------------------")
 
-codeclass = CSVCodelists()
-for cl in codelistcreation:
-    if cl in tidy.columns:
-        tidy[cl] = tidy[cl].str.replace("-"," ")
-        tidy[cl] = tidy[cl].str.capitalize()
-        codeclass.create_codelists(pd.DataFrame(tidy[cl]), 'codelists', scrape.dataset.family, Path(os.getcwd()).name.lower())
+#codeclass = CSVCodelists()
+#for cl in codelistcreation:
+#    if cl in tidy.columns:
+#        tidy[cl] = tidy[cl].str.replace("-"," ")
+#        tidy[cl] = tidy[cl].str.capitalize()
+#        codeclass.create_codelists(pd.DataFrame(tidy[cl]), 'codelists', scrape.dataset.family, Path(os.getcwd()).name.lower())
 # -
 
 

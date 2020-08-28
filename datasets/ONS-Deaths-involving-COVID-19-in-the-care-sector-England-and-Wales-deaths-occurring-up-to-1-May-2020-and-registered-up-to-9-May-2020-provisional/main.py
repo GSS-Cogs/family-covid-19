@@ -1755,9 +1755,10 @@ csvw_transform.set_dataset_uri(urljoin(scraper._base_uri, f'data/{scraper._datas
 csvw_transform.write(out / f'{csvName}-metadata.json')
 with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
     metadata.write(scraper.generate_trig())
+# -
 
 
-# +
+"""
 newTxt = ''
 info = json.load(open('info.json')) 
 mtp = info['transform']['columns']['Value']['measure'].replace('http://gss-data.org.uk/def/measure/','')
@@ -1775,7 +1776,7 @@ with open(f"out/{csvName}-metadata.json") as fp:
 f = open(f"out/{csvName}-metadata.json", "w")
 f.write(newTxt)
 f.close()
-# -
+"""
 
 del joined_dat2['Measure Type']
 del joined_dat2['Unit']

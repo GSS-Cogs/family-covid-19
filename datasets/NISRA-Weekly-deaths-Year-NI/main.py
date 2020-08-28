@@ -77,7 +77,9 @@ all_dat[3].insert(3,'Local Government District', 'total')
 all_dat[3].insert(3,'Location of Death', 'all')
 del all_dat[3]['Week Number']
 
-all_dat[3].head(60)
+# +
+#all_dat[3].head(60)
+# -
 
 all_dat[4].insert(3,'Gender', 'total')
 all_dat[4].insert(3,'Age', 'All')
@@ -124,17 +126,20 @@ for t in all_dat:
 
 joined_dat = pd.concat([all_dat[0], all_dat[1], all_dat[2], all_dat[3], all_dat[4], all_dat[5], all_dat[6]], sort=True)
 
-joined_dat[joined_dat['Registered Death Type'] == 'covid-19-deaths-registered'] = 'covid-19-registered-deaths'
-joined_dat[joined_dat['Marker'] == 'provisional'] = 'Provisional'
+joined_dat['Registered Death Type'][joined_dat['Registered Death Type'] == 'covid-19-deaths-registered'] = 'covid-19-registered-deaths'
+joined_dat['Marker'][joined_dat['Marker'] == 'provisional'] = 'Provisional'
+# Lots of duplicates that are not being removed when outputting as CSV but this seems to work
 joined_dat = joined_dat.drop_duplicates()
-t = joined_dat[joined_dat['Value'] == 1.0]
-t = t[t['Age'] == 'All']
-t = t[t['Registered Death Type'] == 'covid-19-registered-deaths']
-t = t[t['Local Government District'] == 'total']
-t = t[t['Location of Death'] == 'all']
-t = t[t['Gender'] == 'total']
-t.head(60)
-#joined_dat['Registered Death Type'].unique()
+# Getting duplicate rows but with differenct Marker values, which are not counted during tests in Jenkins. removing and keeping last row
+joined_dat = joined_dat.drop_duplicates(subset=['Age','Gender','Local Government District','Location of Death','Period','Registered Death Type'], keep='last')
+#t = joined_dat[joined_dat['Value'] == 0.0]
+#t = t[t['Age'] == 'All']
+#t = joined_dat[joined_dat['Period'] == 'gregorian-interval/2020-03-14T00:00:00/P7D']
+#t = t[t['Registered Death Type'] == 'covid-19-registered-deaths']
+#t = t[t['Local Government District'] == 'total']
+#t = t[t['Location of Death'] == 'care-home']
+#t = t[t['Gender'] == 'total']
+#t.head(60)
 
 joined_dat['Local Government District'] = joined_dat['Local Government District'].apply(pathify)
 #joined_dat['Measure Type'] = joined_dat['Measure Type'].apply(pathify)

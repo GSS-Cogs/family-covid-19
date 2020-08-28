@@ -1905,9 +1905,9 @@ del joined_dat5['Unit']
 #csvw_transform.write(out / f'{csvName}-metadata.json')
 #with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
 #    metadata.write(scraper.generate_trig())
+# -
 
-# +
-#joined_dat5.head(3)
+joined_dat5.head(3)
 
 # +
 # CODE TO CREATE CODELISTS, DOES NOT NEED TO BE UNCOMMENTED

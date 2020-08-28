@@ -49,7 +49,7 @@ all_dat[0].insert(3,'Location of Death', 'all')
 del all_dat[0]['Registration Week']
 
 # +
-#ll_dat[1].head(5)
+#all_dat[1].head(5)
 # -
 
 all_dat[1]['Period'] = all_dat[1]['Period'].replace('year/2020',date_range_str)
@@ -77,9 +77,7 @@ all_dat[3].insert(3,'Local Government District', 'total')
 all_dat[3].insert(3,'Location of Death', 'all')
 del all_dat[3]['Week Number']
 
-# +
-#all_dat[3].head(5)
-# -
+all_dat[3].head(60)
 
 all_dat[4].insert(3,'Gender', 'total')
 all_dat[4].insert(3,'Age', 'All')
@@ -126,6 +124,8 @@ for t in all_dat:
 
 joined_dat = pd.concat([all_dat[0], all_dat[1], all_dat[2], all_dat[3], all_dat[4], all_dat[5], all_dat[6]], sort=True)
 
+
+
 joined_dat['Local Government District'] = joined_dat['Local Government District'].apply(pathify)
 #joined_dat['Measure Type'] = joined_dat['Measure Type'].apply(pathify)
 #joined_dat['Unit'] = joined_dat['Unit'].apply(pathify)
@@ -149,7 +149,7 @@ joined_dat['Age'] = joined_dat['Age'].replace('85+','85 plus')
 joined_dat['Age'] = joined_dat['Age'].apply(pathify)
 
 joined_dat = joined_dat[['Period','Location of Death','Local Government District','Registered Death Type', 'Age','Sex','Marker','Value']]
-joined_dat['Age'].unique()
+joined_dat = joined_dat.drop_duplicates()
 
 # Output the data to CSV
 csvName = 'registered-date-of-death-covid-19-observations.csv'
@@ -359,5 +359,7 @@ f.close()
 #        tidy[cl] = tidy[cl].str.capitalize()
 #        codeclass.create_codelists(pd.DataFrame(tidy[cl]), 'codelists', scrape.dataset.family, Path(os.getcwd()).name.lower())
 # -
+
+
 
 

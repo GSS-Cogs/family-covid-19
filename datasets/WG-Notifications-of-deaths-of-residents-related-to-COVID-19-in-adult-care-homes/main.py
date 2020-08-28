@@ -205,7 +205,8 @@ csvw_transform.set_dataset_uri(urljoin(scraper._base_uri, f'data/{scraper._datas
 csvw_transform.write(out / 'observations.csv-metadata.json')
 with open(out / 'observations.csv-metadata.trig', 'wb') as metadata:
     metadata.write(scraper.generate_trig())
-# +
+# -
+"""
 newTxt = ''
 import json
 info = json.load(open('info.json')) 
@@ -226,7 +227,7 @@ with open("out/observations.csv-metadata.json") as fp:
 f = open("out/observations.csv-metadata.json", "w")
 f.write(newTxt)
 f.close()
-# -
+"""
 
 
 

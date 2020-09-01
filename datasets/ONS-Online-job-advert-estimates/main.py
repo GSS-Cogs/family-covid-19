@@ -86,10 +86,10 @@ for tab in tabs:
     trace.start(datasetTitle, tab, columns, scrape.distributions[0].downloadURL)
     
     remove_notes = tab.filter(contains_string('Notes')).expand(RIGHT).expand(DOWN)
-    measure_type = 'Job Advert Indices'
-    trace.Measure_Type('Hardcoded value as: Adverts')
-    unit = 'Percent'
-    trace.Unit('Hardcoded value as: Count')
+    measure_type = 'Job Adverts'
+    trace.Measure_Type('Hardcoded value as: Job Adverts')
+    unit = 'Indicator'
+    trace.Unit('Hardcoded value as: Indicator')
     
     if tab.name == 'Vacancies by Adzuna Category':
         
@@ -148,7 +148,7 @@ for tab in tabs:
         trace.store("combined_dataframe", tidy_sheet.topandas())
         
         
-        
+
 
 # +
 df = trace.combine_and_trace(datasetTitle, "combined_dataframe")

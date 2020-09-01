@@ -28,9 +28,9 @@
                 "value": "http://reference.data.gov.uk/id/{+date}"
             },
             "Value": {
-                "unit": "http://gss-data.org.uk/def/concept/measurement-units/percent",
-                "measure": "http://gss-data.org.uk/def/measure/job-advert-indices",
-                "datatype": "float64"
+                "unit": "http://gss-data.org.uk/def/concept/measurement-units/indicator",
+                "measure": "http://gss-data.org.uk/def/measure/job-adverts",
+                "datatype": "double"
             }
         },
         "codelists": [
@@ -38,6 +38,9 @@
             "NUTS1 Region",
             "Marker"
         ]
+    },
+        "load": {
+        "publish": true
     },
     "sizingNotes": "Simple table structure with footnotes, however some of the figures are highlighted with comments on row 41 in some case this refers to the whole column but in other cases this is just an individual figure therefore manual intervention may be required.",
     "notes": ""

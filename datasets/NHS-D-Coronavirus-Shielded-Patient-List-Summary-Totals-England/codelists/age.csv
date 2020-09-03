@@ -1,5 +1,11 @@
 Label,Notation,Parent Notation,Sort Priority
-ALL,all,,1
-0-18 Years,y0to18,,2
-19-69 Years,y19to69,,3
-70+ Years,y70plus,,4
+All,all,,1
+0 17,0-17,,2
+18 29,18-29,,3
+30 39,30-39,,4
+40 49,40-49,,5
+50 59,50-59,,6
+60 69,60-69,,7
+70 79,70-79,,8
+80 89,80-89,,9
+90plus,90plus,,10

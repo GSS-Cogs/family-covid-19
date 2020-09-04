@@ -186,7 +186,8 @@ for column in tidy:
 del tidy['Measure Type']
 del tidy['Unit']
 
-tidy['Date'].unique()
+tidy['Marker'] = tidy['Marker'].apply(pathify)
+tidy['Marker'].unique()
 
 # Notes taken from tab: Vacancies
 

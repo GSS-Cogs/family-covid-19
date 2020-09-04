@@ -186,6 +186,8 @@ for column in tidy:
 del tidy['Measure Type']
 del tidy['Unit']
 
+tidy['Date'].unique()
+
 # Notes taken from tab: Vacancies
 
 notes = """

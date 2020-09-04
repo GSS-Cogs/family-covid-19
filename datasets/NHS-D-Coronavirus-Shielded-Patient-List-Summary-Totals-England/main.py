@@ -250,9 +250,16 @@ for column in joined_data:
 del joined_data['Measure Type']
 del joined_data['Unit']
 
+joined_data['Extract Date2'] = pd.to_datetime(joined_data['Extract Date'].str.replace('day/',''))
+joined_data['Extract Date2'] = 'day/' + joined_data['Extract Date2'].dt.strftime('%Y-%m-%d')
+del joined_data['Extract Date']
+joined_data = joined_data.rename(columns={"Extract Date2": "Extract Date"})
+joined_data = joined_data[['Extract Date','CCG Code','Geography Type','Disease Group','Sex','Age','Value','Marker']]
+#joined_data['Extract Date'].unique()
+
 joined_data['Age'] = 'nhs/' + joined_data['Age'].astype(str)
 joined_data['Age'][joined_data['Age'] == 'nhs/All'] = 'all'
-joined_data.head(60)
+#joined_data.head(60)
 
 # +
 #SET UP OUTPUT FOLDER AND OUTPUT DATA TO CSV

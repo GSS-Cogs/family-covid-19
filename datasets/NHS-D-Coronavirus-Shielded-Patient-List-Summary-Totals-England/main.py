@@ -104,7 +104,7 @@ def mapPlaceNamesWithCodes(placeNames):
 # +
 with open("info.json", "r") as f:
     data = json.load(f)
-    data["dataURL"] = "https://files.digital.nhs.uk/63/0A6FF2/Coronavirus%20Shielded%20Patient%20List%2C%20England%20-%20Open%20Data%20with%20CMO%20DG%20-%20LA%20-%202020-08-20.csv"
+    data["dataURL"] = "https://files.digital.nhs.uk/44/1D4817/Coronavirus%20Shielded%20Patient%20List%2C%20England%20-%20Open%20Data%20with%20CMO%20DG%20-%20LA%20-%202020-08-27.csv"
 with open("temp.json", "w") as f:
     json.dump(data, f)
 
@@ -157,7 +157,7 @@ tidy_1 =df[['Period', 'Geography Code', 'Geography Type', 'Disease Group', 'Gend
 with open("info.json", "r") as f:
     data = json.load(f)
     #data["dataURL"] = "https://files.digital.nhs.uk/BA/B409A2/Coronavirus%20Shielded%20Patient%20List%2C%20England%20-%20Open%20Data%20-%20CCG%20-%202020-07-01.csv"
-    data["dataURL"] = "https://files.digital.nhs.uk/96/1D4DE5/Coronavirus%20Shielded%20Patient%20List%2C%20England%20-%20Open%20Data%20with%20CMO%20DG%20-%20CCG%20-%202020-08-20.csv"
+    data["dataURL"] = "https://files.digital.nhs.uk/C5/560853/Coronavirus%20Shielded%20Patient%20List%2C%20England%20-%20Open%20Data%20with%20CMO%20DG%20-%20CCG%20-%202020-08-27.csv"
 with open("temp.json", "w") as f:
     json.dump(data, f)
 
@@ -244,7 +244,7 @@ for column in joined_data:
 #Removing columns as they are defined in info.json 
 del joined_data['Measure Type']
 del joined_data['Unit']
-#joined_data
+joined_data.head(60)
 
 # +
 #SET UP OUTPUT FOLDER AND OUTPUT DATA TO CSV

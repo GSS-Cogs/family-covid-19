@@ -195,7 +195,8 @@ out = Path('out')
 out.mkdir(exist_ok=True)
 tidy.drop_duplicates().to_csv(out / csvName, index = False)
 scrape.dataset.family = 'covid-19'
-scrape.dataset.comment = notes
+scrape.dataset.description = scrape.dataset.description + '\n' + notes
+scrape.dataset.comment = 'ONS has created an estimate of exposure to generic disease, and physical proximity to others, for UK occupations based on US analysis of these factors.'
 
 # CREATE MAPPING CLASS INSTANCE, SET UP VARIABLES AND WRITE FILES
 csvw_transform = CSVWMapping()

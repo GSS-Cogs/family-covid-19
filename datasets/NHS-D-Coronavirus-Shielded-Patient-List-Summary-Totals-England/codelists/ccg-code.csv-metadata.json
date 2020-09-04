@@ -63,7 +63,7 @@
   "prov:hadDerivation": {
     "@id": "http://gss-data.org.uk/data/gss_data/covid-19/nhs-d-coronavirus-shielded-patient-list-summary-totals-england#scheme/ccg-code",
     "@type": "skos:ConceptScheme",
-    "rdfs:label": "Age",
+    "rdfs:label": "CCG Code",
     "skos:hasTopConcept": "http://gss-data.org.uk/data/gss_data/covid-19/nhs-d-coronavirus-shielded-patient-list-summary-totals-england#concept/ccg-code/all"
   }
 }

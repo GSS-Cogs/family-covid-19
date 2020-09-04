@@ -63,7 +63,7 @@
   "prov:hadDerivation": {
     "@id": "http://gss-data.org.uk/data/gss_data/covid-19/nhs-d-coronavirus-shielded-patient-list-summary-totals-england#scheme/disease-group",
     "@type": "skos:ConceptScheme",
-    "rdfs:label": "disease-group",
+    "rdfs:label": "Disease Group",
     "skos:hasTopConcept": "http://gss-data.org.uk/data/gss_data/covid-19/nhs-d-coronavirus-shielded-patient-list-summary-totals-england#concept/disease-group/all"
   }
 }

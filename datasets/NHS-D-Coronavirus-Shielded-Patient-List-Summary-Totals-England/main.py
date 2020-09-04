@@ -184,10 +184,12 @@ df = trace.combine_and_trace(CCG_TITLE, CCG_TITLE)
 
 # Drop the "All" column and the unwanted columns
 trace.ALL("Remove unwanted columns, get rid of column 'CCG Code' as we have the codes")
-df = df.drop(["ALL", "Breakdown Field", "Breakdown Value", "CCG Code", "Disease_Group"], axis=1)
-    
+#df = df.drop(["ALL", "Breakdown Field", "Breakdown Value", "CCG Code", "Disease_Group"], axis=1)
+df = df.drop(["ALL", "Breakdown Field", "Breakdown Value", "CCG Name", "Disease_Group"], axis=1)  
+
 # Rename columns
-df = df.rename(columns={"CCG Name": "Geography Code", "Extract Date": "Period", "Patient Count": "Value"})
+#df = df.rename(columns={"CCG Name": "Geography Code", "Extract Date": "Period", "Patient Count": "Value"})
+df = df.rename(columns={"Extract Date": "Period", "Patient Count": "Value"})
 trace.multi(["Area", "Period", "Value"], "Rename LA Code, Extract Date and Patient Count to Area, Period and Value respectively")
     
 # Measures etc
@@ -198,14 +200,16 @@ df['Geography Type']='Clinical Commissioning Group'
 lookup = {
     "ENG": "E92000001"
 }
-df["Geography Code"] = df["Geography Code"].map(lambda x: lookup.get(x, x))
+##df["Geography Code"] = df["Geography Code"].map(lambda x: lookup.get(x, x))
 #CG Name column to be mapped to ONS Geography codes instead
-df['Geography Code'] = mapPlaceNamesWithCodes(pd.DataFrame(df['Geography Code']))
+##df['Geography Code'] = mapPlaceNamesWithCodes(pd.DataFrame(df['Geography Code']))
 
-tidy_2 =df[['Period', 'Geography Code', 'Geography Type', 'Disease Group', 'Gender', 'Age', 'Measure Type', 'Unit', 'Value']]
+#tidy_2 =df[['Period', 'Geography Code', 'Geography Type', 'Disease Group', 'Gender', 'Age', 'Measure Type', 'Unit', 'Value']]
+tidy_2 =df[['Period', 'CCG Code', 'Geography Type', 'Disease Group', 'Gender', 'Age', 'Measure Type', 'Unit', 'Value']]
 
 # +
-joined_data = pd.concat([tidy_1, tidy_2])
+#joined_data = pd.concat([tidy_1, tidy_2])
+joined_data = tidy_2
 joined_data = joined_data.rename(columns={"Gender": "Sex", "Period" : "Extract Date"})
 
 sexcode = {

@@ -221,7 +221,7 @@ joined_data = joined_data.replace({"Sex": sexcode})
 agecode = { '70+' : '70plus', '90+' : '90plus'}
 joined_data = joined_data.replace({"Age": agecode})
 lookup = {"": "E92000001"}
-joined_data["Geography Code"] = joined_data["Geography Code"].map(lambda x: lookup.get(x, x))
+#joined_data["Geography Code"] = joined_data["Geography Code"].map(lambda x: lookup.get(x, x))
 
 #Adding data marker * = value between 1 and 7
 joined_data['Marker'] = ""
@@ -248,7 +248,7 @@ for column in joined_data:
 #Removing columns as they are defined in info.json 
 del joined_data['Measure Type']
 del joined_data['Unit']
-joined_data.head(60)
+#joined_data.head(60)
 
 # +
 #SET UP OUTPUT FOLDER AND OUTPUT DATA TO CSV

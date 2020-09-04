@@ -196,6 +196,7 @@ trace.multi(["Area", "Period", "Value"], "Rename LA Code, Extract Date and Patie
 df = make_standard_changes(df, trace)
 df['Disease Group'] = df['Disease Group'].fillna('All')
 df['Geography Type']='Clinical Commissioning Group'
+df['CCG Code'] = df['CCG Code'].apply(pathify)
 
 lookup = {
     "ENG": "E92000001"
@@ -258,7 +259,7 @@ out.mkdir(exist_ok=True)
 joined_data.drop_duplicates().to_csv(out / csvName, index = False)
 scraper.dataset.family = 'covid-19'
 scraper.dataset.title = 'Coronavirus Shielded Patient List Summary Totals, England by Clinical Commissioning Group and Local Authority'
-#scraper.dataset.comment = notes
+scraper.dataset.comment = 'This is a release of management information for anonymous summary data for those patients that have been identified on the Shielded Patient List (SPL). Its purpose is to make the summary data available to a wider audience as open data to enable a broad base of users to perform analysis from it. The purpose behind releasing this data is to present regional and local data to allow for its use in public health. It will also allow for greater analysis, modelling and planning to be performed using the latest data to aid in the response to the pandemic. We will update this weekly and we would welcome your feedback to help us develop our open data sets.'
 
 # CREATE MAPPING CLASS INSTANCE, SET UP VARIABLES AND WRITE FILES
 csvw_transform = CSVWMapping()

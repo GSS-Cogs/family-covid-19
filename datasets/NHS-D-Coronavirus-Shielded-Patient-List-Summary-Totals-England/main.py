@@ -244,7 +244,7 @@ for column in joined_data:
 #Removing columns as they are defined in info.json 
 del joined_data['Measure Type']
 del joined_data['Unit']
-joined_data
+#joined_data
 
 # +
 #SET UP OUTPUT FOLDER AND OUTPUT DATA TO CSV

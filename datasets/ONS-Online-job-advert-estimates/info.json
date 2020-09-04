@@ -32,9 +32,10 @@
                 "measure": "http://gss-data.org.uk/def/measure/job-adverts",
                 "datatype": "double"
             },
-             "Marker": {
+            "Marker": {
                 "attribute": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",
                 "value": "http://gss-data.org.uk/def/concept/revision/{marker}"
+            }
         },
         "codelists": [
             "Industry",

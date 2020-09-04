@@ -249,7 +249,10 @@ for column in joined_data:
 #Removing columns as they are defined in info.json 
 del joined_data['Measure Type']
 del joined_data['Unit']
-#joined_data.head(60)
+
+joined_data['Age'] = 'nhs/' + joined_data['Age'].astype(str)
+joined_data['Age'][joined_data['Age'] == 'nhs/All'] = 'all'
+joined_data.head(60)
 
 # +
 #SET UP OUTPUT FOLDER AND OUTPUT DATA TO CSV

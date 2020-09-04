@@ -30,7 +30,7 @@
             "Disease Group": "There are 13 disease groups as defined in the SPL clinical algorithm that have been signed off by the Chief Medical Officer (CMO). A patient can be in multiple disease groups",
             "Age": {
                 "parent": "http://purl.org/linked-data/sdmx/2009/dimension#age",
-                "value": "http://gss-data.org.uk/def/concept/age/{age}",
+                "value": "http://gss-data.org.uk/def/concept/age-groups/{age}",
                 "description": "The age band of the patient based on the date of birth held within Personal Demographics Service (PDS). Age was calculated using the patients date of birth and the age is calculated as at the date of publication."
             },
             "Sex": {

@@ -41,8 +41,8 @@
                 "datatype": "double"
             },             
             "Value": {
-                "unit": "http://gss-data.org.uk/def/concept/measurement-units/standardised-scale",
-                "measure": "http://gss-data.org.uk/def/measure/exposure",
+                "unit": "http://gss-data.org.uk/def/concept/measurement-units/exposure",
+                "measure": "http://gss-data.org.uk/def/measure/standardised-scale",
                 "datatype": "double"
             }
         },

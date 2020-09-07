@@ -212,7 +212,8 @@ tidy.drop_duplicates().to_csv(out / csvName, index = False)
 #SET VARIOUS ATTRIBUTES OF THE SCRAPER
 scrape.dataset.family = 'covid-19'
 scrape.dataset.title = datasetTitle
-scrape.dataset.comment = notes
+scrape.dataset.description = scrape.dataset.description + '/n' + notes
+scrape.dataset.comment = 'Experimental job advert indices covering the UK job market.'
 dataset_path = pathify(os.environ.get('JOB_NAME', 'gss_data/covid-19/' + Path(os.getcwd()).name))
 scrape.set_base_uri('http://gss-data.org.uk')
 scrape.set_dataset_id(dataset_path)
@@ -229,24 +230,24 @@ with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
     metadata.write(scrape.generate_trig())
 
 # +
-newTxt = ''
-info = json.load(open('info.json')) 
-mtp = info['transform']['columns']['Value']['measure'].replace('http://gss-data.org.uk/def/measure/','')
-mt = mtp.capitalize()
-mtpath = f'''"@id": "http://gss-data.org.uk/def/measure/{mtp}",'''
-h = '''"@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure",'''
+#newTxt = ''
+#info = json.load(open('info.json')) 
+#mtp = info['transform']['columns']['Value']['measure'].replace('http://gss-data.org.uk/def/measure/','')
+#mt = mtp.capitalize()
+#mtpath = f'''"@id": "http://gss-data.org.uk/def/measure/{mtp}",'''
+#h = '''"@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure",'''
 
-with open("out/observations.csv-metadata.json") as fp: 
-    for line in fp: 
-        if mtpath in line.strip():
-            print(line)
-            newTxt = newTxt + line + '''\t"rdfs:label": "''' + mt + '''",\n'''
-        else:
-            newTxt += line
-            
-f = open("out/observations.csv-metadata.json", "w")
-f.write(newTxt)
-f.close()
+#with open("out/observations.csv-metadata.json") as fp: 
+#    for line in fp: 
+#        if mtpath in line.strip():
+#            print(line)
+#            newTxt = newTxt + line + '''\t"rdfs:label": "''' + mt + '''",\n'''
+#        else:
+#            newTxt += line
+#            
+#f = open("out/observations.csv-metadata.json", "w")
+#f.write(newTxt)
+#f.close()
 # -
 
 trace.output()

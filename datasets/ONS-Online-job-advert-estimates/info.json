@@ -28,8 +28,8 @@
                 "value": "http://reference.data.gov.uk/id/{+date}"
             },
             "Value": {
-                "unit": "http://gss-data.org.uk/def/concept/measurement-units/indicator",
-                "measure": "http://gss-data.org.uk/def/measure/job-adverts",
+                "unit": "http://gss-data.org.uk/def/concept/measurement-units/job-adverts",
+                "measure": "http://gss-data.org.uk/def/measure/indicator",
                 "datatype": "double"
             },
             "Marker": {

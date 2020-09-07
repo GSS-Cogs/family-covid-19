@@ -50,6 +50,9 @@
             }
         }
     },
+     "load": {
+        "publish": true
+     },
     "sizingNotes": "Should be straightforward with CSV.",
     "notes": ""
 }

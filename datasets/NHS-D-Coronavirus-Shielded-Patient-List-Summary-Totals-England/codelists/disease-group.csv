@@ -2,7 +2,7 @@ Label,Notation,Parent Notation,Sort Priority
 Transplants (Solid),transplants-solid,,1
 Cancer (Solid with Chemotherapy),cancer-solid-with-chemotherapy,,2
 Cancer (Lung with Radical Radiotherapy),cancer-lung-with-radical-radiotherapy,,3
-Cancer (Haematological within 24 months),Cancer-haematological-within-24-months,,4
+Cancer (Haematological within 24 months),cancer-haematological-within-24-months,,4
 Transplants (Haematological within 6 months),transplants-haematological-within-6-months,,5
 Transplants (Haematological with Immunosuppression),transplants-haematological-with-immunosuppression,,6
 Respiratory (Severe Asthma),respiratory-severe-asthma,,7

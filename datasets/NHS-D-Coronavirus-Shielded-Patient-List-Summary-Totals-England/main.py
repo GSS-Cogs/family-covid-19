@@ -257,8 +257,8 @@ joined_data = joined_data.rename(columns={"Extract Date2": "Extract Date"})
 joined_data = joined_data[['Extract Date','CCG Code','Geography Type','Disease Group','Sex','Age','Value','Marker']]
 #joined_data['Extract Date'].unique()
 
-joined_data['Age'] = 'nhs/' + joined_data['Age'].astype(str)
-joined_data['Age'][joined_data['Age'] == 'nhs/All'] = 'all'
+#joined_data['Age'] = 'nhs/' + joined_data['Age'].astype(str)
+joined_data['Age'] = joined_data['Age'].apply(pathify)
 #joined_data.head(60)
 
 # +
@@ -288,6 +288,8 @@ trace.output()
 # +
 # only outputting one dataset - CCG
 # -
+joined_data['Marker'].unique()
+
 
 
 

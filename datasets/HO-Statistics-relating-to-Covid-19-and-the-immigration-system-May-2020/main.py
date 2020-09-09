@@ -101,6 +101,7 @@ scraper.dataset.family = 'covid-19'
 
 # +
 scraper.dataset.family = 'covid-19'
+scraper.dataset.title = 'Statistics relating to Covid-19 and the immigration system'
 scraper.dataset.comment = 'A statistical report showing the impact of Covid-19 on the immigration system.'
 
 import os
@@ -118,42 +119,3 @@ with open(out / 'observations.csv-metadata.trig', 'wb') as metadata:
 # -
 
 trace.output()
-
-# +
-#codelistcreation = tidy[['Air Arrivals']]
-#print(codelistcreation)
-#print("-------------------------------------------------------")
-#print(tidy.columns)
-
-#codeclass = CSVCodelists()
-#for cl in codelistcreation:
-#    if cl in tidy.columns:
-#        tidy[cl] = tidy[cl].str.replace("-"," ")
-#        tidy[cl] = tidy[cl].str.capitalize()
-#        codeclass.create_codelists(pd.DataFrame(tidy[cl]), 'codelists', scraper.dataset.family, Path(os.getcwd()).name.lower())
-# -
-
-"""
-newTxt = ''
-info = json.load(open('info.json')) 
-mtp = info['transform']['columns']['Value']['measure'].replace('http://gss-data.org.uk/def/measure/','')
-mt = mtp.capitalize().replace('-',' ')
-mtpath = f'''"@id": "http://gss-data.org.uk/def/measure/{mtp}",'''
-
-with open("out/observations.csv-metadata.json") as fp: 
-    for line in fp: 
-        if mtpath in line.strip():
-            print(line)
-            newTxt = newTxt + line + '''\t"rdfs:label": "''' + mt + '''",\n'''
-        else:
-            newTxt += line
- 
-
-f = open("out/observations.csv-metadata.json", "w")
-f.write(newTxt)
-f.close()
-"""
-
-
-
-

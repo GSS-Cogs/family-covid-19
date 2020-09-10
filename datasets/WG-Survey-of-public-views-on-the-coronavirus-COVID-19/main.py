@@ -68,7 +68,7 @@ def date_time(time_value):
     month_num = month_num_dict[month_string]
     if len(date_string)  == 1:
         date_string = '0' + date_string
-    return 'gregorian-interval/2020-'+ month_num + '-' + date_string + 'T00:00/P3D'
+    return 'gregorian-interval/2020-'+ month_num + '-' + date_string + 'T00:00:00/P3D'
 new_table["Period"] = new_table["Period"].apply(date_time)
 # -
 
@@ -125,6 +125,8 @@ for cl in codelistcreation:
         tidy[cl] = tidy[cl].str.capitalize()
         codeclass.create_codelists(pd.DataFrame(tidy[cl]), 'codelists', scrape.dataset.family, Path(os.getcwd()).name.lower())
 """
+
+
 
 
 

@@ -109,10 +109,11 @@ tidy['Marker'] = tidy['Marker'].replace(np.NaN,'')
 tidy.head(60)
 
 
-for c in tidy.columns:
-    print(c)
-    print(tidy[c].unique())
-    print("=================================")
+# +
+#for c in tidy.columns:
+#    print(c)
+#    print(tidy[c].unique())
+#    print("=================================")
 
 # +
 import os

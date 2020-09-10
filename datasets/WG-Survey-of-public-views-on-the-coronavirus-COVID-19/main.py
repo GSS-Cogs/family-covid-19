@@ -106,6 +106,8 @@ tidy['Survey Question'] = tidy['Survey Question'].apply(pathify)
 tidy['Average Response'] = tidy['Average Response'].apply(pathify)
 tidy['Marker'] = tidy['Marker'].replace(np.NaN,'')
 tidy['Marker'] = tidy['Marker'].apply(pathify)
+del tidy['Measure Type']
+del tidy['Unit']
 # -
 tidy.head(60)
 

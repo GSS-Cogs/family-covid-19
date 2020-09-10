@@ -79,7 +79,7 @@ out = Path('out')
 out.mkdir(exist_ok=True)
 tidy.drop_duplicates().to_csv(out / 'observations.csv', index = False)
 
-tidy.head(60)
+
 
 import pandas as pd
 def create_codelist(vals, nme, path):
@@ -103,5 +103,47 @@ for c in codelists:
     d = create_codelist(output_data[c], c, ref)
 
 # -
+tidy.head(60)
+
+
+for c in tidy.columns:
+    print(c)
+    print(tidy[c].unique())
+    print("=================================")
+
+# +
+import os
+from urllib.parse import urljoin
+
+out = Path('out')
+out.mkdir(exist_ok=True)
+tidy.drop_duplicates().to_csv(out / 'observations.csv', index = False)
+
+scrape.dataset.family = 'covid-19'
+scrape.dataset.comment = 'Information on public views and behaviours during the coronavirus crisis.'
+dataset_path = pathify(os.environ.get('JOB_NAME', f'gss_data/{scrape.dataset.family}/' + Path(os.getcwd()).name))
+scrape.set_base_uri('http://gss-data.org.uk')
+scrape.set_dataset_id(dataset_path)
+csvw_transform = CSVWMapping()
+csvw_transform.set_csv(out / 'observations.csv')
+csvw_transform.set_mapping(json.load(open('info.json')))
+csvw_transform.set_dataset_uri(urljoin(scrape._base_uri, f'data/{scrape._dataset_id}'))
+csvw_transform.write(out / 'observations.csv-metadata.json')
+with open(out / 'observations.csv-metadata.trig', 'wb') as metadata:
+    metadata.write(scrape.generate_trig())
+# -
+
+"""
+info = json.load(open('info.json')) 
+codelistcreation = info['transform']['codelists'] 
+print(codelistcreation)
+print("-------------------------------------------------------")
+codeclass = CSVCodelists()
+for cl in codelistcreation:
+    if cl in tidy.columns:
+        tidy[cl] = tidy[cl].str.replace("-"," ")
+        tidy[cl] = tidy[cl].str.capitalize()
+        codeclass.create_codelists(pd.DataFrame(tidy[cl]), 'codelists', scrape.dataset.family, Path(os.getcwd()).name.lower())
+"""
 
 

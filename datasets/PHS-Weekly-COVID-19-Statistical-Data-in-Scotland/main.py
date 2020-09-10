@@ -575,13 +575,6 @@ if spec_me:
     for l in lines:
         print(l)
 
-#dat1 = pd.DataFrame(all_dat[['Date','Country','DailyCases']])
-#dat1['Case Type'] = 'daily'
-#dat1 = dat1.rename(columns={'DailyCases': 'Value'})
-#dat2 = pd.DataFrame(all_dat[['Date','Country','CumulativeCases']])
-#dat2['Case Type'] = 'cumulative'
-#dat2 = dat2.rename(columns={'CumulativeCases': 'Value'})
-#alld = pd.concat([dat1,dt2])
 all_dat[0] = all_dat[0][['Date','Country','Case Type','Value']]
 
 # +
@@ -615,18 +608,8 @@ with open(out / 'observations.csv-metadata.trig', 'wb') as metadata:
     metadata.write(scraper.generate_trig())
 # -
 
-"""
-info = json.load(open('info.json')) 
-codelistcreation = info['transform']['codelists'] 
-print(codelistcreation)
-print("-------------------------------------------------------")
-tidy = all_dat[0]
-codeclass = CSVCodelists()
-for cl in codelistcreation:
-    if cl in tidy.columns:
-        tidy[cl] = tidy[cl].str.replace("-"," ")
-        tidy[cl] = tidy[cl].str.capitalize()
-        codeclass.create_codelists(pd.DataFrame(tidy[cl]), 'codelists', scraper.dataset.family, Path(os.getcwd()).name.lower())
-"""
+
+
+
 
 

@@ -542,7 +542,7 @@ for distro_title in [x.title for x in scraper.distributions]:
     # Output
     #df.to_csv(out / "{}.csv".format(pathify(otitle.strip())), index=False)
     
-trace.output()
+#trace.output()
 
 # -
 spec_me = False

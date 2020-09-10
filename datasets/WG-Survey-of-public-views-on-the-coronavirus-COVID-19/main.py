@@ -93,14 +93,14 @@ def create_codelist(vals, nme, path):
 
 
 # +
-output_data = tidy
+#output_data = tidy
 
-ref = Path('reference')
-ref.mkdir(exist_ok=True)
+#ref = Path('reference')
+#ref.mkdir(exist_ok=True)
 
-codelists = ['Survey Question','Survey Question Category','Average Response']
-for c in codelists:
-    d = create_codelist(output_data[c], c, ref)
+#codelists = ['Survey Question','Survey Question Category','Average Response']
+#for c in codelists:
+#    d = create_codelist(output_data[c], c, ref)
 
 # -
 tidy.head(60)

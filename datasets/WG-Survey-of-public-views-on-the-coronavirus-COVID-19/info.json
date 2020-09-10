@@ -26,18 +26,10 @@
                 "dimension": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
                 "value": "http://reference.data.gov.uk/id/{+period}"
             },
-            "Local Authority": {
-                "dimension": "http://purl.org/linked-data/sdmx/2009/dimension#refArea",
-                "value": "http://statistics.data.gov.uk/id/statistical-geography/{local_authority}"
-            },
-            "Sex": {
-                "dimension": "http://purl.org/linked-data/sdmx/2009/dimension#sex",
-                "value": "http://purl.org/linked-data/sdmx/2009/code#sex-{sex}"
-            },
             "Value": {
-                "unit": "http://gss-data.org.uk/def/concept/measurement-units/deaths",
-                "measure": "http://gss-data.org.uk/def/measure/cumulative-count",
-                "datatype": "integer"
+                "unit": "http://gss-data.org.uk/def/concept/measurement-units/percent",
+                "measure": "http://gss-data.org.uk/def/measure/percentage",
+                "datatype": "double"
             }
         },
         "codelists": [

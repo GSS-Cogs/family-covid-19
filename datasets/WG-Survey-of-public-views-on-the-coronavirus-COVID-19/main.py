@@ -68,7 +68,7 @@ def date_time(time_value):
     month_num = month_num_dict[month_string]
     if len(date_string)  == 1:
         date_string = '0' + date_string
-    return 'gregorian-day/2020-'+ month_num + '-' + date_string + 'T00:00/P3D'
+    return 'gregorian-interval/2020-'+ month_num + '-' + date_string + 'T00:00/P3D'
 new_table["Period"] = new_table["Period"].apply(date_time)
 # -
 
@@ -78,45 +78,6 @@ tidy = new_table[['Period','Survey Question Category','Survey Question','Average
 out = Path('out')
 out.mkdir(exist_ok=True)
 tidy.drop_duplicates().to_csv(out / 'observations.csv', index = False)
-
-
-
-import pandas as pd
-def create_codelist(vals, nme, path):
-    dat = pd.DataFrame(vals.unique())
-    dat = dat.rename(columns={0: 'Label'})
-    dat['Notation'] = dat['Label'].apply(pathify)
-    dat['Parent Notation'] = ''
-    dat['Sort Priority'] = ''
-    dat.to_csv(ref / f'{pathify(nme)}.csv', index = False)
-    return dat
-
-
-# +
-#output_data = tidy
-
-#ref = Path('reference')
-#ref.mkdir(exist_ok=True)
-
-#codelists = ['Survey Question','Survey Question Category','Average Response']
-#for c in codelists:
-#    d = create_codelist(output_data[c], c, ref)
-tidy['Survey Question Category'] = tidy['Survey Question Category'].apply(pathify)
-tidy['Survey Question'] = tidy['Survey Question'].apply(pathify)
-tidy['Average Response'] = tidy['Average Response'].apply(pathify)
-tidy['Marker'] = tidy['Marker'].replace(np.NaN,'')
-tidy['Marker'] = tidy['Marker'].apply(pathify)
-del tidy['Measure Type']
-del tidy['Unit']
-# -
-tidy.head(60)
-
-
-# +
-#for c in tidy.columns:
-#    print(c)
-#    print(tidy[c].unique())
-#    print("=================================")
 
 # +
 import os
@@ -152,5 +113,7 @@ for cl in codelistcreation:
         tidy[cl] = tidy[cl].str.capitalize()
         codeclass.create_codelists(pd.DataFrame(tidy[cl]), 'codelists', scrape.dataset.family, Path(os.getcwd()).name.lower())
 """
+
+
 
 

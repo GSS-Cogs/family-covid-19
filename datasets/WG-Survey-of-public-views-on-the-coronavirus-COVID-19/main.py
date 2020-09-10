@@ -101,7 +101,10 @@ def create_codelist(vals, nme, path):
 #codelists = ['Survey Question','Survey Question Category','Average Response']
 #for c in codelists:
 #    d = create_codelist(output_data[c], c, ref)
-
+tidy['Survey Question Category'] = tidy['Survey Question Category'].apply(pathify)
+tidy['Survey Question'] = tidy['Survey Question'].apply(pathify)
+tidy['Average Response'] = tidy['Average Response'].apply(pathify)
+tidy['Marker'] = tidy['Marker'].replace(np.NaN,'')
 # -
 tidy.head(60)
 

@@ -75,6 +75,18 @@ new_table["Period"] = new_table["Period"].apply(date_time)
 tidy = new_table[['Period','Survey Question Category','Survey Question','Average Response','Measure Type',
                   'Unit','Marker', 'Value']]
 
+# +
+tidy['Survey Question Category'] = tidy['Survey Question Category'].apply(pathify)
+tidy['Survey Question'] = tidy['Survey Question'].apply(pathify)
+tidy['Average Response'] = tidy['Average Response'].apply(pathify)
+tidy['Marker'] = tidy['Marker'].replace(np.NaN,'')
+tidy['Marker'] = tidy['Marker'].apply(pathify)
+del tidy['Measure Type']
+del tidy['Unit']
+
+#tidy.head(60)
+# -
+
 out = Path('out')
 out.mkdir(exist_ok=True)
 tidy.drop_duplicates().to_csv(out / 'observations.csv', index = False)

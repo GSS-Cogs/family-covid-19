@@ -1,6 +1,6 @@
 {
     "title": "Weekly COVID-19 Statistical Data in Scotland",
-    "publisher": "Public Health Scotland",
+    "publisher": "public-health-scotland",
     "description": "This dataset replaces the \"COVID-19 Statistical report\" dataset and provides information on demographic characteristics (age, sex, deprivation) of confirmed novel coronavirus (COVID-19) cases, as well as trend data regarding the wider impact of the virus on the healthcare system. Data includes information on primary care out of hours consultations, respiratory calls made to NHS24, contact with COVID-19 Hubs and Assessment Centres, incidents received by Scottish Ambulance Services (SAS), as well as COVID-19 related hospital admissions and admissions to ICU (Intensive Care Unit).",
     "landingPage": "https://www.opendata.nhs.scot/dataset/weekly-covid-19-statistical-data-in-scotland",
     "datasetNotes": [
@@ -18,6 +18,27 @@
         "stage": [
             "To Do",
             "Priority"
+        ],
+        "columns": {
+            "Date": {
+                "dimension": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
+                "value": "http://reference.data.gov.uk/id/{+date}",
+                "description": "Date is based on the ECOSS report date"
+            },
+            "Country": {
+                "dimension": "http://purl.org/linked-data/sdmx/2009/dimension#refArea",
+                "value": "http://statistics.data.gov.uk/id/statistical-geography/{country}",
+                "description": "9=digit country code for Scotland"
+            },
+            "Case Type": "Daily and Cumulative number of positive COVID-19 cases at Scotland level",
+            "Value": {
+                "unit": "http://gss-data.org.uk/def/concept/measurement-units/cases",
+                "measure": "http://gss-data.org.uk/def/measure/count",
+                "datatype": "integer"
+            }
+        },
+        "codelists": [
+            "Case Type"   
         ],
         "airtable": "recPxvIcJVjm5vuX3",
         "main_issue": 172

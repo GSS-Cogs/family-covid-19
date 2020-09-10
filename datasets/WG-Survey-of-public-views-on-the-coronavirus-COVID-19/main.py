@@ -87,9 +87,7 @@ del tidy['Unit']
 #tidy.head(60)
 # -
 
-out = Path('out')
-out.mkdir(exist_ok=True)
-tidy.drop_duplicates().to_csv(out / 'observations.csv', index = False)
+
 
 # +
 import os

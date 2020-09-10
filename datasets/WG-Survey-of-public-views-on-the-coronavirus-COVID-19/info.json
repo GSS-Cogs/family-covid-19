@@ -38,6 +38,9 @@
             "Average Response"   
         ]
     },
+     "load": {
+        "publish": true
+     },
     "sizingNotes": "1 Simple table structure  with footnotes in row 22-24",
     "notes": "Email issued 05/05/2020"
 }

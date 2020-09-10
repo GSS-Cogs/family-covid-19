@@ -141,7 +141,7 @@ def handler_cumulative_cases_by_age_and_sex(df, trace, comments_for_cube):
     
     trace.Measure_Type("Move Rate and Total cases to Value column, differentiate them via Measure Type as: {}", var=["Rate", "Count"])
     trace.Unit_of_Measure("Set to Cases")
-    rate_df = df.drop("TotalCases", axis=1)
+    rate_df = df#.drop("TotalCases", axis=1)
     rate_df = rate_df.rename(columns={"Rate": "Value"})
     rate_df["Measure Type"] = "Rate"
     rate_df["Unit Of Measure"] = "Cases"
@@ -478,7 +478,7 @@ scrapers.scraper_list = [('https://www.opendata.nhs.scot', opendata_nhs)]
 scraper = Scraper(seed="info.json")
 scraper
 # +
-
+all_dat = []
 # A certain amount of nonsense to focus the scraper on each distribution in turn
 for distro_title in [x.title for x in scraper.distributions]:
     
@@ -526,8 +526,8 @@ for distro_title in [x.title for x in scraper.distributions]:
     if distro.title.strip() not in handlers.keys():
         raise Exception("The distribution '{}' is new or something has been renamed - cannot identify a handler for it.".format(distro.title.strip()))
 
-    out = Path('out')
-    out.mkdir(exist_ok=True)
+    #out = Path('out')
+    #out.mkdir(exist_ok=True)
     
     # ----- IMPORTANT -----
     # uncomment the below to ouput the before as well as the after (these ones are confusing, it helps a lot)
@@ -538,9 +538,9 @@ for distro_title in [x.title for x in scraper.distributions]:
     
     # Handle
     df, trace, _ = handlers[distro.title](df, trace, comments[distro_title])
-    
+    all_dat.append(df)
     # Output
-    df.to_csv(out / "{}.csv".format(pathify(otitle.strip())), index=False)
+    #df.to_csv(out / "{}.csv".format(pathify(otitle.strip())), index=False)
     
 trace.output()
 
@@ -575,6 +575,58 @@ if spec_me:
     for l in lines:
         print(l)
 
+#dat1 = pd.DataFrame(all_dat[['Date','Country','DailyCases']])
+#dat1['Case Type'] = 'daily'
+#dat1 = dat1.rename(columns={'DailyCases': 'Value'})
+#dat2 = pd.DataFrame(all_dat[['Date','Country','CumulativeCases']])
+#dat2['Case Type'] = 'cumulative'
+#dat2 = dat2.rename(columns={'CumulativeCases': 'Value'})
+#alld = pd.concat([dat1,dt2])
+all_dat[0] = all_dat[0][['Date','Country','Case Type','Value']]
 
+# +
+#all_dat[0].head(60)
+
+# +
+#for c in all_dat[0].columns:
+#    print(c)
+#    print(all_dat[0][c].unique())
+#    print("##############################################")
+
+# +
+import os
+from urllib.parse import urljoin
+
+out = Path('out')
+out.mkdir(exist_ok=True)
+all_dat[0].drop_duplicates().to_csv(out / 'observations.csv', index = False)
+scraper.dataset.issued = ''
+scraper.dataset.family = 'covid-19'
+scraper.dataset.comment = 'Daily and cumulative number of confirmed positive cases of COVID-19 in Scotland'
+dataset_path = pathify(os.environ.get('JOB_NAME', f'gss_data/{scraper.dataset.family}/' + Path(os.getcwd()).name))
+scraper.set_base_uri('http://gss-data.org.uk')
+scraper.set_dataset_id(dataset_path)
+csvw_transform = CSVWMapping()
+csvw_transform.set_csv(out / 'observations.csv')
+csvw_transform.set_mapping(json.load(open('info.json')))
+csvw_transform.set_dataset_uri(urljoin(scraper._base_uri, f'data/{scraper._dataset_id}'))
+csvw_transform.write(out / 'observations.csv-metadata.json')
+with open(out / 'observations.csv-metadata.trig', 'wb') as metadata:
+    metadata.write(scraper.generate_trig())
+# -
+
+"""
+info = json.load(open('info.json')) 
+codelistcreation = info['transform']['codelists'] 
+print(codelistcreation)
+print("-------------------------------------------------------")
+tidy = all_dat[0]
+codeclass = CSVCodelists()
+for cl in codelistcreation:
+    if cl in tidy.columns:
+        tidy[cl] = tidy[cl].str.replace("-"," ")
+        tidy[cl] = tidy[cl].str.capitalize()
+        codeclass.create_codelists(pd.DataFrame(tidy[cl]), 'codelists', scraper.dataset.family, Path(os.getcwd()).name.lower())
+"""
 
 

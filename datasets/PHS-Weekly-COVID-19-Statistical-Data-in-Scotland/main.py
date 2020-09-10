@@ -576,6 +576,7 @@ if spec_me:
         print(l)
 
 all_dat[0] = all_dat[0][['Date','Country','Case Type','Value']]
+all_dat[0]['Case Type'] = all_dat[0]['Case Type'].apply(pathify)
 
 # +
 #all_dat[0].head(60)

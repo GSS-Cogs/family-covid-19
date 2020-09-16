@@ -330,8 +330,7 @@ joined_dat1.drop_duplicates().to_csv(out / csvName, index = False)
 scraper.dataset.family = 'covid-19'
 scraper.dataset.description = 'SG Coronavirus COVID-19 additional data about adult care homes in Scotland - Suspected COVID-19 Cases.\n ' + notes
 scraper.dataset.comment = 'Testing for COVID-19 in adult care homes in Scotland: split by care homes with confirmed COVID-19 and without confirmed COVID-19, presented by NHS Health Board'
-# Output CSV-W metadata (validation, transform and DSD).
-# Output dataset metadata separately for now.
+scraper.dataset.title = 'Testing for COVID-19 in adult care homes in Scotland'
 
 import os
 from urllib.parse import urljoin
@@ -339,7 +338,7 @@ from urllib.parse import urljoin
 dataset_path = pathify(os.environ.get('JOB_NAME', 'gss_data/covid-19/' + Path(os.getcwd()).name)) 
 scraper.set_base_uri('http://gss-data.org.uk')
 scraper.set_dataset_id(dataset_path)
-#scraper.dataset.title = 'SG Covid-19 additional data about adult care homes - Suspected COVID-19 Cases'
+
 csvw_transform = CSVWMapping()
 csvw_transform.set_csv(out / csvName)
 csvw_transform.set_mapping(json.load(open('info.json')))

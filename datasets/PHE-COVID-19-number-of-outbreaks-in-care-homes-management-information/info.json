@@ -31,7 +31,7 @@
                 "value": "http://statistics.data.gov.uk/id/statistical-geography/{geography_code}"
             },
             "Number of care homes": {
-                "attribute": "http://gss-data.org.uk/def/attribute/number-of-care-homes",
+                "attribute": "http://gss-data.org.uk/def/attribute/number_of_care_homes",
                 "datatype": "integer"
             },
             "Value": {

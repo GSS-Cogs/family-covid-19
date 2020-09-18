@@ -339,7 +339,7 @@ df.drop_duplicates().to_csv(out / csvName, index = False)
 scrape.dataset.family = 'covid-19'
 scrape.dataset.description = scrape.dataset.description + '\n' + notes
 scrape.dataset.comment = 'Statistics on food parcels. The data are taken from management information and are subject to change. They have not been subject to the same validation processes undertaken for official statistics releases. However, they are provided to support transparency and understanding of the response to coronavirus in Wales.'
-scrape.dataset.title = 'Summary data about Coronavirus COVID-19and the response to it - Food Parcels'
+scrape.dataset.title = 'Summary data about Coronavirus COVID-19 and the response to it - Food Parcels'
 
 dataset_path = pathify(os.environ.get('JOB_NAME', f'gss_data/{scrape.dataset.family}/' + Path(os.getcwd()).name)).lower()
 scrape.set_base_uri('http://gss-data.org.uk')

@@ -1,6 +1,6 @@
 {
   "@context": "http://www.w3.org/ns/csvw",
-  "@id": "http://gss-data.org.uk/data/gss_data/covid-19/WG-Summary-data-about-coronavirus-COVID-19-and-the-response-to-it#schema",
+  "@id": "http://gss-data.org.uk/data/gss_data/covid-19/wg-summary-data-about-coronavirus-covid-19-and-the-response-to-it#schema",
   "url": "food-parcels.csv",
   "tableSchema": {
     "columns": [
@@ -30,7 +30,7 @@
         },
         "required": false,
         "propertyUrl": "skos:broader",
-        "valueUrl": "http://gss-data.org.uk/data/gss_data/covid-19/WG-Summary-data-about-coronavirus-COVID-19-and-the-response-to-it#concept/food-parcels/{parent_notation}"
+        "valueUrl": "http://gss-data.org.uk/data/gss_data/covid-19/wg-summary-data-about-coronavirus-covid-19-and-the-response-to-it#concept/food-parcels/{parent_notation}"
       },
       {
         "titles": "Sort Priority",
@@ -54,16 +54,16 @@
       {
         "virtual": true,
         "propertyUrl": "skos:inScheme",
-        "valueUrl": "http://gss-data.org.uk/data/gss_data/covid-19/WG-Summary-data-about-coronavirus-COVID-19-and-the-response-to-it#scheme/food-parcels"
+        "valueUrl": "http://gss-data.org.uk/data/gss_data/covid-19/wg-summary-data-about-coronavirus-covid-19-and-the-response-to-it#scheme/food-parcels"
       }
     ],
     "primaryKey": "notation",
-    "aboutUrl": "http://gss-data.org.uk/data/gss_data/covid-19/WG-Summary-data-about-coronavirus-COVID-19-and-the-response-to-it#concept/food-parcels/{notation}"
+    "aboutUrl": "http://gss-data.org.uk/data/gss_data/covid-19/wg-summary-data-about-coronavirus-covid-19-and-the-response-to-it#concept/food-parcels/{notation}"
   },
   "prov:hadDerivation": {
-    "@id": "http://gss-data.org.uk/data/gss_data/covid-19/WG-Summary-data-about-coronavirus-COVID-19-and-the-response-to-it#scheme/food-parcels",
+    "@id": "http://gss-data.org.uk/data/gss_data/covid-19/wg-summary-data-about-coronavirus-covid-19-and-the-response-to-it#scheme/food-parcels",
     "@type": "skos:ConceptScheme",
     "rdfs:label": "Food Parcels",
-    "skos:hasTopConcept": "http://gss-data.org.uk/data/gss_data/covid-19/WG-Summary-data-about-coronavirus-COVID-19-and-the-response-to-it#concept/food-parcels/total"
+    "skos:hasTopConcept": "http://gss-data.org.uk/data/gss_data/covid-19/wg-summary-data-about-coronavirus-covid-19-and-the-response-to-it#concept/food-parcels/total"
   }
 }

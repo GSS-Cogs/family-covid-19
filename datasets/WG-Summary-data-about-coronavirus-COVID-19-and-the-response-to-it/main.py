@@ -290,6 +290,13 @@ for column in supportResponseTidy:
 """
 
 # %%
+indexNames = tidy_sheet1[tidy_sheet1['Period'] == 'Total to date' ].index
+dates = tidy_sheet1['Period'].drop(indexNames)
+intervalOfOrderPeriods = days_between(max(dates), min(dates))
+tidy_sheet1['Period'] = tidy_sheet1.apply(lambda x: 'gregorian-interval/'+ min(dates) + 'T00:00:00/P' + str(intervalOfOrderPeriods) + 'D' if 'Total to date' in x['Period'] else x['Period'], axis = 1)
+
+
+# %%
 df = tidy_sheet1[tidy_sheet1['Support Type'] == 'Food Parcel']
 df.head(5)
 
@@ -302,7 +309,7 @@ del df['Finance Type 2']
 df['Date'] = df.apply(lambda x: 'day/'+ x['Date'] if 'D' not in x['Date'] else x['Date'], axis = 1)
 df['Food Parcels'] = df.apply(lambda x: 'Orders Received' if 'Food parcel orders received' in x['Food Parcels'] else x['Food Parcels'], axis = 1)
 for c in df.columns:
-    if (c != 'Value') & (c != 'Date'):
+    if (c != 'Value'):
         print(c)
         print(df[c].unique())
         print("#########################")
@@ -345,5 +352,7 @@ csvw_transform.write(out / f'{csvName}-metadata.json')
 #out / csvName).unlink()
 with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
     metadata.write(scrape.generate_trig())
+
+# %%
 
 # %%

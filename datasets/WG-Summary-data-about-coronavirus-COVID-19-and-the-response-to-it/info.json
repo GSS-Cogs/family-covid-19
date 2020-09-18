@@ -1,9 +1,9 @@
 {
     "title": "Summary data about coronavirus (COVID-19) and the response to it",
-    "publisher": "Welsh Government",
+    "publisher": "welsh-government",
     "description": "An overview of statistics about coronavirus and the response to it, including support provided.",
     "landingPage": "https://gov.wales/summary-data-about-coronavirus-covid-19-and-response-it",
-    "dataURL": "https://gov.wales/sites/default/files/statistics-and-research/2020-06/summary-data-about-coronavirus-covid-19-and-the-response-to-it-1-june-2020.ods",
+    "dataURL": "https://gov.wales/sites/default/files/statistics-and-research/2020-09/summary-data-about-coronavirus-covid-19-and-the-response-to-it-8-september-2020-474.ods",
     "datasetNotes": [
         "On the landing page scroll to the latest release, this will open another page scroll to data and click on the + the spreadsheet can be found here"
     ],
@@ -20,7 +20,24 @@
         "main_issue": 1,
         "stage": [
             "To Do"
-        ]
+        ],
+        "columns": {
+            "Date": {
+                "description": "",
+                "source": "",
+                "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
+                "value": "http://reference.data.gov.uk/id/{+date}"
+            },
+            "Food Parcels": {
+                "description": "",
+                "source": ""
+            },
+            "Value": {
+                "unit": "http://gss-data.org.uk/def/concept/measurement-units/parcels",
+                "measure": "http://gss-data.org.uk/def/measure/count",
+                "datatype": "integer"
+            }
+        }
     },
     "sizingNotes": "Simple table structure over 5 Tabs some footnotes",
     "notes": "Email issued 05/05/2020"

@@ -14,24 +14,24 @@
 
 ### Dataset One
 
+        SCRIPT HAS BEEN CHANGED TO ONLY OUTPUT FOOD PARCEL DATA FOR THE MOMENT
+
 #### Output Dataset Name:
 
 		WG COVID-19 Food Parcel Support
 		
 #### Table Structure
 
-		Period, Food Parcel Status, Measure Type, Unit, Marker, Value
+		Period, Food Parcels, Value
 
 #### Sheet: Food_parcels
 
-		A7:A47 - Date - Change name to Period and format as required
+		A7:A47 - Date
 			Time period for Total needs to be added for totals in row 47
-		B6:C6 - Food Parcel Status (Codelist)
+		B6:C6 - Food Parcel (Codelist)
 			Food parcel orders received - Orders Received
 			Attempted deliveries - Attempted Deliveries
-		Add Measure Type column with value Parcel
-		Add Unit column with value Count
-		Values with ~ need to be changed to 0 and "This data item is not yet available" put in Marker column
+        Meaaure Type (Count) and Unit (Parcel) values have been added info.json
 
 ##### Footnotes
 		Daily "order received" data are revised if there was a duplicate record or a box is no longer required and so some totals may be slightly lower than previously shown
@@ -57,7 +57,7 @@
 		Add Measure Type column with value Payments
 		Add Unit column with value Count
 
-		
+
 #### Sheet: Business_Rates_Grants
 
 		A7:A20 - Date - Change name to Period and format as required
@@ -68,7 +68,7 @@
 		Add Measure Type column with values Cumulative Count and Cumulative GBP Million
 		Add Unit column with values Count and GBP 		
 
-		
+
 #### Sheet: DBW_loans
 
 		A7:A15 - Date - Change name to Period and format as required
@@ -79,7 +79,7 @@
 		Add Measure Type column with values Cumulative Count and Cumulative GBP Million
 		Add Unit column with values Count and GBP 
 
-		
+
 #### Sheet: ERF
 
 		A7:A12 - Date - Change name to Period and format as required

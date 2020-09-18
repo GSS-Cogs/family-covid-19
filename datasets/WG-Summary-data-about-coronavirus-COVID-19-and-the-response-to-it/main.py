@@ -1,13 +1,14 @@
 #!/usr/bin/env python
 # coding: utf-8
+# %%
 
-# In[138]:
+# %%
 
 
 # # WG Summary data about coronavirus  COVID-19  and the response to it
 
 
-# In[139]:
+# %%
 
 
 from gssutils import *
@@ -27,13 +28,13 @@ scrape.distributions[0].title = "WG Summary data about coronavirus COVID-19 and 
 scrape
 
 
-# In[140]:
+# %%
 
 
 trace = TransformTrace()
 
 
-# In[141]:
+# %%
 
 
 xls = pd.ExcelFile(scrape.distributions[0].downloadURL, engine="odf")
@@ -48,8 +49,7 @@ for tab in tabs:
     print(tab.name)
 
 
-# In[142]:
-
+# %%
 
 for tab in tabs:
 
@@ -58,27 +58,27 @@ for tab in tabs:
         supportResponseTitle = 'WG COVID-19 Support Response'
 
         columns=["Period", "Finance Type", "Support Type", "Measure Type", "Unit"]
-        trace.start(supportResponseTitle, tab, columns, dataURL)
+        #trace.start(supportResponseTitle, tab, columns, dataURL)
 
         cell = tab.filter(contains_string('Food parcel orders received')).shift(LEFT)
 
         remove = tab.filter(contains_string('Notes')).expand(LEFT).expand(DOWN).expand(RIGHT)
 
-        trace.multi(["Period", "Support_Type"], "Pivot Point is taken as the position of left most horizontal header (allows for small variations in table location in subsequent )")
+        #trace.multi(["Period", "Support_Type"], "Pivot Point is taken as the position of left most horizontal header (allows for small variations in table location in subsequent )")
 
-        trace.Period('Selected as non-blank values below and to left of pivot point.')
+        #trace.Period('Selected as non-blank values below and to left of pivot point.')
         period = cell.shift(DOWN).expand(DOWN).is_not_blank() - remove
 
-        trace.Support_Type('Selected as non-blank values right of the pivot point.')
+        #trace.Support_Type('Selected as non-blank values right of the pivot point.')
         supportType = 'Food Parcel'
 
         financeType = cell.shift(RIGHT).expand(RIGHT).is_not_blank() - remove
 
-        trace.OBS('All non-blank values to the right of Period Values.')
+        #trace.OBS('All non-blank values to the right of Period Values.')
         observations = period.fill(RIGHT).is_not_blank()
 
-        trace.Measure_Type('Hard Coded to {}', var = 'Parcel')
-        trace.Unit('Hard Coded to {}', var = 'Count')
+        #trace.Measure_Type('Hard Coded to {}', var = 'Parcel')
+        #trace.Unit('Hard Coded to {}', var = 'Count')
         dimensions = [
                 HDim(period, 'Period', DIRECTLY, LEFT),
                 HDim(financeType, 'Finance Type', DIRECTLY, ABOVE),
@@ -89,39 +89,40 @@ for tab in tabs:
         ]
 
         tidy_sheet = ConversionSegment(tab, dimensions, observations)
-        trace.with_preview(tidy_sheet)
+        tidy_sheet1 = tidy_sheet.topandas()
+        #trace.with_preview(tidy_sheet)
 
-        trace.store("supportResponseDataframe", tidy_sheet.topandas())
+        #trace.store("supportResponseDataframe", tidy_sheet.topandas())
 
     elif 'Discretionary_Assistance_Fund' in tab.name:
 
         supportResponseTitle = 'WG COVID-19 Support Response'
-
+        """
         columns=["Period", "Finance Type", "Support Type", "Measure Type", "Unit"]
-        trace.start(supportResponseTitle, tab, columns, dataURL)
+        #trace.start(supportResponseTitle, tab, columns, dataURL)
 
         cell = tab.filter(contains_string('COVID-19 related payments')).shift(LEFT)
 
         remove = tab.filter(contains_string('Notes')).expand(LEFT).expand(DOWN).expand(RIGHT)
 
-        trace.multi(["Period", "Finance_Type"], "Pivot Point is taken as the position of left most horizontal header (allows for small variations in table location in subsequent )")
+        #trace.multi(["Period", "Finance_Type"], "Pivot Point is taken as the position of left most horizontal header (allows for small variations in table location in subsequent )")
 
-        trace.Period('Selected as non-blank values below and to left of pivot point.')
+        #trace.Period('Selected as non-blank values below and to left of pivot point.')
         period = cell.shift(DOWN).expand(DOWN).is_not_blank() - remove
 
-        trace.Finance_Type('Selected as non-blank values right of the pivot point.')
+        #trace.Finance_Type('Selected as non-blank values right of the pivot point.')
         financeType = cell.shift(RIGHT).expand(RIGHT).is_not_blank()
 
         financeType2 = cell.shift(1,1).expand(RIGHT).is_not_blank()
 
         #The second column ('Total Paid') doesn't seem to be mentioned in the spec so I'm assuming it was added after it was created
         #therefore I have added the column and altered the measure type/unit later in the transform
-        trace.OBS('All non-blank values to the right of Period Values.')
+        #trace.OBS('All non-blank values to the right of Period Values.')
         observations = period.fill(RIGHT).is_not_blank()
 
-        trace.Support_Type('Hard Coded to {}', var = 'Emergency Assistance')
-        trace.Measure_Type('Hard Coded to {}', var = 'Payments')
-        trace.Unit('Hard Coded to {}', var = 'Count')
+        #trace.Support_Type('Hard Coded to {}', var = 'Emergency Assistance')
+        #trace.Measure_Type('Hard Coded to {}', var = 'Payments')
+        #trace.Unit('Hard Coded to {}', var = 'Count')
         dimensions = [
                 HDim(period, 'Period', DIRECTLY, LEFT),
                 HDim(financeType, 'Finance Type', CLOSEST, LEFT),
@@ -132,24 +133,26 @@ for tab in tabs:
         ]
 
         tidy_sheet = ConversionSegment(tab, dimensions, observations)
-        trace.with_preview(tidy_sheet)
+        tidy_sheet2 = tidy_sheet.topandas()
+        #trace.with_preview(tidy_sheet)
 
-        trace.store("supportResponseDataframe", tidy_sheet.topandas())
-
+        #trace.store("supportResponseDataframe", tidy_sheet.topandas())
+        """
     else:
-
-        trace.start(supportResponseTitle, tab, columns, dataURL)
+        thingJustForThing = ''
+        """
+        #trace.start(supportResponseTitle, tab, columns, dataURL)
 
         cell = tab.filter(contains_string('Source: ')).shift(0,3)
 
         remove = tab.filter(contains_string('Further background')).expand(LEFT).expand(DOWN).expand(RIGHT)
 
-        trace.multi(["Period", "Finance_Type"], "Pivot Point is taken as the position of left most horizontal header (allows for small variations in table location in subsequent )")
+        #trace.multi(["Period", "Finance_Type"], "Pivot Point is taken as the position of left most horizontal header (allows for small variations in table location in subsequent )")
 
-        trace.Period('Selected as non-blank values below and to left of pivot point.')
+        #trace.Period('Selected as non-blank values below and to left of pivot point.')
         period = cell.fill(DOWN).is_not_blank() - remove
 
-        trace.Finance_Type('Selected as non-blank values right of the pivot point.')
+        #trace.Finance_Type('Selected as non-blank values right of the pivot point.')
         financeType = cell.shift(RIGHT).expand(RIGHT).is_not_blank()
 
         if 'Business' in tab.name:
@@ -166,12 +169,12 @@ for tab in tabs:
         else:
             measureType = 'Cumulative Count'
 
-        trace.OBS('All non-blank values to the right of Period Values.')
+        #trace.OBS('All non-blank values to the right of Period Values.')
         observations = period.fill(RIGHT).is_not_blank()
 
-        trace.Support_Type('Hard Coded switch values {} derived from Tab name.', var = supportType)
-        trace.Measure_Type('Hard Coded switch values {} derived from Tab name.', var = measureType)
-        trace.Unit('Hard Coded to {}', var = 'Count')
+        #trace.Support_Type('Hard Coded switch values {} derived from Tab name.', var = supportType)
+        #trace.Measure_Type('Hard Coded switch values {} derived from Tab name.', var = measureType)
+        #trace.Unit('Hard Coded to {}', var = 'Count')
         dimensions = [
                 HDim(period, 'Period', DIRECTLY, LEFT),
                 HDim(financeType, 'Finance Type', DIRECTLY, ABOVE),
@@ -182,13 +185,18 @@ for tab in tabs:
         ]
 
         tidy_sheet = ConversionSegment(tab, dimensions, observations)
-        trace.with_preview(tidy_sheet)
+        tidy_sheet3 = tidy_sheet.topandas()
+        #trace.with_preview(tidy_sheet)
 
-        trace.store("supportResponseDataframe", tidy_sheet.topandas())
+        #trace.store("supportResponseDataframe", tidy_sheet.topandas())
+        """
 
 
-# In[143]:
+# %%
+tidy_sheet1
 
+# %%
+"""
 
 supportResponse = trace.combine_and_trace(supportResponseTitle, "supportResponseDataframe").fillna('')
 
@@ -255,10 +263,11 @@ supportResponse['OBS'] = supportResponse.apply(lambda x: '0' if 'This data item 
 supportResponse.rename(columns={'OBS' : 'Value',
                                 'DATAMARKER' : 'Marker'}, inplace=True)
 supportResponse.head()
+"""
 
 
-# In[144]:
-
+# %%
+"""
 
 from IPython.core.display import HTML
 for col in supportResponse:
@@ -266,10 +275,11 @@ for col in supportResponse:
         supportResponse[col] = supportResponse[col].astype('category')
         display(HTML(f"<h2>{col}</h2>"))
         display(supportResponse[col].cat.categories)
+"""
 
 
-# In[145]:
-
+# %%
+"""
 
 supportResponseTidy = supportResponse[['Period','Finance Type', 'Support Type', 'Value','Measure Type','Unit']]
 
@@ -277,28 +287,63 @@ for column in supportResponseTidy:
     if column in ('Marker', 'Finance Type', 'Support Type'):
         supportResponseTidy[column] = supportResponseTidy[column].map(lambda x: pathify(x))
 
-supportResponseTidy.head(25)
+"""
 
+# %%
+df = tidy_sheet1[tidy_sheet1['Support Type'] == 'Food Parcel']
+df.head(5)
 
-# In[146]:
+# %%
+df = df.rename(columns={'Finance Type': 'Food Parcels', 'Period': 'Date', 'OBS':'Value'})
+del df['Support Type']
+del df['Measure Type']
+del df['Unit']
+del df['Finance Type 2']
+df['Date'] = df.apply(lambda x: 'day/'+ x['Date'] if 'D' not in x['Date'] else x['Date'], axis = 1)
+df['Food Parcels'] = df.apply(lambda x: 'Orders Received' if 'Food parcel orders received' in x['Food Parcels'] else x['Food Parcels'], axis = 1)
+for c in df.columns:
+    if (c != 'Value') & (c != 'Date'):
+        print(c)
+        print(df[c].unique())
+        print("#########################")
+df['Food Parcels'] = df['Food Parcels'].apply(pathify)
+df = df[['Date', 'Food Parcels', 'Value']]
+df.head(10)
 
+# %%
+import os
+from urllib.parse import urljoin
 
+notes = '''
+Guidance documentation can be found here: \n
+https://gov.wales/sites/default/files/statistics-and-research/2020-09/summary-data-about-coronavirus-covid-19-and-the-response-to-it-8-september-2020-423.pdf \n 
+Daily order received data are revised if there was a duplicate record or a box is no longer required and so some totals may be slightly lower than previously shown. \n
+Further background on food parcels for the extremely vulnerable: \n
+https://gov.wales/guidance-on-shielding-and-protecting-people-defined-on-medical-grounds-as-extremely-vulnerable-from-coronavirus-covid-19-html
+'''
+csvName = 'food_parcels_observations.csv'
 out = Path('out')
 out.mkdir(exist_ok=True)
+df.drop_duplicates().to_csv(out / csvName, index = False)
 
-supportResponseTitle = pathify(supportResponseTitle)
+scrape.dataset.family = 'covid-19'
+scrape.dataset.description = scrape.dataset.description + '\n' + notes
+scrape.dataset.comment = 'Statistics on food parcels. The data are taken from management information and are subject to change. They have not been subject to the same validation processes undertaken for official statistics releases. However, they are provided to support transparency and understanding of the response to coronavirus in Wales.'
+scrape.dataset.title = 'Summary data about Coronavirus COVID-19and the response to it - Food Parcels'
 
-supportResponseTidy.drop_duplicates().to_csv(out / f'{supportResponseTitle}.csv', index = False)
+dataset_path = pathify(os.environ.get('JOB_NAME', f'gss_data/{scrape.dataset.family}/' + Path(os.getcwd()).name)).lower()
+scrape.set_base_uri('http://gss-data.org.uk')
+scrape.set_dataset_id(dataset_path)
 
-trace.output()
 
-"""
-scraper.dataset.family = 'homelessness'
-scraper.dataset.theme = THEME['housing-planning-local-services']
-scraper.dataset.license = 'http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/'
-with open(out / 'observations.csv-metadata.trig', 'wb') as metadata:
-    metadata.write(scraper.generate_trig())
+csvw_transform = CSVWMapping()
+csvw_transform.set_csv(out / csvName)
+csvw_transform.set_mapping(json.load(open('info.json')))
+csvw_transform.set_dataset_uri(urljoin(scrape._base_uri, f'data/{scrape._dataset_id}'))
+csvw_transform.write(out / f'{csvName}-metadata.json')
+# Remove subset of data
+#out / csvName).unlink()
+with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
+    metadata.write(scrape.generate_trig())
 
-#csvw = CSVWMetadata('https://gss-cogs.github.io/family-homelessness/reference/')
-#csvw.create(out / 'observations.csv', out / 'observations.csv-schema.json')"""
-
+# %%

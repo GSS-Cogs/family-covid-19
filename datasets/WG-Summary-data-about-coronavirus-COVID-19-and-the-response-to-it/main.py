@@ -307,14 +307,17 @@ del df['Measure Type']
 del df['Unit']
 del df['Finance Type 2']
 df['Date'] = df.apply(lambda x: 'day/'+ x['Date'] if 'D' not in x['Date'] else x['Date'], axis = 1)
-df['Food Parcels'] = df.apply(lambda x: 'Orders Received' if 'Food parcel orders received' in x['Food Parcels'] else x['Food Parcels'], axis = 1)
+df['Food Parcels'] = df.apply(lambda x: 'Orders Received' if 'Food\xa0parcel orders received' in x['Food Parcels'] else x['Food Parcels'], axis = 1)
+
+df['Food Parcels'] = df['Food Parcels'].apply(pathify)
+df = df[['Date', 'Food Parcels', 'Value']]
+
 for c in df.columns:
     if (c != 'Value'):
         print(c)
         print(df[c].unique())
         print("#########################")
-df['Food Parcels'] = df['Food Parcels'].apply(pathify)
-df = df[['Date', 'Food Parcels', 'Value']]
+        
 df.head(10)
 
 # %%

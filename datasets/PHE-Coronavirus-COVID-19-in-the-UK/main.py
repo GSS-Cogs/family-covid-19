@@ -64,7 +64,7 @@ cc1['Measure Type'] = 'count'
 cc2['Measure Type'] = 'cumulative'
 cc3['Measure Type'] = 'rate'
 #######################################################################################
-# WHEN WE CAN PUBLISH WITH MORE THAN ONE MEASYRE TYPE THEN ALSO ADD CUMULATIVE DATA #
+# WHEN WE CAN PUBLISH WITH MORE THAN ONE MEASURE TYPE THEN ALSO ADD CUMULATIVE AND RATIO DATA #
 #covidCases = pd.concat([cc1,cc2,cc3])
 covidCases = cc1[['Date', 'Area Code', 'Measure Type', 'Value']]
 del covidCases['Measure Type']
@@ -91,7 +91,7 @@ cc2['Measure Type'] = 'cumulative'
 cc2 = cc2.rename(columns={'cumCasesBySpecimenDate':'Value',})
 
 #######################################################################################
-# WHEN WE CAN PUBLISH WITH MORE THAN ONE MEASYRE TYPE THEN ALSO ADD CUMULATIVE DATA #
+# WHEN WE CAN PUBLISH WITH MORE THAN ONE MEASURE TYPE THEN ALSO ADD CUMULATIVE DATA #
 #covidCases = pd.concat([cc1,cc2])
 covidCases1 = cc1
 #######################################################################################
@@ -197,7 +197,7 @@ scraper.set_dataset_id(dataset_path)
 csvw_transform = CSVWMapping()
 csvw_transform.set_csv(out / csvName)
 csvw_transform.set_mapping(json.load(open('info.json')))
-csvw_transform.set_dataset_uri(urljoin(scraper._base_uri, f'data/{scraper._dataset_id}'))
+csvw_transform.set_dataset_uri(urljoin(scraper._base_uri, f'data/cases/{scraper._dataset_id}'))
 csvw_transform.write(out / f'{csvName}-metadata.json')
 
 with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
@@ -277,7 +277,7 @@ For indicators where the most recent days' data are incomplete, the final few po
 """
 
 # %%
-"""
+
 import os
 from urllib.parse import urljoin
 
@@ -300,12 +300,12 @@ scraper.set_dataset_id(dataset_path)
 csvw_transform = CSVWMapping()
 csvw_transform.set_csv(out / csvName)
 csvw_transform.set_mapping(json.load(open('info.json')))
-csvw_transform.set_dataset_uri(urljoin(scraper._base_uri, f'data/{scraper._dataset_id}'))
+csvw_transform.set_dataset_uri(urljoin(scraper._base_uri, f'data/deaths/{scraper._dataset_id}'))
 csvw_transform.write(out / f'{csvName}-metadata.json')
 
 with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
     metadata.write(scraper.generate_trig())
-"""
+
 
 
 # %%

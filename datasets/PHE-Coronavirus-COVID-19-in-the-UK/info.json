@@ -33,7 +33,7 @@
                 "description": ""
             },
             "Value": {
-                "unit": "http://gss-data.org.uk/def/concept/measurement-units/persons",
+                "unit": "http://gss-data.org.uk/def/concept/measurement-units/cases",
                 "measure": "http://gss-data.org.uk/def/measure/count",
                 "datatype": "integer"
             }

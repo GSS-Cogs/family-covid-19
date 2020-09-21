@@ -190,14 +190,14 @@ scraper.dataset.description = scraper.dataset.description + notes
 scraper.dataset.comment = 'Number of people with at least one lab-confirmed positive COVID-19 test result, by specimen date, by nation. Individuals tested positive more than once are only counted once, on the date of their first positive test.'
 scraper.dataset.title = 'Coronavirus (Covid-19) Cases by specimen date, by Nation, England: LTLA, UTLA, Region'
 
-dataset_path = pathify(os.environ.get('JOB_NAME', f'gss_data/{scraper.dataset.family}/' + Path(os.getcwd()).name)).lower()
+dataset_path = pathify(os.environ.get('JOB_NAME', f'gss_data/{scraper.dataset.family}/cases/' + Path(os.getcwd()).name)).lower()
 scraper.set_base_uri('http://gss-data.org.uk')
 scraper.set_dataset_id(dataset_path)
 
 csvw_transform = CSVWMapping()
 csvw_transform.set_csv(out / csvName)
 csvw_transform.set_mapping(json.load(open('info.json')))
-csvw_transform.set_dataset_uri(urljoin(scraper._base_uri, f'data/cases/{scraper._dataset_id}'))
+csvw_transform.set_dataset_uri(urljoin(scraper._base_uri, f'data/{scraper._dataset_id}'))
 csvw_transform.write(out / f'{csvName}-metadata.json')
 
 with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
@@ -293,14 +293,14 @@ scraper.dataset.description = scraper.dataset.description + notes
 scraper.dataset.comment = 'Number of deaths of people who had had a positive test result for COVID-19 and died within 28 days of the first positive test. The actual cause of death may not be COVID-19 in all cases. People who died from COVID-19 but had not tested positive are not included and people who died from COVID-19 more than 28 days after their first positive test are not included. Data from the four nations are not directly comparable as methodologies and inclusion criteria vary.'
 scraper.dataset.title = 'Coronavirus (Covid-19) Deaths within 28 days of positive test by date of death, by nation'
 
-dataset_path = pathify(os.environ.get('JOB_NAME', f'gss_data/{scraper.dataset.family}/' + Path(os.getcwd()).name)).lower()
+dataset_path = pathify(os.environ.get('JOB_NAME', f'gss_data/{scraper.dataset.family}/deaths/' + Path(os.getcwd()).name)).lower()
 scraper.set_base_uri('http://gss-data.org.uk')
 scraper.set_dataset_id(dataset_path)
 
 csvw_transform = CSVWMapping()
 csvw_transform.set_csv(out / csvName)
 csvw_transform.set_mapping(json.load(open('info.json')))
-csvw_transform.set_dataset_uri(urljoin(scraper._base_uri, f'data/deaths/{scraper._dataset_id}'))
+csvw_transform.set_dataset_uri(urljoin(scraper._base_uri, f'data/{scraper._dataset_id}'))
 csvw_transform.write(out / f'{csvName}-metadata.json')
 
 with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:

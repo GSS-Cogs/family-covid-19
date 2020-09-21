@@ -1,8 +1,9 @@
 {
     "title": "Coronavirus (COVID-19) in the UK",
-    "publisher": "Public Health England",
+    "publisher": "public-health-england",
     "description": "",
-    "landingPage": "https://coronavirus.data.gov.uk/?_ga=2.156389567.589199403.1589439040-1962094972.1582617556",
+    "landingPage": "https://coronavirus.data.gov.uk/",
+    "dataURL": "https://coronavirus.data.gov.uk/downloads/csv/coronavirus-cases_latest.csv",
     "datasetNotes": [
         "On the landing page scroll to the map of the UK and underneath is the option to Download the latest cases data as CSV or JSON & the latest deaths data as CSV or JSON"
     ],
@@ -20,7 +21,23 @@
         "stage": [
             "To Do",
             "Priority"
-        ]
+        ],
+        "columns": {
+            "Date": {
+                "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
+                "value": "http://reference.data.gov.uk/id/{+date}"
+            },
+            "Area Code": {
+                "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refArea",
+                "value": "http://statistics.data.gov.uk/id/statistical-geography/{area_code}",
+                "description": ""
+            },
+            "Value": {
+                "unit": "http://gss-data.org.uk/def/concept/measurement-units/persons",
+                "measure": "http://gss-data.org.uk/def/measure/count",
+                "datatype": "integer"
+            }
+        }
     },
     "sizingNotes": "Available as 2 CSV or JSON files.",
     "notes": ""

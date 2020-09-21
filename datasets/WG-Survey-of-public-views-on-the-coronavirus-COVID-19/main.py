@@ -1,65 +1,84 @@
-# # WG Survey of public views on the coronavirus  COVID-19 
+#!/usr/bin/env python
+# coding: utf-8
 
-from gssutils import * 
-import json 
+# In[84]:
 
-scrape = Scraper(seed="info.json")   
+
+# # WG Survey of public views on the coronavirus  COVID-19
+
+from gssutils import *
+import json
+
+
+scrape = Scraper('https://gov.wales/survey-public-views-coronavirus-covid-19')
 scrape.distributions[0].title = "Survey of public views on the coronavirus (COVID-19)"
 scrape
 
 tabs = { tab.name: tab for tab in scrape.distributions[0].as_databaker() }
 list(tabs)
 
-# +
+
+# In[85]:
+
+
 tab = tabs['Data']
 cell = tab.filter('Public views & outlook')
 cell.assert_one()
 response = cell.shift(1,0).fill(DOWN).is_not_blank().is_not_whitespace()
-date = cell.shift(0,-1).fill(RIGHT).is_not_blank().is_not_whitespace()  
+date = cell.shift(0,-1).fill(RIGHT).is_not_blank().is_not_whitespace()
 question = response.shift(-1,0)
 survey = cell.expand(DOWN).is_not_blank().is_not_whitespace() - question
-observations = date.fill(DOWN).is_not_blank().is_not_whitespace() 
+observations = date.fill(DOWN).is_not_blank().is_not_whitespace()
 Dimensions = [
             HDim(response,'Average Response',DIRECTLY,LEFT),
             HDim(date, 'Period',DIRECTLY,ABOVE),
             HDim(question, 'Survey Question', DIRECTLY,LEFT),
             HDim(survey,'Survey Question Category', CLOSEST,ABOVE ),
-            HDimConst('Unit','percent'),  
+            HDimConst('Unit','percent'),
             HDimConst('Measure Type','percentage')
-    
-]  
+
+]
 c1 = ConversionSegment(observations, Dimensions, processTIMEUNIT=True)
 new_table = c1.topandas()
 import numpy as np
 new_table.rename(columns={'OBS': 'Value','DATAMARKER': 'Marker'}, inplace=True)
-# -
+
+
+# In[86]:
+
 
 from IPython.core.display import HTML
 for col in new_table:
     if col not in ['Value']:
         new_table[col] = new_table[col].astype('category')
         display(HTML(f"<h2>{col}</h2>"))
-        display(new_table[col].cat.categories) 
+        display(new_table[col].cat.categories)
 
-# +
+
+# In[87]:
+
+
 new_table['Marker'] = new_table['Marker'].map(
     lambda x: {
         '-' : 'Statistical disclosure'
         }.get(x, x))
 
 def user_perc(x,y):
-    
-    if (str(x) ==  'Statistical disclosure'): 
-        
+
+    if (str(x) ==  'Statistical disclosure'):
+
         return 0
     else:
         return y
-    
+
 new_table['Value'] = new_table.apply(lambda row: user_perc(row['Marker'], row['Value']), axis = 1)
 
-# +
-month_num_dict = {'January': '01', 'February': '02', 'March': '03', 'April': '04', 'May': '05', 
-                  'June': '06', 'July': '07', 'August': '08', 'September': '09', 'October': '10', 
+
+# In[88]:
+
+
+month_num_dict = {'January': '01', 'February': '02', 'March': '03', 'April': '04', 'May': '05',
+                  'June': '06', 'July': '07', 'August': '08', 'September': '09', 'October': '10',
                   'November': '11', 'December': '12'}
 
 def date_time(time_value):
@@ -70,12 +89,18 @@ def date_time(time_value):
         date_string = '0' + date_string
     return 'gregorian-interval/2020-'+ month_num + '-' + date_string + 'T00:00:00/P3D'
 new_table["Period"] = new_table["Period"].apply(date_time)
-# -
+
+
+# In[89]:
+
 
 tidy = new_table[['Period','Survey Question Category','Survey Question','Average Response','Measure Type',
                   'Unit','Marker', 'Value']]
 
-# +
+
+# In[90]:
+
+
 tidy['Survey Question Category'] = tidy['Survey Question Category'].apply(pathify)
 tidy['Survey Question'] = tidy['Survey Question'].apply(pathify)
 tidy['Average Response'] = tidy['Average Response'].apply(pathify)
@@ -85,11 +110,17 @@ del tidy['Measure Type']
 del tidy['Unit']
 
 #tidy.head(60)
-# -
+
+
+# In[90]:
 
 
 
-# +
+
+
+# In[91]:
+
+
 import os
 from urllib.parse import urljoin
 
@@ -109,11 +140,14 @@ csvw_transform.set_dataset_uri(urljoin(scrape._base_uri, f'data/{scrape._dataset
 csvw_transform.write(out / 'observations.csv-metadata.json')
 with open(out / 'observations.csv-metadata.trig', 'wb') as metadata:
     metadata.write(scrape.generate_trig())
-# -
+
+
+# In[92]:
+
 
 """
-info = json.load(open('info.json')) 
-codelistcreation = info['transform']['codelists'] 
+info = json.load(open('info.json'))
+codelistcreation = info['transform']['codelists']
 print(codelistcreation)
 print("-------------------------------------------------------")
 codeclass = CSVCodelists()
@@ -123,6 +157,9 @@ for cl in codelistcreation:
         tidy[cl] = tidy[cl].str.capitalize()
         codeclass.create_codelists(pd.DataFrame(tidy[cl]), 'codelists', scrape.dataset.family, Path(os.getcwd()).name.lower())
 """
+
+
+# In[92]:
 
 
 

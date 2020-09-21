@@ -277,7 +277,7 @@ For indicators where the most recent days' data are incomplete, the final few po
 """
 
 # %%
-
+"""
 import os
 from urllib.parse import urljoin
 
@@ -306,8 +306,5 @@ csvw_transform.write(out / f'{csvName}-metadata.json')
 with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
     metadata.write(scraper.generate_trig())
 
+"""
 
-
-# %%
-
-# %%

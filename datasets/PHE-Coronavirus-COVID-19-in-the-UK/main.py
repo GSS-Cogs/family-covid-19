@@ -30,8 +30,12 @@ scraper.distributions[0]
 
 
 # %%
-columns = ['Period', 'LA Name', 'LA Code' 'Value']
-trace.start(scraper.title, name, columns, link)
+#trace = TransformTrace()
+#columns = ['Area name','Area code','Area type','Specimen date','Daily lab-confirmed cases','Cumulative lab-confirmed cases','Cumulative lab-confirmed cases rate']
+#name = 'coronavirus-cases_latest.csv'
+#link = scraper.distributions[0].downloadURL
+#trace.start(scraper.title, name, columns, link)
+#table = pd.read_csv(link, dtype=str)
 
 # %%
 

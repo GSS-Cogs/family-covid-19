@@ -21,8 +21,8 @@ Therefore to run this pipeline you will need to download the TWO csv files from 
 to the folder which contains main.py/main.ipynb
 """
 
-#info = json.load(open('info.json'))
-#etl_title = info["title"]
+info = json.load(open('info.json'))
+etl_title = info["title"]
 
 scraper.dataset.issued = '2020-09-17'
 scraper.distributions[0].title = etl_title

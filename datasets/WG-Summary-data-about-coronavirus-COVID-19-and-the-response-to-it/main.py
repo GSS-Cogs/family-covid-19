@@ -1,14 +1,23 @@
 #!/usr/bin/env python
 # coding: utf-8
+
+# In[17]:
+
+
+#!/usr/bin/env python
+# coding: utf-8
 # %%
 
-# %%
+
+# In[18]:
+
 
 
 # # WG Summary data about coronavirus  COVID-19  and the response to it
 
 
-# %%
+# In[19]:
+
 
 
 from gssutils import *
@@ -23,18 +32,25 @@ def days_between(d1, d2):
     d2 = datetime.strptime(d2, "%Y-%m-%d")
     return abs((d2 - d1).days)
 
-scrape = Scraper(seed="info.json")
+scrape = Scraper('https://gov.wales/summary-data-about-coronavirus-covid-19-and-response-it')
 scrape.distributions[0].title = "WG Summary data about coronavirus COVID-19 and the response to it"
 scrape
 
 
-# %%
+# In[19]:
+
+
+
+
+
+# In[20]:
 
 
 trace = TransformTrace()
 
 
-# %%
+# In[21]:
+
 
 
 xls = pd.ExcelFile(scrape.distributions[0].downloadURL, engine="odf")
@@ -49,7 +65,8 @@ for tab in tabs:
     print(tab.name)
 
 
-# %%
+# In[22]:
+
 
 for tab in tabs:
 
@@ -192,10 +209,15 @@ for tab in tabs:
         """
 
 
-# %%
+# In[23]:
+
+
 tidy_sheet1
 
-# %%
+
+# In[24]:
+
+
 """
 
 supportResponse = trace.combine_and_trace(supportResponseTitle, "supportResponseDataframe").fillna('')
@@ -266,7 +288,9 @@ supportResponse.head()
 """
 
 
-# %%
+# In[25]:
+
+
 """
 
 from IPython.core.display import HTML
@@ -278,7 +302,9 @@ for col in supportResponse:
 """
 
 
-# %%
+# In[26]:
+
+
 """
 
 supportResponseTidy = supportResponse[['Period','Finance Type', 'Support Type', 'Value','Measure Type','Unit']]
@@ -289,18 +315,26 @@ for column in supportResponseTidy:
 
 """
 
-# %%
+
+# In[27]:
+
+
 indexNames = tidy_sheet1[tidy_sheet1['Period'] == 'Total to date' ].index
 dates = tidy_sheet1['Period'].drop(indexNames)
 intervalOfOrderPeriods = days_between(max(dates), min(dates))
 tidy_sheet1['Period'] = tidy_sheet1.apply(lambda x: 'gregorian-interval/'+ min(dates) + 'T00:00:00/P' + str(intervalOfOrderPeriods) + 'D' if 'Total to date' in x['Period'] else x['Period'], axis = 1)
 
 
-# %%
+# In[28]:
+
+
 df = tidy_sheet1[tidy_sheet1['Support Type'] == 'Food Parcel']
 df.head(5)
 
-# %%
+
+# In[29]:
+
+
 df = df.rename(columns={'Finance Type': 'Food Parcels', 'Period': 'Date', 'OBS':'Value'})
 del df['Support Type']
 del df['Measure Type']
@@ -317,16 +351,19 @@ for c in df.columns:
         print(c)
         print(df[c].unique())
         print("#########################")
-        
+
 df.head(10)
 
-# %%
+
+# In[30]:
+
+
 import os
 from urllib.parse import urljoin
 
 notes = '''
 Guidance documentation can be found here: \n
-https://gov.wales/sites/default/files/statistics-and-research/2020-09/summary-data-about-coronavirus-covid-19-and-the-response-to-it-8-september-2020-423.pdf \n 
+https://gov.wales/sites/default/files/statistics-and-research/2020-09/summary-data-about-coronavirus-covid-19-and-the-response-to-it-8-september-2020-423.pdf \n
 Daily order received data are revised if there was a duplicate record or a box is no longer required and so some totals may be slightly lower than previously shown. \n
 Further background on food parcels for the extremely vulnerable: \n
 https://gov.wales/guidance-on-shielding-and-protecting-people-defined-on-medical-grounds-as-extremely-vulnerable-from-coronavirus-covid-19-html
@@ -356,6 +393,15 @@ csvw_transform.write(out / f'{csvName}-metadata.json')
 with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
     metadata.write(scrape.generate_trig())
 
-# %%
 
-# %%
+# In[30]:
+
+
+
+
+
+# In[30]:
+
+
+
+

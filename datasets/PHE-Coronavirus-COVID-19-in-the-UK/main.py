@@ -30,47 +30,93 @@ scraper.distributions[0]
 
 
 # %%
-#trace = TransformTrace()
-#columns = ['Area name','Area code','Area type','Specimen date','Daily lab-confirmed cases','Cumulative lab-confirmed cases','Cumulative lab-confirmed cases rate']
-#name = 'coronavirus-cases_latest.csv'
-#link = scraper.distributions[0].downloadURL
-#trace.start(scraper.title, name, columns, link)
-#table = pd.read_csv(link, dtype=str)
+import csv
+import requests
+
+CSV_URL = scraper.distributions[0].downloadURL
+
+with requests.Session() as s:
+    download = s.get(CSV_URL)
+
+    decoded_content = download.content.decode('utf-8')
+
+    cr = csv.reader(decoded_content.splitlines(), delimiter=',')
+    my_list = list(cr)
+        
+df = pd.DataFrame(my_list, columns=['Area name','Area code','Area type','Specimen date','Daily lab-confirmed cases','Cumulative lab-confirmed cases','Cumulative lab-confirmed cases rate'])
+df = df[1:] # First row is the column names, get rid
+print(df['Area type'].unique())
+# Lower Tier Local Authority
+# Upper Tier Local Authorities
+# Nation
+# Region
+df = df.rename(columns={'Specimen date':'Date','Area code':'Area Code'})
+# Separate out the three columns
+cc1 = df[['Date','Area Code','Daily lab-confirmed cases']]
+cc2 = df[['Date','Area Code','Cumulative lab-confirmed cases']]
+cc3 = df[['Date','Area Code','Cumulative lab-confirmed cases rate']]
+# Rename each measure colunm to Value
+cc1 = cc1.rename(columns={'Daily lab-confirmed cases':'Value'})
+cc2 = cc2.rename(columns={'Cumulative lab-confirmed cases':'Value'})
+cc3 = cc3.rename(columns={'Cumulative lab-confirmed cases rate':'Value'})
+# Set a measure type, not needed yet as we are only uploading one Measure Type
+cc1['Measure Type'] = 'count'
+cc2['Measure Type'] = 'cumulative'
+cc3['Measure Type'] = 'rate'
+#######################################################################################
+# WHEN WE CAN PUBLISH WITH MORE THAN ONE MEASYRE TYPE THEN ALSO ADD CUMULATIVE DATA #
+#covidCases = pd.concat([cc1,cc2,cc3])
+covidCases = cc1[['Date', 'Area Code', 'Measure Type', 'Value']]
+del covidCases['Measure Type']
+#######################################################################################
+covidCases['Date'] = 'day/' + covidCases['Date'].astype(str)
+covidCases.head(10)
 
 # %%
 
-covidCases = pd.read_csv('spec_cases_data_2020.csv')
+covidCases1 = pd.read_csv('spec_cases_data_2020.csv')
 
-covidCases = covidCases.drop(['areaName', 'areaType'], axis=1)
+covidCases1 = covidCases1.drop(['areaName', 'areaType'], axis=1)
 
 
-covidCases = covidCases.rename(columns={'areaCode':'Area Code',
+covidCases1 = covidCases1.rename(columns={'areaCode':'Area Code',
                                         'date':'Date'})
 
 
-cc1 = covidCases[['Date', 'Area Code', 'newCasesBySpecimenDate']]
+cc1 = covidCases1[['Date', 'Area Code', 'newCasesBySpecimenDate']]
 cc1['Measure Type'] = 'count'
 cc1 = cc1.rename(columns={'newCasesBySpecimenDate':'Value',})
-cc2 = covidCases[['Date', 'Area Code', 'cumCasesBySpecimenDate']]
+cc2 = covidCases1[['Date', 'Area Code', 'cumCasesBySpecimenDate']]
 cc2['Measure Type'] = 'cumulative'
 cc2 = cc2.rename(columns={'cumCasesBySpecimenDate':'Value',})
 
 #######################################################################################
 # WHEN WE CAN PUBLISH WITH MORE THAN ONE MEASYRE TYPE THEN ALSO ADD CUMULATIVE DATA #
 #covidCases = pd.concat([cc1,cc2])
-covidCases = cc1
+covidCases1 = cc1
 #######################################################################################
 
-covidCases['Date'] = 'day/' + covidCases['Date'].astype(str)
-covidCases = covidCases[['Date', 'Area Code', 'Measure Type', 'Value']]
+covidCases1['Date'] = 'day/' + covidCases1['Date'].astype(str)
+covidCases1 = covidCases1[['Date', 'Area Code', 'Measure Type', 'Value']]
 
-del covidCases['Measure Type']
+del covidCases1['Measure Type']
 
-covidCases.head()
+covidCases1.head(1)
 
 
 # %%
+print(covidCases.count())
+print(covidCases1.count())
+covidCases2 = pd.concat([covidCases,covidCases1])
+print(covidCases2.count())
+covidCases2 = covidCases2.drop_duplicates()
+print(covidCases2.count())
+covidCases2.head(10)
+
+# %%
 notes = """
+This data includes legacy downloads for England at LTLA, UTLA and Regional levels
+\n
 Daily and cumulative numbers of cases
 \n
 Number of people with at least one lab-confirmed positive COVID-19 PCR test result.
@@ -142,7 +188,7 @@ df.drop_duplicates().to_csv(out / csvName, index = False)
 scraper.dataset.family = 'covid-19'
 scraper.dataset.description = scraper.dataset.description + notes
 scraper.dataset.comment = 'Number of people with at least one lab-confirmed positive COVID-19 test result, by specimen date, by nation. Individuals tested positive more than once are only counted once, on the date of their first positive test.'
-scraper.dataset.title = 'Coronavirus (Covid-19) Cases by specimen date, by Nation'
+scraper.dataset.title = 'Coronavirus (Covid-19) Cases by specimen date, by Nation, England: LTLA, UTLA, Region'
 
 dataset_path = pathify(os.environ.get('JOB_NAME', f'gss_data/{scraper.dataset.family}/' + Path(os.getcwd()).name)).lower()
 scraper.set_base_uri('http://gss-data.org.uk')

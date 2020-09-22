@@ -189,7 +189,8 @@ with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
 
 # +
 #a = joined_dat_ton[joined_dat_ton['Value'] == 16265.8369]
-#a
+#b = joined_dat_ton[joined_dat_ton['Value'] == 18953.1509]
+#b
 # -
 
 

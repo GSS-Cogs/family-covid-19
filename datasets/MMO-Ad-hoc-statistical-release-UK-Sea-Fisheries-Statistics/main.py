@@ -119,8 +119,11 @@ joined_dat_ton['Vessel Length'][joined_dat_ton['Vessel Length'] == 'Total'] = 'A
 joined_dat_ton['Admin Port'][joined_dat_ton['Admin Port'] == 'UK total'] = 'UK'
 
 joined_dat_ton['Vessel Length'] = joined_dat_ton['Vessel Length'].apply(pathify).str.strip()
-#joined_dat_ton['Species Group'] = joined_dat_ton['Species Group'].apply(pathify).str.strip()
+joined_dat_ton['Species Group'] = joined_dat_ton['Species Group'].apply(pathify).str.strip()
 joined_dat_ton['Admin Port'] = joined_dat_ton['Admin Port'].apply(pathify).str.strip()
+
+del joined_dat_ton['Measure Type']
+del joined_dat_ton['Unit']
 # -
 
 for c in joined_dat_ton.columns:

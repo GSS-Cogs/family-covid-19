@@ -20,7 +20,7 @@ tabs = { tab.name: tab for tab in scraper.distribution(latest=True).as_databaker
 list(tabs)
 
 # +
-tab_name_expected = 'Table 1'
+tab_name_expected = 'Table_1'
 ref_cell_expected = 'UK total'
 title_to_include = 'Activity (value and volume landed) of the UK fishing fleet by country, vessel length and species group'
 df = pd.DataFrame()
@@ -122,7 +122,7 @@ OBS_ID = pathify(TITLE)
 import os
 GROUP_ID = pathify(os.environ.get('JOB_NAME', 'gss_data/covid-19/' + Path(os.getcwd()).name))
 
-tidy.drop_duplicates().to_csv(destinationFolder / f'{OBS_ID}.csv', index = False)
+#tidy.drop_duplicates().to_csv(destinationFolder / f'{OBS_ID}.csv', index = False)
 
 # +
 ######## BELOW COMMENT OUT FOR NOW ######

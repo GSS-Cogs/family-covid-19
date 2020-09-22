@@ -1,0 +1,33 @@
+Label,Notation,Parent Notation,Sort Priority
+UK total,uk-total,,1
+Brixham,brixham,uk-total,2
+Fleetwood,fleetwood,uk-total,3
+Grimsby,grimsby,uk-total,4
+Hastings,hastings,uk-total,5
+Lowestoft,lowestoft,uk-total,6
+Newlyn,newlyn,uk-total,7
+North shields,north-shields,uk-total,8
+Plymouth,plymouth,uk-total,9
+Poole,poole,uk-total,10
+Scarborough,scarborough,uk-total,11
+Unknown,unknown,uk-total,12
+Belfast,belfast,uk-total,13
+Aberdeen,aberdeen,uk-total,14
+Anstruther,anstruther,uk-total,15
+Ayr,ayr,uk-total,16
+Buckie,buckie,uk-total,17
+Campbeltown,campbeltown,uk-total,18
+Eyemouth,eyemouth,uk-total,19
+Fraserburgh,fraserburgh,uk-total,20
+Kinlochbervie,kinlochbervie,uk-total,21
+Lochinver,lochinver,uk-total,22
+Mallaig,mallaig,uk-total,23
+Oban,oban,uk-total,24
+Orkney,orkney,uk-total,25
+Peterhead,peterhead,uk-total,26
+Portree,portree,uk-total,27
+Shetland,shetland,uk-total,28
+Stornoway,stornoway,uk-total,29
+Ullapool,ullapool,uk-total,30
+Wick,wick,uk-total,31
+Milford haven,milford-haven,uk-total,32

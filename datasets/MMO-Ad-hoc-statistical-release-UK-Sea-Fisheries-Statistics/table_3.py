@@ -20,7 +20,7 @@ tabs = { tab.name: tab for tab in scraper.distribution(latest=True).as_databaker
 list(tabs)
 
 # +
-tab_name_expected = 'Table 3'
+tab_name_expected = 'Table_3'
 ref_cell_expected = 'UK total'
 title_to_include = 'Activity (value and volume landed) of the UK fishing fleet by species group and country'
 df = pd.DataFrame()
@@ -31,7 +31,8 @@ def date_time(time_value):
         return 'year/' + date_string
 
 
-# +
+# -
+
 #Check the tab/sheet has expected name before continuing. 
 if (tab_name_expected in tabs) != True:
     raise Exception(tab_name_expected + " not found. Something has changed with the naming of sheets within this dataset")
@@ -71,9 +72,6 @@ else:
         savepreviewhtml(c1, fname=tab.name + "Preview.html")
         new_table = c1.topandas()
         df = pd.concat([df, new_table], sort=False)  
-        
-        
-# -
 
 
 df.rename(columns={'OBS': 'Value', 'DATAMARKER' : 'Marker'}, inplace=True)
@@ -125,7 +123,7 @@ OBS_ID = pathify(TITLE)
 import os
 GROUP_ID = pathify(os.environ.get('JOB_NAME', 'gss_data/covid-19/' + Path(os.getcwd()).name))
 
-tidy.drop_duplicates().to_csv(destinationFolder / f'{OBS_ID}.csv', index = False)
+#tidy.drop_duplicates().to_csv(destinationFolder / f'{OBS_ID}.csv', index = False)
 
 # +
 ######## BELOW COMMENT OUT FOR NOW ######

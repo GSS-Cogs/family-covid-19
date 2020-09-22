@@ -20,7 +20,7 @@ tabs = { tab.name: tab for tab in scraper.distribution(latest=True).as_databaker
 list(tabs)
 
 # +
-tab_name_expected = 'Table 2'
+tab_name_expected = 'Table_2'
 ref_cell_expected = 'UK total'
 title_to_include = 'Activity (value, volume landed and number of trips) of the UK fishing fleet by country and admin port'
 df = pd.DataFrame()
@@ -31,7 +31,8 @@ def date_time(time_value):
         return 'year/' + date_string
 
 
-# +
+# -
+
 #Check the tab/sheet has expected name before continuing. 
 if (tab_name_expected in tabs) != True:
     raise Exception(tab_name_expected + " not found. Something has changed with the naming of sheets within this dataset")
@@ -73,9 +74,10 @@ else:
         savepreviewhtml(c1, fname=tab.name + "Preview.html")
         new_table = c1.topandas()
         df = pd.concat([df, new_table], sort=False)  
-        
-        
-        
+
+
+if 'Marker' not in df.columns:
+    df['Marker'] = ''
 
 # +
 df.rename(columns={'OBS': 'Value', 'DATAMARKER' : 'Marker'}, inplace=True)
@@ -110,7 +112,10 @@ for col in df:
         display(HTML(f"<h2>{col}</h2>"))
         display(df[col].cat.categories) 
 
+# +
 tidy = df[['Period', 'Country', 'Admin Port', 'Vessel Length', 'Species Group', 'Measure Type', 'Unit', 'Marker', 'Value']]
+#tidy = df[['Period', 'Country', 'Admin Port', 'Vessel Length', 'Species Group', 'Measure Type', 'Unit', 'Value']]
+
 tidy
 
 # +
@@ -122,7 +127,7 @@ OBS_ID = pathify(TITLE)
 import os
 GROUP_ID = pathify(os.environ.get('JOB_NAME', 'gss_data/covid-19/' + Path(os.getcwd()).name))
 
-tidy.drop_duplicates().to_csv(destinationFolder / f'{OBS_ID}.csv', index = False)
+#tidy.drop_duplicates().to_csv(destinationFolder / f'{OBS_ID}.csv', index = False)
 
 # +
 ######## BELOW COMMENT OUT FOR NOW ######
@@ -139,3 +144,8 @@ tidy.drop_duplicates().to_csv(destinationFolder / f'{OBS_ID}.csv', index = False
 
 #schema = CSVWMetadata('https://gss-cogs.github.io/family-covid-19/reference/')
 #schema.create(destinationFolder / f'{OBS_ID}.csv', destinationFolder / f'{OBS_ID}.csv-schema.json')
+# -
+
+
+
+

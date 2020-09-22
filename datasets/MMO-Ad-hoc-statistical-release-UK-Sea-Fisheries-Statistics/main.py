@@ -146,7 +146,7 @@ notes = ''
 csvName = 'quantity_observations.csv'
 out = Path('out')
 out.mkdir(exist_ok=True)
-df.drop_duplicates().to_csv(out / csvName, index = False)
+joined_dat_ton.drop_duplicates().to_csv(out / csvName, index = False)
 
 scraper.dataset.family = 'covid_19'
 #scraper.dataset.description = scraper.dataset.description + '\nGuidance documentation can be found here:\n' + notes

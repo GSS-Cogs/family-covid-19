@@ -186,6 +186,10 @@ with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
 #        dat[cl] = dat[cl].str.replace("-"," ")
 #        dat[cl] = dat[cl].str.capitalize()
 #        codeclass.create_codelists(pd.DataFrame(dat[cl]), 'codelists', scraper.dataset.family, Path(os.getcwd()).name.lower())
+
+# +
+#a = joined_dat_ton[joined_dat_ton['Value'] == 16265.8369]
+#a
 # -
 
 

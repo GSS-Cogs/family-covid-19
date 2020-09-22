@@ -149,6 +149,9 @@ notes = ''
 csvName = 'quantity_observations.csv'
 out = Path('out')
 out.mkdir(exist_ok=True)
+#print(joined_dat_ton.count())
+joined_dat_ton = joined_dat_ton.drop_duplicates()
+#print(joined_dat_ton.count())
 joined_dat_ton.drop_duplicates().to_csv(out / csvName, index = False)
 
 scraper.dataset.family = 'covid_19'

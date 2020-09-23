@@ -72,15 +72,16 @@ all_dat[0] = all_dat[0].replace(np.nan, '', regex=True)
 
 all_dat[0]['Admin Port'] = 'UK total'
 all_dat[0] = all_dat[0][['Period','Country','Vessel Length','Species Group','Admin Port','Measure Type','Unit','Marker','Value']]
-# -
 
-all_dat[0].head(5)
+# +
+#all_dat[0].head(5)
+# -
 
 #all_dat[0]['Value'] = round(all_dat[0]['Value'],1)
 all_dat[1]["Country"] = all_dat[1]["Country"].map(lambda x: geoglookup.get(x, x))
 all_dat[1] = all_dat[1].replace(np.nan, '', regex=True)
 all_dat[1] = all_dat[1][['Period','Country','Vessel Length','Species Group','Admin Port','Measure Type','Unit','Marker','Value']]
-all_dat[1].head(5)
+#all_dat[1].head(5)
 
 # +
 all_dat[2]["Country"] = all_dat[2]["Country"].map(lambda x: geoglookup.get(x, x))
@@ -88,7 +89,7 @@ all_dat[2] = all_dat[2].replace(np.nan, '', regex=True)
 all_dat[2]['Admin Port'] = 'UK total'
 all_dat[2] = all_dat[2][['Period','Country','Vessel Length','Species Group','Admin Port','Measure Type','Unit','Marker','Value']]
 
-all_dat[2].head(5)
+#all_dat[2].head(5)
 
 # +
 if 'Marker' not in all_dat[3].columns:
@@ -99,7 +100,7 @@ all_dat[3]['Admin Port'] = 'UK total'
 all_dat[3]['Species Group'] = 'All'
 all_dat[3] = all_dat[3][['Period','Country','Vessel Length','Species Group','Admin Port','Measure Type','Unit','Marker','Value']]
 
-all_dat[3].head(5)
+#all_dat[3].head(5)
 # -
 
 joined_dat = pd.concat([all_dat[0],all_dat[1],all_dat[2],all_dat[3]])
@@ -138,7 +139,8 @@ print('Dataset 4: ' + str(all_dat[3]['Country'].count()))
 print('JoinedDataset: ' + str(joined_dat['Country'].count()))
 print('JoinedDatasetTON: ' + str(joined_dat_ton['Country'].count()) + ' - only Quantity')
 
-joined_dat_ton.head(60)
+# +
+#joined_dat_ton.head(60)
 
 # +
 import os
@@ -149,9 +151,12 @@ notes = ''
 csvName = 'quantity_observations.csv'
 out = Path('out')
 out.mkdir(exist_ok=True)
-#print(joined_dat_ton.count())
+
+# Having trouble with duplicates, seems to be a rounding issue
+joined_dat_ton['Value'] = joined_dat_ton['Value'].astype(int).round(4)
+print(joined_dat_ton['Country'].count())
 joined_dat_ton = joined_dat_ton.drop_duplicates()
-#print(joined_dat_ton.count())
+print(joined_dat_ton['Country'].count())
 joined_dat_ton.drop_duplicates().to_csv(out / csvName, index = False)
 
 scraper.dataset.family = 'covid_19'
@@ -188,9 +193,16 @@ with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
 #        codeclass.create_codelists(pd.DataFrame(dat[cl]), 'codelists', scraper.dataset.family, Path(os.getcwd()).name.lower())
 
 # +
-#a = joined_dat_ton[joined_dat_ton['Value'] == 16265.8369]
+#a = joined_dat_ton[joined_dat_ton['Value'] >= 16265.8369]
 #b = joined_dat_ton[joined_dat_ton['Value'] == 18953.1509]
+#a
+# +
 #b
+
+
+# +
+#c = joined_dat_ton[(joined_dat_ton['Year'] == 'year/2019') & (joined_dat_ton['Country'] == 'S04000001') & (joined_dat_ton['Vessel Length'] == 'all') & (joined_dat_ton['Species Group'] == 'all') & (joined_dat_ton['Admin Port'] == 'uk')]
+#c
 # -
 
 

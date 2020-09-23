@@ -12,19 +12,17 @@
 
 [Transform Flowchart](https://gss-cogs.github.io/family-covid-19/datasets/specflowcharts.html?MMO-Ad-hoc-statistical-release-UK-Sea-Fisheries-Statistics/flowchart.ttl)
 
-### Dataset One
+#### Published Data
 
-#### Output Dataset Name:
-
-		MMO Ad-Hoc UK Sea Fisheries Statistical Release
+		Data has been published on PMD4 for Quantity only. All four sheets have been joined together, which produces duplicates rows based on different decimal places. Have had to set values to 4 decimal places to enable removal of duplicates.
 
 #### Table Structure
 
-		Period, ONS Geography Code, Vessel Length, Species Group, Measure Type, Unit, Marker, Value
+		Period, ONS Geography Code, Vessel Length, Species Group, Marker, Value
 
 #### Sheet: Table 1 - Activity (value and volume landed) of the UK fishing fleet by country, vessel length and species group
 
-		D6:E6 - Year - change to Period and format as required
+		D6:E6 - Year - format as required
 		B8, B21, B34, B47, B60 - UK and Nations - change to ONS Geography Code and use 
 			Wales - W08000001
 			Scotland - S04000001
@@ -42,25 +40,21 @@
 			Shellfish
 			Add All category	
 		F, J Change has latest Year in Period column
-		Add Measure Type column with values GBP Thousands, Weight and Annual Percentage Change
-		Add Unit column with values GBP, Tonnes, Percent
 		Any values of .. to be replaced with 0 and "Figure less than 1" put in Marker column
 
 #### Sheet: Table 2 - Activity (value, volume landed and number of trips) of the UK fishing fleet by country and admin port
 
-		D6:E6 - Year - change to Period and format as required
-		B:C - Country & Admin Port - change to ONS Geography Code and change values to 9 digit codes
+		D6:E6 - Year - format as required
+		B:C - Country & Admin Port - change to ONS Code and change values to 9 digit codes
 			Ignore Unknown rows for now as we currently do not have a Geography code for it
 		Add Vessel Length column with value All
 		Add Species Group column with value All
 		F, J, N Change has latest Year in Period column
-		Add Measure Type column with values GBP Thousands, Weight and Annual Percentage Change
-		Add Unit column with values GBP, Tonnes, Trips
 		Any values of .. to be replaced with 0 and "Figure less than 1" put in Marker column
 
 #### Sheet: Table 3 - Activity (value and volume landed) of the UK fishing fleet by species group and country
 
-		D6:E6 - Year - change to Period and format as required
+		D6:E6 - Year - format as required
 		B8, C10:C13 - Country - change to ONS Geography Code and change values to 9 digit codes
 		B9, B14, B19 - Species Group (Codelist)
 			Demersal
@@ -68,14 +62,12 @@
 			Shellfish
 			Add All category	
 		F, J Change has latest Year in Period column
-		Add Measure Type column with values GBP Thousands, Weight and Annual Percentage Change
-		Add Unit column with values GBP, Tonnes, Percent
 		Any values of .. to be replaced with 0 and "Figure less than 1" put in Marker column
 
 #### Sheet: Table 4 - Activity (value and volume landed) of the UK fishing fleet by country and vessel length
 
-		D6:E6 - Year - change to Period and format as required
-		B8, B14, B20, B26, B32 - Country - change to ONS Geography Code and change values to 9 digit codes
+		D6:E6 - Year - format as required
+		B8, B14, B20, B26, B32 - Country - change to ONS Code and change values to 9 digit codes
 		C9:C13 - Vessel Length (Codelist)
 			u10m
 			10-12m
@@ -83,15 +75,15 @@
 			15-24m
 			o24m	
 		F, J Change has latest Year in Period column
+		Any values of .. to be replaced with 0 and "Figure less than 1" put in Marker column
+
+#### Measures and Units
 		Add Measure Type column with values GBP Thousands, Weight and Annual Percentage Change
 		Add Unit column with values GBP, Tonnes, Percent
-		Any values of .. to be replaced with 0 and "Figure less than 1" put in Marker column
 		
 ##### Footnotes
 
 		Please note this release contains provisional data and therefore may not provide a complete picture of recent fishing activity.
-		A high volume landing of mackerel by an English vessel has missing data. Therefore, to give a more realistic estimate, the value for this landing has been imputed based on March 2019 mackerel prices
-
 
 #### DM Notes
 

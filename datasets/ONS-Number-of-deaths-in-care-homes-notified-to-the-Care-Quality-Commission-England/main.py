@@ -1,6 +1,12 @@
-# # ONS Number of deaths in care homes notified to the Care Quality Commission, England 
+#!/usr/bin/env python
+# coding: utf-8
 
-from gssutils import * 
+# In[8]:
+
+
+# # ONS Number of deaths in care homes notified to the Care Quality Commission, England
+
+from gssutils import *
 import json
 import string
 import warnings
@@ -8,7 +14,6 @@ import pandas as pd
 import json
 import re
 from datetime import datetime
-
 
 # +
 def left(s, amount):
@@ -64,12 +69,15 @@ def excelRange(bag):
     return '{' + lowx + lowy + '-' + highx + highy + '}'
 
 
-info = json.load(open('info.json')) 
-landingPage = info['landingPage'] 
-landingPage 
-# -
+info = json.load(open('info.json'))
+landingPage = info['landingPage']
+landingPage
 
-scraper = Scraper(landingPage) 
+
+# In[9]:
+
+
+scraper = Scraper(landingPage)
 #scraper = Scraper(seed="info.json")
 #scraper.distributions[0].title = "Number of deaths in care homes notified to the Care Quality Commission, England"
 scraper
@@ -86,14 +94,14 @@ for tab in tabs:
     datacube_name = "Number of deaths in care homes notified to the Care Quality Commission, England (By Local Authority)"
     columns=["Date of Notification", "Place of Occurrence","Death Causes","Local Authority", "Measure Type", "Unit"]
     trace.start(datacube_name, tab, columns, scraper.distributions[0].downloadURL)
-    
+
     if tab.name.lower() == 'table 1':
         date_of_notification = tab.filter(contains_string('Date of notification')).shift(0,1).expand(DOWN).is_not_blank()
         trace.Date_of_Notification('Date of notification given at cell range: {}', var = excelRange(date_of_notification))
-        
+
         place_of_occurrrence = tab.filter(contains_string('Date of notification')).shift(1,0).expand(RIGHT).is_not_blank()
         trace.Place_of_Occurrence('Place of Occurrence given at cell range: {}', var = excelRange(place_of_occurrrence))
-         
+
         measure_type = 'Deaths'
         trace.Measure_Type('Hardcoded value as: Deaths')
         unit = 'Count'
@@ -103,7 +111,7 @@ for tab in tabs:
         death_causes = 'Involving COVID-19'
         trace.Death_Causes('Hardcoded value as: Involving COVID-19')
         observations = place_of_occurrrence.fill(DOWN).is_not_blank()
-        
+
         dimensions = [
             HDim(date_of_notification, 'Date of notification', DIRECTLY, LEFT),
             HDim(place_of_occurrrence, 'Place of Occurrence', DIRECTLY, ABOVE),
@@ -114,17 +122,17 @@ for tab in tabs:
         ]
         tidy_sheet = ConversionSegment(tab, dimensions, observations)
         trace.with_preview(tidy_sheet)
-        #savepreviewhtml(tidy_sheet) 
+        #savepreviewhtml(tidy_sheet)
         trace.store("combined_dataframe", tidy_sheet.topandas())
-        
+
     if tab.name.lower() == 'table 2':
-        
+
         date_of_notification = tab.filter(contains_string('Table 2')).shift(0,2).expand(RIGHT).is_not_blank()
         trace.Date_of_Notification('Date of notification given at cell range: {}', var = excelRange(date_of_notification))
-        
+
         local_authority = tab.filter(contains_string('England')).expand(DOWN).is_not_blank()
         trace.Local_Authority('local_authority given at cell range: {}', var = excelRange(local_authority))
-            
+
         measure_type = 'Deaths'
         trace.Measure_Type('Hardcoded value as: Deaths')
         unit = 'Count'
@@ -134,7 +142,7 @@ for tab in tabs:
         death_causes = 'Involving COVID-19'
         trace.Death_Causes('Hardcoded value as: Involving COVID-19')
         observations = date_of_notification.fill(DOWN).is_not_blank()
-        
+
         dimensions = [
             HDim(date_of_notification, 'Date of notification', DIRECTLY, ABOVE),
             HDim(local_authority, 'Local Authority', DIRECTLY, LEFT),
@@ -145,17 +153,17 @@ for tab in tabs:
         ]
         tidy_sheet = ConversionSegment(tab, dimensions, observations)
         trace.with_preview(tidy_sheet)
-        #savepreviewhtml(tidy_sheet) 
+        #savepreviewhtml(tidy_sheet)
         trace.store("combined_dataframe", tidy_sheet.topandas())
-        
+
     if tab.name.lower() == 'table 3':
-        
+
         date_of_notification = tab.filter(contains_string('Table 3')).shift(0,2).expand(RIGHT).is_not_blank()
         trace.Date_of_Notification('Date of notification given at cell range: {}', var = excelRange(date_of_notification))
-        
+
         local_authority = tab.filter(contains_string('England')).expand(DOWN).is_not_blank()
         trace.Local_Authority('local_authority given at cell range: {}', var = excelRange(local_authority))
-            
+
         measure_type = 'Deaths'
         trace.Measure_Type('Hardcoded value as: Deaths')
         unit = 'Count'
@@ -165,7 +173,7 @@ for tab in tabs:
         death_causes = 'All causes'
         trace.Death_Causes('Hardcoded value as: All causes')
         observations = date_of_notification.fill(DOWN).is_not_blank()
-        
+
         dimensions = [
             HDim(date_of_notification, 'Date of notification', DIRECTLY, ABOVE),
             HDim(local_authority, 'Local Authority', DIRECTLY, LEFT),
@@ -176,11 +184,13 @@ for tab in tabs:
         ]
         tidy_sheet = ConversionSegment(tab, dimensions, observations)
         trace.with_preview(tidy_sheet)
-       # savepreviewhtml(tidy_sheet) 
+       # savepreviewhtml(tidy_sheet)
         trace.store("combined_dataframe", tidy_sheet.topandas())
 
 
-# +
+# In[10]:
+
+
 df = trace.combine_and_trace(datacube_name, "combined_dataframe")
 df.rename(columns={'OBS' : 'Value'}, inplace=True)
 trace.add_column("Value")
@@ -197,14 +207,16 @@ for column in tidy:
         tidy[column] = tidy[column].map(lambda x: pathify(x))
 tidy['Value'] = tidy['Value'].astype(int)
 
-# -
+
+# In[11]:
+
 
 from IPython.core.display import HTML
 for col in df:
     if col not in ['Value']:
         df[col] = df[col].astype('category')
         display(HTML(f"<h2>{col}</h2>"))
-        display(df[col].cat.categories) 
+        display(df[col].cat.categories)
 
 # Notes taken from Tables : 1, 2, 3
 
@@ -214,7 +226,10 @@ notes = """
 3. Figures are for persons who were resident in and died in a care home.
 """
 
-# +
+
+# In[12]:
+
+
 dte = pd.DataFrame(columns=['Per'])
 dte['Per'] = pd.to_datetime(df['Date of notification'][df['Date of notification'] != 'All Deaths'].unique())
 min_date = dte['Per'].min()
@@ -236,7 +251,10 @@ df['Period'][df['Period'].str.contains('All Deaths')] = date_range_str
 
 # Table 4
 
-# +
+
+# In[13]:
+
+
 datasetTitle = 'Number of deaths involving COVID-19 in care homes residents by place of occurrence, by week of notification England'
 trace = TransformTrace()
 tab = next(t for t in tabs.values() if t.name.startswith('Table 4'))
@@ -247,14 +265,14 @@ columns=["Week Ending", "Place of Occurrence","Death Causes","Local Authority", 
 trace.start(datacube_name, tab, columns, scraper.distributions[0].downloadURL)
 
 #Week ending
-week_ending = tab.filter(contains_string('Week Ending')).shift(1,0).expand(RIGHT).is_not_blank()
+week_ending = tab.filter(contains_string('Week ending')).shift(1,0).expand(RIGHT).is_not_blank()
 print(week_ending)
 trace.Week_Ending('Date of notification given at cell range: {}', var = excelRange(week_ending))
-        
+
 death_cause_options = ['All deaths', 'Deaths involving COVID-19']
 death_causes = tab.filter(contains_string('All deaths')).expand(DOWN).one_of(death_cause_options)
-trace.Death_Causes('Death Causes given at cell range: {}', var = excelRange(death_causes)) 
-        
+trace.Death_Causes('Death Causes given at cell range: {}', var = excelRange(death_causes))
+
 place_of_occurrrence = tab.filter(contains_string('All deaths')).expand(DOWN).is_not_blank() - death_causes
 trace.Place_of_Occurrence('Place of Occurrence given at cell range: {}', var = excelRange(place_of_occurrrence))
 
@@ -264,8 +282,8 @@ unit = 'Count'
 trace.Unit('Hardcoded value as: Count')
 local_authority = 'England'
 trace.Local_Authority('Hardcoded value as: England')
-observations = week_ending.fill(DOWN).is_not_blank()  
-        
+observations = week_ending.fill(DOWN).is_not_blank()
+
 dimensions = [
     HDim(week_ending, 'Week Ending', DIRECTLY, ABOVE),
     HDim(death_causes, 'Death Causes', CLOSEST, ABOVE),
@@ -277,11 +295,13 @@ dimensions = [
 tidy_sheet = ConversionSegment(tab, dimensions, observations)
 
 trace.with_preview(tidy_sheet)
-savepreviewhtml(tidy_sheet) 
+savepreviewhtml(tidy_sheet)
 trace.store("combined_dataframe", tidy_sheet.topandas())
 
 
-# +
+# In[14]:
+
+
 df = trace.combine_and_trace(datacube_name, "combined_dataframe")
 df.rename(columns={'OBS' : 'Value'}, inplace=True)
 trace.add_column("Value")
@@ -304,7 +324,7 @@ for col in df:
     if col not in ['Value']:
         df[col] = df[col].astype('category')
         display(HTML(f"<h2>{col}</h2>"))
-        display(df[col].cat.categories) 
+        display(df[col].cat.categories)
 
 # Notes taken from Table : 4
 
@@ -358,17 +378,26 @@ joined_dat['Cause of Death'] = joined_dat['Cause of Death'].apply(pathify)
 joined_dat['Measure Type'] = joined_dat['Measure Type'].apply(pathify)
 joined_dat['Unit'] = joined_dat['Unit'].apply(pathify)
 
-# +
+
+# In[15]:
+
+
 #joined_dat = joined_dat.rename(columns={'Cause of Death' : 'ONS Cause of Death'})
 #joined_dat = joined_dat.rename(columns={'Location of Death' : 'ONS Location of Death'})
 #joined_dat.head(10)
 
-# +
+
+# In[16]:
+
+
 del joined_dat['Measure Type']
 del joined_dat['Unit']
 
 joined_dat['Value'] = pd.to_numeric(joined_dat['Value'], downcast='integer')
-# -
+
+
+# In[17]:
+
 
 joined_dat['Cause of Death'][joined_dat['Cause of Death'] == 'deaths-involving-covid-19'] = 'involving-covid-19'
 joined_dat['Cause of Death'].unique()
@@ -379,7 +408,10 @@ out = Path('out')
 out.mkdir(exist_ok=True)
 joined_dat.drop_duplicates().to_csv(out / csvName, index = False)
 
-# +
+
+# In[18]:
+
+
 scraper.dataset.family = 'covid-19'
 scraper.dataset.description = 'ONS Number of deaths in care homes notified to the Care Quality Commission, England.\n ' + notes
 scraper.dataset.comment = 'Provisional counts of deaths in care homes caused by the coronavirus (COVID-19) by local authority. Published by the Office for National Statistics and Care Quality Commission.'
@@ -389,7 +421,7 @@ scraper.dataset.comment = 'Provisional counts of deaths in care homes caused by 
 import os
 from urllib.parse import urljoin
 
-dataset_path = pathify(os.environ.get('JOB_NAME', 'gss_data/covid-19/' + Path(os.getcwd()).name)).lower() 
+dataset_path = pathify(os.environ.get('JOB_NAME', 'gss_data/covid-19/' + Path(os.getcwd()).name)).lower()
 scraper.set_base_uri('http://gss-data.org.uk')
 scraper.set_dataset_id(dataset_path)
 #### scraper.dataset.title = 'ONS Number of deaths in care homes notified to the Care Quality Commission'
@@ -400,39 +432,47 @@ csvw_transform.set_dataset_uri(urljoin(scraper._base_uri, f'data/{scraper._datas
 csvw_transform.write(out / f'{csvName}-metadata.json')
 with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
     metadata.write(scraper.generate_trig())
-# -
+
+
+# In[19]:
+
 
 """
 newTxt = ''
 
-info = json.load(open('info.json')) 
+info = json.load(open('info.json'))
 mtp = info['transform']['columns']['Value']['measure'].replace('http://gss-data.org.uk/def/measure/','')
 mt = mtp.capitalize().replace('-',' ')
 mtpath = f'''"@id": "http://gss-data.org.uk/def/measure/{mtp}",'''
 
-with open("out/observations.csv-metadata.json") as fp: 
-    for line in fp: 
+with open("out/observations.csv-metadata.json") as fp:
+    for line in fp:
         if mtpath in line.strip():
             print(line)
             newTxt = newTxt + line + '''\t"rdfs:label": "''' + mt + '''",\n'''
         else:
             newTxt += line
- 
+
 
 f = open("out/observations.csv-metadata.json", "w")
 f.write(newTxt)
 f.close()
 """
 
-# +
-#info = json.load(open('info.json')) 
-#codelistcreation = info['transform']['codelists'] 
+
+# In[20]:
+
+
+#info = json.load(open('info.json'))
+#codelistcreation = info['transform']['codelists']
 #print(codelistcreation)
 #print("-------------------------------------------------------")
 #print(joined_dat.columns)
 
 
-# +
+# In[21]:
+
+
 #codeclass = CSVCodelists()
 #for cl in codelistcreation:
 #    if cl in joined_dat.columns:
@@ -442,5 +482,4 @@ f.close()
 # +
 #joined_dat.head(10)
 # -
-
 

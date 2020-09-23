@@ -166,8 +166,6 @@ del joined_dat_ton['Unit']
 joined_dat_ton['Month'][joined_dat_ton['Month'].str.contains(str(yrs[0]))] = 'month/' + str(yrs[0]) + '-' + str(mnthNo[0])
 joined_dat_ton['Month'][joined_dat_ton['Month'].str.contains(str(yrs[1]))] = 'month/' + str(yrs[1]) + '-' + str(mnthNo[1])
 joined_dat_ton['Month'].unique()
-# Realised that this is a monthly figure rather than a yearly one so changing column name here rather than go through everything
-
 # -
 
 for c in joined_dat_ton.columns:
@@ -182,7 +180,7 @@ print('Dataset 4: ' + str(all_dat[3]['Country'].count()))
 print('JoinedDataset: ' + str(joined_dat['Country'].count()))
 print('JoinedDatasetTON: ' + str(joined_dat_ton['Country'].count()) + ' - only Quantity')
 
-note = 'Please note this release contains provisional data and therefore may not provide a complete picture of recent fishing activity'
+notes = 'Please note this release contains provisional data and therefore may not provide a complete picture of recent fishing activity'
 
 # +
 import os

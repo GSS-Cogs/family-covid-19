@@ -21,9 +21,9 @@
             "To Do"
         ],
         "columns": {
-            "Year": {
+            "Month": {
                 "dimension": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
-                "value": "http://reference.data.gov.uk/id/{+year}" 
+                "value": "http://reference.data.gov.uk/id/{+month}" 
             },
             "Country": {
                 "dimension": "http://purl.org/linked-data/sdmx/2009/dimension#refArea",

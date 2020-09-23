@@ -56,6 +56,8 @@ mths = ['January','Feburary','March','April','May','June','July','August','Septe
 
 for m in mths:
     if m in dateRange:
+        i = dateRange.find(m)
+        mthsStr = dateRange[i:len(dateRange)-3]
         for s in re.finditer(m, dateRange):
             mnths.append(m)
 
@@ -201,7 +203,7 @@ joined_dat_ton.drop_duplicates().to_csv(out / csvName, index = False)
 
 scraper.dataset.family = 'covid_19'
 scraper.dataset.description = scraper.dataset.description + '\n' + notes
-scraper.dataset.comment = 'Volume landed of the UK fishing fleet by country, vessel length and species group, ' + notes
+scraper.dataset.comment = 'Volume landed of the UK fishing fleet by country, vessel length and species group, ' + mthsStr
 scraper.dataset.title = 'Ad hoc statistical release UK Sea Fisheries Statistics - Quantity (t)'
 
 dataset_path = pathify(os.environ.get('JOB_NAME', f'gss_data/{scraper.dataset.family}/' + Path(os.getcwd()).name)).lower()

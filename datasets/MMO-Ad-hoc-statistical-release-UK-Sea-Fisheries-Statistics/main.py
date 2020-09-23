@@ -36,6 +36,17 @@ all_dat.append(tidy)
 # Value and volumn landed by country and vessel length
 # %run "table_4.py"
 all_dat.append(tidy)
+# -
+
+# Got from Table 1 script
+dateRange = str(dateRange)
+mths = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
+for m in mths:
+    if m in dateRange:
+        i = dateRange.find(m)
+        mthsStr = dateRange[i:len(dateRange)-3]
+        break
+mthsStr
 
 # +
 import numpy as np
@@ -142,8 +153,7 @@ print('Dataset 4: ' + str(all_dat[3]['Country'].count()))
 print('JoinedDataset: ' + str(joined_dat['Country'].count()))
 print('JoinedDatasetTON: ' + str(joined_dat_ton['Country'].count()) + ' - only Quantity')
 
-# +
-#joined_dat_ton.head(60)
+note = 'Please note this release contains provisional data and therefore may not provide a complete picture of recent fishing activity'
 
 # +
 import os
@@ -157,14 +167,14 @@ out.mkdir(exist_ok=True)
 
 # Having trouble with duplicates, seems to be a rounding issue
 joined_dat_ton['Value'] = joined_dat_ton['Value'].astype(int).round(4)
-print(joined_dat_ton['Country'].count())
+#print(joined_dat_ton['Country'].count())
 joined_dat_ton = joined_dat_ton.drop_duplicates()
-print(joined_dat_ton['Country'].count())
+#print(joined_dat_ton['Country'].count())
 joined_dat_ton.drop_duplicates().to_csv(out / csvName, index = False)
 
 scraper.dataset.family = 'covid_19'
-#scraper.dataset.description = scraper.dataset.description + '\nGuidance documentation can be found here:\n' + notes
-scraper.dataset.comment = 'Total domestic electricity consumption for LSOA regions across England, Wales & Scotland'
+scraper.dataset.description = scraper.dataset.description + '\n' + notes
+scraper.dataset.comment = 'Volume landed of the UK fishing fleet by country, vessel length and species group, ' + mthsStr
 scraper.dataset.title = 'Ad hoc statistical release UK Sea Fisheries Statistics - Quantity (t)'
 
 dataset_path = pathify(os.environ.get('JOB_NAME', f'gss_data/{scraper.dataset.family}/' + Path(os.getcwd()).name)).lower()
@@ -177,8 +187,7 @@ csvw_transform.set_csv(out / csvName)
 csvw_transform.set_mapping(json.load(open('info.json')))
 csvw_transform.set_dataset_uri(urljoin(scraper._base_uri, f'data/{scraper._dataset_id}'))
 csvw_transform.write(out / f'{csvName}-metadata.json')
-# Remove subset of data
-#out / csvName).unlink()
+
 with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
     metadata.write(scraper.generate_trig())
 

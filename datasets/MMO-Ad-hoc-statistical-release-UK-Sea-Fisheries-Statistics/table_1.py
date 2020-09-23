@@ -40,6 +40,7 @@ else:
     tab = tabs[tab_name_expected]
     #Checking the title of the sheet in question is what is expected.
     title_of_tab = tab.excel_ref('A1')
+    dateRange = tab.excel_ref('A1')
     title_of_tab = str(title_of_tab)
     expected_title = title_to_include #Change this as needed / dataset is updated
     if expected_title in title_of_tab:

@@ -107,7 +107,9 @@ joined_dat = pd.concat([all_dat[0],all_dat[1],all_dat[2],all_dat[3]])
 
 joined_dat = joined_dat.rename(columns={'Period':'Year'})
 joined_dat['Value'][joined_dat['Marker'] == 'Figure less than 1'] = 0
-joined_dat["Species Group"] = joined_dat["Species Group"].map(lambda x: fishlookup.get(x, x))
+#joined_dat["Species Group"] = joined_dat["Species Group"].map(lambda x: fishlookup.get(x, x))
+joined_dat["Species Group"] = joined_dat["Species Group"].str.replace(' total','')
+joined_dat["Vessel Length"] = joined_dat["Vessel Length"].str.replace(' total','')
 
 # +
 joined_dat_ton = joined_dat[joined_dat['Unit'] == 'Tonnes']
@@ -122,6 +124,7 @@ joined_dat_ton['Admin Port'][joined_dat_ton['Admin Port'] == 'UK total'] = 'UK'
 joined_dat_ton['Vessel Length'] = joined_dat_ton['Vessel Length'].apply(pathify).str.strip()
 joined_dat_ton['Species Group'] = joined_dat_ton['Species Group'].apply(pathify).str.strip()
 joined_dat_ton['Admin Port'] = joined_dat_ton['Admin Port'].apply(pathify).str.strip()
+joined_dat_ton['Marker'] = joined_dat_ton['Marker'].apply(pathify).str.strip()
 
 del joined_dat_ton['Measure Type']
 del joined_dat_ton['Unit']
@@ -193,11 +196,12 @@ with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
 #        codeclass.create_codelists(pd.DataFrame(dat[cl]), 'codelists', scraper.dataset.family, Path(os.getcwd()).name.lower())
 
 # +
-#a = joined_dat_ton[joined_dat_ton['Value'] >= 16265.8369]
-#b = joined_dat_ton[joined_dat_ton['Value'] == 18953.1509]
-#a
-# +
-#b
+#joined_dat_ton['Vessel Length'].unique()
+# -
+#for c in joined_dat_ton.columns:
+#    print(c)
+#    print(list(joined_dat_ton[c].unique()))
+ #   print("######################")
 
 
 # +

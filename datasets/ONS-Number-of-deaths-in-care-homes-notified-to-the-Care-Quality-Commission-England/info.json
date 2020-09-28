@@ -35,6 +35,10 @@
                 "unit": "http://gss-data.org.uk/def/concept/measurement-units/deaths",
                 "measure": "http://gss-data.org.uk/def/measure/cumulative-count",
                 "datatype": "double"
+            },
+             "Cause of Death": {
+                "description": "Care home providers notify the Care Quality Commission (CQC) within 2-3 days of a death involving COVID-19. This is based on information from the care home provider, which may or may not correspond to a medical diagnosis or test result.",
+                "source": "https://www.ons.gov.uk/news/statementsandletters/publicationofstatisticsondeathsinvolvingcovid19incarehomesinenglandtransparencystatement"
             }
         },
         "codelists": [

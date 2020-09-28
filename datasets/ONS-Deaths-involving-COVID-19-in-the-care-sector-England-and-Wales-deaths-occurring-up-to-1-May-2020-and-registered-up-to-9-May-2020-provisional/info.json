@@ -35,6 +35,10 @@
                 "unit": "http://gss-data.org.uk/def/concept/measurement-units/deaths",
                 "measure": "http://gss-data.org.uk/def/measure/cumulative-count",
                 "datatype": "integer"
+            },
+            "Cause of Death": {
+                "description": "The cause of death reported represents the final underlying cause of death.",
+                "source": "https://www.ons.gov.uk/peoplepopulationandcommunity/birthsdeathsandmarriages/deaths/methodologies/mortalitystatisticsinenglandandwalesqmi"
             }
         },
         "codelists": [

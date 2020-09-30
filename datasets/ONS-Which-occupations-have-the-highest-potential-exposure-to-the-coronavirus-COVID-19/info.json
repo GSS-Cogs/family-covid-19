@@ -15,7 +15,7 @@
     "transform": {
         "airtable": "rec5JLgajkliNNDm7",
         "main_issue": 16,
-         "columns": {
+        "columns": {
             "UK SOC 2010 Code": {
                 "attribute": "http://gss-data.org.uk/def/attribute/uk-soc-2010-code",
                 "datatype": "integer"
@@ -39,7 +39,7 @@
             "Percentage Workforce BAME": {
                 "attribute": "http://gss-data.org.uk/def/attribute/percentage-workforce-bame",
                 "datatype": "double"
-            },             
+            },
             "Value": {
                 "unit": "http://gss-data.org.uk/def/concept/measurement-units/exposure",
                 "measure": "http://gss-data.org.uk/def/measure/standardised-scale",
@@ -53,9 +53,155 @@
         "stage": [
             "To Do",
             "Priority"
+        ],
+        "transformStage": [
+            {
+                "source_name": "Which occupations have the highest potential exposure to the coronavirus (COVID-19)?",
+                "identifier": "Which occupations have the highest potential exposure to the coronavirus (COVID-19)?||Occupations and exposure||https://www.ons.gov.uk/visualisations/dvc806/occupations_exposure_to_disease_data.xls",
+                "source": [
+                    {
+                        "https://www.ons.gov.uk/visualisations/dvc806/occupations_exposure_to_disease_data.xls": ""
+                    }
+                ],
+                "title": "Occupations and exposure",
+                "preview": "documentation/previews/ca5f4bc5-4adc-4755-9459-8d774a8d5584.html",
+                "observation_selection": null,
+                "columns": [
+                    {
+                        "Measure type": "{C3-D3}"
+                    },
+                    {
+                        "UK SOC 2010 Code": "{A4-A370}"
+                    },
+                    {
+                        "Occupation title": "{B4-B362}"
+                    },
+                    {
+                        "Total in employment": "{E4-E362}"
+                    },
+                    {
+                        "Median hourly pay": "{F4-F362}"
+                    },
+                    {
+                        "Percentage of the workforce that are female": "{G4-G362}"
+                    },
+                    {
+                        "Percentage of the workforce that are aged 55 plus": "{H4-H362}"
+                    },
+                    {
+                        "Percentage of the workforce that are BAME": "{I4-I363}"
+                    }
+                ],
+                "postTransformNotes": [
+                    {
+                        "Measure_type": [
+                            "Measure type given at cell range: {C3-D3}",
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "UK_SOC_2010_Code": [
+                            "UK SOC 2010 Code given at cell range: {A4-A370}",
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Occupation_title": [
+                            "Occupation title given at cell range: {B4-B362}",
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Total_in_employment": [
+                            "Total in employment given at cell range: {E4-E362}",
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Median_hourly_pay": [
+                            "Median hourly pay (\u00a3) given at cell range: {F4-F362}",
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Percentage_of_the_workforce_that_are_female": [
+                            "Percentage of the workforce that are female given at cell range: {G4-G362}",
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Percentage_of_the_workforce_that_are_aged_55_plus": [
+                            "Percentage of the workforce that are aged 55+ given at cell range: {H4-H362}",
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Percentage_of_the_workforce_that_are_BAME": [
+                            "Percentage of the workforce that are BAME given at cell range: {I4-I363}",
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Unit": [
+                            "Hardcoded as : standardised to a scale",
+                            "Information regarding The standardised exposure to disease / infections measure found here: https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/articles/whichoccupationshavethehighestpotentialexposuretothecoronaviruscovid19/2020-05-11 ",
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    }
+                ]
+            },
+            {
+                "source_name": "Which occupations have the highest potential exposure to the coronavirus (COVID-19)?",
+                "identifier": "Which occupations have the highest potential exposure to the coronavirus (COVID-19)?||combined_dataframe||https://www.ons.gov.uk/visualisations/dvc806/occupations_exposure_to_disease_data.xls : Occupations and exposure",
+                "source": [
+                    {
+                        "https://www.ons.gov.uk/visualisations/dvc806/occupations_exposure_to_disease_data.xls": "Occupations and exposure"
+                    }
+                ],
+                "title": "combined_dataframe",
+                "preview": null,
+                "observation_selection": null,
+                "columns": [],
+                "postTransformNotes": [
+                    {
+                        "Measure_type": []
+                    },
+                    {
+                        "UK_SOC_2010_Code": []
+                    },
+                    {
+                        "Occupation_title": [
+                            "Remove any prefixed whitespace from all values in column and pathify"
+                        ]
+                    },
+                    {
+                        "Total_in_employment": []
+                    },
+                    {
+                        "Median_hourly_pay": []
+                    },
+                    {
+                        "Percentage_of_the_workforce_that_are_female": []
+                    },
+                    {
+                        "Percentage_of_the_workforce_that_are_aged_55_plus": []
+                    },
+                    {
+                        "Percentage_of_the_workforce_that_are_BAME": []
+                    },
+                    {
+                        "Unit": []
+                    },
+                    {
+                        "Value": [
+                            "Rename databaker columns OBS to Value"
+                        ]
+                    }
+                ]
+            }
         ]
     },
-        "load": {
+    "load": {
         "publish": true
     },
     "sizingNotes": "Simple table structure, straightforward dimensions and few footnotes.",

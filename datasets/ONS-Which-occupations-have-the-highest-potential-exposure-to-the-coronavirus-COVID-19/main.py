@@ -1,8 +1,17 @@
-# -*- coding: utf-8 -*-
-# # ONS Which occupations have the highest potential exposure to the coronavirus  COVID-19 
+#!/usr/bin/env python
+# coding: utf-8
 
-# +
-from gssutils import * 
+# In[51]:
+
+
+# -*- coding: utf-8 -*-
+# # ONS Which occupations have the highest potential exposure to the coronavirus  COVID-19
+
+
+# In[52]:
+
+
+from gssutils import *
 import json
 import string
 import warnings
@@ -11,6 +20,7 @@ import json
 import re
 from datetime import datetime
 from urllib.parse import urljoin
+from urllib.request import urlopen
 import os
 
 def left(s, amount):
@@ -65,11 +75,47 @@ def excelRange(bag):
 
     return '{' + lowx + lowy + '-' + highx + highy + '}'
 
+
+# In[53]:
+
+
 df = pd.DataFrame()
 trace = TransformTrace()
-# -
 
-scrape = Scraper(seed="info.json")   
+
+# In[54]:
+
+
+from urllib.request import Request, urlopen
+
+def all_same(items):
+    if len(items) == 0:
+        return False
+    return all(x == items[0] for x in items)
+
+req = Request("https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/articles/whichoccupationshavethehighestpotentialexposuretothecoronaviruscovid19/2020-05-11", headers={'User-Agent': 'Mozilla/5.0'})
+html = urlopen(req).read()
+plaintext = html.decode('utf8')
+links = re.findall("href=[\"\'](.*?)[\"\']", plaintext)
+links = [x for x in links if x.endswith("xls")]
+if all_same(links) == True:
+    dataURL = links[0]
+    with open('info.json', 'r+') as info:
+        data = json.load(info)
+        data["dataURL"] = dataURL
+        info.seek(0)
+        json.dump(data, info, indent=4)
+        info.truncate()
+else:
+    print("Multiple or No files found, investigate or retrieve manually")
+    for i in links:
+        print(i)
+
+
+# In[55]:
+
+
+scrape = Scraper(seed = 'info.json')
 scrape.distributions[0].title = "Which occupations have the highest potential exposure to the coronavirus (COVID-19)?"
 scrape
 
@@ -78,7 +124,10 @@ list(tabs)
 
 # ##### Sheet: Occupations and exposure
 
-# +
+
+# In[56]:
+
+
 tab = tabs['Occupations and exposure']
 datacube_name = "Which occupations have the highest potential exposure to the coronavirus (COVID-19)?"
 columns=['Measure type', 'UK SOC 2010 Code', 'Occupation title', 'Total in employment', 'Median hourly pay', 'Percentage of the workforce that are female', 'Percentage of the workforce that are aged 55 plus', 'Percentage of the workforce that are BAME', 'Unit']
@@ -132,7 +181,7 @@ dimensions = [
 ]
 tidy_sheet = ConversionSegment(tab, dimensions, observations)
 trace.with_preview(tidy_sheet)
-#savepreviewhtml(tidy_sheet) 
+#savepreviewhtml(tidy_sheet)
 trace.store("combined_dataframe", tidy_sheet.topandas())
 
 df = trace.combine_and_trace(datacube_name, "combined_dataframe")
@@ -149,9 +198,12 @@ for col in df:
     if col not in ['Value']:
         df[col] = df[col].astype('category')
         display(HTML(f"<h2>{col}</h2>"))
-        display(df[col].cat.categories) 
+        display(df[col].cat.categories)
 
-# +
+
+# In[57]:
+
+
 tidy = df[['UK SOC 2010 Code', 'Occupation','Total in employment', 'Median hourly pay', 'Percentage Workforce Female', 'Percentage Workforce Aged 55plus', 'Percentage Workforce BAME', 'Working Condition Category', 'Measure type', 'Unit', 'Value']]
 
 trace.Occupation_title("Remove any prefixed whitespace from all values in column and pathify")
@@ -162,11 +214,12 @@ for column in tidy:
         tidy[column] = tidy[column].map(lambda x: pathify(x))
 
 
-# -
+# In[58]:
+
 
 
 # ________________________________________________________________________
-# REMOVING OBS WITH MEASURETYPE "PROXIMITY TO OTHERS" FOR NOW DUE TO NOT CURRENTLY BEING ABLE TO HANDEL MULTPLE MEASURE TYPES. WILL NEED TO BE ADDED BACK IN. 
+# REMOVING OBS WITH MEASURETYPE "PROXIMITY TO OTHERS" FOR NOW DUE TO NOT CURRENTLY BEING ABLE TO HANDEL MULTPLE MEASURE TYPES. WILL NEED TO BE ADDED BACK IN.
 # _________________________________________________________________________
 
 df.drop(df[df['Measure type'] == 'Proximity'].index, inplace=True)
@@ -174,7 +227,7 @@ df.drop(df[df['Measure type'] == 'Proximity'].index, inplace=True)
 
 # _______________________________________________________________________________________________________________
 
-#Removing columns as they are defined in info.json 
+#Removing columns as they are defined in info.json
 del tidy['Measure type']
 del tidy['Unit']
 
@@ -188,7 +241,10 @@ please follow link for more information on how The standardised exposure to dise
 https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/articles/whichoccupationshavethehighestpotentialexposuretothecoronaviruscovid19/2020-05-11
 """
 
-# +
+
+# In[59]:
+
+
 #SET UP OUTPUT FOLDER AND OUTPUT DATA TO CSV
 csvName = 'observations.csv'
 out = Path('out')
@@ -207,7 +263,9 @@ csvw_transform.write(out / f'{csvName}-metadata.json')
 #
 
 
-# -
+# In[60]:
+
+
 # CREATE AND OUTPUT TRIG FILE
 with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
     metadata.write(scrape.generate_trig())
@@ -215,9 +273,12 @@ with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
 trace.output()
 #tidy
 
-# +
-#info = json.load(open('info.json')) 
-#codelistcreation = info['transform']['codelists'] 
+
+# In[61]:
+
+
+#info = json.load(open('info.json'))
+#codelistcreation = info['transform']['codelists']
 #print(codelistcreation)
 #print("-------------------------------------------------------")
 
@@ -227,7 +288,10 @@ trace.output()
 #        tidy[cl] = tidy[cl].str.replace("-"," ")
 #        tidy[cl] = tidy[cl].str.capitalize()
 #        codeclass.create_codelists(pd.DataFrame(tidy[cl]), 'codelists', 'covid-19', Path(os.getcwd()).name.lower())
-# -
+
+
+# In[62]:
+
 
 
 
@@ -238,7 +302,7 @@ trace.output()
 
 # #### Sheet : Total workforce data
 #
-# COMMENTED OUT FOR NOW, ONLY 3 OBSERVATIONS AND THEY ARE DERRIABLE FROM SHEET ABOVE 
+# COMMENTED OUT FOR NOW, ONLY 3 OBSERVATIONS AND THEY ARE DERRIABLE FROM SHEET ABOVE
 
 # tab = tabs['Total_workforce_population']
 # datacube_name = "Which occupations have the highest potential exposure to the coronavirus (COVID-19)?"
@@ -264,14 +328,14 @@ trace.output()
 # ]
 # tidy_sheet = ConversionSegment(tab, dimensions, observations)
 # trace.with_preview(tidy_sheet)
-# #savepreviewhtml(tidy_sheet) 
+# #savepreviewhtml(tidy_sheet)
 # trace.store("combined_dataframe_2", tidy_sheet.topandas())
 #
 # df = trace.combine_and_trace(datacube_name, "combined_dataframe_2")
 # trace.add_column("Value")
 # trace.multi([ "Value"], "Rename databaker columns OBS to Value")
 # df.rename(columns={'OBS' : 'Value'}, inplace=True)
-# df = df.replace({'Workforce Category' : {'Percentage of the workforce that are female(%)' : 'Females', 
+# df = df.replace({'Workforce Category' : {'Percentage of the workforce that are female(%)' : 'Females',
 #                                    'Percentage of the workforce that are BAME (%)' : 'BAME',
 #                                    'Percentage of the workforce that are aged 55+ (%)': 'Aged 55plus'}})
 #

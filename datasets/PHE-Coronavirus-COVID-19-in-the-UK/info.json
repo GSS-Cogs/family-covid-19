@@ -1,6 +1,6 @@
 {
     "title": "Coronavirus (COVID-19) in the UK",
-    "publisher": "public-health-england",
+    "publisher": "Public Health England",
     "description": "",
     "landingPage": "https://coronavirus.data.gov.uk/",
     "dataURL": "https://coronavirus.data.gov.uk/downloads/csv/coronavirus-cases_latest.csv",
@@ -13,14 +13,13 @@
     ],
     "extract": {
         "source": "CSV, JSON",
-        "stage": "Documented"
+        "stage": "To document"
     },
     "transform": {
         "airtable": "recyr2nSSQUdgJrRK",
         "main_issue": 36,
         "stage": [
-            "To Do",
-            "Priority"
+            "Hold"
         ],
         "columns": {
             "Date": {

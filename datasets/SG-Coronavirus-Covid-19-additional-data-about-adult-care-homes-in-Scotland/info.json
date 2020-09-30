@@ -2,12 +2,12 @@
     "landingPage": "https://www.gov.scot/publications/coronavirus-covid-19-additional-data-about-adult-care-homes-in-scotland/",
     "dataURL": "https://www.gov.scot/binaries/content/documents/govscot/publications/statistics/2020/05/data-on-coronavirus-covid-19-in-adult-care-homes-in-scotland2/documents/coronavirus-covid-19-testing-for-covid-19-in-adult-care-homes-in-scotland/coronavirus-covid-19-testing-for-covid-19-in-adult-care-homes-in-scotland/govscot%3Adocument/HSCA%2Bweb%2Btemplate%2Bfor%2B19th%2BAugust%2B%2BCoronavirus%2B%2528Covid-19%2529%2BNumber%2Bof%2BResidents%2Band%2BStaff%2BTested%2Bin%2BAdult%2BCare%2BHomes%2B19.08.2020.xlsx",
     "title": "Coronavirus (Covid-19): additional data about adult care homes in Scotland",
-    "publisher": "scottish-government",
-    "description": "Weekly data on suspected cases of COVID-19 in adult care homes in Scotland.",
+    "publisher": "Scottish Government",
+    "description": "Weekly data on COVID-19 in adult care homes in Scotland.\n(Testing for COVID-19 in adult care homes in Scotland: split by care homes with confirmed COVID-19 and without confirmed COVID-19, presented by NHS Health Board)",
     "datasetNotes": [
-        "On landing page scroll down to download "
+        "On landing page scroll down to download at bottom of page."
     ],
-    "published": "2020-05-27",
+    "published": "2020-09-09",
     "families": [
         "COVID-19"
     ],
@@ -42,6 +42,6 @@
             }
         }
     },
-    "sizingNotes": "Simple table structure, with a mixture of figures and & with foot side notes.  2 Tables on tabs and some tabs with only charts which can be discounted.",
-    "notes": "Data Viz"
+    "sizingNotes": "Simple table structure, with a mixture of figures and & with foot side notes.",
+    "notes": "Data Viz - Note Title name has now changed on landing page to \"Coronavirus (COVID-19): adult care homes - additional data\". Tech team assessing.\n****17/9/20*****Dataset name has changed to \"Coronavirus (Covid-19): Testing for COVID-19 in adult care homes in Scotland\u201d. Data within the original spreadsheet contained in table 5 is now in the updated spreadsheet as table 1. After discussing with Data Manager (LP) it is agreed Airtable will remain the same title but Data Manager will update title on PMD."
 }

@@ -1,6 +1,6 @@
 {
     "title": "Survey of public views on the coronavirus (COVID-19)",
-    "publisher": "welsh-government",
+    "publisher": "Welsh Government",
     "description": "Information on public views and behaviours during the coronavirus crisis.",
     "landingPage": "https://gov.wales/survey-public-views-coronavirus-covid-19",
     "dataURL": "https://gov.wales/sites/default/files/statistics-and-research/2020-09/survey-of-public-views-on-the-coronavirus-covid-19-19-march-to-31-august-2020-853.ods",
@@ -35,12 +35,12 @@
         "codelists": [
             "Survey Question Category",
             "Survey Question",
-            "Average Response"   
+            "Average Response"
         ]
     },
-     "load": {
+    "load": {
         "publish": true
-     },
+    },
     "sizingNotes": "1 Simple table structure  with footnotes in row 22-24",
     "notes": "Email issued 05/05/2020"
 }

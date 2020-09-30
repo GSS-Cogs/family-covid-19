@@ -12,12 +12,11 @@
     ],
     "extract": {
         "source": "XLS",
-        "stage": "Documented"
+        "stage": "Not Required"
     },
     "transform": {
         "stage": [
-            "To Do",
-            "Priority"
+            "Hold"
         ],
         "airtable": "recALVfEQmRkYXhpj",
         "main_issue": 121,
@@ -331,5 +330,5 @@
         "Stage One Notes": "\nThese statistics refer to infections reported in the community, by which we mean private households. These figures exclude infections reported in hospitals, care homes or other institutional settings.\nThis analysis is based on statistical modelling conducted by our research partners at the University of Oxford.\nThe method combines a statistical modelling approach with population information used in standard population weighting.\nAs this is based on Bayesian analysis, the appropriate uncertainty measure to use is credible intervals rather than confidence intervals. However they can be interpreted in the same way.\nEstimates are presented for the mid-point (Thursday) of each week over the period.\nThe England population used in this analysis relates to the community population aged two years and over. It is not the same as the total population of England as reported in our mid-year population estimates.\nOnly people aged sixteen and over are included in our blood test. Therefore, the English population estimates used included only those aged 16 and over. This population is 45,042,000\n"
     },
     "sizingNotes": "Simple tables and structures. Few dimensions and some footnotes.",
-    "notes": ""
+    "notes": "Not required as it is a duplicate of Github issue 58"
 }

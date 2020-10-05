@@ -3,6 +3,38 @@
 from gssutils import * 
 import json 
 
+info = json.load(open('info.json'))
+
+# +
+
+"""
+from urllib.request import Request, urlopen
+from bs4 import BeautifulSoup
+
+
+req = Request(info["landingPage"], headers={'User-Agent': 'Mozilla/5.0'})
+html = urlopen(req).read()
+plaintext = html.decode('utf8')
+soup = BeautifulSoup(plaintext)
+for a in soup.select('#series--content > div:nth-child(1) > div > div > ul > li > div > div.index-list__title > a'):
+    dataPage = a['href']
+req = Request(dataPage, headers={'User-Agent': 'Mozilla/5.0'})
+html = urlopen(req).read()
+plaintext = html.decode('utf8')
+soup = BeautifulSoup(plaintext)
+for a in soup.select('.accordion__content > div > div > div > div > div > div > div.document__details > h3 > a'):
+    dataURL = a['href']
+
+with open('info.json', 'r+') as info:
+    data = json.load(info)
+    data["dataURL"] = dataURL
+    info.seek(0)
+    json.dump(data, info, indent=4)
+    info.truncate()
+"""
+
+# +
+
 scrape = Scraper(seed="info.json")   
 scrape.distributions[0].title = "Testing data for coronavirus (COVID-19)"
 scrape

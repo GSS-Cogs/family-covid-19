@@ -98,7 +98,25 @@ def dictiComment(tabName, tabTitle, tabColumns):
 
 
 # %%
+from urllib.request import Request, urlopen
+from bs4 import BeautifulSoup
 
+info = json.load(open('info.json'))
+
+req = Request(info["landingPage"], headers={'User-Agent': 'Mozilla/5.0'})
+html = urlopen(req).read()
+plaintext = html.decode('utf8')
+soup = BeautifulSoup(plaintext)
+for a in soup.select('.no-icon'):
+    if 'Coronavirus (Covid-19): Testing for COVID-19 in adult care homes in Scotland' in a.get_text():
+        dataURL = "https://www.gov.scot" + a['href']
+
+with open('info.json', 'r+') as info:
+    data = json.load(info)
+    data["dataURL"] = dataURL
+    info.seek(0)
+    json.dump(data, info, indent=4)
+    info.truncate()
 
 scraper = Scraper(seed='info.json')
 scraper.distributions[0].title = "Coronavirus (Covid-19): additional data about adult care homes in Scotland"

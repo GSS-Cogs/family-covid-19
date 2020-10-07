@@ -1,8 +1,9 @@
 {
     "title": "Death registrations and occurrences by local authority and health board",
-    "publisher": "Office for National Statistics",
+    "publisher": "office-for-national-statistics",
     "description": "Provisional counts of the number of deaths registered in England and Wales, including deaths involving the coronavirus (COVID-19), by local authority, health board and place of death in the latest weeks for which data are available.",
     "landingPage": "https://www.ons.gov.uk/peoplepopulationandcommunity/healthandsocialcare/causesofdeath/datasets/deathregistrationsandoccurrencesbylocalauthorityandhealthboard/2020",
+    "dataURL": "https://www.ons.gov.uk/file?uri=/peoplepopulationandcommunity/healthandsocialcare/causesofdeath/datasets/deathregistrationsandoccurrencesbylocalauthorityandhealthboard/2020/lahbtablesweek39.xlsx",
     "datasetNotes": [
         "On landing page scroll down to dataset under heading \"Latest Version\"."
     ],
@@ -20,7 +21,27 @@
         "stage": [
             "To Do",
             "Priority"
-        ]
+        ],
+         "columns": {
+             "Week number": {
+                "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
+                "value": "http://reference.data.gov.uk/id/{+week_number}"
+            },
+             "Year": {
+                "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
+                "value": "http://reference.data.gov.uk/id/{+year}"
+            },
+            "Area Code": {
+                "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refArea",
+                "value": "http://statistics.data.gov.uk/id/statistical-geography/{area_code}",
+                "description": ""
+            },
+            "Value": {
+                "unit": "http://gss-data.org.uk/def/concept/measurement-units/deaths",
+                "measure": "http://gss-data.org.uk/def/measure/count",
+                "datatype": "integer"
+            }
+         }
     },
     "sizingNotes": "Several tabs, simple table structure and straightforward dimensions.",
     "notes": ""

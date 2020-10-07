@@ -9,12 +9,8 @@ scraper.distributions[0].title = "ONS Death registrations and occurrences by loc
 scraper
 
 dat = scraper.distributions[0].as_pandas(sheet_name='Registrations - All data')
+# Area code,Geography type,Area name,Cause of death,Week number,Place of death,Number of deaths
 
-# +
-#Area code,Geography type,Area name,Cause of death,Week number,Place of death,Number of deaths
-# -
-#dat = a
-#a = dat
 headline = dat.iloc[0,0]
 dat.head(4)
 
@@ -26,10 +22,10 @@ dat.head(10)
 
 dat = dat.drop(dat.columns[1], axis=1)
 dat = dat.drop(dat.columns[1], axis=1)
-dat = dat.rename(columns={str(dat.columns[len(dat.columns) - 1]): 'Value'})
+dat = dat.rename(columns={str(dat.columns[len(dat.columns) - 1]): 'Value', 'Week number':'Week'})
 dat['Year'] = 'year/2020'
-dat['Week number'] = 'week/' + dat['Week number'].astype(str)
-dat = dat[['Week number','Year','Area code','Cause of death','Place of death','Value']]
+dat['Week'] = 'week/' + dat['Week'].astype(str)
+dat = dat[['Week','Year','Area code','Cause of death','Place of death','Value']]
 dat['Cause of death'] = dat['Cause of death'].apply(pathify)
 dat['Place of death'] = dat['Place of death'].apply(pathify)
 dat.head()

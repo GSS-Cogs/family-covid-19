@@ -12,11 +12,11 @@ dat = scraper.distributions[0].as_pandas(sheet_name='Registrations - All data')
 
 # +
 #Area code,Geography type,Area name,Cause of death,Week number,Place of death,Number of deaths
-# +
+# -
 #dat = a
 #a = dat
-#dat.head(2)
-# -
+headline = dat.iloc[0,0]
+dat.head(4)
 
 cols = list(dat.iloc[2,0:7])
 dat.columns = cols
@@ -38,7 +38,7 @@ dat.head()
 import os
 from urllib.parse import urljoin
 
-notes = ''
+notes = headline
 
 csvName = 'registrations-observations.csv'
 out = Path('out')
@@ -46,6 +46,7 @@ out.mkdir(exist_ok=True)
 dat.drop_duplicates().to_csv(out / csvName, index = False)
 
 scraper.dataset.family = 'covid-19'
+scraper.dataset.description = notes + '\n' + scraper.dataset.description
 scraper.dataset.comment = 'Provisional counts of the number of deaths registered in England and Wales, including deaths involving the coronavirus (COVID-19), by local authority, health board and place of death in the latest weeks for which data are available.'
 scraper.dataset.title = 'Death Registrations by Local Authority and Health Board'
 

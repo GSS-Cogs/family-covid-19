@@ -1,6 +1,6 @@
 {
   "@context": "http://www.w3.org/ns/csvw",
-  "@id": "http://gss-data.org.uk/data/gss_data/covid-19/ons-death-registrations-and-occurrences-by-local-authority-and-health-board#schema",
+  "@id": "#table",
   "url": "cause-of-death.csv",
   "tableSchema": {
     "columns": [
@@ -30,7 +30,7 @@
         },
         "required": false,
         "propertyUrl": "skos:broader",
-        "valueUrl": "http://gss-data.org.uk/data/gss_data/covid-19/ons-death-registrations-and-occurrences-by-local-authority-and-health-board#concept/cause-of-death/{parent_notation}"
+        "valueUrl": "http://gss-data.org.uk/data/gss_data/covid-19/ons-death-registrations-and-occurrences-by-local-authority-and-health-board/concept/cause-of-death/{parent_notation}"
       },
       {
         "titles": "Sort Priority",
@@ -54,16 +54,15 @@
       {
         "virtual": true,
         "propertyUrl": "skos:inScheme",
-        "valueUrl": "http://gss-data.org.uk/data/gss_data/covid-19/ons-death-registrations-and-occurrences-by-local-authority-and-health-board#scheme/cause-of-death"
+        "valueUrl": "http://gss-data.org.uk/data/gss_data/covid-19/ons-death-registrations-and-occurrences-by-local-authority-and-health-board/concept-scheme/cause-of-death"
       }
     ],
     "primaryKey": "notation",
-    "aboutUrl": "http://gss-data.org.uk/data/gss_data/covid-19/ons-death-registrations-and-occurrences-by-local-authority-and-health-board#concept/cause-of-death/{notation}"
+    "aboutUrl": "http://gss-data.org.uk/data/gss_data/covid-19/ons-death-registrations-and-occurrences-by-local-authority-and-health-board/concept/cause-of-death/{notation}"
   },
   "prov:hadDerivation": {
-    "@id": "http://gss-data.org.uk/data/gss_data/covid-19/ons-death-registrations-and-occurrences-by-local-authority-and-health-board#scheme/cause-of-death",
+    "@id": "http://gss-data.org.uk/data/gss_data/covid-19/ons-death-registrations-and-occurrences-by-local-authority-and-health-board/concept-scheme/cause-of-death",
     "@type": "skos:ConceptScheme",
-    "rdfs:label": "Cause of death",
-    "skos:hasTopConcept": "http://gss-data.org.uk/data/gss_data/covid-19/ons-death-registrations-and-occurrences-by-local-authority-and-health-board#concept/cause-of-death/all"
+    "rdfs:label": "Cause of death"
   }
 }

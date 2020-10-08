@@ -36,6 +36,8 @@ ti = [
     'Death Registrations by Local Authority and Health Board',
     'Death Occurrences by Local Authority and Health Board'
 ]
+# Paths
+pa = ['/registrations', '/occurrences']
 
 i = 0
 for s in sn:
@@ -67,7 +69,7 @@ for s in sn:
     scraper.dataset.comment = co[i]
     scraper.dataset.title = ti[i]
 
-    dataset_path = pathify(os.environ.get('JOB_NAME', f'gss_data/{scraper.dataset.family}/' + Path(os.getcwd()).name)).lower()
+    dataset_path = pathify(os.environ.get('JOB_NAME', f'gss_data/{scraper.dataset.family}/' + Path(os.getcwd()).name)).lower() + pa[i]
     scraper.set_base_uri('http://gss-data.org.uk')
     scraper.set_dataset_id(dataset_path)
 

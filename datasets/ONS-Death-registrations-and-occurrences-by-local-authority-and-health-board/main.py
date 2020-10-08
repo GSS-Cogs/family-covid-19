@@ -12,6 +12,7 @@ dat = scraper.distributions[0].as_pandas(sheet_name='Registrations - All data')
 # Area code,Geography type,Area name,Cause of death,Week number,Place of death,Number of deaths
 
 headline = dat.iloc[0,0]
+print(headline)
 dat.head(4)
 
 cols = list(dat.iloc[2,0:7])
@@ -23,9 +24,9 @@ dat.head(10)
 dat = dat.drop(dat.columns[1], axis=1)
 dat = dat.drop(dat.columns[1], axis=1)
 dat = dat.rename(columns={str(dat.columns[len(dat.columns) - 1]): 'Value', 'Week number':'Week'})
-dat['Year'] = 'year/2020'
-dat['Week'] = 'week/' + dat['Week'].astype(str)
-dat = dat[['Week','Year','Area code','Cause of death','Place of death','Value']]
+dat['Week'] = np.where(dat['Week'] < 10, '0' + dat['Week'].astype(str), dat['Week'].astype(str))
+dat['Week'] = 'week/2020-W' + dat['Week'].astype(str)
+dat = dat[['Week','Area code','Cause of death','Place of death','Value']]
 dat['Cause of death'] = dat['Cause of death'].apply(pathify)
 dat['Place of death'] = dat['Place of death'].apply(pathify)
 dat.head()

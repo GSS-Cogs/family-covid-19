@@ -14,6 +14,7 @@
 
 ----------
 #### No stage 1 as I jumped straight to Stage 2
+#### KEEP THE 2 DATASETS SEPARATE
 
 ### Stage 2. Alignment
 

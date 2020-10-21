@@ -1,7 +1,15 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[47]:
+# In[491]:
+
+
+#!/usr/bin/env python
+# coding: utf-8
+
+
+# In[492]:
+
 
 
 from gssutils import *
@@ -13,7 +21,7 @@ from datetime import datetime
 import string
 
 
-# In[48]:
+# In[493]:
 
 
 info = json.load(open('info.json'))
@@ -83,7 +91,8 @@ def excelRange(bag):
     return '{' + lowy + lowx + '-' + highy + highx + '}'
 
 
-# In[49]:
+# In[494]:
+
 
 
 
@@ -96,8 +105,7 @@ def excelRange(bag):
 #No currently usable scraper, dataURL changes too often to make good use of seed(info.json)
 
 
-# In[50]:
-
+# In[495]:
 
 
 dataLinks = []
@@ -114,13 +122,15 @@ for i in dataLinks:
     print(i)
 
 
-# In[51]:
+# In[496]:
+
 
 
 trace = TransformTrace()
 
 
-# In[52]:
+# In[497]:
+
 
 
 for link in dataLinks:
@@ -188,7 +198,7 @@ for link in dataLinks:
 
             trace.store("dailyDeaths", tidy_sheet.topandas())
 
-        elif 'deaths by region' in tab.name.lower() or 'no post test' in tab.name.lower():
+        elif 'deaths by region' in tab.name.lower() or 'no post testFINE' in tab.name.lower():
 
             columns=["Period", "ONS Geography Code", "NHS Hospital Code", "Age", "Sex", "Ethnicity", "Preexisting Condition", "Preexisting Condition Status", "Measure Type", "Unit"]
             trace.start(dailyDeaths, tab, columns, link)
@@ -267,7 +277,7 @@ for link in dataLinks:
             period = cell.shift(RIGHT).expand(RIGHT).is_not_blank()
             trace.Period('Selected as non-blank values in range: {}', var = excelRange(period))
 
-            age = cell.expand(DOWN).is_not_blank()
+            age = cell.fill(DOWN).is_not_blank()
             trace.Age('Selected as non-blank values in range: {}', var = excelRange(age))
 
             sex = 'All'
@@ -330,7 +340,7 @@ for link in dataLinks:
             sex = 'All'
             trace.Sex('Hardcoded as {}', var = sex)
 
-            ethnicity = cell.expand(DOWN).is_not_blank()
+            ethnicity = cell.fill(DOWN).is_not_blank()
             trace.Ethnicity('Selected as non-blank values in range: {}', var = excelRange(ethnicity))
             #THIS CURRENTLY EXCLUDES SOME 'TOTAL' ROWS FOR EACH ETHNICITY, I can't find a way to replace the whitespace for each column heading
             #reliably that wouldn't risk data accuracy if anything in the table was changed, and this dataset is updated very often
@@ -385,7 +395,7 @@ for link in dataLinks:
             period = tab.filter('Period:').shift(RIGHT)
             trace.Period('Single Date given for whole sheet, located: {}', var = excelRange(period))
 
-            age = cell.expand(DOWN).is_not_blank()
+            age = cell.fill(DOWN).is_not_blank()
             trace.Age('Selected as non-blank values in range: {}', var = excelRange(age))
 
             sex = cell.expand(RIGHT).is_not_blank()
@@ -442,7 +452,7 @@ for link in dataLinks:
             period = tab.filter('Period:').shift(RIGHT)
             trace.Period('Single Date given for whole sheet, located: {}', var = excelRange(period))
 
-            age = cell.expand(DOWN).is_not_blank()
+            age = cell.fill(DOWN).is_not_blank()
             trace.Age('Selected as non-blank values in range: {}', var = excelRange(age))
 
             sex = 'All'
@@ -513,16 +523,16 @@ for link in dataLinks:
             conditionStatus = 'Yes'
             trace.Preexisting_Condition_Status('Hardcoded as {}', var = conditionStatus)
 
-            condition = cell.fill(RIGHT).is_not_blank()
+            condition = period.shift(RIGHT)
             trace.Preexisting_Condition('Selected as non-blank values in range: {}', var = excelRange(condition))
 
-            measureType = 'Deaths Positive Test'
-            trace.Measure_Type('Hardcoded as {}', var = measureType)
+            measureType = cell.shift(RIGHT).fill(RIGHT).is_not_blank()
+            trace.Measure_Type('Selected as non-blank values in range: {}', var = excelRange(measureType))
 
-            unit = 'Count'
-            trace.Unit('Hardcoded as {}', var = unit)
+            unit = cell.shift(RIGHT).fill(RIGHT).is_not_blank()
+            trace.Unit('Selected as non-blank values in range: {}', var = excelRange(unit))
 
-            observations = period.fill(RIGHT).is_not_blank()
+            observations = condition.fill(RIGHT).is_not_blank()
 
             dimensions = [
                     HDimConst('ONS Geography Code', region),
@@ -531,10 +541,10 @@ for link in dataLinks:
                     HDimConst('Age', age),
                     HDimConst('Sex', sex),
                     HDimConst('Ethnicity', ethnicity),
-                    HDim(condition, 'Pre-existing Condition', DIRECTLY, ABOVE),
-                    HDimConst('Pre-existing Condition Status' , conditionStatus),
-                    HDimConst('Measure Type', measureType),
-                    HDimConst('Unit', unit)
+                    HDim(condition, 'Pre-existing Condition', DIRECTLY, LEFT),
+                    HDimConst( 'Pre-existing Condition Status', conditionStatus),
+                    HDim(measureType, 'Measure Type', DIRECTLY, ABOVE),
+                    HDim(unit, 'Unit', DIRECTLY, ABOVE),
             ]
 
             tidy_sheet = ConversionSegment(tab, dimensions, observations)
@@ -546,25 +556,28 @@ for link in dataLinks:
             continue
 
 
-# In[53]:
+# In[498]:
 
 
 dailyDeathsDf = trace.combine_and_trace(dailyDeaths, "dailyDeaths").fillna('')
 
-dailyDeathsDf['Measure Type'] = dailyDeathsDf.apply(lambda x: 'Deaths Awaiting Verification' if 'Awaiting verification' in x['Period'] else x['Measure Type'], axis = 1)
+#dailyDeathsDf['Period'] = dailyDeathsDf.apply(lambda x: datetime.strptime(right(x['Period'], (len(x['Period']) - 19)), '%d %B %Y').strftime('%Y-%m-%d') if x['Period'].startswith('All data up to') else x['Period'], axis = 1)
+#This is a terrible solution, but them using "all data up to" etc as the period is also terrible
+
+dailyDeathsDf['Measure Type'] = dailyDeathsDf.apply(lambda x: 'Deaths Awaiting Verification' if 'Awaiting verification' in str(x['Period']) else x['Measure Type'], axis = 1)
 dailyDeathsDf['Measure Type'] = dailyDeathsDf.apply(lambda x: 'Percentage' if 'Percentage' in x['Unit'] and 'null' not in x['Unit'] else x['Measure Type'], axis = 1)
 dailyDeathsDf['Measure Type'] = dailyDeathsDf.apply(lambda x: 'Percentage without Null and not stated' if 'Percentage' in x['Unit'] and 'null' in x['Unit'] else x['Measure Type'], axis = 1)
 
 trace.Measure_Type('Change to Percentage for Percentage values using column headers as reference')
 
-dailyDeathsDf['Unit'] = dailyDeathsDf.apply(lambda x: 'Percent' if '%' in x['Pre-existing Condition'] else x['Unit'], axis = 1)
+dailyDeathsDf['Unit'] = dailyDeathsDf.apply(lambda x: 'Percent' if 'Percentage' in x['Measure Type'] else x['Unit'], axis = 1)
 
 trace.Unit('Change to Percent where Measure Type is changed to Percentage')
 
-indexNames = dailyDeathsDf[ dailyDeathsDf['Period'].isin(['Awaiting verification','Up to 01-Mar-20','Total', 'All data up to 5pm 2 June 2020', 'All data up to 5pm 9 June 2020'])].index
+indexNames = dailyDeathsDf[ dailyDeathsDf['Period'].isin(['Awaiting verification','Up to 01-Mar-20','Total', 'All data up to 4pm 14 October 2020', 'All data up to 5pm 9 June 2020'])].index
 dates = dailyDeathsDf['Period'].drop(indexNames)
-intervalOfOrderPeriods = days_between(max(dates), min(dates))
-dailyDeathsDf['Period'] = dailyDeathsDf.apply(lambda x: 'gregorian-interval/'+ min(dates) + 'T00:00:00/P' + str(intervalOfOrderPeriods) + 'D' if 'Total' in x['Period'] else ('gregorian-interval/'+ min(dates) + 'T00:00:00/P' + str(intervalOfOrderPeriods) + 'D' if 'Awaiting verification' in x['Period'] else x['Period']), axis = 1)
+#intervalOfOrderPeriods = days_between(max(dates), min(dates))
+#dailyDeathsDf['Period'] = dailyDeathsDf.apply(lambda x: 'gregorian-interval/'+ min(dates) + 'T00:00:00/P' + str(intervalOfOrderPeriods) + 'D' if 'Total' in x['Period'] else ('gregorian-interval/'+ min(dates) + 'T00:00:00/P' + str(intervalOfOrderPeriods) + 'D' if 'Awaiting verification' in x['Period'] else x['Period']), axis = 1)
 
 trace.Period('Chance Total Period to be full range of dates')
 
@@ -579,13 +592,20 @@ dailyDeathsDf = dailyDeathsDf.replace({'ONS Geography Code' : {
 		'South East' : 'E40000005',
 		'South West' : 'E32000013'},
                                     'Unit' : {
-        'Percentage (excluding null and not stated)' : 'Percent'},
+        'Percentage (excluding null and not stated)' : 'Percent',
+        '% of deaths (excluding unknown or not reported) with condition' : 'Percent',
+        '% of deaths since introduced with condition' : 'Percent',
+        'Count of all deaths since condition introduced' : 'Count',
+        'Count of condition' : 'Count',
+        'Count of unknown or not reported for condition' : 'Count'},
                                     'Pre-existing Condition' : {
         'Count of condition' : 'With Condition',
         'Count of unknown or not reported for condition' : 'unknown or not reported',
         'Count of all deaths since condition introduced' : 'Deaths since Condition Introduced',
         '% of deaths since introduced with condition' : 'Deaths since Condition Introduced',
         '% of deaths (excluding unknown or not reported) with condition' : 'Deaths excluding unknown or not reported'}})
+
+dailyDeathsDf['OBS'] = dailyDeathsDf.apply(lambda x: x['OBS']*100 if 'Percent' in x['Unit'] else x['OBS'], axis = 1)
 
 trace.ONS_Geography_Code('Replace location names with Geography Codes')
 
@@ -598,7 +618,7 @@ trace.Preexisting_Condition("Replace '% of deaths since introduced with conditio
 trace.Preexisting_Condition("Replace '% of deaths (excluding unknown or not reported) with condition' with 'Deaths excluding unknown or not reported'")
 
 
-# In[54]:
+# In[499]:
 
 
 from IPython.core.display import HTML
@@ -609,13 +629,7 @@ for col in dailyDeathsDf:
         display(dailyDeathsDf[col].cat.categories)
 
 
-# In[54]:
-
-
-
-
-
-# In[55]:
+# In[500]:
 
 
 out = Path('out')

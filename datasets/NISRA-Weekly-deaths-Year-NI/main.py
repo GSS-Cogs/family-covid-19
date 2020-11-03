@@ -1,379 +1,527 @@
+#!/usr/bin/env python
+# coding: utf-8
+
+# In[152]:
+
+
 # -*- coding: utf-8 -*-
-# # NISRA Weekly deaths,  Year   NI 
+# # NISRA Weekly deaths,  Year   NI
 
-from gssutils import * 
-import json 
-
-scrape = Scraper(seed="info.json")   
-scrape.distributions[0].title = "Weekly deaths, 2020 (NI)"
-print(dir(scrape))
+from gssutils import *
+import json
+#title = "Weekly deaths, 2020 (NI)"
+scrape = Scraper('https://www.nisra.gov.uk/publications/weekly-deaths')
 scrape
 
+
+# In[153]:
+
+
+
 scrape.distributions = [x for x in scrape.distributions if x.mediaType == Excel]
-tabs = { tab.name: tab for tab in scrape.distributions[0].as_databaker() }
+
+
+# In[154]:
+
+
+dist = scrape.distributions[0]
+display(dist)
+
+
+# In[155]:
+
+
+tabs = { tab.name: tab for tab in dist.as_databaker() if tab.name.startswith('Table')}
 list(tabs)
 
-# +
-import glob
-
-py_files = [i for i in glob.glob('*.{}'.format('py'))]
-py_files.sort()
-all_dat = []
-
-for i in py_files:
-    file = "'" + i + "'"
-    if file.startswith("'main") == True:
-        continue
-    %run $file
-    all_dat.append(tidy)
-    del tidy
-# -
-
-print('Date range from Table_02 script: ' + str(date_range) + ' Days')
-print('Minimum date from Table_02 script: ' + str(min_date))
-date_range_str = 'gregorian-interval/' + str(min_date).replace(' ','T') + '/P' + str(date_range) + 'D'
-print('Formatted date range string: ' + date_range_str)
-
-sexMap = pd.read_csv('../../Reference/sex-mapping.csv') 
-niMap = pd.read_csv('../../Reference/northern-ireland-lgd-mapping.csv')
-
-# Sort out Table_01
-all_dat[0]['Registered Death Type'] = all_dat[0]['Registered Death Type'].str.replace('-in-week-2020p','')
-all_dat[0]['Registered Death Type'] = all_dat[0]['Registered Death Type'].str.replace('2019p','2019')
-all_dat[0]['Registered Death Type'] = all_dat[0]['Registered Death Type'].str.replace('193','19')
-all_dat[0]['Registered Death Type'] = all_dat[0]['Registered Death Type'].str.replace('respiratory2','respiratory')
-all_dat[0].insert(3,'Gender', 'total')
-all_dat[0].insert(3,'Age', 'All')
-all_dat[0].insert(3,'Local Government District', 'total')
-all_dat[0].insert(3,'Location of Death', 'all')
-del all_dat[0]['Registration Week']
-
-# +
-#all_dat[1].head(5)
-# -
-
-all_dat[1]['Period'] = all_dat[1]['Period'].replace('year/2020',date_range_str)
-all_dat[1]['Gender'] = all_dat[1]['Gender'].replace('total-registered-deaths','total')
-all_dat[1].insert(3,'Registered Death Type', 'total-number-of-deaths-registered')
-all_dat[1].insert(3,'Local Government District', 'total')
-all_dat[1].insert(3,'Location of Death', 'all')
-del all_dat[1]['Week Number']
-
-
-all_dat[2].insert(3,'Gender', 'total')
-all_dat[2].insert(3,'Age', 'All')
-all_dat[2].insert(3,'Registered Death Type', 'total-number-of-deaths-registered')
-all_dat[2].insert(3,'Location of Death', 'all')
-del all_dat[2]['Registration Week']
-
-# +
-#all_dat[2].head(5)
-# -
-
-all_dat[3]['Period'] = all_dat[3]['Period'].replace('year/2020',date_range_str)
-all_dat[3]['Gender'] = all_dat[3]['Gender'].replace('total-registered-deaths','total')
-all_dat[3].insert(3,'Registered Death Type', 'covid-19-registered-deaths')
-all_dat[3].insert(3,'Local Government District', 'total')
-all_dat[3].insert(3,'Location of Death', 'all')
-del all_dat[3]['Week Number']
-
-# +
-#all_dat[3].head(60)
-# -
-
-all_dat[4].insert(3,'Gender', 'total')
-all_dat[4].insert(3,'Age', 'All')
-all_dat[4].insert(3,'Registered Death Type', 'covid-19-registered-deaths')
-all_dat[4].insert(3,'Location of Death', 'all')
-del all_dat[4]['Registration Week']
-
-# +
-#all_dat[4].head(5)
-# -
-
-all_dat[5] = all_dat[5].rename(columns={'Place of Death': 'Location of Death'})
-all_dat[5]['Location of Death'] = all_dat[5]['Location of Death'].replace('care-home3','care-home')
-all_dat[5]['Location of Death'] = all_dat[5]['Location of Death'].replace('other4','other')
-all_dat[5].insert(3,'Gender', 'total')
-all_dat[5].insert(3,'Age', 'All')
-all_dat[5].insert(3,'Local Government District', 'total')
-all_dat[5].insert(3,'Registered Death Type', 'covid-19-registered-deaths')
-del all_dat[5]['Week of Death']
-
-# +
-#all_dat[5].head(5)
-# -
-
-all_dat[6].insert(3,'Gender', 'total')
-all_dat[6].insert(3,'Age', 'All')
-all_dat[6].insert(3,'Registered Death Type', 'covid-19-registered-deaths')
-all_dat[6].insert(3,'Location of Death', 'care-home')
-del all_dat[6]['Week of Death']
-
-# +
-#all_dat[6].head(60)
-# -
-
-cols = ['Period', 'Local Government District','Registered Death Type','Location of Death','Age','Gender','Marker','Value']
-i = 0
-for t in all_dat:
-    try:
-        all_dat[i] = all_dat[i][cols]
-    except Exception as e:
-        print(' Tables 1 to 7 have been rearranged')
-        break
-    i = i + 1
-
-joined_dat = pd.concat([all_dat[0], all_dat[1], all_dat[2], all_dat[3], all_dat[4], all_dat[5], all_dat[6]], sort=True)
-
-joined_dat['Registered Death Type'][joined_dat['Registered Death Type'] == 'covid-19-deaths-registered'] = 'covid-19-registered-deaths'
-joined_dat['Marker'][joined_dat['Marker'] == 'Provisional'] = 'provisional'
-# Lots of duplicates that are not being removed when outputting as CSV but this seems to work
-joined_dat = joined_dat.drop_duplicates()
-# Getting duplicate rows but with differenct Marker values, which are not counted during tests in Jenkins. removing and keeping last row
-joined_dat = joined_dat.drop_duplicates(subset=['Age','Gender','Local Government District','Location of Death','Period','Registered Death Type'], keep='last')
-#t = joined_dat[joined_dat['Value'] == 0.0]
-#t = t[t['Age'] == 'All']
-#t = joined_dat[joined_dat['Period'] == 'gregorian-interval/2020-03-14T00:00:00/P7D']
-#t = t[t['Registered Death Type'] == 'covid-19-registered-deaths']
-#t = t[t['Local Government District'] == 'total']
-#t = t[t['Location of Death'] == 'care-home']
-#t = t[t['Gender'] == 'total']
-#t.head(60)
-
-joined_dat['Local Government District'] = joined_dat['Local Government District'].apply(pathify)
-#joined_dat['Measure Type'] = joined_dat['Measure Type'].apply(pathify)
-#joined_dat['Unit'] = joined_dat['Unit'].apply(pathify)
-#joined_dat.head(10)
-
-# Sex Mapping
-joined_dat = joined_dat.rename(columns={'Gender': 'Sex'})
-joined_dat['Sex'] = joined_dat['Sex'].str.strip()
-joined_dat['Sex'] = joined_dat['Sex'].map(sexMap.set_index('Category')['Code'])
-
-# Geography code Mapping
-joined_dat['Local Government District'] = joined_dat['Local Government District'].str.strip()
-joined_dat['Local Government District'] = joined_dat['Local Government District'].map(niMap.set_index('Category')['Code'])
-
-# Hopefully all NaN values have been accounted for in the Marker column
-joined_dat['Value'] = joined_dat['Value'].replace(np.nan,0)
-
-joined_dat['Age'] = joined_dat['Age'].replace('<7 days','less than 7 Days')
-joined_dat['Age'] = joined_dat['Age'].replace('>=7 days and < 1 year','more than equal to 7 days and less than 1 year')
-joined_dat['Age'] = joined_dat['Age'].replace('85+','85 plus')
-joined_dat['Age'] = joined_dat['Age'].apply(pathify)
-
-joined_dat = joined_dat[['Period','Location of Death','Local Government District','Registered Death Type', 'Age','Sex','Marker','Value']]
-
-
-# Output the data to CSV
-csvName = 'registered-date-of-death-covid-19-observations.csv'
-#csvName = 'observations.csv'
-out = Path('out')
-out.mkdir(exist_ok=True)
-joined_dat.drop_duplicates().to_csv(out / csvName, index = False)
-
-notes = """
-P Weekly published data are provisional.
-1 This data is based on registrations of deaths, not occurrences. The majority of deaths are registered within five days in Northern Ireland.
-2 COVID-19 deaths include any death where Coronavirus or COVID-19 (suspected or confirmed) was mentioned anywhere on the death certificate.
-3Includes deaths in care homes only. Care home residents who have died in a different location will be counted elsewhere in this table.
-4 The 'Other' category includes deaths at a residential address which was not the usual address of the deceased and all other places.
-"""
-
-# +
-scrape.dataset.family = 'covid-19'
-scrape.dataset.description = 'NISRA Registered Date of Death including COVID-19.\n' + notes
-scrape.dataset.comment = 'Weekly death registrations in Northern Ireland'
-# Output CSV-W metadata (validation, transform and DSD).
-# Output dataset metadata separately for now.
-
-import os
-from urllib.parse import urljoin
-
-scrape.dataset.title = 'Weekly Deaths - Notification Date of Death including COVID-19'
-dataset_path = pathify(os.environ.get('JOB_NAME', 'gss_data/covid-19/' + scrape.dataset.title)) 
-scrape.set_base_uri('http://gss-data.org.uk')
-scrape.set_dataset_id(dataset_path)
-csvw_transform = CSVWMapping()
-csvw_transform.set_csv(out / csvName)
-csvw_transform.set_mapping(json.load(open('info.json')))
-csvw_transform.set_dataset_uri(urljoin(scrape._base_uri, f'data/{scrape._dataset_id}'))
-csvw_transform.write(out / f'{csvName}-metadata.json')
-with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
-    metadata.write(scrape.generate_trig())
-# -
-"""
-newTxt = ''
-
-info = json.load(open('info.json')) 
-mtp = info['transform']['columns']['Value']['measure'].replace('http://gss-data.org.uk/def/measure/','')
-mt = mtp.capitalize().replace('-',' ')
-mtpath = f'''"@id": "http://gss-data.org.uk/def/measure/{mtp}",'''
-
-with open("out/registered-date-of-death-covid-19-observations.csv-metadata.json") as fp: 
-    for line in fp: 
-        if mtpath in line.strip():
-            print(line)
-            newTxt = newTxt + line + '''\t"rdfs:label": "''' + mt + '''",\n'''
-        else:
-            newTxt += line
- 
-f = open("out/registered-date-of-death-covid-19-observations.csv-metadata.json", "w")
-f.write(newTxt)
-f.close()
-"""
-del joined_dat
-del all_dat[7]['Week of Death']
-del all_dat[7]['Covid-19 Deaths']
-all_dat[7].insert(3,'Location of Death', 'all')
-all_dat[7].insert(3,'Person Type', 'all')
-
-# +
-#all_dat[7].head(5)
-# -
-
-
-all_dat[8]['Place of Death'] = all_dat[8]['Place of Death'].replace('other3','other')
-del all_dat[8]['Week of Death']
-all_dat[8] = all_dat[8].rename(columns={'Place of Death': 'Location of Death'})
-all_dat[8].insert(3,'Person Type', 'all')
-
-# +
-#all_dat[8].head(5)
-# -
-
-all_dat[9]['Place of Death'] = all_dat[9]['Place of Death'].replace('care-home3a','care-home')
-all_dat[9]['Place of Death'] = all_dat[9]['Place of Death'].replace('hospital3b','hospital')
-all_dat[9]['Place of Death'] = all_dat[9]['Place of Death'].replace('-of-all-covid-19-hospital-deaths','hospital')
-all_dat[9]['Place of Death'] = all_dat[9]['Place of Death'].replace('-of-all-covid-19-deaths','all')
-all_dat[9] = all_dat[9].rename(columns={'Place of Death': 'Location of Death'})
-del all_dat[9]['Week of Death']
-all_dat[9].insert(3,'Person Type', 'care-home-residents')
-
-# +
-#all_dat[9].head(5)
-# -
-
-all_dat[10]['Place of Death'] = all_dat[10]['Place of Death'].replace('care-home3','care-home')
-all_dat[10]['Place of Death'] = all_dat[10]['Place of Death'].replace('other4','other')
-all_dat[10]['Place of Death'] = all_dat[10]['Place of Death'].replace('cumulative-total','all')
-all_dat[10] = all_dat[10].rename(columns={'Place of Death': 'Location of Death'})
-all_dat[10].insert(3,'Person Type', 'all')
-
-# +
-#all_dat[10].head(50)
-# -
-
-cols = ['Period', 'Location of Death', 'Person Type', 'Measure Type', 'Unit', 'Marker', 'Value']
-for i in range(7,10):
-    try:
-        all_dat[i] = all_dat[i][cols]
-    except Exception as e:
-        print(str(e) + ':' + str(i) + ' : Tables 8 to 11 have been rearranged')
-        break
-
-joined_dat = pd.concat([all_dat[7], all_dat[8], all_dat[9], all_dat[10]])
-
-#### REMOVE ROWS WITH 'CUMULATIVE COUNT' IN THE UNIT COLUMN AS CAUSING DUPLICATES IN JENKINS AND CAN BE DERIVED ANYWAY
-joined_dat = joined_dat[joined_dat['Unit'] == 'Count']
-####################################################################################################
-#joined_dat['Unit'].unique()
-
-joined_dat['Measure Type'] = 'Deaths'
-
-# Hopefully all NaN values have been accounted for in the Marker column
-joined_dat['Value'] = joined_dat['Value'].replace(np.nan,0)
-
-joined_dat = joined_dat[['Period','Location of Death','Person Type','Marker','Value']]
-
-# +
-#joined_dat['Measure Type'] = joined_dat['Measure Type'].apply(pathify)
-#joined_dat['Unit'] = joined_dat['Unit'].apply(pathify)
-#joined_dat.head(10)
-
-# +
-#del joined_dat['Measure Type']
-#del joined_dat['Unit']
-
-joined_dat['Value'] = pd.to_numeric(joined_dat['Value'], downcast='integer')
-# -
-
-notes = """
-P Weekly published data are provisional.
-1 This data is based on the actual date of death, from those deaths registered by GRO up to 1st July 2020. All data in this table are subject to change, as some deaths will have occurred but haven’t been registered yet.  The first covid-19 death in Northern Ireland occurred on 18th March 2020.
-2 COVID-19 deaths include any death where Coronavirus or COVID-19 (suspected or confirmed) was mentioned anywhere on the death certificate.
-3Includes deaths in care homes only. Care home residents who have died in a different location will be counted elsewhere in this table.
-4 The 'Other' category includes deaths at a residential address which was not the usual address of the deceased and all other places.
-"""
-
-# +
-# Output the data to CSV
-#csvName = 'date-of-death-occurrences-covid-19-observations.csv'
-#out = Path('out')
-#out.mkdir(exist_ok=True)
-#joined_dat.drop_duplicates().to_csv(out / csvName, index = False)
-# -
-
-"""
-scrape.dataset.family = 'covid-19'
-scrape.dataset.description = 'NISRA COVID-19 Date of Death Occurrences Including COVID-19.\n ' + notes
-scrape.dataset.comment = 'Weekly death occurrances in Northern Ireland'
-# Output CSV-W metadata (validation, transform and DSD).
-# Output dataset metadata separately for now.
-
-import os
-from urllib.parse import urljoin
-
-scrape.dataset.title = 'Weekly Deaths - Date of Death including COVID-19'
-dataset_path = pathify(os.environ.get('JOB_NAME', 'gss_data/covid-19/' + scrape.dataset.title)) 
-scrape.set_base_uri('http://gss-data.org.uk')
-scrape.set_dataset_id(dataset_path)
-
-csvw_transform = CSVWMapping()
-csvw_transform.set_csv(out / csvName)
-csvw_transform.set_mapping(json.load(open('info.json')))
-csvw_transform.set_dataset_uri(urljoin(scrape._base_uri, f'data/{scrape._dataset_id}'))
-csvw_transform.write(out / f'{csvName}-metadata.json')
-with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
-    metadata.write(scrape.generate_trig())
-
-
-newTxt = ''
-
-info = json.load(open('info.json')) 
-mtp = info['transform']['columns']['Value']['measure'].replace('http://gss-data.org.uk/def/measure/','')
-mt = mtp.capitalize().replace('-',' ')
-mtpath = f'''"@id": "http://gss-data.org.uk/def/measure/{mtp}",'''
-
-with open("out/date-of-death-occurrences-covid-19-observations.csv-metadata.json") as fp: 
-    for line in fp: 
-        if mtpath in line.strip():
-            newTxt = newTxt + line + '''\t"rdfs:label": "''' + mt + '''",\n'''
-        else:
-            newTxt += line
- 
-f = open("out/date-of-death-occurrences-covid-19-observations.csv-metadata.json", "w")
-f.write(newTxt)
-f.close()
-"""
-
-
-# +
-#scrape._dataset_id
-
-# +
-#codelistcreation = ['Age'] 
-#print(codelistcreation)
-#print("-------------------------------------------------------")
-#tidy = joined_dat
-#codeclass = CSVCodelists()
-#for cl in codelistcreation:
-#    if cl in tidy.columns:
-#        tidy[cl] = tidy[cl].str.replace("-"," ")
-#        tidy[cl] = tidy[cl].str.capitalize()
-#        codeclass.create_codelists(pd.DataFrame(tidy[cl]), 'codelists', scrape.dataset.family, Path(os.getcwd()).name.lower())
-# -
+tidied_sheets = {}
+
+for name, tab in tabs.items():
+
+    if 'table 1' == name.lower():
+
+        remove = tab.filter('P Weekly published data are provisional.').expand(DOWN).expand(RIGHT)
+
+        cell = tab.filter('Contents')
+
+        area = 'Northern Ireland'
+
+        week_ending = cell.shift(1, 4).fill(DOWN).is_not_blank() - remove
+
+        measurement = cell.shift(2, 3).expand(RIGHT).is_not_blank() | cell.shift(2, 4).expand(RIGHT).is_not_blank()
+
+        measure_type = 'Deaths'
+
+        unit = 'Count'
+
+        observations = week_ending.fill(RIGHT).is_not_blank()
+
+        dimensions = [
+        HDimConst('Area', area),
+        HDim(week_ending, 'Week Ending', DIRECTLY, LEFT),
+        HDim(measurement, 'Measurement', DIRECTLY, ABOVE),
+        HDimConst('Measure Type', measure_type),
+        HDimConst('Unit', unit),
+        ]
+
+        tidy_sheet = ConversionSegment(tab, dimensions, observations)
+        savepreviewhtml(tidy_sheet, fname="Preview.html")
+
+        tidied_sheets[name] = tidy_sheet.topandas()
+
+    elif 'table 2' == name.lower():
+
+        remove = tab.filter('P Weekly published data are provisional.').expand(DOWN).expand(RIGHT)
+
+        cell = tab.filter('Contents')
+
+        area = 'Northern Ireland'
+
+        week_ending = cell.shift(0, 4).fill(RIGHT).is_not_blank() | tab.filter('Year to Date')
+
+        gender = cell.shift(0, 5).expand(DOWN).is_not_blank()
+
+        age = gender.shift(RIGHT).expand(DOWN).is_not_blank() - remove
+
+        measure_type = 'Deaths'
+
+        unit = 'Count'
+
+        observations = age.fill(RIGHT).is_not_blank()
+
+        dimensions = [
+        HDimConst('Area', area),
+        HDim(week_ending, 'Week Ending', DIRECTLY, ABOVE),
+        HDim(gender, 'Gender', CLOSEST, ABOVE),
+        HDim(age, 'Age', DIRECTLY, LEFT),
+        HDimConst('Measure Type', measure_type),
+        HDimConst('Unit', unit),
+        ]
+
+        tidy_sheet = ConversionSegment(tab, dimensions, observations)
+        savepreviewhtml(tidy_sheet, fname="Preview.html")
+
+        tidied_sheets[name] = tidy_sheet.topandas()
+
+    elif 'table 3' == name.lower():
+
+        remove = tab.filter('P Weekly published data are provisional.').expand(DOWN).expand(RIGHT)
+
+        cell = tab.filter('Contents')
+
+        area = cell.shift(2, 4).expand(RIGHT).is_not_blank()
+
+        week_ending = cell.shift(1, 4).fill(DOWN).is_not_blank() - remove
+
+        measure_type = 'Deaths'
+
+        unit = 'Count'
+
+        observations = week_ending.fill(RIGHT).is_not_blank()
+
+        dimensions = [
+        HDim(area, 'Area', DIRECTLY, ABOVE),
+        HDim(week_ending, 'Week Ending', DIRECTLY, LEFT),
+        HDimConst('Measure Type', measure_type),
+        HDimConst('Unit', unit),
+        ]
+
+        tidy_sheet = ConversionSegment(tab, dimensions, observations)
+        savepreviewhtml(tidy_sheet, fname="Preview.html")
+
+        tidied_sheets[name] = tidy_sheet.topandas()
+
+    elif 'table 4' == name.lower():
+
+        remove = tab.filter('P Weekly published data are provisional.').expand(DOWN).expand(RIGHT)
+
+        cell = tab.filter('Contents')
+
+        area = 'Northern Ireland'
+
+        week_ending = cell.shift(1, 3).fill(DOWN).is_not_blank() - remove
+
+        place_of_death = cell.shift(2, 3).expand(RIGHT).is_not_blank()
+
+        measure_type = 'Deaths'
+
+        unit = 'Count'
+
+        observations = week_ending.fill(RIGHT).is_not_blank()
+
+        dimensions = [
+        HDimConst('Area', area),
+        HDim(week_ending, 'Week Ending', DIRECTLY, LEFT),
+        HDim(place_of_death, 'Place of Death', DIRECTLY, ABOVE),
+        HDimConst('Measure Type', measure_type),
+        HDimConst('Unit', unit),
+        ]
+
+        tidy_sheet = ConversionSegment(tab, dimensions, observations)
+        savepreviewhtml(tidy_sheet, fname="Preview.html")
+
+        tidied_sheets[name] = tidy_sheet.topandas()
+
+    elif 'table 5' == name.lower():
+
+        remove = tab.filter('P Weekly published data are provisional.').expand(DOWN).expand(RIGHT)
+
+        cell = tab.filter('Contents')
+
+        area = 'Northern Ireland'
+
+        week_ending = cell.shift(0, 4).fill(RIGHT).is_not_blank() | tab.filter('Year to Date')
+
+        gender = cell.shift(0, 5).expand(DOWN).is_not_blank()
+
+        age = gender.shift(RIGHT).expand(DOWN).is_not_blank() - remove
+
+        measure_type = 'Covid Related Deaths'
+
+        unit = 'Count'
+
+        observations = age.fill(RIGHT).is_not_blank()
+
+        dimensions = [
+        HDimConst('Area', area),
+        HDim(week_ending, 'Week Ending', DIRECTLY, ABOVE),
+        HDim(gender, 'Gender', CLOSEST, ABOVE),
+        HDim(age, 'Age', DIRECTLY, LEFT),
+        HDimConst('Measure Type', measure_type),
+        HDimConst('Unit', unit),
+        ]
+
+        tidy_sheet = ConversionSegment(tab, dimensions, observations)
+        savepreviewhtml(tidy_sheet, fname="Preview.html")
+
+        tidied_sheets[name] = tidy_sheet.topandas()
+
+    elif 'table 6' == name.lower():
+
+        remove = tab.filter('P Weekly published data are provisional.').expand(DOWN).expand(RIGHT)
+
+        cell = tab.filter('Contents')
+
+        area = cell.shift(2, 4).expand(RIGHT).is_not_blank()
+
+        week_ending = cell.shift(1, 4).fill(DOWN).is_not_blank() - remove
+
+        measure_type = 'Covid Related Deaths'
+
+        unit = 'Count'
+
+        observations = week_ending.fill(RIGHT).is_not_blank()
+
+        dimensions = [
+        HDim(area, 'Area', DIRECTLY, ABOVE),
+        HDim(week_ending, 'Week Ending', DIRECTLY, LEFT),
+        HDimConst('Measure Type', measure_type),
+        HDimConst('Unit', unit),
+        ]
+
+        tidy_sheet = ConversionSegment(tab, dimensions, observations)
+        savepreviewhtml(tidy_sheet, fname="Preview.html")
+
+        tidied_sheets[name] = tidy_sheet.topandas()
+
+    elif 'table 7' == name.lower():
+
+        remove = tab.filter('P Weekly published data are provisional.').expand(DOWN).expand(RIGHT)
+
+        cell = tab.filter('Contents')
+
+        area = 'Northern Ireland'
+
+        week_ending = cell.shift(1, 3).fill(DOWN).is_not_blank() - remove
+
+        place_of_death = cell.shift(2, 3).expand(RIGHT).is_not_blank()
+
+        measure_type = 'Covid Related Deaths'
+
+        unit = 'Count'
+
+        observations = week_ending.fill(RIGHT).is_not_blank()
+
+        dimensions = [
+        HDimConst('Area', area),
+        HDim(week_ending, 'Week Ending', DIRECTLY, LEFT),
+        HDim(place_of_death, 'Place of Death', DIRECTLY, ABOVE),
+        HDimConst('Measure Type', measure_type),
+        HDimConst('Unit', unit),
+        ]
+
+        tidy_sheet = ConversionSegment(tab, dimensions, observations)
+        savepreviewhtml(tidy_sheet, fname="Preview.html")
+
+        tidied_sheets[name] = tidy_sheet.topandas()
+
+    elif 'table 8' == name.lower():
+
+        remove = tab.filter('P Weekly published data are provisional.').expand(DOWN).expand(RIGHT)
+
+        cell = tab.filter('Contents')
+
+        area = cell.shift(2, 4).expand(RIGHT).is_not_blank()
+
+        week_ending = cell.shift(1, 4).fill(DOWN).is_not_blank() - remove
+
+        measure_type = 'Covid Related Care Home Deaths'
+
+        unit = 'Count'
+
+        observations = week_ending.fill(RIGHT).is_not_blank()
+
+        dimensions = [
+        HDim(area, 'Area', DIRECTLY, ABOVE),
+        HDim(week_ending, 'Week Ending', DIRECTLY, LEFT),
+        HDimConst('Measure Type', measure_type),
+        HDimConst('Unit', unit),
+        ]
+
+        tidy_sheet = ConversionSegment(tab, dimensions, observations)
+        savepreviewhtml(tidy_sheet, fname="Preview.html")
+
+        tidied_sheets[name] = tidy_sheet.topandas()
+
+    elif 'table 9' == name.lower():
+
+        remove = tab.filter('P Weekly published data are provisional.').expand(DOWN).expand(RIGHT)
+
+        cell = tab.filter('Contents')
+
+        area = 'Northern Ireland'
+
+        period = cell.shift(0, 4).expand(DOWN).is_not_blank() - remove
+
+        place_of_death = cell.shift(1, 3).expand(RIGHT).is_not_blank()
+
+        measure_type = 'Covid Related Deaths'
+
+        unit = 'Count'
+
+        observations = period.fill(RIGHT).is_not_blank() - tab.filter('Cumulative Total').expand(DOWN)
+
+        dimensions = [
+        HDimConst('Area', area),
+        HDim(period, 'Period', DIRECTLY, LEFT),
+        HDim(place_of_death, 'Place of Death', DIRECTLY, ABOVE),
+        HDimConst('Measure Type', measure_type),
+        HDimConst('Unit', unit),
+        ]
+
+        tidy_sheet = ConversionSegment(tab, dimensions, observations)
+        savepreviewhtml(tidy_sheet, fname="Preview.html")
+
+        tidied_sheets[name] = tidy_sheet.topandas()
+
+    elif 'table 10' == name.lower():
+
+        remove = tab.filter('P Weekly published data are provisional.').expand(DOWN).expand(RIGHT)
+
+        cell = tab.filter('Contents')
+
+        area = 'Northern Ireland'
+
+        week_ending = cell.shift(1, 3).fill(DOWN).is_not_blank() - remove
+
+        measure_type = 'Covid Related Death Occurrences'
+
+        unit = 'Count'
+
+        observations = week_ending.shift(RIGHT)
+
+        dimensions = [
+        HDimConst('Area', area),
+        HDim(week_ending, 'Week Ending', DIRECTLY, LEFT),
+        HDimConst('Measure Type', measure_type),
+        HDimConst('Unit', unit),
+        ]
+
+        tidy_sheet = ConversionSegment(tab, dimensions, observations)
+        savepreviewhtml(tidy_sheet, fname="Preview.html")
+
+        tidied_sheets[name] = tidy_sheet.topandas()
+
+    elif 'table 11' == name.lower():
+
+        remove = tab.filter('P Weekly published data are provisional.').expand(DOWN).expand(RIGHT)
+
+        cell = tab.filter('Contents')
+
+        area = 'Northern Ireland'
+
+        week_ending = cell.shift(1, 3).fill(DOWN).is_not_blank() - remove
+
+        place_of_death = cell.shift(2, 3).expand(RIGHT).is_not_blank()
+
+        measure_type = 'Covid Related Death Occurrences'
+
+        unit = 'Count'
+
+        observations = week_ending.fill(RIGHT).is_not_blank()
+
+        dimensions = [
+        HDimConst('Area', area),
+        HDim(week_ending, 'Week Ending', DIRECTLY, LEFT),
+        HDim(place_of_death, 'Place of Death', DIRECTLY, ABOVE),
+        HDimConst('Measure Type', measure_type),
+        HDimConst('Unit', unit),
+        ]
+
+        tidy_sheet = ConversionSegment(tab, dimensions, observations)
+        savepreviewhtml(tidy_sheet, fname="Preview.html")
+
+        tidied_sheets[name] = tidy_sheet.topandas()
+
+    elif 'table 12' == name.lower():
+
+        remove = tab.filter('P Weekly published data are provisional.').expand(DOWN).expand(RIGHT)
+
+        cell = tab.filter('Contents')
+
+        area = 'Northern Ireland'
+
+        week_ending = cell.shift(1, 3).fill(DOWN).is_not_blank() - remove
+
+        place_of_death = cell.shift(2, 3).expand(RIGHT).is_not_blank()
+
+        measure_type = 'Covid Related Death Occurrences'
+
+        unit = 'Count'
+
+        observations = week_ending.fill(RIGHT).is_not_blank()
+
+        dimensions = [
+        HDimConst('Area', area),
+        HDim(week_ending, 'Week Ending', DIRECTLY, LEFT),
+        HDim(place_of_death, 'Place of Death', DIRECTLY, ABOVE),
+        HDimConst('Measure Type', measure_type),
+        HDimConst('Unit', unit),
+        ]
+
+        tidy_sheet = ConversionSegment(tab, dimensions, observations)
+        savepreviewhtml(tidy_sheet, fname="Preview.html")
+
+        tidied_sheets[name] = tidy_sheet.topandas()
+
+    elif 'table 13' == name.lower():
+
+        remove = tab.filter('P Weekly published data are provisional.').expand(DOWN).expand(RIGHT)
+
+        cell = tab.filter('Contents')
+
+        area = 'Northern Ireland'
+
+        period = cell.shift(0, 4).expand(DOWN).is_not_blank() - remove
+
+        place_of_death = cell.shift(1, 3).expand(RIGHT).is_not_blank()
+
+        measure_type = 'Covid Related Death Occurrences'
+
+        unit = 'Count'
+
+        observations = period.fill(RIGHT).is_not_blank() - tab.filter('Cumulative Total').expand(DOWN)
+
+        dimensions = [
+        HDimConst('Area', area),
+        HDim(period, 'Period', DIRECTLY, LEFT),
+        HDim(place_of_death, 'Place of Death', DIRECTLY, ABOVE),
+        HDimConst('Measure Type', measure_type),
+        HDimConst('Unit', unit),
+        ]
+
+        tidy_sheet = ConversionSegment(tab, dimensions, observations)
+        savepreviewhtml(tidy_sheet, fname="Preview.html")
+
+        tidied_sheets[name] = tidy_sheet.topandas()
+
+
+# In[156]:
+
+
+for name in tidied_sheets:
+
+    if 'table 1' in name.lower():
+
+        df = tidied_sheets['Table 1']
+
+        df['Unit'] = df.apply(lambda x: 'Average Count' if 'Average' in x['Measurement'] else x['Unit'], axis = 1)
+
+    elif 'table 2' in name.lower():
+
+        df = tidied_sheets['Table 2']
+
+        df['Gender'] = df.apply(lambda x: 'All' if 'Total Registered Deaths' in x['Gender'] else x['Gender'], axis = 1)
+
+    elif 'table 3' in name.lower():
+
+        df = tidied_sheets['Table 3']
+
+    elif 'table 4' in name.lower():
+
+        df = tidied_sheets['Table 4']
+
+    elif 'table 5' in name.lower():
+
+        df = tidied_sheets['Table 5']
+
+        df['Gender'] = df.apply(lambda x: 'All' if 'Total Registered Deaths' in x['Gender'] else x['Gender'], axis = 1)
+
+    elif 'table 6' in name.lower():
+
+        df = tidied_sheets['Table 6']
+
+    elif 'table 7' in name.lower():
+
+        df = tidied_sheets['Table 7']
+
+    elif 'table 8' in name.lower():
+
+        df = tidied_sheets['Table 8']
+
+    elif 'table 9' in name.lower():
+
+        df = tidied_sheets['Table 9']
+
+    elif 'table 10' in name.lower():
+
+        df = tidied_sheets['Table 10']
+
+    elif 'table 11' in name.lower():
+
+        df = tidied_sheets['Table 11']
+
+    elif 'table 12' in name.lower():
+
+        df = tidied_sheets['Table 12']
+
+        df['Unit'] = df.apply(lambda x: 'Percent' if '%' in x['Place of Death'] else x['Unit'], axis = 1)
+
+        df['Measure Type'] = df.apply(lambda x: 'Percentage of all Covid Related Deaths' if '%' in x['Place of Death'] else x['Measure Type'], axis = 1)
+
+        df['Place of Death'] = df.apply(lambda x: 'Hospital' if '% of all Covid-19 Hospital Deaths' in x['Place of Death'] else x['Place of Death'], axis = 1)
+
+        df['Place of Death'] = df.apply(lambda x: 'Total' if '% of all Covid-19 Deaths' in x['Place of Death'] else x['Place of Death'], axis = 1)
+
+    elif 'table 13' in name.lower():
+
+        df = tidied_sheets['Table 13']
+
+df
+
+
+# In[157]:
+
+
+from IPython.core.display import HTML
+for col in df:
+    if col not in ['Value']:
+        df[col] = df[col].astype('category')
+        display(HTML(f"<h2>{col}</h2>"))
+        display(df[col].cat.categories)
+
+
+# In[157]:
 
 
 

@@ -33,7 +33,7 @@
 
 		Registration Week, Week Ending, Registered Death Type, Measure Type, Unit, Marker, Value
 
-#### Sheet: Weekly Deaths_Age by Sex - Deaths registered each week in Northern Ireland 2020
+#### Sheet: Weekly Deaths_Age by Gender - Deaths registered each week in Northern Ireland 2020
 
 		A - Gender
 		B - Age (Codelist)
@@ -60,7 +60,7 @@
 
 		Registration Week, Week Ending, Local Government District, Measure Type, Unit, Marker, Value
 
-#### Sheet: Covid-19_Deaths_age by sex - Covid-19 Deaths registered each week in Northern Ireland, age by sex
+#### Sheet: Covid-19_Deaths_age by Gender - Covid-19 Deaths registered each week in Northern Ireland, age by Gender
 
 		A - Gender
 		B - Age (Codelist)
@@ -142,153 +142,237 @@
 
 ### 2. Harmonise
 
-#### Dataset Outputs:
-
-		d1. NISRA Weekly Registered COVID-19 and All Deaths
-		
-			Reformat NaN values in marker column to Empty sting
-			Map Local Government District column to mapping CSV
-			Map Sex column to sex_mapping.csv
-			Reformat year to date values (year/2020) with overall range date
-			Remove any superscript values from end of string in columns (eg, 1, 2, 3, P)
-			Replace any Nan value sin Value column with 0 and check a reason why has been put in Marker column
-			
-		d2. dataset output Two
+### Dataset One - Registrations
 
 #### Sheet: Table 1
 
-		Column Addition/Removal/Rename/Reformat
-			Add Sex column with value T
-			Add NISRA Age Band column with value All
-			Remove column Registration Week
-			Rename column Week Ending to Period
-			Add column Local Government District with value All
-			Add Location of Death column with value All
-			
-		Join to Dataset:
-			d1
+	Set week ending to the previous Saturday and format as a gregorian-interval - 7 days
+	Rename column 'OBS' to 'Value'
+	Set 'Area' column to ONS Geography Northern Ireland code
+	Remove superscripts from 'Measurement' column values, rename 'Death Measurement Type' (codelist/pathify)
+	Set 'Value' column to 0 where 'Marker' column = '-'
+	Replace NaNs in 'Marker' column with empty string
+
+	Add 'Age' column with value 'all'
+	Add 'Gender' column with value 'T'
+	Add 'Place of death' column with value 'total'
+	Add 'Cause of death' column with value 'all'
 
 #### Sheet: Table 2
 
-		Column Addition/Removal/Rename/Reformat
-			Add column Registered Death Type with value All Registered Deaths
-			Remove column Week number
-			Rename column Week Ending to Period
-			Reformat year to date values with overall range date
-			Rename Gender column to Sex and reformat with M, F, T, U
-			Add column Local Government District with value All	
-			Add Location of Death column with value All
-		
-		Join to Dataset:
-			d1
-		
+	Set week ending to the previous Saturday and format as a gregorian-interval - 7 days
+	Set 'Year to date' cell with range from Sat 4st Jan 2020 to max date in 'Week Ending' column
+	Gender: Male = T, Female = M, All = T, Total = T, Unknown = U
+	Age: codelist/pathify
+	Rename column 'OBS' to 'Value'
+	Set 'Area' column to ONS Geography Northern Ireland code
+
+	Add 'Place of death' column with value 'total'
+	Add 'Cause of death' column with value 'all'
+	Add 'Death Measurement Type' column with value 'Total Number of Deaths Registered in Week'
+
 #### Sheet: Table 3
 
-		Column Addition/Removal/Rename/Reformat
-			Add Sex column with value T
-			Add NISRA Age Band column with value All
-			Add column Registered Death Type with value All Registered Deaths
-			Remove column Registration Week
-			Rename column Week Ending to Period
-			Add Location of Death column with value All
-		
-		Join to Dataset:
-			d1
+	Set week ending to the previous Saturday and format as a gregorian-interval - 7 days
+	Rename column 'OBS' to 'Value'
+	Set 'Area' column to ONS Geography codes, set Total to Northern Ireland code
+	
+	Add 'Age' column with value 'all'
+	Add 'Gender' column with value 'T'
+	Add 'Place of death' column with value 'total'
+	Add 'Cause of death' column with value 'all'
+	Add 'Death Measurement Type' column with value 'Total Number of Deaths Registered in Week'
 
 #### Sheet: Table 4
 
-		Column Addition/Removal/Rename/Reformat
-			Add column Registered Death Type with value COVID-19 Registered Deaths
-			Add column Local Government District with value All
-			Remove column Week number
-			Rename column Week Ending to Period
-			Add Location of Death column with value All
-		
-		Join to Dataset:
-			d1
+	Set week ending to the previous Saturday and format as a gregorian-interval - 7 days
+	Rename column 'OBS' to 'Value'
+	Set 'Area' column to ONS Geography codes	
+	Remove superscripts from 'Place of death' column values
+
+	Add 'Age' column with value 'all'
+	Add 'Gender' column with valuecovid-19-related 'T'
+	Add 'Cause of death' column with value 'all'
+	Add 'Death Measurement Type' column with value 'Total Number of Deaths Registered in Week'
 
 #### Sheet: Table 5
 
-		Column Addition/Removal/Rename/Reformat
-			Add column Registered Death Type with value COVID-19 Registered Deaths
-			Add Sex column with value T
-			Add NISRA Age Band column with value All
-			Remove column Registration Week
-			Rename column Week Ending to Period
-			Add Location of Death column with value All
-		
-		Join to Dataset:
-			d1
+	Set week ending to the previous Saturday and format as a gregorian-interval - 7 days
+	Set 'Year to date' cell with range from Sat 4st Jan 2020 to max date in 'Week Ending' column
+	Rename column 'OBS' to 'Value'
+	Gender: Male = T, Female = M, All = T, Total = T, Unknown = U
+	Age: codelist/pathify
 
-#### Sheet: Table  6
+	Add 'Cause of death' column with value 'covid-19-related'
+	Add 'Place of death' column with value 'total'
+	Add 'Death Measurement Type' column with value 'Total Number of Deaths Registered in Week'
 
-		Column Addition/Removal/Rename/Reformat
-			Add column Registered Death Type with value COVID-19 Registered Deaths
-			Add Sex column with value T
-			Add NISRA Age Band column with value All
-			Remove column Week of Death
-			Rename column Week Ending to Period
-			Rename Place of Death column to Location of Death (Just to match up with other COVID-19 datasets)
-		
-		Join to Dataset:
-			d1
-		
+#### Sheet: Table 6
+
+	Set week ending to the previous Saturday and format as a gregorian-interval - 7 days
+	Set 'Area' column to ONS Geography codes, set Total to Northern Ireland code
+	Rename column 'OBS' to 'Value'
+	
+	Add 'Age' column with value 'all'
+	Add 'Gender' column with value 'T'
+	Add 'Place of death' column with value 'total'
+	Add 'Cause of death' column with value 'covid-19-related'
+	Add 'Death Measurement Type' column with value 'Total Number of Deaths Registered in Week'
 
 #### Sheet: Table 7
 
-		Column Addition/Removal/Rename/Reformat
-			Add column Registered Death Type with value COVID-19 Registered Deaths
-			Add Sex column with value T
-			Add NISRA Age Band column with value All
-			Remove column Registration Week
-			Rename column Week Ending to Period
-			Add Location of Death column with value All
-		
-		Join to Dataset:
-			d1
-		
-		
+	Set week ending to the previous Saturday and format as a gregorian-interval - 7 days
+	Rename column 'OBS' to 'Value'
+	Set 'Area' column to ONS Geography Northern Ireland code
+	'Place of death': Remove superscripts (codelist/pathify)
+
+	Add 'Age' column with value 'all'
+	Add 'Gender' column with value 'T'
+	Add 'Cause of death' column with value 'covid-19-related'
+	Add 'Death Measurement Type' column with value 'Total Number of Deaths Registered in Week'
+
 #### Sheet: Table 8
 
-		Column Addition/Removal/Rename/Reformat
-			Remove column Week of Death and Covid-19 Deaths
-			Add column Location of Death
-		
-		Join to Dataset:
-			d2
-		
+	Set week ending to the previous Saturday and format as a gregorian-interval - 7 days
+	Set 'Area' column to ONS Geography codes, set Total to Northern Ireland code
+	Rename column 'OBS' to 'Value'
+
+	Add 'Age' column with value 'all'
+	Add 'Gender' column with value 'T'
+	Add 'Place of death' column with value 'care-home'
+	Add 'Cause of death' column with value 'covid-19-related'
+	Add 'Death Measurement Type' column with value 'Total Number of Deaths Registered in Week'
+
 #### Sheet: Table 9
 
-		Column Addition/Removal/Rename/Reformat
-			Rename column Place of Death to Location of Death
-			Remove column Week of Death
-			Remove supascripts from column Location of Death
-		
-		Join to Dataset:
-			d2
-		
+	Ignore Cumulative Total
+	Set Period to day interval
+	Rename column 'OBS' to 'Value'
+	Set 'Area' column to ONS Geography Northern Ireland code
+	'Place of death':(codelist/pathify)
+
+	Add 'Age' column with value 'all'
+	Add 'Gender' column with value 'T'
+	Add 'Cause of death' column with value 'covid-19-related'
+	Add 'Death Measurement Type' column with value 'Total Number of Deaths Registered on Day'
+	
+#### Table Structure
+
+	Period, Death Measurement Type, Area, Gender, Age, Place of death, Cause of death, DataMarker, Value
+	
+
+#### JOIN Tables 1 to 9
+
+	Rename 'Week Ending' columns as 'Period'
+	Add 'Marker' columns where needed and rename 'Datamarker' columns to Marker
+	Remove 'Average Count' data for now as we still can't have multiple measures
+	Remove Measure Type and Unit column as these will be defined in info.json
+
+	info.json
+		Measure Type: count	
+		Unit: deaths
+
+	Scraper:
+		Title: Weekly deaths - Registrations		
+		Comment:  Weekly and daily death registrations in Northern Ireland including COVID-19 related deaths
+		Description: Weekly and daily death registrations in Northern Ireland including COVID-19 related deaths 
+			Care Home deaths includes deaths in care homes only. Care home residents who have died in a different location will not be counted in this table. 
+			+ footnotes below
+		Family: covid-19
+		dataset_id:
+
+
+### Dataset Two - Occurrences
+
 #### Sheet: Table 10
 
-		Column Addition/Removal/Rename/Reformat
-			Rename column Place of Death to Location of Death
-			Remove column Week Ending
-			Remove superscripts from column Location of Death
-		
-		Join to Dataset:
-			d2
+	Ignore Cumulative Number
+	Set week ending to the previous Saturday and format as a gregorian-interval - 7 days
+	Rename column 'OBS' to 'Value'
+	Set 'Area' column to ONS Geography Northern Ireland code
 
+	Add 'Place of death' column with value 'total'
+	Add 'Cause of death' column with value 'covid-19-related'
+	Add 'Residential setting' column with value 'all'
+	
 #### Sheet: Table 11
 
-		Column Addition/Removal/Rename/Reformat
-			Rename column Place of Death to Location of Death
-			Remove superscripts from column Location of Death
-		
-		Join to Dataset:
-			d2
+	Set week ending to the previous Saturday and format as a gregorian-interval - 7 days
+	Rename column 'OBS' to 'Value'
+	Set 'Area' column to ONS Geography Northern Ireland code
+	'Place of death': remove superscripts (codelist/pathify)
 
+	Add 'Cause of death' column with value 'covid-19-related'
+	Add 'Residential setting' column with value 'all'
 
+#### Sheet: Table 12
 
-##### Footnotes
+	Ignore Cumulative Total
+	Set Period to day interval
+	Rename column 'OBS' to 'Value'
+	Set 'Area' column to ONS Geography Northern Ireland code
+	Add 'Place of death' columns with values 'care-home', 'hospital', 'total' as per sheet
 
-		footnotes
+	Add 'Residential setting' column with value 'care-home'
+	Add 'Cause of death' column with value 'covid-19-related'
 
+#### Sheet: Table 13
+
+	Ignore percentages
+	Set week ending to the previous Saturday and format as a gregorian-interval - 7 days
+	Rename column 'OBS' to 'Value'
+	Set 'Area' column to ONS Geography Northern Ireland code
+	'Place of death': remove superscripts (codelist/pathify)
+
+	Add 'Cause of death' column with value 'covid-19-related
+	Add 'Residential setting' column with value 'all'
+
+#### Table Structure
+
+	Period, Area, Place of death, Cause of death, Residential setting, DataMarker, Value
+
+#### JOIN Tables 10 to 13
+
+	Rename 'Week Ending' columns as 'Period'
+	Add 'Marker' columns where needed and rename 'Datamarker' columns to Marker
+	Remove Measure Type and Unit column as these will be defined in info.json or a dict , which is passed to the CSVMapping class.
+
+	info.json
+		Measure Type: count	
+		Unit: deaths
+
+	Scraper:
+		Title: Weekly deaths - Occurrences
+		Comment: Weekly and daily death occurrences in Northern Ireland including COVID-19 related deaths
+		Description: Weekly and daily death occurrences in Northern Ireland including COVID-19 related deaths 
+			This data is based on the actual date of death, from those deaths registered by GRO. All data in this table are subject to change, as some deaths will have occurred but haven’t been registered yet.
+			Care home residents have been identified where either (a) the death occurred in a care home, or (b) the death occurred elsewhere but the place of usual residence of the deceased was recorded as a care home. It should be noted that the statistics will not capture those cases where a care home resident died in hospital or another location and the usual address recorded on their death certificate is not a care home. 
+			+ footnotes below
+		Family: covid-19
+		dataset_id:
+
+--------------
+	
+### Footnotes
+
+	To meet user needs, NISRA publish timely but provisional counts of death registrations in Northern Ireland in our Weekly Deaths provisional dataset. Weekly totals are presented alongside a 5-year, weekly average as well as the minimum and maximum number of deaths for the same week over the last five years. To allow time for registration and processing, these figures are published 7 days after the week ends.
+	Because of the coronavirus (COVID-19) pandemic, from 3rd April 2020, our weekly deaths release has been supplemented with the numbers of respiratory deaths (respiratory deaths include any death where Pneumonia, Bronchitis, Bronchiolitis or Influenza was mentioned anywhere on the death certificate); and deaths relating to COVID-19 (that is, where COVID-19 or suspected COVID-19 was mentioned anywhere on the death certificate, including in combination with other health conditions). The figures are presented by age group and sex.
+	
+	Find latest report here:
+	https://www.nisra.gov.uk/publications/weekly-deaths
+
+	Weekly published data are provisional.
+	The majority of deaths are registered within five days in Northern Ireland.
+	Respiratory deaths include any death where terms directly relating to respiratory causes were mentioned anywhere on the death certificate (this includes Covid-19 deaths). 
+	This is not directly comparable to the ONS figures relating to ‘deaths where the underlying cause was respiratory disease’.
+	Covid-19 deaths include any death where Coronavirus or Covid-19 (suspected or confirmed) was mentioned anywhere on the death certificate.
+	Data are assigned to LGD based on usual residence of the deceased, as provided by the informant. Usual residence can include a care home. Where the deceased was not usually resident in Northern Ireland, their death has been mapped to the place of death.
+	The 'Other' category in Place of death includes deaths at a residential address which was not the usual address of the deceased and all other places.
+
+-----------
+
+### DM Notes
+
+	Have requested information from BAs about when the start of the week begins and what do the dashes mean. Until we have an answer for this leave the 'Marker' and the 'Value' columns they are and do not publish.
+
+	BAs have confirmed that the start of the week is on a Saturday

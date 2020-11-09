@@ -1,0 +1,70 @@
+# Welsh Gov datasets currently use dimensions and codes specific to the dataset
+PREFIX wg:       <http://gss-data.org.uk/data/gss_data/covid-19/wg-notifications-of-deaths-of-residents-related-to-covid-19-in-adult-care-homes#dimension/>
+PREFIX wg-cod:   <http://gss-data.org.uk/data/gss_data/covid-19/wg-notifications-of-deaths-of-residents-related-to-covid-19-in-adult-care-homes#concept/cause-of-death/>
+PREFIX wg-lod:   <http://gss-data.org.uk/data/gss_data/covid-19/wg-notifications-of-deaths-of-residents-related-to-covid-19-in-adult-care-homes#concept/location-of-death/>
+# ONS datasets currently use dimensions and codes specific to the dataset
+PREFIX ons:      <http://gss-data.org.uk/data/gss_data/covid-19/ons-number-of-deaths-in-care-homes-notified-to-the-care-quality-commission-england#dimension/>
+PREFIX ons-cod:  <http://gss-data.org.uk/data/gss_data/covid-19/ons-number-of-deaths-in-care-homes-notified-to-the-care-quality-commission-england#concept/cause-of-death/>
+# National Records Scotland
+PREFIX nrs:      <http://gss-data.org.uk/data/gss_data/covid-19/nrs-deaths-involving-coronavirus-covid-19-in-scotland#dimension/>
+PREFIX nrs-loc:  <http://gss-data.org.uk/data/gss_data/covid-19/nrs-deaths-involving-coronavirus-covid-19-in-scotland#concept/location-of-death/>
+PREFIX nrs-rdt:  <http://gss-data.org.uk/data/gss_data/covid-19/nrs-deaths-involving-coronavirus-covid-19-in-scotland#concept/registered-death-type/>
+PREFIX nrs-age:  <http://gss-data.org.uk/data/gss_data/covid-19/nrs-deaths-involving-coronavirus-covid-19-in-scotland#concept/nrs-age-group/>
+# Northern Ireland
+PREFIX nisra:      <http://gss-data.org.uk/data/gss_data/covid-19/nisra-weekly-deaths-year-ni#dimension/>
+PREFIX nisra-loc:  <http://gss-data.org.uk/data/gss_data/covid-19/nisra-weekly-deaths-year-ni#concept/location-of-death/>
+PREFIX nisra-rdt:  <http://gss-data.org.uk/data/gss_data/covid-19/nisra-weekly-deaths-year-ni#concept/registered-death-type/>
+PREFIX nisra-age:  <http://gss-data.org.uk/data/gss_data/covid-19/nisra-weekly-deaths-year-ni#concept/age/>
+
+PREFIX rdfs:     <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX meas:     <http://gss-data.org.uk/def/measure/>
+PREFIX stat-ent: <http://statistics.data.gov.uk/def/statistical-entity#>
+PREFIX stat-geo: <http://statistics.data.gov.uk/def/statistical-geography#>
+PREFIX sdmxd:    <http://purl.org/linked-data/sdmx/2009/dimension#>
+PREFIX sdmxc:    <http://purl.org/linked-data/sdmx/2009/code#>
+PREFIX xsd:      <http://www.w3.org/2001/XMLSchema#>
+
+# some counts are decimals, some ints, and some strings, so coerce them all to decimals before summing.
+SELECT DISTINCT ?geocode ?name (SUM(xsd:decimal(?value)) AS ?deaths)
+WHERE {
+  {
+    # note, covid-total is covid confirmed + suspected and is less than "total", which includes all causes
+    ?obs wg:cause-of-death wg-cod:covid-total ;
+         meas:count ?value ;
+         wg:location-of-death wg-lod:total ;
+         wg:area-code ?code .
+    # restrict to geographies which are direct children of Welsh Unitary Authorities W06
+    ?code stat-ent:code <http://statistics.data.gov.uk/id/statistical-entity/W06> .
+  } UNION {
+            ?obs ons:cause-of-death ons-cod:involving-covid-19 ;
+                 meas:cumulative-count ?value ;
+                 ons:local-authority ?code .
+            #filter to E06, E07, E08, E09, E10
+            ?code stat-ent:code ?parent .
+            FILTER (?parent in (<http://statistics.data.gov.uk/id/statistical-entity/E06>,
+                                 <http://statistics.data.gov.uk/id/statistical-entity/E07>,
+                                 <http://statistics.data.gov.uk/id/statistical-entity/E08>,
+                                 <http://statistics.data.gov.uk/id/statistical-entity/E09>,
+                                 <http://statistics.data.gov.uk/id/statistical-entity/E10>))
+          } UNION {
+                    ?obs nrs:location-of-death nrs-loc:care-home ;
+                         meas:count ?value ;
+                         nrs:registered-death-type nrs-rdt:deaths-where-covid-19-was-mentioned-on-the-death-certificate ;
+                         nrs:nrs-age-group nrs-age:all ;
+                         sdmxd:sex sdmxc:sex-T ;
+                         nrs:council-area ?code .
+                    ?code stat-ent:code <http://statistics.data.gov.uk/id/statistical-entity/S12> .
+                  } UNION {
+                            ?obs nisra:registered-death-type nisra-rdt:covid-19-registered-deaths ;
+                                 meas:count ?value ;
+                                 sdmxd:sex sdmxc:sex-T ;
+                                 nisra:location-of-death nisra-loc:care-home ;
+                                 nisra:age nisra-age:all ;
+                                 nisra:local-government-district ?code .
+                            ?code stat-ent:code <http://statistics.data.gov.uk/id/statistical-entity/N09> .
+                          }
+  ?code rdfs:label ?geocode .
+  OPTIONAL { ?code stat-geo:officialname ?name }
+}
+GROUP BY ?geocode ?name
+ORDER BY ?geocode

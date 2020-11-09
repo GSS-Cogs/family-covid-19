@@ -36,33 +36,33 @@ WHERE {
     # restrict to geographies which are direct children of Welsh Unitary Authorities W06
     ?code stat-ent:code <http://statistics.data.gov.uk/id/statistical-entity/W06> .
   } UNION {
-            ?obs ons:cause-of-death ons-cod:involving-covid-19 ;
-                 meas:cumulative-count ?value ;
-                 ons:local-authority ?code .
-            #filter to E06, E07, E08, E09, E10
-            ?code stat-ent:code ?parent .
-            FILTER (?parent in (<http://statistics.data.gov.uk/id/statistical-entity/E06>,
-                                 <http://statistics.data.gov.uk/id/statistical-entity/E07>,
-                                 <http://statistics.data.gov.uk/id/statistical-entity/E08>,
-                                 <http://statistics.data.gov.uk/id/statistical-entity/E09>,
-                                 <http://statistics.data.gov.uk/id/statistical-entity/E10>))
-          } UNION {
-                    ?obs nrs:location-of-death nrs-loc:care-home ;
-                         meas:count ?value ;
-                         nrs:registered-death-type nrs-rdt:deaths-where-covid-19-was-mentioned-on-the-death-certificate ;
-                         nrs:nrs-age-group nrs-age:all ;
-                         sdmxd:sex sdmxc:sex-T ;
-                         nrs:council-area ?code .
-                    ?code stat-ent:code <http://statistics.data.gov.uk/id/statistical-entity/S12> .
-                  } UNION {
-                            ?obs nisra:registered-death-type nisra-rdt:covid-19-registered-deaths ;
-                                 meas:count ?value ;
-                                 sdmxd:sex sdmxc:sex-T ;
-                                 nisra:location-of-death nisra-loc:care-home ;
-                                 nisra:age nisra-age:all ;
-                                 nisra:local-government-district ?code .
-                            ?code stat-ent:code <http://statistics.data.gov.uk/id/statistical-entity/N09> .
-                          }
+    ?obs ons:cause-of-death ons-cod:involving-covid-19 ;
+         meas:cumulative-count ?value ;
+         ons:local-authority ?code .
+    #filter to E06, E07, E08, E09, E10
+    ?code stat-ent:code ?parent .
+    FILTER (?parent in (<http://statistics.data.gov.uk/id/statistical-entity/E06>,
+                         <http://statistics.data.gov.uk/id/statistical-entity/E07>,
+                         <http://statistics.data.gov.uk/id/statistical-entity/E08>,
+                         <http://statistics.data.gov.uk/id/statistical-entity/E09>,
+                         <http://statistics.data.gov.uk/id/statistical-entity/E10>))
+  } UNION {
+    ?obs nrs:location-of-death nrs-loc:care-home ;
+         meas:count ?value ;
+         nrs:registered-death-type nrs-rdt:deaths-where-covid-19-was-mentioned-on-the-death-certificate ;
+         nrs:nrs-age-group nrs-age:all ;
+         sdmxd:sex sdmxc:sex-T ;
+         nrs:council-area ?code .
+    ?code stat-ent:code <http://statistics.data.gov.uk/id/statistical-entity/S12> .
+  } UNION {
+    ?obs nisra:registered-death-type nisra-rdt:covid-19-registered-deaths ;
+         meas:count ?value ;
+         sdmxd:sex sdmxc:sex-T ;
+         nisra:location-of-death nisra-loc:care-home ;
+         nisra:age nisra-age:all ;
+         nisra:local-government-district ?code .
+    ?code stat-ent:code <http://statistics.data.gov.uk/id/statistical-entity/N09> .
+  }
   ?code rdfs:label ?geocode .
   OPTIONAL { ?code stat-geo:officialname ?name }
 }

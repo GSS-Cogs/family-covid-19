@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[633]:
+# In[765]:
 
 
 # -*- coding: utf-8 -*-
@@ -18,21 +18,21 @@ scrape = Scraper('https://www.nisra.gov.uk/publications/weekly-deaths')
 scrape
 
 
-# In[634]:
+# In[766]:
 
 
 
 scrape.distributions = [x for x in scrape.distributions if x.mediaType == Excel]
 
 
-# In[635]:
+# In[767]:
 
 
 dist = scrape.distributions[0]
 display(dist)
 
 
-# In[636]:
+# In[768]:
 
 
 tabs = { tab.name: tab for tab in dist.as_databaker() if tab.name.startswith('Table')}
@@ -440,7 +440,7 @@ for name, tab in tabs.items():
         tidied_sheets[name] = tidy_sheet.topandas()
 
 
-# In[637]:
+# In[769]:
 
 
 registrations_tables = {}
@@ -623,6 +623,9 @@ for name in tidied_sheets:
 
         df = tidied_sheets['Table 7']
 
+        indexes = df.ix[df['Place of Death'].isin(['Total'])].index
+        df.drop(indexes, inplace = True)
+
         df['Week Ending'] = df.apply(lambda x: 'gregorian-interval/' + str(parse(x['Week Ending']).date() - timedelta(days=6)) +'T00:00:00/P7D', axis = 1)
 
         df = df.rename(columns={'OBS':'Value',
@@ -647,6 +650,9 @@ for name in tidied_sheets:
     elif 'table 8' in name.lower():
 
         df = tidied_sheets['Table 8']
+
+        indexes = df.ix[df['Area'].isin(['Total'])].index
+        df.drop(indexes, inplace = True)
 
         df['Week Ending'] = df.apply(lambda x: 'gregorian-interval/' + str(parse(x['Week Ending']).date() - timedelta(days=6)) +'T00:00:00/P7D', axis = 1)
 
@@ -780,7 +786,7 @@ for name in tidied_sheets:
 df
 
 
-# In[638]:
+# In[770]:
 
 
 registrations = pd.concat(registrations_tables.values(), ignore_index=True)
@@ -805,7 +811,7 @@ for column in registrations:
 registrations
 
 
-# In[639]:
+# In[771]:
 
 
 csvName = 'registrations-observations.csv'
@@ -849,7 +855,7 @@ with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
 
 
 
-# In[640]:
+# In[772]:
 
 
 from IPython.core.display import HTML
@@ -860,7 +866,7 @@ for col in registrations:
         display(registrations[col].cat.categories)
 
 
-# In[641]:
+# In[773]:
 
 
 occurrences = pd.concat(occurrences_tables.values(), ignore_index=True)
@@ -881,7 +887,7 @@ for column in occurrences:
 occurrences
 
 
-# In[642]:
+# In[774]:
 
 
 csvName = 'occurrences-observations.csv'
@@ -925,7 +931,7 @@ with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
     metadata.write(scrape.generate_trig())
 
 
-# In[643]:
+# In[775]:
 
 
 from IPython.core.display import HTML
@@ -936,8 +942,30 @@ for col in occurrences:
         display(occurrences[col].cat.categories)
 
 
-# In[644]:
+# In[776]:
 
 
-
+import pandas as pd
+df = pd.read_csv("out/registrations-observations.csv")
+df["all_dimensions_concatenated"] = ""
+for col in df.columns.values:
+    if col != "Value":
+        df["all_dimensions_concatenated"] = df["all_dimensions_concatenated"]+df[col].astype(str)
+found = []
+bad_combos = []
+for item in df["all_dimensions_concatenated"]:
+    if item not in found:
+        found.append(item)
+    else:
+        bad_combos.append(item)
+df = df[df["all_dimensions_concatenated"].map(lambda x: x in bad_combos)]
+drop_these_cols = []
+for col in df.columns.values:
+    if col != "all_dimensions_concatenated" and col != "Value":
+        drop_these_cols.append(col)
+for dtc in drop_these_cols:
+    df = df.drop(dtc, axis=1)
+df = df[["all_dimensions_concatenated", "Value"]]
+df = df.sort_values(by=['all_dimensions_concatenated'])
+df.to_csv("duplicates_with_values.csv", index=False)
 

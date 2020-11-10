@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[562]:
+# In[633]:
 
 
 # -*- coding: utf-8 -*-
@@ -18,21 +18,21 @@ scrape = Scraper('https://www.nisra.gov.uk/publications/weekly-deaths')
 scrape
 
 
-# In[563]:
+# In[634]:
 
 
 
 scrape.distributions = [x for x in scrape.distributions if x.mediaType == Excel]
 
 
-# In[564]:
+# In[635]:
 
 
 dist = scrape.distributions[0]
 display(dist)
 
 
-# In[565]:
+# In[636]:
 
 
 tabs = { tab.name: tab for tab in dist.as_databaker() if tab.name.startswith('Table')}
@@ -440,7 +440,7 @@ for name, tab in tabs.items():
         tidied_sheets[name] = tidy_sheet.topandas()
 
 
-# In[566]:
+# In[637]:
 
 
 registrations_tables = {}
@@ -713,6 +713,9 @@ for name in tidied_sheets:
 
         df = tidied_sheets['Table 11']
 
+        indexes = df.ix[df['Place of Death'].isin(['Total'])].index
+        df.drop(indexes, inplace = True)
+
         df['Week Ending'] = df.apply(lambda x: 'gregorian-interval/' + str(parse(x['Week Ending']).date() - timedelta(days=6)) +'T00:00:00/P7D', axis = 1)
 
         df = df.rename(columns={'OBS':'Value',
@@ -777,7 +780,7 @@ for name in tidied_sheets:
 df
 
 
-# In[567]:
+# In[638]:
 
 
 registrations = pd.concat(registrations_tables.values(), ignore_index=True)
@@ -802,7 +805,7 @@ for column in registrations:
 registrations
 
 
-# In[568]:
+# In[639]:
 
 
 csvName = 'registrations-observations.csv'
@@ -846,7 +849,7 @@ with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
 
 
 
-# In[569]:
+# In[640]:
 
 
 from IPython.core.display import HTML
@@ -857,7 +860,7 @@ for col in registrations:
         display(registrations[col].cat.categories)
 
 
-# In[570]:
+# In[641]:
 
 
 occurrences = pd.concat(occurrences_tables.values(), ignore_index=True)
@@ -878,7 +881,7 @@ for column in occurrences:
 occurrences
 
 
-# In[571]:
+# In[642]:
 
 
 csvName = 'occurrences-observations.csv'
@@ -922,7 +925,7 @@ with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
     metadata.write(scrape.generate_trig())
 
 
-# In[572]:
+# In[643]:
 
 
 from IPython.core.display import HTML
@@ -933,7 +936,7 @@ for col in occurrences:
         display(occurrences[col].cat.categories)
 
 
-# In[572]:
+# In[644]:
 
 
 

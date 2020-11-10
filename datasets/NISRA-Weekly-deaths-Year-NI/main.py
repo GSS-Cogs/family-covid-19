@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[784]:
+# In[816]:
 
 
 # -*- coding: utf-8 -*-
@@ -18,21 +18,21 @@ scrape = Scraper('https://www.nisra.gov.uk/publications/weekly-deaths')
 scrape
 
 
-# In[785]:
+# In[817]:
 
 
 
 scrape.distributions = [x for x in scrape.distributions if x.mediaType == Excel]
 
 
-# In[786]:
+# In[818]:
 
 
 dist = scrape.distributions[0]
 display(dist)
 
 
-# In[ ]:
+# In[819]:
 
 
 tabs = { tab.name: tab for tab in dist.as_databaker() if tab.name.startswith('Table')}
@@ -440,7 +440,7 @@ for name, tab in tabs.items():
         tidied_sheets[name] = tidy_sheet.topandas()
 
 
-# In[ ]:
+# In[820]:
 
 
 registrations_tables = {}
@@ -786,7 +786,7 @@ for name in tidied_sheets:
 df
 
 
-# In[ ]:
+# In[821]:
 
 
 registrations = pd.concat(registrations_tables.values(), ignore_index=True)
@@ -811,7 +811,7 @@ for column in registrations:
 registrations
 
 
-# In[ ]:
+# In[822]:
 
 
 csvName = 'registrations-observations.csv'
@@ -820,7 +820,8 @@ out.mkdir(exist_ok=True)
 registrations.drop_duplicates().to_csv(out / csvName, index = False)
 
 scrape.dataset.title = 'Weekly Deaths - Registrations'
-dataset_path = pathify(os.environ.get('JOB_NAME', 'gss_data/covid-19/') + scrape.dataset.title)
+scrape.dataset.family = 'covid-19'
+dataset_path = pathify(os.environ.get('JOB_NAME', f'gss_data/{scrape.dataset.family}/' + Path(os.getcwd()).name)).lower() + '/registrations'
 scrape.set_base_uri('http://gss-data.org.uk')
 scrape.set_dataset_id(dataset_path)
 
@@ -842,7 +843,6 @@ scrape.dataset.description = """
 	Data are assigned to LGD based on usual residence of the deceased, as provided by the informant. Usual residence can include a care home. Where the deceased was not usually resident in Northern Ireland, their death has been mapped to the place of death.
 	The 'Other' category in Place of death includes deaths at a residential address which was not the usual address of the deceased and all other places.
 	"""
-scrape.dataset.family = 'covid-19'
 
 csvw_transform = CSVWMapping()
 csvw_transform.set_csv(out / csvName)
@@ -855,7 +855,7 @@ with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
 
 
 
-# In[ ]:
+# In[823]:
 
 
 from IPython.core.display import HTML
@@ -866,7 +866,7 @@ for col in registrations:
         display(registrations[col].cat.categories)
 
 
-# In[ ]:
+# In[824]:
 
 
 occurrences = pd.concat(occurrences_tables.values(), ignore_index=True)
@@ -887,7 +887,7 @@ for column in occurrences:
 occurrences
 
 
-# In[ ]:
+# In[825]:
 
 
 csvName = 'occurrences-observations.csv'
@@ -896,7 +896,9 @@ out.mkdir(exist_ok=True)
 occurrences.drop_duplicates().to_csv(out / csvName, index = False)
 
 scrape.dataset.title = 'Weekly deaths - Occurrences'
-dataset_path = pathify(os.environ.get('JOB_NAME', 'gss_data/covid-19/') + scrape.dataset.title)
+scrape.dataset.family = 'covid-19'
+
+dataset_path = pathify(os.environ.get('JOB_NAME', f'gss_data/{scrape.dataset.family}/' + Path(os.getcwd()).name)).lower() + '/occurrences'
 scrape.set_base_uri('http://gss-data.org.uk')
 scrape.set_dataset_id(dataset_path)
 
@@ -919,7 +921,6 @@ scrape.dataset.description = """
 	Data are assigned to LGD based on usual residence of the deceased, as provided by the informant. Usual residence can include a care home. Where the deceased was not usually resident in Northern Ireland, their death has been mapped to the place of death.
 	The 'Other' category in Place of death includes deaths at a residential address which was not the usual address of the deceased and all other places.
 	"""
-scrape.dataset.family = 'covid-19'
 
 csvw_transform = CSVWMapping()
 csvw_transform.set_csv(out / csvName)
@@ -931,7 +932,7 @@ with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
     metadata.write(scrape.generate_trig())
 
 
-# In[ ]:
+# In[826]:
 
 
 from IPython.core.display import HTML
@@ -942,7 +943,7 @@ for col in occurrences:
         display(occurrences[col].cat.categories)
 
 
-# In[ ]:
+# In[826]:
 
 
 

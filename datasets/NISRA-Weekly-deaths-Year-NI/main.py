@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[765]:
+# In[784]:
 
 
 # -*- coding: utf-8 -*-
@@ -18,21 +18,21 @@ scrape = Scraper('https://www.nisra.gov.uk/publications/weekly-deaths')
 scrape
 
 
-# In[766]:
+# In[785]:
 
 
 
 scrape.distributions = [x for x in scrape.distributions if x.mediaType == Excel]
 
 
-# In[767]:
+# In[786]:
 
 
 dist = scrape.distributions[0]
 display(dist)
 
 
-# In[768]:
+# In[ ]:
 
 
 tabs = { tab.name: tab for tab in dist.as_databaker() if tab.name.startswith('Table')}
@@ -440,7 +440,7 @@ for name, tab in tabs.items():
         tidied_sheets[name] = tidy_sheet.topandas()
 
 
-# In[769]:
+# In[ ]:
 
 
 registrations_tables = {}
@@ -786,7 +786,7 @@ for name in tidied_sheets:
 df
 
 
-# In[770]:
+# In[ ]:
 
 
 registrations = pd.concat(registrations_tables.values(), ignore_index=True)
@@ -811,7 +811,7 @@ for column in registrations:
 registrations
 
 
-# In[771]:
+# In[ ]:
 
 
 csvName = 'registrations-observations.csv'
@@ -820,7 +820,7 @@ out.mkdir(exist_ok=True)
 registrations.drop_duplicates().to_csv(out / csvName, index = False)
 
 scrape.dataset.title = 'Weekly Deaths - Registrations'
-dataset_path = pathify(os.environ.get('JOB_NAME', 'gss_data/covid-19/' + scrape.dataset.title))
+dataset_path = pathify(os.environ.get('JOB_NAME', 'gss_data/covid-19/') + scrape.dataset.title)
 scrape.set_base_uri('http://gss-data.org.uk')
 scrape.set_dataset_id(dataset_path)
 
@@ -855,7 +855,7 @@ with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
 
 
 
-# In[772]:
+# In[ ]:
 
 
 from IPython.core.display import HTML
@@ -866,7 +866,7 @@ for col in registrations:
         display(registrations[col].cat.categories)
 
 
-# In[773]:
+# In[ ]:
 
 
 occurrences = pd.concat(occurrences_tables.values(), ignore_index=True)
@@ -887,7 +887,7 @@ for column in occurrences:
 occurrences
 
 
-# In[774]:
+# In[ ]:
 
 
 csvName = 'occurrences-observations.csv'
@@ -896,7 +896,7 @@ out.mkdir(exist_ok=True)
 occurrences.drop_duplicates().to_csv(out / csvName, index = False)
 
 scrape.dataset.title = 'Weekly deaths - Occurrences'
-dataset_path = pathify(os.environ.get('JOB_NAME', 'gss_data/covid-19/' + scrape.dataset.title))
+dataset_path = pathify(os.environ.get('JOB_NAME', 'gss_data/covid-19/') + scrape.dataset.title)
 scrape.set_base_uri('http://gss-data.org.uk')
 scrape.set_dataset_id(dataset_path)
 
@@ -931,7 +931,7 @@ with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
     metadata.write(scrape.generate_trig())
 
 
-# In[775]:
+# In[ ]:
 
 
 from IPython.core.display import HTML
@@ -942,30 +942,8 @@ for col in occurrences:
         display(occurrences[col].cat.categories)
 
 
-# In[776]:
+# In[ ]:
 
 
-import pandas as pd
-df = pd.read_csv("out/registrations-observations.csv")
-df["all_dimensions_concatenated"] = ""
-for col in df.columns.values:
-    if col != "Value":
-        df["all_dimensions_concatenated"] = df["all_dimensions_concatenated"]+df[col].astype(str)
-found = []
-bad_combos = []
-for item in df["all_dimensions_concatenated"]:
-    if item not in found:
-        found.append(item)
-    else:
-        bad_combos.append(item)
-df = df[df["all_dimensions_concatenated"].map(lambda x: x in bad_combos)]
-drop_these_cols = []
-for col in df.columns.values:
-    if col != "all_dimensions_concatenated" and col != "Value":
-        drop_these_cols.append(col)
-for dtc in drop_these_cols:
-    df = df.drop(dtc, axis=1)
-df = df[["all_dimensions_concatenated", "Value"]]
-df = df.sort_values(by=['all_dimensions_concatenated'])
-df.to_csv("duplicates_with_values.csv", index=False)
+
 

@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[770]:
+# In[530]:
 
 
 # -*- coding: utf-8 -*-
@@ -18,21 +18,21 @@ scrape = Scraper('https://www.nisra.gov.uk/publications/weekly-deaths')
 scrape
 
 
-# In[771]:
+# In[531]:
 
 
 
 scrape.distributions = [x for x in scrape.distributions if x.mediaType == Excel]
 
 
-# In[772]:
+# In[532]:
 
 
 dist = scrape.distributions[0]
 display(dist)
 
 
-# In[773]:
+# In[533]:
 
 
 tabs = { tab.name: tab for tab in dist.as_databaker() if tab.name.startswith('Table')}
@@ -440,7 +440,7 @@ for name, tab in tabs.items():
         tidied_sheets[name] = tidy_sheet.topandas()
 
 
-# In[774]:
+# In[534]:
 
 
 registrations_tables = {}
@@ -565,6 +565,9 @@ for name in tidied_sheets:
 
         df = tidied_sheets['Table 5']
 
+        indexes = df.ix[df['Gender'].isin(['Total Registered Deaths']) & ~df['Week Ending'].isin(['Year to Date']) & df['Age'].isin(['All'])].index
+        df.drop(indexes, inplace = True)
+
         df['Gender'] = df.apply(lambda x: 'All' if 'Total Registered Deaths' in x['Gender'] else x['Gender'], axis = 1)
 
         indexNames = df['Week Ending'][ ~df['Week Ending'].isin(['Year to Date'])]
@@ -656,7 +659,7 @@ for name in tidied_sheets:
 
         df['Gender'] = 'T'
 
-        df['Place of Death'] = 'total'
+        df['Place of Death'] = 'care-home'
 
         df['Cause of Death'] = 'covid-19-related'
 
@@ -774,7 +777,7 @@ for name in tidied_sheets:
 df
 
 
-# In[775]:
+# In[535]:
 
 
 registrations = pd.concat(registrations_tables.values(), ignore_index=True)
@@ -799,7 +802,7 @@ for column in registrations:
 registrations
 
 
-# In[776]:
+# In[536]:
 
 
 csvName = 'registrations-observations.csv'
@@ -843,7 +846,7 @@ with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
 
 
 
-# In[777]:
+# In[537]:
 
 
 from IPython.core.display import HTML
@@ -854,7 +857,7 @@ for col in registrations:
         display(registrations[col].cat.categories)
 
 
-# In[778]:
+# In[538]:
 
 
 occurrences = pd.concat(occurrences_tables.values(), ignore_index=True)
@@ -871,7 +874,7 @@ occurrences = occurrences[['Period', 'Area', 'Place of Death', 'Cause of Death',
 occurrences
 
 
-# In[779]:
+# In[539]:
 
 
 csvName = 'occurrences-observations.csv'
@@ -915,7 +918,7 @@ with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
     metadata.write(scrape.generate_trig())
 
 
-# In[780]:
+# In[540]:
 
 
 from IPython.core.display import HTML
@@ -926,7 +929,7 @@ for col in occurrences:
         display(occurrences[col].cat.categories)
 
 
-# In[780]:
+# In[541]:
 
 
 

@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[816]:
+# In[903]:
 
 
 # -*- coding: utf-8 -*-
@@ -18,21 +18,21 @@ scrape = Scraper('https://www.nisra.gov.uk/publications/weekly-deaths')
 scrape
 
 
-# In[817]:
+# In[904]:
 
 
 
 scrape.distributions = [x for x in scrape.distributions if x.mediaType == Excel]
 
 
-# In[818]:
+# In[905]:
 
 
 dist = scrape.distributions[0]
 display(dist)
 
 
-# In[819]:
+# In[906]:
 
 
 tabs = { tab.name: tab for tab in dist.as_databaker() if tab.name.startswith('Table')}
@@ -440,7 +440,7 @@ for name, tab in tabs.items():
         tidied_sheets[name] = tidy_sheet.topandas()
 
 
-# In[820]:
+# In[907]:
 
 
 registrations_tables = {}
@@ -786,7 +786,7 @@ for name in tidied_sheets:
 df
 
 
-# In[821]:
+# In[908]:
 
 
 registrations = pd.concat(registrations_tables.values(), ignore_index=True)
@@ -805,13 +805,31 @@ registrations = registrations.replace({'Age' : {'>=7 days and < 1 year' : 'More 
 registrations = registrations[['Period', 'Death Measurement Type', 'Area', 'Gender', 'Age', 'Location of Death', 'Cause of Death', 'Marker', 'Value']]
 
 for column in registrations:
-    if column in ('Age', 'Death Measurement Type', 'Area', 'Location of Death'):
+    if column in ('Age', 'Death Measurement Type', 'Location of Death'):
         registrations[column] = registrations[column].map(lambda x: pathify(x))
+
+registrations['Marker'] = registrations.apply(lambda x: '' if 'N/A' in str(x['Marker']) else x['Marker'], axis = 1)
+registrations['Marker'] = registrations['Marker'].fillna('')
+registrations['Marker'] = registrations.apply(lambda x: 'suppressed' if '-' in str(x['Marker']) else x['Marker'], axis = 1)
+registrations['Value'] = registrations.apply(lambda x: '0' if 'suppressed' in str(x['Marker']) else x['Value'], axis = 1)
+
+registrations = registrations.replace({'Area' : {
+    'Antrim & Newtownabbey' : 'N09000001',
+    'Ards & North Down' : 'N09000011',
+    'Armagh City, Banbridge & Craigavon' : 'N09000002',
+    'Belfast' : 'N09000003',
+    'Causeway Coast & Glens' : 'N09000004',
+    'Derry City & Strabane' : 'N09000005',
+    'Fermanagh & Omagh' : 'N09000006',
+    'Lisburn & Castlereagh' : 'N09000007',
+    'Mid & East Antrim' : 'N09000008',
+    'Mid Ulster' : 'N06000010',
+    'Newry, Mourne & Down' : 'N09000010'}})
 
 registrations
 
 
-# In[822]:
+# In[909]:
 
 
 csvName = 'registrations-observations.csv'
@@ -855,7 +873,7 @@ with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
 
 
 
-# In[823]:
+# In[910]:
 
 
 from IPython.core.display import HTML
@@ -866,7 +884,7 @@ for col in registrations:
         display(registrations[col].cat.categories)
 
 
-# In[824]:
+# In[911]:
 
 
 occurrences = pd.concat(occurrences_tables.values(), ignore_index=True)
@@ -881,13 +899,32 @@ occurrences = occurrences.drop(['Measure Type', 'Unit'], axis=1)
 occurrences = occurrences[['Period', 'Area', 'Location of Death', 'Cause of Death', 'Residential Setting', 'Marker', 'Value']]
 
 for column in occurrences:
-    if column in ('Area', 'Location of Death'):
+    if column in ('Location of Death'):
         occurrences[column] = occurrences[column].map(lambda x: pathify(x))
+
+occurrences['Marker'] = occurrences.apply(lambda x: '' if 'N/A' in str(x['Marker']) else x['Marker'], axis = 1)
+occurrences['Marker'] = occurrences['Marker'].fillna('')
+occurrences['Marker'] = occurrences.apply(lambda x: 'suppressed' if '-' in str(x['Marker']) else x['Marker'], axis = 1)
+occurrences['Value'] = occurrences.apply(lambda x: '0' if 'suppressed' in str(x['Marker']) else x['Value'], axis = 1)
+
+occurrences = occurrences.replace({'Area' : {
+    'Antrim & Newtownabbey' : 'N09000001',
+    'Ards & North Down' : 'N09000011',
+    'Armagh City, Banbridge & Craigavon' : 'N09000002',
+    'Belfast' : 'N09000003',
+    'Causeway Coast & Glens' : 'N09000004',
+    'Derry City & Strabane' : 'N09000005',
+    'Fermanagh & Omagh' : 'N09000006',
+    'Lisburn & Castlereagh' : 'N09000007',
+    'Mid & East Antrim' : 'N09000008',
+    'Mid Ulster' : 'N06000010',
+    'Newry, Mourne & Down' : 'N09000010'
+}})
 
 occurrences
 
 
-# In[825]:
+# In[912]:
 
 
 csvName = 'occurrences-observations.csv'
@@ -932,7 +969,7 @@ with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
     metadata.write(scrape.generate_trig())
 
 
-# In[826]:
+# In[913]:
 
 
 from IPython.core.display import HTML
@@ -943,7 +980,7 @@ for col in occurrences:
         display(occurrences[col].cat.categories)
 
 
-# In[826]:
+# In[913]:
 
 
 

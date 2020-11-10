@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[542]:
+# In[562]:
 
 
 # -*- coding: utf-8 -*-
@@ -18,21 +18,21 @@ scrape = Scraper('https://www.nisra.gov.uk/publications/weekly-deaths')
 scrape
 
 
-# In[543]:
+# In[563]:
 
 
 
 scrape.distributions = [x for x in scrape.distributions if x.mediaType == Excel]
 
 
-# In[544]:
+# In[564]:
 
 
 dist = scrape.distributions[0]
 display(dist)
 
 
-# In[545]:
+# In[565]:
 
 
 tabs = { tab.name: tab for tab in dist.as_databaker() if tab.name.startswith('Table')}
@@ -440,7 +440,7 @@ for name, tab in tabs.items():
         tidied_sheets[name] = tidy_sheet.topandas()
 
 
-# In[546]:
+# In[566]:
 
 
 registrations_tables = {}
@@ -777,7 +777,7 @@ for name in tidied_sheets:
 df
 
 
-# In[547]:
+# In[567]:
 
 
 registrations = pd.concat(registrations_tables.values(), ignore_index=True)
@@ -796,13 +796,13 @@ registrations = registrations.replace({'Age' : {'>=7 days and < 1 year' : 'More 
 registrations = registrations[['Period', 'Death Measurement Type', 'Area', 'Gender', 'Age', 'Location of Death', 'Cause of Death', 'Marker', 'Value']]
 
 for column in registrations:
-    if column in ('Age', 'Death Measurement Type', 'Area'):
+    if column in ('Age', 'Death Measurement Type', 'Area', 'Location of Death'):
         registrations[column] = registrations[column].map(lambda x: pathify(x))
 
 registrations
 
 
-# In[548]:
+# In[568]:
 
 
 csvName = 'registrations-observations.csv'
@@ -846,7 +846,7 @@ with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
 
 
 
-# In[549]:
+# In[569]:
 
 
 from IPython.core.display import HTML
@@ -857,28 +857,28 @@ for col in registrations:
         display(registrations[col].cat.categories)
 
 
-# In[550]:
+# In[570]:
 
 
 occurrences = pd.concat(occurrences_tables.values(), ignore_index=True)
 
-occurrences = occurrences.rename(columns={'DATAMARKER':'Marker'})
+occurrences = occurrences.rename(columns={'DATAMARKER':'Marker', 'Place of Death' : 'Location of Death'})
 
 indexNames = occurrences[ occurrences['Unit'] == 'Percent' ].index
 occurrences.drop(indexNames, inplace = True)
 
 occurrences = occurrences.drop(['Measure Type', 'Unit'], axis=1)
 
-occurrences = occurrences[['Period', 'Area', 'Place of Death', 'Cause of Death', 'Residential Setting', 'Marker', 'Value']]
+occurrences = occurrences[['Period', 'Area', 'Location of Death', 'Cause of Death', 'Residential Setting', 'Marker', 'Value']]
 
 for column in occurrences:
-    if column in ('Area'):
+    if column in ('Area', 'Location of Death'):
         occurrences[column] = occurrences[column].map(lambda x: pathify(x))
 
 occurrences
 
 
-# In[551]:
+# In[571]:
 
 
 csvName = 'occurrences-observations.csv'
@@ -922,7 +922,7 @@ with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
     metadata.write(scrape.generate_trig())
 
 
-# In[552]:
+# In[572]:
 
 
 from IPython.core.display import HTML
@@ -933,7 +933,7 @@ for col in occurrences:
         display(occurrences[col].cat.categories)
 
 
-# In[552]:
+# In[572]:
 
 
 

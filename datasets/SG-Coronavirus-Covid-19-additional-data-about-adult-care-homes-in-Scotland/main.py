@@ -377,20 +377,21 @@ with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
 
 # %%
 scraper = Scraper(seed="info.json")   
-scraper.distributions[0].title = "SG-Coronavirus-Covid-19-additional-data-about-adult-care-homes-in-Scotland"
+scraper.distributions[1].title = "SG-Coronavirus-Covid-19-additional-data-about-adult-care-homes-in-Scotland"
 scraper 
 
 # %%
 
 distribution = scraper.distributions[1]
-#datasetTitle = scraper.distributions[0].title
 link = distribution.downloadURL
+scraper.distributions
 
 # %%
 tabs = { tab: tab for tab in distribution.as_databaker() }
 
 # %%
 for tab in tabs:
+    print(tab.name)
     if tab.name.lower().startswith('data'):
         weeks = tab.excel_ref('C12').fill(DOWN).expand(DOWN).is_not_blank()
         death = tab.excel_ref('C12').fill(RIGHT).expand(RIGHT).is_not_blank()

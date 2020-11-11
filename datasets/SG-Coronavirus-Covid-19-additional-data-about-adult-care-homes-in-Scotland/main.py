@@ -4,13 +4,14 @@
 #SG-Coronavirus-Covid-19-additional-data-about-adult-care-homes-in-Scotland
 
 # %%
-
-
 from gssutils import *
 import pandas as pd
 import json
 import string
 import re
+
+
+# %%
 
 def right(s, amount):
     return s[-amount:]
@@ -364,6 +365,58 @@ csvw_transform.set_dataset_uri(urljoin(scraper._base_uri, f'data/{scraper._datas
 csvw_transform.write(out / f'{csvName}-metadata.json')
 with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
     metadata.write(scraper.generate_trig())
+
+# %%
+scraper = Scraper(seed="info.json")   
+scraper.distributions[0].title = "SG-Coronavirus-Covid-19-additional-data-about-adult-care-homes-in-Scotland"
+scraper 
+
+# %%
+
+distribution = scraper.distributions[1]
+datasetTitle = scraper.distributions[0].title
+link = distribution.downloadURL
+
+# %%
+tabs = { tab: tab for tab in distribution.as_databaker() }
+
+# %%
+for tab in tabs:
+    if tab.name.lower().startswith('data'):
+        weeks = tab.excel_ref('C12').fill(DOWN).expand(DOWN).is_not_blank()
+        death = tab.excel_ref('C12').fill(RIGHT).expand(RIGHT).is_not_blank()
+        dat = tab.excel_ref('C12').fill(DOWN).fill(RIGHT).is_not_blank()
+
+        # Set the dimensions
+        Dimensions = [
+            HDim(weeks,'Week', DIRECTLY, LEFT),
+            HDim(death,'Cause of Death', CLOSEST, RIGHT),
+            ]
+        c2 = ConversionSegment(dat, Dimensions, processTIMEUNIT=True)        
+        c2 = c2.topandas()
+
+
+        
+
+# %%
+from datetime import datetime
+
+c2 = c2.rename(columns={'OBS':'Value'})
+c2 = c2[['Week','Cause of Death','Value']]
+df = pd.DataFrame(c2['Week'].str.split(' ',1).tolist(),columns = ['Start','End'])
+c2['Week'] = df['Start']
+del df
+c2 = c2[c2['Cause of Death'] != "Confirmed COVID-19 as % of all deaths"]
+c2 = c2[c2['Cause of Death'] != "Suspected COVID-19 as % of all deaths"]
+c2 = c2[c2['Cause of Death'] != "Other causes as % of all deaths"]
+
+
+# %%
+c2['Week'] = c2['Week'].astype(str) + '20' 
+c2['Week'] =  pd.to_datetime(c2['Week'], format='%d/%m/%Y')
+c2['Week'] = 'gregorian-interval/' + c2['Week'].astype(str) + 'T00:00:00/P7D'
+c2['Value'] = pd.to_numeric(c2['Value'], downcast='integer')
+c2.head(60)
 
 # %%
 

@@ -376,20 +376,24 @@ with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
 """
 
 # %%
-scraper = Scraper(seed="info.json")   
-scraper.distributions[1].title = "SG-Coronavirus-Covid-19-additional-data-about-adult-care-homes-in-Scotland"
-scraper 
+#### NEW DATA FOR CARE HOMES
+
+# %%
+#scraper = Scraper(seed="info.json")   
+#scraper.distributions[1].title = "SG-Coronavirus-Covid-19-additional-data-about-adult-care-homes-in-Scotland"
+#scraper 
 
 # %%
 
-distribution = scraper.distributions[1]
-link = distribution.downloadURL
-scraper.distributions
+#distribution = scraper.distributions[1]
+#link = distribution.downloadURL
+#scraper.distributions
 
 # %%
-tabs = { tab: tab for tab in distribution.as_databaker() }
+#tabs = { tab: tab for tab in distribution.as_databaker() }
 
 # %%
+"""
 for tab in tabs:
     print(tab.name)
     if tab.name.lower().startswith('data'):
@@ -404,11 +408,10 @@ for tab in tabs:
             ]
         c2 = ConversionSegment(dat, Dimensions, processTIMEUNIT=True)        
         c2 = c2.topandas()
-
-
-        
+"""      
 
 # %%
+"""
 from datetime import datetime
 
 c2 = c2.rename(columns={'OBS':'Value'})
@@ -419,23 +422,25 @@ del df
 c2 = c2[c2['Cause of Death'] != "Confirmed COVID-19 as % of all deaths"]
 c2 = c2[c2['Cause of Death'] != "Suspected COVID-19 as % of all deaths"]
 c2 = c2[c2['Cause of Death'] != "Other causes as % of all deaths"]
+"""
 
 
 # %%
-c2['Week'] = c2['Week'].astype(str) + '20' 
-c2['Week'] =  pd.to_datetime(c2['Week'], format='%d/%m/%Y')
-c2['Week'] = 'gregorian-interval/' + c2['Week'].astype(str) + 'T00:00:00/P7D'
-c2['Value'] = pd.to_numeric(c2['Value'], downcast='integer')
-c2['Cause of Death'] = c2['Cause of Death'].apply(pathify)
+#c2['Week'] = c2['Week'].astype(str) + '20' 
+#c2['Week'] =  pd.to_datetime(c2['Week'], format='%d/%m/%Y')
+#c2['Week'] = 'gregorian-interval/' + c2['Week'].astype(str) + 'T00:00:00/P7D'
+#c2['Value'] = pd.to_numeric(c2['Value'], downcast='integer')
+#c2['Cause of Death'] = c2['Cause of Death'].apply(pathify)
 #c2.head(60)
 
 # %%
 # Output the data to CSV
-csvName = 'observations.csv'
-out = Path('out')
-c2.drop_duplicates().to_csv(out / csvName, index = False)
+#csvName = 'observations.csv'
+#out = Path('out')
+#c2.drop_duplicates().to_csv(out / csvName, index = False)
 
 # %%
+"""
 scraper.dataset.family = 'covid-19'
 scraper.dataset.description = "Deaths reported to Care Inspectorate: the number of deaths reported by adult care homes, including COVID-19 and non-COVID-19 related deaths"
 scraper.dataset.comment = 'Deaths reported to Care Inspectorate including COVID-19'
@@ -456,5 +461,47 @@ csvw_transform.write(out / f'{csvName}-metadata.json')
 
 with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
     metadata.write(scraper.generate_trig())
+"""
+
+# %%
+#import pandas as pd
+#from rdflib import Graph, Literal, RDF, URIRef
+#from rdflib.namespace import OWL, VOID, DCTERMS, RDF, RDFS, SKOS, XSD, FOAF
+#from gssutils import pathify
+#from pathlib import Path
+#import numpy as np
+
+# %%
+"""
+g = Graph()
+bas = "http://gss-data.org.uk/data/gss_data/covid-19/sg-coronavirus-covid-19-additional-data-about-adult-care-homes-in-scotland/"
+for row in c2.iterrows():
+    s = URIRef(bas + row[1]['Week'] + '/' + row[1]['Cause of Death'])
+    g.add((s, RDF.type, URIRef("http://purl.org/linked-data/cube#Observation")))
+    p = URIRef("http://gss-data.org.uk/data/gss_data/covid-19/sg-coronavirus-covid-19-additional-data-about-adult-care-homes-in-scotland#dimension/cause-of-death")
+    o = URIRef("http://gss-data.org.uk/data/gss_data/covid-19/sg-coronavirus-covid-19-additional-data-about-adult-care-homes-in-scotland#concept/cause-of-death/" + row[1]['Cause of Death'])
+    g.add((s, p, o))
+    p = URIRef("http://gss-data.org.uk/def/measure/deaths")
+    o = Literal(row[1]['Value'])
+    g.add((s, p, o))
+    p = URIRef("http://purl.org/linked-data/cube#dataSet")
+    o = URIRef("http://gss-data.org.uk/data/gss_data/covid-19/sg-coronavirus-covid-19-additional-data-about-adult-care-homes-in-scotland#dataset")
+    g.add((s, p, o))
+    p = URIRef("http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure")
+    o = URIRef("http://gss-data.org.uk/def/concept/measurement-units/count")
+    g.add((s, p, o))
+    p = URIRef("http://purl.org/linked-data/cube#measureType")
+    o = URIRef("http://gss-data.org.uk/def/measure/deaths")
+    g.add((s, p, o))
+    p = URIRef("http://purl.org/linked-data/sdmx/2009/dimension#refPeriod")
+    o = URIRef("http://reference.data.gov.uk/id/" + Literal(row[1]['Week']))
+    
+#g.bind("skos", SKOS)
+#g.bind("rdf", RDF)
+#g.bind("rdfs", RDFS)
+print(g.serialize(format='n3').decode("utf-8"))
+
+g.serialize(destination='observations.ttl', format='turtle')
+"""
 
 # %%

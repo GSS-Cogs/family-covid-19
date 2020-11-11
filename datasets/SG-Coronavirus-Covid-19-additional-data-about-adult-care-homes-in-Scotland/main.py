@@ -10,9 +10,8 @@ import json
 import string
 import re
 
-
 # %%
-
+"""
 def right(s, amount):
     return s[-amount:]
 
@@ -96,9 +95,10 @@ def dictiComment(tabName, tabTitle, tabColumns):
              'columns' : columnInfo}
 
     return dicti
-
+"""
 
 # %%
+"""
 from urllib.request import Request, urlopen
 from bs4 import BeautifulSoup
 
@@ -122,16 +122,18 @@ with open('info.json', 'r+') as info:
 scraper = Scraper(seed='info.json')
 scraper.distributions[0].title = "Coronavirus (Covid-19): additional data about adult care homes in Scotland"
 scraper
+"""
 
 
 # %%
-
+"""
 distribution = scraper.distributions[0]
 display(distribution)
+"""
 
 
 # %%
-
+"""
 
 trace = TransformTrace()
 
@@ -196,7 +198,7 @@ for tab in tabs:
 
         trace.store(pathify(tab.name), tidy_sheet.topandas())
 
-
+"""
 
 # %%
 
@@ -205,7 +207,7 @@ for tab in tabs:
 
 
 # %%
-
+"""
 all_tabs = []
 postTransNotes = []
 
@@ -230,10 +232,10 @@ for tab in tabs:
 
         all_tabs.append(df)
 
-
+"""
 
 # %%
-infoData['transform']['Post Transform Changes'] = postTransNotes
+#infoData['transform']['Post Transform Changes'] = postTransNotes
 
 
 # %%
@@ -252,67 +254,69 @@ Please Note: Due to a change in the reporting cycle, there are overlaps between 
 7th August Based on return of 1,006 of Scotland's 1,080 care homes 
 14th August Based on return of 1,006 of Scotland's 1,080 care homes 
 """
-
+"""
 infoData['transform']['Stage One Notes'] = notes
 
 with open('infoStageOne.json', 'w') as info:
         info.write(json.dumps(infoData, indent=4).replace('null', '"Not Applicable"'))
+"""
 
 
 # %%
-trace.output()
+#trace.output()
 
 
 # %%
-all_tabs[0]['Sector'] = 'All'
+#all_tabs[0]['Sector'] = 'All'
 
 # %%
-all_tabs[0] = all_tabs[0][['Period', 'NHS Board', 'Measure', 'People Tested', 'Measure Type', 'Unit', 'OBS']]
+#all_tabs[0] = all_tabs[0][['Period', 'NHS Board', 'Measure', 'People Tested', 'Measure Type', 'Unit', 'OBS']]
 
 # %%
 # Pull the mapping files into DataFrames
-geogsHB = pd.read_csv('../../Reference/scottish-health-board-mapping.csv') 
-geogsCA = pd.read_csv('../../Reference/scottish-council-areas-mapping.csv') 
+#geogsHB = pd.read_csv('../../Reference/scottish-health-board-mapping.csv') 
+#geogsCA = pd.read_csv('../../Reference/scottish-council-areas-mapping.csv') 
 
 # %%
-all_tabs[0]['NHS Board'][all_tabs[0]['NHS Board'] == 'SCOTLAND'] = 'Scotland'
+#all_tabs[0]['NHS Board'][all_tabs[0]['NHS Board'] == 'SCOTLAND'] = 'Scotland'
 
 # %%
 # Map the Geography codes
-all_tabs[0]['NHS Board'] = all_tabs[0]['NHS Board'].map(geogsHB.set_index('Category')['Code'])
+#all_tabs[0]['NHS Board'] = all_tabs[0]['NHS Board'].map(geogsHB.set_index('Category')['Code'])
 
 # %%
-joined_dat1 = all_tabs[0]
+#joined_dat1 = all_tabs[0]
 #joined_dat1.head()
 
 # %%
 #ssl = ['¹','²','³','⁴','⁵','⁶','⁷','⁸','⁹','¹⁰']
 
-joined_dat1['Period'] = [x[:-2] for x in joined_dat1['Period']]
-joined_dat1['Period'] = joined_dat1['Period'].str.strip()
+#joined_dat1['Period'] = [x[:-2] for x in joined_dat1['Period']]
+#joined_dat1['Period'] = joined_dat1['Period'].str.strip()
 #joined_dat1.head()
 
 # %%
 #joined_dat1['Period'].unique()
 
 # %%
-joined_dat1 = joined_dat1.rename(columns = {'OBS' : 'Value', 'Measure': 'Test Outcome'})
+#joined_dat1 = joined_dat1.rename(columns = {'OBS' : 'Value', 'Measure': 'Test Outcome'})
 #joined_dat1.head(5)
 
 # %%
-joined_dat1['People Tested'] = joined_dat1['People Tested'].apply(pathify) 
-joined_dat1['Test Outcome'] = joined_dat1['Test Outcome'].apply(pathify) 
+#joined_dat1['People Tested'] = joined_dat1['People Tested'].apply(pathify) 
+#joined_dat1['Test Outcome'] = joined_dat1['Test Outcome'].apply(pathify) 
 
 # %%
 #joined_dat1['Measure'].unique()
 
 # %%
-del joined_dat1['Measure Type']
-del joined_dat1['Unit']
+#del joined_dat1['Measure Type']
+#del joined_dat1['Unit']
 
-joined_dat1['Value'] = pd.to_numeric(joined_dat1['Value'], downcast='integer')
+#joined_dat1['Value'] = pd.to_numeric(joined_dat1['Value'], downcast='integer')
 
 # %%
+"""
 dtes = joined_dat1['Period'].str.split("-", n = 1, expand = True)
 dtes[1] = dtes[1].str.strip()
 dtes[0] = dtes[0].str.strip()
@@ -337,15 +341,19 @@ dtes[8] = (dtes[5] + dtes[2].dt.strftime('%Y-%m-%dT%H:%M:%S') + '/P' + dtes[4] +
 #dtes
 joined_dat1['Period'] = dtes[8]
 joined_dat1['Value'] = joined_dat1['Value'].astype(int)
+"""
 
 # %%
+"""
 # Output the data to CSV
 csvName = 'observations.csv'
 out = Path('out')
 out.mkdir(exist_ok=True)
 joined_dat1.drop_duplicates().to_csv(out / csvName, index = False)
+"""
 
 # %%
+"""
 scraper.dataset.family = 'covid-19'
 scraper.dataset.description = 'SG Coronavirus COVID-19 additional data about adult care homes in Scotland - Suspected COVID-19 Cases.\n ' + notes
 scraper.dataset.comment = 'Testing for COVID-19 in adult care homes in Scotland: split by care homes with confirmed COVID-19 and without confirmed COVID-19, presented by NHS Health Board'
@@ -365,6 +373,7 @@ csvw_transform.set_dataset_uri(urljoin(scraper._base_uri, f'data/{scraper._datas
 csvw_transform.write(out / f'{csvName}-metadata.json')
 with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
     metadata.write(scraper.generate_trig())
+"""
 
 # %%
 scraper = Scraper(seed="info.json")   
@@ -416,8 +425,35 @@ c2['Week'] = c2['Week'].astype(str) + '20'
 c2['Week'] =  pd.to_datetime(c2['Week'], format='%d/%m/%Y')
 c2['Week'] = 'gregorian-interval/' + c2['Week'].astype(str) + 'T00:00:00/P7D'
 c2['Value'] = pd.to_numeric(c2['Value'], downcast='integer')
-c2.head(60)
+c2['Cause of Death'] = c2['Cause of Death'].apply(pathify)
+#c2.head(60)
 
 # %%
+# Output the data to CSV
+csvName = 'observations.csv'
+out = Path('out')
+c2.drop_duplicates().to_csv(out / csvName, index = False)
+
+# %%
+scraper.dataset.family = 'covid-19'
+scraper.dataset.description = "Deaths reported to Care Inspectorate: the number of deaths reported by adult care homes, including COVID-19 and non-COVID-19 related deaths"
+scraper.dataset.comment = 'Deaths reported to Care Inspectorate including COVID-19'
+scraper.dataset.title = 'Coronavirus (COVID-19): adult care homes - additional data'
+
+import os
+from urllib.parse import urljoin
+
+dataset_path = pathify(os.environ.get('JOB_NAME', f'gss_data/{scraper.dataset.family}/' + Path(os.getcwd()).name)).lower()
+scraper.set_base_uri('http://gss-data.org.uk')
+scraper.set_dataset_id(dataset_path)
+
+csvw_transform = CSVWMapping()
+csvw_transform.set_csv(out / csvName)
+csvw_transform.set_mapping(json.load(open('info.json')))
+csvw_transform.set_dataset_uri(urljoin(scraper._base_uri, f'data/{scraper._dataset_id}'))
+csvw_transform.write(out / f'{csvName}-metadata.json')
+
+with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
+    metadata.write(scraper.generate_trig())
 
 # %%

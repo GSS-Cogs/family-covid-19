@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[106]:
+# In[1]:
 
 
 # -*- coding: utf-8 -*-
@@ -9,20 +9,24 @@
 
 from gssutils import *
 import json
+import re
+
+def cellCont(cell):
+    return re.findall(r"'([^']*)'", str(cell))[0]
 
 info = json.load(open('info.json'))
 landingPage = info['landingPage']
 landingPage
 
 
-# In[107]:
+# In[2]:
 
 
 scrape = Scraper(landingPage)
 scrape
 
 
-# In[108]:
+# In[3]:
 
 
 scrape.distributions = [x for x in scrape.distributions if x.mediaType == Excel]
@@ -31,7 +35,7 @@ for i in scrape.distributions:
     display(i)
 
 
-# In[109]:
+# In[4]:
 
 
 birthsDist = scrape.distributions[0]
@@ -41,16 +45,16 @@ deathsDist = scrape.distributions[1]
 display(deathsDist)
 
 
-# In[110]:
+# In[5]:
 
 
 tabs = {}
 
-birthTabs = { tab.name: tab for tab in birthsDist.as_databaker() if tab.name.startswith('Table')}
+birthTabs = { tab.name: tab for tab in birthsDist.as_databaker()}
 list(birthTabs)
 tabs.update(birthTabs)
 
-deathTabs = { tab.name: tab for tab in deathsDist.as_databaker() if tab.name.startswith('Table')}
+deathTabs = { tab.name: tab for tab in deathsDist.as_databaker()}
 list(deathTabs)
 tabs.update(deathTabs)
 
@@ -60,20 +64,20 @@ for name, tab in tabs.items():
 
     remove = tab.filter('Notes').expand(DOWN).expand(RIGHT)
 
-    if 'table 1' in name.lower():
+    if 'table 1' in cellCont(tab.excel_ref('A1')).lower():
         cell = tab.filter(contains_string('Table 1:'))
-    elif 'table 2' in name.lower():
+    elif 'table 2' in cellCont(tab.excel_ref('A1')).lower():
         cell = tab.filter(contains_string('Table 2:'))
 
     area = 'Scotland'
 
-    year = cell.shift(1, 2).expand(RIGHT).is_not_blank()
+    year = cell.shift(1, 3).expand(RIGHT).is_not_blank()
 
     week = cell.shift(0, 3).fill(DOWN).is_not_blank() - remove
 
-    if 'table 1' in name.lower():
+    if 'table 1' in cellCont(tab.excel_ref('A1')).lower():
         measure_type = 'Births'
-    elif 'table 2' in name.lower():
+    elif 'table 2' in cellCont(tab.excel_ref('A1')).lower():
         measure_type = 'Deaths'
 
     unit = 'Count'
@@ -91,10 +95,15 @@ for name, tab in tabs.items():
     tidy_sheet = ConversionSegment(tab, dimensions, observations)
     savepreviewhtml(tidy_sheet, fname="Preview.html")
 
-    tidied_sheets[name] = tidy_sheet.topandas()
+    if 'table 1' in cellCont(tab.excel_ref('A1')).lower():
+        tableName = 'Table 1'
+    elif 'table 2' in cellCont(tab.excel_ref('A1')).lower():
+        tableName = 'Table 2'
+
+    tidied_sheets[tableName] = tidy_sheet.topandas()
 
 
-# In[111]:
+# In[6]:
 
 
 dataframes = []
@@ -121,7 +130,16 @@ merged_df = pd.concat(dataframes)
 merged_df
 
 
-# In[113]:
+# In[7]:
+
+
+csvName = 'observations.csv'
+out = Path('out')
+out.mkdir(exist_ok=True)
+merged_df.drop_duplicates().to_csv(out / csvName, index = False)
+
+
+# In[8]:
 
 
 from IPython.core.display import HTML

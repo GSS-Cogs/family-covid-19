@@ -64,6 +64,6 @@
     "@id": "http://gss-data.org.uk/data/gss_data/covid-19/ons-online-price-changes-for-high-demand-products#scheme/product",
     "@type": "skos:ConceptScheme",
     "rdfs:label": "Product",
-    "skos:hasTopConcept": "http://gss-data.org.uk/data/gss_data/covid-19/ons-online-price-changes-for-high-demand-products#concept/product/all"
+    "skos:hasTopConcept { "@id": "http://gss-data.org.uk/data/gss_data/covid-19/ons-online-price-changes-for-high-demand-products#concept/product/all" }
   }
 }

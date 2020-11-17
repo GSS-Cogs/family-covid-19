@@ -64,6 +64,6 @@
     "@id": "http://gss-data.org.uk/data/gss_data/covid-19/wg-summary-data-about-coronavirus-covid-19-and-the-response-to-it#scheme/food-parcels",
     "@type": "skos:ConceptScheme",
     "rdfs:label": "Food Parcels",
-    "skos:hasTopConcept": "http://gss-data.org.uk/data/gss_data/covid-19/wg-summary-data-about-coronavirus-covid-19-and-the-response-to-it#concept/food-parcels/total"
+    "skos:hasTopConcept { "@id": "http://gss-data.org.uk/data/gss_data/covid-19/wg-summary-data-about-coronavirus-covid-19-and-the-response-to-it#concept/food-parcels/total" }
   }
 }

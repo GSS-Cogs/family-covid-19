@@ -64,6 +64,6 @@
     "@id": "http://gss-data.org.uk/data/gss_data/covid-19/ons-number-of-deaths-in-care-homes-notified-to-the-care-quality-commission-england#scheme/cause-of-death",
     "@type": "skos:ConceptScheme",
     "rdfs:label": "Cause of Death",
-    "skos:hasTopConcept": "http://gss-data.org.uk/data/gss_data/covid-19/ons-number-of-deaths-in-care-homes-notified-to-the-care-quality-commission-england#concept/cause-of-death/all"
+    "skos:hasTopConcept { "@id": "http://gss-data.org.uk/data/gss_data/covid-19/ons-number-of-deaths-in-care-homes-notified-to-the-care-quality-commission-england#concept/cause-of-death/all" }
   }
 }

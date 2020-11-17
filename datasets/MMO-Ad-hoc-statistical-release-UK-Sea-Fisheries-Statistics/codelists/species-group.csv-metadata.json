@@ -64,6 +64,6 @@
     "@id": "http://gss-data.org.uk/data/gss_data/covid-19/mmo-ad-hoc-statistical-release-uk-sea-fisheries-statistics#scheme/species-group",
     "@type": "skos:ConceptScheme",
     "rdfs:label": "Species Group",
-    "skos:hasTopConcept": "http://gss-data.org.uk/data/gss_data/covid-19/mmo-ad-hoc-statistical-release-uk-sea-fisheries-statistics#concept/species-group/all"
+    "skos:hasTopConcept { "@id": "http://gss-data.org.uk/data/gss_data/covid-19/mmo-ad-hoc-statistical-release-uk-sea-fisheries-statistics#concept/species-group/all" }
   }
 }

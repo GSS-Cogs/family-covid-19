@@ -64,6 +64,6 @@
     "@id": "http://gss-data.org.uk/data/gss_data/covid-19/nhs-d-coronavirus-shielded-patient-list-summary-totals-england#scheme/geography-type",
     "@type": "skos:ConceptScheme",
     "rdfs:label": "Geography Type",
-    "skos:hasTopConcept": "http://gss-data.org.uk/data/gss_data/covid-19/nhs-d-coronavirus-shielded-patient-list-summary-totals-england#concept/geography-type/all"
+    "skos:hasTopConcept { "@id": "http://gss-data.org.uk/data/gss_data/covid-19/nhs-d-coronavirus-shielded-patient-list-summary-totals-england#concept/geography-type/all" }
   }
 }

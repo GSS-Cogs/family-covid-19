@@ -64,6 +64,6 @@
     "@id": "http://gss-data.org.uk/data/gss_data/covid-19/phe-covid-19-number-of-outbreaks-in-care-homes-management-information#scheme/region-type",
     "@type": "skos:ConceptScheme",
     "rdfs:label": "Region Type",
-    "skos:hasTopConcept": "http://gss-data.org.uk/data/gss_data/covid-19/phe-covid-19-number-of-outbreaks-in-care-homes-management-information#concept/region-type/all"
+    "skos:hasTopConcept { "@id": "http://gss-data.org.uk/data/gss_data/covid-19/phe-covid-19-number-of-outbreaks-in-care-homes-management-information#concept/region-type/all" }
   }
 }

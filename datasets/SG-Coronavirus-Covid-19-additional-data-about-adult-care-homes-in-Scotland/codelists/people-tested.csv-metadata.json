@@ -64,6 +64,6 @@
     "@id": "http://gss-data.org.uk/data/gss_data/covid-19/sg-coronavirus-covid-19-additional-data-about-adult-care-homes-in-scotland#scheme/people-tested",
     "@type": "skos:ConceptScheme",
     "rdfs:label": "People Tested",
-    "skos:hasTopConcept": "http://gss-data.org.uk/data/gss_data/covid-19/sg-coronavirus-covid-19-additional-data-about-adult-care-homes-in-scotland#concept/people-tested/all"
+    "skos:hasTopConcept { "@id": "http://gss-data.org.uk/data/gss_data/covid-19/sg-coronavirus-covid-19-additional-data-about-adult-care-homes-in-scotland#concept/people-tested/all" }
   }
 }

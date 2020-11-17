@@ -64,6 +64,6 @@
     "@id": "http://gss-data.org.uk/data/gss_data/covid-19/nrs-deaths-involving-coronavirus-covid-19-in-scotland#scheme/location-of-death",
     "@type": "skos:ConceptScheme",
     "rdfs:label": "Location of Death",
-    "skos:hasTopConcept": "http://gss-data.org.uk/data/gss_data/covid-19/nrs-deaths-involving-coronavirus-covid-19-in-scotland#concept/location-of-death/all"
+    "skos:hasTopConcept { "@id": "http://gss-data.org.uk/data/gss_data/covid-19/nrs-deaths-involving-coronavirus-covid-19-in-scotland#concept/location-of-death/all" }
   }
 }

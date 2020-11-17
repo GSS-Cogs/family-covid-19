@@ -64,6 +64,6 @@
     "@id": "http://gss-data.org.uk/data/gss_data/covid-19/ons-online-job-advert-estimates#scheme/marker",
     "@type": "skos:ConceptScheme",
     "rdfs:label": "Marker",
-    "skos:hasTopConcept": "http://gss-data.org.uk/data/gss_data/covid-19/ons-online-job-advert-estimates#concept/marker/all"
+    "skos:hasTopConcept { "@id": "http://gss-data.org.uk/data/gss_data/covid-19/ons-online-job-advert-estimates#concept/marker/all" }
   }
 }

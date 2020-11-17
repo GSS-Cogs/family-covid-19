@@ -64,6 +64,6 @@
     "@id": "http://gss-data.org.uk/data/gss_data/covid-19/wg-survey-of-public-views-on-the-coronavirus-covid-19#scheme/average-response",
     "@type": "skos:ConceptScheme",
     "rdfs:label": "Average Response",
-    "skos:hasTopConcept": "http://gss-data.org.uk/data/gss_data/covid-19/wg-survey-of-public-views-on-the-coronavirus-covid-19#concept/average-response/all"
+    "skos:hasTopConcept { "@id": "http://gss-data.org.uk/data/gss_data/covid-19/wg-survey-of-public-views-on-the-coronavirus-covid-19#concept/average-response/all" }
   }
 }

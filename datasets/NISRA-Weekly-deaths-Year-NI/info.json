@@ -40,21 +40,21 @@
             },
             "Death Measurement Type": {
                 "parent": "http://gss-data.org.uk/data/gss_data/covid-19/dimension#registered-death-type",
-                "value": "http://gss-data.org.uk/data/gss_data/covid-19/NISRA-Weekly-deaths-Year-NI/concept-scheme/registered-death-type/{registered_death_type}"
+                "value": "http://gss-data.org.uk/data/gss_data/covid-19/nisra-weekly-deaths-year-ni#concept/registered-death-type/{registered_death_type}"
             },
             "Place of Death": {
                 "parent": "http://gss-data.org.uk/data/gss_data/covid-19/dimension#location-of-death",
-                "value": "http://gss-data.org.uk/data/gss_data/covid-19/NISRA-Weekly-deaths-Year-NI/concept-scheme/location-of-death/{location_of_death}",
+                "value": "http://gss-data.org.uk/data/gss_data/covid-19/nisra-weekly-deaths-year-ni#concept/location-of-death/{location_of_death}",
                 "description": "NISRA locations of death"
             },
             "Cause of Death": {
                 "parent": "http://gss-data.org.uk/data/gss_data/covid-19/dimension#cause-of-death",
-                "value": "http://gss-data.org.uk/data/gss_data/covid-19/NISRA-Weekly-deaths-Year-NI/concept-scheme/cause-of-death/{cause_of_death}",
+                "value": "http://gss-data.org.uk/data/gss_data/covid-19/nisra-weekly-deaths-year-ni#concept/cause-of-death/{cause_of_death}",
                 "description": "NISRA causes of death"
             },
             "Residential Setting": {
                 "parent": "http://gss-data.org.uk/data/gss_data/covid-19/dimension#residential-setting",
-                "value": "http://gss-data.org.uk/data/gss_data/covid-19/NISRA-Weekly-deaths-Year-NI/concept-scheme/residential-setting/{residential_setting}",
+                "value": "http://gss-data.org.uk/data/gss_data/covid-19/nisra-weekly-deaths-year-ni#concept/residential-setting/{residential_setting}",
                 "description": "NISRA causes of death"
             },
             "Marker": {
@@ -64,7 +64,7 @@
             "Value": {
                 "unit": "http://gss-data.org.uk/def/concept/measurement-units/deaths",
                 "measure": "http://gss-data.org.uk/def/measure/count",
-                "datatype": "float64"
+                "datatype": "decimal"
             }
         }
     },

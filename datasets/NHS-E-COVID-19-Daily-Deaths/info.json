@@ -20,7 +20,24 @@
         "stage": [
             "To Do",
             "Priority"
-        ]
+        ],
+        "columns": {
+            "Date of Death": {
+                "description": "All deaths were reported during the period specified below and are recorded against the date of death rather than the day the deaths were announced.",
+                "source": "",
+                "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
+                "value": "http://reference.data.gov.uk/id/{+date_of_death}"
+            },
+            "NHS Region": {
+                "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refArea",
+                "value": "http://statistics.data.gov.uk/id/statistical-geography/{nhs_region}"
+            },
+            "Value": {
+                "unit": "http://gss-data.org.uk/def/concept/measurement-units/deaths",
+                "measure": "http://gss-data.org.uk/def/measure/count",
+                "datatype": "integer"
+            }
+        }
     },
     "sizingNotes": "Simple table structure across 7 tabs of differing size",
     "notes": ""

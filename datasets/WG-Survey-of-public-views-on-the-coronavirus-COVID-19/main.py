@@ -76,25 +76,70 @@ new_table['Value'] = new_table.apply(lambda row: user_perc(row['Marker'], row['V
 
 
 # %%
-
+import datetime
 
 month_num_dict = {'January': '01', 'February': '02', 'March': '03', 'April': '04', 'May': '05',
                   'June': '06', 'July': '07', 'August': '08', 'September': '09', 'October': '10',
                   'November': '11', 'December': '12'}
 
 def date_time(time_value):
-    date_string = time_value.strip().split(' ')[0]
-    month_string = time_value.strip().split(' ')[-1]
-    month_num = month_num_dict[month_string]
-    if len(date_string)  == 1:
-        date_string = '0' + date_string
-    return 'gregorian-interval/2020-'+ month_num + '-' + date_string + 'T00:00:00/P3D'
+    #date_string = time_value.strip().split(' ')[0]
+    #month_string = time_value.strip().split(' ')[-1]
+    #month_num = month_num_dict[month_string]
+    #if len(date_string)  == 1:
+    #    date_string = '0' + date_string
+    #return 'gregorian-interval/2020-'+ month_num + '-' + date_string + 'T00:00:00/P3D'
+    # THESE DATES ARE ALL OVER THE PLACE, 3 DAYS, 4 DAYS, INBETWEEN MONTHS ETC.
+    i = 0
+    yr = 2020 
+
+    date_string = time_value.split(' ')[2]
+    dates = time_value.strip().split(' ')
+
+    if len(dates) < 5: # ONLY ONE MONTH IN DATE STRING
+        sd = datetime.datetime(yr, int(month_num_dict[dates[-1]]), int(dates[0]))
+        ed = datetime.datetime(yr, int(month_num_dict[dates[-1]]), int(dates[2]))
+        ed = ed + datetime.timedelta(1) # Add a day so it includes the end date day as well
+    else:   # TWO MONTHS IN DATE STRING
+        sd = datetime.datetime(yr, int(month_num_dict[dates[1]]), int(dates[0]))
+        ed = datetime.datetime(yr, int(month_num_dict[dates[-1]]), int(dates[3]))
+        ed = ed + datetime.timedelta(1) # Add a day so it includes the end date day as well
+
+
+    delta = ed - sd
+    diff = (ed - sd).days
+
+    sd = sd.strftime('%Y-%m-%d')
+    sd = 'gregorian-interval/'+ sd + f'T00:00:00/P{diff}D'
+    return sd
+
 new_table["Period"] = new_table["Period"].apply(date_time)
 
 
 # %%
+#import datetime
+#i = 0
+#yr = 2020 
 
+#date_string = new_table['Period'][i].strip().split(' ')[2]
+#dates = new_table['Period'][i].strip().split(' ')
 
+#if len(dates) < 5:
+#    sd = datetime.datetime(yr, int(month_num_dict[dates[-1]]), int(dates[0]))
+#    ed = datetime.datetime(yr, int(month_num_dict[dates[-1]]), int(dates[2]))
+#    ed = ed + datetime.timedelta(1) # Add a day so it includes the end date day as well
+#else:
+#    sd = datetime.datetime(yr, int(month_num_dict[dates[1]]), int(dates[0]))
+#    ed = datetime.datetime(yr, int(month_num_dict[dates[-1]]), int(dates[3]))
+#    ed = ed + datetime.timedelta(1) # Add a day so it includes the end date day as well
+    
+#delta = ed - sd
+#diff = (ed - sd).days
+
+#sd = sd.strftime('%Y-%m-%d')
+#sd = 'gregorian-interval/'+ sd + f'T00:00:00/P{diff}D'
+
+# %%
 tidy = new_table[['Period','Survey Question Category','Survey Question','Public Response','Measure Type',
                   'Unit','Marker', 'Value']]
 
@@ -111,7 +156,7 @@ del tidy['Unit']
 
 
 # %%
-tidy.head(10)
+#list(tidy['Period'].unique())
 
 # %%
 import os

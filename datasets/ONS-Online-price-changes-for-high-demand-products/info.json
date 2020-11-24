@@ -34,6 +34,9 @@
                 "unit": "http://gss-data.org.uk/def/concept/measurement-units/price-indice-change",
                 "measure": "http://gss-data.org.uk/def/measure/percent",
                 "datatype": "float64"
+            },
+            "Product": {
+                "description":"These products were chosen at the beginning of lockdown using anecdotal evidence on which products were in high demand from consumers.",          		"source":"https://www.ons.gov.uk/peoplepopulationandcommunity/healthandsocialcare/conditionsanddiseases/methodologies/onlineweeklypricechangesmethodology"
             }
         },
         "codelists": [

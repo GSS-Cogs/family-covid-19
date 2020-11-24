@@ -64,6 +64,6 @@
     "@id": "http://gss-data.org.uk/data/gss_data/covid-19/phs-weekly-covid-19-statistical-data-in-scotland#scheme/case-type",
     "@type": "skos:ConceptScheme",
     "rdfs:label": "Case Type",
-    "skos:hasTopConcept": "http://gss-data.org.uk/data/gss_data/covid-19/phs-weekly-covid-19-statistical-data-in-scotland#concept/case-type/all"
+    "skos:hasTopConcept { "@id": "http://gss-data.org.uk/data/gss_data/covid-19/phs-weekly-covid-19-statistical-data-in-scotland#concept/case-type/all" }
   }
 }

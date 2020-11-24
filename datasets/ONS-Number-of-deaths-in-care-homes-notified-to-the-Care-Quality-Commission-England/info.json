@@ -46,9 +46,6 @@
             "ONS Cause of Death"
         ]
     },
-    "load": {
-        "publish": true
-    },
     "sizingNotes": "Simple table structure with footnotes",
     "notes": "Data viz"
 }

@@ -18,14 +18,14 @@
 
 #### Table Structure
 
-		 Period, Survey Question Category, Survey Question, Average Response, Measure Type, Unit, Marker, Value
+		 Period, Survey Question Category, Survey Question, Public Response, Measure Type, Unit, Marker, Value
 
 #### Sheet: Data
 
 		C3:J3 - Date - Change to Period and format as required
 		A4, A9, A15, A18 - Survey Question Category (Codelist)
 		A5:A8, A10:A14, A16:A17, A19:A20 - Survey Question
-		B5:B8, B10:B14, B16:B17, B19:B20 - Average Response
+		B5:B8, B10:B14, B16:B17, B19:B20 - Public Response
 		Add Measure type column with value Percentage
 		Add Unit column with value Percent
 

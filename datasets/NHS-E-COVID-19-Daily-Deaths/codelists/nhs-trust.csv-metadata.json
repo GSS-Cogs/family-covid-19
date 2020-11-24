@@ -1,7 +1,7 @@
 {
   "@context": "http://www.w3.org/ns/csvw",
-  "@id": "http://gss-data.org.uk/data/gss_data/covid-19/mmo-ad-hoc-statistical-release-uk-sea-fisheries-statistics#schema",
-  "url": "vessel-length.csv",
+  "@id": "#table",
+  "url": "nhs-trust.csv",
   "tableSchema": {
     "columns": [
       {
@@ -30,7 +30,7 @@
         },
         "required": false,
         "propertyUrl": "skos:broader",
-        "valueUrl": "http://gss-data.org.uk/data/gss_data/covid-19/mmo-ad-hoc-statistical-release-uk-sea-fisheries-statistics#concept/vessel-length/{parent_notation}"
+        "valueUrl": "http://gss-data.org.uk/data/gss_data/covid-19/nhs-e-covid-19-daily-deaths/concept/nhs-trust/{parent_notation}"
       },
       {
         "titles": "Sort Priority",
@@ -54,16 +54,16 @@
       {
         "virtual": true,
         "propertyUrl": "skos:inScheme",
-        "valueUrl": "http://gss-data.org.uk/data/gss_data/covid-19/mmo-ad-hoc-statistical-release-uk-sea-fisheries-statistics#scheme/vessel-length"
+        "valueUrl": "http://gss-data.org.uk/data/gss_data/covid-19/nhs-e-covid-19-daily-deaths/concept-scheme/nhs-trust"
       }
     ],
     "primaryKey": "notation",
-    "aboutUrl": "http://gss-data.org.uk/data/gss_data/covid-19/mmo-ad-hoc-statistical-release-uk-sea-fisheries-statistics#concept/vessel-length/{notation}"
+    "aboutUrl": "http://gss-data.org.uk/data/gss_data/covid-19/nhs-e-covid-19-daily-deaths/concept/nhs-trust/{notation}"
   },
   "prov:hadDerivation": {
-    "@id": "http://gss-data.org.uk/data/gss_data/covid-19/mmo-ad-hoc-statistical-release-uk-sea-fisheries-statistics#scheme/vessel-length",
+    "@id": "http://gss-data.org.uk/data/gss_data/covid-19/nhs-e-covid-19-daily-deaths/concept-scheme/nhs-trust",
     "@type": "skos:ConceptScheme",
-    "rdfs:label": "Vessel Length",
-    "skos:hasTopConcept { "@id": "http://gss-data.org.uk/data/gss_data/covid-19/mmo-ad-hoc-statistical-release-uk-sea-fisheries-statistics#concept/vessel-length/all" }
+    "rdfs:label": "NHS Trust",
+    "skos:hasTopConcept": "http://gss-data.org.uk/data/gss_data/covid-19/nhs-e-covid-19-daily-deaths/concept/nhs-trust/all"
   }
 }

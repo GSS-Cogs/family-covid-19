@@ -1,7 +1,7 @@
 {
   "@context": "http://www.w3.org/ns/csvw",
-  "@id": "http://gss-data.org.uk/data/gss_data/covid-19/wg-survey-of-public-views-on-the-coronavirus-covid-19#schema",
-  "url": "average-response.csv",
+  "@id": "#table",
+  "url": "age-band.csv",
   "tableSchema": {
     "columns": [
       {
@@ -30,7 +30,7 @@
         },
         "required": false,
         "propertyUrl": "skos:broader",
-        "valueUrl": "http://gss-data.org.uk/data/gss_data/covid-19/wg-survey-of-public-views-on-the-coronavirus-covid-19#concept/average-response/{parent_notation}"
+        "valueUrl": "http://gss-data.org.uk/data/gss_data/covid-19/nhs-e-covid-19-daily-deaths/concept/age-band/{parent_notation}"
       },
       {
         "titles": "Sort Priority",
@@ -54,16 +54,16 @@
       {
         "virtual": true,
         "propertyUrl": "skos:inScheme",
-        "valueUrl": "http://gss-data.org.uk/data/gss_data/covid-19/wg-survey-of-public-views-on-the-coronavirus-covid-19#scheme/average-response"
+        "valueUrl": "http://gss-data.org.uk/data/gss_data/covid-19/nhs-e-covid-19-daily-deaths/concept-scheme/age-band"
       }
     ],
     "primaryKey": "notation",
-    "aboutUrl": "http://gss-data.org.uk/data/gss_data/covid-19/wg-survey-of-public-views-on-the-coronavirus-covid-19#concept/average-response/{notation}"
+    "aboutUrl": "http://gss-data.org.uk/data/gss_data/covid-19/nhs-e-covid-19-daily-deaths/concept/age-band/{notation}"
   },
   "prov:hadDerivation": {
-    "@id": "http://gss-data.org.uk/data/gss_data/covid-19/wg-survey-of-public-views-on-the-coronavirus-covid-19#scheme/average-response",
+    "@id": "http://gss-data.org.uk/data/gss_data/covid-19/nhs-e-covid-19-daily-deaths/concept-scheme/age-band",
     "@type": "skos:ConceptScheme",
-    "rdfs:label": "Average Response",
-    "skos:hasTopConcept": "http://gss-data.org.uk/data/gss_data/covid-19/wg-survey-of-public-views-on-the-coronavirus-covid-19#concept/average-response/all"
+    "rdfs:label": "Age Band",
+    "skos:hasTopConcept": "http://gss-data.org.uk/data/gss_data/covid-19/nhs-e-covid-19-daily-deaths/concept/age-band/all"
   }
 }

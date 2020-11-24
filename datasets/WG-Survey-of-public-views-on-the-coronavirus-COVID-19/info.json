@@ -3,7 +3,7 @@
     "publisher": "Welsh Government",
     "description": "Information on public views and behaviours during the coronavirus crisis.",
     "landingPage": "https://gov.wales/survey-public-views-coronavirus-covid-19",
-    "dataURL": "https://gov.wales/sites/default/files/statistics-and-research/2020-09/survey-of-public-views-on-the-coronavirus-covid-19-19-march-to-31-august-2020-853.ods",
+    "dataURL": "https://gov.wales/sites/default/files/statistics-and-research/2020-11/survey-of-public-views-on-the-coronavirus-covid-19-19-march-to-09-november-2020-192.ods",
     "datasetNotes": [
         "On the landing page scroll to the latest release, this will open another page scroll to data and click on the + the spreadsheet can be found here"
     ],
@@ -28,14 +28,14 @@
             },
             "Value": {
                 "unit": "http://gss-data.org.uk/def/concept/measurement-units/percent",
-                "measure": "http://gss-data.org.uk/def/measure/indicator",
+                "measure": "http://gss-data.org.uk/def/measure/proportion",
                 "datatype": "double"
             }
         },
         "codelists": [
             "Survey Question Category",
             "Survey Question",
-            "Average Response"
+            "Public Response"
         ]
     },
     "load": {

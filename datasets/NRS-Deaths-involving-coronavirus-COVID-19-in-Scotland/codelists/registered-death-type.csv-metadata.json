@@ -64,6 +64,6 @@
     "@id": "http://gss-data.org.uk/data/gss_data/covid-19/nrs-deaths-involving-coronavirus-covid-19-in-scotland#scheme/registered-death-type",
     "@type": "skos:ConceptScheme",
     "rdfs:label": "Registered Death Type",
-    "skos:hasTopConcept": "http://gss-data.org.uk/data/gss_data/covid-19/nrs-deaths-involving-coronavirus-covid-19-in-scotland#concept/registered-death-type/all"
+    "skos:hasTopConcept { "@id": "http://gss-data.org.uk/data/gss_data/covid-19/nrs-deaths-involving-coronavirus-covid-19-in-scotland#concept/registered-death-type/all" }
   }
 }

@@ -10,148 +10,106 @@
 
 [Landing Page](https://www.england.nhs.uk/statistics/statistical-work-areas/covid-19-daily-deaths/)
 
-[Transform Flowchart](https://gss-cogs.github.io/family-covid-19/datasets/specflowcharts.html?NHS-E-COVID-19-Daily-Deaths/flowchart.ttl)
+#### File
 
-### Dataset One
+	COVID 19 total announced deaths 18 November 2020
 
-#### Output Dataset Name:
+#### Sheet: Tab1 Deaths by region
 
-		NHS COVID-19 Daily Deaths
+	Column B: NHS Region - map to regions, see DM notes
+	Row 16: Date of Death, reformat to day/{yyyy-mm-dd}
+		Ignore the first date column 'Up to 1-mar-20' (See DM notes below) 
+		Date for total column should be formatted to a gregorian-interval from the first day until the last
+	Add Column:
+		'Age Band' with value 'total'
+		'COVID-19 Test Result' with value 'Positive test result':'positive-test-result'
+		'NHS Trust' with value 'total'
+	Measure Type: deaths
+	Unit: count
 
+#### Sheet: Tab2 Deaths no pos test
+
+	Column B: NHS Region - map to regions, see DM notes
+	Row 16: Date of Death, reformat to day/{yyyy-mm-dd}
+		Ignore the first date column 'Up to 1-mar-20' (See DM notes below) 
+		Date for total column should be formatted to a gregorian-interval from the first day until the last
+	Add Column:
+		'Age Band' with value 'total'
+		'COVID-19 Test Result' with value 'No positive test but mentioned on death certificate':'no-positive-test-mentioned-on-death-certificate'
+		'NHS Trust' with value 'total'
+	Measure Type: deaths
+	Unit: count
+
+#### Sheet: Tab3 Deaths by age
+
+	Column B: Age Bands
+	Row 16: Date of Death, reformat to day/{yyyy-mm-dd}
+		Ignore the first date column 'Up to 1-mar-20' (See DM notes below)
+		Date for total column should be formatted to a gregorian-interval/ from the first day until the last
+	Add Column:
+		'NHS Region' with value 'E92000001'
+		'COVID-19 Test Result' with value 'Positive test result':'positive-test-result'
+		'NHS Trust' with value 'total'
+	Measure Type: deaths
+	Unit: count
+					
+#### Sheet: Tab4 Deaths by trust
+
+	Column B: NHS Region - map to regions, see DM notes
+	Column C: Code, rename --> NHS Trust (Use code column and create codelist with code as Notation and Name (column E) as the Label)
+	Row 16: Date of Death, reformat to day/{yyyy-mm-dd}
+		Ignore the first date column 'Up to 1-mar-20' (See DM notes below)
+		Date for total column should be formatted to a Gregorian-interval from the first day until the last
+	Add Column:
+		'COVID-19 Test Result' with value 'Positive test result':'positive-test-result'
+		'Age Band' with value 'total'
+	Measure Type: deaths
+	Unit: count		
+
+#### Join all 4 sheets
+
+	
 #### Table Structure
 
-		Period, ONS Geography Code, NHS Hospital Code, Age, Ethnicity, Pre-existing Condition Status, Pre-existing Condition, Measure Type, Unit, Marker, Value
+	Date, NHS Region, NHS Trust, Age Band, COVID-19 Test Result, Value
 
-#### Sheet: COVID19 total deaths by trust
 
-		B17:B235 - NHS England Region - change to ONS Geography Code and change to codes:
-			England - E92000001
-			London - E12000007
-			Midlands - E40000008
-			North East and Yorkshire - E40000009
-			North West - E12000002
-			South East - E40000005
-			South West - E32000013
-		D17:D235 - Code - change to NHS Hospital Code (Codelist)
-		E17:E235 - Name - ignore as we have the code but becomes part of the NHS Hospital Code Codelist
-		F16:CG16 - Date - change to Period and format as required
-		CI17:CI235 - Awaiting Verification - change Measure Type as below, will have the overall date range in the period column
-		CK17:CK235 - Total - will have the overall date range in the period column
-		Add Age column with value All
-		Add Ethnicity column with value All
-		Add Pre-existing Condition Status column with value All
-		Add Pre-existing Condition column with value All
-		Add Measure Type column with values Deaths Positive Test and Deaths Awaiting Verification
-		Add Unit column with value Count
 
-#### Sheet: COVID19 total deaths by region
 
-		B17:B25 - NHS England Region - change to ONS Geography Code and change to codes as explained above
-		D16:CE16 - Date - change to Period and format as required
-		CI17:CI25 - Awaiting Verification - change Measure Type as below, will have the overall date range in the period column
-		CK17:CK25 - Total - will have the overall date range in the period column
-		Add NHS Hospital Code column with value All
-		Add Age column with value All
-		Add Ethnicity column with value All
-		Add Pre-existing Condition Status column with value All
-		Add Pre-existing Condition column with value All
-		Add Measure Type column with values Deaths Positive Test and Deaths Awaiting Verification
-		Add Unit column with value Count
 
-#### Sheet: Deaths by Region - no pos test
-
-		B17:B25 - NHS England Region - change to ONS Geography Code and change to codes as explained above
-		D16:CE16 - Date - change to Period and format as required
-		CI17:CI25 - Awaiting Verification - change Measure Type as below, will have the overall date range in the period column
-		CK17:CK25 - Total - will have the overall date range in the period column
-		Add NHS Hospital Code column with value All
-		Add Age column with value All
-		Add Ethnicity column with value All
-		Add Pre-existing Condition Status column with value All
-		Add Pre-existing Condition column with value All
-		Add Measure Type column with values Deaths No Positive test and Deaths Awaiting Verification
-		Add Unit column with value Count
-
-#### Sheet: COVID19 total deaths by age
-
-		B17:B24 - Age group - change to Age (Codelist)
-		D16:CE16 - Date - change to Period and format as required
-		CI17:CI224 - Awaiting Verification - change Measure Type as below, will have the overall date range in the period column
-		CK17:CK224 - Total - will have the overall date range in the period column
-		Add ONS Geography Code column with value E92000001
-		Add NHS Hospital Code column with value All
-		Add Ethnicity column with value All
-		Add Pre-existing Condition Status column with value All
-		Add Pre-existing Condition column with value All
-		Add Measure Type column with values Deaths Positive Test and Deaths Awaiting Verification
-		Add Unit column with value Count
+## THESE SHEETS APPEARED IN THE FILE WHEN THE SPEC WAS INITIALLY DONE BUT HAVE BEEN REMOVED SINCE.
 
 #### Sheet: COVID19 all deaths by ethnicity
 
-		C5 - Date - change to Period and format as required (will have to figure out what the date range is)
-		B17:B40 - Ethnic Group - change to Ethnicity (Codelist)
-			Row 22 = White Total 
-			Row 27 = Mixed Race Total
-			Row 37 = BAME Total
-			Row 40 = Not Stated/No match Total
-		Add ONS Geography Code column with value E92000001
-		Add NHS Hospital Code column with value All
-		Add Age column with value All
-		Add Pre-existing Condition Status column with value All
-		Add Pre-existing Condition column with value All
-		Add Measure Type column with values Deaths Positive Test and Percentage and Percentage without Null and not stated
-		Add Unit column with values Count and Percent
-
 #### Sheet: COVID19 all deaths by gender
 
-		C5 - Date - change to Period and format as required (will have to figure out what the date range is)
-		B17:B24 - Age group - change to Age (Codelist)
-		D16:G16 - Gender - change to Sex - Female = F, Male = M, Unknown Gender = U, Total = T
-		Add ONS Geography Code column with value E92000001
-		Add NHS Hospital Code column with value All
-		Add Ethnicity column with value All
-		Add Pre-existing Condition Status column with value All
-		Add Pre-existing Condition column with value All
-		Add Measure Type column with value Deaths Positive Test
-		Add Unit column with value Count
-
-#### Sheet: COVID19 all deaths by condition
-
-		C5 - Date - change to Period and format as required (will have to figure out what the date range is)
-		D16:G16 - Pre-existing Condition Status (Codelist)
-		B17:B24 - Age Group - change to Age (Codelist)
-		Add ONS Geography Code column with value E92000001
-		Add NHS Hospital Code column with value All
-		Add Ethnicity column with value All
-		Add Age column with value All
-		Add Pre-existing Condition column with value All
-		Add Measure Type column with value Deaths Positive Test
-		Add Unit column with value Count		
+#### Sheet: COVID19 all deaths by condition		
 
 #### Sheet: COVID19 all deaths condition 2
 
-		B16:B27 - Date Introduced - change to Period ,this should be a date range from the date in the cell to the published date in cell C8
-		C16:C27 - Condition - change to Pre-existing Condition (Codelist) 
-		D15:H15 - Pre-existing Condition Status (Codelist)
-			Count of condition = With Condition
-			Count of unknown or not reported for condition = unknown or not reported
-			Count of all deaths since condition introduced = Deaths since Condition Introduced
-			% of deaths since introduced with condition = Deaths since Condition Introduced
-			% of deaths (excluding unknown or not reported) with condition = Deaths excluding unknown or not reported
-		Add ONS Geography Code column with value E92000001
-		Add NHS Hospital Code column with value All
-		Add Ethnicity column with value All
-		Add Age column with value All
-		Add Pre-existing Condition Status column with value Yes
-		Add Measure Type column with values Deaths Positive Test 
-		Add Unit column with values Count and Percent	
-
 ##### Footnotes
 
-		Hopefully this is in already in the metadata
-		Note: interpretation of the figures should take into account the fact that totals by date of death, particularly for recent prior days, are likely to be updated in future releases. For example as deaths are confirmed as testing positive for Covid-19, as more post-mortem tests are processed and data from them are validated. Any changes are made clear in the daily files.
+		Hopefully 
 
 #### DM Notes
 
-Data likely to change from 14 May 2020, hopefully this will already be explained in the metadata
+	First column of dates states 'Up to  01-Mar-20' cannot find when the start date should be. Have asked BAs if they can investigate. Going to assume 1 Jan 2020 for the time being.
+	18th Nov 2020. 
+	Lots of the NHS trust names do not a ONS Geography code so will have to create codelist based on codes in Tab4
+	Spoke to Dave (DM) agreed that we can ignore the 'up to 1 Mar 20' data as they are all zeros and unless something major happens like a huge re-evaluation NHS deaths then they will always be zero. And if things change then the format of the data tables will probably change as well so the spec will need revisiting.
+
+	Age Band:
+		pathify values and change 80+ to 80plus
+
+	NHS Trust
+		Pathify values
+		
+	Region ONS Geography Codes:
+		England - E92000001
+		London - E12000007
+		Midlands - E40000008
+		North East and Yorkshire - E40000009
+		North West - E12000002
+		South East - E40000005
+		South West - E32000013
 

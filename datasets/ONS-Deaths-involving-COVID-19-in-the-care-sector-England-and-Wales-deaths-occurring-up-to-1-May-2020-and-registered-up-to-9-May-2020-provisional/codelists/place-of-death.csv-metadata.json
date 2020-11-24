@@ -64,6 +64,6 @@
     "@id": "http://gss-data.org.uk/data/gss_data/covid-19/ons-deaths-involving-covid-19-in-the-care-sector-england-and-wales-deaths-occurring-up-to-1-may-2020-and-registered-up-to-9-may-2020-provisional#scheme/place-of-death",
     "@type": "skos:ConceptScheme",
     "rdfs:label": "Place of death",
-    "skos:hasTopConcept": "http://gss-data.org.uk/data/gss_data/covid-19/ons-deaths-involving-covid-19-in-the-care-sector-england-and-wales-deaths-occurring-up-to-1-may-2020-and-registered-up-to-9-may-2020-provisional#concept/place-of-death/all"
+    "skos:hasTopConcept { "@id": "http://gss-data.org.uk/data/gss_data/covid-19/ons-deaths-involving-covid-19-in-the-care-sector-england-and-wales-deaths-occurring-up-to-1-may-2020-and-registered-up-to-9-may-2020-provisional#concept/place-of-death/all" }
   }
 }

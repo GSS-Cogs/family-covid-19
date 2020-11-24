@@ -64,6 +64,6 @@
     "@id": "http://gss-data.org.uk/data/gss_data/covid-19/nrs-deaths-involving-coronavirus-covid-19-in-scotland#scheme/nrs-age-group",
     "@type": "skos:ConceptScheme",
     "rdfs:label": "NRS Age Group",
-    "skos:hasTopConcept": "http://gss-data.org.uk/data/gss_data/covid-19/nrs-deaths-involving-coronavirus-covid-19-in-scotland#concept/nrs-age-group/all"
+    "skos:hasTopConcept { "@id": "http://gss-data.org.uk/data/gss_data/covid-19/nrs-deaths-involving-coronavirus-covid-19-in-scotland#concept/nrs-age-group/all" }
   }
 }

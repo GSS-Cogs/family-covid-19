@@ -1,0 +1,29 @@
+{
+    "title": "Weekly deaths by week of occurrence, council area and location",
+    "publisher": "National Records of Scotland",
+    "description": "The following are user requests for ad-hoc analysis related to COVID-19 deaths data.  As these data may be useful for others, we are making them available to download for any users of our data.",
+    "landingPage": "https://www.nrscotland.gov.uk/statistics-and-data/statistics/statistics-by-theme/vital-events/general-publications/weekly-and-monthly-data-on-births-and-deaths/deaths-involving-coronavirus-covid-19-in-scotland/related-statistics",
+    "datasetNotes": [
+        "On the landing page under Ad-hoc Queries"
+    ],
+    "published": "2020-10-14",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": "PMD, XLS, CSV",
+        "stage": "Documented"
+    },
+    "transform": {
+        "stage": [
+            "To Do"
+        ],
+        "columns": {
+            
+        },
+        "airtable": "recdDe3FoiIZ4qXl1",
+        "main_issue": 180
+    },
+    "sizingNotes": "Simple table structure ",
+    "notes": ""
+}

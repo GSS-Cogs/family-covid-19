@@ -43,9 +43,6 @@
             }
         }
     },
-    "load": {
-        "publish": true
-    },
     "sizingNotes": "Simple table structure although different formats across 7 tabs",
     "notes": "Data Viz  ----\n\n\nEmail issued 05/05/2020"
 }

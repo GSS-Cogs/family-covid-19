@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 # coding: utf-8
+# %%
 
-# In[1]:
+# %%
 
 
 # -*- coding: utf-8 -*-
@@ -19,21 +20,21 @@ scrape = Scraper('https://www.nisra.gov.uk/publications/weekly-deaths')
 scrape
 
 
-# In[2]:
+# %%
 
 
 
 scrape.distributions = [x for x in scrape.distributions if x.mediaType == Excel]
 
 
-# In[3]:
+# %%
 
 
 dist = scrape.distributions[0]
 display(dist)
 
 
-# In[4]:
+# %%
 
 
 tabs = { tab.name: tab for tab in dist.as_databaker() if tab.name.startswith('Table')}
@@ -441,7 +442,7 @@ for name, tab in tabs.items():
         tidied_sheets[name] = tidy_sheet.topandas()
 
 
-# In[5]:
+# %%
 
 
 registrations_tables = {}
@@ -787,7 +788,7 @@ for name in tidied_sheets:
 df
 
 
-# In[6]:
+# %%
 
 
 registrations = pd.concat(registrations_tables.values(), ignore_index=True)
@@ -810,6 +811,7 @@ for column in registrations:
 registrations['Marker'] = registrations.apply(lambda x: '' if 'N/A' in str(x['Marker']) else x['Marker'], axis = 1)
 registrations['Marker'] = registrations['Marker'].fillna('')
 registrations['Value'] = registrations.apply(lambda x: '0' if '-' in str(x['Marker']) else x['Value'], axis = 1)
+registrations['Value'] = pd.to_numeric(registrations['Value'], downcast='integer')
 
 registrations = registrations.replace({'Area' : {
     'Antrim & Newtownabbey' : 'N09000001',
@@ -831,7 +833,7 @@ registrations = registrations[['Period', 'Death Measurement Type', 'Area', 'Gend
 registrations
 
 
-# In[7]:
+# %%
 
 
 csvName = 'registrations-observations.csv'
@@ -875,7 +877,7 @@ with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
 
 
 
-# In[8]:
+# %%
 
 
 from IPython.core.display import HTML
@@ -886,7 +888,7 @@ for col in registrations:
         display(registrations[col].cat.categories)
 
 
-# In[9]:
+# %%
 
 
 occurrences = pd.concat(occurrences_tables.values(), ignore_index=True)
@@ -905,6 +907,7 @@ for column in occurrences:
 occurrences['Marker'] = occurrences.apply(lambda x: '' if 'N/A' in str(x['Marker']) else x['Marker'], axis = 1)
 occurrences['Marker'] = occurrences['Marker'].fillna('')
 occurrences['Value'] = occurrences.apply(lambda x: '0' if '-' in str(x['Marker']) else x['Value'], axis = 1)
+occurrences['Value'] = pd.to_numeric(occurrences['Value'], downcast='integer')
 
 occurrences = occurrences.replace({'Area' : {
     'Antrim & Newtownabbey' : 'N09000001',
@@ -926,7 +929,7 @@ occurrences = occurrences[['Period', 'Area', 'Location of Death', 'Cause of Deat
 occurrences
 
 
-# In[10]:
+# %%
 
 
 csvName = 'occurrences-observations.csv'
@@ -971,7 +974,7 @@ with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
     metadata.write(scrape.generate_trig())
 
 
-# In[11]:
+# %%
 
 
 from IPython.core.display import HTML
@@ -982,7 +985,7 @@ for col in occurrences:
         display(occurrences[col].cat.categories)
 
 
-# In[11]:
+# %%
 
 
 

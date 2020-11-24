@@ -1,7 +1,7 @@
 {
   "@context": "http://www.w3.org/ns/csvw",
-  "@id": "http://gss-data.org.uk/data/gss_data/covid-19/wg-survey-of-public-views-on-the-coronavirus-covid-19#schema",
-  "url": "average-response.csv",
+  "@id": "#table",
+  "url": "public-response.csv",
   "tableSchema": {
     "columns": [
       {
@@ -30,7 +30,7 @@
         },
         "required": false,
         "propertyUrl": "skos:broader",
-        "valueUrl": "http://gss-data.org.uk/data/gss_data/covid-19/wg-survey-of-public-views-on-the-coronavirus-covid-19#concept/average-response/{parent_notation}"
+        "valueUrl": "http://gss-data.org.uk/data/gss_data/covid-19/wg-survey-of-public-views-on-the-coronavirus-covid-19/concept/public-response/{parent_notation}"
       },
       {
         "titles": "Sort Priority",
@@ -54,16 +54,18 @@
       {
         "virtual": true,
         "propertyUrl": "skos:inScheme",
-        "valueUrl": "http://gss-data.org.uk/data/gss_data/covid-19/wg-survey-of-public-views-on-the-coronavirus-covid-19#scheme/average-response"
+        "valueUrl": "http://gss-data.org.uk/data/gss_data/covid-19/wg-survey-of-public-views-on-the-coronavirus-covid-19/concept-scheme/public-response"
       }
     ],
     "primaryKey": "notation",
-    "aboutUrl": "http://gss-data.org.uk/data/gss_data/covid-19/wg-survey-of-public-views-on-the-coronavirus-covid-19#concept/average-response/{notation}"
+    "aboutUrl": "http://gss-data.org.uk/data/gss_data/covid-19/wg-survey-of-public-views-on-the-coronavirus-covid-19/concept/public-response/{notation}"
   },
   "prov:hadDerivation": {
-    "@id": "http://gss-data.org.uk/data/gss_data/covid-19/wg-survey-of-public-views-on-the-coronavirus-covid-19#scheme/average-response",
+    "@id": "http://gss-data.org.uk/data/gss_data/covid-19/wg-survey-of-public-views-on-the-coronavirus-covid-19/concept-scheme/public-response",
     "@type": "skos:ConceptScheme",
-    "rdfs:label": "Average Response",
-    "skos:hasTopConcept { "@id": "http://gss-data.org.uk/data/gss_data/covid-19/wg-survey-of-public-views-on-the-coronavirus-covid-19#concept/average-response/all" }
+    "rdfs:label": "Public Response",
+    "skos:hasTopConcept": { 
+      "@id": "http://gss-data.org.uk/data/gss_data/covid-19/wg-survey-of-public-views-on-the-coronavirus-covid-19/concept/public-response/all" 
+    }
   }
 }

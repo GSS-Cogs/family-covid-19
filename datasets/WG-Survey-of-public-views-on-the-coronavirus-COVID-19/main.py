@@ -148,10 +148,10 @@ dataset_path = pathify(os.environ.get('JOB_NAME', f'gss_data/{scrape.dataset.fam
 scrape.set_base_uri('http://gss-data.org.uk')
 scrape.set_dataset_id(dataset_path)
 csvw_transform = CSVWMapping()
-csvw_transform.set_csv(out / 'observations.csv')
+csvw_transform.set_csv(out / csvName)
 csvw_transform.set_mapping(json.load(open('info.json')))
 csvw_transform.set_dataset_uri(urljoin(scrape._base_uri, f'data/{scrape._dataset_id}'))
-csvw_transform.write(out / 'observations.csv-metadata.json')
+csvw_transform.write(out / f'{csvName}-metadata.json')
 
 # Remove subset of data
 (out / csvName).unlink()
@@ -161,20 +161,9 @@ with open(out / 'observations.csv-metadata.trig', 'wb') as metadata:
 
 
 # %%
-
-
-"""
-info = json.load(open('info.json'))
-codelistcreation = info['transform']['codelists']
-print(codelistcreation)
-print("-------------------------------------------------------")
-codeclass = CSVCodelists()
-for cl in codelistcreation:
-    if cl in tidy.columns:
-        tidy[cl] = tidy[cl].str.replace("-"," ")
-        tidy[cl] = tidy[cl].str.capitalize()
-        codeclass.create_codelists(pd.DataFrame(tidy[cl]), 'codelists', scrape.dataset.family, Path(os.getcwd()).name.lower())
-"""
+info = json.load(open(out / f'{csvName}-metadata.json'))
+info['tables'][0]['url'] = csvName + '.gz'
+#info
 
 
 # %%

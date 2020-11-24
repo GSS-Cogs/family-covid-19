@@ -30,7 +30,7 @@
         },
         "required": false,
         "propertyUrl": "skos:broader",
-        "valueUrl": "http://gss-data.org.uk/data/gss_data/covid-19/wg-survey-of-public-views-on-the-coronavirus-covid-19/concept/public-response/{parent_notation}"
+        "valueUrl": "http://gss-data.org.uk/data/gss_data/covid-19/wg-survey-of-public-views-on-the-coronavirus-covid-19#concept/public-response/{parent_notation}"
       },
       {
         "titles": "Sort Priority",
@@ -54,18 +54,18 @@
       {
         "virtual": true,
         "propertyUrl": "skos:inScheme",
-        "valueUrl": "http://gss-data.org.uk/data/gss_data/covid-19/wg-survey-of-public-views-on-the-coronavirus-covid-19/concept-scheme/public-response"
+        "valueUrl": "http://gss-data.org.uk/data/gss_data/covid-19/wg-survey-of-public-views-on-the-coronavirus-covid-19#scheme/public-response"
       }
     ],
     "primaryKey": "notation",
-    "aboutUrl": "http://gss-data.org.uk/data/gss_data/covid-19/wg-survey-of-public-views-on-the-coronavirus-covid-19/concept/public-response/{notation}"
+    "aboutUrl": "http://gss-data.org.uk/data/gss_data/covid-19/wg-survey-of-public-views-on-the-coronavirus-covid-19#concept/public-response/{notation}"
   },
   "prov:hadDerivation": {
-    "@id": "http://gss-data.org.uk/data/gss_data/covid-19/wg-survey-of-public-views-on-the-coronavirus-covid-19/concept-scheme/public-response",
+    "@id": "http://gss-data.org.uk/data/gss_data/covid-19/wg-survey-of-public-views-on-the-coronavirus-covid-19#scheme/public-response",
     "@type": "skos:ConceptScheme",
     "rdfs:label": "Public Response",
     "skos:hasTopConcept": { 
-      "@id": "http://gss-data.org.uk/data/gss_data/covid-19/wg-survey-of-public-views-on-the-coronavirus-covid-19/concept/public-response/all" 
+      "@id": "http://gss-data.org.uk/data/gss_data/covid-19/wg-survey-of-public-views-on-the-coronavirus-covid-19#concept/public-response/all" 
     }
   }
 }

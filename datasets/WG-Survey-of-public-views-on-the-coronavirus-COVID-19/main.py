@@ -120,7 +120,7 @@ from urllib.parse import urljoin
 csvName = "observations.csv"
 out = Path('out')
 out.mkdir(exist_ok=True)
-tidy[:5].drop_duplicates().to_csv(out / csvName, index = False)
+tidy.drop_duplicates().to_csv(out / csvName, index = False)
 tidy.drop_duplicates().to_csv(out / (csvName + '.gz'), index = False, compression='gzip')
 
 scrape.dataset.family = 'covid-19'
@@ -154,16 +154,15 @@ csvw_transform.set_dataset_uri(urljoin(scrape._base_uri, f'data/{scrape._dataset
 csvw_transform.write(out / f'{csvName}-metadata.json')
 
 # Remove subset of data
-(out / csvName).unlink()
+#(out / csvName).unlink()
 
 with open(out / 'observations.csv-metadata.trig', 'wb') as metadata:
     metadata.write(scrape.generate_trig())
 
 
 # %%
-info = json.load(open(out / f'{csvName}-metadata.json'))
-info['tables'][0]['url'] = csvName + '.gz'
-#info
+#info = json.load(open(out / f'{csvName}-metadata.json'))
+#info['tables'][0]['url'] = csvName + '.gz'
 
 
 # %%

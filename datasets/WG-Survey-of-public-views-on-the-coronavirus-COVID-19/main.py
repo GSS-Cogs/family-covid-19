@@ -99,11 +99,11 @@ def date_time(time_value):
     if len(dates) < 5: # ONLY ONE MONTH IN DATE STRING
         sd = datetime.datetime(yr, int(month_num_dict[dates[-1]]), int(dates[0]))
         ed = datetime.datetime(yr, int(month_num_dict[dates[-1]]), int(dates[2]))
-        ed = ed + datetime.timedelta(1) # Add a day so it includes the end date day as well
+        #ed = ed + datetime.timedelta(1) # Add a day so it includes the end date day as well
     else:   # TWO MONTHS IN DATE STRING
         sd = datetime.datetime(yr, int(month_num_dict[dates[1]]), int(dates[0]))
         ed = datetime.datetime(yr, int(month_num_dict[dates[-1]]), int(dates[3]))
-        ed = ed + datetime.timedelta(1) # Add a day so it includes the end date day as well
+        #ed = ed + datetime.timedelta(1) # Add a day so it includes the end date day as well
 
 
     delta = ed - sd

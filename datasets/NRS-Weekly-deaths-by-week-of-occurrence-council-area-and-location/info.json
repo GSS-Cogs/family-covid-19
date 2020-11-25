@@ -19,10 +19,98 @@
             "To Do"
         ],
         "columns": {
-            
+            "Week of Occurrence": {
+                "description": "",
+                "source": "",
+                "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
+                "value": "http://reference.data.gov.uk/id/{+week_of_occurrence}"
+            },
+            "Area": {
+                "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refArea",
+                "value": "http://statistics.data.gov.uk/id/statistical-geography/{area}"
+            },
+            "Value": {
+                "unit": "http://gss-data.org.uk/def/concept/measurement-units/deaths",
+                "measure": "http://gss-data.org.uk/def/measure/count",
+                "datatype": "integer"
+            }
         },
         "airtable": "recdDe3FoiIZ4qXl1",
-        "main_issue": 180
+        "main_issue": 180,
+        "transformStage": [
+            {
+                "source_name": "Weekly deaths by week of occurrence, council area and location",
+                "identifier": "Weekly deaths by week of occurrence, council area and location||Data||https://www.nrscotland.gov.uk/files//statistics/covid19/weekly-deaths-by-date-council-area-location.xlsx",
+                "source": [
+                    {
+                        "https://www.nrscotland.gov.uk/files//statistics/covid19/weekly-deaths-by-date-council-area-location.xlsx": ""
+                    }
+                ],
+                "title": "Data",
+                "preview": "documentation/previews/730fad04-f307-472a-9b62-1d929f1ecafc.html",
+                "observation_selection": null,
+                "columns": [],
+                "postTransformNotes": [
+                    {
+                        "Period": [
+                            "Added to dataframe 'Data'"
+                        ]
+                    },
+                    {
+                        "Measurement": [
+                            "Added to dataframe 'Data'"
+                        ]
+                    },
+                    {
+                        "Gender": [
+                            "Added to dataframe 'Data'"
+                        ]
+                    },
+                    {
+                        "Values": [
+                            "Added to dataframe 'Data'"
+                        ]
+                    },
+                    {
+                        "Marker": [
+                            "Added to dataframe 'Data'"
+                        ]
+                    }
+                ]
+            },
+            {
+                "source_name": "Weekly deaths by week of occurrence, council area and location",
+                "identifier": "Weekly deaths by week of occurrence, council area and location||Data||https://www.nrscotland.gov.uk/files//statistics/covid19/weekly-deaths-by-date-council-area-location.xlsx : Data",
+                "source": [
+                    {
+                        "https://www.nrscotland.gov.uk/files//statistics/covid19/weekly-deaths-by-date-council-area-location.xlsx": "Data"
+                    }
+                ],
+                "title": "Data",
+                "preview": null,
+                "observation_selection": null,
+                "columns": [],
+                "postTransformNotes": [
+                    {
+                        "Period": []
+                    },
+                    {
+                        "Measurement": []
+                    },
+                    {
+                        "Gender": []
+                    },
+                    {
+                        "Values": [
+                            "Rename 'OBS' column to 'Values'"
+                        ]
+                    },
+                    {
+                        "Marker": []
+                    }
+                ]
+            }
+        ]
     },
     "sizingNotes": "Simple table structure ",
     "notes": ""

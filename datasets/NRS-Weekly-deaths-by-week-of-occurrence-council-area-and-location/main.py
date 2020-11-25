@@ -1,13 +1,14 @@
 #!/usr/bin/env python
 # coding: utf-8
+# %%
 
-# In[79]:
+# %%
 
 
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[1]:
+# %%
 
 
 # -*- coding: utf-8 -*-
@@ -72,20 +73,20 @@ landingPage = info['landingPage']
 landingPage
 
 
-# In[80]:
+# %%
 
 
 scrape = Scraper(landingPage)
 scrape
 
 
-# In[81]:
+# %%
 
 
 scrape.distributions
 
 
-# In[82]:
+# %%
 
 
 dist = scrape.distributions[0]
@@ -93,7 +94,7 @@ dist.title = "Weekly deaths by week of occurrence, council area and location"
 display(dist)
 
 
-# In[83]:
+# %%
 
 
 pd.set_option('display.float_format', lambda x: '%.2f' % x)
@@ -154,7 +155,7 @@ for name, tab in tabs.items():
 tidy_sheet.topandas()
 
 
-# In[84]:
+# %%
 
 
 out = Path('out')
@@ -210,22 +211,22 @@ for name in tabs:
             'West Dunbartonshire' : 'S12000039',
             'West Lothian' : 'S12000040'}})
 
-        df = df[['Area', 'Period', 'Week of Occurrence', 'Cause of Death', 'Values']]
+        df = df[['Area', 'Period', 'Week of Occurrence', 'Location of Death', 'Cause of Death', 'Values']]
 
         cubes.add_cube(scrape, df, dist.title)
 
         tidied_tables[name] = df
 
 
-# In[85]:
+# %%
 
 
 for name in tidied_tables:
     print('Tab Name: ' +  name)
-    print(tidied_tables[name])
+    #print(tidied_tables[name])
 
 
-# In[86]:
+# %%
 
 
 scrape.dataset.family = 'covid-19'
@@ -234,3 +235,8 @@ scrape.dataset.issued = parse('25 November 2020').date()
 trace.render("spec_v1.html")
 cubes.output_all()
 
+
+# %%
+tidied_tables['Data'].head(20)
+
+# %%

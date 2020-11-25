@@ -1,0 +1,13 @@
+Label,Notation,Parent Notation,Sort Priority
+"Live Birth",live-birth,,1
+"Stillbirths",stillbirths,,2
+"Perinatal deaths",perinatal-deaths,,3
+"Neonatal deaths",neonatal-deaths,,4
+"Infant deaths",infant-deaths,,5
+"Deaths - all ages",deaths-all-ages,,6
+Marriages,marriages,,7
+Civil Partnerships,civil-partnerships,,8
+All Marriages,all-marriages,,9
+Opposite Sex Marriages,opposite-sex-marriages,all-marriages,10
+Same sex Marriages,same-sex-marriages,all-marriages,11
+Deaths,deaths,,12

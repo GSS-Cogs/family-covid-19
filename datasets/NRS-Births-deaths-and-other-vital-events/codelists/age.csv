@@ -1,0 +1,18 @@
+Label,Notation,Parent Notation,Sort Priority
+Less than 4 Weeks,lessW4,all,1
+4 to 52 Weeks,W4T52,all,2
+1 to 4 Years,Y1T4,all,3
+5 to 9 Years,Y5T9,all,4
+10 to 14 Years,Y10T14,all,5
+15 to 24 Years,Y15T24,all,6
+25 to 34 Years,Y25T34,all,7
+35 to 44 Years,Y35T44,all,8
+45 to 54 Years,Y45T54,all,9
+55 to 54 Years,Y55T64,all,10
+65 to 74 Years,Y65T74,all,11
+75 to 84 Years,Y75T84,all,12
+85 to 89 Years,Y85T89,all,13
+85 Years Plus,Y85plus,all,14
+90 Years Plus,Y90plus,all,15
+All,all,,16
+Total,total,,17

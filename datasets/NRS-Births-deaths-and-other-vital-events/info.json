@@ -18,6 +18,35 @@
         "stage": [
             "To Do"
         ],
+        "columns": {
+            "Period": {
+                "description": "",
+                "source": "",
+                "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
+                "value": "http://reference.data.gov.uk/id/{+period}"
+            },
+            "Cause of Death": {
+                "parent": "http://gss-data.org.uk/data/gss_data/covid-19/nrs-births-deaths-and-other-vital-events/concept-scheme/cause-of-death",
+                "value": "http://gss-data.org.uk/data/gss_data/covid-19/nrs-births-deaths-and-other-vital-events/concept/cause-of-death/{cause_of_death}",
+                "description": "nternational Classification of Diseases (ICD) - The ICD is the global health information standard for mortality and morbidity statistics. ICD is increasingly used in clinical care and research to define diseases and study disease patterns, as well as manage health care, monitor outcomes and allocate resources. More than 100 countries use the system to report mortality data, a primary indicator of health status. This system helps to monitor death and disease rates worldwide and measure progress towards the Millennium Development Goals. About 70% of the world’s health expenditures (USD $ 3.5 billion) are allocated using ICD for reimbursement and resource allocation ICD has been translated into 43 languages. The 11th revision process is underway and the final ICD-11 will be released in 2018. Browse classifications: https://icd.who.int/browse10/2010/en#/I",
+                "source": "https://www.who.int/classifications/icd/factsheet/en/#:~:text=It%20is%20the%20international%20standard,and%20other%20related%20health%20conditions."
+            },
+            "Parent Marital Status": {
+                "parent": "http://gss-data.org.uk/data/gss_data/covid-19/nrs-births-deaths-and-other-vital-events/concept-scheme/parent-marital-status",
+                "value": "http://gss-data.org.uk/data/gss_data/covid-19/nrs-births-deaths-and-other-vital-events/concept/parent-marital-status/{parent_marital_status}",
+                "description": "Married or Unmarried",
+                "source": ""
+            },
+            "Area": {
+                "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refArea",
+                "value": "http://statistics.data.gov.uk/id/statistical-geography/{area_code}"
+            },
+            "Value": {
+                "unit": "http://gss-data.org.uk/def/concept/measurement-units/deaths",
+                "measure": "http://gss-data.org.uk/def/measure/count",
+                "datatype": "integer"
+            }
+        },
         "airtable": "recEnfDGHSinWTX2S",
         "main_issue": 82
     },

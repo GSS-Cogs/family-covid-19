@@ -1,13 +1,14 @@
 #!/usr/bin/env python
 # coding: utf-8
+# %%
 
-# In[36]:
+# %%
 
 
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[1]:
+# %%
 
 
 # -*- coding: utf-8 -*-
@@ -71,20 +72,20 @@ landingPage = info['landingPage']
 landingPage
 
 
-# In[37]:
+# %%
 
 
 scrape = Scraper(landingPage)
 scrape
 
 
-# In[38]:
+# %%
 
 
 scrape.distributions
 
 
-# In[39]:
+# %%
 
 
 
@@ -92,7 +93,7 @@ dist = scrape.distributions[0]
 display(dist)
 
 
-# In[40]:
+# %%
 
 
 pd.set_option('display.float_format', lambda x: '%.2f' % x)
@@ -362,7 +363,7 @@ for name, tab in tabs.items():
 tidy_sheet.topandas()
 
 
-# In[41]:
+# %%
 
 
 out = Path('out')
@@ -684,10 +685,15 @@ for name in tabs:
         df.drop_duplicates().to_csv(out / csvName, index = False)
 
 
-# In[42]:
+# %%
 
 
 for name in tidied_tables:
     print('Tab Name: ' +  name)
     print(tidied_tables[name])
 
+
+# %%
+tidied_tables['Q6'].head(10)
+
+# %%

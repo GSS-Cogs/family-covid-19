@@ -1,0 +1,68 @@
+Label,Notation,Parent Notation,Sort Priority
+All,all,,1
+Certain infectious and parasitic diseases  (A00-B99),a00-b99,all,2
+"Tuberculosis (A15-19,B90 )",a15-19-b90 ,all,3
+Meningococcal infection (A39),a39,all,4
+Viral hepatitis (B15-19),b15-19,all,5
+Human immunodeficiency virus (HIV) disease (B20-24),b20-24,all,6
+Neoplasms (C00-D48),c00-d48,all,7
+Malignant neoplasms (C00-97),c00-97,all,8
+"Malignant neoplasms of lip, oral cavity and pharynx (C00-14)",c00-14,all,9
+Malignant neoplasm of oesophagus (C15),c15,all,10
+Malignant neoplasm of stomach (C16),c16,all,11
+Malignant neoplasm of colon (C18),c18,all,12
+Malignant neoplasm of rectum and anus (C19-21),c19-21,all,13
+Malignant neoplasm of liver and the intrahepatic bile ducts (C22),c22,all,14
+Malignant neoplasm of pancreas (C25),c25,all,15
+Malignant neoplasm of larynx (C32),c32,all,16
+"Malignant neoplasm of trachea, bronchus and lung (C33-34)",c33-34,all,17
+Malignant melanoma of skin (C43),c43,all,18
+Malignant neoplasm of breast (C50),c50,all,19
+Malignant neoplasm of cervix uteri (C53),c53,all,20
+Malignant neoplasm of other parts of the uterus (C54-55),c54-55,all,21
+Malignant neoplasm of ovary (C56),c56,all,22
+Malignant neoplasm of prostate (C61),c61,all,23
+"Malignant neoplasm of kidney, except renal pelvis (C64)",c64,all,24
+Malignant neoplasm of bladder (C67),c67,all,25
+"Malignant neoplasm of lymphoid, haematopoietic and related tissue (C81-96)",c81-96,all,26
+Diseases of the blood and blood forming organs and certain disorders involving the immune mechanism (D50-89),d50-89,all,27
+"Endocrine, nutritional and metabolic diseases (E00-90)",e00-90,all,28
+Diabetes mellitus (E10-E14),e10-e14,all,29
+Mental and behavioural disorders (F00-99),f00-99,all,30
+"Dementia (F01, F03)","f01, f03",all,31
+Mental and behavioural disorders due to use of alcohol (F10),f10,all,32
+Diseases of the nervous system and the sense organs (G00-H95),g00-h95,all,33
+Meningitis (G00-03),g00-03,all,34
+Alzheimer's Disease (G30),g30,all,35
+Diseases of the circulatory system (I00-99),i00-99,all,36
+Ischaemic heart diseases (I20-25),i20-25,all,37
+"Other heart diseases (I30-33,I39-I52)",i30-33-i39-i52,all,38
+Cerebrovascular diseases (I60-69),i60-69,all,39
+Diseases of the respiratory system (J00-99),j00-99,all,40
+Influenza (J09-11),j09-11,all,41
+Pneumonia (J12-18),j12-18,all,42
+Chronic lower respiratory diseases (J40-47),j40-47,all,43
+Asthma (J45-46),j45-46,all,44
+Diseases of the digestive system (K00-93),k00-93,all,45
+"Ulcer of the stomach, duodendum and jejunum (K25-28)",k25-28,all,46
+"Chronic liver disease (K70, K73-74)",k70-k73-74,all,47
+Diseases of the skin and subcutaneous tissue (L00-99),l00-99,all,48
+Diseases of the musculoskeletal system and connective system (M00-99),m00-99,all,49
+"Rheumatoid arthritis and osteoarthritis (M05-06,M15-M19)",m05-06-m15-m19,all,50
+Diseases of the genitourinary system (N00-99),n00-99,all,51
+Diseases of the kidney and ureter (N00-29),n00-29,all,52
+"Pregnancy, childbirth and the puerperium (O00-99)",o00-99,all,53
+Certain conditions originating in the perinatal period (P00-96),p00-96,all,54
+"Congenital malformations, deformations and chromosomal abnormalities (Q00-99)",q00-99,all,55
+Congenital malformations of the nervous system (Q00-07),q00-07,all,56
+Congenital malformations of the circulatory system (Q20-28),q20-28,all,57
+"Symptoms, signs and abnormal clinical and laboratory findings, not elsewhere classified (R00-99)",r00-99,all,58
+Sudden infant death syndrome (R95),r95,all,59
+Other ill-defined and unknown causes (R96-99),r96-99,all,60
+Coronavirus (U07),u07,all,61
+External causes of morbidity and mortality (V01-Y98),v01-y98,all,62
+"Accidents (V01-X59, Y85, Y86)",v01-x59-y85-y86,all,63
+Transport accidents (V01-99),v01-99,all,64
+Falls (W00-19),w00-19,all,65
+Poisonings (X40-49),x40-49,all,66
+"Intentional self-harm, assault, and undetermined intent (X60-Y34, Y87)",x60-y34-y87,all,67

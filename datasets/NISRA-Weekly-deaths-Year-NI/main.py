@@ -835,7 +835,7 @@ registrations['Value'].fillna(0, inplace=True)
 registrations = registrations.rename(columns={'Gender':'Sex'})
 registrations['Value'] = pd.to_numeric(registrations['Value'], downcast='integer')
 
-registrations.head(10)
+#registrations.head(10)
 
 
 # %%
@@ -845,6 +845,7 @@ csvName = 'registrations-observations.csv'
 out = Path('out')
 out.mkdir(exist_ok=True)
 registrations.drop_duplicates().to_csv(out / csvName, index = False)
+registrations.drop_duplicates().to_csv(out / (csvName + '.gz'), index = False, compression='gzip')
 
 scrape.dataset.title = 'Weekly Deaths - Registrations'
 scrape.dataset.family = 'covid-19'
@@ -934,7 +935,7 @@ occurrences = occurrences[['Period', 'Area', 'Location of Death', 'Cause of Deat
 occurrences['Value'].fillna(0, inplace=True)
 occurrences['Value'] = pd.to_numeric(occurrences['Value'], downcast='integer')
 
-occurrences
+#occurrences
 
 
 # %%
@@ -944,6 +945,7 @@ csvName = 'occurrences-observations.csv'
 out = Path('out')
 out.mkdir(exist_ok=True)
 occurrences.drop_duplicates().to_csv(out / csvName, index = False)
+occurrences.drop_duplicates().to_csv(out / (csvName + '.gz'), index = False, compression='gzip')
 
 scrape.dataset.title = 'Weekly deaths - Occurrences'
 scrape.dataset.family = 'covid-19'
@@ -998,6 +1000,6 @@ for col in occurrences:
 
 
 # %%
-list(registrations['Death Measurement Type'].unique())
+#list(registrations['Death Measurement Type'].unique())
 
 # %%

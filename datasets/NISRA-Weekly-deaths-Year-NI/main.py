@@ -785,7 +785,7 @@ for name in tidied_sheets:
 
         occurrences_tables['table 13'] = df
 
-df
+#df
 
 
 # %%
@@ -830,7 +830,12 @@ registrations = registrations.replace({'Area' : {
 
 registrations = registrations[['Period', 'Death Measurement Type', 'Area', 'Gender', 'Age', 'Location of Death', 'Cause of Death', 'Value']]
 
-registrations
+registrations = registrations.rename(columns={'Gender':'Sex'})
+registrations['Value'].fillna(0, inplace=True)
+registrations = registrations.rename(columns={'Gender':'Sex'})
+registrations['Value'] = pd.to_numeric(registrations['Value'], downcast='integer')
+
+registrations.head(10)
 
 
 # %%
@@ -849,22 +854,22 @@ scrape.set_dataset_id(dataset_path)
 
 scrape.dataset.comment = 'Weekly and daily death registrations in Northern Ireland including COVID-19 related deaths'
 scrape.dataset.description = """
-    Weekly and daily death registrations in Northern Ireland including COVID-19 related deaths
-	Care Home deaths includes deaths in care homes only. Care home residents who have died in a different location will not be counted in this table.
-    To meet user needs, NISRA publish timely but provisional counts of death registrations in Northern Ireland in our Weekly Deaths provisional dataset. Weekly totals are presented alongside a 5-year, weekly average as well as the minimum and maximum number of deaths for the same week over the last five years. To allow time for registration and processing, these figures are published 7 days after the week ends.
-	Because of the coronavirus (COVID-19) pandemic, from 3rd April 2020, our weekly deaths release has been supplemented with the numbers of respiratory deaths (respiratory deaths include any death where Pneumonia, Bronchitis, Bronchiolitis or Influenza was mentioned anywhere on the death certificate); and deaths relating to COVID-19 (that is, where COVID-19 or suspected COVID-19 was mentioned anywhere on the death certificate, including in combination with other health conditions). The figures are presented by age group and sex.
+Weekly and daily death registrations in Northern Ireland including COVID-19 related deaths
+Care Home deaths includes deaths in care homes only. Care home residents who have died in a different location will not be counted in this table.
+To meet user needs, NISRA publish timely but provisional counts of death registrations in Northern Ireland in our Weekly Deaths provisional dataset. Weekly totals are presented alongside a 5-year, weekly average as well as the minimum and maximum number of deaths for the same week over the last five years. To allow time for registration and processing, these figures are published 7 days after the week ends.
+Because of the coronavirus (COVID-19) pandemic, from 3rd April 2020, our weekly deaths release has been supplemented with the numbers of respiratory deaths (respiratory deaths include any death where Pneumonia, Bronchitis, Bronchiolitis or Influenza was mentioned anywhere on the death certificate); and deaths relating to COVID-19 (that is, where COVID-19 or suspected COVID-19 was mentioned anywhere on the death certificate, including in combination with other health conditions). The figures are presented by age group and sex.
 
-	Find latest report here:
-	https://www.nisra.gov.uk/publications/weekly-deaths
+Find latest report here:
+https://www.nisra.gov.uk/publications/weekly-deaths
 
-	Weekly published data are provisional.
-	The majority of deaths are registered within five days in Northern Ireland.
-	Respiratory deaths include any death where terms directly relating to respiratory causes were mentioned anywhere on the death certificate (this includes Covid-19 deaths).
-	This is not directly comparable to the ONS figures relating to ‘deaths where the underlying cause was respiratory disease’.
-	Covid-19 deaths include any death where Coronavirus or Covid-19 (suspected or confirmed) was mentioned anywhere on the death certificate.
-	Data are assigned to LGD based on usual residence of the deceased, as provided by the informant. Usual residence can include a care home. Where the deceased was not usually resident in Northern Ireland, their death has been mapped to the place of death.
-	The 'Other' category in Place of death includes deaths at a residential address which was not the usual address of the deceased and all other places.
-	"""
+Weekly published data are provisional.
+The majority of deaths are registered within five days in Northern Ireland.
+Respiratory deaths include any death where terms directly relating to respiratory causes were mentioned anywhere on the death certificate (this includes Covid-19 deaths).
+This is not directly comparable to the ONS figures relating to ‘deaths where the underlying cause was respiratory disease’.
+Covid-19 deaths include any death where Coronavirus or Covid-19 (suspected or confirmed) was mentioned anywhere on the death certificate.
+Data are assigned to LGD based on usual residence of the deceased, as provided by the informant. Usual residence can include a care home. Where the deceased was not usually resident in Northern Ireland, their death has been mapped to the place of death.
+The 'Other' category in Place of death includes deaths at a residential address which was not the usual address of the deceased and all other places.
+"""
 
 csvw_transform = CSVWMapping()
 csvw_transform.set_csv(out / csvName)
@@ -926,6 +931,9 @@ occurrences = occurrences.replace({'Area' : {
 
 occurrences = occurrences[['Period', 'Area', 'Location of Death', 'Cause of Death', 'Residential Setting', 'Value']]
 
+occurrences['Value'].fillna(0, inplace=True)
+occurrences['Value'] = pd.to_numeric(occurrences['Value'], downcast='integer')
+
 occurrences
 
 
@@ -946,23 +954,23 @@ scrape.set_dataset_id(dataset_path)
 
 scrape.dataset.comment = 'Weekly and daily death occurrences in Northern Ireland including COVID-19 related deaths'
 scrape.dataset.description = """
-    Weekly and daily death occurrences in Northern Ireland including COVID-19 related deaths
-			This data is based on the actual date of death, from those deaths registered by GRO. All data in this table are subject to change, as some deaths will have occurred but haven’t been registered yet.
-			Care home residents have been identified where either (a) the death occurred in a care home, or (b) the death occurred elsewhere but the place of usual residence of the deceased was recorded as a care home. It should be noted that the statistics will not capture those cases where a care home resident died in hospital or another location and the usual address recorded on their death certificate is not a care home.
+Weekly and daily death occurrences in Northern Ireland including COVID-19 related deaths
+This data is based on the actual date of death, from those deaths registered by GRO. All data in this table are subject to change, as some deaths will have occurred but haven’t been registered yet.
+Care home residents have been identified where either (a) the death occurred in a care home, or (b) the death occurred elsewhere but the place of usual residence of the deceased was recorded as a care home. It should be noted that the statistics will not capture those cases where a care home resident died in hospital or another location and the usual address recorded on their death certificate is not a care home.
     To meet user needs, NISRA publish timely but provisional counts of death registrations in Northern Ireland in our Weekly Deaths provisional dataset. Weekly totals are presented alongside a 5-year, weekly average as well as the minimum and maximum number of deaths for the same week over the last five years. To allow time for registration and processing, these figures are published 7 days after the week ends.
-	Because of the coronavirus (COVID-19) pandemic, from 3rd April 2020, our weekly deaths release has been supplemented with the numbers of respiratory deaths (respiratory deaths include any death where Pneumonia, Bronchitis, Bronchiolitis or Influenza was mentioned anywhere on the death certificate); and deaths relating to COVID-19 (that is, where COVID-19 or suspected COVID-19 was mentioned anywhere on the death certificate, including in combination with other health conditions). The figures are presented by age group and sex.
+Because of the coronavirus (COVID-19) pandemic, from 3rd April 2020, our weekly deaths release has been supplemented with the numbers of respiratory deaths (respiratory deaths include any death where Pneumonia, Bronchitis, Bronchiolitis or Influenza was mentioned anywhere on the death certificate); and deaths relating to COVID-19 (that is, where COVID-19 or suspected COVID-19 was mentioned anywhere on the death certificate, including in combination with other health conditions). The figures are presented by age group and sex.
 
-	Find latest report here:
-	https://www.nisra.gov.uk/publications/weekly-deaths
+Find latest report here:
+https://www.nisra.gov.uk/publications/weekly-deaths
 
-	Weekly published data are provisional.
-	The majority of deaths are registered within five days in Northern Ireland.
-	Respiratory deaths include any death where terms directly relating to respiratory causes were mentioned anywhere on the death certificate (this includes Covid-19 deaths).
-	This is not directly comparable to the ONS figures relating to ‘deaths where the underlying cause was respiratory disease’.
-	Covid-19 deaths include any death where Coronavirus or Covid-19 (suspected or confirmed) was mentioned anywhere on the death certificate.
-	Data are assigned to LGD based on usual residence of the deceased, as provided by the informant. Usual residence can include a care home. Where the deceased was not usually resident in Northern Ireland, their death has been mapped to the place of death.
-	The 'Other' category in Place of death includes deaths at a residential address which was not the usual address of the deceased and all other places.
-	"""
+Weekly published data are provisional.
+The majority of deaths are registered within five days in Northern Ireland.
+Respiratory deaths include any death where terms directly relating to respiratory causes were mentioned anywhere on the death certificate (this includes Covid-19 deaths).
+This is not directly comparable to the ONS figures relating to ‘deaths where the underlying cause was respiratory disease’.
+Covid-19 deaths include any death where Coronavirus or Covid-19 (suspected or confirmed) was mentioned anywhere on the death certificate.
+Data are assigned to LGD based on usual residence of the deceased, as provided by the informant. Usual residence can include a care home. Where the deceased was not usually resident in Northern Ireland, their death has been mapped to the place of death.
+The 'Other' category in Place of death includes deaths at a residential address which was not the usual address of the deceased and all other places.
+"""
 
 csvw_transform = CSVWMapping()
 csvw_transform.set_csv(out / csvName)
@@ -986,7 +994,7 @@ for col in occurrences:
 
 
 # %%
+#occurrences.head(20)
 
 
-
-
+# %%

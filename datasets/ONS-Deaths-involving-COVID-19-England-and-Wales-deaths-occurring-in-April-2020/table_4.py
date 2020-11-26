@@ -86,12 +86,14 @@ trace.add_column("Value")
 trace.Value("Rename databaker columns OBS to Value")
 tidy = df[['Period', 'Value', 'All causes 2020', 'Five year average', 'Measure Type', 'Unit']]
 
-from IPython.core.display import HTML
-for col in df:
-    if col not in ['Value']:
-        df[col] = df[col].astype('category')
-        display(HTML(f"<h2>{col}</h2>"))
-        display(df[col].cat.categories) 
+# +
+#from IPython.core.display import HTML
+#for col in df:
+#    if col not in ['Value']:
+#        df[col] = df[col].astype('category')
+#        display(HTML(f"<h2>{col}</h2>"))
+#        display(df[col].cat.categories) 
+# -
 
 
 # Notes taken from Table 
@@ -118,7 +120,7 @@ df.drop_duplicates().to_csv(out / f'{title}.csv', index = False)
 with open(out / f'{title}.csv-metadata.trig', 'wb') as metadata:
     metadata.write(scraper.generate_trig())
 trace.output()
-tidy
+#tidy
 
 
 # -

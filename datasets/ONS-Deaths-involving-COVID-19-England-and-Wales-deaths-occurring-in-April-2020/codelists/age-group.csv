@@ -1,0 +1,22 @@
+Label,Notation,Parent Notation,Sort Priority
+All,all,,1
+Less than 1 Year,less-than-1,all,2
+01 To 04 Years,01-04,all,3
+05 To 09 Years,05-09,all,4
+10 To 14 Years,10-14,all,5
+15 To 19 Years,15-19,all,6
+20 To 24 Years,20-24,all,7
+25 To 29 Years,25-29,all,8
+30 To 34 Years,30-34,all,9
+35 To 39 Years,35-39,all,10
+40 To 44 Years,40-44,all,11
+45 To 49 Years,45-49,all,12
+50 To 54 Years,50-54,all,13
+55 To 59 Years,55-59,all,14
+60 To 64 Years,60-64,all,15
+65 To 69 Years,65-69,all,16
+70 To 74 Years,70-74,all,17
+75 To 79 Years,75-79,all,18
+80 To 84 Years,80-84,all,19
+85 To 89 Years,85-89,all,20
+90 Plus Years,90plus,all,21

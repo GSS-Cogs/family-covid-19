@@ -1,0 +1,72 @@
+Label,Notation,Parent Notation,Sort Priority
+All,all,,1
+All causes five year average,all-causes-five-year-average,,2
+Coronavirus (U07.1-U07.2),u07-1-u07-2,all,3
+Intestinal infectious diseases (A00-A09),a00-a09,all,4
+"Tuberculosis (A15-A19, B90)",a15-a19-b90,all,5
+"Vector-borne diseases and rabies (A20, A44, A75-A79, A82-A84, A85.2, A90-A98, B50-B57)",a20-a44-a75-a79-a82-a84-a85-2-a90-a98-b50-b57,all,6
+"Vaccine-preventable diseases  (A33-A37, A49.2, A80, B01, B02, B05, B06, B15, B16, B17.0, B18.0, B18.1, B26, B91, G14)",a33-a37-a49-2-a80-b01-b02-b05-b06-b15-b16-b17-0-b18-0-b18-1-b26-b91-g14,all,7
+"Meningitis and meningococcal infection (A39, A87, G00-G03)",a39-a87-g00-g03,all,8
+Septicaemia (A40-A41),a40-a41,all,9
+Human immunodeficiency virus [HIV] disease (B20-B24),b20-b24,all,10
+Malignant neoplasm of oesophagus (C15),c15,all,11
+Malignant neoplasm of stomach (C16),c16,all,12
+"Malignant neoplasm of colon, sigmoid, rectum and anus (C18-C21)",c18-c21,all,13
+Malignant neoplasm of liver and intrahepatic bile ducts (C22),c22,all,14
+Malignant neoplasm of gallbladder and other parts of biliary tract (C23-C24),c23-c24,all,15
+Malignant neoplasm of pancreas (C25),c25,all,16
+Malignant neoplasm of larynx (C32),c32,all,17
+"Malignant neoplasm of trachea, bronchus and lung (C33-C34)",c33-c34,all,18
+Malignant neoplasm of bone and articular cartilage (C40-C41),c40-c41,all,19
+Melanoma and other malignant neoplasms of skin  (C43-C44),c43-c44,all,20
+Malignant neoplasm of breast (C50),c50,all,21
+Malignant neoplasm of uterus (C53-C55),c53-c55,all,22
+Malignant neoplasm of ovary (C56),c56,all,23
+Malignant neoplasm of prostate (C61),c61,all,24
+"Malignant neoplasm of kidney, except renal pelvis (C64)",c64,all,25
+Malignant neoplasm of bladder (C67),c67,all,26
+Malignant neoplasm of brain (C71),c71,all,27
+"Malignant neoplasms, stated or presumed to be primary of lymphoid, haematopoietic and related tissue (C81-C96)",c81-c96,all,28
+"In situ and benign neoplasms, and neoplasms of uncertain or unknown behaviour (D00-D48)",d00-d48,all,29
+"Malnutrition, nutritional anaemias and other nutritional deficiencies (D50-D53, E40-E64)",d50-d53-e40-e64,all,30
+Diabetes (E10-E14),e10-e14,all,31
+"Disorders of fluid, electrolyte and acid-base balance (incl. dehydration (E86-E87)",e86-e87,all,32
+"Dementia and Alzheimer disease (F01, F03, G30)",f01-f03-g30,all,33
+Mental and behavioural disorders due to psychoactive substance use (F10-F19),f10-f19,all,34
+Systemic atrophies primarily affecting the central nervous system (G10-G12),g10-g12,all,35
+Parkinson disease (G20),g20,all,36
+Epilepsy and status epilepticus (G40-G41),g40-g41,all,37
+Cerebral palsy and other paralytic syndromes (G80-G83),g80-g83,all,38
+Chronic rheumatic heart diseases (I05-I09),i05-i09,all,39
+Hypertensive diseases (I10-I15),i10-i15,all,40
+Ischaemic heart diseases (I20-I25),i20-i25,all,41
+Pulmonary heart disease and diseases of pulmonary circulation (I26-I28),i26-i28,all,42
+Nonrheumatic valve disorders and endocarditis (I34-I38),i34-i38,all,43
+Cardiomyopathy (I42),i42,all,44
+Cardiac arrest (I46),i46,all,45
+Cardiac arrhythmias (I47-I49),i47-i49,all,46
+Heart failure and complications and ill-defined heart disease (I50-I51),i50-i51,all,47
+Cerebrovascular diseases (I60-I69),i60-i69,all,48
+Atherosclerosis (I70),i70,all,49
+Aortic aneurysm and dissection (I71),i71,all,50
+"Acute respiratory infections other than influenza and pneumonia (J00-J06, J20-J22)",j00-j06-j20-j22,all,51
+Influenza and pneumonia (J09-J18),j09-j18,all,52
+Chronic lower respiratory diseases (J40-J47),j40-j47,all,53
+Pulmonary oedema and other interstitial pulmonary diseases (J80-J84),j80-j84,all,54
+Respiratory failure (J96),j96,all,55
+"Appendicitis, hernia and intestinal obstruction (K35-K46, K56)",k35-k46-k56,all,56
+Cirrhosis and other diseases of liver (K70-K76),k70-k76,all,57
+Diseases of the musculoskeletal system and connective tissue (M00-M99),m00-m99,all,58
+Diseases of the urinary system (N00-N39),n00-n39,all,59
+"Pregnancy, childbirth and the puerperium (O00-O99)",o00-o99,all,60
+Certain conditions originating in the perinatal period (P00-P96),p00-p96,all,61
+"Congenital malformations, deformations and chromosomal abnormalities (Q00-Q99)",q00-q99,all,62
+"Symptoms, signs and ill-defined conditions (R00-R99)",r00-r99,all,63
+"Homicide and probable homicide (U50.9, X85-Y09, Y87.1)",u50-9-x85-y09-y87-1,all,64
+Land transport accidents (V01-V89),v01-v89,all,65
+Accidental falls (W00-W19),w00-w19,all,66
+Non-intentional firearm discharge (W32-W34),w32-w34,all,67
+Accidental drowning and submersion (W65-W74),w65-w74,all,68
+Accidental threats to breathing (W75-W84),w75-w84,all,69
+Accidental poisoning (X40-X49),x40-x49,all,70
+"Suicide and injury/poisoning of undetermined intent (X60-X84, Y10-Y34)",x60-x84-y10-y34,all,71

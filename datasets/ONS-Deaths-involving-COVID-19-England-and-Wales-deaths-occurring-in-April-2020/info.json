@@ -17,6 +17,129 @@
         "stage": [
             "To Do",
             "Priority"
+        ],
+        "columns": {
+            "Period": {
+                "description": "",
+                "source": "",
+                "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
+                "value": "http://reference.data.gov.uk/id/{+period}"
+            },
+            "Country": {
+                "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refArea",
+                "value": "http://statistics.data.gov.uk/id/statistical-geography/{country}"
+            },
+            "Cause of Death": {
+                "parent": "http://gss-data.org.uk/data/gss_data/covid-19/ons-deaths-involving-covid-19-England-and-Wales-deaths-occurring-in-april-2020/concept-scheme/cause-of-death",
+                "value": "http://gss-data.org.uk/data/gss_data/covid-19/ons-deaths-involving-covid-19-England-and-Wales-deaths-occurring-in-april-2020/concept/cause-of-death/{cause_of_death}",
+                "description": ""
+            },
+            "Age Group": {
+                "parent": "http://gss-data.org.uk/data/gss_data/covid-19/ons-deaths-involving-covid-19-England-and-Wales-deaths-occurring-in-april-2020/concept-scheme/age-group",
+                "value": "http://gss-data.org.uk/data/gss_data/covid-19/ons-deaths-involving-covid-19-England-and-Wales-deaths-occurring-in-april-2020/concept/age-group/{age_group}",
+                "description": ""
+            },
+            "Sex": {
+                "dimension": "http://purl.org/linked-data/sdmx/2009/dimension#sex",
+                "value": "http://purl.org/linked-data/sdmx/2009/code#sex-{sex}"
+            },
+            "Value": {
+                "unit": "http://gss-data.org.uk/def/concept/measurement-units/deaths",
+                "measure": "http://gss-data.org.uk/def/measure/count",
+                "datatype": "integer"
+            }
+        },
+        "transformStage": [
+            {
+                "source_name": "Number of deaths due to COVID-19 by date of death, England and Wales",
+                "identifier": "Number of deaths due to COVID-19 by date of death, England and Wales||Table 4||https://www.ons.gov.uk/file?uri=/peoplepopulationandcommunity/birthsdeathsandmarriages/deaths/datasets/deathsinvolvingcovid19englandandwales/may2020/referencetables.xlsx",
+                "source": [
+                    {
+                        "https://www.ons.gov.uk/file?uri=/peoplepopulationandcommunity/birthsdeathsandmarriages/deaths/datasets/deathsinvolvingcovid19englandandwales/may2020/referencetables.xlsx": ""
+                    }
+                ],
+                "title": "Table 4",
+                "preview": "documentation/previews/f65a3a33-760c-431f-966f-35ae2b43e532.html",
+                "observation_selection": null,
+                "columns": [
+                    {
+                        "Period": "A113"
+                    },
+                    {
+                        "All causes 2020": "C86"
+                    },
+                    {
+                        "Five year average": "D84"
+                    }
+                ],
+                "postTransformNotes": [
+                    {
+                        "Period": [
+                            "Period detailed at cell value: A113",
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "All_causes_2020": [
+                            "All causes -  2020 detailed at cell value: C86",
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Five_year_average": [
+                            "5-year average detailed at cell value: D84",
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Measure_Type": [
+                            "Hardcoded value as: Count",
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Unit": [
+                            "Hardcoded value as: Deaths",
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    }
+                ]
+            },
+            {
+                "source_name": "Number of deaths due to COVID-19 by date of death, England and Wales",
+                "identifier": "Number of deaths due to COVID-19 by date of death, England and Wales||combined_dataframe||https://www.ons.gov.uk/file?uri=/peoplepopulationandcommunity/birthsdeathsandmarriages/deaths/datasets/deathsinvolvingcovid19englandandwales/may2020/referencetables.xlsx : Table 4",
+                "source": [
+                    {
+                        "https://www.ons.gov.uk/file?uri=/peoplepopulationandcommunity/birthsdeathsandmarriages/deaths/datasets/deathsinvolvingcovid19englandandwales/may2020/referencetables.xlsx": "Table 4"
+                    }
+                ],
+                "title": "combined_dataframe",
+                "preview": null,
+                "observation_selection": null,
+                "columns": [],
+                "postTransformNotes": [
+                    {
+                        "Period": []
+                    },
+                    {
+                        "All_causes_2020": []
+                    },
+                    {
+                        "Five_year_average": []
+                    },
+                    {
+                        "Measure_Type": []
+                    },
+                    {
+                        "Unit": []
+                    },
+                    {
+                        "Value": [
+                            "Rename databaker columns OBS to Value"
+                        ]
+                    }
+                ]
+            }
         ]
     },
     "sizingNotes": "Multiple tabs with simple structures and multiple dimensions. Multiple footnotes.",

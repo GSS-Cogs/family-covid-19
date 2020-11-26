@@ -160,13 +160,14 @@ for column in tidy:
         tidy[column] = tidy[column].str.rstrip()
         tidy[column] = tidy[column].map(lambda x: pathify(x))
 tidy['Value'] = tidy['Value'].astype(int)
+# + {}
+#from IPython.core.display import HTML
+#for col in df:
+#    if col not in ['Value']:
+#        df[col] = df[col].astype('category')
+#        display(HTML(f"<h2>{col}</h2>"))
+#        display(df[col].cat.categories) 
 # -
-from IPython.core.display import HTML
-for col in df:
-    if col not in ['Value']:
-        df[col] = df[col].astype('category')
-        display(HTML(f"<h2>{col}</h2>"))
-        display(df[col].cat.categories) 
 
 
 # Notes taken from Table 
@@ -184,17 +185,26 @@ notes = """
 # Output Tidy data
 
 # +
-out = Path('out')
-out.mkdir(exist_ok=True)
-title = pathify(datasetTitle)
-scraper.dataset.comment = notes
-df.drop_duplicates().to_csv(out / f'{title}.csv', index = False)
-scraper.dataset.family = 'covid-19'
+#out = Path('out')
+#out.mkdir(exist_ok=True)
+#title = pathify(datasetTitle)
+#scraper.dataset.comment = notes
+#df.drop_duplicates().to_csv(out / f'{title}.csv', index = False)
+#scraper.dataset.family = 'covid-19'
 
-import os
-df.drop_duplicates().to_csv(out / f'{title}.csv', index = False)
-with open(out / f'{title}.csv-metadata.trig', 'wb') as metadata:
-    metadata.write(scraper.generate_trig())
-trace.output()
-tidy
+#import os
+#df.drop_duplicates().to_csv(out / f'{title}.csv', index = False)
+#with open(out / f'{title}.csv-metadata.trig', 'wb') as metadata:
+#    metadata.write(scraper.generate_trig())
+#trace.output()
+#tidy
+
+# -
+
+
+
+# +
+#tidy.head(60)
+# -
+
 

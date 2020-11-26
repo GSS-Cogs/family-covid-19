@@ -1,7 +1,7 @@
 {
   "@context": "http://www.w3.org/ns/csvw",
   "@id": "#table",
-  "url": "{codelist}.csv",
+  "url": "cause-of-death.csv",
   "tableSchema": {
     "columns": [
       {
@@ -30,7 +30,7 @@
         },
         "required": false,
         "propertyUrl": "skos:broader",
-        "valueUrl": "http://gss-data.org.uk/data/gss_data/{family}/{transformname}#concept/{codelist}/{parent_notation}"
+        "valueUrl": "http://gss-data.org.uk/data/gss_data/covid-19/ons-deaths-involving-covid-19-england-and-wales-deaths-occurring-in-april-2020/concept/cause-of-death/{parent_notation}"
       },
       {
         "titles": "Sort Priority",
@@ -54,16 +54,16 @@
       {
         "virtual": true,
         "propertyUrl": "skos:inScheme",
-        "valueUrl": "http://gss-data.org.uk/data/gss_data/{family}/{transformname}#scheme/{codelist}"
+        "valueUrl": "http://gss-data.org.uk/data/gss_data/covid-19/ons-deaths-involving-covid-19-england-and-wales-deaths-occurring-in-april-2020/concept-scheme/cause-of-death"
       }
     ],
     "primaryKey": "notation",
-    "aboutUrl": "http://gss-data.org.uk/data/gss_data/{family}/{transformname}#concept/{codelist}/{notation}"
+    "aboutUrl": "http://gss-data.org.uk/data/gss_data/covid-19/ons-deaths-involving-covid-19-england-and-wales-deaths-occurring-in-april-2020/concept/cause-of-death/{notation}"
   },
   "prov:hadDerivation": {
-    "@id": "http://gss-data.org.uk/data/gss_data/{family}/{transformname}#scheme/{codelist}",
+    "@id": "http://gss-data.org.uk/data/gss_data/covid-19/ons-deaths-involving-covid-19-england-and-wales-deaths-occurring-in-april-2020/concept-scheme/cause-of-death",
     "@type": "skos:ConceptScheme",
-    "rdfs:label": "{codelistlabel}",
-    "skos:hasTopConcept": "http://gss-data.org.uk/data/gss_data/{family}/{transformname}#concept/{codelist}/all"
+    "rdfs:label": "Cause of Death",
+    "skos:hasTopConcept": "http://gss-data.org.uk/data/gss_data/covid-19/ons-deaths-involving-covid-19-england-and-wales-deaths-occurring-in-april-2020/concept/cause-of-death/all"
   }
 }

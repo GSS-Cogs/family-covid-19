@@ -124,7 +124,7 @@ with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
     metadata.write(scraper.generate_trig())
 # -
 
-testing = True
+testing = False
 if testing:
     for c in joined_dat.columns:
         if c not in 'Value':
@@ -134,13 +134,15 @@ if testing:
 
 
 
-codelistcreation = ['Cause of Death'] 
-df = joined_dat
-codeclass = CSVCodelists()
-for cl in codelistcreation:
-    if cl in df.columns:
-        df[cl] = df[cl].str.replace("-"," ")
-        df[cl] = df[cl].str.capitalize()
-        codeclass.create_codelists(pd.DataFrame(df[cl]), 'codelists', scraper.dataset.family, Path(os.getcwd()).name.lower())
+# +
+#codelistcreation = ['Cause of Death'] 
+#df = joined_dat
+#codeclass = CSVCodelists()
+#for cl in codelistcreation:
+#    if cl in df.columns:
+#        df[cl] = df[cl].str.replace("-"," ")
+#        df[cl] = df[cl].str.capitalize()
+#        codeclass.create_codelists(pd.DataFrame(df[cl]), 'codelists', scraper.dataset.family, Path(os.getcwd()).name.lower())
+# -
 
 

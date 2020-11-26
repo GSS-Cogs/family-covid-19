@@ -30,7 +30,7 @@
         },
         "required": false,
         "propertyUrl": "skos:broader",
-        "valueUrl": "http://gss-data.org.uk/data/gss_data/covid-19/nisra-weekly-deaths-year-ni#concept/death-measurement-type/{parent_notation}"
+        "valueUrl": "http://gss-data.org.uk/data/gss_data/covid-19/nisra-weekly-deaths-year-ni/concept/death-measurement-type/{parent_notation}"
       },
       {
         "titles": "Sort Priority",
@@ -54,16 +54,16 @@
       {
         "virtual": true,
         "propertyUrl": "skos:inScheme",
-        "valueUrl": "http://gss-data.org.uk/data/gss_data/covid-19/nisra-weekly-deaths-year-ni#scheme/death-measurement-type"
+        "valueUrl": "http://gss-data.org.uk/data/gss_data/covid-19/nisra-weekly-deaths-year-ni/concept-scheme/death-measurement-type"
       }
     ],
     "primaryKey": "notation",
-    "aboutUrl": "http://gss-data.org.uk/data/gss_data/covid-19/nisra-weekly-deaths-year-ni#concept/death-measurement-type/{notation}"
+    "aboutUrl": "http://gss-data.org.uk/data/gss_data/covid-19/nisra-weekly-deaths-year-ni/concept/death-measurement-type/{notation}"
   },
   "prov:hadDerivation": {
-    "@id": "http://gss-data.org.uk/data/gss_data/covid-19/nisra-weekly-deaths-year-ni#scheme/death-measurement-type",
+    "@id": "http://gss-data.org.uk/data/gss_data/covid-19/nisra-weekly-deaths-year-ni/concept-scheme/death-measurement-type",
     "@type": "skos:ConceptScheme",
-    "rdfs:label": "Registered Death Type",
-    "skos:hasTopConcept": { "@id": "http://gss-data.org.uk/data/gss_data/covid-19/nisra-weekly-deaths-year-ni#concept/death-measurement-type/all" }
+    "rdfs:label": "Death Measurement Type",
+    "skos:hasTopConcept": { "@id": "http://gss-data.org.uk/data/gss_data/covid-19/nisra-weekly-deaths-year-ni/concept/death-measurement-type/all" }
   }
 }

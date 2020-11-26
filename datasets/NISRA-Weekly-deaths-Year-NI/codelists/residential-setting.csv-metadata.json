@@ -30,7 +30,7 @@
         },
         "required": false,
         "propertyUrl": "skos:broader",
-        "valueUrl": "http://gss-data.org.uk/data/gss_data/covid-19/nisra-weekly-deaths-year-ni#concept/residential-setting/{parent_notation}"
+        "valueUrl": "http://gss-data.org.uk/data/gss_data/covid-19/nisra-weekly-deaths-year-ni/concept/residential-setting/{parent_notation}"
       },
       {
         "titles": "Sort Priority",
@@ -54,16 +54,16 @@
       {
         "virtual": true,
         "propertyUrl": "skos:inScheme",
-        "valueUrl": "http://gss-data.org.uk/data/gss_data/covid-19/nisra-weekly-deaths-year-ni#scheme/residential-setting"
+        "valueUrl": "http://gss-data.org.uk/data/gss_data/covid-19/nisra-weekly-deaths-year-ni/concept-scheme/residential-setting"
       }
     ],
     "primaryKey": "notation",
-    "aboutUrl": "http://gss-data.org.uk/data/gss_data/covid-19/nisra-weekly-deaths-year-ni#concept/residential-setting/{notation}"
+    "aboutUrl": "http://gss-data.org.uk/data/gss_data/covid-19/nisra-weekly-deaths-year-ni/concept/residential-setting/{notation}"
   },
   "prov:hadDerivation": {
-    "@id": "http://gss-data.org.uk/data/gss_data/covid-19/nisra-weekly-deaths-year-ni#scheme/residential-setting",
+    "@id": "http://gss-data.org.uk/data/gss_data/covid-19/nisra-weekly-deaths-year-ni/concept-scheme/residential-setting",
     "@type": "skos:ConceptScheme",
     "rdfs:label": "Residential Setting",
-    "skos:hasTopConcept": { "@id": "http://gss-data.org.uk/data/gss_data/covid-19/nisra-weekly-deaths-year-ni#concept/residential-setting/all" }
+    "skos:hasTopConcept": { "@id": "http://gss-data.org.uk/data/gss_data/covid-19/nisra-weekly-deaths-year-ni/concept/residential-setting/all" }
   }
 }

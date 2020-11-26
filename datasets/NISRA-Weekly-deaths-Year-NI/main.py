@@ -998,3 +998,6 @@ for col in occurrences:
 
 
 # %%
+list(registrations['Death Measurement Type'].unique())
+
+# %%

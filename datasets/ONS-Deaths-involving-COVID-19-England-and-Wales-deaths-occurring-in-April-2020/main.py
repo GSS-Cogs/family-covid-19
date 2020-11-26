@@ -87,6 +87,7 @@ joined_dat['Sex'][joined_dat['Sex'] == 'all'] = 'T'
 joined_dat['Cause of Death'] = joined_dat['Cause of Death'].str.strip()
 joined_dat['Cause of Death'] = joined_dat['Cause of Death'].apply(pathify)
 joined_dat['Age Group'] = joined_dat['Age Group'].apply(pathify)
+joined_dat['Value'] = pd.to_numeric(joined_dat['Value'], downcast='integer')
 
 # +
 import os

@@ -44,10 +44,13 @@
 
 * Join tables 1 & 2 together on:
   * `Area`
+  * `Year`
+  * `Month`
   * `Period`
 * Join tables 3, 4 & 5 together on:
   * `Area`
-  * `Period`
+  * `Year`
+  * `Month`
   * `Cause of Death`
 
 ## Further Discussion

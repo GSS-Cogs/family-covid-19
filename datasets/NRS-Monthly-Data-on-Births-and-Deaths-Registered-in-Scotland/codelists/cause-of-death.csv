@@ -1,0 +1,6 @@
+Label,Notation,Parent Notation,Sort Priority,ICD10 Mapping
+All Causes,all,,1,
+Malignant Neoplasms (C00-C97),malignant-neoplasms,all,2,C00-C97.9
+Diseases of the circulatory system (I00-I99),diseases-of-circulatory-system,all,3,I00-I99.9
+Diseases of the respiratory system (J00-J99),diseases-of-respiratory-system,all,4,J00-J99.9
+Other Causes,other,all,5,

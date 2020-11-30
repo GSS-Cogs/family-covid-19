@@ -18,6 +18,32 @@
         "stage": [
             "To Do"
         ],
+        "columns": {
+            "Area": {
+                "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refArea",
+                "value": "http://statistics.data.gov.uk/id/statistical-geography/{area}"
+            },
+            "Year": {
+                "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
+                "value": "http://reference.data.gov.uk/id/year/{year}"
+            },
+            "Month": {
+                "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
+                "value": "http://reference.data.gov.uk/id/month/{year}-{month}"
+            },
+            "Period": {
+                "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
+                "value": "http://reference.data.gov.uk/id/month/{year}-{month}"
+            },
+            "Cause of Death": {
+                "parent": "http://purl.org/linked-data/cube#DimensionProperty",
+                "value": "http://gss-data.org.uk/data/gss_data/covid-19/nrs-monthly-data-on-births-and-deaths-registered-in-scotland#concept/cause-of-death/{+cause_of_death}"
+            },
+            "Value": {
+                "measure": "",
+                "unit": ""
+            }
+        },
         "airtable": "recWGReSPnoLey4Bd",
         "main_issue": 96
     },

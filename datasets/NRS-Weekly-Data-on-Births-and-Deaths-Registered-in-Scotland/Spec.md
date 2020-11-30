@@ -1,10 +1,13 @@
 
 ## Actions to Take
-* Alter the `Week Number` - remove the preceding `W` so we're left with just a number between 1 and 53.
+* Alter the `Week Number` column - remove the preceding `W` so we're left with just an integer between 1 and 53.
+* Convert the `Year` column values to integers.
 * Remove all values for Week 53 where the cell value is `-`. These years do not have a 53rd week.
 * The `Area` should be mapped to the ONS geography code for Scotland `http://statistics.data.gov.uk/id/statistical-geography/S01011834`.
     * This should be taken care of by my changes to the `info.json` file.
-* Rename the `OBS` column to `Value`.
+* Rename the `OBS` column to `Value`. Map all values in the column to integers.
+* Add `Period` column and set the value to be `week/{year}-{week}`, e.g. `week/2020-28`.
+* 
 
 ## Issues
 
@@ -16,10 +19,6 @@
 ## Leigh notes
 
 
-	Year column needs to be converted to an integer
-	Week and year column need to be combined into format week/{year}-{week} - week/2020-02
-	Column needs a name like Period
-	Value (OBS) column needs to be converted to integer
 	Measure Type and Unit column can be removed as they will be taken care of in the info.json (this will hopefully change soon with the use of the cube class)
 
 	If still can't do multi-measure cubes
@@ -42,4 +41,3 @@
 
 	Maybe speak to Shannon about the new cube class to see if it is possible to output multi-cube datasets with it. If so then we can keep to one dataset and won't need to change the path.
 	
-	Don't need any code lists , which makes things nice and simple

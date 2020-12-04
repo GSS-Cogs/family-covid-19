@@ -2,56 +2,62 @@
 
 ## Guidance to Data Engineer
 
+### All Tables
+
+* Remove `Measure Type` & `Unit` columns.
+* Rename `OBS` column to `Value`.
+* Ensure `Value` and `Year` columns are floored to integers.
+* Map `Month` column values to the month numbers 01 to 12.
+* Add `Period` column with value `month/{Year}-{Month}`.
+  * You can now delete the `Month` and `Year` columns.
+
 ### Table 1: Births in Scotland by month of registration and NHS Board area, 1990 - 2020
 
 * Map `Area` column to `S08` geographies for health boards except where the value is `Scotland`, the value should be `S01011834` then.
-* Rename `OBS` column to `Value`.
-* Ensure `Value` and `Year` columns are floored to integers.
-* Map `Month` column values to the month numbers 01 to 12.
 
-### Table 2: Births in Scotland by month of registration and council area, 1996 - 2020
+### Table 2: Bi rths in Scotland by month of registration and council area, 1996 - 2020
 
 * Set `Area` column to `S01011834` i.e. `http://statistics.data.gov.uk/id/statistical-geography/S01011834` - Scotland.
-* Rename `OBS` column to `Value`.
-* Ensure `Value` and `Year` columns are floored to integers.
-* Map `Month` column values to the month numbers 01 to 12.
 
 ### Table 3: Deaths in Scotland by month of registration and NHS Board area, 1990 - 2020
 
 * Map `Area` column to `S08` geographies for health boards except where the value is `Scotland`, the value should be `S01011834` then.
-* Rename `OBS` column to `Value`.
-* Ensure `Value` and `Year` columns are floored to integers.
-* Map `Month` column values to the month numbers 01 to 12.
 * Add `Cause of Death` column and set to `all`
 
 ### Table 4: Deaths in Scotland by month of registration and council area, 1996 - 2020
 
 * Map `Area` column to `S12` geographies for councils except where the value is `Scotland`, the value should be `S01011834` then.
-* Rename `OBS` column to `Value`.
-* Ensure `Value` and `Year` columns are floored to integers.
-* Map `Month` column values to the month numbers 01 to 12.
 * Add `Cause of Death` column and set to `all`
 
 ### Table 5: Deaths in Scotland by month of registration and cause of death1, 2000 - 2020
 
 * Set `Area` column to `S01011834` i.e. `http://statistics.data.gov.uk/id/statistical-geography/S01011834` - Scotland.
-* Rename `OBS` column to `Value`.
-* Ensure `Value` and `Year` columns are floored to integers.
-* Map `Month` column values to the month numbers 01 to 12.
 * Map the values in the `Cause of Death` column so that they match the associated `notation` values in the code list. If the script can't find a mapping, ensure that an exception is thrown so we know we need to fix the mapping before publication.
 
-### Joins
+### Datasets to Output
 
-* Join tables 1 & 2 together on:
-  * `Area`
-  * `Year`
-  * `Month`
-  * `Period`
-* Join tables 3, 4 & 5 together on:
-  * `Area`
-  * `Year`
-  * `Month`
-  * `Cause of Death`
+#### Births Dataset
+
+Graph name: `births`.
+
+Join tables 1 & 2 together on:
+
+* `Area`
+* `Period`
+
+Output using column mappings defined in `columns.births.json`.
+
+#### Deaths Dataset
+
+Graph name: `deaths`.
+
+Join tables 3, 4 & 5 together on:
+
+* `Area`
+* `Period`
+* `Cause of Death`
+
+Output using column mappings defined in `columns.deaths.json`.
 
 ## Further Discussion
 

@@ -64,6 +64,6 @@
     "@id": "http://gss-data.org.uk/data/gss_data/covid-19/ho-statistics-relating-to-covid-19-and-the-immigration-system-may-2020#scheme/air-arrivals",
     "@type": "skos:ConceptScheme",
     "rdfs:label": "Air Arrivals",
-    "skos:hasTopConcept { "@id": "http://gss-data.org.uk/data/gss_data/covid-19/ho-statistics-relating-to-covid-19-and-the-immigration-system-may-2020#concept/air-arrivals/all" }
+    "skos:hasTopConcept": { "@id": "http://gss-data.org.uk/data/gss_data/covid-19/ho-statistics-relating-to-covid-19-and-the-immigration-system-may-2020#concept/air-arrivals/all" }
   }
 }

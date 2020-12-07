@@ -47,32 +47,49 @@
                     }
                 ],
                 "title": "Data",
-                "preview": "documentation/previews/730fad04-f307-472a-9b62-1d929f1ecafc.html",
+                "preview": "documentation/previews/2b27a118-8e92-4302-9e88-26922481d1b2.html",
                 "observation_selection": null,
-                "columns": [],
+                "columns": [
+                    {
+                        "Week of Occurrence": "{A4-A5843}"
+                    },
+                    {
+                        "Area": "{B4-B5843}"
+                    },
+                    {
+                        "Location of Death": "{C4-C5843}"
+                    },
+                    {
+                        "Cause of Death": "{D4-D5843}"
+                    }
+                ],
                 "postTransformNotes": [
                     {
-                        "Period": [
+                        "Week_of_Occurrence": [
+                            "Dimension found in cell range: {A4-A5843}",
                             "Added to dataframe 'Data'"
                         ]
                     },
                     {
-                        "Measurement": [
+                        "Area": [
+                            "Dimension found in cell range: {B4-B5843}",
                             "Added to dataframe 'Data'"
                         ]
                     },
                     {
-                        "Gender": [
+                        "Location_of_Death": [
+                            "Dimension found in cell range: {C4-C5843}",
                             "Added to dataframe 'Data'"
                         ]
                     },
                     {
-                        "Values": [
+                        "Cause_of_Death": [
+                            "Dimension found in cell range: {D4-D5843}",
                             "Added to dataframe 'Data'"
                         ]
                     },
                     {
-                        "Marker": [
+                        "Value": [
                             "Added to dataframe 'Data'"
                         ]
                     }
@@ -92,21 +109,23 @@
                 "columns": [],
                 "postTransformNotes": [
                     {
-                        "Period": []
-                    },
-                    {
-                        "Measurement": []
-                    },
-                    {
-                        "Gender": []
-                    },
-                    {
-                        "Values": [
-                            "Rename 'OBS' column to 'Values'"
+                        "Week_of_Occurrence": [
+                            "Add 'week/2020-' to Values"
                         ]
                     },
                     {
-                        "Marker": []
+                        "Area": [
+                            "Convert to Council Area ONS Geography Codes"
+                        ]
+                    },
+                    {
+                        "Location_of_Death": []
+                    },
+                    {
+                        "Cause_of_Death": []
+                    },
+                    {
+                        "Value": []
                     }
                 ]
             }

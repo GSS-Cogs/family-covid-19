@@ -1,14 +1,24 @@
 #!/usr/bin/env python
 # coding: utf-8
+
+# In[161]:
+
+
+#!/usr/bin/env python
+# coding: utf-8
 # %%
 
-# %%
+
+# In[162]:
+
 
 
 #!/usr/bin/env python
 # coding: utf-8
 
-# %%
+
+# In[163]:
+
 
 
 # -*- coding: utf-8 -*-
@@ -70,31 +80,15 @@ cubes = Cubes("info.json")
 
 info = json.load(open('info.json'))
 landingPage = info['landingPage']
-landingPage
-
-
-# %%
-
-
 scrape = Scraper(landingPage)
-scrape
-
-
-# %%
-
-
-scrape.distributions
-
-
-# %%
-
 
 dist = scrape.distributions[0]
 dist.title = "Weekly deaths by week of occurrence, council area and location"
 display(dist)
 
 
-# %%
+# In[164]:
+
 
 
 pd.set_option('display.float_format', lambda x: '%.2f' % x)
@@ -113,7 +107,7 @@ for name, tab in tabs.items():
 
     if 'data' == name.lower():
 
-        columns = ['Period', 'Measurement', 'Gender', 'Values', 'Marker']
+        columns = ['Week of Occurrence', 'Area', 'Location of Death', 'Cause of Death', 'Value']
 
         trace.start(datasetTitle, tab, columns, link)
 
@@ -121,41 +115,35 @@ for name, tab in tabs.items():
 
         cell = tab.filter(contains_string("Data for weekly deaths"))
 
-        period = 'year/2020'
-
         week_of_occurrence = cell.shift(0, 2).fill(DOWN).is_not_blank() - remove
-        #trace.Period('Year to use with Period taken from cell range: {}', var = excelRange(year))
+        trace.Week_of_Occurrence('Dimension found in cell range: {}', var = excelRange(week_of_occurrence))
 
-        council = week_of_occurrence.shift(RIGHT)
-        #trace.Period('Quarter to use with Period taken from cell range: {}', var = excelRange(quarter))
+        area = week_of_occurrence.shift(RIGHT)
+        trace.Area('Dimension found in cell range: {}', var = excelRange(area))
 
-        location_of_death = council.shift(RIGHT)
-        #trace.Measurement('Temporary header name')
-        #trace.Measurement('Measurement values found in cell range: {}', var = excelRange(measurement1))
+        location_of_death = area.shift(RIGHT)
+        trace.Location_of_Death('Dimension found in cell range: {}', var = excelRange(location_of_death))
 
         cause_of_death = location_of_death.shift(RIGHT)
-        #trace.Gender('Observations adapted from values found in range: {}', var = excelRange(measurement2))
+        trace.Cause_of_Death('Dimension found in cell range: {}', var = excelRange(cause_of_death))
 
         observations = cause_of_death.shift(RIGHT)
-        #trace.Values('Observations found in range: {}', var = excelRange(observations))
+        trace.Values('Observations found in range: {}', var = excelRange(observations))
 
         dimensions = [
-        HDimConst('Period', period),
         HDim(week_of_occurrence, 'Week of Occurrence', DIRECTLY, LEFT),
-        HDim(council, 'Area', DIRECTLY, LEFT),
+        HDim(area, 'Area', DIRECTLY, LEFT),
         HDim(location_of_death, 'Location of Death', DIRECTLY, LEFT),
         HDim(cause_of_death, 'Cause of Death', DIRECTLY, LEFT),
         ]
 
         tidy_sheet = ConversionSegment(tab, dimensions, observations)
         trace.with_preview(tidy_sheet)
-
         trace.store(name, tidy_sheet.topandas())
 
-tidy_sheet.topandas()
 
+# In[165]:
 
-# %%
 
 
 out = Path('out')
@@ -169,8 +157,8 @@ for name in tabs:
 
         df = trace.combine_and_trace(datasetTitle, name).fillna('')
 
-        df = df.rename(columns={'OBS' : 'Values'})
-        trace.Values("Rename 'OBS' column to 'Values'")
+        df = df.rename(columns={'OBS' : 'Value'})
+        trace.Values("Rename 'OBS' column to 'Value'")
 
         df = df.replace({'Area' : {
             'Aberdeen City': 'S12000033',
@@ -211,32 +199,43 @@ for name in tabs:
             'West Dunbartonshire' : 'S12000039',
             'West Lothian' : 'S12000040'}})
 
-        df = df[['Area', 'Period', 'Week of Occurrence', 'Location of Death', 'Cause of Death', 'Values']]
+        trace.Area("Convert to Council Area ONS Geography Codes")
+
+        df['Week of Occurrence'] = df.apply(lambda x:  'week/2020-' + x['Week of Occurrence'], axis = 1)
+        trace.Week_of_Occurrence("Add 'week/2020-' to Values")
+
+        COLUMNS_TO_NOT_PATHIFY = ['Area', 'Value']
+
+        for col in df.columns.values.tolist():
+            if col in COLUMNS_TO_NOT_PATHIFY:
+                continue
+            try:
+                df[col] = df[col].apply(pathify)
+            except Exception as err:
+                raise Exception('Failed to pathify column "{}".'.format(col)) from err
+
+        df = df[['Week of Occurrence', 'Area', 'Location of Death', 'Cause of Death', 'Value']]
 
         cubes.add_cube(scrape, df, dist.title)
 
         tidied_tables[name] = df
 
 
-# %%
-
-
-for name in tidied_tables:
-    print('Tab Name: ' +  name)
-    #print(tidied_tables[name])
-
-
-# %%
+# In[166]:
 
 
 scrape.dataset.family = 'covid-19'
 scrape.dataset.issued = parse('25 November 2020').date()
+scrape.dataset.comment = 'Weekly Covid-19 and Non-Covid-19 deaths by week of occurrence, council area and location'
+scrape.dataset.description = """Weekly Covid-19 and Non-Covid-19 deaths by week of occurrence, council area and location
+		This data is from user requests for ad-hoc analysis related to COVID-19 deaths data. As these data may be useful for others, we are making them available to download for any users of our data."""
 
 trace.render("spec_v1.html")
 cubes.output_all()
 
 
-# %%
+# In[167]:
+
+
 tidied_tables['Data'].head(20)
 
-# %%

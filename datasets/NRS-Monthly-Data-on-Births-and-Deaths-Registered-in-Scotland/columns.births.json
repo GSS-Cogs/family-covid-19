@@ -1,0 +1,16 @@
+{
+    "Area": {
+        "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refArea",
+        "value": "http://statistics.data.gov.uk/id/statistical-geography/{area}"
+    },
+    "Period": {
+        "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
+        "description": "The information presented is based on the date of registration, not the date on which the event occurred. This is consistent with all routine data published by the National Records of Scotland (NRS) for examplein the Registrar General’s Annual Reports (http://www.nrscotland.gov.uk/statistics-and-data/statistics/stats-at-a-glance/registrar-generals-annual-review). Further information on date of registration versus date of occurrence is given on the Monthly data on Births and Deaths (http://www.nrscotland.gov.uk/statistics-and-data/statistics/statistics-by-theme/vital-events/general-publications/weekly-and-monthly-data-on-births-and-deaths/monthly-data-on-deaths-registered-in-scotland) page of the NRS website.",
+        "value": "http://reference.data.gov.uk/id/{period}"
+    },
+    "Value": {
+        "unit": "http://gss-data.org.uk/def/concept/measurement-units/people",
+        "measure": "http://gss-data.org.uk/def/measure/births",
+        "datatype": "integer"
+    }
+}

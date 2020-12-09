@@ -1,0 +1,41 @@
+{
+    "title": "Weekly Data on Births and Deaths Registered in Scotland",
+    "publisher": "National Records of  Scotland",
+    "description": "Tables 1 and 2 list the weekly total numbers of births and deaths registered since 1974.",
+    "landingPage": "https://www.nrscotland.gov.uk/statistics-and-data/statistics/statistics-by-theme/vital-events/general-publications/weekly-and-monthly-data-on-births-and-deaths/weekly-data-on-births-and-deaths",
+    "datasetNotes": [
+        "On landing page scroll to middle of page where two tables contain the dataset, one for births and one for deaths."
+    ],
+    "published": "2020-05-13",
+    "families": [
+        "COVID-19"
+    ],
+    "extract": {
+        "source": "XLS, CSV",
+        "stage": "Documented"
+    },
+    "transform": {
+        "stage": [
+            "To Do"
+        ],
+        "columns": {
+            "Area": {
+                "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refArea",
+                "value": "http://statistics.data.gov.uk/id/statistical-geography/S01011834"
+            },
+            "Period": {
+                "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
+                "value": "http://reference.data.gov.uk/id/{period}"
+            },
+            "Value": {
+                "unit": "http://gss-data.org.uk/def/concept/measurement-units/people",
+                "measure": "http://gss-data.org.uk/def/measure/deaths",
+                "datatype": "integer"
+            }
+        },
+        "airtable": "recdDe3FoiIZ4qXl1",
+        "main_issue": 102
+    },
+    "sizingNotes": "Simple tables. CSV format available.",
+    "notes": "Landing page contains conflicting information as to which day is the first day of the week. We have received confirmation from NRS that their week starts on Monday in accordance with ISO8601."
+}

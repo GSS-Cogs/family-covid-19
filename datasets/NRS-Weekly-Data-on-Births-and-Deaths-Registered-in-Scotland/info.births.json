@@ -18,9 +18,24 @@
         "stage": [
             "To Do"
         ],
+        "columns": {
+            "Area": {
+                "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refArea",
+                "value": "http://statistics.data.gov.uk/id/statistical-geography/S01011834"
+            },
+            "Period": {
+                "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
+                "value": "http://reference.data.gov.uk/id/{period}"
+            },
+            "Value": {
+                "unit": "http://gss-data.org.uk/def/concept/measurement-units/people",
+                "measure": "http://gss-data.org.uk/def/measure/births",
+                "datatype": "integer"
+            }
+        },
         "airtable": "recdDe3FoiIZ4qXl1",
         "main_issue": 102
     },
     "sizingNotes": "Simple tables. CSV format available.",
-    "notes": ""
+    "notes": "Landing page contains conflicting information as to which day is the first day of the week. We have received confirmation from NRS that their week starts on Monday in accordance with ISO8601."
 }

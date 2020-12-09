@@ -244,5 +244,24 @@ for tableNumber, dist in distributions.items():
 
         tidied_tables[tableTitle] = pd.concat(tidied_sheets)
 
-tidied_tables
+print(tidied_tables)
 
+# dataset_path = "stuff"
+#
+# out = Path('out')
+# out.mkdir(exist_ok=True)
+#
+# scrape.set_base_uri('http://gss-data.org.uk')
+# scrape.set_dataset_id(dataset_path)
+#
+# for tableName in tidied_tables.keys():
+#     table = tidied_tables[tableName]
+#     csvName = f"{tableName}.csv"
+#     table.drop_duplicates().to_csv(out / csvName, index = False)
+#
+#     # csvw_transform = CSVWMapping()
+#     # csvw_transform.set_csv(f"{out}/{csvName}")
+#     # csvw_transform.set_mapping(json.load(open('info.json')))
+#     # # csvw_transform.set_dataset_uri(urljoin(scrape._base_uri, f'data/{scrape._dataset_id}'))
+#     # csvw_transform.write(out / f'{csvName}-metadata.json')
+#

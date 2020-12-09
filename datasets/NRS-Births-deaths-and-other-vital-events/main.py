@@ -1,14 +1,29 @@
 #!/usr/bin/env python
 # coding: utf-8
-# %%
 
-# %%
+# In[56]:
 
 
 #!/usr/bin/env python
 # coding: utf-8
 
-# %%
+
+# In[56]:
+
+
+
+
+
+# In[57]:
+
+
+
+#!/usr/bin/env python
+# coding: utf-8
+
+
+# In[58]:
+
 
 
 # -*- coding: utf-8 -*-
@@ -20,6 +35,8 @@ from dateutil.parser import parse
 from datetime import datetime, timedelta
 from urllib.parse import urljoin
 import string
+import pathlib
+import re
 
 def right(s, amount):
     return s[-amount:]
@@ -44,16 +61,19 @@ def colnum_string(n):
         string = chr(65 + remainder) + string
     return string
 
+def cellCont(cell):
+    return re.findall(r"'([^']*)'", str(cell))[0]
+
 def excelRange(bag):
-    xvalues = []
-    yvalues = []
+    xValue = []
+    yValue = []
     for cell in bag:
         coordinate = cellLoc(cell)
-        xvalues.append(''.join([i for i in coordinate if not i.isdigit()]))
-        yvalues.append(int(''.join([i for i in coordinate if i.isdigit()])))
+        xValue.append(''.join([i for i in coordinate if not i.isdigit()]))
+        yValue.append(int(''.join([i for i in coordinate if i.isdigit()])))
     high = 0
     low = 0
-    for i in xvalues:
+    for i in xValue:
         if col2num(i) >= high:
             high = col2num(i)
         if low == 0:
@@ -62,8 +82,8 @@ def excelRange(bag):
             low = col2num(i)
         highx = colnum_string(high)
         lowx = colnum_string(low)
-    highy = str(max(yvalues))
-    lowy = str(min(yvalues))
+    highy = str(max(yValue))
+    lowy = str(min(yValue))
 
     return '{' + lowx + lowy + '-' + highx + highy + '}'
 
@@ -72,28 +92,28 @@ landingPage = info['landingPage']
 landingPage
 
 
-# %%
+# In[ ]:
 
 
 scrape = Scraper(landingPage)
 scrape
 
 
-# %%
+# In[ ]:
 
 
 scrape.distributions
 
 
-# %%
-
+# In[ ]:
 
 
 dist = scrape.distributions[0]
 display(dist)
 
 
-# %%
+# In[ ]:
+
 
 
 pd.set_option('display.float_format', lambda x: '%.2f' % x)
@@ -112,7 +132,7 @@ for name, tab in tabs.items():
 
     if 'q1' == name.lower():
 
-        columns = ['Period', 'Measurement', 'Gender', 'Values', 'Marker']
+        columns = ['Period', 'Measurement', 'Sex', 'Value', 'Marker']
 
         trace.start(datasetTitle, tab, columns, link)
 
@@ -128,17 +148,17 @@ for name, tab in tabs.items():
 
         measurement1 = cell.shift(2, 2).expand(RIGHT).is_not_blank()
         trace.Measurement('Temporary header name')
-        trace.Measurement('Measurement values found in cell range: {}', var = excelRange(measurement1))
+        trace.Measurement('Measurement Value found in cell range: {}', var = excelRange(measurement1))
 
         measurement2 = cell.shift(2, 3).expand(RIGHT).is_not_blank()
-        trace.Gender('Observations adapted from values found in range: {}', var = excelRange(measurement2))
+        trace.Sex('Observations adapted from Value found in range: {}', var = excelRange(measurement2))
 
         measurement3 = cell.shift(2, 4).expand(RIGHT) - cell.shift(2, 2).expand(RIGHT).filter('Year').shift(0, 2).expand(RIGHT)
         trace.Measurement('Additional information found in range: {}', var = excelRange(measurement3))
-        trace.Gender('Additional information found in range: {}', var = excelRange(measurement3))
+        trace.Sex('Additional information found in range: {}', var = excelRange(measurement3))
 
         observations = (year.fill(RIGHT).is_not_blank() | quarter.fill(RIGHT).is_not_blank()) & measurement3.expand(DOWN)
-        trace.Values('Observations found in range: {}', var = excelRange(observations))
+        trace.Value('Observations found in range: {}', var = excelRange(observations))
 
         dimensions = [
         HDim(year, 'Year', CLOSEST, ABOVE),
@@ -155,7 +175,7 @@ for name, tab in tabs.items():
 
     elif 'q2' in name.lower():
 
-        columns = ['Period', 'Area', 'Measurement', 'Gender', 'Values', 'Marker']
+        columns = ['Period', 'Area', 'Measurement', 'Sex', 'Value', 'Marker']
 
         trace.start(datasetTitle, tab, columns, link)
 
@@ -167,23 +187,23 @@ for name, tab in tabs.items():
         trace.Period('Period Hardcoded for tab as: {}', var = period)
 
         area = cell.shift(0, 3).fill(DOWN).is_not_blank() - remove
-        trace.Area('Values found in cell range: {}', var = excelRange(measurement1))
+        trace.Area('Value found in cell range: {}', var = excelRange(measurement1))
 
         areaType = area.filter(contains_string('areas'))
 
         measurement1 = cell.shift(1, 3).expand(RIGHT).is_not_blank()
         trace.Measurement('Temporary header name')
-        trace.Measurement('Measurement values found in cell range: {}', var = excelRange(measurement1))
+        trace.Measurement('Measurement Value found in cell range: {}', var = excelRange(measurement1))
 
         measurement2 = cell.shift(1, 4).expand(RIGHT).is_not_blank()
-        trace.Gender('Observations adapted from values found in range: {}', var = excelRange(measurement2))
+        trace.Sex('Observations adapted from Value found in range: {}', var = excelRange(measurement2))
 
         measurement3 = cell.shift(1, 5).expand(RIGHT) - cell.shift(1, 3).expand(RIGHT).filter('Area').shift(0, 2).expand(DOWN)
         trace.Measurement('Additional information found in range: {}', var = excelRange(measurement3))
-        trace.Gender('Additional information found in range: {}', var = excelRange(measurement3))
+        trace.Sex('Additional information found in range: {}', var = excelRange(measurement3))
 
         observations = area.fill(RIGHT).is_not_blank() & measurement3.expand(DOWN)
-        trace.Values('Observations found in range: {}', var = excelRange(observations))
+        trace.Value('Observations found in range: {}', var = excelRange(observations))
 
         dimensions = [
         HDimConst('Period', period),
@@ -201,7 +221,7 @@ for name, tab in tabs.items():
 
     elif 'q3' in name.lower():
 
-        columns = ['Period', 'Area', 'Measurement', 'Age', 'Gender', 'Values', 'Marker']
+        columns = ['Period', 'Area', 'Measurement', 'Age', 'Sex', 'Value', 'Marker']
 
         trace.start(datasetTitle, tab, columns, link)
 
@@ -217,18 +237,18 @@ for name, tab in tabs.items():
         trace.Measurement("Hardcoded for tab as: {}", var = measurement)
 
         area = cell.shift(0, 3).fill(DOWN).is_not_blank() - remove
-        trace.Area('Values found in cell range: {}', var = excelRange(area))
+        trace.Area('Value found in cell range: {}', var = excelRange(area))
 
         areaType = area.filter(contains_string('areas'))
 
         age = cell.shift(1, 3).expand(RIGHT).is_not_blank()
-        trace.Age('Values found in cell range: {}', var = excelRange(age))
+        trace.Age('Value found in cell range: {}', var = excelRange(age))
 
         gender = cell.shift(1, 4).expand(RIGHT).is_not_blank()
-        trace.Gender('Values found in cell range: {}', var = excelRange(gender))
+        trace.Sex('Value found in cell range: {}', var = excelRange(gender))
 
         observations = area.fill(RIGHT).is_not_blank() & gender.expand(DOWN)
-        trace.Values('Observations found in range: {}', var = excelRange(observations))
+        trace.Value('Observations found in range: {}', var = excelRange(observations))
 
         dimensions = [
         HDimConst('Period', period),
@@ -246,7 +266,7 @@ for name, tab in tabs.items():
 
     elif 'q4' in name.lower():
 
-        columns = ['Period', 'ICD 10 Summary List', 'Cause of Death', 'Values', 'Marker']
+        columns = ['Period', 'ICD 10 Summary List', 'Cause of Death', 'Value', 'Marker']
 
         trace.start(datasetTitle, tab, columns, link)
 
@@ -254,17 +274,17 @@ for name, tab in tabs.items():
 
         cell = tab.filter(contains_string("Table Q4:"))
 
-        period = cell.shift(2, 3).expand(RIGHT).is_not_blank() - cell.shift(2, 3).expand(RIGHT).filter(contains_string('average'))
+        period = cell.shift(2, 4).expand(RIGHT).is_not_blank() - cell.shift(2, 4).expand(RIGHT).filter(contains_string('average'))
         trace.Period('Year for period found in range: {}', var = excelRange(period))
 
         icd = cell.shift(0, 3).fill(DOWN) - remove
-        trace.ICD_10_Summary_List("Values found in range: {}", var = excelRange(icd))
+        trace.ICD_10_Summary_List("Value found in range: {}", var = excelRange(icd))
 
         cause_of_death = cell.shift(1, 3).fill(DOWN).is_not_blank() - remove
-        trace.Cause_of_Death('Values found in cell range: {}', var = excelRange(cause_of_death))
+        trace.Cause_of_Death('Value found in cell range: {}', var = excelRange(cause_of_death))
 
-        observations = cause_of_death.fill(RIGHT).is_not_blank() & period.expand(DOWN) - tab.filter('Second Quarter')
-        trace.Values('Observations found in range: {}', var = excelRange(observations))
+        observations = cause_of_death.fill(RIGHT).is_not_blank() & period.expand(DOWN) - tab.filter('ICD 10 Summary List').expand(RIGHT)
+        trace.Value('Observations found in range: {}', var = excelRange(observations))
 
         dimensions = [
         HDim(period, 'Period', DIRECTLY, ABOVE),
@@ -279,7 +299,7 @@ for name, tab in tabs.items():
 
     elif 'q5' in name.lower():
 
-        columns = ['Period', 'Cause of Death', 'ICD 10 Summary List', 'Age', 'Gender', 'Values', 'Marker']
+        columns = ['Period', 'Cause of Death', 'ICD 10 Summary List', 'Age', 'Sex', 'Value', 'Marker']
 
         trace.start(datasetTitle, tab, columns, link)
 
@@ -287,23 +307,23 @@ for name, tab in tabs.items():
 
         cell = tab.filter(contains_string("Q5:"))
 
-        period = 'quarter/2020-Q2'
-        trace.Period('Period Hardcoded for tab as: {}', var = period)
+        period = left(right(cellCont(tab.filter(contains_string('Q5'))), 5), 4)
+        trace.Period('Period Year for tab as: {}', var = period)
 
         icd = cell.shift(0, 3).fill(DOWN).is_not_blank() - remove
-        trace.ICD_10_Summary_List("Values found in range: {}", var = excelRange(icd))
+        trace.ICD_10_Summary_List("Value found in range: {}", var = excelRange(icd))
 
         cause_of_death = cell.shift(1, 2).fill(DOWN).is_not_blank() - remove
-        trace.Cause_of_Death('Values found in cell range: {}', var = excelRange(cause_of_death))
+        trace.Cause_of_Death('Value found in cell range: {}', var = excelRange(cause_of_death))
 
         age = (cell.shift(2, 3).expand(RIGHT) | cell.shift(2, 3).expand(RIGHT).shift(DOWN)).is_not_blank()
-        trace.Age('Values found in cell range: {}', var = excelRange(age))
+        trace.Age('Value found in cell range: {}', var = excelRange(age))
 
         gender = cell.shift(2, 2).fill(DOWN).is_not_blank() - remove
-        trace.Gender('Values found in cell range: {}', var = excelRange(gender))
+        trace.Sex('Value found in cell range: {}', var = excelRange(gender))
 
         observations = gender.fill(RIGHT).is_not_blank() & age.expand(DOWN)
-        trace.Values('Observations found in range: {}', var = excelRange(observations))
+        trace.Value('Observations found in range: {}', var = excelRange(observations))
 
         dimensions = [
         HDimConst('Period', period),
@@ -320,7 +340,7 @@ for name, tab in tabs.items():
 
     elif 'q6' in name.lower():
 
-        columns = ['Period', 'Area', 'Cause of Death', 'ICD 10 Summary List', 'Gender', 'Values', 'Marker']
+        columns = ['Period', 'Area', 'Cause of Death', 'ICD 10 Summary List', 'Sex', 'Value', 'Marker']
 
         trace.start(datasetTitle, tab, columns, link)
 
@@ -328,23 +348,23 @@ for name, tab in tabs.items():
 
         cell = tab.filter(contains_string("Q6:"))
 
-        period = 'quarter/2020-Q2'
-        trace.Period('Period Hardcoded for tab as: {}', var = period)
+        period = left(right(cellCont(tab.filter(contains_string('Q6:'))), 5), 4)
+        trace.Period('Period Year for tab as: {}', var = period)
 
         icd = cell.shift(0, 3).fill(DOWN).is_not_blank() - remove
-        trace.ICD_10_Summary_List("Values found in range: {}", var = excelRange(icd))
+        trace.ICD_10_Summary_List("Value found in range: {}", var = excelRange(icd))
 
         cause_of_death = cell.shift(1, 2).fill(DOWN).is_not_blank() - remove
-        trace.Cause_of_Death('Values found in cell range: {}', var = excelRange(cause_of_death))
+        trace.Cause_of_Death('Value found in cell range: {}', var = excelRange(cause_of_death))
 
         area = cell.shift(3, 2).expand(RIGHT).is_not_blank()
-        trace.Area('Values found in cell range: {}', var = excelRange(area))
+        trace.Area('Value found in cell range: {}', var = excelRange(area))
 
         gender = cell.shift(2, 2).fill(DOWN).is_not_blank() - remove
-        trace.Gender('Values found in cell range: {}', var = excelRange(gender))
+        trace.Sex('Value found in cell range: {}', var = excelRange(gender))
 
         observations = gender.fill(RIGHT).is_not_blank() & area.expand(DOWN)
-        trace.Values('Observations found in range: {}', var = excelRange(observations))
+        trace.Value('Observations found in range: {}', var = excelRange(observations))
 
         dimensions = [
         HDimConst('Period', period),
@@ -360,10 +380,8 @@ for name, tab in tabs.items():
         trace.store(name, tidy_sheet.topandas())
 
 
-tidy_sheet.topandas()
+# In[ ]:
 
-
-# %%
 
 
 out = Path('out')
@@ -392,20 +410,15 @@ for name in tabs:
         trace.Period("Replace 'Year 20206 ' with 'Year 2020'")
 
         df['Quarter'] = df.apply(lambda x: '1st' if '1st' in x['Quarter'] else x['Quarter'], axis =1)
-
         df['Quarter'] = df.apply(lambda x: left(x['Quarter'], 1), axis =1)
-
         df['Year'] = df.apply(lambda x: right(x['Year'].strip(), 4), axis =1)
-
         df['Period'] = df.apply(lambda x: 'quarter/'+ x['Year'].replace('Year ', '') + '-Q' + x['Quarter'], axis = 1)
         trace.add_column("Period")
-        trace.Period("Create Period values based on 'Year' and 'Quarter' columns")
+        trace.Period("Create Period Value based on 'Year' and 'Quarter' columns")
 
         df['Gender'] = df.apply(lambda x: 'F' if 'Female' in x['Measurement 2'] else ('M' if 'Male' in x['Measurement 2'] else 'T'), axis = 1)
         df['Gender'] = df.apply(lambda x: 'T' if 'both sexes' in x['Measurement 2'].lower() else x['Gender'], axis = 1)
-        trace.Gender("Replace 'Females' with 'F', 'Males' with 'M' and 'T' or 'N/A' otherwise where appropriate")
-
-        df['Measurement 1'] = df.apply(lambda x: x['Measurement 1'] + ' ' + x['Measurement 2'] + ' ' + x['Measurement 3'], axis = 1)
+        trace.Sex("Replace 'Females' with 'F', 'Males' with 'M' and 'T' otherwise where appropriate")
 
         df = df.replace({'Measurement 1' : {
             'Civil Partnerships  Female ' : 'Civil Partnerships',
@@ -433,21 +446,41 @@ for name in tabs:
             'Perinatal deaths Rate4 ' : 'Perinatal deaths Rate',
             'Stillbirths Number ' : 'Stillbirths Number',
             'Stillbirths Rate4 ' : 'Stillbirths Rate'}})
-        trace.Measurement('Combining column values indicate rate/number values (for use for stage 2 and then removed)')
+        trace.Measurement('Combining column Value indicate rate/number Value (for use for stage 2 and then removed)')
 
-        df['Gender'] = df.apply(lambda x: 'N/A' if 'sex' in x['Measurement 1'].lower() or 'Marriages' in x['Measurement 1'] else x['Gender'], axis = 1)
+        df['Gender'] = df.apply(lambda x: 'T' if 'sex' in x['Measurement 1'].lower() or 'Marriages' in x['Measurement 1'] else x['Gender'], axis = 1)
 
-        df = df.drop(['Measurement 2', 'Measurement 3', 'Year', 'Quarter'], axis=1)
+        df['Parent Marital Status'] = df.apply(lambda x: 'unmarried' if 'To unmarried parents' in x['Measurement 2'] else 'married', axis = 1)
+        df['Parent Marital Status'] = df.apply(lambda x: 'all' if 'live births' not in x['Measurement 1'].lower() else x['Parent Marital Status'], axis = 1)
+        trace.add_column('Parent Marital Status')
+        trace.Parent_Marital_Status("Unmarried or Married based on Live Birth values, all to rest of rows")
 
-        df = df.rename(columns={'Measurement 1' : 'Measurement', 'OBS' : 'Values', 'DATAMARKER' : 'Marker'})
-        trace.multi(['Values', 'Marker'], "Rename 'Observations' and 'DATAMARKER' columns with 'Values' and 'Marker' respectively")
+        df['OBS'] = df.apply(lambda x: 0 if '-' in x['DATAMARKER'].lower() else x['OBS'], axis = 1)
+        trace.Value("Replace - DATAMARKER values with '0'")
+        df['Measure Type'] = df.apply(lambda x: 'rate per 1000 population' if 'rate' in x['Measurement 2'].lower() or 'rate' in x['Measurement 3'].lower() else 'count', axis = 1)
+        df['Unit'] = df.apply(lambda x: 'births' if 'live births' in x['Measurement 1'].lower() else 'deaths', axis = 1)
 
-        df = df[['Period','Measurement','Gender','Values', 'Marker']]
+        df['Measure Type'] = df.apply(lambda x: 'rate per 1000 live and still births' if 'rate' in x['Measure Type'] and x['Measurement 1'].lower() in ['stillbirths', 'perinatal deaths'] else x['Measure Type'], axis = 1)
+        df['Measure Type'] = df.apply(lambda x: 'rate per 1000 live births' if 'rate' in x['Measure Type'] and x['Measurement 1'].lower() in ['neonatal deaths', 'infant deaths'] else x['Measure Type'], axis = 1)
+
+        indexNames = df[ df['Measurement 2'] == 'Males per 1,000 females' ].index
+        df.drop(indexNames, inplace = True)
+        indexNames = df[ df['Measurement 3'] == '% of live births' ].index
+        df.drop(indexNames, inplace = True)
+
+        trace.add_column('Vital Event')
+        trace.Vital_Event("Replaces Temp Header 'Measurement'")
+        trace.Vital_Event("Ignore 'males per 1,000 females' as it can be derived from the data")
+        trace.Vital_Event("Ignore 'TO unmarried parents % of live births' as it can be derived from the data")
+
+        df = df.drop(['Year', 'Quarter', 'DATAMARKER', 'Measurement 2', 'Measurement 3'], axis=1)
+
+        df = df.rename(columns={'Measurement 1' : 'Vital Event', 'OBS' : 'Value', 'Gender' : 'Sex'})
+        trace.Value("Rename 'Observations' column to 'Value' ")
+
+        df = df[['Period', 'Vital Event', 'Sex', 'Parent Marital Status', 'Value', 'Measure Type', 'Unit']]
 
         tidied_tables[name] = df
-
-        csvName = name + '.csv'
-        df.drop_duplicates().to_csv(out / csvName, index = False)
 
     elif name.lower() == 'q2':
 
@@ -455,10 +488,8 @@ for name in tabs:
 
         df['Gender'] = df.apply(lambda x: 'F' if 'Female' in x['Measurement 2'] else ('M' if 'Male' in x['Measurement 2'] else 'T'), axis = 1)
         df['Gender'] = df.apply(lambda x: 'T' if 'both sexes' in x['Measurement 2'].lower() else x['Gender'], axis = 1)
-        df['Gender'] = df.apply(lambda x: 'N/A' if 'Marriages' in x['Measurement 1'] else x['Gender'], axis = 1)
-        trace.Gender("Replace 'Females' with 'F', 'Males' with 'M' and 'T' or 'N/A' otherwise where appropriate")
-
-        df['Measurement 1'] = df.apply(lambda x: x['Measurement 1'] + ' ' + x['Measurement 2'] + ' ' + x['Measurement 3'], axis = 1)
+        df['Gender'] = df.apply(lambda x: 'T' if 'Marriages' in x['Measurement 1'] else x['Gender'], axis = 1)
+        trace.Sex("Replace 'Females' with 'F', 'Males' with 'M' and 'T' otherwise where appropriate")
 
         df['Area'] = df.apply(lambda x: x['Area'].strip(), axis = 1)
 
@@ -468,25 +499,8 @@ for name in tabs:
         df['Area'] = df.apply(lambda x: x['Area'] + ' ' + x['Area Type'], axis = 1)
 
         df = df.replace({'Measurement 1' : {
-            'Civil Partnerships Female ' : 'Civil Partnerships',
-            'Civil Partnerships Male ' : 'Civil Partnerships',
-            'Deaths Both sexes Number' : 'Deaths Number',
-            'Deaths Both sexes Rate 2' : 'Deaths Rate',
-            'Deaths Females ' : 'Deaths',
-            'Deaths Males ' : 'Deaths',
-            'Estimated population at 30 June 2016 Both sexes ' : 'Estimated population at 30 June 2016',
-            'Estimated population at 30 June 2016 Females ' : 'Estimated population at 30 June 2016',
-            'Estimated population at 30 June 2016 Males ' : 'Estimated population at 30 June 2016',
-            'Infant deaths Number ' : 'Infant deaths Number',
-            'Live births Both sexes Number' : 'Live births Number',
-            'Live births Females ' : 'Live births',
-            'Live births Males ' : 'Live births',
-            'Marriages  Opposite Sex ' : 'Marriages Opposite Sex',
-            'Marriages  Same Sex ' : 'Marriages Same Sex',
-            'Marriages  Total ' : 'Marriages Total',
-            'Neonatal deaths Rate 4 ' : 'Neonatal deaths Rate',
-            'Perinatal deaths Rate 3 ' : 'Perinatal deaths Rate',
-            'Stillbirths Number ' : 'Stillbirths Number'},
+            'Deaths' : 'Deaths - all ages',
+            'Marriages ' : 'Marriages'},
                         'Area' : {
             'Aberdeen City Council areas': 'S12000033',
             'Aberdeenshire Council areas' : 'S12000034',
@@ -535,17 +549,33 @@ for name in tabs:
             'West Dunbartonshire Council areas' : 'S12000039',
             'West Lothian Council areas' : 'S12000040',
             'Western Isles NHS Board areas' : 'S08000028'}})
+        
+        trace.Area('Replace Council Area and NHS Board areas with corresponding Codes')
+        
+        trace.add_column('Vital Event')
+        trace.Vital_Event("Replaces Temp Header 'Measurement'")
+        trace.Vital_Event("Replace 'Deaths' with 'Deaths - all ages'")
 
-        df = df.drop(['Measurement 2', 'Measurement 3', 'Area Type'], axis=1)
+        df['OBS'] = df.apply(lambda x: 0 if '-' in x['DATAMARKER'].lower() else x['OBS'], axis = 1)
+        trace.Value("Replace - DATAMARKER values with '0'")
 
-        df = df.rename(columns={'Measurement 1' : 'Measurement', 'OBS' : 'Values', 'DATAMARKER' : 'Marker'})
+        df['Measure Type'] = df.apply(lambda x: 'rate per 1000 population' if 'rate' in x['Measurement 2'].lower() or 'rate' in x['Measurement 3'].lower() else 'count', axis = 1)
+        df['Unit'] = df.apply(lambda x: 'births' if 'live births' in x['Measurement 1'].lower() else 'deaths', axis = 1)
 
-        df = df[['Period','Area','Measurement','Gender','Values', 'Marker']]
+        df['Measure Type'] = df.apply(lambda x: 'rate per 1000 live and still births' if 'rate' in x['Measure Type'] and x['Measurement 1'].lower() in ['stillbirths', 'perinatal deaths'] else x['Measure Type'], axis = 1)
+        df['Measure Type'] = df.apply(lambda x: 'rate per 1000 live births' if 'rate' in x['Measure Type'] and x['Measurement 1'].lower() in ['neonatal deaths', 'infant deaths'] else x['Measure Type'], axis = 1)
+
+        df['Parent Marital Status'] = 'all'
+        trace.add_column('Parent Marital Status')
+        trace.Parent_Marital_Status("All value 'all' to every row")
+
+        df = df.drop(['Measurement 2', 'Measurement 3', 'Area Type', 'DATAMARKER'], axis=1)
+
+        df = df.rename(columns={'Measurement 1' : 'Vital Event', 'OBS' : 'Value', 'Gender' : 'Sex'})
+
+        df = df[['Period', 'Area', 'Vital Event', 'Parent Marital Status', 'Sex', 'Value', 'Measure Type', 'Unit']]
 
         tidied_tables[name] = df
-
-        csvName = name + '.csv'
-        df.drop_duplicates().to_csv(out / csvName, index = False)
 
     elif name.lower() == 'q3':
 
@@ -609,35 +639,59 @@ for name in tabs:
             '0.0' : '0',
             'All ages' : 'All'}})
 
+        trace.Area('Replace Council Area and NHS Board areas with corresponding Codes')
+
+        df['OBS'] = df.apply(lambda x: 0 if '-' in x['DATAMARKER'].lower() else x['OBS'], axis = 1)
+        trace.Value("Replace - DATAMARKER values with '0'")
+
+        df['Cause of Death'] = 'all'
+        trace.add_column('Cause of Death')
+        trace.Cause_of_Death("Replace Measurement column with Cause of Death - filled with 'All'")
+
         df['Age'] = df.apply(lambda x: x['Age'].replace('+', ' Plus'), axis = 1)
+        trace.Age("Replace + with Plus")
 
-        df = df.drop(['Area Type'], axis=1)
+        df = df.drop(['Area Type', 'DATAMARKER', 'Measurement'], axis=1)
 
-        df = df.rename(columns={'OBS' : 'Values', 'DATAMARKER' : 'Marker'})
+        df = df.rename(columns={'OBS' : 'Value','Gender' : 'Sex'})
 
-        df = df[['Period','Area','Measurement', 'Age', 'Gender','Values', 'Marker']]
+        df = df[['Period', 'Area', 'Age', 'Sex', 'Cause of Death', 'Value']]
 
         tidied_tables[name] = df
-
-        csvName = name + '.csv'
-        df.drop_duplicates().to_csv(out / csvName, index = False)
 
     elif name.lower() == 'q4':
 
         df = trace.combine_and_trace(datasetTitle, name).fillna('')
 
-        df['Period'] = df.apply(lambda x: 'quarter/'+left(str(x['Period']), 4)+'-Q2', axis = 1)
-        df['Cause of Death'] = df.apply(lambda x: x['Cause of Death'].strip(), axis = 1)
+        path = pathlib.PurePath(dist.downloadURL)
+        quarter = left(path.name.replace('quarter-', ''), 1)
+
+        df['Period'] = df.apply(lambda x: 'quarter/'+left(str(x['Period']), 4)+'-Q'+quarter, axis = 1)
         df['ICD 10 Summary List'] = df.apply(lambda x: x['ICD 10 Summary List'].strip(), axis = 1)
 
-        df = df.rename(columns={'OBS' : 'Values', 'DATAMARKER' : 'Marker'})
+        df = df.drop(['Cause of Death'], axis=1)
+        trace.Cause_of_Death("Replace Cause of Death values with ICD 10 Summary values and drop ICD 10 column")
 
-        df = df[['Period', 'ICD 10 Summary List', 'Cause of Death', 'Values', 'Marker']]
+        df['OBS'] = df.apply(lambda x: 0 if '-' in x['DATAMARKER'].lower() else x['OBS'], axis = 1)
+        trace.Value("Replace - DATAMARKER values with '0'")
+
+        df = df.rename(columns={'OBS' : 'Value', 'ICD 10 Summary List' : 'Cause of Death'})
+
+        df['Sex'] = 'T'
+        df['Age'] = 'all'
+        df['Area'] = 'S92000003'
+        trace.add_column("Sex")
+        trace.Sex("Fill values with T")
+        trace.add_column("Age")
+        trace.Age("Fill values with all")
+        trace.add_column("Area")
+        trace.Area("Fill values with S92000003 - Scotland country code")
+
+        df = df.replace({'Cause of Death' : {'' : 'all'}})
+
+        df = df[['Period', 'Area',  'Age', 'Sex', 'Cause of Death', 'Value']]
 
         tidied_tables[name] = df
-
-        csvName = name + '.csv'
-        df.drop_duplicates().to_csv(out / csvName, index = False)
 
     elif name.lower() == 'q5':
 
@@ -646,19 +700,37 @@ for name in tabs:
         df = df.replace({'Age' : {'<4' : 'Less than 4 Weeks',
                                   '4-' : 'Between 4 Weeks and 1 Year',
                                   'All Ages' : 'All'},
-                         'Gender' : {'All' : 'T'}})
+                         'Gender' : {'All' : 'T'},
+                         'ICD 10 Summary List' : {'' : 'all'}})
+
+        trace.Age("Replace '<4' with 'Less than 4 Weeks'")
+        trace.Age("Replace '4-' with 'Between 4 Weeks and 1 Year'")
+        trace.Age("Replace 'All Ages' with 'All'")
+        trace.Sex("Replace 'All' with 'T'")
+
+        path = pathlib.PurePath(dist.downloadURL)
+        quarter = left(path.name.replace('quarter-', ''), 1)
+
         df['Age'] = df.apply(lambda x: x['Age'].replace('+', ' Plus'), axis = 1)
+        trace.Age("Replace + with Plus")
 
-        df['Cause of Death'] = df.apply(lambda x: x['Cause of Death'].replace('2', '').strip(), axis = 1)
+        df['OBS'] = df.apply(lambda x: 0 if '-' in x['DATAMARKER'].lower() else x['OBS'], axis = 1)
+        trace.Value("Replace - DATAMARKER values with '0'")
 
-        df = df.rename(columns={'OBS' : 'Values', 'DATAMARKER' : 'Marker'})
+        df['Area'] = 'S92000003'
+        trace.add_column("Area")
+        trace.Area("Add 'S92000003' - Scotland Country code - to every row")
 
-        df = df[['Period', 'Age', 'Gender', 'ICD 10 Summary List', 'Cause of Death', 'Values', 'Marker']]
+        df['Period'] = df.apply(lambda x: 'quarter/' + x['Period'] + '-Q' + quarter, axis = 1)
+
+        df = df.drop(['Cause of Death', 'DATAMARKER'], axis=1)
+
+        df = df.rename(columns={'OBS' : 'Value', 'ICD 10 Summary List' : 'Cause of Death', 'Gender' : 'Sex'})
+        trace.Cause_of_Death("Replace Cause of Death values with ICD 10 Summary values and drop ICD 10 column")
+
+        df = df[['Period', 'Area', 'Age', 'Sex', 'Cause of Death', 'Value']]
 
         tidied_tables[name] = df
-
-        csvName = name + '.csv'
-        df.drop_duplicates().to_csv(out / csvName, index = False)
 
     elif name.lower() == 'q6':
 
@@ -671,29 +743,174 @@ for name in tabs:
             'Fife' : 'S08000029',
             'Forth Valley' : 'S08000019',
             'Grampian' : 'S08000020',
-            'Scotland' : 'S92000003'}})
+            'Scotland' : 'S92000003'},
+                        'Gender' : {'All' : 'T'},
+                        'ICD 10 Summary List' : {'' : 'all'}})
+        trace.Area("Replace area names with area codes")
 
-        df['Cause of Death'] = df.apply(lambda x: x['Cause of Death'].replace('3', '').strip(), axis = 1)
+        df['OBS'] = df.apply(lambda x: 0 if '-' in x['DATAMARKER'].lower() else x['OBS'], axis = 1)
+        trace.Value("Replace - DATAMARKER values with '0'")
 
-        df = df.rename(columns={'OBS' : 'Values', 'DATAMARKER' : 'Marker'})
+        df['Age'] = 'all'
+        trace.add_column("Age")
+        trace.Age("Add value 'all'")
 
-        df = df[['Period', 'Area', 'Cause of Death', 'ICD 10 Summary List', 'Gender', 'Values', 'Marker']]
+        path = pathlib.PurePath(dist.downloadURL)
+        quarter = left(path.name.replace('quarter-', ''), 1)
+        df['Period'] = df.apply(lambda x: 'quarter/' + x['Period'] + '-Q' + quarter, axis = 1)
+
+        df = df.drop(['Cause of Death', 'DATAMARKER'], axis=1)
+        df = df.rename(columns={'OBS' : 'Value', 'ICD 10 Summary List' : 'Cause of Death', 'Gender' : 'Sex'})
+        trace.Cause_of_Death("Replace Cause of Death values with ICD 10 Summary values and drop ICD 10 column")
+
+        df = df[['Period', 'Area', 'Age', 'Sex', 'Cause of Death', 'Value']]
 
         tidied_tables[name] = df
 
-        csvName = name + '.csv'
-        df.drop_duplicates().to_csv(out / csvName, index = False)
+
+# In[ ]:
 
 
-# %%
+cubes = Cubes("info.json")
 
 
-for name in tidied_tables:
-    print('Tab Name: ' +  name)
-    print(tidied_tables[name])
+# In[ ]:
 
 
-# %%
-tidied_tables['Q6'].head(10)
+#Stage 2 Alignment - Dataset One
 
-# %%
+datasetOne = tidied_tables['Q1'][tidied_tables['Q1']['Vital Event'].isin(['Live births', 'Stillbirths', 'Perinatal deaths', 'Infant deaths', 'Neonatal deaths'])].append(tidied_tables['Q2'][tidied_tables['Q2']['Vital Event'].isin(['Live births', 'Stillbirths', 'Perinatal deaths', 'Infant deaths', 'Neonatal deaths'])], sort = False).fillna('S92000003')
+datasetOne = datasetOne[datasetOne['Measure Type'].isin(['count'])]
+datasetOne = datasetOne[['Period', 'Area', 'Vital Event', 'Sex', 'Parent Marital Status', 'Value', 'Measure Type', 'Unit']]
+
+COLUMNS_TO_NOT_PATHIFY = ['Area', 'Period', 'Value']
+
+for col in datasetOne.columns.values.tolist():
+	if col in COLUMNS_TO_NOT_PATHIFY:
+		continue
+	try:
+		datasetOne[col] = datasetOne[col].apply(pathify)
+	except Exception as err:
+		raise Exception('Failed to pathify column "{}".'.format(col)) from err
+
+scrape.dataset.title = 'Births, deaths, and other vital events, Quarterly figures - Live births, Stillbirths & Perinatal, Neonatal and Infant Deaths'
+scrape.dataset.comment = 'Quarterly figures for Live births, Stillbirths & Perinatal, Neonatal and Infant Deaths'
+scrape.dataset.description = """Quarterly figures for Live births, Stillbirths & Perinatal, Neonatal and Infant Deaths
+		About this data
+		https://www.nrscotland.gov.uk/files//statistics/births-marriages-deaths-quarterly/quarterly-pub-about.pdf"""
+scrape.dataset.family = 'covid-19'
+scrape.dataset.issued = dist.issued
+
+cubes.add_cube(scrape, datasetOne, scrape.dataset.title)
+
+datasetOne
+
+
+# In[ ]:
+
+
+#Stage 2 Alignment - Dataset Two
+
+datasetTwo = tidied_tables['Q1'][tidied_tables['Q1']['Vital Event'].isin(['Civil Partnerships ', 'Deaths - all ages', 'Marriages'])].append(tidied_tables['Q2'][tidied_tables['Q2']['Vital Event'].isin(['Civil Partnerships ', 'Deaths - all ages', 'Marriages'])], sort = False).fillna('S92000003')
+datasetTwo['Unit'] = datasetTwo.apply(lambda x: 'marriages' if 'marriages' in x['Vital Event'].lower() else ('civil partnership' if 'civil partnerships' in x['Vital Event'].lower() else x['Unit']), axis = 1)
+datasetTwo = datasetTwo[datasetTwo['Measure Type'].isin(['count'])]
+datasetTwo = datasetTwo[['Period', 'Vital Event', 'Sex', 'Area', 'Value']]
+
+COLUMNS_TO_NOT_PATHIFY = ['Area', 'Period', 'Value']
+
+for col in datasetTwo.columns.values.tolist():
+	if col in COLUMNS_TO_NOT_PATHIFY:
+		continue
+	try:
+		datasetTwo[col] = datasetTwo[col].apply(pathify)
+	except Exception as err:
+		raise Exception('Failed to pathify column "{}".'.format(col)) from err
+
+scrape.dataset.title = 'Births, deaths, and other vital events, Quarterly figures - Deaths, Marriages & Civil Partnerships'
+scrape.dataset.comment = 'Quarterly figures for Deaths, Marriages & Civil Partnerships'
+scrape.dataset.description = """Quarterly figures for Deaths, Marriages & Civil Partnerships
+		About this data
+		https://www.nrscotland.gov.uk/files//statistics/births-marriages-deaths-quarterly/quarterly-pub-about.pdf"""
+scrape.dataset.family = 'covid-19'
+scrape.dataset.issued = dist.issued
+
+cubes.add_cube(scrape, datasetTwo, scrape.dataset.title)
+
+datasetTwo
+
+
+# In[ ]:
+
+
+#Stage 2 Alignment - Dataset Three
+
+datasetThree = tidied_tables['Q2'][tidied_tables['Q2']['Vital Event'] == 'Estimated population at 30 June 2019']
+datasetThree = datasetThree.drop(['Vital Event'], axis=1)
+datasetThree = datasetThree[['Period', 'Area', 'Sex', 'Value']]
+
+COLUMNS_TO_NOT_PATHIFY = ['Area', 'Value']
+
+for col in datasetThree.columns.values.tolist():
+	if col in COLUMNS_TO_NOT_PATHIFY:
+		continue
+	try:
+		datasetThree[col] = datasetThree[col].apply(pathify)
+	except Exception as err:
+		raise Exception('Failed to pathify column "{}".'.format(col)) from err
+
+scrape.dataset.title = 'Births, deaths, and other vital events, Quarterly figures - Estimated Population by Sex and Council Area'
+scrape.dataset.comment = 'Quarterly figures for estimated population by sex and Council Area'
+scrape.dataset.description = """Quarterly figures for estimated population by sex and Council Area
+		About this data
+		https://www.nrscotland.gov.uk/files//statistics/births-marriages-deaths-quarterly/quarterly-pub-about.pdf"""
+scrape.dataset.family = 'covid-19'
+scrape.dataset.issued = dist.issued
+
+cubes.add_cube(scrape, datasetThree, scrape.dataset.title)
+
+datasetThree
+
+
+# In[ ]:
+
+
+#Stage 2 Alignment - Dataset Four
+
+datasetFour = pd.concat([tidied_tables['Q3'], tidied_tables['Q4'], tidied_tables['Q5'], tidied_tables['Q6']])
+datasetFour = datasetFour[['Period', 'Area', 'Age', 'Sex', 'Cause of Death', 'Value']]
+
+COLUMNS_TO_NOT_PATHIFY = ['Area', 'Value']
+
+for col in datasetFour.columns.values.tolist():
+	if col in COLUMNS_TO_NOT_PATHIFY:
+		continue
+	try:
+		datasetFour[col] = datasetFour[col].apply(pathify)
+	except Exception as err:
+		raise Exception('Failed to pathify column "{}".'.format(col)) from err
+
+scrape.dataset.title = 'Births, deaths, and other vital events, Quarterly figures - Deaths by Age, Sex, Cause of Death and Administrative Area'
+scrape.dataset.comment = 'Quarterly figures for Deaths by Age, Sex, Cause of Death and Administrative Area'
+scrape.dataset.description = """Quarterly figures for Deaths by Age, Sex, Cause of Death and Administrative Area
+		About this data
+		https://www.nrscotland.gov.uk/files//statistics/births-marriages-deaths-quarterly/quarterly-pub-about.pdf"""
+scrape.dataset.family = 'covid-19'
+scrape.dataset.issued = dist.issued
+
+cubes.add_cube(scrape, datasetFour, scrape.dataset.title)
+
+datasetFour
+
+
+# In[ ]:
+
+
+trace.render("spec_v1.html")
+cubes.output_all()
+
+
+# In[ ]:
+
+
+
+

@@ -28,7 +28,7 @@
             "Cause of Death": {
                 "parent": "http://gss-data.org.uk/data/gss_data/covid-19/nrs-births-deaths-and-other-vital-events/concept-scheme/cause-of-death",
                 "value": "http://gss-data.org.uk/data/gss_data/covid-19/nrs-births-deaths-and-other-vital-events/concept/cause-of-death/{cause_of_death}",
-                "description": "nternational Classification of Diseases (ICD) - The ICD is the global health information standard for mortality and morbidity statistics. ICD is increasingly used in clinical care and research to define diseases and study disease patterns, as well as manage health care, monitor outcomes and allocate resources. More than 100 countries use the system to report mortality data, a primary indicator of health status. This system helps to monitor death and disease rates worldwide and measure progress towards the Millennium Development Goals. About 70% of the world’s health expenditures (USD $ 3.5 billion) are allocated using ICD for reimbursement and resource allocation ICD has been translated into 43 languages. The 11th revision process is underway and the final ICD-11 will be released in 2018. Browse classifications: https://icd.who.int/browse10/2010/en#/I",
+                "description": "nternational Classification of Diseases (ICD) - The ICD is the global health information standard for mortality and morbidity statistics. ICD is increasingly used in clinical care and research to define diseases and study disease patterns, as well as manage health care, monitor outcomes and allocate resources. More than 100 countries use the system to report mortality data, a primary indicator of health status. This system helps to monitor death and disease rates worldwide and measure progress towards the Millennium Development Goals. About 70% of the world\u00e2\u20ac\u2122s health expenditures (USD $ 3.5 billion) are allocated using ICD for reimbursement and resource allocation ICD has been translated into 43 languages. The 11th revision process is underway and the final ICD-11 will be released in 2018. Browse classifications: https://icd.who.int/browse10/2010/en#/I",
                 "source": "https://www.who.int/classifications/icd/factsheet/en/#:~:text=It%20is%20the%20international%20standard,and%20other%20related%20health%20conditions."
             },
             "Parent Marital Status": {
@@ -48,7 +48,720 @@
             }
         },
         "airtable": "recEnfDGHSinWTX2S",
-        "main_issue": 82
+        "main_issue": 82,
+        "transformStage": [
+            {
+                "source_name": "Births, deaths, and other vital events",
+                "identifier": "Births, deaths, and other vital events||Q1||https://www.nrscotland.gov.uk/files//statistics/births-marriages-deaths-quarterly/20/q3/quarter-3-20-tables.xls",
+                "source": [
+                    {
+                        "https://www.nrscotland.gov.uk/files//statistics/births-marriages-deaths-quarterly/20/q3/quarter-3-20-tables.xls": ""
+                    }
+                ],
+                "title": "Q1",
+                "preview": "documentation/previews/691997e0-b47b-488c-81cb-328ab769fda2.html",
+                "observation_selection": null,
+                "columns": [
+                    {
+                        "Period": "{A8-A60}"
+                    },
+                    {
+                        "Measurement": "{C5-AA5}"
+                    },
+                    {
+                        "Sex": "{C5-AA5}"
+                    },
+                    {
+                        "Value": "{C7-AA60}"
+                    }
+                ],
+                "postTransformNotes": [
+                    {
+                        "Period": [
+                            "Year to use with Period taken from cell range: {B7-B57}",
+                            "Quarter to use with Period taken from cell range: {A8-A60}",
+                            "Added to dataframe 'Q1'"
+                        ]
+                    },
+                    {
+                        "Measurement": [
+                            "Temporary header name",
+                            "Measurement Value found in cell range: {C3-AB3}",
+                            "Additional information found in range: {C5-AA5}",
+                            "Added to dataframe 'Q1'"
+                        ]
+                    },
+                    {
+                        "Sex": [
+                            "Observations adapted from Value found in range: {C4-AA4}",
+                            "Additional information found in range: {C5-AA5}",
+                            "Added to dataframe 'Q1'"
+                        ]
+                    },
+                    {
+                        "Value": [
+                            "Observations found in range: {C7-AA60}",
+                            "Added to dataframe 'Q1'"
+                        ]
+                    },
+                    {
+                        "Marker": [
+                            "Added to dataframe 'Q1'"
+                        ]
+                    }
+                ]
+            },
+            {
+                "source_name": "Births, deaths, and other vital events",
+                "identifier": "Births, deaths, and other vital events||Q2||https://www.nrscotland.gov.uk/files//statistics/births-marriages-deaths-quarterly/20/q3/quarter-3-20-tables.xls",
+                "source": [
+                    {
+                        "https://www.nrscotland.gov.uk/files//statistics/births-marriages-deaths-quarterly/20/q3/quarter-3-20-tables.xls": ""
+                    }
+                ],
+                "title": "Q2",
+                "preview": "documentation/previews/1e7d53b1-a371-404e-99b5-60fb03174f21.html",
+                "observation_selection": null,
+                "columns": [
+                    {
+                        "Period": "quarter/2020-Q2"
+                    },
+                    {
+                        "Area": "{C3-AB3}"
+                    },
+                    {
+                        "Measurement": "{B6-AD6}"
+                    },
+                    {
+                        "Sex": "{B6-AD6}"
+                    },
+                    {
+                        "Value": "{B8-AA57}"
+                    }
+                ],
+                "postTransformNotes": [
+                    {
+                        "Period": [
+                            "Period Hardcoded for tab as: quarter/2020-Q2",
+                            "Added to dataframe 'Q2'"
+                        ]
+                    },
+                    {
+                        "Area": [
+                            "Value found in cell range: {C3-AB3}",
+                            "Added to dataframe 'Q2'"
+                        ]
+                    },
+                    {
+                        "Measurement": [
+                            "Temporary header name",
+                            "Measurement Value found in cell range: {B4-Z4}",
+                            "Additional information found in range: {B6-AD6}",
+                            "Added to dataframe 'Q2'"
+                        ]
+                    },
+                    {
+                        "Sex": [
+                            "Observations adapted from Value found in range: {B5-AA5}",
+                            "Additional information found in range: {B6-AD6}",
+                            "Added to dataframe 'Q2'"
+                        ]
+                    },
+                    {
+                        "Value": [
+                            "Observations found in range: {B8-AA57}",
+                            "Added to dataframe 'Q2'"
+                        ]
+                    },
+                    {
+                        "Marker": [
+                            "Added to dataframe 'Q2'"
+                        ]
+                    }
+                ]
+            },
+            {
+                "source_name": "Births, deaths, and other vital events",
+                "identifier": "Births, deaths, and other vital events||Q3||https://www.nrscotland.gov.uk/files//statistics/births-marriages-deaths-quarterly/20/q3/quarter-3-20-tables.xls",
+                "source": [
+                    {
+                        "https://www.nrscotland.gov.uk/files//statistics/births-marriages-deaths-quarterly/20/q3/quarter-3-20-tables.xls": ""
+                    }
+                ],
+                "title": "Q3",
+                "preview": "documentation/previews/976f1e10-f877-4c88-aa47-2c849dfd6061.html",
+                "observation_selection": null,
+                "columns": [
+                    {
+                        "Period": "quarter/2020-Q2"
+                    },
+                    {
+                        "Area": "{A7-A56}"
+                    },
+                    {
+                        "Measurement": "Deaths"
+                    },
+                    {
+                        "Age": "{B4-AD4}"
+                    },
+                    {
+                        "Sex": "{B5-AE5}"
+                    },
+                    {
+                        "Value": "{B7-AE56}"
+                    }
+                ],
+                "postTransformNotes": [
+                    {
+                        "Period": [
+                            "Period Hardcoded for tab as: quarter/2020-Q2",
+                            "Added to dataframe 'Q3'"
+                        ]
+                    },
+                    {
+                        "Area": [
+                            "Value found in cell range: {A7-A56}",
+                            "Added to dataframe 'Q3'"
+                        ]
+                    },
+                    {
+                        "Measurement": [
+                            "Temporary header name",
+                            "Hardcoded for tab as: Deaths",
+                            "Added to dataframe 'Q3'"
+                        ]
+                    },
+                    {
+                        "Age": [
+                            "Value found in cell range: {B4-AD4}",
+                            "Added to dataframe 'Q3'"
+                        ]
+                    },
+                    {
+                        "Sex": [
+                            "Value found in cell range: {B5-AE5}",
+                            "Added to dataframe 'Q3'"
+                        ]
+                    },
+                    {
+                        "Value": [
+                            "Observations found in range: {B7-AE56}",
+                            "Added to dataframe 'Q3'"
+                        ]
+                    },
+                    {
+                        "Marker": [
+                            "Added to dataframe 'Q3'"
+                        ]
+                    }
+                ]
+            },
+            {
+                "source_name": "Births, deaths, and other vital events",
+                "identifier": "Births, deaths, and other vital events||Q4||https://www.nrscotland.gov.uk/files//statistics/births-marriages-deaths-quarterly/20/q3/quarter-3-20-tables.xls",
+                "source": [
+                    {
+                        "https://www.nrscotland.gov.uk/files//statistics/births-marriages-deaths-quarterly/20/q3/quarter-3-20-tables.xls": ""
+                    }
+                ],
+                "title": "Q4",
+                "preview": "documentation/previews/c06fa60f-4e41-4c84-8230-5722246687cb.html",
+                "observation_selection": null,
+                "columns": [
+                    {
+                        "Period": "{C5-I5}"
+                    },
+                    {
+                        "ICD 10 Summary List": "{A5-A93}"
+                    },
+                    {
+                        "Cause of Death": "{B9-B91}"
+                    },
+                    {
+                        "Value": "{C9-I91}"
+                    }
+                ],
+                "postTransformNotes": [
+                    {
+                        "Period": [
+                            "Year for period found in range: {C5-I5}",
+                            "Added to dataframe 'Q4'"
+                        ]
+                    },
+                    {
+                        "ICD_10_Summary_List": [
+                            "Value found in range: {A5-A93}",
+                            "Added to dataframe 'Q4'"
+                        ]
+                    },
+                    {
+                        "Cause_of_Death": [
+                            "Value found in cell range: {B9-B91}",
+                            "Added to dataframe 'Q4'"
+                        ]
+                    },
+                    {
+                        "Value": [
+                            "Observations found in range: {C9-I91}",
+                            "Added to dataframe 'Q4'"
+                        ]
+                    },
+                    {
+                        "Marker": [
+                            "Added to dataframe 'Q4'"
+                        ]
+                    }
+                ]
+            },
+            {
+                "source_name": "Births, deaths, and other vital events",
+                "identifier": "Births, deaths, and other vital events||Q5||https://www.nrscotland.gov.uk/files//statistics/births-marriages-deaths-quarterly/20/q3/quarter-3-20-tables.xls",
+                "source": [
+                    {
+                        "https://www.nrscotland.gov.uk/files//statistics/births-marriages-deaths-quarterly/20/q3/quarter-3-20-tables.xls": ""
+                    }
+                ],
+                "title": "Q5",
+                "preview": "documentation/previews/0691338e-8529-4f4d-8d8b-9532ea034d1b.html",
+                "observation_selection": null,
+                "columns": [
+                    {
+                        "Period": "2020"
+                    },
+                    {
+                        "Cause of Death": "{B7-B145}"
+                    },
+                    {
+                        "ICD 10 Summary List": "{A10-A145}"
+                    },
+                    {
+                        "Age": "{D4-R5}"
+                    },
+                    {
+                        "Sex": "{C7-C146}"
+                    },
+                    {
+                        "Value": "{D7-R146}"
+                    }
+                ],
+                "postTransformNotes": [
+                    {
+                        "Period": [
+                            "Period Year for tab as: 2020",
+                            "Added to dataframe 'Q5'"
+                        ]
+                    },
+                    {
+                        "Cause_of_Death": [
+                            "Value found in cell range: {B7-B145}",
+                            "Added to dataframe 'Q5'"
+                        ]
+                    },
+                    {
+                        "ICD_10_Summary_List": [
+                            "Value found in range: {A10-A145}",
+                            "Added to dataframe 'Q5'"
+                        ]
+                    },
+                    {
+                        "Age": [
+                            "Value found in cell range: {D4-R5}",
+                            "Added to dataframe 'Q5'"
+                        ]
+                    },
+                    {
+                        "Sex": [
+                            "Value found in cell range: {C7-C146}",
+                            "Added to dataframe 'Q5'"
+                        ]
+                    },
+                    {
+                        "Value": [
+                            "Observations found in range: {D7-R146}",
+                            "Added to dataframe 'Q5'"
+                        ]
+                    },
+                    {
+                        "Marker": [
+                            "Added to dataframe 'Q5'"
+                        ]
+                    }
+                ]
+            },
+            {
+                "source_name": "Births, deaths, and other vital events",
+                "identifier": "Births, deaths, and other vital events||Q6||https://www.nrscotland.gov.uk/files//statistics/births-marriages-deaths-quarterly/20/q3/quarter-3-20-tables.xls",
+                "source": [
+                    {
+                        "https://www.nrscotland.gov.uk/files//statistics/births-marriages-deaths-quarterly/20/q3/quarter-3-20-tables.xls": ""
+                    }
+                ],
+                "title": "Q6",
+                "preview": "documentation/previews/417ca51b-2d18-4cdf-b36c-4789d018afc3.html",
+                "observation_selection": null,
+                "columns": [
+                    {
+                        "Period": "2020"
+                    },
+                    {
+                        "Area": "{D3-J3}"
+                    },
+                    {
+                        "Cause of Death": "{B7-B292}"
+                    },
+                    {
+                        "ICD 10 Summary List": "{A10-A292}"
+                    },
+                    {
+                        "Sex": "{C7-C293}"
+                    },
+                    {
+                        "Value": "{D7-J293}"
+                    }
+                ],
+                "postTransformNotes": [
+                    {
+                        "Period": [
+                            "Period Year for tab as: 2020",
+                            "Added to dataframe 'Q6'"
+                        ]
+                    },
+                    {
+                        "Area": [
+                            "Value found in cell range: {D3-J3}",
+                            "Added to dataframe 'Q6'"
+                        ]
+                    },
+                    {
+                        "Cause_of_Death": [
+                            "Value found in cell range: {B7-B292}",
+                            "Added to dataframe 'Q6'"
+                        ]
+                    },
+                    {
+                        "ICD_10_Summary_List": [
+                            "Value found in range: {A10-A292}",
+                            "Added to dataframe 'Q6'"
+                        ]
+                    },
+                    {
+                        "Sex": [
+                            "Value found in cell range: {C7-C293}",
+                            "Added to dataframe 'Q6'"
+                        ]
+                    },
+                    {
+                        "Value": [
+                            "Observations found in range: {D7-J293}",
+                            "Added to dataframe 'Q6'"
+                        ]
+                    },
+                    {
+                        "Marker": [
+                            "Added to dataframe 'Q6'"
+                        ]
+                    }
+                ]
+            },
+            {
+                "source_name": "Births, deaths, and other vital events",
+                "identifier": "Births, deaths, and other vital events||Q1||https://www.nrscotland.gov.uk/files//statistics/births-marriages-deaths-quarterly/20/q3/quarter-3-20-tables.xls : Q1",
+                "source": [
+                    {
+                        "https://www.nrscotland.gov.uk/files//statistics/births-marriages-deaths-quarterly/20/q3/quarter-3-20-tables.xls": "Q1"
+                    }
+                ],
+                "title": "Q1",
+                "preview": null,
+                "observation_selection": null,
+                "columns": [],
+                "postTransformNotes": [
+                    {
+                        "Period": [
+                            "Create Period Value based on 'Year' and 'Quarter' columns"
+                        ]
+                    },
+                    {
+                        "Measurement": [
+                            "Replace ' Marriages 2' with 'Marriages'",
+                            "Replace 'Stillbirths 1' with 'Stillbirths'",
+                            "Combining column Value indicate rate/number Value (for use for stage 2 and then removed)"
+                        ]
+                    },
+                    {
+                        "Sex": [
+                            "Replace 'Females' with 'F', 'Males' with 'M' and 'T' otherwise where appropriate"
+                        ]
+                    },
+                    {
+                        "Value": [
+                            "Replace - DATAMARKER values with '0'",
+                            "Rename 'Observations' column to 'Value' "
+                        ]
+                    },
+                    {
+                        "Marker": []
+                    },
+                    {
+                        "Parent_Marital_Status": [
+                            "Unmarried or Married based on Live Birth values, all to rest of rows"
+                        ]
+                    },
+                    {
+                        "Vital_Event": [
+                            "Replaces Temp Header 'Measurement'",
+                            "Ignore 'males per 1,000 females' as it can be derived from the data",
+                            "Ignore 'TO unmarried parents % of live births' as it can be derived from the data"
+                        ]
+                    }
+                ]
+            },
+            {
+                "source_name": "Births, deaths, and other vital events",
+                "identifier": "Births, deaths, and other vital events||Q2||https://www.nrscotland.gov.uk/files//statistics/births-marriages-deaths-quarterly/20/q3/quarter-3-20-tables.xls : Q2",
+                "source": [
+                    {
+                        "https://www.nrscotland.gov.uk/files//statistics/births-marriages-deaths-quarterly/20/q3/quarter-3-20-tables.xls": "Q2"
+                    }
+                ],
+                "title": "Q2",
+                "preview": null,
+                "observation_selection": null,
+                "columns": [],
+                "postTransformNotes": [
+                    {
+                        "Period": []
+                    },
+                    {
+                        "Area": [
+                            "Replace Council Area and NHS Board areas with corresponding Codes"
+                        ]
+                    },
+                    {
+                        "Measurement": []
+                    },
+                    {
+                        "Sex": [
+                            "Replace 'Females' with 'F', 'Males' with 'M' and 'T' otherwise where appropriate"
+                        ]
+                    },
+                    {
+                        "Value": [
+                            "Replace - DATAMARKER values with '0'"
+                        ]
+                    },
+                    {
+                        "Marker": []
+                    },
+                    {
+                        "Vital_Event": [
+                            "Replaces Temp Header 'Measurement'",
+                            "Replace 'Deaths' with 'Deaths - all ages'"
+                        ]
+                    },
+                    {
+                        "Parent_Marital_Status": [
+                            "All value 'all' to every row"
+                        ]
+                    }
+                ]
+            },
+            {
+                "source_name": "Births, deaths, and other vital events",
+                "identifier": "Births, deaths, and other vital events||Q3||https://www.nrscotland.gov.uk/files//statistics/births-marriages-deaths-quarterly/20/q3/quarter-3-20-tables.xls : Q3",
+                "source": [
+                    {
+                        "https://www.nrscotland.gov.uk/files//statistics/births-marriages-deaths-quarterly/20/q3/quarter-3-20-tables.xls": "Q3"
+                    }
+                ],
+                "title": "Q3",
+                "preview": null,
+                "observation_selection": null,
+                "columns": [],
+                "postTransformNotes": [
+                    {
+                        "Period": []
+                    },
+                    {
+                        "Area": [
+                            "Replace Council Area and NHS Board areas with corresponding Codes"
+                        ]
+                    },
+                    {
+                        "Measurement": []
+                    },
+                    {
+                        "Age": [
+                            "Replace + with Plus"
+                        ]
+                    },
+                    {
+                        "Sex": []
+                    },
+                    {
+                        "Value": [
+                            "Replace - DATAMARKER values with '0'"
+                        ]
+                    },
+                    {
+                        "Marker": []
+                    },
+                    {
+                        "Cause_of_Death": [
+                            "Replace Measurement column with Cause of Death - filled with 'All'"
+                        ]
+                    }
+                ]
+            },
+            {
+                "source_name": "Births, deaths, and other vital events",
+                "identifier": "Births, deaths, and other vital events||Q4||https://www.nrscotland.gov.uk/files//statistics/births-marriages-deaths-quarterly/20/q3/quarter-3-20-tables.xls : Q4",
+                "source": [
+                    {
+                        "https://www.nrscotland.gov.uk/files//statistics/births-marriages-deaths-quarterly/20/q3/quarter-3-20-tables.xls": "Q4"
+                    }
+                ],
+                "title": "Q4",
+                "preview": null,
+                "observation_selection": null,
+                "columns": [],
+                "postTransformNotes": [
+                    {
+                        "Period": []
+                    },
+                    {
+                        "ICD_10_Summary_List": []
+                    },
+                    {
+                        "Cause_of_Death": [
+                            "Replace Cause of Death values with ICD 10 Summary values and drop ICD 10 column"
+                        ]
+                    },
+                    {
+                        "Value": [
+                            "Replace - DATAMARKER values with '0'"
+                        ]
+                    },
+                    {
+                        "Marker": []
+                    },
+                    {
+                        "Sex": [
+                            "Fill values with T"
+                        ]
+                    },
+                    {
+                        "Age": [
+                            "Fill values with all"
+                        ]
+                    },
+                    {
+                        "Area": [
+                            "Fill values with S92000003 - Scotland country code"
+                        ]
+                    }
+                ]
+            },
+            {
+                "source_name": "Births, deaths, and other vital events",
+                "identifier": "Births, deaths, and other vital events||Q5||https://www.nrscotland.gov.uk/files//statistics/births-marriages-deaths-quarterly/20/q3/quarter-3-20-tables.xls : Q5",
+                "source": [
+                    {
+                        "https://www.nrscotland.gov.uk/files//statistics/births-marriages-deaths-quarterly/20/q3/quarter-3-20-tables.xls": "Q5"
+                    }
+                ],
+                "title": "Q5",
+                "preview": null,
+                "observation_selection": null,
+                "columns": [],
+                "postTransformNotes": [
+                    {
+                        "Period": []
+                    },
+                    {
+                        "Cause_of_Death": [
+                            "Replace Cause of Death values with ICD 10 Summary values and drop ICD 10 column"
+                        ]
+                    },
+                    {
+                        "ICD_10_Summary_List": []
+                    },
+                    {
+                        "Age": [
+                            "Replace '<4' with 'Less than 4 Weeks'",
+                            "Replace '4-' with 'Between 4 Weeks and 1 Year'",
+                            "Replace 'All Ages' with 'All'",
+                            "Replace + with Plus"
+                        ]
+                    },
+                    {
+                        "Sex": [
+                            "Replace 'All' with 'T'"
+                        ]
+                    },
+                    {
+                        "Value": [
+                            "Replace - DATAMARKER values with '0'"
+                        ]
+                    },
+                    {
+                        "Marker": []
+                    },
+                    {
+                        "Area": [
+                            "Add 'S92000003' - Scotland Country code - to every row"
+                        ]
+                    }
+                ]
+            },
+            {
+                "source_name": "Births, deaths, and other vital events",
+                "identifier": "Births, deaths, and other vital events||Q6||https://www.nrscotland.gov.uk/files//statistics/births-marriages-deaths-quarterly/20/q3/quarter-3-20-tables.xls : Q6",
+                "source": [
+                    {
+                        "https://www.nrscotland.gov.uk/files//statistics/births-marriages-deaths-quarterly/20/q3/quarter-3-20-tables.xls": "Q6"
+                    }
+                ],
+                "title": "Q6",
+                "preview": null,
+                "observation_selection": null,
+                "columns": [],
+                "postTransformNotes": [
+                    {
+                        "Period": []
+                    },
+                    {
+                        "Area": [
+                            "Replace area names with area codes"
+                        ]
+                    },
+                    {
+                        "Cause_of_Death": [
+                            "Replace Cause of Death values with ICD 10 Summary values and drop ICD 10 column"
+                        ]
+                    },
+                    {
+                        "ICD_10_Summary_List": []
+                    },
+                    {
+                        "Sex": []
+                    },
+                    {
+                        "Value": [
+                            "Replace - DATAMARKER values with '0'"
+                        ]
+                    },
+                    {
+                        "Marker": []
+                    },
+                    {
+                        "Age": [
+                            "Add value 'all'"
+                        ]
+                    }
+                ]
+            }
+        ]
     },
     "sizingNotes": "Largish tables but simple structures. Footnotes present, multiple dimensions and sub-dimensions.",
     "notes": ""

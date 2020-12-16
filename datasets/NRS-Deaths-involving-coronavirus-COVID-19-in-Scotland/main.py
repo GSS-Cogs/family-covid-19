@@ -108,13 +108,7 @@ with open(out / 'observations.csv-metadata.trig', 'wb') as metadata:
 
 
 
-scraper.dataset.family = 'covid-19'
-codelistcreation = ['Registered Death Type','NRS Age Group','Location of Death']
-df = df
-codeclass = CSVCodelists()
-for cl in codelistcreation:
-    if cl in df.columns:
-        codeclass.create_codelists(pd.DataFrame(df[cl]), 'codelists2', scraper.dataset.family, Path(os.getcwd()).name.lower())
+
 
 # +
 #f = open("out/observations.csv-metadata.json", "w")

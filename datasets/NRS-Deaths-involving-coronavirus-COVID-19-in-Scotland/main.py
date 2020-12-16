@@ -104,19 +104,3 @@ csvw_transform.set_dataset_uri(urljoin(scrape._base_uri, f'data/{scrape._dataset
 csvw_transform.write(out / 'observations.csv-metadata.json')
 with open(out / 'observations.csv-metadata.trig', 'wb') as metadata:
     metadata.write(scrape.generate_trig())
-# -
-
-
-
-
-
-# +
-#f = open("out/observations.csv-metadata.json", "w")
-#f.write(newTxt)
-#f.close()
-# -
-
-
-
-
-

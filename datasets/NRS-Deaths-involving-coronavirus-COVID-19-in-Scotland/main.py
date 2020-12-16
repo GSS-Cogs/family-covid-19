@@ -106,25 +106,15 @@ with open(out / 'observations.csv-metadata.trig', 'wb') as metadata:
     metadata.write(scrape.generate_trig())
 # -
 
-info = json.load(open('info.json')) 
-
-"""
-newTxt = ''
 
 
-mtp = info['transform']['columns']['Value']['measure'].replace('http://gss-data.org.uk/def/measure/','')  #'Count'
-mt = mtp.capitalize()
-mtpath = f'''"@id": "http://gss-data.org.uk/def/measure/{mtp}",'''
-h = '''"@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure",'''
-
-with open("out/observations.csv-metadata.json") as fp: 
-    for line in fp: 
-        if mtpath in line.strip():
-            print(line)
-            newTxt = newTxt + line + '''\t"rdfs:label": "''' + mt + '''",\n'''
-        else:
-            newTxt += line
-"""
+scraper.dataset.family = 'covid-19'
+codelistcreation = ['Registered Death Type','NRS Age Group','Location of Death']
+df = df
+codeclass = CSVCodelists()
+for cl in codelistcreation:
+    if cl in df.columns:
+        codeclass.create_codelists(pd.DataFrame(df[cl]), 'codelists2', scraper.dataset.family, Path(os.getcwd()).name.lower())
 
 # +
 #f = open("out/observations.csv-metadata.json", "w")

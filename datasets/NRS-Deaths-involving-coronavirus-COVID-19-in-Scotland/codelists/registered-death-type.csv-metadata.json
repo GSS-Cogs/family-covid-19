@@ -1,6 +1,6 @@
 {
   "@context": "http://www.w3.org/ns/csvw",
-  "@id": "http://gss-data.org.uk/data/gss_data/covid-19/nrs-deaths-involving-coronavirus-covid-19-in-scotland#schema",
+  "@id": "#table",
   "url": "registered-death-type.csv",
   "tableSchema": {
     "columns": [
@@ -30,7 +30,7 @@
         },
         "required": false,
         "propertyUrl": "skos:broader",
-        "valueUrl": "http://gss-data.org.uk/data/gss_data/covid-19/nrs-deaths-involving-coronavirus-covid-19-in-scotland#concept/registered-death-type/{parent_notation}"
+        "valueUrl": "http://gss-data.org.uk/data/gss_data/covid-19/nrs-deaths-involving-coronavirus-covid-19-in-scotland/concept/registered-death-type/{parent_notation}"
       },
       {
         "titles": "Sort Priority",
@@ -54,16 +54,16 @@
       {
         "virtual": true,
         "propertyUrl": "skos:inScheme",
-        "valueUrl": "http://gss-data.org.uk/data/gss_data/covid-19/nrs-deaths-involving-coronavirus-covid-19-in-scotland#scheme/registered-death-type"
+        "valueUrl": "http://gss-data.org.uk/data/gss_data/covid-19/nrs-deaths-involving-coronavirus-covid-19-in-scotland/concept-scheme/registered-death-type"
       }
     ],
     "primaryKey": "notation",
-    "aboutUrl": "http://gss-data.org.uk/data/gss_data/covid-19/nrs-deaths-involving-coronavirus-covid-19-in-scotland#concept/registered-death-type/{notation}"
+    "aboutUrl": "http://gss-data.org.uk/data/gss_data/covid-19/nrs-deaths-involving-coronavirus-covid-19-in-scotland/concept/registered-death-type/{notation}"
   },
   "prov:hadDerivation": {
-    "@id": "http://gss-data.org.uk/data/gss_data/covid-19/nrs-deaths-involving-coronavirus-covid-19-in-scotland#scheme/registered-death-type",
+    "@id": "http://gss-data.org.uk/data/gss_data/covid-19/nrs-deaths-involving-coronavirus-covid-19-in-scotland/concept-scheme/registered-death-type",
     "@type": "skos:ConceptScheme",
     "rdfs:label": "Registered Death Type",
-    "skos:hasTopConcept { "@id": "http://gss-data.org.uk/data/gss_data/covid-19/nrs-deaths-involving-coronavirus-covid-19-in-scotland#concept/registered-death-type/all" }
+    "skos:hasTopConcept": { "@id": "http://gss-data.org.uk/data/gss_data/covid-19/nrs-deaths-involving-coronavirus-covid-19-in-scotland#concept/registered-death-type/all" }
   }
 }

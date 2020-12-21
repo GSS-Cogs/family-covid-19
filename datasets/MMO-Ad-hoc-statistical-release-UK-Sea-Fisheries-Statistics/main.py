@@ -57,6 +57,7 @@ i = 1
 for m in mths:
     if m in dateRange:
         thismnth = i
+        mthsStr = m
         break
     i = i + 1
  

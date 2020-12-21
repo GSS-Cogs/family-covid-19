@@ -74,6 +74,9 @@ else:
         df = pd.concat([df, new_table], sort=False)  
 
 
+if 'Marker' not in df.columns:
+    df['Marker'] = ""
+
 df.rename(columns={'OBS': 'Value', 'DATAMARKER' : 'Marker'}, inplace=True)
 #df = df.replace('', np.nan, regex=True)
 
@@ -140,3 +143,6 @@ GROUP_ID = pathify(os.environ.get('JOB_NAME', 'gss_data/covid-19/' + Path(os.get
 
 #schema = CSVWMetadata('https://gss-cogs.github.io/family-covid-19/reference/')
 #schema.create(destinationFolder / f'{OBS_ID}.csv', destinationFolder / f'{OBS_ID}.csv-schema.json')
+# -
+
+

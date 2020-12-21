@@ -53,21 +53,22 @@ yrs.append(now.year)
 # Got from Table 1 script
 dateRange = str(dateRange)
 mths = ['January','Feburary','March','April','May','June','July','August','September','October','November','December']
-
+i = 1
 for m in mths:
     if m in dateRange:
-        i = dateRange.find(m)
-        mthsStr = dateRange[i:len(dateRange)-3]
-        for s in re.finditer(m, dateRange):
-            mnths.append(m)
+        thismnth = i
+        break
+    i = i + 1
+ 
+if thismnth < 10:
+    thismnth = "0" + str(thismnth)
+else:
+    thismnth = str(thismnth)
 
 mnthNo = []
-for m in mnths:
-    s = strptime('Jul','%b').tm_mon
-    if (s < 10):
-        mnthNo.append('0' + str(s))
-    else:
-        mnthNo.append(str(s))
+mnthNo.append(thismnth)
+mnthNo.append(thismnth)
+
 print(mnthNo)
 print(yrs)
 

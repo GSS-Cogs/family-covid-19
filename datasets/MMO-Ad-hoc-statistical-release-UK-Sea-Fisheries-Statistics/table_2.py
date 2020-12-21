@@ -145,7 +145,8 @@ GROUP_ID = pathify(os.environ.get('JOB_NAME', 'gss_data/covid-19/' + Path(os.get
 #schema = CSVWMetadata('https://gss-cogs.github.io/family-covid-19/reference/')
 #schema.create(destinationFolder / f'{OBS_ID}.csv', destinationFolder / f'{OBS_ID}.csv-schema.json')
 # -
-
+if 'Marker' not in tidy.columns:
+    tidy['Marker'] = ""
 
 
 

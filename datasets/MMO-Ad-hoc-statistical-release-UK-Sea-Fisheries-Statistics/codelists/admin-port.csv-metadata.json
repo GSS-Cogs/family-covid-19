@@ -110,7 +110,7 @@
                 "@value": "List of ports generated from the *Ad hoc statistical release: UK Sea Fisheries Statistics November 2020* publication."
             },
             "http://publishmydata.com/pmdcat#graph": {
-                "@id": "http://gss-data.org.uk/data/gss_data/covid-19/mmo-ad-hoc-statistical-release-uk-sea-fisheries-statistics"
+                "@id": "http://gss-data.org.uk/data/gss_data/covid-19/mmo-ad-hoc-statistical-release-uk-sea-fisheries-statistics#scheme/admin-port"
             },
             "http://rdfs.org/ns/void#sparqlEndpoint": {
                 "@id": "http://gss-data.org.uk/tools/sparql"
@@ -139,7 +139,7 @@
                 "@value": "2020-12-29T08:26:51.359720"
             },
             "http://publishmydata.com/pmdcat#metadataGraph": {
-                "@id": "http://gss-data.org.uk/data/gss_data/covid-19/mmo-ad-hoc-statistical-release-uk-sea-fisheries-statistics"
+                "@id": "http://gss-data.org.uk/data/gss_data/covid-19/mmo-ad-hoc-statistical-release-uk-sea-fisheries-statistics#scheme/admin-port"
             }
         }
     ]

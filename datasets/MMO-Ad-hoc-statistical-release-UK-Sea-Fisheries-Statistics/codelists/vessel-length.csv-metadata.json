@@ -1,6 +1,6 @@
 {
   "@context": "http://www.w3.org/ns/csvw",
-  "@id": "#table",
+  "@id": "http://gss-data.org.uk/data/gss_data/covid-19/mmo-ad-hoc-statistical-release-uk-sea-fisheries-statistics#schema",
   "url": "vessel-length.csv",
   "tableSchema": {
     "columns": [
@@ -63,7 +63,6 @@
   "prov:hadDerivation": {
     "@id": "http://gss-data.org.uk/data/gss_data/covid-19/mmo-ad-hoc-statistical-release-uk-sea-fisheries-statistics#scheme/vessel-length",
     "@type": "skos:ConceptScheme",
-    "rdfs:label": "Vessel Length",
-    "skos:hasTopConcept": { "@id": "http://gss-data.org.uk/data/gss_data/covid-19/mmo-ad-hoc-statistical-release-uk-sea-fisheries-statistics#concept/vessel-length/all" }
+    "rdfs:label": "Vessel Length"
   }
 }

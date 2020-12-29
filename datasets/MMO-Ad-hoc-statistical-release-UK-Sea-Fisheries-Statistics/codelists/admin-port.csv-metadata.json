@@ -123,10 +123,10 @@
             }
         },
         {
-            "@id": "http://gss-data.org.uk/data/gss_data/covid-19/mmo-ad-hoc-statistical-release-uk-sea-fisheries-statistics#scheme/catalog-record",
+            "@id": "http://gss-data.org.uk/data/gss_data/covid-19/mmo-ad-hoc-statistical-release-uk-sea-fisheries-statistics#scheme/admin-port/catalog-record",
             "@type": "dcat:CatalogRecord",
             "foaf:primaryTopic": {
-                "@id": "http://gss-data.org.uk/data/gss_data/covid-19/mmo-ad-hoc-statistical-release-uk-sea-fisheries-statistics#scheme/dataset"
+                "@id": "http://gss-data.org.uk/data/gss_data/covid-19/mmo-ad-hoc-statistical-release-uk-sea-fisheries-statistics#scheme/admin-port/dataset"
             },
             "dc:title": "Admin Port Catalog Record",
             "rdfs:label": "Admin Port Catalog Record",

@@ -3,7 +3,6 @@ All,all,,1
 Demersal,demersal,all,2
 Pelagic,pelagic,all,3
 Shellfish,shellfish,all,4
-Demersal ,demersal,all,5
-Demersal total,demersal-total,all,6
-Pelagic total,pelagic-total,all,7
-Shellfish total,shellfish-total,all,8
+Demersal total,demersal-total,all,5
+Pelagic total,pelagic-total,all,6
+Shellfish total,shellfish-total,all,7

@@ -84,7 +84,34 @@
             },
             "rdfs:label": "Species Group",
             "dc:title": "Species Group",
-            "rdfs:comment": "Dataset representing the 'Species Group' code list."
+            "rdfs:comment": "Dataset representing the 'Species Group' code list.",
+            "dc:license": {
+                "@id": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/"
+            },
+            "dc:creator": {
+                "@id": "https://www.gov.uk/government/organisations/marine-management-organisation"
+            },
+            "dc:publisher": {
+                "@id": "https://www.gov.uk/government/organisations/marine-management-organisation"
+            },
+            "dcat:contactPoint": {
+                "@id": "mailto:info@marinemanagement.org.uk"
+            },
+            "dcat:landingPage": {
+                "@id": "https://www.gov.uk/government/statistics/ad-hoc-statistical-release-uk-sea-fisheries-statistics-november-2020"
+            },
+            "dc:issued": {
+                "@type": "dateTime",
+                "@value": "2020-12-18T00:00:00"
+            },
+            "dc:modified": {
+                "@type": "dateTime",
+                "@value": "2012-12-18T00:00:00"
+            },
+            "http://publishmydata.com/pmdcat#markdownDescription": {
+                "@type": "https://www.w3.org/ns/iana/media-types/text/markdown#Resource",
+                "@value": "List of species groups generated from the *Ad hoc statistical release: UK Sea Fisheries Statistics November 2020* publication."
+            }
         },
         {
             "@id": "http://gss-data.org.uk/catalog/vocabularies",

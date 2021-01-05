@@ -23,39 +23,37 @@
         "columns": {
             "Period": {
                 "dimension": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
-                "value": "http://reference.data.gov.uk/id/{+period}"
+                "value": "http://reference.data.gov.uk/id/{+period}",
+                "codelist": false
             },
             "Sex": {
                 "dimension": "http://purl.org/linked-data/sdmx/2009/dimension#sex",
-                "value": "http://purl.org/linked-data/sdmx/2009/code#sex-{sex}"
+                "value": "http://purl.org/linked-data/sdmx/2009/code#sex-{sex}",
+                "codelist": false
             },
             "Area": {
                 "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refArea",
-                "value": "http://statistics.data.gov.uk/id/statistical-geography/{area}"
+                "value": "http://statistics.data.gov.uk/id/statistical-geography/{area}",
+                "codelist": false
             },
             "Age": {
-                "parent": "http://gss-data.org.uk/data/gss_data/covid-19/nisra-weekly-deaths-year-ni/concept-scheme/age",
                 "value": "http://gss-data.org.uk/data/gss_data/covid-19/nisra-weekly-deaths-year-ni/concept/age/{age}",
                 "description": "NISRA Age Brackets"
             },
             "Location of Death": {
-                "parent": "http://gss-data.org.uk/data/gss_data/covid-19/nisra-weekly-deaths-year-ni/concept-scheme/location-of-death",
-                "value": "http://gss-data.org.uk/data/gss_data/covid-19/nisra-weekly-deaths-year-ni/concept/location-of-death/{location_of_death}",
+                "value": "http://gss-data.org.uk/data/gss_data/covid-19/nisra-weekly-deaths-year-ni#concept/location-of-death/{location_of_death}",
                 "description": "NISRA locations of death"
             },
             "Cause of Death": {
-                "parent": "http://gss-data.org.uk/data/gss_data/covid-19/nisra-weekly-deaths-year-ni/concept-scheme/cause-of-death",
-                "value": "http://gss-data.org.uk/data/gss_data/covid-19/nisra-weekly-deaths-year-ni/concept/cause-of-death/{cause_of_death}",
+                "value": "http://gss-data.org.uk/data/gss_data/covid-19/nisra-weekly-deaths-year-ni#concept/cause-of-death/{cause_of_death}",
                 "description": "NISRA causes of death"
             },
             "Residential Setting": {
-                "parent": "http://gss-data.org.uk/data/gss_data/covid-19/nisra-weekly-deaths-year-ni/concept-scheme/residential-setting",
-                "value": "http://gss-data.org.uk/data/gss_data/covid-19/nisra-weekly-deaths-year-ni/concept/residential-setting/{residential_setting}",
+                "value": "http://gss-data.org.uk/data/gss_data/covid-19/nisra-weekly-deaths-year-ni#concept/residential-setting/{residential_setting}",
                 "description": "NISRA Residential setting of person who died, care home etc."
             },
             "Death Measurement Type": {
-                "parent": "http://gss-data.org.uk/data/gss_data/covid-19/nisra-weekly-deaths-year-ni/concept-scheme/death-measurement-type",
-                "value": "http://gss-data.org.uk/data/gss_data/covid-19/nisra-weekly-deaths-year-ni/concept/death-measurement-type/{death_measurement_type}",
+                "value": "http://gss-data.org.uk/data/gss_data/covid-19/nisra-weekly-deaths-year-ni#concept/death-measurement-type/{death_measurement_type}",
                 "description": "NISRA statistical measurement used"
             },
             "Marker": {

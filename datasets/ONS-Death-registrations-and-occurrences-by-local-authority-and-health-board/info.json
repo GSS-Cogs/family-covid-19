@@ -31,18 +31,17 @@
             "Area code": {
                 "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refArea",
                 "value": "http://statistics.data.gov.uk/id/statistical-geography/{area_code}",
-                "description": "",
                 "codelist": false
             },
              "Place of death": {
-                 "parent": "http://gss-data.org.uk/data/gss_data/covid-19/ons-death-registrations-and-occurrences-by-local-authority-and-health-board/concept-scheme/place-of-death",
-                 "value": "http://gss-data.org.uk/data/gss_data/covid-19/ons-death-registrations-and-occurrences-by-local-authority-and-health-board#concept/place-of-death/{place_of_death}",
-                "description": ""
+                "label": "Place of Death",
+                "value": "http://gss-data.org.uk/data/gss_data/covid-19/ons-death-registrations-and-occurrences-by-local-authority-and-health-board#concept/place-of-death/{place_of_death}",
+                "codelist": "http://gss-data.org.uk/data/gss_data/covid-19/ons-death-registrations-and-occurrences-by-local-authority-and-health-board#scheme/place-of-death"
             },
             "Cause of death": {
-                 "parent": "http://gss-data.org.uk/data/gss_data/covid-19/ons-death-registrations-and-occurrences-by-local-authority-and-health-board/concept-scheme/cause-of-death",
-                 "value": "http://gss-data.org.uk/data/gss_data/covid-19/ons-death-registrations-and-occurrences-by-local-authority-and-health-board#concept/cause-of-death/{cause_of_death}",
-                "description": ""
+                "label": "Cause of Death",
+                "value": "http://gss-data.org.uk/data/gss_data/covid-19/ons-death-registrations-and-occurrences-by-local-authority-and-health-board#concept/cause-of-death/{cause_of_death}",
+                "codelist": "http://gss-data.org.uk/data/gss_data/covid-19/ons-death-registrations-and-occurrences-by-local-authority-and-health-board#scheme/cause-of-death"
             },
             "Value": {
                 "unit": "http://gss-data.org.uk/def/concept/measurement-units/deaths",

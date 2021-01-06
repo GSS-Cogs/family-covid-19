@@ -37,7 +37,7 @@
                 "codelist": false
             },
             "Age": {
-                "value": "http://gss-data.org.uk/data/gss_data/covid-19/nisra-weekly-deaths-year-ni/concept/age/{age}",
+                "value": "http://gss-data.org.uk/data/gss_data/covid-19/nisra-weekly-deaths-year-ni#concept/age/{age}",
                 "description": "NISRA Age Brackets"
             },
             "Location of Death": {

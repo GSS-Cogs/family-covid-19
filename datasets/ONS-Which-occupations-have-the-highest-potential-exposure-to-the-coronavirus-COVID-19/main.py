@@ -229,7 +229,7 @@ df.drop(df[df['Measure type'] == 'Proximity'].index, inplace=True)
 # _______________________________________________________________________________________________________________
 
 #Removing columns as they are defined in info.json
-del tidy['Measure type']
+#del tidy['Measure type']
 del tidy['Unit']
 
 notes = """Some occupations are excluded due to no exposure and/or proximity measures being available

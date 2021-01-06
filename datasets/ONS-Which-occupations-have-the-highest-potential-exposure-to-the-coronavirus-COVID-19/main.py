@@ -1,14 +1,15 @@
 #!/usr/bin/env python
 # coding: utf-8
+# %%
 
-# In[51]:
+# %%
 
 
 # -*- coding: utf-8 -*-
 # # ONS Which occupations have the highest potential exposure to the coronavirus  COVID-19
 
 
-# In[52]:
+# %%
 
 
 from gssutils import *
@@ -76,14 +77,14 @@ def excelRange(bag):
     return '{' + lowx + lowy + '-' + highx + highy + '}'
 
 
-# In[53]:
+# %%
 
 
 df = pd.DataFrame()
 trace = TransformTrace()
 
 
-# In[54]:
+# %%
 
 
 from urllib.request import Request, urlopen
@@ -112,7 +113,7 @@ else:
         print(i)
 
 
-# In[55]:
+# %%
 
 
 scrape = Scraper(seed = 'info.json')
@@ -125,7 +126,7 @@ list(tabs)
 # ##### Sheet: Occupations and exposure
 
 
-# In[56]:
+# %%
 
 
 tab = tabs['Occupations and exposure']
@@ -201,7 +202,7 @@ for col in df:
         display(df[col].cat.categories)
 
 
-# In[57]:
+# %%
 
 
 tidy = df[['UK SOC 2010 Code', 'Occupation','Total in employment', 'Median hourly pay', 'Percentage Workforce Female', 'Percentage Workforce Aged 55plus', 'Percentage Workforce BAME', 'Working Condition Category', 'Measure type', 'Unit', 'Value']]
@@ -214,7 +215,7 @@ for column in tidy:
         tidy[column] = tidy[column].map(lambda x: pathify(x))
 
 
-# In[58]:
+# %%
 
 
 
@@ -242,7 +243,7 @@ https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemplo
 """
 
 
-# In[59]:
+# %%
 
 
 #SET UP OUTPUT FOLDER AND OUTPUT DATA TO CSV
@@ -263,7 +264,7 @@ csvw_transform.write(out / f'{csvName}-metadata.json')
 #
 
 
-# In[60]:
+# %%
 
 
 # CREATE AND OUTPUT TRIG FILE
@@ -274,7 +275,7 @@ trace.output()
 #tidy
 
 
-# In[61]:
+# %%
 
 
 #info = json.load(open('info.json'))
@@ -290,7 +291,7 @@ trace.output()
 #        codeclass.create_codelists(pd.DataFrame(tidy[cl]), 'codelists', 'covid-19', Path(os.getcwd()).name.lower())
 
 
-# In[62]:
+# %%
 
 
 

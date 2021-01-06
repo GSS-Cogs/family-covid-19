@@ -64,6 +64,6 @@
     "@id": "http://gss-data.org.uk/data/gss_data/covid-19/ons-which-occupations-have-the-highest-potential-exposure-to-the-coronavirus-covid-19#scheme/occupation",
     "@type": "skos:ConceptScheme",
     "rdfs:label": "Occupation",
-    "skos:hasTopConcept { "@id": "http://gss-data.org.uk/data/gss_data/covid-19/ons-which-occupations-have-the-highest-potential-exposure-to-the-coronavirus-covid-19#concept/occupation/all" }
+    "skos:hasTopConcept": { "@id": "http://gss-data.org.uk/data/gss_data/covid-19/ons-which-occupations-have-the-highest-potential-exposure-to-the-coronavirus-covid-19#concept/occupation/all" }
   }
 }

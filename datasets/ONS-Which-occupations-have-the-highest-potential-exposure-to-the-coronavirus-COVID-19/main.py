@@ -203,9 +203,8 @@ for col in df:
 
 
 # %%
-
-
-tidy = df[['UK SOC 2010 Code', 'Occupation','Total in employment', 'Median hourly pay', 'Percentage Workforce Female', 'Percentage Workforce Aged 55plus', 'Percentage Workforce BAME', 'Working Condition Category', 'Measure type', 'Unit', 'Value']]
+#tidy = df[['UK SOC 2010 Code', 'Occupation','Total in employment', 'Median hourly pay', 'Percentage Workforce Female', 'Percentage Workforce Aged 55plus', 'Percentage Workforce BAME', 'Working Condition Category', 'Measure type', 'Unit', 'Value']]
+tidy = df[['UK SOC 2010 Code', 'Occupation', 'Working Condition Category', 'Measure type', 'Unit', 'Value']]
 
 trace.Occupation_title("Remove any prefixed whitespace from all values in column and pathify")
 for column in tidy:

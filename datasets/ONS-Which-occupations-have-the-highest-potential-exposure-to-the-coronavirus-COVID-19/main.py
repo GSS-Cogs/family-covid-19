@@ -169,8 +169,8 @@ trace.Unit("Information regarding The standardised exposure to disease / infecti
 observations = measure_type.fill(DOWN).is_not_blank()
 
 dimensions = [
-    HDim(soc_codes, 'UK SOC 2010 Code', DIRECTLY, LEFT),
-    HDim(occupation_title, 'Occupation', DIRECTLY, LEFT),
+    HDim(soc_codes, 'Occupation', DIRECTLY, LEFT),
+    HDim(occupation_title, 'Occupation title', DIRECTLY, LEFT),
     HDim(measure_type, 'Measure type', DIRECTLY, ABOVE),
     HDim(measure_type, 'Working Condition Category', DIRECTLY, ABOVE),
     HDim(total_employment, 'Total in employment', DIRECTLY, RIGHT),
@@ -189,8 +189,8 @@ df = trace.combine_and_trace(datacube_name, "combined_dataframe")
 trace.add_column("Value")
 trace.multi([ "Value"], "Rename databaker columns OBS to Value")
 df.rename(columns={'OBS' : 'Value'}, inplace=True)
-df["UK SOC 2010 Code"] = pd.to_numeric(df["UK SOC 2010 Code"])
-df["UK SOC 2010 Code"] = df["UK SOC 2010 Code"].astype(int)
+df["Occupation"] = pd.to_numeric(df["Occupation"])
+df["Occupation"] = df["Occupation"].astype(int)
 df = df.replace({'Measure type' : {'Proximity to others' : 'Proximity', 'Exposure to disease' : 'Exposure'}})
 # -
 
@@ -204,11 +204,11 @@ for col in df:
 
 # %%
 #tidy = df[['UK SOC 2010 Code', 'Occupation','Total in employment', 'Median hourly pay', 'Percentage Workforce Female', 'Percentage Workforce Aged 55plus', 'Percentage Workforce BAME', 'Working Condition Category', 'Measure type', 'Unit', 'Value']]
-tidy = df[['UK SOC 2010 Code', 'Occupation', 'Working Condition Category', 'Measure type', 'Unit', 'Value']]
+tidy = df[['Occupation', 'Working Condition Category', 'Measure type', 'Unit', 'Value']]
 
 trace.Occupation_title("Remove any prefixed whitespace from all values in column and pathify")
 for column in tidy:
-    if column in ('Occupation', 'Working Condition Category'):
+    if column in ('Working Condition Category'):
         tidy[column] = tidy[column].str.lstrip()
         tidy[column] = tidy[column].str.rstrip()
         tidy[column] = tidy[column].map(lambda x: pathify(x))
@@ -343,5 +343,7 @@ trace.output()
 # tidy = df[['Workforce Category', 'Measure type', 'Unit', 'Value']]
 
 
+
+# %%
 
 # %%

@@ -1,360 +1,366 @@
-Label,Notation,Parent Notation,Sort Priority
-Chief executives and senior officials,chief-executives-and-senior-officials,,1
-Production managers and directors in manufacturing,production-managers-and-directors-in-manufacturing,,2
-Production managers and directors in construction,production-managers-and-directors-in-construction,,3
-Production managers and directors in mining and energy,production-managers-and-directors-in-mining-and-energy,,4
-Financial managers and directors,financial-managers-and-directors,,5
-Marketing and sales directors,marketing-and-sales-directors,,6
-Purchasing managers and directors,purchasing-managers-and-directors,,7
-Advertising and public relations directors,advertising-and-public-relations-directors,,8
-Human resource managers and directors,human-resource-managers-and-directors,,9
-Information technology and telecommunications directors,information-technology-and-telecommunications-directors,,10
-Functional managers and directors n e c,functional-managers-and-directors-n-e-c,,11
-Financial institution managers and directors,financial-institution-managers-and-directors,,12
-Managers and directors in transport and distribution,managers-and-directors-in-transport-and-distribution,,13
-Managers and directors in storage and warehousing,managers-and-directors-in-storage-and-warehousing,,14
-Senior police officers,senior-police-officers,,15
-Senior officers in fire ambulance prison and related services,senior-officers-in-fire-ambulance-prison-and-related-services,,16
-Health services and public health managers and directors,health-services-and-public-health-managers-and-directors,,17
-Social services managers and directors,social-services-managers-and-directors,,18
-Managers and directors in retail and wholesale,managers-and-directors-in-retail-and-wholesale,,19
-Managers and proprietors in agriculture and horticulture,managers-and-proprietors-in-agriculture-and-horticulture,,20
-Managers and proprietors in forestry fishing and related services,managers-and-proprietors-in-forestry-fishing-and-related-services,,21
-Hotel and accommodation managers and proprietors,hotel-and-accommodation-managers-and-proprietors,,22
-Restaurant and catering establishment managers and proprietors,restaurant-and-catering-establishment-managers-and-proprietors,,23
-Publicans and managers of licensed premises,publicans-and-managers-of-licensed-premises,,24
-Leisure and sports managers,leisure-and-sports-managers,,25
-Travel agency managers and proprietors,travel-agency-managers-and-proprietors,,26
-Health care practice managers,health-care-practice-managers,,27
-Residential day and domiciliary care managers and proprietors,residential-day-and-domiciliary-care-managers-and-proprietors,,28
-Property housing and estate managers,property-housing-and-estate-managers,,29
-Garage managers and proprietors,garage-managers-and-proprietors,,30
-Hairdressing and beauty salon managers and proprietors,hairdressing-and-beauty-salon-managers-and-proprietors,,31
-Shopkeepers and proprietors wholesale and retail,shopkeepers-and-proprietors-wholesale-and-retail,,32
-Waste disposal and environmental services managers,waste-disposal-and-environmental-services-managers,,33
-Managers and proprietors in other services n e c,managers-and-proprietors-in-other-services-n-e-c,,34
-Chemical scientists,chemical-scientists,,35
-Biological scientists and biochemists,biological-scientists-and-biochemists,,36
-Physical scientists,physical-scientists,,37
-Social and humanities scientists,social-and-humanities-scientists,,38
-Natural and social science professionals n e c,natural-and-social-science-professionals-n-e-c,,39
-Civil engineers,civil-engineers,,40
-Mechanical engineers,mechanical-engineers,,41
-Electrical engineers,electrical-engineers,,42
-Electronics engineers,electronics-engineers,,43
-Design and development engineers,design-and-development-engineers,,44
-Production and process engineers,production-and-process-engineers,,45
-Engineering professionals n e c,engineering-professionals-n-e-c,,46
-It business analysts architects and systems designers,it-business-analysts-architects-and-systems-designers,,47
-Programmers and software development professionals,programmers-and-software-development-professionals,,48
-Conservation professionals,conservation-professionals,,49
-Environment professionals,environment-professionals,,50
-Research and development managers,research-and-development-managers,,51
-Medical practitioners,medical-practitioners,,52
-Psychologists,psychologists,,53
-Pharmacists,pharmacists,,54
-Ophthalmic opticians,ophthalmic-opticians,,55
-Dental practitioners,dental-practitioners,,56
-Veterinarians,veterinarians,,57
-Medical radiographers,medical-radiographers,,58
-Podiatrists,podiatrists,,59
-Health professionals n e c,health-professionals-n-e-c,,60
-Physiotherapists,physiotherapists,,61
-Occupational therapists,occupational-therapists,,62
-Speech and language therapists,speech-and-language-therapists,,63
-Therapy professionals n e c,therapy-professionals-n-e-c,,64
-Nurses,nurses,,65
-Midwives,midwives,,66
-Higher education teaching professionals,higher-education-teaching-professionals,,67
-Further education teaching professionals,further-education-teaching-professionals,,68
-Secondary education teaching professionals,secondary-education-teaching-professionals,,69
-Primary and nursery education teaching professionals,primary-and-nursery-education-teaching-professionals,,70
-Special needs education teaching professionals,special-needs-education-teaching-professionals,,71
-Senior professionals of educational establishments,senior-professionals-of-educational-establishments,,72
-Education advisers and school inspectors,education-advisers-and-school-inspectors,,73
-Teaching and other educational professionals n e c,teaching-and-other-educational-professionals-n-e-c,,74
-Barristers and judges,barristers-and-judges,,75
-Solicitors,solicitors,,76
-Legal professionals n e c,legal-professionals-n-e-c,,77
-Chartered and certified accountants,chartered-and-certified-accountants,,78
-Management consultants and business analysts,management-consultants-and-business-analysts,,79
-Business and financial project management professionals,business-and-financial-project-management-professionals,,80
-Actuaries economists and statisticians,actuaries-economists-and-statisticians,,81
-Business and related research professionals,business-and-related-research-professionals,,82
-Business research and administrative professionals n e c,business-research-and-administrative-professionals-n-e-c,,83
-Architects,architects,,84
-Town planning officers,town-planning-officers,,85
-Quantity surveyors,quantity-surveyors,,86
-Chartered surveyors,chartered-surveyors,,87
-Chartered architectural technologists,chartered-architectural-technologists,,88
-Construction project managers and related professionals,construction-project-managers-and-related-professionals,,89
-Social workers,social-workers,,90
-Probation officers,probation-officers,,91
-Clergy,clergy,,92
-Welfare professionals n e c,welfare-professionals-n-e-c,,93
-Librarians,librarians,,94
-Archivists and curators,archivists-and-curators,,95
-Quality control and planning engineers,quality-control-and-planning-engineers,,96
-Quality assurance and regulatory professionals,quality-assurance-and-regulatory-professionals,,97
-Environmental health professionals,environmental-health-professionals,,98
-Journalists newspaper and periodical editors,journalists-newspaper-and-periodical-editors,,99
-Public relations professionals,public-relations-professionals,,100
-Advertising accounts managers and creative directors,advertising-accounts-managers-and-creative-directors,,101
-Laboratory technicians,laboratory-technicians,,102
-Electrical and electronics technicians,electrical-and-electronics-technicians,,103
-Engineering technicians,engineering-technicians,,104
-Building and civil engineering technicians,building-and-civil-engineering-technicians,,105
-Quality assurance technicians,quality-assurance-technicians,,106
-Planning process and production technicians,planning-process-and-production-technicians,,107
-Science engineering and production technicians n e c,science-engineering-and-production-technicians-n-e-c,,108
-Architectural and town planning technicians,architectural-and-town-planning-technicians,,109
-Draughtspersons,draughtspersons,,110
-It operations technicians,it-operations-technicians,,111
-Paramedics,paramedics,,112
-Dispensing opticians,dispensing-opticians,,113
-Pharmaceutical technicians,pharmaceutical-technicians,,114
-Medical and dental technicians,medical-and-dental-technicians,,115
-Youth and community workers,youth-and-community-workers,,116
-Child and early years officers,child-and-early-years-officers,,117
-Housing officers,housing-officers,,118
-Counsellors,counsellors,,119
-Welfare and housing associate professionals n e c,welfare-and-housing-associate-professionals-n-e-c,,120
-Police officers sergeant and below,police-officers-sergeant-and-below,,121
-Fire service officers watch manager and below,fire-service-officers-watch-manager-and-below,,122
-Prison service officers below principal officer,prison-service-officers-below-principal-officer,,123
-Police community support officers,police-community-support-officers,,124
-Protective service associate professionals n e c,protective-service-associate-professionals-n-e-c,,125
-Artists,artists,,126
-Authors writers and translators,authors-writers-and-translators,,127
-Actors entertainers and presenters,actors-entertainers-and-presenters,,128
-Dancers and choreographers,dancers-and-choreographers,,129
-Musicians,musicians,,130
-Arts officers producers and directors,arts-officers-producers-and-directors,,131
-Photographers audio visual and broadcasting equipment operators,photographers-audio-visual-and-broadcasting-equipment-operators,,132
-Graphic designers,graphic-designers,,133
-Product clothing and related designers,product-clothing-and-related-designers,,134
-Sports players,sports-players,,135
-Sports coaches instructors and officials,sports-coaches-instructors-and-officials,,136
-Fitness instructors,fitness-instructors,,137
-Air traffic controllers,air-traffic-controllers,,138
-Aircraft pilots and flight engineers,aircraft-pilots-and-flight-engineers,,139
-Ship and hovercraft officers,ship-and-hovercraft-officers,,140
-Legal associate professionals,legal-associate-professionals,,141
-Estimators valuers and assessors,estimators-valuers-and-assessors,,142
-Brokers,brokers,,143
-Insurance underwriters,insurance-underwriters,,144
-Finance and investment analysts and advisers,finance-and-investment-analysts-and-advisers,,145
-Taxation experts,taxation-experts,,146
-Importers and exporters,importers-and-exporters,,147
-Financial and accounting technicians,financial-and-accounting-technicians,,148
-Financial accounts managers,financial-accounts-managers,,149
-Business and related associate professionals n e c,business-and-related-associate-professionals-n-e-c,,150
-Buyers and procurement officers,buyers-and-procurement-officers,,151
-Business sales executives,business-sales-executives,,152
-Marketing associate professionals,marketing-associate-professionals,,153
-Estate agents and auctioneers,estate-agents-and-auctioneers,,154
-Sales accounts and business development managers,sales-accounts-and-business-development-managers,,155
-Conference and exhibition managers and organisers,conference-and-exhibition-managers-and-organisers,,156
-Conservation and environmental associate professionals,conservation-and-environmental-associate-professionals,,157
-Public services associate professionals,public-services-associate-professionals,,158
-Human resources and industrial relations officers,human-resources-and-industrial-relations-officers,,159
-Vocational and industrial trainers and instructors,vocational-and-industrial-trainers-and-instructors,,160
-Careers advisers and vocational guidance specialists,careers-advisers-and-vocational-guidance-specialists,,161
-Inspectors of standards and regulations,inspectors-of-standards-and-regulations,,162
-Health and safety officers,health-and-safety-officers,,163
-National government administrative occupations,national-government-administrative-occupations,,164
-Local government administrative occupations,local-government-administrative-occupations,,165
-Officers of non governmental organisations,officers-of-non-governmental-organisations,,166
-Credit controllers,credit-controllers,,167
-Book keepers payroll managers and wages clerks,book-keepers-payroll-managers-and-wages-clerks,,168
-Bank and post office clerks,bank-and-post-office-clerks,,169
-Finance officers,finance-officers,,170
-Financial administrative occupations n e c,financial-administrative-occupations-n-e-c,,171
-Records clerks and assistants,records-clerks-and-assistants,,172
-Pensions and insurance clerks and assistants,pensions-and-insurance-clerks-and-assistants,,173
-Stock control clerks and assistants,stock-control-clerks-and-assistants,,174
-Transport and distribution clerks and assistants,transport-and-distribution-clerks-and-assistants,,175
-Library clerks and assistants,library-clerks-and-assistants,,176
-Human resources administrative occupations,human-resources-administrative-occupations,,177
-Sales administrators,sales-administrators,,178
-Other administrative occupations n e c,other-administrative-occupations-n-e-c,,179
-Office managers,office-managers,,180
-Office supervisors,office-supervisors,,181
-Medical secretaries,medical-secretaries,,182
-Legal secretaries,legal-secretaries,,183
-School secretaries,school-secretaries,,184
-Company secretaries,company-secretaries,,185
-Personal assistants and other secretaries,personal-assistants-and-other-secretaries,,186
-Receptionists,receptionists,,187
-Typists and related keyboard occupations,typists-and-related-keyboard-occupations,,188
-Farmers,farmers,,189
-Horticultural trades,horticultural-trades,,190
-Gardeners and landscape gardeners,gardeners-and-landscape-gardeners,,191
-Groundsmen and greenkeepers,groundsmen-and-greenkeepers,,192
-Agricultural and fishing trades n e c,agricultural-and-fishing-trades-n-e-c,,193
-Smiths and forge workers,smiths-and-forge-workers,,194
-Moulders core makers and die casters,moulders-core-makers-and-die-casters,,195
-Sheet metal workers,sheet-metal-workers,,196
-Metal plate workers and riveters,metal-plate-workers-and-riveters,,197
-Welding trades,welding-trades,,198
-Pipe fitters,pipe-fitters,,199
-Metal machining setters and setter operators,metal-machining-setters-and-setter-operators,,200
-Tool makers tool fitters and markers out,tool-makers-tool-fitters-and-markers-out,,201
-Metal working production and maintenance fitters,metal-working-production-and-maintenance-fitters,,202
-Precision instrument makers and repairers,precision-instrument-makers-and-repairers,,203
-Air conditioning and refrigeration engineers,air-conditioning-and-refrigeration-engineers,,204
-Vehicle technicians mechanics and electricians,vehicle-technicians-mechanics-and-electricians,,205
-Vehicle body builders and repairers,vehicle-body-builders-and-repairers,,206
-Vehicle paint technicians,vehicle-paint-technicians,,207
-Aircraft maintenance and related trades,aircraft-maintenance-and-related-trades,,208
-Boat and ship builders and repairers,boat-and-ship-builders-and-repairers,,209
-Rail and rolling stock builders and repairers,rail-and-rolling-stock-builders-and-repairers,,210
-Electricians and electrical fitters,electricians-and-electrical-fitters,,211
-Telecommunications engineers,telecommunications-engineers,,212
-Tv video and audio engineers,tv-video-and-audio-engineers,,213
-It engineers,it-engineers,,214
-Electrical and electronic trades n e c,electrical-and-electronic-trades-n-e-c,,215
-Skilled metal electrical and electronic trades supervisors,skilled-metal-electrical-and-electronic-trades-supervisors,,216
-Steel erectors,steel-erectors,,217
-Bricklayers and masons,bricklayers-and-masons,,218
-Roofers roof tilers and slaters,roofers-roof-tilers-and-slaters,,219
-Plumbers and heating and ventilating engineers,plumbers-and-heating-and-ventilating-engineers,,220
-Carpenters and joiners,carpenters-and-joiners,,221
-Glaziers window fabricators and fitters,glaziers-window-fabricators-and-fitters,,222
-Construction and building trades n e c,construction-and-building-trades-n-e-c,,223
-Plasterers,plasterers,,224
-Floorers and wall tilers,floorers-and-wall-tilers,,225
-Painters and decorators,painters-and-decorators,,226
-Construction and building trades supervisors,construction-and-building-trades-supervisors,,227
-Weavers and knitters,weavers-and-knitters,,228
-Upholsterers,upholsterers,,229
-Footwear and leather working trades,footwear-and-leather-working-trades,,230
-Tailors and dressmakers,tailors-and-dressmakers,,231
-Textiles garments and related trades n e c,textiles-garments-and-related-trades-n-e-c,,232
-Pre press technicians,pre-press-technicians,,233
-Printers,printers,,234
-Print finishing and binding workers,print-finishing-and-binding-workers,,235
-Butchers,butchers,,236
-Bakers and flour confectioners,bakers-and-flour-confectioners,,237
-Fishmongers and poultry dressers,fishmongers-and-poultry-dressers,,238
-Chefs,chefs,,239
-Cooks,cooks,,240
-Catering and bar managers,catering-and-bar-managers,,241
-Glass and ceramics makers decorators and finishers,glass-and-ceramics-makers-decorators-and-finishers,,242
-Furniture makers and other craft woodworkers,furniture-makers-and-other-craft-woodworkers,,243
-Florists,florists,,244
-Other skilled trades n e c,other-skilled-trades-n-e-c,,245
-Nursery nurses and assistants,nursery-nurses-and-assistants,,246
-Childminders and related occupations,childminders-and-related-occupations,,247
-Playworkers,playworkers,,248
-Teaching assistants,teaching-assistants,,249
-Educational support assistants,educational-support-assistants,,250
-Veterinary nurses,veterinary-nurses,,251
-Pest control officers,pest-control-officers,,252
-Animal care services occupations n e c,animal-care-services-occupations-n-e-c,,253
-Nursing auxiliaries and assistants,nursing-auxiliaries-and-assistants,,254
-Ambulance staff excluding paramedics,ambulance-staff-excluding-paramedics,,255
-Dental nurses,dental-nurses,,256
-Houseparents and residential wardens,houseparents-and-residential-wardens,,257
-Care workers and home carers,care-workers-and-home-carers,,258
-Senior care workers,senior-care-workers,,259
-Care escorts,care-escorts,,260
-Undertakers mortuary and crematorium assistants,undertakers-mortuary-and-crematorium-assistants,,261
-Sports and leisure assistants,sports-and-leisure-assistants,,262
-Travel agents,travel-agents,,263
-Air travel assistants,air-travel-assistants,,264
-Rail travel assistants,rail-travel-assistants,,265
-Leisure and travel service occupations n e c,leisure-and-travel-service-occupations-n-e-c,,266
-Hairdressers and barbers,hairdressers-and-barbers,,267
-Beauticians and related occupations,beauticians-and-related-occupations,,268
-Housekeepers and related occupations,housekeepers-and-related-occupations,,269
-Caretakers,caretakers,,270
-Cleaning and housekeeping managers and supervisors,cleaning-and-housekeeping-managers-and-supervisors,,271
-Sales and retail assistants,sales-and-retail-assistants,,272
-Retail cashiers and check out operators,retail-cashiers-and-check-out-operators,,273
-Telephone salespersons,telephone-salespersons,,274
-Pharmacy and other dispensing assistants,pharmacy-and-other-dispensing-assistants,,275
-Vehicle and parts salespersons and advisers,vehicle-and-parts-salespersons-and-advisers,,276
-Collector salespersons and credit agents,collector-salespersons-and-credit-agents,,277
-Debt rent and other cash collectors,debt-rent-and-other-cash-collectors,,278
-Roundspersons and van salespersons,roundspersons-and-van-salespersons,,279
-Market and street traders and assistants,market-and-street-traders-and-assistants,,280
-Merchandisers and window dressers,merchandisers-and-window-dressers,,281
-Sales related occupations n e c,sales-related-occupations-n-e-c,,282
-Sales supervisors,sales-supervisors,,283
-Call and contact centre occupations,call-and-contact-centre-occupations,,284
-Telephonists,telephonists,,285
-Communication operators,communication-operators,,286
-Market research interviewers,market-research-interviewers,,287
-Customer service occupations n e c,customer-service-occupations-n-e-c,,288
-Customer service managers and supervisors,customer-service-managers-and-supervisors,,289
-Food drink and tobacco process operatives,food-drink-and-tobacco-process-operatives,,290
-Glass and ceramics process operatives,glass-and-ceramics-process-operatives,,291
-Textile process operatives,textile-process-operatives,,292
-Chemical and related process operatives,chemical-and-related-process-operatives,,293
-Rubber process operatives,rubber-process-operatives,,294
-Plastics process operatives,plastics-process-operatives,,295
-Metal making and treating process operatives,metal-making-and-treating-process-operatives,,296
-Electroplaters,electroplaters,,297
-Process operatives n e c,process-operatives-n-e-c,,298
-Paper and wood machine operatives,paper-and-wood-machine-operatives,,299
-Coal mine operatives,coal-mine-operatives,,300
-Quarry workers and related operatives,quarry-workers-and-related-operatives,,301
-Energy plant operatives,energy-plant-operatives,,302
-Metal working machine operatives,metal-working-machine-operatives,,303
-Water and sewerage plant operatives,water-and-sewerage-plant-operatives,,304
-Printing machine assistants,printing-machine-assistants,,305
-Plant and machine operatives n e c,plant-and-machine-operatives-n-e-c,,306
-Assemblers electrical and electronic products,assemblers-electrical-and-electronic-products,,307
-Assemblers vehicles and metal goods,assemblers-vehicles-and-metal-goods,,308
-Routine inspectors and testers,routine-inspectors-and-testers,,309
-Weighers graders and sorters,weighers-graders-and-sorters,,310
-Tyre exhaust and windscreen fitters,tyre-exhaust-and-windscreen-fitters,,311
-Sewing machinists,sewing-machinists,,312
-Assemblers and routine operatives n e c,assemblers-and-routine-operatives-n-e-c,,313
-Scaffolders stagers and riggers,scaffolders-stagers-and-riggers,,314
-Road construction operatives,road-construction-operatives,,315
-Rail construction and maintenance operatives,rail-construction-and-maintenance-operatives,,316
-Construction operatives n e c,construction-operatives-n-e-c,,317
-Large goods vehicle drivers,large-goods-vehicle-drivers,,318
-Van drivers,van-drivers,,319
-Bus and coach drivers,bus-and-coach-drivers,,320
-Taxi and cab drivers and chauffeurs,taxi-and-cab-drivers-and-chauffeurs,,321
-Driving instructors,driving-instructors,,322
-Crane drivers,crane-drivers,,323
-Fork lift truck drivers,fork-lift-truck-drivers,,324
-Agricultural machinery drivers,agricultural-machinery-drivers,,325
-Mobile machine drivers and operatives n e c,mobile-machine-drivers-and-operatives-n-e-c,,326
-Train and tram drivers,train-and-tram-drivers,,327
-Marine and waterways transport operatives,marine-and-waterways-transport-operatives,,328
-Air transport operatives,air-transport-operatives,,329
-Rail transport operatives,rail-transport-operatives,,330
-Other drivers and transport operatives n e c,other-drivers-and-transport-operatives-n-e-c,,331
-Farm workers,farm-workers,,332
-Forestry workers,forestry-workers,,333
-Fishing and other elementary agriculture occupations n e c,fishing-and-other-elementary-agriculture-occupations-n-e-c,,334
-Elementary construction occupations,elementary-construction-occupations,,335
-Industrial cleaning process occupations,industrial-cleaning-process-occupations,,336
-Packers bottlers canners and fillers,packers-bottlers-canners-and-fillers,,337
-Elementary process plant occupations n e c,elementary-process-plant-occupations-n-e-c,,338
-Postal workers mail sorters messengers and couriers,postal-workers-mail-sorters-messengers-and-couriers,,339
-Elementary administration occupations n e c,elementary-administration-occupations-n-e-c,,340
-Window cleaners,window-cleaners,,341
-Cleaners and domestics,cleaners-and-domestics,,342
-Launderers dry cleaners and pressers,launderers-dry-cleaners-and-pressers,,343
-Refuse and salvage occupations,refuse-and-salvage-occupations,,344
-Vehicle valeters and cleaners,vehicle-valeters-and-cleaners,,345
-Elementary cleaning occupations n e c,elementary-cleaning-occupations-n-e-c,,346
-Security guards and related occupations,security-guards-and-related-occupations,,347
-Parking and civil enforcement occupations,parking-and-civil-enforcement-occupations,,348
-School midday and crossing patrol occupations,school-midday-and-crossing-patrol-occupations,,349
-Elementary security occupations n e c,elementary-security-occupations-n-e-c,,350
-Shelf fillers,shelf-fillers,,351
-Elementary sales occupations n e c,elementary-sales-occupations-n-e-c,,352
-Elementary storage occupations,elementary-storage-occupations,,353
-Hospital porters,hospital-porters,,354
-Kitchen and catering assistants,kitchen-and-catering-assistants,,355
-Waiters and waitresses,waiters-and-waitresses,,356
-Bar staff,bar-staff,,357
-Leisure and theme park attendants,leisure-and-theme-park-attendants,,358
-Other elementary services occupations n e c,other-elementary-services-occupations-n-e-c,,359
+Label,Noatation,Parent Notation,Sort Priority
+Chief executives and senior officials,1115,,1
+Production managers and directors in manufacturing,1121,,2
+Production managers and directors in construction,1122,,3
+Production managers and directors in mining and energy,1123,,4
+Financial managers and directors,1131,,5
+Marketing and sales directors,1132,,6
+Purchasing managers and directors,1133,,7
+Advertising and public relations directors,1134,,8
+Human resource managers and directors,1135,,9
+Information technology and telecommunications directors,1136,,10
+Functional managers and directors n.e.c.,1139,,11
+Financial institution managers and directors,1150,,12
+Managers and directors in transport and distribution,1161,,13
+Managers and directors in storage and warehousing,1162,,14
+Senior police officers,1172,,15
+"Senior officers in fire, ambulance, prison and related services",1173,,16
+Health services and public health managers and directors,1181,,17
+Social services managers and directors,1184,,18
+Managers and directors in retail and wholesale,1190,,19
+Managers and proprietors in agriculture and horticulture,1211,,20
+"Managers and proprietors in forestry, fishing and related services",1213,,21
+Hotel and accommodation managers and proprietors,1221,,22
+Restaurant and catering establishment managers and proprietors,1223,,23
+Publicans and managers of licensed premises,1224,,24
+Leisure and sports managers,1225,,25
+Travel agency managers and proprietors,1226,,26
+Health care practice managers,1241,,27
+"Residential, day and domiciliary  care managers and proprietors",1242,,28
+"Property, housing and estate managers",1251,,29
+Garage managers and proprietors,1252,,30
+Hairdressing and beauty salon managers and proprietors,1253,,31
+Shopkeepers and proprietors – wholesale and retail,1254,,32
+Waste disposal and environmental services managers,1255,,33
+Managers and proprietors in other services n.e.c.,1259,,34
+Chemical scientists,2111,,35
+Biological scientists and biochemists,2112,,36
+Physical scientists,2113,,37
+Social and humanities scientists,2114,,38
+Natural and social science professionals n.e.c.,2119,,39
+Civil engineers,2121,,40
+Mechanical engineers,2122,,41
+Electrical engineers,2123,,42
+Electronics engineers,2124,,43
+Design and development engineers,2126,,44
+Production and process engineers,2127,,45
+Engineering professionals n.e.c.,2129,,46
+"IT business analysts, architects and systems designers",2135,,47
+Programmers and software development professionals,2136,,48
+Conservation professionals,2141,,49
+Environment professionals,2142,,50
+Research and development managers,2150,,51
+Medical practitioners,2211,,52
+Psychologists,2212,,53
+Pharmacists,2213,,54
+Ophthalmic opticians,2214,,55
+Dental practitioners,2215,,56
+Veterinarians,2216,,57
+Medical radiographers,2217,,58
+Podiatrists,2218,,59
+Health professionals n.e.c.,2219,,60
+Physiotherapists,2221,,61
+Occupational therapists,2222,,62
+Speech and language therapists,2223,,63
+Therapy professionals n.e.c.,2229,,64
+Nurses,2231,,65
+Midwives,2232,,66
+Higher education teaching professionals,2311,,67
+Further education teaching professionals,2312,,68
+Secondary education teaching professionals,2314,,69
+Primary and nursery education teaching professionals,2315,,70
+Special needs education teaching professionals,2316,,71
+Senior professionals of educational establishments,2317,,72
+Education advisers and school inspectors,2318,,73
+Teaching and other educational professionals n.e.c.,2319,,74
+Barristers and judges,2412,,75
+Solicitors,2413,,76
+Legal professionals n.e.c.,2419,,77
+Chartered and certified accountants,2421,,78
+Management consultants and business analysts,2423,,79
+Business and financial project management professionals,2424,,80
+"Actuaries, economists and statisticians",2425,,81
+Business and related research professionals,2426,,82
+"Business, research and administrative professionals n.e.c.",2429,,83
+Architects,2431,,84
+Town planning officers,2432,,85
+Quantity surveyors,2433,,86
+Chartered surveyors,2434,,87
+Chartered architectural technologists,2435,,88
+Construction project managers and related professionals,2436,,89
+Social workers,2442,,90
+Probation officers,2443,,91
+Clergy,2444,,92
+Welfare professionals n.e.c.,2449,,93
+Librarians,2451,,94
+Archivists and curators,2452,,95
+Quality control and planning engineers,2461,,96
+Quality assurance and regulatory professionals,2462,,97
+Environmental health professionals,2463,,98
+"Journalists, newspaper and periodical editors",2471,,99
+Public relations professionals,2472,,100
+Advertising accounts managers and creative directors,2473,,101
+Laboratory technicians,3111,,102
+Electrical and electronics technicians,3112,,103
+Engineering technicians,3113,,104
+Building and civil engineering technicians,3114,,105
+Quality assurance technicians,3115,,106
+"Planning, process and production technicians",3116,,107
+"Science, engineering and production technicians n.e.c.",3119,,108
+Architectural and town planning technicians,3121,,109
+Draughtspersons,3122,,110
+IT operations technicians,3131,,111
+Paramedics,3213,,112
+Dispensing opticians,3216,,113
+Pharmaceutical technicians,3217,,114
+Medical and dental technicians,3218,,115
+Youth and community workers,3231,,116
+Child and early years officers,3233,,117
+Housing officers,3234,,118
+Counsellors,3235,,119
+Welfare and housing associate professionals n.e.c.,3239,,120
+Police officers (sergeant and below),3312,,121
+Fire service officers (watch manager and below),3313,,122
+Prison service officers (below principal officer),3314,,123
+Police community support officers,3315,,124
+Protective service associate professionals n.e.c.,3319,,125
+Artists,3411,,126
+"Authors, writers and translators",3412,,127
+"Actors, entertainers and presenters",3413,,128
+Dancers and choreographers,3414,,129
+Musicians,3415,,130
+"Arts officers, producers and directors",3416,,131
+"Photographers, audio-visual and broadcasting equipment operators",3417,,132
+Graphic designers,3421,,133
+"Product, clothing and related designers",3422,,134
+Sports players,3441,,135
+"Sports coaches, instructors and officials",3442,,136
+Fitness instructors,3443,,137
+Air traffic controllers,3511,,138
+Aircraft pilots and flight engineers,3512,,139
+Ship and hovercraft officers,3513,,140
+Legal associate professionals,3520,,141
+"Estimators, valuers and assessors",3531,,142
+Brokers,3532,,143
+Insurance underwriters,3533,,144
+Finance and investment analysts and advisers,3534,,145
+Taxation experts,3535,,146
+Importers and exporters,3536,,147
+Financial and accounting technicians,3537,,148
+Financial accounts managers,3538,,149
+Business and related associate professionals n.e.c.,3539,,150
+Buyers and procurement officers,3541,,151
+Business sales executives,3542,,152
+Marketing associate professionals,3543,,153
+Estate agents and auctioneers,3544,,154
+Sales accounts and business development managers,3545,,155
+Conference and exhibition managers and organisers,3546,,156
+Conservation and environmental associate professionals,3550,,157
+Public services associate professionals,3561,,158
+Human resources and industrial relations officers,3562,,159
+Vocational and industrial trainers and instructors,3563,,160
+Careers advisers and vocational guidance specialists,3564,,161
+Inspectors of standards and regulations,3565,,162
+Health and safety officers,3567,,163
+National government administrative occupations,4112,,164
+Local government administrative occupations,4113,,165
+Officers of non-governmental organisations,4114,,166
+Credit controllers,4121,,167
+"Book-keepers, payroll managers and wages clerks",4122,,168
+Bank and post office clerks,4123,,169
+Finance officers,4124,,170
+Financial administrative occupations n.e.c.,4129,,171
+Records clerks and assistants,4131,,172
+Pensions and insurance clerks and assistants,4132,,173
+Stock control clerks and assistants,4133,,174
+Transport and distribution clerks and assistants,4134,,175
+Library clerks and assistants,4135,,176
+Human resources administrative occupations,4138,,177
+Sales administrators,4151,,178
+Other administrative occupations n.e.c.,4159,,179
+Office managers,4161,,180
+Office supervisors,4162,,181
+Medical secretaries,4211,,182
+Legal secretaries,4212,,183
+School secretaries,4213,,184
+Company secretaries,4214,,185
+Personal assistants and other secretaries,4215,,186
+Receptionists,4216,,187
+Typists and related keyboard occupations,4217,,188
+Farmers,5111,,189
+Horticultural trades,5112,,190
+Gardeners and landscape gardeners,5113,,191
+Groundsmen and greenkeepers,5114,,192
+Agricultural and fishing trades n.e.c.,5119,,193
+Smiths and forge workers,5211,,194
+"Moulders, core makers and die casters",5212,,195
+Sheet metal workers,5213,,196
+"Metal plate workers, and riveters",5214,,197
+Welding trades,5215,,198
+Pipe fitters,5216,,199
+Metal machining setters and setter-operators,5221,,200
+"Tool makers, tool fitters and markers-out",5222,,201
+Metal working production and maintenance fitters,5223,,202
+Precision instrument makers and repairers,5224,,203
+Air-conditioning and refrigeration engineers,5225,,204
+"Vehicle technicians, mechanics and electricians",5231,,205
+Vehicle body builders and repairers,5232,,206
+Vehicle paint technicians,5234,,207
+Aircraft maintenance and related trades,5235,,208
+Boat and ship builders and repairers,5236,,209
+Rail and rolling stock builders and repairers,5237,,210
+Electricians and electrical fitters,5241,,211
+Telecommunications engineers,5242,,212
+"TV, video and audio engineers",5244,,213
+IT engineers,5245,,214
+Electrical and electronic trades n.e.c.,5249,,215
+"Skilled metal, electrical and electronic trades supervisors",5250,,216
+Steel erectors,5311,,217
+Bricklayers and masons,5312,,218
+"Roofers, roof tilers and slaters",5313,,219
+Plumbers and heating and ventilating engineers,5314,,220
+Carpenters and joiners,5315,,221
+"Glaziers, window fabricators and fitters",5316,,222
+Construction and building trades n.e.c.,5319,,223
+Plasterers,5321,,224
+Floorers and wall tilers,5322,,225
+Painters and decorators,5323,,226
+Construction and building trades supervisors,5330,,227
+Weavers and knitters,5411,,228
+Upholsterers,5412,,229
+Footwear and leather working trades,5413,,230
+Tailors and dressmakers,5414,,231
+"Textiles, garments and related trades n.e.c.",5419,,232
+Pre-press technicians,5421,,233
+Printers,5422,,234
+Print finishing and binding workers,5423,,235
+Butchers,5431,,236
+Bakers and flour confectioners,5432,,237
+Fishmongers and poultry dressers,5433,,238
+Chefs,5434,,239
+Cooks,5435,,240
+Catering and bar managers,5436,,241
+"Glass and ceramics makers, decorators and finishers",5441,,242
+Furniture makers and other craft woodworkers,5442,,243
+Florists,5443,,244
+Other skilled trades n.e.c.,5449,,245
+Nursery nurses and assistants,6121,,246
+Childminders and related occupations,6122,,247
+Playworkers,6123,,248
+Teaching assistants,6125,,249
+Educational support assistants,6126,,250
+Veterinary nurses,6131,,251
+Pest control officers,6132,,252
+Animal care services occupations n.e.c.,6139,,253
+Nursing auxiliaries and assistants,6141,,254
+Ambulance staff (excluding paramedics),6142,,255
+Dental nurses,6143,,256
+Houseparents and residential wardens,6144,,257
+Care workers and home carers,6145,,258
+Senior care workers,6146,,259
+Care escorts,6147,,260
+"Undertakers, mortuary and crematorium assistants",6148,,261
+Sports and leisure assistants,6211,,262
+Travel agents,6212,,263
+Air travel assistants,6214,,264
+Rail travel assistants,6215,,265
+Leisure and travel service occupations n.e.c.,6219,,266
+Hairdressers and barbers,6221,,267
+Beauticians and related occupations,6222,,268
+Housekeepers and related occupations,6231,,269
+Caretakers,6232,,270
+Cleaning and housekeeping managers and supervisors,6240,,271
+Sales and retail assistants,7111,,272
+Retail cashiers and check-out operators,7112,,273
+Telephone salespersons,7113,,274
+Pharmacy and other dispensing assistants,7114,,275
+Vehicle and parts salespersons and advisers,7115,,276
+Collector salespersons and credit agents,7121,,277
+"Debt, rent and other cash collectors",7122,,278
+Roundspersons and van salespersons,7123,,279
+Market and street traders and assistants,7124,,280
+Merchandisers and window dressers,7125,,281
+Sales related occupations n.e.c.,7129,,282
+Sales supervisors,7130,,283
+Call and contact centre occupations,7211,,284
+Telephonists,7213,,285
+Communication operators,7214,,286
+Market research interviewers,7215,,287
+Customer service occupations n.e.c.,7219,,288
+Customer service managers and supervisors,7220,,289
+"Food, drink and tobacco process operatives",8111,,290
+Glass and ceramics process operatives,8112,,291
+Textile process operatives,8113,,292
+Chemical and related process operatives,8114,,293
+Rubber process operatives,8115,,294
+Plastics process operatives,8116,,295
+Metal making and treating process operatives,8117,,296
+Electroplaters,8118,,297
+Process operatives n.e.c.,8119,,298
+Paper and wood machine operatives,8121,,299
+Coal mine operatives,8122,,300
+Quarry workers and related operatives,8123,,301
+Energy plant operatives,8124,,302
+Metal working machine operatives,8125,,303
+Water and sewerage plant operatives,8126,,304
+Printing machine assistants,8127,,305
+Plant and machine operatives n.e.c.,8129,,306
+Assemblers (electrical and electronic products),8131,,307
+Assemblers (vehicles and metal goods),8132,,308
+Routine inspectors and testers,8133,,309
+"Weighers, graders and sorters",8134,,310
+"Tyre, exhaust and windscreen fitters",8135,,311
+Sewing machinists,8137,,312
+Assemblers and routine operatives n.e.c.,8139,,313
+"Scaffolders, stagers and riggers",8141,,314
+Road construction operatives,8142,,315
+Rail construction and maintenance operatives,8143,,316
+Construction operatives n.e.c.,8149,,317
+Large goods vehicle drivers,8211,,318
+Van drivers,8212,,319
+Bus and coach drivers,8213,,320
+Taxi and cab drivers and chauffeurs,8214,,321
+Driving instructors,8215,,322
+Crane drivers,8221,,323
+Fork-lift truck drivers,8222,,324
+Agricultural machinery drivers,8223,,325
+Mobile machine drivers and operatives n.e.c.,8229,,326
+Train and tram drivers,8231,,327
+Marine and waterways transport operatives,8232,,328
+Air transport operatives,8233,,329
+Rail transport operatives,8234,,330
+Other drivers and transport operatives n.e.c.,8239,,331
+Farm workers,9111,,332
+Forestry workers,9112,,333
+Fishing and other elementary agriculture occupations n.e.c.,9119,,334
+Elementary construction occupations,9120,,335
+Industrial cleaning process occupations,9132,,336
+"Packers, bottlers, canners and fillers",9134,,337
+Elementary process plant occupations n.e.c.,9139,,338
+"Postal workers, mail sorters, messengers and couriers",9211,,339
+Elementary administration occupations n.e.c.,9219,,340
+Window cleaners,9231,,341
+Cleaners and domestics,9233,,342
+"Launderers, dry cleaners and pressers",9234,,343
+Refuse and salvage occupations,9235,,344
+Vehicle valeters and cleaners,9236,,345
+Elementary cleaning occupations n.e.c.,9239,,346
+Security guards and related occupations,9241,,347
+Parking and civil enforcement occupations,9242,,348
+School midday and crossing patrol occupations,9244,,349
+Elementary security occupations n.e.c.,9249,,350
+Shelf fillers,9251,,351
+Elementary sales occupations n.e.c.,9259,,352
+Elementary storage occupations,9260,,353
+Hospital porters,9271,,354
+Kitchen and catering assistants,9272,,355
+Waiters and waitresses,9273,,356
+Bar staff,9274,,357
+Leisure and theme park attendants,9275,,358
+Other elementary services occupations n.e.c.,9279,,359
+,"For the percentage of women in each occupation, figures have been grouped together for percentages greater than 95% for disclosure reasons",,360
+,"Please note the exposure to disease and proximity to others data was calculated by O*NET prior to the coronavirus (COVID-19) outbreak, therefore will not reflect any changes to working practices implemented since the outbreak.",,361
+,Some occupations are excluded due to no exposure and/or proximity measures being available,,362
+,The BAME group includes: Mixed/Multiple ethnic groups; Indian; Pakistani; Bangladeshi; Chinese; any other Asian background; Black/African/Caribbean/Black British,,363
+,This measure of pay comes from the Annual Survey of Hours and Earnings (ASHE). It is hourly earnings excluding overtime. It's calculated as (gross pay excluding overtime/basic paid hours). The pay period in question was not affected by absence. It includes people aged 16+ both full-time and part-time.,,364
+,,,

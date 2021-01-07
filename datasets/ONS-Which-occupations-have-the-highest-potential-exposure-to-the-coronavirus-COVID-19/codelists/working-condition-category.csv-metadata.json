@@ -87,7 +87,7 @@
             },
             "rdfs:label": "Working Condition Category",
             "dc:title": "Working Condition Category",
-            "rdfs:comment": "Dataset representing the 'Occupation' code list.",
+            "rdfs:comment": "Dataset representing the 'Working Condition Category' code list.",
             "dc:issued": {
                 "@type": "dateTime",
                 "@value": "2020-05-11T09:00:00.000000"

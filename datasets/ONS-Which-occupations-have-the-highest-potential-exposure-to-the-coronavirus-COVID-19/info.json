@@ -35,8 +35,8 @@
                 "attribute": "http://gss-data.org.uk/def/attribute/percentage-workforce-bame"
             },
             "Value": {
-                "unit": "http://gss-data.org.uk/def/concept/measurement-units/exposure",
-                "measure": "http://gss-data.org.uk/def/measure/standardised-scale",
+                "unit": "http://gss-data.org.uk/def/concept/measurement-units/standardised-scale",
+                "measure": "http://gss-data.org.uk/def/measure/exposure",
                 "datatype": "double"
             }
         },

@@ -344,8 +344,4 @@ trace.output()
 
 
 
-
-pip install --user git+https://github.com/GSS-Cogs/gss-utils@cf65458ec6cf2d004ae69788ced379e412bbc811#egg=gssutils
-
-
 # %%

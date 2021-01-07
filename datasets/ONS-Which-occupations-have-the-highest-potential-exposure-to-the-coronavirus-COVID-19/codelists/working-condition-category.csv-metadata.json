@@ -3,67 +3,125 @@
   "@id": "http://gss-data.org.uk/data/gss_data/covid-19/ons-which-occupations-have-the-highest-potential-exposure-to-the-coronavirus-covid-19#schema",
   "url": "working-condition-category.csv",
   "tableSchema": {
-    "columns": [
-      {
-        "titles": "Label",
-        "name": "label",
-        "datatype": "string",
-        "required": true,
-        "propertyUrl": "rdfs:label"
-      },
-      {
-        "titles": "Notation",
-        "name": "notation",
-        "datatype": {
-          "base": "string",
-          "format": "^-?[\\w\\.\\/]+(-[\\w\\.\\/]+)*$"
+      "columns": [
+        {
+          "titles": "Label",
+          "name": "label",
+          "datatype": "string",
+          "required": true,
+          "propertyUrl": "rdfs:label"
         },
-        "required": true,
-        "propertyUrl": "skos:notation"
-      },
-      {
-        "titles": "Parent Notation",
-        "name": "parent_notation",
-        "datatype": {
-          "base": "string",
-          "format": "^(-?[\\w\\.\\/]+(-[\\w\\.\\/]+)*|)$"
+        {
+          "titles": "Notation",
+          "name": "notation",
+          "datatype": {
+            "base": "string",
+            "format": "^-?[\\w\\.\\/]+(-[\\w\\.\\/]+)*$"
+          },
+          "required": true,
+          "propertyUrl": "skos:notation"
         },
-        "required": false,
-        "propertyUrl": "skos:broader",
-        "valueUrl": "http://gss-data.org.uk/data/gss_data/covid-19/ons-which-occupations-have-the-highest-potential-exposure-to-the-coronavirus-covid-19#concept/working-condition-category/{parent_notation}"
-      },
-      {
-        "titles": "Sort Priority",
-        "name": "sort",
-        "datatype": "integer",
-        "required": false,
-        "propertyUrl": "http://www.w3.org/ns/ui#sortPriority"
-      },
-      {
-        "titles": "Description",
-        "name": "description",
-        "datatype": "string",
-        "required": false,
-        "propertyUrl": "rdfs:comment"
-      },
-      {
-        "virtual": true,
-        "propertyUrl": "rdf:type",
-        "valueUrl": "skos:Concept"
-      },
-      {
-        "virtual": true,
-        "propertyUrl": "skos:inScheme",
-        "valueUrl": "http://gss-data.org.uk/data/gss_data/covid-19/ons-which-occupations-have-the-highest-potential-exposure-to-the-coronavirus-covid-19#scheme/working-condition-category"
+        {
+          "titles": "Parent Notation",
+          "name": "parent_notation",
+          "datatype": {
+            "base": "string",
+            "format": "^(-?[\\w\\.\\/]+(-[\\w\\.\\/]+)*|)$"
+          },
+          "required": false,
+          "propertyUrl": "skos:broader",
+          "valueUrl": "http://gss-data.org.uk/data/gss_data/covid-19/ons-which-occupations-have-the-highest-potential-exposure-to-the-coronavirus-covid-19#concept/working-condition-category/{parent_notation}"
+        },
+        {
+          "titles": "Sort Priority",
+          "name": "sort",
+          "datatype": "integer",
+          "required": false,
+          "propertyUrl": "http://www.w3.org/ns/ui#sortPriority"
+        },
+        {
+          "titles": "Description",
+          "name": "description",
+          "datatype": "string",
+          "required": false,
+          "propertyUrl": "rdfs:comment"
+        },
+        {
+          "virtual": true,
+          "propertyUrl": "rdf:type",
+          "valueUrl": "skos:Concept"
+        },
+        {
+          "virtual": true,
+          "propertyUrl": "skos:inScheme",
+          "valueUrl": "http://gss-data.org.uk/data/gss_data/covid-19/ons-which-occupations-have-the-highest-potential-exposure-to-the-coronavirus-covid-19#scheme/working-condition-category"
+        }
+      ],
+      "primaryKey": "notation",
+      "aboutUrl": "http://gss-data.org.uk/data/gss_data/covid-19/ons-which-occupations-have-the-highest-potential-exposure-to-the-coronavirus-covid-19#concept/working-condition-category/{notation}"
+    },
+    "prov:hadDerivation": {
+      "@id": "http://gss-data.org.uk/data/gss_data/covid-19/ons-which-occupations-have-the-highest-potential-exposure-to-the-coronavirus-covid-19#schemeworking-condition-category",
+      "@type": [
+          "skos:ConceptScheme",
+          "http://publishmydata.com/pmdcat#ConceptScheme"
+      ],
+      "skos:hasTopConcept": {
+          "@id": "http://gss-data.org.uk/data/gss_data/covid-19/ons-which-occupations-have-the-highest-potential-exposure-to-the-coronavirus-covid-19#conceptworking-condition-category/all"
       }
-    ],
-    "primaryKey": "notation",
-    "aboutUrl": "http://gss-data.org.uk/data/gss_data/covid-19/ons-which-occupations-have-the-highest-potential-exposure-to-the-coronavirus-covid-19#concept/working-condition-category/{notation}"
   },
-  "prov:hadDerivation": {
-    "@id": "http://gss-data.org.uk/data/gss_data/covid-19/ons-which-occupations-have-the-highest-potential-exposure-to-the-coronavirus-covid-19#scheme/working-condition-category",
-    "@type": "skos:ConceptScheme",
-    "rdfs:label": "Working Condition Category",
-    "skos:hasTopConcept": { "@id": "http://gss-data.org.uk/data/gss_data/covid-19/ons-which-occupations-have-the-highest-potential-exposure-to-the-coronavirus-covid-19#concept/working-condition-category/all" }
-  }
+  "rdfs:label": "Working Condition Category",
+  "dc:title": "Working Condition Category",
+  "rdfs:seeAlso": [
+        {
+            "@id": "http://gss-data.org.uk/data/gss_data/covid-19/ons-which-occupations-have-the-highest-potential-exposure-to-the-coronavirus-covid-19#schemeworking-condition-category/dataset",
+            "@type": [
+                "dcat:Dataset",
+                "http://publishmydata.com/pmdcat#Dataset"
+            ],
+            "http://publishmydata.com/pmdcat#datasetContents": {
+                "@id": "http://gss-data.org.uk/data/gss_data/covid-19/ons-which-occupations-have-the-highest-potential-exposure-to-the-coronavirus-covid-19#schemeworking-condition-category"
+            },
+            "http://publishmydata.com/pmdcat#graph": {
+                "@id": "http://gss-data.org.uk/data/gss_data/covid-19/ons-which-occupations-have-the-highest-potential-exposure-to-the-coronavirus-covid-19#schemeworking-condition-category"
+            },
+            "rdfs:label": "Working Condition Category",
+            "dc:title": "Working Condition Category",
+            "rdfs:comment": "Dataset representing the 'Occupation' code list.",
+            "dc:issued": {
+                "@type": "dateTime",
+                "@value": "2020-05-11T09:00:00.000000"
+            },
+            "dc:modified": {
+                "@type": "dateTime",
+                "@value": "2020-05-11T09:00:00.000000"
+            }
+        },
+        {
+            "@id": "http://gss-data.org.uk/catalog/vocabularies",
+            "dcat:record": {
+                "@id": "http://gss-data.org.uk/data/gss_data/covid-19/ons-which-occupations-have-the-highest-potential-exposure-to-the-coronavirus-covid-19#schemeworking-condition-category/catalog-record"
+            }
+        },
+        {
+            "@id": "http://gss-data.org.uk/data/gss_data/covid-19/ons-which-occupations-have-the-highest-potential-exposure-to-the-coronavirus-covid-19#schemeworking-condition-category/catalog-record",
+            "@type": "dcat:CatalogRecord",
+            "foaf:primaryTopic": {
+                "@id": "http://gss-data.org.uk/data/gss_data/covid-19/ons-which-occupations-have-the-highest-potential-exposure-to-the-coronavirus-covid-19#schemeworking-condition-category/dataset"
+            },
+            "http://publishmydata.com/pmdcat#metadataGraph": {
+                "@id": "http://gss-data.org.uk/data/gss_data/covid-19/ons-which-occupations-have-the-highest-potential-exposure-to-the-coronavirus-covid-19#schemeworking-condition-category"
+            },
+            "dc:title": "Working Condition Category Catalog Record",
+            "rdfs:label": "Working Condition Category Catalog Record",
+            "dc:issued": {
+                "@type": "dateTime",
+                "@value": "2021-01-07T13:53:52.758493"
+            },
+            "dc:modified": {
+                "@type": "dateTime",
+                "@value": "2021-01-07T13:53:52.758493"
+            }
+        }
+    ]
 }

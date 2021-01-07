@@ -35,13 +35,11 @@
             },
              "Place of death": {
                 "label": "Place of Death",
-                "value": "http://gss-data.org.uk/data/gss_data/covid-19/ons-death-registrations-and-occurrences-by-local-authority-and-health-board#concept/place-of-death/{place_of_death}",
-                "codelist": "http://gss-data.org.uk/data/gss_data/covid-19/ons-death-registrations-and-occurrences-by-local-authority-and-health-board#scheme/place-of-death"
+                "value": "http://gss-data.org.uk/data/gss_data/covid-19/ons-death-registrations-and-occurrences-by-local-authority-and-health-board#concept/place-of-death/{place_of_death}"
             },
             "Cause of death": {
                 "label": "Cause of Death",
-                "value": "http://gss-data.org.uk/data/gss_data/covid-19/ons-death-registrations-and-occurrences-by-local-authority-and-health-board#concept/cause-of-death/{cause_of_death}",
-                "codelist": "http://gss-data.org.uk/data/gss_data/covid-19/ons-death-registrations-and-occurrences-by-local-authority-and-health-board#scheme/cause-of-death"
+                "value": "http://gss-data.org.uk/data/gss_data/covid-19/ons-death-registrations-and-occurrences-by-local-authority-and-health-board#concept/cause-of-death/{cause_of_death}"
             },
             "Value": {
                 "unit": "http://gss-data.org.uk/def/concept/measurement-units/deaths",

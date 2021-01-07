@@ -17,28 +17,22 @@
         "main_issue": 16,
         "columns": {
             "UK SOC 2010 Code": {
-                "attribute": "http://gss-data.org.uk/def/attribute/uk-soc-2010-code",
-                "datatype": "integer"
+                "attribute": "http://gss-data.org.uk/def/attribute/uk-soc-2010-code"
             },
             "Total in employment": {
-                "attribute": "http://gss-data.org.uk/def/attribute/total-in-employment",
-                "datatype": "double"
+                "attribute": "http://gss-data.org.uk/def/attribute/total-in-employment"
             },
             "Median hourly pay": {
-                "attribute": "http://gss-data.org.uk/def/attribute/median-hourly-pay",
-                "datatype": "double"
+                "attribute": "http://gss-data.org.uk/def/attribute/median-hourly-pay"
             },
             "Percentage Workforce Female": {
-                "attribute": "http://gss-data.org.uk/def/attribute/percentage-workforce-female",
-                "datatype": "double"
+                "attribute": "http://gss-data.org.uk/def/attribute/percentage-workforce-female"
             },
             "Percentage Workforce Aged 55plus": {
-                "attribute": "http://gss-data.org.uk/def/attribute/percentage-workforce-aged-55plus",
-                "datatype": "double"
+                "attribute": "http://gss-data.org.uk/def/attribute/percentage-workforce-aged-55plus"
             },
             "Percentage Workforce BAME": {
-                "attribute": "http://gss-data.org.uk/def/attribute/percentage-workforce-bame",
-                "datatype": "double"
+                "attribute": "http://gss-data.org.uk/def/attribute/percentage-workforce-bame"
             },
             "Value": {
                 "unit": "http://gss-data.org.uk/def/concept/measurement-units/exposure",

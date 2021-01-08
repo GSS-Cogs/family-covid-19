@@ -25,18 +25,21 @@
             "Extract Date": {
                 "description": "This is the date when the SPL summary data was extracted for use in the analysis",
                 "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
-                "value": "http://reference.data.gov.uk/id/{+extract_date}"
+                "value": "http://reference.data.gov.uk/id/{+extract_date}",
+                "codelist": false
             },
             "Disease Group": "There are 13 disease groups as defined in the SPL clinical algorithm that have been signed off by the Chief Medical Officer (CMO). A patient can be in multiple disease groups",
             "Age": "The age band of the patient based on the date of birth held within Personal Demographics Service (PDS). Age was calculated using the patients date of birth and the age is calculated as at the date of publication.",
             "Sex": {
                 "parent": "http://purl.org/linked-data/sdmx/2009/dimension#sex",
                 "value": "http://purl.org/linked-data/sdmx/2009/code#sex-{sex}",
+                "codelist": false,
                 "description": "Gender is as recorded within the Personal Demographics Service (PDS)"
             },
             "Geography Code": {
                 "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refArea",
                 "value": "http://statistics.data.gov.uk/id/statistical-geography/{geography_code}",
+                "codelist": false,
                 "description": "The Clinical Commissioning Group (CCG) or Local Authority code containing the patients normal home address. This is derived from the patients address within the Personal Demographics Service (PDS)."
             },
             "Value": {

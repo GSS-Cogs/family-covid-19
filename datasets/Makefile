@@ -2,10 +2,12 @@ datasets = $(sort $(dir $(wildcard */info.json)))
 transforms = $(sort $(dir $(wildcard */main.py)))
 
 test_info:
-	ajv -s ../schemas/pipelines-schema.json -d info.json
+	curl -z dataset-schema.json -o dataset-schema.json https://gss-cogs.github.io/family-schemas/dataset-schema.json
+	curl -z pipelines-schema.json -o pipelines-schema.json https://gss-cogs.github.io/family-schemas/pipelines-schema.json
+	ajv -s pipelines-schema -d info.json
 	for info in */info.json; do \
-  		ajv -s ../schemas/dataset-schema.json -d "$$info" ; \
-  	done
+		ajv -s dataset-schema.json -d "$$info" ; \
+	done
 
 %.ipynb : %.py
 	jupytext --to notebook $<

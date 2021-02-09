@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+# #%matplotlib inline
+
+""
 # # ONS Death registrations and occurrences by local authority and health board 
 
 from gssutils import * 
@@ -59,6 +62,9 @@ for s in sn:
     dat['Cause of death'] = dat['Cause of death'].apply(pathify)
     dat['Place of death'] = dat['Place of death'].apply(pathify)
 
+    dat['Measure Type'] = 'count'
+    dat['Unit'] = 'deaths'
+    
     csvName = fn[i]
     out = Path('out')
     out.mkdir(exist_ok=True)
@@ -119,3 +125,12 @@ for s in sn:
 #toread.seek(0)  # reset the pointer
 
 #df = pd.read_excel(toread)  # now read to dataframe
+
+""
+
+
+""
+
+
+""
+

@@ -41,6 +41,7 @@
                 "label": "Cause of Death",
                 "value": "http://gss-data.org.uk/data/gss_data/covid-19/ons-death-registrations-and-occurrences-by-local-authority-and-health-board#concept/cause-of-death/{cause_of_death}"
             },
+            "Measure type": false,
             "Value": {
                 "unit": "http://gss-data.org.uk/def/concept/measurement-units/deaths",
                 "measure": "http://gss-data.org.uk/def/measure/count",

@@ -1,0 +1,132 @@
+{
+    "@context": "http://www.w3.org/ns/csvw",
+    "@id": "http://gss-data.org.uk/data/gss_data/covid-19/ons-death-registrations-and-occurrences-by-local-authority-and-health-board#scheme/death-measure",
+    "url": "death-measure.csv",
+    "rdfs:label": "Death Measure",
+    "dc:title": "Death Measure",
+    "tableSchema": {
+        "columns": [
+            {
+                "titles": "Label",
+                "name": "label",
+                "datatype": "string",
+                "required": true,
+                "propertyUrl": "rdfs:label"
+            },
+            {
+                "titles": "Notation",
+                "name": "notation",
+                "datatype": {
+                    "base": "string",
+                    "format": "^-?[\\w\\.\\/\\+]+(-[\\w\\.\\/\\+]+)*$"
+                },
+                "required": true,
+                "propertyUrl": "skos:notation"
+            },
+            {
+                "titles": "Parent Notation",
+                "name": "parent_notation",
+                "datatype": {
+                    "base": "string",
+                    "format": "^(-?[\\w\\.\\/\\+]+(-[\\w\\.\\/\\+]+)*|)$"
+                },
+                "required": false,
+                "propertyUrl": "skos:broader",
+                "valueUrl": "http://gss-data.org.uk/data/gss_data/covid-19/ons-death-registrations-and-occurrences-by-local-authority-and-health-board#concept/death-measure/{parent_notation}"
+            },
+            {
+                "titles": "Sort Priority",
+                "name": "sort_priority",
+                "datatype": "integer",
+                "required": false,
+                "propertyUrl": "http://www.w3.org/ns/ui#sortPriority"
+            },
+            {
+                "virtual": true,
+                "propertyUrl": "rdf:type",
+                "valueUrl": "skos:Concept"
+            },
+            {
+                "virtual": true,
+                "propertyUrl": "skos:inScheme",
+                "valueUrl": "http://gss-data.org.uk/data/gss_data/covid-19/ons-death-registrations-and-occurrences-by-local-authority-and-health-board#scheme/death-measure"
+            }
+        ],
+        "primaryKey": "notation",
+        "aboutUrl": "http://gss-data.org.uk/data/gss_data/covid-19/ons-death-registrations-and-occurrences-by-local-authority-and-health-board#concept/death-measure/{notation}"
+    },
+    "prov:hadDerivation": {
+        "@id": "http://gss-data.org.uk/data/gss_data/covid-19/ons-death-registrations-and-occurrences-by-local-authority-and-health-board#scheme/death-measure",
+        "@type": [
+            "skos:ConceptScheme",
+            "http://publishmydata.com/pmdcat#ConceptScheme"
+        ]
+    },
+    "rdfs:seeAlso": [
+        {
+            "@id": "http://gss-data.org.uk/data/gss_data/covid-19/ons-death-registrations-and-occurrences-by-local-authority-and-health-board#scheme/death-measure/dataset",
+            "@type": [
+                "dcat:Dataset",
+                "http://publishmydata.com/pmdcat#Dataset"
+            ],
+            "http://publishmydata.com/pmdcat#datasetContents": {
+                "@id": "http://gss-data.org.uk/data/gss_data/covid-19/ons-death-registrations-and-occurrences-by-local-authority-and-health-board#scheme/death-measure"
+            },
+            "http://publishmydata.com/pmdcat#graph": {
+                "@id": "http://gss-data.org.uk/data/gss_data/covid-19/ons-death-registrations-and-occurrences-by-local-authority-and-health-board#scheme/death-measure"
+            },
+            "rdfs:label": "Death Measure",
+            "dc:title": "Death Measure",
+            "rdfs:comment": "Dataset representing the 'Death Measure' code list.",
+            "dc:license": {
+                "@id": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/"
+            },
+            "dc:creator": {
+                "@id": "https://www.ons.gov.uk/"
+            },
+            "dc:publisher": {
+                "@id": "https://www.ons.gov.uk/"
+            },
+            "dcat:contactPoint": {
+                "@id": "mailto:health.data@ons.gov.uk"
+            },
+            "dcat:landingPage": {
+                "@id": "https://www.ons.gov.uk/peoplepopulationandcommunity/healthandsocialcare/causesofdeath/datasets/deathregistrationsandoccurrencesbylocalauthorityandhealthboard/2020"
+            },
+            "dc:issued": {
+                "@type": "dateTime",
+                "@value": "2020-04-28T00:00:00"
+            },
+            "dc:modified": {
+                "@type": "dateTime",
+                "@value": "2020-12-30T00:00:00"
+            }
+        },
+        {
+            "@id": "http://gss-data.org.uk/catalog/vocabularies",
+            "dcat:record": {
+                "@id": "http://gss-data.org.uk/data/gss_data/covid-19/ons-death-registrations-and-occurrences-by-local-authority-and-health-board#scheme/death-measure/catalog-record"
+            }
+        },
+        {
+            "@id": "http://gss-data.org.uk/data/gss_data/covid-19/ons-death-registrations-and-occurrences-by-local-authority-and-health-board#scheme/death-measure/catalog-record",
+            "@type": "dcat:CatalogRecord",
+            "foaf:primaryTopic": {
+                "@id": "http://gss-data.org.uk/data/gss_data/covid-19/ons-death-registrations-and-occurrences-by-local-authority-and-health-board#scheme/death-measure/dataset"
+            },
+            "http://publishmydata.com/pmdcat#metadataGraph": {
+                "@id": "http://gss-data.org.uk/data/gss_data/covid-19/ons-death-registrations-and-occurrences-by-local-authority-and-health-board#scheme/death-measure"
+            },
+            "dc:title": "Death Measure Catalog Record",
+            "rdfs:label": "Death Measure Catalog Record",
+            "dc:issued": {
+                "@type": "dateTime",
+                "@value": "2021-01-09T14:56:06.923714"
+            },
+            "dc:modified": {
+                "@type": "dateTime",
+                "@value": "2021-01-09T14:56:06.923714"
+            }
+        }
+    ]
+}

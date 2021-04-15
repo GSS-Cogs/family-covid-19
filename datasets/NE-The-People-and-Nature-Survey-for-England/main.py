@@ -13,9 +13,6 @@ landingPage
 scraper = Scraper(seed='info.json')
 scraper
 
-distribution = scraper.distribution(latest=True)
-distribution
-
 trace = TransformTrace()
 cubes = Cubes("info.json")
 

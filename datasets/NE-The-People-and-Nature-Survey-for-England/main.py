@@ -5,6 +5,7 @@
 import pandas as pd
 from gssutils import *
 import json
+import datetime
 
 info = json.load(open('info.json'))
 landingPage = info['landingPage']
@@ -45,6 +46,11 @@ def mid(s, offset, amount):
 
 def cellLoc(cell):
     return right(str(cell), len(str(cell)) - 2).split(" ", 1)[0]
+
+
+def format_date(date_value):
+    date_string = datetime.datetime.strptime(date_value, '%B %Y').strftime('%Y-%m')
+    return date_string
 
 
 # Transform process

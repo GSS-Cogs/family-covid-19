@@ -81,3 +81,19 @@ for tab in tabs:
     trace.Unweighted_base_size('Unweighted base size details at cell value: {}', var=cellLoc(unweighted_base_size))
 
     observations = tab.excel_ref('B4').expand(DOWN).expand(RIGHT).is_not_blank()
+
+    dimensions = [
+        HDim(question, 'Question', CLOSEST, ABOVE),
+        HDim(answer, 'Answer', DIRECTLY, LEFT),
+        HDim(value_type, 'Value Type', DIRECTLY, ABOVE),
+        HDimConst('Measure Type', measure_type),
+        HDimConst('Unit', unit),
+        HDim(period, 'Period', CLOSEST, ABOVE),
+        HDim(base_unit, 'Base Unit', CLOSEST, ABOVE),
+        HDim(unweighted_base_size, 'Unweighted base size', CLOSEST, ABOVE)
+    ]
+
+    tidy_sheet = ConversionSegment(tab, dimensions, observations)
+    trace.with_preview(tidy_sheet)
+    savepreviewhtml(tidy_sheet, fname=f'{tab.name}_Preview.html')
+    trace.store('combined_dataframe', tidy_sheet.topandas())

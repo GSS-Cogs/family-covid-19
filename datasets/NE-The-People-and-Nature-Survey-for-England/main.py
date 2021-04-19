@@ -97,3 +97,10 @@ for tab in tabs:
     trace.with_preview(tidy_sheet)
     savepreviewhtml(tidy_sheet, fname=f'{tab.name}_Preview.html')
     trace.store('combined_dataframe', tidy_sheet.topandas())
+
+df = trace.combine_and_trace(datasetTitle, "combined_dataframe")
+trace.add_column('Value')
+trace.Value('Rename databaker column OBS to Value')
+df.rename(columns={'OBS': 'Value'}, inplace=True)
+df['Value'] = pd.Series(["{0:.2f}".format(val * 100) for val in df['Value']], index = df.index)
+df['Period'] = df['Period'].apply(format_date)

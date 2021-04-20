@@ -104,3 +104,7 @@ trace.Value('Rename databaker column OBS to Value')
 df.rename(columns={'OBS': 'Value'}, inplace=True)
 df['Value'] = pd.Series(["{0:.2f}".format(val * 100) for val in df['Value']], index = df.index)
 df['Period'] = df['Period'].apply(format_date)
+
+df = df[['Question', 'Answer', 'Value', 'Value Type', 'Measure Type', 'Unit', 'Period', 'Base Unit',
+         'Unweighted base size']]
+cubes.add_cube(scraper, df, datasetTitle)

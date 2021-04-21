@@ -109,3 +109,5 @@ df['Period'] = df['Period'].apply(format_date)
 df = df[['Question', 'Answer', 'Value', 'Value Type', 'Measure Type', 'Unit', 'Period', 'Base Unit',
          'Unweighted base size']]
 cubes.add_cube(scraper, df, datasetTitle)
+
+cubes.output_all()

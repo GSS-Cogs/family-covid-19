@@ -27,7 +27,7 @@ tabs = loadxlstabs("data.xls")
 
 datasetTitle = info["title"]
 tabs_name = ['Q1', 'Q2', 'Q4b', 'Q4e', 'Q6', 'Q34b', 'Q49a', 'Q49b', 'Q59a']
-columns=['Question', 'Response', 'Value Type', 'Measure Type', 'Unit', 'Period', 'Base Unit', 'Unweighted base size']
+columns=['Question', 'Response', 'Type', 'Measure Type', 'Unit', 'Period', 'Base Unit', 'Unweighted base size']
 
 tabs = {tab: tab for tab in dist.as_databaker() if tab.name in tabs_name}
 
@@ -63,7 +63,7 @@ for tab in tabs:
     trace.Response('Response details at cell value: {}', var=cellLoc(response))
 
     value_type = tab.excel_ref('B2').expand(RIGHT).is_not_blank()
-    trace.Value_Type('Value Type details at cell value: {}', var=cellLoc(value_type))
+    trace.Type('Type details at cell value: {}', var=cellLoc(value_type))
 
     measure_type = 'Percentage'
     trace.Measure_Type('Hardcoded value as: Percentage')
@@ -85,7 +85,7 @@ for tab in tabs:
     dimensions = [
         HDim(question, 'Question', CLOSEST, ABOVE),
         HDim(response, 'Response', DIRECTLY, LEFT),
-        HDim(value_type, 'Value Type', DIRECTLY, ABOVE),
+        HDim(value_type, 'Type', DIRECTLY, ABOVE),
         HDimConst('Measure Type', measure_type),
         HDimConst('Unit', unit),
         HDim(period, 'Period', CLOSEST, ABOVE),
@@ -107,7 +107,7 @@ df['Value'] = pd.Series(["{0:.2%}".format(val) for val in df['Value']], index = 
 df['Period'] = df['Period'].apply(format_date)
 df['Unweighted base size'] = pd.to_numeric(df['Unweighted base size'], errors='coerce').astype(int)
 
-df = df[['Question', 'Response', 'Value', 'Value Type', 'Measure Type', 'Unit', 'Period', 'Base Unit',
+df = df[['Question', 'Response', 'Value', 'Type', 'Measure Type', 'Unit', 'Period', 'Base Unit',
          'Unweighted base size']]
 cubes.add_cube(scraper, df, datasetTitle)
 

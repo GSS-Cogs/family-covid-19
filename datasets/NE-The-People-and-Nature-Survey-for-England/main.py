@@ -6,6 +6,8 @@ import pandas as pd
 from gssutils import *
 import json
 import datetime
+import string
+import re
 
 info = json.load(open('info.json'))
 landingPage = info['landingPage']
@@ -48,6 +50,45 @@ def cellLoc(cell):
     return right(str(cell), len(str(cell)) - 2).split(" ", 1)[0]
 
 
+def col2num(col):
+    num = 0
+    for c in col:
+        if c in string.ascii_letters:
+            num = num * 26 + (ord(c.upper()) - ord('A')) + 1
+    return num
+
+
+def colnum_string(n):
+    string = ""
+    while n > 0:
+        n, remainder = divmod(n - 1, 26)
+        string = chr(65 + remainder) + string
+    return string
+
+
+def excelRange(bag):
+    xvalues = []
+    yvalues = []
+    for cell in bag:
+        coordinate = cellLoc(cell)
+        xvalues.append(''.join([i for i in coordinate if not i.isdigit()]))
+        yvalues.append(int(''.join([i for i in coordinate if i.isdigit()])))
+    high = 0
+    low = 0
+    for i in xvalues:
+        if col2num(i) >= high:
+            high = col2num(i)
+        if low == 0:
+            low = col2num(i)
+        elif col2num(i) < low:
+            low = col2num(i)
+        highx = colnum_string(high)
+        lowx = colnum_string(low)
+    highy = str(max(yvalues))
+    lowy = str(min(yvalues))
+    return '{' + lowx + lowy + '-' + highx + highy + '}'
+
+
 def format_date(date_value):
     date_string = datetime.datetime.strptime(date_value, '%B %Y').strftime('%Y-%m')
     return date_string
@@ -60,10 +101,10 @@ for tab in tabs:
     trace.Question('Question details at cell value: {}', var=cellLoc(question))
 
     response = tab.excel_ref('A4').expand(DOWN).is_not_blank()
-    trace.Response('Response details at cell value: {}', var=cellLoc(response))
+    trace.Response("Values given at cell range: {}", var = excelRange(response))
 
     value_type = tab.excel_ref('B2').expand(RIGHT).is_not_blank()
-    trace.Type('Type details at cell value: {}', var=cellLoc(value_type))
+    trace.Type("Values given at cell range: {}", var = excelRange(value_type))
 
     measure_type = 'Percentage'
     trace.Measure_Type('Hardcoded value as: Percentage')

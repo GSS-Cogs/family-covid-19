@@ -97,6 +97,8 @@ def format_date(date_value):
 # Transform process
 for tab in tabs:
     trace.start(datasetTitle, tab, columns, dist.downloadURL)
+    print(tab.name)
+
     question = tab.excel_ref('A1')
     trace.Question('Question details at cell value: {}', var=cellLoc(question))
 

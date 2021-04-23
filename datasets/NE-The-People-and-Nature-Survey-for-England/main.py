@@ -153,3 +153,5 @@ df = df[['Question', 'Response', 'Value', 'Type', 'Measure Type', 'Unit', 'Perio
 cubes.add_cube(scraper, df, datasetTitle)
 
 cubes.output_all()
+
+trace.render("spec_v1.html")

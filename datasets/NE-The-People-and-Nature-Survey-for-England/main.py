@@ -144,7 +144,7 @@ for tab in tabs:
 df = trace.combine_and_trace(datasetTitle, "combined_dataframe")
 trace.add_column('Value')
 trace.Value('Rename databaker column OBS to Value')
-df.rename(columns={'OBS': 'Value'}, inplace=True)
+df.rename(columns={'OBS': 'Value', 'DATAMARKER': 'Marker'}, inplace=True)
 df = df.replace({'Value': {'' : '0'}})
 df['Value'] = pd.Series(["{0:.2%}".format(val) for val in df['Value']], index = df.index)
 df['Period'] = df['Period'].apply(format_date)

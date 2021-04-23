@@ -31,6 +31,9 @@ datasetTitle = info["title"]
 tabs_name = ['Q1', 'Q2', 'Q4b', 'Q4e', 'Q6', 'Q34b', 'Q49a', 'Q49b', 'Q59a']
 columns=['Question', 'Response', 'Type', 'Measure Type', 'Unit', 'Period', 'Base Unit', 'Unweighted base size']
 
+if len(set(tabs_name)-{x.name for x in tabs}) != 0:
+    raise ValueError(f'Aborting. A tab named {set(tabs_name)-{x.name for x in tabs}} required but not found')
+
 tabs = {tab: tab for tab in dist.as_databaker() if tab.name in tabs_name}
 
 

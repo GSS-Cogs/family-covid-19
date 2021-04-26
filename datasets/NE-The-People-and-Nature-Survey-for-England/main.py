@@ -17,17 +17,17 @@ scraper = Scraper(seed='info.json')
 scraper
 
 trace = TransformTrace()
-cubes = Cubes("info.json")
+cubes = Cubes('info.json')
 
 dist = scraper.distribution(mediaType=ODS)
-xls = pd.ExcelFile(dist.downloadURL, engine="odf")
-with pd.ExcelWriter("data.xls") as writer:
+xls = pd.ExcelFile(dist.downloadURL, engine='odf')
+with pd.ExcelWriter('data.xls') as writer:
     for sheet in xls.sheet_names:
         pd.read_excel(xls, sheet).to_excel(writer,sheet, index = False)
     writer.save()
-tabs = loadxlstabs("data.xls")
+tabs = loadxlstabs('data.xls')
 
-datasetTitle = info["title"]
+datasetTitle = info['title']
 tabs_name = ['Q1', 'Q2', 'Q4b', 'Q4e', 'Q6', 'Q34b', 'Q49a', 'Q49b', 'Q59a']
 columns=['Question', 'Response', 'Type', 'Measure Type', 'Unit', 'Period', 'Base', 'Unweighted base size']
 
@@ -103,28 +103,28 @@ for tab in tabs:
     print(tab.name)
 
     question = tab.excel_ref('A1')
-    trace.Question('Question details at cell value: {}', var=cellLoc(question))
+    trace.Question('Defined from cell value: {}', var=cellLoc(question))
 
     response = tab.excel_ref('A4').expand(DOWN).is_not_blank()
-    trace.Response("Values given at cell range: {}", var = excelRange(response))
+    trace.Response('Defined from cell range: {}', var = excelRange(response))
 
     value_type = tab.excel_ref('B2').expand(RIGHT).is_not_blank()
-    trace.Type("Values given at cell range: {}", var = excelRange(value_type))
+    trace.Type('Defined from cell range: {}', var = excelRange(value_type))
 
     measure_type = 'Percentage'
-    trace.Measure_Type('Hardcoded value as: Percentage')
+    trace.Measure_Type('Hardcoded as Percentage')
 
     unit = 'Percent'
-    trace.Unit('Hardcoded value as: Percent')
+    trace.Unit('Hardcoded as Percent')
 
     period = tab.excel_ref('B1')
-    trace.Period('Period details at cell value: {}', var=cellLoc(period))
+    trace.Period('Defined from cell value: {}', var=cellLoc(period))
 
     base = tab.excel_ref('A2')
-    trace.Base('Base details at cell value: {}', var=cellLoc(base))
+    trace.Base('Defined from cell value: {}', var=cellLoc(base))
 
     unweighted_base_size = tab.excel_ref('B3')
-    trace.Unweighted_base_size('Unweighted base size details at cell value: {}', var=cellLoc(unweighted_base_size))
+    trace.Unweighted_base_size('Defined from cell value: {}', var=cellLoc(unweighted_base_size))
 
     observations = tab.excel_ref('B4').expand(DOWN).expand(RIGHT).is_not_blank()
 
@@ -144,12 +144,12 @@ for tab in tabs:
     savepreviewhtml(tidy_sheet, fname=f'{tab.name}_Preview.html')
     trace.store('combined_dataframe', tidy_sheet.topandas())
 
-df = trace.combine_and_trace(datasetTitle, "combined_dataframe")
+df = trace.combine_and_trace(datasetTitle, 'combined_dataframe')
 trace.add_column('Value')
 trace.Value('Rename databaker column OBS to Value')
 df.rename(columns={'OBS': 'Value', 'DATAMARKER': 'Marker'}, inplace=True)
 df = df.replace({'Value': {'' : '0'}})
-df['Value'] = pd.Series(["{0:.2%}".format(val) for val in df['Value']], index = df.index)
+df['Value'] = pd.Series(['{0:.2%}'.format(val) for val in df['Value']], index = df.index)
 df['Period'] = df['Period'].apply(format_date)
 df['Unweighted base size'] = pd.to_numeric(df['Unweighted base size'], errors='coerce').astype(int)
 
@@ -159,4 +159,4 @@ cubes.add_cube(scraper, df, datasetTitle)
 
 cubes.output_all()
 
-trace.render("spec_v1.html")
+trace.render('spec_v1.html')

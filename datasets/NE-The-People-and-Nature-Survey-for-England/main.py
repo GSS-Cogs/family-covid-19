@@ -29,7 +29,7 @@ tabs = loadxlstabs("data.xls")
 
 datasetTitle = info["title"]
 tabs_name = ['Q1', 'Q2', 'Q4b', 'Q4e', 'Q6', 'Q34b', 'Q49a', 'Q49b', 'Q59a']
-columns=['Question', 'Response', 'Type', 'Measure Type', 'Unit', 'Period', 'Base Unit', 'Unweighted base size']
+columns=['Question', 'Response', 'Type', 'Measure Type', 'Unit', 'Period', 'Base', 'Unweighted base size']
 
 if len(set(tabs_name)-{x.name for x in tabs}) != 0:
     raise ValueError(f'Aborting. A tab named {set(tabs_name)-{x.name for x in tabs}} required but not found')
@@ -120,8 +120,8 @@ for tab in tabs:
     period = tab.excel_ref('B1')
     trace.Period('Period details at cell value: {}', var=cellLoc(period))
 
-    base_unit = tab.excel_ref('A2')
-    trace.Base_Unit('Base Unit details at cell value: {}', var=cellLoc(base_unit))
+    base = tab.excel_ref('A2')
+    trace.Base('Base details at cell value: {}', var=cellLoc(base))
 
     unweighted_base_size = tab.excel_ref('B3')
     trace.Unweighted_base_size('Unweighted base size details at cell value: {}', var=cellLoc(unweighted_base_size))
@@ -135,7 +135,7 @@ for tab in tabs:
         HDimConst('Measure Type', measure_type),
         HDimConst('Unit', unit),
         HDim(period, 'Period', CLOSEST, ABOVE),
-        HDim(base_unit, 'Base Unit', CLOSEST, ABOVE),
+        HDim(base, 'Base', CLOSEST, ABOVE),
         HDim(unweighted_base_size, 'Unweighted base size', CLOSEST, ABOVE)
     ]
 
@@ -153,7 +153,7 @@ df['Value'] = pd.Series(["{0:.2%}".format(val) for val in df['Value']], index = 
 df['Period'] = df['Period'].apply(format_date)
 df['Unweighted base size'] = pd.to_numeric(df['Unweighted base size'], errors='coerce').astype(int)
 
-df = df[['Question', 'Response', 'Value', 'Type', 'Measure Type', 'Unit', 'Period', 'Base Unit',
+df = df[['Question', 'Response', 'Value', 'Type', 'Measure Type', 'Unit', 'Period', 'Base',
          'Unweighted base size']]
 cubes.add_cube(scraper, df, datasetTitle)
 

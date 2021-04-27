@@ -155,6 +155,11 @@ df['Unweighted base size'] = pd.to_numeric(df['Unweighted base size'], errors='c
 
 df = df[['Question', 'Response', 'Value', 'Type', 'Measure Type', 'Unit', 'Period', 'Base',
          'Unweighted base size']]
+
+for col in df.columns:
+    if col not in ['Value', 'Type']:
+        df[col] = df[col].apply(lambda x: pathify(str(x)))
+
 cubes.add_cube(scraper, df, datasetTitle)
 
 cubes.output_all()

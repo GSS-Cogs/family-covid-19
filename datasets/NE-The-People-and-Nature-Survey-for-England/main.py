@@ -20,6 +20,8 @@ trace = TransformTrace()
 cubes = Cubes('info.json')
 
 dist = scraper.distribution(mediaType=ODS, latest=True)
+# The source data is published in ODS format. ODS is converted to xls with the below lines of code as databaker is
+# compatible with xls
 xls = pd.ExcelFile(dist.downloadURL, engine='odf')
 with pd.ExcelWriter('data.xls') as writer:
     for sheet in xls.sheet_names:

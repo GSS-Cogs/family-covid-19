@@ -19,7 +19,7 @@ scraper
 trace = TransformTrace()
 cubes = Cubes('info.json')
 
-dist = scraper.distribution(mediaType=ODS)
+dist = scraper.distribution(mediaType=ODS, latest=True)
 xls = pd.ExcelFile(dist.downloadURL, engine='odf')
 with pd.ExcelWriter('data.xls') as writer:
     for sheet in xls.sheet_names:

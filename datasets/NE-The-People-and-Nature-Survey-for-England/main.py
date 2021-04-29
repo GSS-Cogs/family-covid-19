@@ -7,7 +7,6 @@ from gssutils import *
 import json
 import datetime
 import string
-import re
 
 info = json.load(open('info.json'))
 landingPage = info['landingPage']
@@ -20,6 +19,10 @@ trace = TransformTrace()
 cubes = Cubes('info.json')
 
 dist = scraper.distribution(mediaType=ODS, latest=True)
+datasetTitle = info['title']
+dist
+datasetTitle
+
 # The source data is published in ODS format. ODS is converted to xls with the below lines of code as databaker is
 # compatible with xls
 xls = pd.ExcelFile(dist.downloadURL, engine='odf')
@@ -29,7 +32,6 @@ with pd.ExcelWriter('data.xls') as writer:
     writer.save()
 tabs = loadxlstabs('data.xls')
 
-datasetTitle = info['title']
 tabs_name = ['Q1', 'Q2', 'Q4b', 'Q4e', 'Q6', 'Q34b', 'Q49a', 'Q49b', 'Q59a']
 columns=['Question', 'Response', 'Type', 'Measure Type', 'Unit', 'Period', 'Base', 'Unweighted base size']
 
@@ -150,7 +152,6 @@ df = trace.combine_and_trace(datasetTitle, 'combined_dataframe')
 trace.add_column('Value')
 trace.Value('Rename databaker column OBS to Value')
 df.rename(columns={'OBS': 'Value', 'DATAMARKER': 'Marker'}, inplace=True)
-df = df.replace({'Value': {'' : '0'}})
 df['Value'] = pd.Series(['{0:.2%}'.format(val) for val in df['Value']], index = df.index)
 df['Period'] = df['Period'].apply(format_date)
 df['Unweighted base size'] = pd.to_numeric(df['Unweighted base size'], errors='coerce').astype(int)

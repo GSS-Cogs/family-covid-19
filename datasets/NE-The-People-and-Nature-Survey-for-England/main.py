@@ -160,7 +160,10 @@ df = df[['Question', 'Response', 'Value', 'Type', 'Measure Type', 'Unit', 'Perio
 
 for col in df.columns:
     if col not in ['Value', 'Type']:
-        df[col] = df[col].apply(lambda x: pathify(str(x)))
+        try:
+            df[col] = df[col].apply(lambda x: pathify(str(x)))
+        except Exception as err:
+            raise Exception('Failed to pathify column "{}".'.format(col)) from err
     if col in ['Type', 'Measure Type', 'Unit', 'Period']:
         df[col] = df[col].astype('category')
 

@@ -165,7 +165,7 @@ for col in df.columns:
         try:
             df[col] = df[col].astype('category')
         except ValueError as err:
-            raise Exception('Failed to convert category data type for column "{}".'.format(col)) from err
+            raise ValueError('Failed to convert category data type for column "{}".'.format(col)) from err
 
 cubes.add_cube(scraper, df, datasetTitle)
 

@@ -162,7 +162,10 @@ for col in df.columns:
         except Exception as err:
             raise Exception('Failed to pathify column "{}".'.format(col)) from err
     if col in ['Type', 'Measure Type', 'Unit', 'Period']:
-        df[col] = df[col].astype('category')
+        try:
+            df[col] = df[col].astype('category')
+        except ValueError as err:
+            raise Exception('Failed to convert category data type for column "{}".'.format(col)) from err
 
 cubes.add_cube(scraper, df, datasetTitle)
 

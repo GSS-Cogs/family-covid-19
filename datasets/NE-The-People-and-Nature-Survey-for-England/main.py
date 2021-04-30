@@ -7,6 +7,7 @@ from gssutils import *
 import json
 import datetime
 import string
+from dateutil.parser import parse
 
 info = json.load(open('info.json'))
 landingPage = info['landingPage']
@@ -96,11 +97,6 @@ def excelRange(bag):
     return '{' + lowx + lowy + '-' + highx + highy + '}'
 
 
-def format_date(date_value):
-    date_string = datetime.datetime.strptime(date_value, '%B %Y').strftime('%Y-%m')
-    return date_string
-
-
 # Transform process
 for tab in tabs:
     trace.start(datasetTitle, tab, columns, dist.downloadURL)
@@ -153,7 +149,7 @@ trace.add_column('Value')
 trace.Value('Rename databaker column OBS to Value')
 df.rename(columns={'OBS': 'Value', 'DATAMARKER': 'Marker'}, inplace=True)
 df['Value'] = pd.Series(['{0:.2%}'.format(val) for val in df['Value']], index = df.index)
-df['Period'] = df['Period'].apply(format_date)
+df['Period'] = df['Period'].apply(lambda x: parse(x).strftime('%Y-%m'))
 df['Unweighted base size'] = pd.to_numeric(df['Unweighted base size'], errors='coerce').astype(int)
 
 df = df[['Question', 'Response', 'Value', 'Type', 'Measure Type', 'Unit', 'Period', 'Base',

@@ -149,7 +149,7 @@ trace.add_column('Value')
 trace.Value('Rename databaker column OBS to Value')
 df.rename(columns={'OBS': 'Value', 'DATAMARKER': 'Marker'}, inplace=True)
 df['Value'] = pd.Series(['{0:.2%}'.format(val) for val in df['Value']], index = df.index)
-df['Period'] = df['Period'].apply(lambda x: parse(x).strftime('%Y-%m'))
+df['Period'] = df['Period'].apply(lambda x: parse(str(x)).strftime('%Y-%m'))
 df['Unweighted base size'] = pd.to_numeric(df['Unweighted base size'], errors='coerce').astype(int)
 
 df = df[['Question', 'Response', 'Value', 'Type', 'Measure Type', 'Unit', 'Period', 'Base',

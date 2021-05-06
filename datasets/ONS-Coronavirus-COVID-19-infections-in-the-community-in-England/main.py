@@ -88,7 +88,7 @@ def excelRange(bag):
 for tab in tabs:
     print(tab.name)
     if tab.name == '1a':
-        columns = ['Title', 'Period', 'Distancing', 'Odds Ratio', 'Lower Confidence Interval',
+        columns = ['Title', 'Period', 'Social Distance Ability', 'Odds Ratio', 'Lower Confidence Interval',
                    'Upper Confidence Interval', 'Positive Sample Count', 'Total Sample Count']
         trace.start(datasetTitle, tab, columns, dist.downloadURL)
 
@@ -98,8 +98,8 @@ for tab in tabs:
         period = tab.excel_ref('A10').expand(DOWN).is_not_blank() & tab.excel_ref('A16').expand(UP).is_not_blank()
         trace.Period('Defined from cell range: {}', var=excelRange(period))
 
-        distancing = tab.excel_ref('B7').expand(RIGHT).is_not_blank()
-        trace.Distancing('Defined from cell range: {}', var=excelRange(distancing))
+        social_distance = tab.excel_ref('B7').expand(RIGHT).is_not_blank()
+        trace.Social_Distance_Ability('Defined from cell range: {}', var=excelRange(social_distance))
 
         odds_ratio = tab.filter('Odds Ratio').expand(DOWN).is_not_blank()
         trace.Odds_Ratio('Defined from cell range: {}', var=excelRange(odds_ratio))
@@ -121,7 +121,7 @@ for tab in tabs:
         dimensions = [
             HDim(title, 'Title', CLOSEST, ABOVE),
             HDim(period, 'Period', DIRECTLY, LEFT),
-            HDim(distancing, 'Distancing', CLOSEST, LEFT),
+            HDim(social_distance, 'Social Distance Ability', CLOSEST, LEFT),
             HDim(odds_ratio, 'Odds Ratio', DIRECTLY, ABOVE),
             HDim(lower_confidence_interval, 'Lower Confidence Interval', DIRECTLY, ABOVE),
             HDim(upper_confidence_interval, 'Upper Confidence Interval', DIRECTLY, ABOVE),

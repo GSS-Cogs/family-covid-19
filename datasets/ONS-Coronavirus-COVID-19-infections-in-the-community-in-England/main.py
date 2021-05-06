@@ -88,43 +88,48 @@ def excelRange(bag):
 for tab in tabs:
     print(tab.name)
     if tab.name == '1a':
-        columns = ['distancing', 'odds ratio', 'lower interval', 'upper interval', 'positive sample count',
-                   'total sample count', 'period', 'title']
+        columns = ['Title', 'Period', 'Distancing', 'Odds Ratio', 'Lower Confidence Interval',
+                   'Upper Confidence Interval', 'Positive Sample Count', 'Total Sample Count']
         trace.start(datasetTitle, tab, columns, dist.downloadURL)
 
         title = tab.excel_ref('A3')
-        trace.title('Defined from cell value: {}', var=cellLoc(title))
+        trace.Title('Defined from cell value: {}', var=cellLoc(title))
 
         period = tab.excel_ref('A10').expand(DOWN).is_not_blank() & tab.excel_ref('A16').expand(UP).is_not_blank()
-        trace.period('Defined from cell range: {}', var=excelRange(period))
-
-        odds_ratio = tab.filter('Odds Ratio').expand(DOWN).is_not_blank()
-        trace.odds_ratio('Defined from cell value: {}', var=excelRange(odds_ratio))
-
-        lower_interval = tab.filter('Lower').expand(DOWN).is_not_blank()
-        trace.lower_interval('Defined from cell value: {}', var=excelRange(lower_interval))
-
-        upper_interval = tab.filter('Upper').expand(DOWN).is_not_blank()
-        trace.upper_interval('Defined from cell value: {}', var=excelRange(upper_interval))
-
-        positive_sample_count = tab.filter('Number of people testing positive').expand(DOWN).is_not_blank()
-        trace.positive_sample_count('Defined from cell value: {}', var=excelRange(positive_sample_count))
-
-        total_sample_count = tab.filter('Total number of people in sample').expand(DOWN).is_not_blank()
-        trace.total_sample_count('Defined from cell value: {}', var=excelRange(total_sample_count))
+        trace.Period('Defined from cell range: {}', var=excelRange(period))
 
         distancing = tab.excel_ref('B7').expand(RIGHT).is_not_blank()
-        trace.distancing('Defined from cell range: {}', var = excelRange(distancing))
+        trace.Distancing('Defined from cell range: {}', var=excelRange(distancing))
+
+        odds_ratio = tab.filter('Odds Ratio').expand(DOWN).is_not_blank()
+        trace.Odds_Ratio('Defined from cell range: {}', var=excelRange(odds_ratio))
+
+        lower_confidence_interval = tab.filter('Lower').expand(DOWN).is_not_blank()
+        trace.Lower_Confidence_Interval('Defined from cell range: {}', var=excelRange(lower_confidence_interval))
+
+        upper_confidence_interval = tab.filter('Upper').expand(DOWN).is_not_blank()
+        trace.Upper_Confidence_Interval('Defined from cell range: {}', var=excelRange(upper_confidence_interval))
+
+        positive_sample_count = tab.filter('Number of people testing positive').expand(DOWN).is_not_blank()
+        trace.Positive_Sample_Count('Defined from cell range: {}', var=excelRange(positive_sample_count))
+
+        total_sample_count = tab.filter('Total number of people in sample').expand(DOWN).is_not_blank()
+        trace.Total_Sample_Count('Defined from cell range: {}', var=excelRange(total_sample_count))
 
         observations = tab.excel_ref('B10').expand(DOWN).expand(RIGHT).is_not_blank()
 
         dimensions = [
-            HDim(distancing, 'distancing', DIRECTLY, ABOVE),
-            HDim(period, 'period', DIRECTLY, LEFT),
-            HDim(odds_ratio, 'odds_ratio', DIRECTLY, ABOVE),
-            HDim(lower_interval, 'lower_interval', DIRECTLY, ABOVE),
-            HDim(upper_interval, 'upper_interval', DIRECTLY, ABOVE),
-            HDim(positive_sample_count, 'positive_sample_count', DIRECTLY, ABOVE),
-            HDim(total_sample_count, 'total_sample_count', DIRECTLY, ABOVE),
-            HDimConst('title', title)
+            HDim(title, 'Title', CLOSEST, ABOVE),
+            HDim(period, 'Period', DIRECTLY, LEFT),
+            HDim(distancing, 'Distancing', CLOSEST, LEFT),
+            HDim(odds_ratio, 'Odds Ratio', DIRECTLY, ABOVE),
+            HDim(lower_confidence_interval, 'Lower Confidence Interval', DIRECTLY, ABOVE),
+            HDim(upper_confidence_interval, 'Upper Confidence Interval', DIRECTLY, ABOVE),
+            HDim(positive_sample_count, 'Positive Sample Count', DIRECTLY, ABOVE),
+            HDim(total_sample_count, 'Total Sample Count', DIRECTLY, ABOVE)
         ]
+
+        tidy_sheet = ConversionSegment(tab, dimensions, observations)
+        trace.with_preview(tidy_sheet)
+        savepreviewhtml(tidy_sheet, fname=f'{tab.name}_Preview.html')
+        trace.store('combined_dataframe', tidy_sheet.topandas())

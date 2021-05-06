@@ -132,4 +132,51 @@ for tab in tabs:
         tidy_sheet = ConversionSegment(tab, dimensions, observations)
         trace.with_preview(tidy_sheet)
         savepreviewhtml(tidy_sheet, fname=f'{tab.name}_Preview.html')
-        trace.store('combined_dataframe', tidy_sheet.topandas())
+        trace.store(f'dataframe_table_{tab.name}', tidy_sheet.topandas())
+
+    if tab.name == '1b':
+        columns = ['Title', 'Period', 'Mode of Travel', 'Odds Ratio', 'Lower Confidence Interval',
+                   'Upper Confidence Interval', 'Positive Sample Count', 'Total Sample Count']
+        trace.start(datasetTitle, tab, columns, dist.downloadURL)
+
+        title = tab.excel_ref('A3')
+        trace.Title('Defined from cell value: {}', var=cellLoc(title))
+
+        period = tab.excel_ref('A10').expand(DOWN).is_not_blank() & tab.excel_ref('A16').expand(UP).is_not_blank()
+        trace.Period('Defined from cell range: {}', var=excelRange(period))
+
+        mode_travel = tab.excel_ref('B7').expand(RIGHT).is_not_blank()
+        trace.Mode_of_Travel('Defined from cell range: {}', var=excelRange(mode_travel))
+
+        odds_ratio = tab.filter('Odds Ratio').expand(DOWN).is_not_blank()
+        trace.Odds_Ratio('Defined from cell range: {}', var=excelRange(odds_ratio))
+
+        lower_confidence_interval = tab.filter('Lower').expand(DOWN).is_not_blank()
+        trace.Lower_Confidence_Interval('Defined from cell range: {}', var=excelRange(lower_confidence_interval))
+
+        upper_confidence_interval = tab.filter('Upper').expand(DOWN).is_not_blank()
+        trace.Upper_Confidence_Interval('Defined from cell range: {}', var=excelRange(upper_confidence_interval))
+
+        positive_sample_count = tab.filter('Number of people testing positive').expand(DOWN).is_not_blank()
+        trace.Positive_Sample_Count('Defined from cell range: {}', var=excelRange(positive_sample_count))
+
+        total_sample_count = tab.filter('Total number of people in sample').expand(DOWN).is_not_blank()
+        trace.Total_Sample_Count('Defined from cell range: {}', var=excelRange(total_sample_count))
+
+        observations = tab.excel_ref('B10').expand(DOWN).expand(RIGHT).is_not_blank()
+
+        dimensions = [
+            HDim(title, 'Title', CLOSEST, ABOVE),
+            HDim(period, 'Period', DIRECTLY, LEFT),
+            HDim(mode_travel, 'Mode of Travel', CLOSEST, LEFT),
+            HDim(odds_ratio, 'Odds Ratio', DIRECTLY, ABOVE),
+            HDim(lower_confidence_interval, 'Lower Confidence Interval', DIRECTLY, ABOVE),
+            HDim(upper_confidence_interval, 'Upper Confidence Interval', DIRECTLY, ABOVE),
+            HDim(positive_sample_count, 'Positive Sample Count', DIRECTLY, ABOVE),
+            HDim(total_sample_count, 'Total Sample Count', DIRECTLY, ABOVE)
+        ]
+
+        tidy_sheet = ConversionSegment(tab, dimensions, observations)
+        trace.with_preview(tidy_sheet)
+        savepreviewhtml(tidy_sheet, fname=f'{tab.name}_Preview.html')
+        trace.store(f'dataframe_table_{tab.name}', tidy_sheet.topandas())

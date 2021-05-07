@@ -180,3 +180,36 @@ for tab in tabs:
         trace.with_preview(tidy_sheet)
         savepreviewhtml(tidy_sheet, fname=f'{tab.name}_Preview.html')
         trace.store(f'dataframe_table_{tab.name}', tidy_sheet.topandas())
+
+    if tab.name in ['2a', '2b', '2c', '2d']:
+        columns = ['Title', 'Period', 'Symptom', 'Percent', 'Lower 95 Percent Confidence Interval',
+                   'Upper 95 Percent Confidence Interval', 'Positive Sample Count', 'Total Sample Count']
+        trace.start(datasetTitle, tab, columns, dist.downloadURL)
+
+        title = tab.excel_ref('A3')
+        trace.Title('Defined from cell value: {}', var=cellLoc(title))
+
+        period = tab.excel_ref('A4')
+        trace.Period('Defined from cell value: {}', var=cellLoc(period))
+
+        symptom = tab.excel_ref('A7').expand(DOWN).is_not_blank() & tab.excel_ref('A23').expand(UP).is_not_blank()
+        trace.Symptom('Defined from cell range: {}', var=excelRange(symptom))
+
+        percent = tab.filter(contains_string('% testing positive with symptom')).expand(DOWN).is_not_blank()
+        trace.Percent('Defined from cell range: {}', var=excelRange(percent))
+
+        lower_confidence_interval = tab.filter('Lower').expand(DOWN).is_not_blank()
+        trace.Lower_95_Percent_Confidence_Interval('Defined from cell range: {}',
+                                                   var=excelRange(lower_confidence_interval))
+
+        upper_confidence_interval = tab.filter('Upper').expand(DOWN).is_not_blank()
+        trace.Upper_95_Percent_Confidence_Interval('Defined from cell range: {}',
+                                                   var=excelRange(upper_confidence_interval))
+
+        positive_sample_count = tab.filter('Number of people testing positive with symptom').expand(DOWN).is_not_blank()
+        trace.Positive_Sample_Count('Defined from cell range: {}', var=excelRange(positive_sample_count))
+
+        total_sample_count = tab.filter('Total number of people testing positive').expand(DOWN).is_not_blank()
+        trace.Total_Sample_Count('Defined from cell range: {}', var=excelRange(total_sample_count))
+
+        observations = tab.excel_ref('B7').expand(DOWN).expand(RIGHT).is_not_blank()

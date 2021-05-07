@@ -213,3 +213,19 @@ for tab in tabs:
         trace.Total_Sample_Count('Defined from cell range: {}', var=excelRange(total_sample_count))
 
         observations = tab.excel_ref('B7').expand(DOWN).expand(RIGHT).is_not_blank()
+
+        dimensions = [
+            HDim(title, 'Title', CLOSEST, ABOVE),
+            HDim(period, 'Period', CLOSEST, ABOVE),
+            HDim(symptom, 'Symptom', DIRECTLY, LEFT),
+            HDim(percent, 'Percent', DIRECTLY, ABOVE),
+            HDim(lower_confidence_interval, 'Lower 95 Percent Confidence Interval', DIRECTLY, ABOVE),
+            HDim(upper_confidence_interval, 'Upper 95 Percent Confidence Interval', DIRECTLY, ABOVE),
+            HDim(positive_sample_count, 'Positive Sample Count', DIRECTLY, ABOVE),
+            HDim(total_sample_count, 'Total Sample Count', DIRECTLY, ABOVE)
+        ]
+
+        tidy_sheet = ConversionSegment(tab, dimensions, observations)
+        trace.with_preview(tidy_sheet)
+        savepreviewhtml(tidy_sheet, fname=f'{tab.name}_Preview.html')
+        trace.store(f'dataframe_table_2', tidy_sheet.topandas())

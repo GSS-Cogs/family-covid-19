@@ -88,8 +88,8 @@ def excelRange(bag):
 for tab in tabs:
     print(tab.name)
     if tab.name == '1a':
-        columns = ['Title', 'Period', 'Social Distance Ability', 'Odds Ratio', 'Lower Confidence Interval',
-                   'Upper Confidence Interval', 'Positive Sample Count', 'Total Sample Count']
+        columns = ['Title', 'Period', 'Social Distance Ability', 'Odds Ratio', 'Lower 95 Percent Confidence Interval',
+                   'Upper 95 Percent Confidence Interval', 'Positive Sample Count', 'Total Sample Count']
         trace.start(datasetTitle, tab, columns, dist.downloadURL)
 
         title = tab.excel_ref('A3')
@@ -105,10 +105,10 @@ for tab in tabs:
         trace.Odds_Ratio('Defined from cell range: {}', var=excelRange(odds_ratio))
 
         lower_confidence_interval = tab.filter('Lower').expand(DOWN).is_not_blank()
-        trace.Lower_Confidence_Interval('Defined from cell range: {}', var=excelRange(lower_confidence_interval))
+        trace.Lower_95_Percent_Confidence_Interval('Defined from cell range: {}', var=excelRange(lower_confidence_interval))
 
         upper_confidence_interval = tab.filter('Upper').expand(DOWN).is_not_blank()
-        trace.Upper_Confidence_Interval('Defined from cell range: {}', var=excelRange(upper_confidence_interval))
+        trace.Upper_95_Percent_Confidence_Interval('Defined from cell range: {}', var=excelRange(upper_confidence_interval))
 
         positive_sample_count = tab.filter('Number of people testing positive').expand(DOWN).is_not_blank()
         trace.Positive_Sample_Count('Defined from cell range: {}', var=excelRange(positive_sample_count))
@@ -123,8 +123,8 @@ for tab in tabs:
             HDim(period, 'Period', DIRECTLY, LEFT),
             HDim(social_distance, 'Social Distance Ability', CLOSEST, LEFT),
             HDim(odds_ratio, 'Odds Ratio', DIRECTLY, ABOVE),
-            HDim(lower_confidence_interval, 'Lower Confidence Interval', DIRECTLY, ABOVE),
-            HDim(upper_confidence_interval, 'Upper Confidence Interval', DIRECTLY, ABOVE),
+            HDim(lower_confidence_interval, 'Lower 95 Percent Confidence Interval', DIRECTLY, ABOVE),
+            HDim(upper_confidence_interval, 'Upper 95 Percent Confidence Interval', DIRECTLY, ABOVE),
             HDim(positive_sample_count, 'Positive Sample Count', DIRECTLY, ABOVE),
             HDim(total_sample_count, 'Total Sample Count', DIRECTLY, ABOVE)
         ]
@@ -135,8 +135,8 @@ for tab in tabs:
         trace.store(f'dataframe_table_{tab.name}', tidy_sheet.topandas())
 
     if tab.name == '1b':
-        columns = ['Title', 'Period', 'Mode of Travel', 'Odds Ratio', 'Lower Confidence Interval',
-                   'Upper Confidence Interval', 'Positive Sample Count', 'Total Sample Count']
+        columns = ['Title', 'Period', 'Mode of Travel', 'Odds Ratio', 'Lower 95 Percent Confidence Interval',
+                   'Upper 95 Percent Confidence Interval', 'Positive Sample Count', 'Total Sample Count']
         trace.start(datasetTitle, tab, columns, dist.downloadURL)
 
         title = tab.excel_ref('A3')
@@ -152,10 +152,10 @@ for tab in tabs:
         trace.Odds_Ratio('Defined from cell range: {}', var=excelRange(odds_ratio))
 
         lower_confidence_interval = tab.filter('Lower').expand(DOWN).is_not_blank()
-        trace.Lower_Confidence_Interval('Defined from cell range: {}', var=excelRange(lower_confidence_interval))
+        trace.Lower_95_Percent_Confidence_Interval('Defined from cell range: {}', var=excelRange(lower_confidence_interval))
 
         upper_confidence_interval = tab.filter('Upper').expand(DOWN).is_not_blank()
-        trace.Upper_Confidence_Interval('Defined from cell range: {}', var=excelRange(upper_confidence_interval))
+        trace.Upper_95_Percent_Confidence_Interval('Defined from cell range: {}', var=excelRange(upper_confidence_interval))
 
         positive_sample_count = tab.filter('Number of people testing positive').expand(DOWN).is_not_blank()
         trace.Positive_Sample_Count('Defined from cell range: {}', var=excelRange(positive_sample_count))
@@ -170,8 +170,8 @@ for tab in tabs:
             HDim(period, 'Period', DIRECTLY, LEFT),
             HDim(mode_travel, 'Mode of Travel', CLOSEST, LEFT),
             HDim(odds_ratio, 'Odds Ratio', DIRECTLY, ABOVE),
-            HDim(lower_confidence_interval, 'Lower Confidence Interval', DIRECTLY, ABOVE),
-            HDim(upper_confidence_interval, 'Upper Confidence Interval', DIRECTLY, ABOVE),
+            HDim(lower_confidence_interval, 'Lower 95 Percent Confidence Interval', DIRECTLY, ABOVE),
+            HDim(upper_confidence_interval, 'Upper 95 Percent Confidence Interval', DIRECTLY, ABOVE),
             HDim(positive_sample_count, 'Positive Sample Count', DIRECTLY, ABOVE),
             HDim(total_sample_count, 'Total Sample Count', DIRECTLY, ABOVE)
         ]

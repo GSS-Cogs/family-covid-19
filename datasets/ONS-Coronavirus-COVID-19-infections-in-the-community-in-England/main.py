@@ -6,6 +6,7 @@ import pandas as pd
 from gssutils import *
 import json
 import string
+from datefinder import find_dates
 
 info = json.load(open('info.json'))
 landingPage = info['landingPage']
@@ -84,6 +85,14 @@ def excelRange(bag):
     return '{' + lowx + lowy + '-' + highx + highy + '}'
 
 
+def format_date(date_str):
+    date_str = date_str.replace('between', '')
+    date_results = list(find_dates(date_str))
+    from_date = date_results[0].strftime('%Y-%m-%dT%H:%M:%S')
+    to_date = date_results[1].strftime('%Y-%m-%dT%H:%M:%S')
+    return from_date + '-' + to_date
+
+
 # Transform process
 for tab in tabs:
     print(tab.name)
@@ -140,7 +149,7 @@ for tab in tabs:
         tidy_sheet = ConversionSegment(tab, dimensions, observations)
         trace.with_preview(tidy_sheet)
         savepreviewhtml(tidy_sheet, fname=f'{tab.name}_Preview.html')
-        trace.store(f'dataframe_table_{tab.name}', tidy_sheet.topandas())
+        trace.store(f'combined_dataframe_table_{tab.name}', tidy_sheet.topandas())
 
     if tab.name == '1b':
         columns = ['Title', 'Total Survey Period', 'Measurement', 'Period', 'Mode of Travel', 'Odds Ratio', 'Lower 95 Percent Confidence Interval',
@@ -195,7 +204,7 @@ for tab in tabs:
         tidy_sheet = ConversionSegment(tab, dimensions, observations)
         trace.with_preview(tidy_sheet)
         savepreviewhtml(tidy_sheet, fname=f'{tab.name}_Preview.html')
-        trace.store(f'dataframe_table_{tab.name}', tidy_sheet.topandas())
+        trace.store(f'combined_dataframe_table_{tab.name}', tidy_sheet.topandas())
 
     if tab.name in ['2a', '2b', '2c', '2d']:
         columns = ['Title', 'Period', 'Symptom', 'Percent', 'Lower 95 Percent Confidence Interval',
@@ -244,7 +253,7 @@ for tab in tabs:
         tidy_sheet = ConversionSegment(tab, dimensions, observations)
         trace.with_preview(tidy_sheet)
         savepreviewhtml(tidy_sheet, fname=f'{tab.name}_Preview.html')
-        trace.store(f'dataframe_table_2', tidy_sheet.topandas())
+        trace.store(f'combined_dataframe_table_2', tidy_sheet.topandas())
 
 # Notes from tab
 notes = """
@@ -264,5 +273,12 @@ Table 2a,2b,2c,2d
 """
 scraper.dataset.comment = notes
 
+df_tbl_1a = trace.combine_and_trace(datasetTitle, 'combined_dataframe_table_1a')
+df_tbl_1b = trace.combine_and_trace(datasetTitle, 'combined_dataframe_table_1b')
+df_tbl_2 = trace.combine_and_trace(datasetTitle, 'combined_dataframe_table_2')
 
-
+df_tbl_1a['Period'] = df_tbl_1a['Period'].apply(format_date)
+df_tbl_1a['Total Survey Period'] = df_tbl_1a['Total Survey Period'].apply(format_date)
+df_tbl_1b['Period'] = df_tbl_1b['Period'].apply(format_date)
+df_tbl_1b['Total Survey Period'] = df_tbl_1b['Total Survey Period'].apply(format_date)
+df_tbl_2['Period'] = df_tbl_2['Period'].apply(format_date)

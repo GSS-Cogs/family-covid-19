@@ -88,12 +88,18 @@ def excelRange(bag):
 for tab in tabs:
     print(tab.name)
     if tab.name == '1a':
-        columns = ['Title', 'Period', 'Social Distance Ability', 'Odds Ratio', 'Lower 95 Percent Confidence Interval',
+        columns = ['Title', 'Total Period', 'Measurement', 'Period', 'Social Distance Ability', 'Odds Ratio', 'Lower 95 Percent Confidence Interval',
                    'Upper 95 Percent Confidence Interval', 'Positive Sample Count', 'Total Sample Count']
         trace.start(datasetTitle, tab, columns, dist.downloadURL)
 
         title = tab.excel_ref('A3')
         trace.Title('Defined from cell value: {}', var=cellLoc(title))
+
+        total_period = tab.excel_ref('A4')
+        trace.Total_Period('Defined from cell value: {}', var=cellLoc(total_period))
+
+        measurement = tab.excel_ref('A6')
+        trace.Measurement('Defined from cell value: {}', var=cellLoc(measurement))
 
         period = tab.excel_ref('A10').expand(DOWN).is_not_blank() & tab.excel_ref('A16').expand(UP).is_not_blank()
         trace.Period('Defined from cell range: {}', var=excelRange(period))
@@ -120,6 +126,8 @@ for tab in tabs:
 
         dimensions = [
             HDim(title, 'Title', CLOSEST, ABOVE),
+            HDim(total_period, 'Total Period', CLOSEST, ABOVE),
+            HDim(measurement, 'Measurement', CLOSEST, ABOVE),
             HDim(period, 'Period', DIRECTLY, LEFT),
             HDim(social_distance, 'Social Distance Ability', CLOSEST, LEFT),
             HDim(odds_ratio, 'Odds Ratio', DIRECTLY, ABOVE),
@@ -135,12 +143,18 @@ for tab in tabs:
         trace.store(f'dataframe_table_{tab.name}', tidy_sheet.topandas())
 
     if tab.name == '1b':
-        columns = ['Title', 'Period', 'Mode of Travel', 'Odds Ratio', 'Lower 95 Percent Confidence Interval',
+        columns = ['Title', 'Total Period', 'Measurement', 'Period', 'Mode of Travel', 'Odds Ratio', 'Lower 95 Percent Confidence Interval',
                    'Upper 95 Percent Confidence Interval', 'Positive Sample Count', 'Total Sample Count']
         trace.start(datasetTitle, tab, columns, dist.downloadURL)
 
         title = tab.excel_ref('A3')
         trace.Title('Defined from cell value: {}', var=cellLoc(title))
+
+        total_period = tab.excel_ref('A4')
+        trace.Total_Period('Defined from cell value: {}', var=cellLoc(total_period))
+
+        measurement = tab.excel_ref('A6')
+        trace.Measurement('Defined from cell value: {}', var=cellLoc(measurement))
 
         period = tab.excel_ref('A10').expand(DOWN).is_not_blank() & tab.excel_ref('A16').expand(UP).is_not_blank()
         trace.Period('Defined from cell range: {}', var=excelRange(period))
@@ -167,6 +181,8 @@ for tab in tabs:
 
         dimensions = [
             HDim(title, 'Title', CLOSEST, ABOVE),
+            HDim(total_period, 'Total Period', CLOSEST, ABOVE),
+            HDim(measurement, 'Measurement', CLOSEST, ABOVE),
             HDim(period, 'Period', DIRECTLY, LEFT),
             HDim(mode_travel, 'Mode of Travel', CLOSEST, LEFT),
             HDim(odds_ratio, 'Odds Ratio', DIRECTLY, ABOVE),
@@ -247,3 +263,6 @@ Table 2a,2b,2c,2d
 4. These data are unweighted percentages of people with any positive test result that had a Ct value less than 30.
 """
 scraper.dataset.comment = notes
+
+
+

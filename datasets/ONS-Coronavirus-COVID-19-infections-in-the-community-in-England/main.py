@@ -229,3 +229,21 @@ for tab in tabs:
         trace.with_preview(tidy_sheet)
         savepreviewhtml(tidy_sheet, fname=f'{tab.name}_Preview.html')
         trace.store(f'dataframe_table_2', tidy_sheet.topandas())
+
+# Notes from tab
+notes = """
+Table 1a,1b
+1. All results are provisional and subject to revision.
+2. These statistics refer to infections reported in the community, by which we mean private households. These figures exclude infections reported in hospitals, care homes and/or other institutional settings.
+3. The data in this table relate to those who have tested positive for COVID-19 on a nose and throat swab in the time periods specified.
+4. This analysis is based on data from participants aged 16-74 who are currently working. 
+5. Estimates were calculated using a logistic regression model which accounts for age, sex, region, urban/rural status, ethnicity, household size, multigenerational households, deprivation, whether individuals are currently working from home and their ability to socially distance at work if not working from home, method of travel to work and face coverings in the workplace. 													
+4. Please see our methods article for more methodological information on the COVID-19 Infection Survey:
+https://www.ons.gov.uk/peoplepopulationandcommunity/healthandsocialcare/conditionsanddiseases/methodologies/covid19infectionsurveypilotmethodsandfurtherinformation
+Table 2a,2b,2c,2d
+1. All results are provisional and subject to revision.
+2. These statistics refer to infections reported in the community, by which we mean private households. These figures exclude infections reported in hospitals, care homes or other institutional settings.
+3. Symptoms are self-reported and were not professionally diagnosed.
+4. These data are unweighted percentages of people with any positive test result that had a Ct value less than 30.
+"""
+scraper.dataset.comment = notes

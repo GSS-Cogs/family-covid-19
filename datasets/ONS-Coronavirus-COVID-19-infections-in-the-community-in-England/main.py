@@ -282,3 +282,9 @@ df_tbl_1a['Total Survey Period'] = df_tbl_1a['Total Survey Period'].apply(format
 df_tbl_1b['Period'] = df_tbl_1b['Period'].apply(format_date)
 df_tbl_1b['Total Survey Period'] = df_tbl_1b['Total Survey Period'].apply(format_date)
 df_tbl_2['Period'] = df_tbl_2['Period'].apply(format_date)
+
+trace.add_column('Value')
+trace.Value('Rename databaker column OBS to Value')
+df_tbl_1a.rename(columns={'OBS': 'Value', 'DATAMARKER': 'Marker'}, inplace=True)
+df_tbl_1b.rename(columns={'OBS': 'Value', 'DATAMARKER': 'Marker'}, inplace=True)
+df_tbl_2.rename(columns={'OBS': 'Value', 'DATAMARKER': 'Marker'}, inplace=True)

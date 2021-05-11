@@ -103,6 +103,15 @@ def pathify_columns(df, columns_arr):
                 raise Exception('Failed to pathify column "{}".'.format(col)) from err
 
 
+def convert_category_datatype(df, columns_arr):
+    for col in df.columns:
+        if col in columns_arr:
+            try:
+                df[col] = df[col].astype('category')
+            except ValueError as err:
+                raise ValueError('Failed to convert category data type for column "{}".'.format(col)) from err
+
+
 # Transform process
 for tab in tabs:
     print(tab.name)
@@ -317,3 +326,7 @@ df_tbl_2 = df_tbl_2[['Title', 'Period', 'Symptom', 'Value', 'Percent', 'Lower 95
 pathify_columns(df_tbl_1a, ['Title', 'Measurement', 'Social Distance Ability'])
 pathify_columns(df_tbl_1b, ['Title', 'Measurement', 'Mode of Travel'])
 pathify_columns(df_tbl_2, ['Title', 'Symptom'])
+
+convert_category_datatype(df_tbl_1a, ['Title', 'Measurement', 'Social Distance Ability'])
+convert_category_datatype(df_tbl_1b, ['Title', 'Measurement', 'Mode of Travel'])
+convert_category_datatype(df_tbl_2, ['Title', 'Symptom'])

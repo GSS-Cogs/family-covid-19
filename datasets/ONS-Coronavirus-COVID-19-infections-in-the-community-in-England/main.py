@@ -94,6 +94,15 @@ def format_date(date_str):
     return from_date + '-' + to_date
 
 
+def pathify_columns(df, columns_arr):
+    for col in df.columns:
+        if col in columns_arr:
+            try:
+                df[col] = df[col].apply(lambda x: pathify(str(x)))
+            except Exception as err:
+                raise Exception('Failed to pathify column "{}".'.format(col)) from err
+
+
 # Transform process
 for tab in tabs:
     print(tab.name)
@@ -304,3 +313,7 @@ df_tbl_1b = df_tbl_1b[['Title', 'Measurement', 'Total Survey Period', 'Mode of T
                        'Lower 95 Percent Confidence Interval', 'Upper 95 Percent Confidence Interval', 'Positive Sample Count', 'Total Sample Count']]
 df_tbl_2 = df_tbl_2[['Title', 'Period', 'Symptom', 'Value', 'Percent', 'Lower 95 Percent Confidence Interval',
                      'Upper 95 Percent Confidence Interval', 'Positive Sample Count', 'Total Sample Count']]
+
+pathify_columns(df_tbl_1a, ['Title', 'Measurement', 'Social Distance Ability'])
+pathify_columns(df_tbl_1b, ['Title', 'Measurement', 'Mode of Travel'])
+pathify_columns(df_tbl_2, ['Title', 'Symptom'])

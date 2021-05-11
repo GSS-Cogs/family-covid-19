@@ -297,3 +297,10 @@ df_tbl_2['Positive Sample Count'] = pd.to_numeric(df_tbl_2['Positive Sample Coun
 df_tbl_1a['Total Sample Count'] = pd.to_numeric(df_tbl_1a['Total Sample Count'], errors='coerce').astype('Int64').replace(np.nan, 'None')
 df_tbl_1b['Total Sample Count'] = pd.to_numeric(df_tbl_1b['Total Sample Count'], errors='coerce').astype('Int64').replace(np.nan, 'None')
 df_tbl_2['Total Sample Count'] = pd.to_numeric(df_tbl_2['Total Sample Count'], errors='coerce').astype('Int64').replace(np.nan, 'None')
+
+df_tbl_1a = df_tbl_1a[['Title', 'Measurement', 'Total Survey Period', 'Social Distance Ability', 'Period', 'Value', 'Odds Ratio',
+                       'Lower 95 Percent Confidence Interval', 'Upper 95 Percent Confidence Interval', 'Positive Sample Count', 'Total Sample Count']]
+df_tbl_1b = df_tbl_1b[['Title', 'Measurement', 'Total Survey Period', 'Mode of Travel', 'Period', 'Value', 'Odds Ratio',
+                       'Lower 95 Percent Confidence Interval', 'Upper 95 Percent Confidence Interval', 'Positive Sample Count', 'Total Sample Count']]
+df_tbl_2 = df_tbl_2[['Title', 'Period', 'Symptom', 'Value', 'Percent', 'Lower 95 Percent Confidence Interval',
+                     'Upper 95 Percent Confidence Interval', 'Positive Sample Count', 'Total Sample Count']]

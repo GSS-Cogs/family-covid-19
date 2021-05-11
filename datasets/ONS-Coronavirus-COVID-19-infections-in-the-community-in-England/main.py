@@ -7,6 +7,7 @@ from gssutils import *
 import json
 import string
 from datefinder import find_dates
+import numpy as np
 
 info = json.load(open('info.json'))
 landingPage = info['landingPage']
@@ -288,3 +289,11 @@ trace.Value('Rename databaker column OBS to Value')
 df_tbl_1a.rename(columns={'OBS': 'Value', 'DATAMARKER': 'Marker'}, inplace=True)
 df_tbl_1b.rename(columns={'OBS': 'Value', 'DATAMARKER': 'Marker'}, inplace=True)
 df_tbl_2.rename(columns={'OBS': 'Value', 'DATAMARKER': 'Marker'}, inplace=True)
+
+df_tbl_1a['Positive Sample Count'] = pd.to_numeric(df_tbl_1a['Positive Sample Count'], errors='coerce').astype('Int64').replace(np.nan, 'None')
+df_tbl_1b['Positive Sample Count'] = pd.to_numeric(df_tbl_1b['Positive Sample Count'], errors='coerce').astype('Int64').replace(np.nan, 'None')
+df_tbl_2['Positive Sample Count'] = pd.to_numeric(df_tbl_2['Positive Sample Count'], errors='coerce').astype('Int64').replace(np.nan, 'None')
+
+df_tbl_1a['Total Sample Count'] = pd.to_numeric(df_tbl_1a['Total Sample Count'], errors='coerce').astype('Int64').replace(np.nan, 'None')
+df_tbl_1b['Total Sample Count'] = pd.to_numeric(df_tbl_1b['Total Sample Count'], errors='coerce').astype('Int64').replace(np.nan, 'None')
+df_tbl_2['Total Sample Count'] = pd.to_numeric(df_tbl_2['Total Sample Count'], errors='coerce').astype('Int64').replace(np.nan, 'None')

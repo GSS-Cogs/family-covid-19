@@ -111,8 +111,13 @@ def convert_category_datatype(df, columns_arr):
                 raise ValueError('Failed to convert category data type for column "{}".'.format(col)) from err
 
 
-def convert_column_type_int64(df, column):
-    df[column] = pd.to_numeric(df[column], errors='coerce').astype('Int64').replace(np.nan, 'None')
+def convert_column_type_numeric(df, column_arr, datatype):
+    for col in df.columns:
+        if col in column_arr:
+            try:
+                df[col] = pd.to_numeric(df[col], errors='coerce').astype(datatype).replace(np.nan, 'None')
+            except Exception as err:
+                raise Exception('Failed to convert column datatype "{}".'.format(col)) from err
 
 
 # Transform process
@@ -311,13 +316,13 @@ df_tbl_2['Period'] = df_tbl_2['Period'].apply(format_date)
 df_tbl_1a['Total Survey Period'] = df_tbl_1a['Total Survey Period'].apply(format_date)
 df_tbl_1b['Total Survey Period'] = df_tbl_1b['Total Survey Period'].apply(format_date)
 
-convert_column_type_int64(df_tbl_1a, 'Positive Sample Count')
-convert_column_type_int64(df_tbl_1b, 'Positive Sample Count')
-convert_column_type_int64(df_tbl_2, 'Positive Sample Count')
+convert_column_type_numeric(df_tbl_1a, ['Positive Sample Count', 'Total Sample Count'], 'Int64')
+convert_column_type_numeric(df_tbl_1b, ['Positive Sample Count', 'Total Sample Count'], 'Int64')
+convert_column_type_numeric(df_tbl_2, ['Positive Sample Count', 'Total Sample Count'], 'Int64')
 
-convert_column_type_int64(df_tbl_1a, 'Total Sample Count')
-convert_column_type_int64(df_tbl_1b, 'Total Sample Count')
-convert_column_type_int64(df_tbl_2, 'Total Sample Count')
+convert_column_type_numeric(df_tbl_1a, ['Odds Ratio', 'Lower 95 Percent Confidence Interval', 'Upper 95 Percent Confidence Interval'], 'float64')
+convert_column_type_numeric(df_tbl_1b, ['Odds Ratio', 'Lower 95 Percent Confidence Interval', 'Upper 95 Percent Confidence Interval'], 'float64')
+convert_column_type_numeric(df_tbl_2, ['Percent', 'Lower 95 Percent Confidence Interval', 'Upper 95 Percent Confidence Interval'], 'float64')
 
 convert_category_datatype(df_tbl_1a, ['Title', 'Measurement', 'Social Distance Ability'])
 convert_category_datatype(df_tbl_1b, ['Title', 'Measurement', 'Mode of Travel'])

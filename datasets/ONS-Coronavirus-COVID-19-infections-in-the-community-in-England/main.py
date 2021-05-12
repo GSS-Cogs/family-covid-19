@@ -299,17 +299,17 @@ df_tbl_1a = trace.combine_and_trace(datasetTitle, 'combined_dataframe_table_1a')
 df_tbl_1b = trace.combine_and_trace(datasetTitle, 'combined_dataframe_table_1b')
 df_tbl_2 = trace.combine_and_trace(datasetTitle, 'combined_dataframe_table_2')
 
-df_tbl_1a['Period'] = df_tbl_1a['Period'].apply(format_date)
-df_tbl_1a['Total Survey Period'] = df_tbl_1a['Total Survey Period'].apply(format_date)
-df_tbl_1b['Period'] = df_tbl_1b['Period'].apply(format_date)
-df_tbl_1b['Total Survey Period'] = df_tbl_1b['Total Survey Period'].apply(format_date)
-df_tbl_2['Period'] = df_tbl_2['Period'].apply(format_date)
-
 trace.add_column('Value')
 trace.Value('Rename databaker column OBS to Value')
 df_tbl_1a.rename(columns={'OBS': 'Value', 'DATAMARKER': 'Marker'}, inplace=True)
 df_tbl_1b.rename(columns={'OBS': 'Value', 'DATAMARKER': 'Marker'}, inplace=True)
 df_tbl_2.rename(columns={'OBS': 'Value', 'DATAMARKER': 'Marker'}, inplace=True)
+
+df_tbl_1a['Period'] = df_tbl_1a['Period'].apply(format_date)
+df_tbl_1b['Period'] = df_tbl_1b['Period'].apply(format_date)
+df_tbl_2['Period'] = df_tbl_2['Period'].apply(format_date)
+df_tbl_1a['Total Survey Period'] = df_tbl_1a['Total Survey Period'].apply(format_date)
+df_tbl_1b['Total Survey Period'] = df_tbl_1b['Total Survey Period'].apply(format_date)
 
 convert_column_type_int64(df_tbl_1a, 'Positive Sample Count')
 convert_column_type_int64(df_tbl_1b, 'Positive Sample Count')
@@ -319,17 +319,17 @@ convert_column_type_int64(df_tbl_1a, 'Total Sample Count')
 convert_column_type_int64(df_tbl_1b, 'Total Sample Count')
 convert_column_type_int64(df_tbl_2, 'Total Sample Count')
 
+convert_category_datatype(df_tbl_1a, ['Title', 'Measurement', 'Social Distance Ability'])
+convert_category_datatype(df_tbl_1b, ['Title', 'Measurement', 'Mode of Travel'])
+convert_category_datatype(df_tbl_2, ['Title', 'Symptom'])
+
+pathify_columns(df_tbl_1a, ['Title', 'Measurement', 'Social Distance Ability'])
+pathify_columns(df_tbl_1b, ['Title', 'Measurement', 'Mode of Travel'])
+pathify_columns(df_tbl_2, ['Title', 'Symptom'])
+
 df_tbl_1a = df_tbl_1a[['Title', 'Measurement', 'Total Survey Period', 'Social Distance Ability', 'Period', 'Value', 'Odds Ratio',
                        'Lower 95 Percent Confidence Interval', 'Upper 95 Percent Confidence Interval', 'Positive Sample Count', 'Total Sample Count']]
 df_tbl_1b = df_tbl_1b[['Title', 'Measurement', 'Total Survey Period', 'Mode of Travel', 'Period', 'Value', 'Odds Ratio',
                        'Lower 95 Percent Confidence Interval', 'Upper 95 Percent Confidence Interval', 'Positive Sample Count', 'Total Sample Count']]
 df_tbl_2 = df_tbl_2[['Title', 'Period', 'Symptom', 'Value', 'Percent', 'Lower 95 Percent Confidence Interval',
                      'Upper 95 Percent Confidence Interval', 'Positive Sample Count', 'Total Sample Count']]
-
-pathify_columns(df_tbl_1a, ['Title', 'Measurement', 'Social Distance Ability'])
-pathify_columns(df_tbl_1b, ['Title', 'Measurement', 'Mode of Travel'])
-pathify_columns(df_tbl_2, ['Title', 'Symptom'])
-
-convert_category_datatype(df_tbl_1a, ['Title', 'Measurement', 'Social Distance Ability'])
-convert_category_datatype(df_tbl_1b, ['Title', 'Measurement', 'Mode of Travel'])
-convert_category_datatype(df_tbl_2, ['Title', 'Symptom'])

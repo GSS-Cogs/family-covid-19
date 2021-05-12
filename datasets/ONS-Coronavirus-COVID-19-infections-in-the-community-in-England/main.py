@@ -338,3 +338,11 @@ df_tbl_1b = df_tbl_1b[['Title', 'Measurement', 'Total Survey Period', 'Mode of T
                        'Lower 95 Percent Confidence Interval', 'Upper 95 Percent Confidence Interval', 'Positive Sample Count', 'Total Sample Count']]
 df_tbl_2 = df_tbl_2[['Title', 'Period', 'Symptom', 'Value', 'Percent', 'Lower 95 Percent Confidence Interval',
                      'Upper 95 Percent Confidence Interval', 'Positive Sample Count', 'Total Sample Count']]
+
+cubes.add_cube(scraper, df_tbl_1a, datasetTitle+'-table1a')
+cubes.add_cube(scraper, df_tbl_1b, datasetTitle+'-table1b')
+cubes.add_cube(scraper, df_tbl_2, datasetTitle+'-table2')
+
+cubes.output_all()
+
+trace.render('spec_v1.html')

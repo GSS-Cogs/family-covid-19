@@ -25,10 +25,9 @@ dist
 datasetTitle
 
 tabs_name = ['1a', '1b', '2a', '2b', '2c', '2d']
-
+tabs = {tab: tab for tab in dist.as_databaker() if tab.name in tabs_name}
 if len(set(tabs_name)-{x.name for x in tabs}) != 0:
     raise ValueError(f'Aborting. A tab named {set(tabs_name)-{x.name for x in tabs}} required but not found')
-tabs = {tab: tab for tab in dist.as_databaker() if tab.name in tabs_name}
 
 
 def left(s, amount):
@@ -110,6 +109,10 @@ def convert_category_datatype(df, columns_arr):
                 df[col] = df[col].astype('category')
             except ValueError as err:
                 raise ValueError('Failed to convert category data type for column "{}".'.format(col)) from err
+
+
+def convert_column_type_int64(df, column):
+    df[column] = pd.to_numeric(df[column], errors='coerce').astype('Int64').replace(np.nan, 'None')
 
 
 # Transform process
@@ -308,13 +311,13 @@ df_tbl_1a.rename(columns={'OBS': 'Value', 'DATAMARKER': 'Marker'}, inplace=True)
 df_tbl_1b.rename(columns={'OBS': 'Value', 'DATAMARKER': 'Marker'}, inplace=True)
 df_tbl_2.rename(columns={'OBS': 'Value', 'DATAMARKER': 'Marker'}, inplace=True)
 
-df_tbl_1a['Positive Sample Count'] = pd.to_numeric(df_tbl_1a['Positive Sample Count'], errors='coerce').astype('Int64').replace(np.nan, 'None')
-df_tbl_1b['Positive Sample Count'] = pd.to_numeric(df_tbl_1b['Positive Sample Count'], errors='coerce').astype('Int64').replace(np.nan, 'None')
-df_tbl_2['Positive Sample Count'] = pd.to_numeric(df_tbl_2['Positive Sample Count'], errors='coerce').astype('Int64').replace(np.nan, 'None')
+convert_column_type_int64(df_tbl_1a, 'Positive Sample Count')
+convert_column_type_int64(df_tbl_1b, 'Positive Sample Count')
+convert_column_type_int64(df_tbl_2, 'Positive Sample Count')
 
-df_tbl_1a['Total Sample Count'] = pd.to_numeric(df_tbl_1a['Total Sample Count'], errors='coerce').astype('Int64').replace(np.nan, 'None')
-df_tbl_1b['Total Sample Count'] = pd.to_numeric(df_tbl_1b['Total Sample Count'], errors='coerce').astype('Int64').replace(np.nan, 'None')
-df_tbl_2['Total Sample Count'] = pd.to_numeric(df_tbl_2['Total Sample Count'], errors='coerce').astype('Int64').replace(np.nan, 'None')
+convert_column_type_int64(df_tbl_1a, 'Total Sample Count')
+convert_column_type_int64(df_tbl_1b, 'Total Sample Count')
+convert_column_type_int64(df_tbl_2, 'Total Sample Count')
 
 df_tbl_1a = df_tbl_1a[['Title', 'Measurement', 'Total Survey Period', 'Social Distance Ability', 'Period', 'Value', 'Odds Ratio',
                        'Lower 95 Percent Confidence Interval', 'Upper 95 Percent Confidence Interval', 'Positive Sample Count', 'Total Sample Count']]

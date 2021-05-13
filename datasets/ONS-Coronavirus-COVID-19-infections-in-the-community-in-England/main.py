@@ -124,7 +124,7 @@ def convert_column_type_numeric(df, column_arr, datatype):
 for tab in tabs:
     print(tab.name)
     if tab.name == '1a':
-        columns = ['Title', 'Total Survey Period', 'Measurement', 'Period', 'Social Distance Ability', 'Lower 95 Percent Confidence Interval',
+        columns = ['Title', 'Total Survey Period', 'Measurement', 'Period', 'Measure Type', 'Unit', 'Social Distance Ability', 'Lower 95 Percent Confidence Interval',
                    'Upper 95 Percent Confidence Interval', 'Positive Sample Count', 'Total Sample Count']
         trace.start(datasetTitle, tab, columns, dist.downloadURL)
 
@@ -155,6 +155,12 @@ for tab in tabs:
         total_sample_count = tab.filter('Total number of people in sample').expand(DOWN).is_not_blank()
         trace.Total_Sample_Count('Defined from cell range: {}', var=excelRange(total_sample_count))
 
+        measure_type = tab.excel_ref('A3')
+        trace.Measure_Type('Defined from cell value: {}', var=cellLoc(measure_type))
+
+        unit = 'Odds Ratio'
+        trace.Unit('Hardcoded as Odds Ratio')
+
         observations = tab.filter('Odds Ratio').expand(DOWN).is_not_blank()
 
         dimensions = [
@@ -166,7 +172,9 @@ for tab in tabs:
             HDim(lower_confidence_interval, 'Lower 95 Percent Confidence Interval', DIRECTLY, RIGHT),
             HDim(upper_confidence_interval, 'Upper 95 Percent Confidence Interval', DIRECTLY, RIGHT),
             HDim(positive_sample_count, 'Positive Sample Count', DIRECTLY, RIGHT),
-            HDim(total_sample_count, 'Total Sample Count', DIRECTLY, RIGHT)
+            HDim(total_sample_count, 'Total Sample Count', DIRECTLY, RIGHT),
+            HDim(measure_type, 'Measure Type', CLOSEST, ABOVE),
+            HDimConst('Unit', unit)
         ]
 
         tidy_sheet = ConversionSegment(tab, dimensions, observations)
@@ -175,7 +183,7 @@ for tab in tabs:
         trace.store(f'combined_dataframe_table_{tab.name}', tidy_sheet.topandas())
 
     if tab.name == '1b':
-        columns = ['Title', 'Total Survey Period', 'Measurement', 'Period', 'Mode of Travel', 'Lower 95 Percent Confidence Interval',
+        columns = ['Title', 'Total Survey Period', 'Measurement', 'Period', 'Measure Type', 'Unit', 'Mode of Travel', 'Lower 95 Percent Confidence Interval',
                    'Upper 95 Percent Confidence Interval', 'Positive Sample Count', 'Total Sample Count']
         trace.start(datasetTitle, tab, columns, dist.downloadURL)
 
@@ -206,6 +214,12 @@ for tab in tabs:
         total_sample_count = tab.filter('Total number of people in sample').expand(DOWN).is_not_blank()
         trace.Total_Sample_Count('Defined from cell range: {}', var=excelRange(total_sample_count))
 
+        measure_type = tab.excel_ref('A3')
+        trace.Measure_Type('Defined from cell value: {}', var=cellLoc(measure_type))
+
+        unit = 'Odds Ratio'
+        trace.Unit('Hardcoded as Odds Ratio')
+
         observations = tab.filter('Odds Ratio').expand(DOWN).is_not_blank()
 
         dimensions = [
@@ -217,7 +231,9 @@ for tab in tabs:
             HDim(lower_confidence_interval, 'Lower 95 Percent Confidence Interval', DIRECTLY, RIGHT),
             HDim(upper_confidence_interval, 'Upper 95 Percent Confidence Interval', DIRECTLY, RIGHT),
             HDim(positive_sample_count, 'Positive Sample Count', DIRECTLY, RIGHT),
-            HDim(total_sample_count, 'Total Sample Count', DIRECTLY, RIGHT)
+            HDim(total_sample_count, 'Total Sample Count', DIRECTLY, RIGHT),
+            HDim(measure_type, 'Measure Type', CLOSEST, ABOVE),
+            HDimConst('Unit', unit)
         ]
 
         tidy_sheet = ConversionSegment(tab, dimensions, observations)
@@ -226,7 +242,7 @@ for tab in tabs:
         trace.store(f'combined_dataframe_table_{tab.name}', tidy_sheet.topandas())
 
     if tab.name in ['2a', '2b', '2c', '2d']:
-        columns = ['Title', 'Period', 'Symptom', 'Lower 95 Percent Confidence Interval',
+        columns = ['Title', 'Period', 'Symptom', 'Measure Type', 'Unit', 'Lower 95 Percent Confidence Interval',
                    'Upper 95 Percent Confidence Interval', 'Positive Sample Count', 'Total Sample Count']
         trace.start(datasetTitle, tab, columns, dist.downloadURL)
 
@@ -253,6 +269,12 @@ for tab in tabs:
         total_sample_count = tab.filter('Total number of people testing positive').expand(DOWN).is_not_blank()
         trace.Total_Sample_Count('Defined from cell range: {}', var=excelRange(total_sample_count))
 
+        measure_type = 'Percentage'
+        trace.Measure_Type('Hardcoded as Percentage')
+
+        unit = 'Percent'
+        trace.Unit('Hardcoded as Percent')
+
         observations = tab.filter(contains_string('% testing positive with symptom')).expand(DOWN).is_not_blank()
 
         dimensions = [
@@ -262,7 +284,9 @@ for tab in tabs:
             HDim(lower_confidence_interval, 'Lower 95 Percent Confidence Interval', DIRECTLY, RIGHT),
             HDim(upper_confidence_interval, 'Upper 95 Percent Confidence Interval', DIRECTLY, RIGHT),
             HDim(positive_sample_count, 'Positive Sample Count', DIRECTLY, RIGHT),
-            HDim(total_sample_count, 'Total Sample Count', DIRECTLY, RIGHT)
+            HDim(total_sample_count, 'Total Sample Count', DIRECTLY, RIGHT),
+            HDimConst('Measure Type', measure_type),
+            HDimConst('Unit', unit)
         ]
 
         tidy_sheet = ConversionSegment(tab, dimensions, observations)
@@ -320,19 +344,19 @@ convert_column_type_numeric(df_tbl_1a, ['Lower 95 Percent Confidence Interval', 
 convert_column_type_numeric(df_tbl_1b, ['Lower 95 Percent Confidence Interval', 'Upper 95 Percent Confidence Interval'], 'float64')
 convert_column_type_numeric(df_tbl_2, ['Lower 95 Percent Confidence Interval', 'Upper 95 Percent Confidence Interval'], 'float64')
 
-convert_category_datatype(df_tbl_1a, ['Title', 'Measurement', 'Social Distance Ability'])
-convert_category_datatype(df_tbl_1b, ['Title', 'Measurement', 'Mode of Travel'])
-convert_category_datatype(df_tbl_2, ['Title', 'Symptom'])
+convert_category_datatype(df_tbl_1a, ['Title', 'Measurement', 'Social Distance Ability', 'Measure Type', 'Unit'])
+convert_category_datatype(df_tbl_1b, ['Title', 'Measurement', 'Mode of Travel', 'Measure Type', 'Unit'])
+convert_category_datatype(df_tbl_2, ['Title', 'Symptom', 'Measure Type', 'Unit'])
 
-pathify_columns(df_tbl_1a, ['Title', 'Measurement', 'Social Distance Ability'])
-pathify_columns(df_tbl_1b, ['Title', 'Measurement', 'Mode of Travel'])
-pathify_columns(df_tbl_2, ['Title', 'Symptom'])
+pathify_columns(df_tbl_1a, ['Title', 'Measurement', 'Social Distance Ability', 'Measure Type', 'Unit'])
+pathify_columns(df_tbl_1b, ['Title', 'Measurement', 'Mode of Travel', 'Measure Type', 'Unit'])
+pathify_columns(df_tbl_2, ['Title', 'Symptom', 'Measure Type', 'Unit'])
 
-df_tbl_1a = df_tbl_1a[['Title', 'Measurement', 'Total Survey Period', 'Social Distance Ability', 'Period', 'Value',
+df_tbl_1a = df_tbl_1a[['Title', 'Measurement', 'Total Survey Period', 'Social Distance Ability', 'Period', 'Value', 'Measure Type', 'Unit',
                        'Lower 95 Percent Confidence Interval', 'Upper 95 Percent Confidence Interval', 'Positive Sample Count', 'Total Sample Count']]
-df_tbl_1b = df_tbl_1b[['Title', 'Measurement', 'Total Survey Period', 'Mode of Travel', 'Period', 'Value',
+df_tbl_1b = df_tbl_1b[['Title', 'Measurement', 'Total Survey Period', 'Mode of Travel', 'Period', 'Value', 'Measure Type', 'Unit',
                        'Lower 95 Percent Confidence Interval', 'Upper 95 Percent Confidence Interval', 'Positive Sample Count', 'Total Sample Count']]
-df_tbl_2 = df_tbl_2[['Title', 'Period', 'Symptom', 'Value', 'Lower 95 Percent Confidence Interval',
+df_tbl_2 = df_tbl_2[['Title', 'Period', 'Symptom', 'Value', 'Measure Type', 'Unit', 'Lower 95 Percent Confidence Interval',
                      'Upper 95 Percent Confidence Interval', 'Positive Sample Count', 'Total Sample Count']]
 
 cubes.add_cube(scraper, df_tbl_1a, datasetTitle+'-table-1a')

@@ -116,8 +116,8 @@ def convert_column_type_numeric(df, column_arr, datatype):
         if col in column_arr:
             try:
                 df[col] = pd.to_numeric(df[col], errors='coerce').astype(datatype).replace(np.nan, 'None')
-            except Exception as err:
-                raise Exception('Failed to convert column datatype "{}".'.format(col)) from err
+            except ValueError as err:
+                raise ValueError('Failed to convert column datatype "{}".'.format(col)) from err
 
 
 # Transform process
@@ -301,13 +301,18 @@ Table 2a,2b,2c,2d
 scraper.dataset.comment = notes
 
 df_tbl_1a = trace.combine_and_trace(datasetTitle, 'combined_dataframe_table_1a')
-df_tbl_1b = trace.combine_and_trace(datasetTitle, 'combined_dataframe_table_1b')
-df_tbl_2 = trace.combine_and_trace(datasetTitle, 'combined_dataframe_table_2')
-
 trace.add_column('Value')
 trace.Value('Rename databaker column OBS to Value')
 df_tbl_1a.rename(columns={'OBS': 'Value', 'DATAMARKER': 'Marker'}, inplace=True)
+
+df_tbl_1b = trace.combine_and_trace(datasetTitle, 'combined_dataframe_table_1b')
+trace.add_column('Value')
+trace.Value('Rename databaker column OBS to Value')
 df_tbl_1b.rename(columns={'OBS': 'Value', 'DATAMARKER': 'Marker'}, inplace=True)
+
+df_tbl_2 = trace.combine_and_trace(datasetTitle, 'combined_dataframe_table_2')
+trace.add_column('Value')
+trace.Value('Rename databaker column OBS to Value')
 df_tbl_2.rename(columns={'OBS': 'Value', 'DATAMARKER': 'Marker'}, inplace=True)
 
 df_tbl_1a['Period'] = df_tbl_1a['Period'].apply(format_date)

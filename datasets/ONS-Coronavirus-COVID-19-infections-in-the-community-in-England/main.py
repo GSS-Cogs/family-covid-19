@@ -175,7 +175,7 @@ for tab in tabs:
 
         tidy_sheet = ConversionSegment(tab, dimensions, observations)
         trace.with_preview(tidy_sheet)
-        savepreviewhtml(tidy_sheet, fname=f'{tab.name}_Preview.html')
+        savepreviewhtml(tidy_sheet, fname=f'Table_{tab.name}_Preview.html')
         trace.store(f'combined_dataframe_table_{tab.name}', tidy_sheet.topandas())
 
     if tab.name == '1b':
@@ -230,7 +230,7 @@ for tab in tabs:
 
         tidy_sheet = ConversionSegment(tab, dimensions, observations)
         trace.with_preview(tidy_sheet)
-        savepreviewhtml(tidy_sheet, fname=f'{tab.name}_Preview.html')
+        savepreviewhtml(tidy_sheet, fname=f'Table_{tab.name}_Preview.html')
         trace.store(f'combined_dataframe_table_{tab.name}', tidy_sheet.topandas())
 
     if tab.name in ['2a', '2b', '2c', '2d']:
@@ -279,7 +279,7 @@ for tab in tabs:
 
         tidy_sheet = ConversionSegment(tab, dimensions, observations)
         trace.with_preview(tidy_sheet)
-        savepreviewhtml(tidy_sheet, fname=f'{tab.name}_Preview.html')
+        savepreviewhtml(tidy_sheet, fname=f'Table_{tab.name}_Preview.html')
         trace.store(f'combined_dataframe_table_2', tidy_sheet.topandas())
 
 # Notes from tab
@@ -339,9 +339,9 @@ df_tbl_1b = df_tbl_1b[['Title', 'Measurement', 'Total Survey Period', 'Mode of T
 df_tbl_2 = df_tbl_2[['Title', 'Period', 'Symptom', 'Value', 'Percent', 'Lower 95 Percent Confidence Interval',
                      'Upper 95 Percent Confidence Interval', 'Positive Sample Count', 'Total Sample Count']]
 
-cubes.add_cube(scraper, df_tbl_1a, datasetTitle+'-table1a')
-cubes.add_cube(scraper, df_tbl_1b, datasetTitle+'-table1b')
-cubes.add_cube(scraper, df_tbl_2, datasetTitle+'-table2')
+cubes.add_cube(scraper, df_tbl_1a, datasetTitle+'-table-1a')
+cubes.add_cube(scraper, df_tbl_1b, datasetTitle+'-table-1b')
+cubes.add_cube(scraper, df_tbl_2, datasetTitle+'-table-2')
 
 cubes.output_all()
 

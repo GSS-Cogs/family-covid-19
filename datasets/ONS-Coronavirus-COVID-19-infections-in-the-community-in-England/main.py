@@ -311,6 +311,7 @@ Table 2a,2b,2c,2d
 4. These data are unweighted percentages of people with any positive test result that had a Ct value less than 30.
 """
 scraper.dataset.comment = notes
+scraper.dataset.family = 'covid-19'
 
 df_tbl_1a = trace.combine_and_trace(datasetTitle, 'combined_dataframe_table_1a')
 trace.add_column('Value')

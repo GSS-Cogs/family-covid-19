@@ -338,7 +338,7 @@ trace.Country_Name("Create Country Name Value based on 'Title' column")
 country_code_dict={'England':'E92000001', 'Wales':'W92000004', 'Northern Ireland':'N92000002', 'Scotland':'S92000003'}
 df_tbl_2['Country Code'] = df_tbl_2['Country Name'].replace(country_code_dict)
 trace.add_column('Country Code')
-trace.Country_Name("Create Country Code Value based on 'Country Name' column")
+trace.Country_Code("Create Country Code Value based on 'Country Name' column")
 
 df_tbl_1a['Period'] = df_tbl_1a['Period'].apply(format_date)
 df_tbl_1b['Period'] = df_tbl_1b['Period'].apply(format_date)

@@ -351,7 +351,7 @@ convert_column_type_numeric(df_tbl_2, ['Lower Bound of 95 Percent Confidence Int
 
 convert_category_datatype(df_tbl_1a, ['Title', 'Measurement', 'Social Distance Ability', 'Measure Type', 'Unit'])
 convert_category_datatype(df_tbl_1b, ['Title', 'Measurement', 'Mode of Travel', 'Measure Type', 'Unit'])
-convert_category_datatype(df_tbl_2, ['Title', 'Symptom', 'Measure Type', 'Unit'])
+convert_category_datatype(df_tbl_2, ['Title', 'Region', 'Symptom', 'Measure Type', 'Unit'])
 
 pathify_columns(df_tbl_1a, ['Title', 'Measurement', 'Social Distance Ability', 'Measure Type', 'Unit'])
 pathify_columns(df_tbl_1b, ['Title', 'Measurement', 'Mode of Travel', 'Measure Type', 'Unit'])

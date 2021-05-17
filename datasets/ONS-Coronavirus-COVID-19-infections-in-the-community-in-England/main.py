@@ -331,9 +331,9 @@ trace.Value('Rename databaker column OBS to Value')
 df_tbl_2.rename(columns={'OBS': 'Value', 'DATAMARKER': 'Marker'}, inplace=True)
 df_tbl_2 = df_tbl_2.dropna(subset=['Symptom'], axis =0)
 
-df_tbl_2['Region'] = df_tbl_2['Title'].str.split().str[-1]
-trace.add_column('Region')
-trace.Region("Create Region Value based on 'Title' column")
+df_tbl_2['Country Name'] = df_tbl_2['Title'].str.split().str[-1]
+trace.add_column('Country Name')
+trace.Country_Name("Create Country Name Value based on 'Title' column")
 
 df_tbl_1a['Period'] = df_tbl_1a['Period'].apply(format_date)
 df_tbl_1b['Period'] = df_tbl_1b['Period'].apply(format_date)
@@ -351,17 +351,17 @@ convert_column_type_numeric(df_tbl_2, ['Lower Bound of 95 Percent Confidence Int
 
 convert_category_datatype(df_tbl_1a, ['Title', 'Measurement', 'Social Distance Ability', 'Measure Type', 'Unit'])
 convert_category_datatype(df_tbl_1b, ['Title', 'Measurement', 'Mode of Travel', 'Measure Type', 'Unit'])
-convert_category_datatype(df_tbl_2, ['Title', 'Region', 'Symptom', 'Measure Type', 'Unit'])
+convert_category_datatype(df_tbl_2, ['Title', 'Country Name', 'Symptom', 'Measure Type', 'Unit'])
 
 pathify_columns(df_tbl_1a, ['Title', 'Measurement', 'Social Distance Ability', 'Measure Type', 'Unit'])
 pathify_columns(df_tbl_1b, ['Title', 'Measurement', 'Mode of Travel', 'Measure Type', 'Unit'])
-pathify_columns(df_tbl_2, ['Title', 'Region', 'Symptom', 'Measure Type', 'Unit'])
+pathify_columns(df_tbl_2, ['Title', 'Country Name', 'Symptom', 'Measure Type', 'Unit'])
 
 df_tbl_1a = df_tbl_1a[['Title', 'Measurement', 'Total Survey Period', 'Social Distance Ability', 'Period', 'Value', 'Measure Type', 'Unit',
                        'Lower Bound of 95 Percent Confidence Interval', 'Upper Bound of 95 Percent Confidence Interval', 'Positive Sample Count', 'Total Sample Count']]
 df_tbl_1b = df_tbl_1b[['Title', 'Measurement', 'Total Survey Period', 'Mode of Travel', 'Period', 'Value', 'Measure Type', 'Unit',
                        'Lower Bound of 95 Percent Confidence Interval', 'Upper Bound of 95 Percent Confidence Interval', 'Positive Sample Count', 'Total Sample Count']]
-df_tbl_2 = df_tbl_2[['Title', 'Period', 'Region', 'Symptom', 'Value', 'Measure Type', 'Unit', 'Lower Bound of 95 Percent Confidence Interval',
+df_tbl_2 = df_tbl_2[['Title', 'Period', 'Country Name', 'Symptom', 'Value', 'Measure Type', 'Unit', 'Lower Bound of 95 Percent Confidence Interval',
                      'Upper Bound of 95 Percent Confidence Interval', 'Positive Sample Count', 'Total Sample Count']]
 
 cubes.add_cube(scraper, df_tbl_1a, datasetTitle+'-table-1a')

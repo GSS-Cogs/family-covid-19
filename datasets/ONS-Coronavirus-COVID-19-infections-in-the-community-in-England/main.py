@@ -124,8 +124,8 @@ def convert_column_type_numeric(df, column_arr, datatype):
 for tab in tabs:
     print(tab.name)
     if tab.name == '1a':
-        columns = ['Title', 'Total Survey Period', 'Measurement', 'Period', 'Measure Type', 'Unit', 'Social Distance Ability', 'Lower 95 Percent Confidence Interval',
-                   'Upper 95 Percent Confidence Interval', 'Positive Sample Count', 'Total Sample Count']
+        columns = ['Title', 'Total Survey Period', 'Measurement', 'Period', 'Measure Type', 'Unit', 'Social Distance Ability', 'Lower Bound of 95 Percent Confidence Interval',
+                   'Upper Bound of 95 Percent Confidence Interval', 'Positive Sample Count', 'Total Sample Count']
         trace.start(datasetTitle, tab, columns, dist.downloadURL)
 
         title = tab.excel_ref('A3')
@@ -143,11 +143,11 @@ for tab in tabs:
         social_distance = tab.excel_ref('B7').expand(RIGHT).is_not_blank()
         trace.Social_Distance_Ability('Defined from cell range: {}', var=excelRange(social_distance))
 
-        lower_confidence_interval = tab.filter('Lower').expand(DOWN).is_not_blank()
-        trace.Lower_95_Percent_Confidence_Interval('Defined from cell range: {}', var=excelRange(lower_confidence_interval))
+        lower_bound_confidence_interval = tab.filter('Lower').expand(DOWN).is_not_blank()
+        trace.Lower_Bound_of_95_Percent_Confidence_Interval('Defined from cell range: {}', var=excelRange(lower_bound_confidence_interval))
 
-        upper_confidence_interval = tab.filter('Upper').expand(DOWN).is_not_blank()
-        trace.Upper_95_Percent_Confidence_Interval('Defined from cell range: {}', var=excelRange(upper_confidence_interval))
+        upper_bound_confidence_interval = tab.filter('Upper').expand(DOWN).is_not_blank()
+        trace.Upper_Bound_of_95_Percent_Confidence_Interval('Defined from cell range: {}', var=excelRange(upper_bound_confidence_interval))
 
         positive_sample_count = tab.filter('Number of people testing positive').expand(DOWN).is_not_blank()
         trace.Positive_Sample_Count('Defined from cell range: {}', var=excelRange(positive_sample_count))
@@ -169,8 +169,8 @@ for tab in tabs:
             HDim(measurement, 'Measurement', CLOSEST, ABOVE),
             HDim(period, 'Period', DIRECTLY, LEFT),
             HDim(social_distance, 'Social Distance Ability', DIRECTLY, ABOVE),
-            HDim(lower_confidence_interval, 'Lower 95 Percent Confidence Interval', DIRECTLY, RIGHT),
-            HDim(upper_confidence_interval, 'Upper 95 Percent Confidence Interval', DIRECTLY, RIGHT),
+            HDim(lower_bound_confidence_interval, 'Lower Bound of 95 Percent Confidence Interval', DIRECTLY, RIGHT),
+            HDim(upper_bound_confidence_interval, 'Upper Bound of 95 Percent Confidence Interval', DIRECTLY, RIGHT),
             HDim(positive_sample_count, 'Positive Sample Count', DIRECTLY, RIGHT),
             HDim(total_sample_count, 'Total Sample Count', DIRECTLY, RIGHT),
             HDim(measure_type, 'Measure Type', CLOSEST, ABOVE),
@@ -183,8 +183,8 @@ for tab in tabs:
         trace.store(f'combined_dataframe_table_{tab.name}', tidy_sheet.topandas())
 
     if tab.name == '1b':
-        columns = ['Title', 'Total Survey Period', 'Measurement', 'Period', 'Measure Type', 'Unit', 'Mode of Travel', 'Lower 95 Percent Confidence Interval',
-                   'Upper 95 Percent Confidence Interval', 'Positive Sample Count', 'Total Sample Count']
+        columns = ['Title', 'Total Survey Period', 'Measurement', 'Period', 'Measure Type', 'Unit', 'Mode of Travel', 'Lower Bound of 95 Percent Confidence Interval',
+                   'Upper Bound of 95 Percent Confidence Interval', 'Positive Sample Count', 'Total Sample Count']
         trace.start(datasetTitle, tab, columns, dist.downloadURL)
 
         title = tab.excel_ref('A3')
@@ -202,11 +202,11 @@ for tab in tabs:
         mode_travel = tab.excel_ref('B7').expand(RIGHT).is_not_blank()
         trace.Mode_of_Travel('Defined from cell range: {}', var=excelRange(mode_travel))
 
-        lower_confidence_interval = tab.filter('Lower').expand(DOWN).is_not_blank()
-        trace.Lower_95_Percent_Confidence_Interval('Defined from cell range: {}', var=excelRange(lower_confidence_interval))
+        lower_bound_confidence_interval = tab.filter('Lower').expand(DOWN).is_not_blank()
+        trace.Lower_Bound_of_95_Percent_Confidence_Interval('Defined from cell range: {}', var=excelRange(lower_bound_confidence_interval))
 
-        upper_confidence_interval = tab.filter('Upper').expand(DOWN).is_not_blank()
-        trace.Upper_95_Percent_Confidence_Interval('Defined from cell range: {}', var=excelRange(upper_confidence_interval))
+        upper_bound_confidence_interval = tab.filter('Upper').expand(DOWN).is_not_blank()
+        trace.Upper_Bound_of_95_Percent_Confidence_Interval('Defined from cell range: {}', var=excelRange(upper_bound_confidence_interval))
 
         positive_sample_count = tab.filter('Number of people testing positive').expand(DOWN).is_not_blank()
         trace.Positive_Sample_Count('Defined from cell range: {}', var=excelRange(positive_sample_count))
@@ -228,8 +228,8 @@ for tab in tabs:
             HDim(measurement, 'Measurement', CLOSEST, ABOVE),
             HDim(period, 'Period', DIRECTLY, LEFT),
             HDim(mode_travel, 'Mode of Travel', DIRECTLY, ABOVE),
-            HDim(lower_confidence_interval, 'Lower 95 Percent Confidence Interval', DIRECTLY, RIGHT),
-            HDim(upper_confidence_interval, 'Upper 95 Percent Confidence Interval', DIRECTLY, RIGHT),
+            HDim(lower_bound_confidence_interval, 'Lower Bound of 95 Percent Confidence Interval', DIRECTLY, RIGHT),
+            HDim(upper_bound_confidence_interval, 'Upper Bound of 95 Percent Confidence Interval', DIRECTLY, RIGHT),
             HDim(positive_sample_count, 'Positive Sample Count', DIRECTLY, RIGHT),
             HDim(total_sample_count, 'Total Sample Count', DIRECTLY, RIGHT),
             HDim(measure_type, 'Measure Type', CLOSEST, ABOVE),
@@ -242,8 +242,8 @@ for tab in tabs:
         trace.store(f'combined_dataframe_table_{tab.name}', tidy_sheet.topandas())
 
     if tab.name in ['2a', '2b', '2c', '2d']:
-        columns = ['Title', 'Period', 'Symptom', 'Measure Type', 'Unit', 'Lower 95 Percent Confidence Interval',
-                   'Upper 95 Percent Confidence Interval', 'Positive Sample Count', 'Total Sample Count']
+        columns = ['Title', 'Period', 'Symptom', 'Measure Type', 'Unit', 'Lower Bound of 95 Percent Confidence Interval',
+                   'Upper Bound of 95 Percent Confidence Interval', 'Positive Sample Count', 'Total Sample Count']
         trace.start(datasetTitle, tab, columns, dist.downloadURL)
 
         title = tab.excel_ref('A3')
@@ -255,13 +255,13 @@ for tab in tabs:
         symptom = tab.excel_ref('A7').expand(DOWN).is_not_blank() & tab.excel_ref('A23').expand(UP).is_not_blank()
         trace.Symptom('Defined from cell range: {}', var=excelRange(symptom))
 
-        lower_confidence_interval = tab.filter('Lower').expand(DOWN).is_not_blank()
-        trace.Lower_95_Percent_Confidence_Interval('Defined from cell range: {}',
-                                                   var=excelRange(lower_confidence_interval))
+        lower_bound_confidence_interval = tab.filter('Lower').expand(DOWN).is_not_blank()
+        trace.Lower_Bound_of_95_Percent_Confidence_Interval('Defined from cell range: {}',
+                                                   var=excelRange(lower_bound_confidence_interval))
 
-        upper_confidence_interval = tab.filter('Upper').expand(DOWN).is_not_blank()
-        trace.Upper_95_Percent_Confidence_Interval('Defined from cell range: {}',
-                                                   var=excelRange(upper_confidence_interval))
+        upper_bound_confidence_interval = tab.filter('Upper').expand(DOWN).is_not_blank()
+        trace.Upper_Bound_of_95_Percent_Confidence_Interval('Defined from cell range: {}',
+                                                   var=excelRange(upper_bound_confidence_interval))
 
         positive_sample_count = tab.filter('Number of people testing positive with symptom').expand(DOWN).is_not_blank()
         trace.Positive_Sample_Count('Defined from cell range: {}', var=excelRange(positive_sample_count))
@@ -281,8 +281,8 @@ for tab in tabs:
             HDim(title, 'Title', CLOSEST, ABOVE),
             HDim(period, 'Period', CLOSEST, ABOVE),
             HDim(symptom, 'Symptom', DIRECTLY, LEFT),
-            HDim(lower_confidence_interval, 'Lower 95 Percent Confidence Interval', DIRECTLY, RIGHT),
-            HDim(upper_confidence_interval, 'Upper 95 Percent Confidence Interval', DIRECTLY, RIGHT),
+            HDim(lower_bound_confidence_interval, 'Lower Bound of 95 Percent Confidence Interval', DIRECTLY, RIGHT),
+            HDim(upper_bound_confidence_interval, 'Upper Bound of 95 Percent Confidence Interval', DIRECTLY, RIGHT),
             HDim(positive_sample_count, 'Positive Sample Count', DIRECTLY, RIGHT),
             HDim(total_sample_count, 'Total Sample Count', DIRECTLY, RIGHT),
             HDimConst('Measure Type', measure_type),
@@ -345,9 +345,9 @@ convert_column_type_numeric(df_tbl_1a, ['Positive Sample Count', 'Total Sample C
 convert_column_type_numeric(df_tbl_1b, ['Positive Sample Count', 'Total Sample Count'], 'Int64')
 convert_column_type_numeric(df_tbl_2, ['Positive Sample Count', 'Total Sample Count'], 'Int64')
 
-convert_column_type_numeric(df_tbl_1a, ['Lower 95 Percent Confidence Interval', 'Upper 95 Percent Confidence Interval'], 'float64')
-convert_column_type_numeric(df_tbl_1b, ['Lower 95 Percent Confidence Interval', 'Upper 95 Percent Confidence Interval'], 'float64')
-convert_column_type_numeric(df_tbl_2, ['Lower 95 Percent Confidence Interval', 'Upper 95 Percent Confidence Interval'], 'float64')
+convert_column_type_numeric(df_tbl_1a, ['Lower Bound of 95 Percent Confidence Interval', 'Upper Bound of 95 Percent Confidence Interval'], 'float64')
+convert_column_type_numeric(df_tbl_1b, ['Lower Bound of 95 Percent Confidence Interval', 'Upper Bound of 95 Percent Confidence Interval'], 'float64')
+convert_column_type_numeric(df_tbl_2, ['Lower Bound of 95 Percent Confidence Interval', 'Upper Bound of 95 Percent Confidence Interval'], 'float64')
 
 convert_category_datatype(df_tbl_1a, ['Title', 'Measurement', 'Social Distance Ability', 'Measure Type', 'Unit'])
 convert_category_datatype(df_tbl_1b, ['Title', 'Measurement', 'Mode of Travel', 'Measure Type', 'Unit'])
@@ -358,11 +358,11 @@ pathify_columns(df_tbl_1b, ['Title', 'Measurement', 'Mode of Travel', 'Measure T
 pathify_columns(df_tbl_2, ['Title', 'Region', 'Symptom', 'Measure Type', 'Unit'])
 
 df_tbl_1a = df_tbl_1a[['Title', 'Measurement', 'Total Survey Period', 'Social Distance Ability', 'Period', 'Value', 'Measure Type', 'Unit',
-                       'Lower 95 Percent Confidence Interval', 'Upper 95 Percent Confidence Interval', 'Positive Sample Count', 'Total Sample Count']]
+                       'Lower Bound of 95 Percent Confidence Interval', 'Upper Bound of 95 Percent Confidence Interval', 'Positive Sample Count', 'Total Sample Count']]
 df_tbl_1b = df_tbl_1b[['Title', 'Measurement', 'Total Survey Period', 'Mode of Travel', 'Period', 'Value', 'Measure Type', 'Unit',
-                       'Lower 95 Percent Confidence Interval', 'Upper 95 Percent Confidence Interval', 'Positive Sample Count', 'Total Sample Count']]
-df_tbl_2 = df_tbl_2[['Title', 'Period', 'Region', 'Symptom', 'Value', 'Measure Type', 'Unit', 'Lower 95 Percent Confidence Interval',
-                     'Upper 95 Percent Confidence Interval', 'Positive Sample Count', 'Total Sample Count']]
+                       'Lower Bound of 95 Percent Confidence Interval', 'Upper Bound of 95 Percent Confidence Interval', 'Positive Sample Count', 'Total Sample Count']]
+df_tbl_2 = df_tbl_2[['Title', 'Period', 'Region', 'Symptom', 'Value', 'Measure Type', 'Unit', 'Lower Bound of 95 Percent Confidence Interval',
+                     'Upper Bound of 95 Percent Confidence Interval', 'Positive Sample Count', 'Total Sample Count']]
 
 cubes.add_cube(scraper, df_tbl_1a, datasetTitle+'-table-1a')
 cubes.add_cube(scraper, df_tbl_1b, datasetTitle+'-table-1b')

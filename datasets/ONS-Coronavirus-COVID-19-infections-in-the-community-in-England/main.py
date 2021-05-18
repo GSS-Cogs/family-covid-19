@@ -140,8 +140,8 @@ for tab in tabs:
         period = tab.excel_ref('A10').expand(DOWN).is_not_blank() & tab.excel_ref('A16').expand(UP).is_not_blank()
         trace.Period('Defined from cell range: {}', var=excelRange(period))
 
-        social_distance = tab.excel_ref('B7').expand(RIGHT).is_not_blank()
-        trace.Social_Distance_Ability_At_Work('Defined from cell range: {}', var=excelRange(social_distance))
+        social_distance_ability = tab.excel_ref('B7').expand(RIGHT).is_not_blank()
+        trace.Social_Distance_Ability_At_Work('Defined from cell range: {}', var=excelRange(social_distance_ability))
 
         lower_bound_confidence_interval = tab.filter('Lower').expand(DOWN).is_not_blank()
         trace.Lower_Bound_of_95_Percent_Confidence_Interval('Defined from cell range: {}', var=excelRange(lower_bound_confidence_interval))
@@ -168,7 +168,7 @@ for tab in tabs:
             HDim(total_survey_period, 'Total Survey Period', CLOSEST, ABOVE),
             HDim(measurement, 'Measurement', CLOSEST, ABOVE),
             HDim(period, 'Period', DIRECTLY, LEFT),
-            HDim(social_distance, 'Social Distance Ability At Work', DIRECTLY, ABOVE),
+            HDim(social_distance_ability, 'Social Distance Ability At Work', DIRECTLY, ABOVE),
             HDim(lower_bound_confidence_interval, 'Lower Bound of 95 Percent Confidence Interval', DIRECTLY, RIGHT),
             HDim(upper_bound_confidence_interval, 'Upper Bound of 95 Percent Confidence Interval', DIRECTLY, RIGHT),
             HDim(positive_sample_count, 'Positive Sample Count', DIRECTLY, RIGHT),

@@ -124,7 +124,7 @@ def convert_column_type_numeric(df, column_arr, datatype):
 for tab in tabs:
     print(tab.name)
     if tab.name == '1a':
-        columns = ['Title', 'Total Survey Period', 'Measurement', 'Period', 'Measure Type', 'Unit', 'Social Distance Ability', 'Lower Bound of 95 Percent Confidence Interval',
+        columns = ['Title', 'Total Survey Period', 'Measurement', 'Period', 'Measure Type', 'Unit', 'Social Distance Ability At Work', 'Lower Bound of 95 Percent Confidence Interval',
                    'Upper Bound of 95 Percent Confidence Interval', 'Positive Sample Count', 'Total Sample Count']
         trace.start(datasetTitle, tab, columns, dist.downloadURL)
 
@@ -141,7 +141,7 @@ for tab in tabs:
         trace.Period('Defined from cell range: {}', var=excelRange(period))
 
         social_distance = tab.excel_ref('B7').expand(RIGHT).is_not_blank()
-        trace.Social_Distance_Ability('Defined from cell range: {}', var=excelRange(social_distance))
+        trace.Social_Distance_Ability_At_Work('Defined from cell range: {}', var=excelRange(social_distance))
 
         lower_bound_confidence_interval = tab.filter('Lower').expand(DOWN).is_not_blank()
         trace.Lower_Bound_of_95_Percent_Confidence_Interval('Defined from cell range: {}', var=excelRange(lower_bound_confidence_interval))
@@ -168,7 +168,7 @@ for tab in tabs:
             HDim(total_survey_period, 'Total Survey Period', CLOSEST, ABOVE),
             HDim(measurement, 'Measurement', CLOSEST, ABOVE),
             HDim(period, 'Period', DIRECTLY, LEFT),
-            HDim(social_distance, 'Social Distance Ability', DIRECTLY, ABOVE),
+            HDim(social_distance, 'Social Distance Ability At Work', DIRECTLY, ABOVE),
             HDim(lower_bound_confidence_interval, 'Lower Bound of 95 Percent Confidence Interval', DIRECTLY, RIGHT),
             HDim(upper_bound_confidence_interval, 'Upper Bound of 95 Percent Confidence Interval', DIRECTLY, RIGHT),
             HDim(positive_sample_count, 'Positive Sample Count', DIRECTLY, RIGHT),
@@ -354,15 +354,15 @@ convert_column_type_numeric(df_tbl_1a, ['Lower Bound of 95 Percent Confidence In
 convert_column_type_numeric(df_tbl_1b, ['Lower Bound of 95 Percent Confidence Interval', 'Upper Bound of 95 Percent Confidence Interval'], 'float64')
 convert_column_type_numeric(df_tbl_2, ['Lower Bound of 95 Percent Confidence Interval', 'Upper Bound of 95 Percent Confidence Interval'], 'float64')
 
-convert_category_datatype(df_tbl_1a, ['Title', 'Measurement', 'Social Distance Ability', 'Measure Type', 'Unit'])
+convert_category_datatype(df_tbl_1a, ['Title', 'Measurement', 'Social Distance Ability At Work', 'Measure Type', 'Unit'])
 convert_category_datatype(df_tbl_1b, ['Title', 'Measurement', 'Mode of Travel', 'Measure Type', 'Unit'])
 convert_category_datatype(df_tbl_2, ['Title', 'Country Name', 'Country Code', 'Symptom', 'Measure Type', 'Unit'])
 
-pathify_columns(df_tbl_1a, ['Title', 'Measurement', 'Social Distance Ability', 'Measure Type', 'Unit'])
+pathify_columns(df_tbl_1a, ['Title', 'Measurement', 'Social Distance Ability At Work', 'Measure Type', 'Unit'])
 pathify_columns(df_tbl_1b, ['Title', 'Measurement', 'Mode of Travel', 'Measure Type', 'Unit'])
 pathify_columns(df_tbl_2, ['Title', 'Country Name', 'Country Code', 'Symptom', 'Measure Type', 'Unit'])
 
-df_tbl_1a = df_tbl_1a[['Title', 'Measurement', 'Total Survey Period', 'Social Distance Ability', 'Period', 'Value', 'Measure Type', 'Unit',
+df_tbl_1a = df_tbl_1a[['Title', 'Measurement', 'Total Survey Period', 'Social Distance Ability At Work', 'Period', 'Value', 'Measure Type', 'Unit',
                        'Lower Bound of 95 Percent Confidence Interval', 'Upper Bound of 95 Percent Confidence Interval', 'Positive Sample Count', 'Total Sample Count']]
 df_tbl_1b = df_tbl_1b[['Title', 'Measurement', 'Total Survey Period', 'Mode of Travel', 'Period', 'Value', 'Measure Type', 'Unit',
                        'Lower Bound of 95 Percent Confidence Interval', 'Upper Bound of 95 Percent Confidence Interval', 'Positive Sample Count', 'Total Sample Count']]

@@ -125,7 +125,7 @@ for tab in tabs:
     print(tab.name)
     if tab.name == '1a':
         columns = ['Title', 'Total Survey Period', 'Measurement', 'Period', 'Measure Type', 'Unit', 'Social Distance Ability At Work', 'Lower Bound of 95 Percent Confidence Interval',
-                   'Upper Bound of 95 Percent Confidence Interval', 'Positive Sample Count', 'Total Sample Count']
+                   'Upper Bound of 95 Percent Confidence Interval', 'Number of people testing positive in sample', 'Total Number of People in sample']
         trace.start(datasetTitle, tab, columns, dist.downloadURL)
 
         title = tab.excel_ref('A3')
@@ -150,10 +150,10 @@ for tab in tabs:
         trace.Upper_Bound_of_95_Percent_Confidence_Interval('Defined from cell range: {}', var=excelRange(upper_bound_confidence_interval))
 
         positive_sample_count = tab.filter('Number of people testing positive').expand(DOWN).is_not_blank()
-        trace.Positive_Sample_Count('Defined from cell range: {}', var=excelRange(positive_sample_count))
+        trace.Number_of_people_testing_positive_in_sample('Defined from cell range: {}', var=excelRange(positive_sample_count))
 
         total_sample_count = tab.filter('Total number of people in sample').expand(DOWN).is_not_blank()
-        trace.Total_Sample_Count('Defined from cell range: {}', var=excelRange(total_sample_count))
+        trace.Total_Number_of_People_in_sample('Defined from cell range: {}', var=excelRange(total_sample_count))
 
         measure_type = tab.excel_ref('A3')
         trace.Measure_Type('Defined from cell value: {}', var=cellLoc(measure_type))
@@ -171,8 +171,8 @@ for tab in tabs:
             HDim(social_distance_ability, 'Social Distance Ability At Work', DIRECTLY, ABOVE),
             HDim(lower_bound_confidence_interval, 'Lower Bound of 95 Percent Confidence Interval', DIRECTLY, RIGHT),
             HDim(upper_bound_confidence_interval, 'Upper Bound of 95 Percent Confidence Interval', DIRECTLY, RIGHT),
-            HDim(positive_sample_count, 'Positive Sample Count', DIRECTLY, RIGHT),
-            HDim(total_sample_count, 'Total Sample Count', DIRECTLY, RIGHT),
+            HDim(positive_sample_count, 'Number of people testing positive in sample', DIRECTLY, RIGHT),
+            HDim(total_sample_count, 'Total Number of People in sample', DIRECTLY, RIGHT),
             HDim(measure_type, 'Measure Type', CLOSEST, ABOVE),
             HDimConst('Unit', unit)
         ]
@@ -184,7 +184,7 @@ for tab in tabs:
 
     if tab.name == '1b':
         columns = ['Title', 'Total Survey Period', 'Measurement', 'Period', 'Measure Type', 'Unit', 'Mode of Travel to Work', 'Lower Bound of 95 Percent Confidence Interval',
-                   'Upper Bound of 95 Percent Confidence Interval', 'Positive Sample Count', 'Total Sample Count']
+                   'Upper Bound of 95 Percent Confidence Interval', 'Number of people testing positive in sample', 'Total Number of People in sample']
         trace.start(datasetTitle, tab, columns, dist.downloadURL)
 
         title = tab.excel_ref('A3')
@@ -209,10 +209,10 @@ for tab in tabs:
         trace.Upper_Bound_of_95_Percent_Confidence_Interval('Defined from cell range: {}', var=excelRange(upper_bound_confidence_interval))
 
         positive_sample_count = tab.filter('Number of people testing positive').expand(DOWN).is_not_blank()
-        trace.Positive_Sample_Count('Defined from cell range: {}', var=excelRange(positive_sample_count))
+        trace.Number_of_people_testing_positive_in_sample('Defined from cell range: {}', var=excelRange(positive_sample_count))
 
         total_sample_count = tab.filter('Total number of people in sample').expand(DOWN).is_not_blank()
-        trace.Total_Sample_Count('Defined from cell range: {}', var=excelRange(total_sample_count))
+        trace.Total_Number_of_People_in_sample('Defined from cell range: {}', var=excelRange(total_sample_count))
 
         measure_type = tab.excel_ref('A3')
         trace.Measure_Type('Defined from cell value: {}', var=cellLoc(measure_type))
@@ -230,8 +230,8 @@ for tab in tabs:
             HDim(mode_travel_to_work, 'Mode of Travel to Work', DIRECTLY, ABOVE),
             HDim(lower_bound_confidence_interval, 'Lower Bound of 95 Percent Confidence Interval', DIRECTLY, RIGHT),
             HDim(upper_bound_confidence_interval, 'Upper Bound of 95 Percent Confidence Interval', DIRECTLY, RIGHT),
-            HDim(positive_sample_count, 'Positive Sample Count', DIRECTLY, RIGHT),
-            HDim(total_sample_count, 'Total Sample Count', DIRECTLY, RIGHT),
+            HDim(positive_sample_count, 'Number of people testing positive in sample', DIRECTLY, RIGHT),
+            HDim(total_sample_count, 'Total Number of People in sample', DIRECTLY, RIGHT),
             HDim(measure_type, 'Measure Type', CLOSEST, ABOVE),
             HDimConst('Unit', unit)
         ]
@@ -346,8 +346,8 @@ df_tbl_2['Period'] = df_tbl_2['Period'].apply(format_date)
 df_tbl_1a['Total Survey Period'] = df_tbl_1a['Total Survey Period'].apply(format_date)
 df_tbl_1b['Total Survey Period'] = df_tbl_1b['Total Survey Period'].apply(format_date)
 
-convert_column_type_numeric(df_tbl_1a, ['Positive Sample Count', 'Total Sample Count'], 'Int64')
-convert_column_type_numeric(df_tbl_1b, ['Positive Sample Count', 'Total Sample Count'], 'Int64')
+convert_column_type_numeric(df_tbl_1a, ['Number of people testing positive in sample', 'Total Number of People in sample'], 'Int64')
+convert_column_type_numeric(df_tbl_1b, ['Number of people testing positive in sample', 'Total Number of People in sample'], 'Int64')
 convert_column_type_numeric(df_tbl_2, ['Positive Sample Count', 'Total Sample Count'], 'Int64')
 
 convert_column_type_numeric(df_tbl_1a, ['Lower Bound of 95 Percent Confidence Interval', 'Upper Bound of 95 Percent Confidence Interval'], 'float64')
@@ -363,9 +363,9 @@ pathify_columns(df_tbl_1b, ['Title', 'Measurement', 'Mode of Travel to Work', 'M
 pathify_columns(df_tbl_2, ['Title', 'Country Name', 'Country Code', 'Symptom', 'Measure Type', 'Unit'])
 
 df_tbl_1a = df_tbl_1a[['Title', 'Measurement', 'Total Survey Period', 'Social Distance Ability At Work', 'Period', 'Value', 'Measure Type', 'Unit',
-                       'Lower Bound of 95 Percent Confidence Interval', 'Upper Bound of 95 Percent Confidence Interval', 'Positive Sample Count', 'Total Sample Count']]
+                       'Lower Bound of 95 Percent Confidence Interval', 'Upper Bound of 95 Percent Confidence Interval', 'Number of people testing positive in sample', 'Total Number of People in sample']]
 df_tbl_1b = df_tbl_1b[['Title', 'Measurement', 'Total Survey Period', 'Mode of Travel to Work', 'Period', 'Value', 'Measure Type', 'Unit',
-                       'Lower Bound of 95 Percent Confidence Interval', 'Upper Bound of 95 Percent Confidence Interval', 'Positive Sample Count', 'Total Sample Count']]
+                       'Lower Bound of 95 Percent Confidence Interval', 'Upper Bound of 95 Percent Confidence Interval', 'Number of people testing positive in sample', 'Total Number of People in sample']]
 df_tbl_2 = df_tbl_2[['Title', 'Period', 'Country Name', 'Country Code', 'Symptom', 'Value', 'Measure Type', 'Unit', 'Lower Bound of 95 Percent Confidence Interval',
                      'Upper Bound of 95 Percent Confidence Interval', 'Positive Sample Count', 'Total Sample Count']]
 

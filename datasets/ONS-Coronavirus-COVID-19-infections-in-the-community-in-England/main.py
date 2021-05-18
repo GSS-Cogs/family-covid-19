@@ -243,7 +243,7 @@ for tab in tabs:
 
     if tab.name in ['2a', '2b', '2c', '2d']:
         columns = ['Title', 'Period', 'Symptom', 'Measure Type', 'Unit', 'Lower Bound of 95 Percent Confidence Interval',
-                   'Upper Bound of 95 Percent Confidence Interval', 'Positive Sample Count', 'Total Sample Count']
+                   'Upper Bound of 95 Percent Confidence Interval', 'Number of people testing positive with symptom', 'Total number of people testing positive']
         trace.start(datasetTitle, tab, columns, dist.downloadURL)
 
         title = tab.excel_ref('A3')
@@ -264,10 +264,10 @@ for tab in tabs:
                                                    var=excelRange(upper_bound_confidence_interval))
 
         positive_sample_count = tab.filter('Number of people testing positive with symptom').expand(DOWN).is_not_blank()
-        trace.Positive_Sample_Count('Defined from cell range: {}', var=excelRange(positive_sample_count))
+        trace.Number_of_people_testing_positive_with_symptom('Defined from cell range: {}', var=excelRange(positive_sample_count))
 
         total_sample_count = tab.filter('Total number of people testing positive').expand(DOWN).is_not_blank()
-        trace.Total_Sample_Count('Defined from cell range: {}', var=excelRange(total_sample_count))
+        trace.Total_number_of_people_testing_positive('Defined from cell range: {}', var=excelRange(total_sample_count))
 
         measure_type = 'Percentage testing positive with symptom'
         trace.Measure_Type('Hardcoded as Percentage testing positive with symptom')
@@ -283,8 +283,8 @@ for tab in tabs:
             HDim(symptom, 'Symptom', DIRECTLY, LEFT),
             HDim(lower_bound_confidence_interval, 'Lower Bound of 95 Percent Confidence Interval', DIRECTLY, RIGHT),
             HDim(upper_bound_confidence_interval, 'Upper Bound of 95 Percent Confidence Interval', DIRECTLY, RIGHT),
-            HDim(positive_sample_count, 'Positive Sample Count', DIRECTLY, RIGHT),
-            HDim(total_sample_count, 'Total Sample Count', DIRECTLY, RIGHT),
+            HDim(positive_sample_count, 'Number of people testing positive with symptom', DIRECTLY, RIGHT),
+            HDim(total_sample_count, 'Total number of people testing positive', DIRECTLY, RIGHT),
             HDimConst('Measure Type', measure_type),
             HDimConst('Unit', unit)
         ]
@@ -348,7 +348,7 @@ df_tbl_1b['Total Survey Period'] = df_tbl_1b['Total Survey Period'].apply(format
 
 convert_column_type_numeric(df_tbl_1a, ['Number of people testing positive in sample', 'Total Number of People in sample'], 'Int64')
 convert_column_type_numeric(df_tbl_1b, ['Number of people testing positive in sample', 'Total Number of People in sample'], 'Int64')
-convert_column_type_numeric(df_tbl_2, ['Positive Sample Count', 'Total Sample Count'], 'Int64')
+convert_column_type_numeric(df_tbl_2, ['Number of people testing positive with symptom', 'Total number of people testing positive'], 'Int64')
 
 convert_column_type_numeric(df_tbl_1a, ['Lower Bound of 95 Percent Confidence Interval', 'Upper Bound of 95 Percent Confidence Interval'], 'float64')
 convert_column_type_numeric(df_tbl_1b, ['Lower Bound of 95 Percent Confidence Interval', 'Upper Bound of 95 Percent Confidence Interval'], 'float64')
@@ -367,7 +367,7 @@ df_tbl_1a = df_tbl_1a[['Title', 'Measurement', 'Total Survey Period', 'Social Di
 df_tbl_1b = df_tbl_1b[['Title', 'Measurement', 'Total Survey Period', 'Mode of Travel to Work', 'Period', 'Value', 'Measure Type', 'Unit',
                        'Lower Bound of 95 Percent Confidence Interval', 'Upper Bound of 95 Percent Confidence Interval', 'Number of people testing positive in sample', 'Total Number of People in sample']]
 df_tbl_2 = df_tbl_2[['Title', 'Period', 'Country Name', 'Country Code', 'Symptom', 'Value', 'Measure Type', 'Unit', 'Lower Bound of 95 Percent Confidence Interval',
-                     'Upper Bound of 95 Percent Confidence Interval', 'Positive Sample Count', 'Total Sample Count']]
+                     'Upper Bound of 95 Percent Confidence Interval', 'Number of people testing positive with symptom', 'Total number of people testing positive']]
 
 cubes.add_cube(scraper, df_tbl_1a, datasetTitle+'-table-1a')
 cubes.add_cube(scraper, df_tbl_1b, datasetTitle+'-table-1b')

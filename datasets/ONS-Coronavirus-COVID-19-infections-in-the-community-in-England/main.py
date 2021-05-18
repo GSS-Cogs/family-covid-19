@@ -269,8 +269,8 @@ for tab in tabs:
         total_sample_count = tab.filter('Total number of people testing positive').expand(DOWN).is_not_blank()
         trace.Total_Sample_Count('Defined from cell range: {}', var=excelRange(total_sample_count))
 
-        measure_type = 'Percentage'
-        trace.Measure_Type('Hardcoded as Percentage')
+        measure_type = 'Percentage testing positive with symptom'
+        trace.Measure_Type('Hardcoded as Percentage testing positive with symptom')
 
         unit = 'Percent'
         trace.Unit('Hardcoded as Percent')

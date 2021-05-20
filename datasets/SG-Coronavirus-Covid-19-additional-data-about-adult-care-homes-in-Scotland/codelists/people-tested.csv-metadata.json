@@ -1,69 +1,124 @@
 {
-  "@context": "http://www.w3.org/ns/csvw",
-  "@id": "http://gss-data.org.uk/data/gss_data/covid-19/sg-coronavirus-covid-19-additional-data-about-adult-care-homes-in-scotland#schema",
-  "url": "people-tested.csv",
-  "tableSchema": {
-    "columns": [
-      {
-        "titles": "Label",
-        "name": "label",
-        "datatype": "string",
-        "required": true,
-        "propertyUrl": "rdfs:label"
-      },
-      {
-        "titles": "Notation",
-        "name": "notation",
-        "datatype": {
-          "base": "string",
-          "format": "^-?[\\w\\.\\/]+(-[\\w\\.\\/]+)*$"
-        },
-        "required": true,
-        "propertyUrl": "skos:notation"
-      },
-      {
-        "titles": "Parent Notation",
-        "name": "parent_notation",
-        "datatype": {
-          "base": "string",
-          "format": "^(-?[\\w\\.\\/]+(-[\\w\\.\\/]+)*|)$"
-        },
-        "required": false,
-        "propertyUrl": "skos:broader",
-        "valueUrl": "http://gss-data.org.uk/data/gss_data/covid-19/sg-coronavirus-covid-19-additional-data-about-adult-care-homes-in-scotland#concept/people-tested/{parent_notation}"
-      },
-      {
-        "titles": "Sort Priority",
-        "name": "sort",
-        "datatype": "integer",
-        "required": false,
-        "propertyUrl": "http://www.w3.org/ns/ui#sortPriority"
-      },
-      {
-        "titles": "Description",
-        "name": "description",
-        "datatype": "string",
-        "required": false,
-        "propertyUrl": "rdfs:comment"
-      },
-      {
-        "virtual": true,
-        "propertyUrl": "rdf:type",
-        "valueUrl": "skos:Concept"
-      },
-      {
-        "virtual": true,
-        "propertyUrl": "skos:inScheme",
-        "valueUrl": "http://gss-data.org.uk/data/gss_data/covid-19/sg-coronavirus-covid-19-additional-data-about-adult-care-homes-in-scotland#scheme/people-tested"
-      }
-    ],
-    "primaryKey": "notation",
-    "aboutUrl": "http://gss-data.org.uk/data/gss_data/covid-19/sg-coronavirus-covid-19-additional-data-about-adult-care-homes-in-scotland#concept/people-tested/{notation}"
-  },
-  "prov:hadDerivation": {
-    "@id": "http://gss-data.org.uk/data/gss_data/covid-19/sg-coronavirus-covid-19-additional-data-about-adult-care-homes-in-scotland#scheme/people-tested",
-    "@type": "skos:ConceptScheme",
+    "@context": "http://www.w3.org/ns/csvw",
+    "@id": "http://gss-data.org.uk/data/gss_data/covid-19/sg-coronavirus-covid-19-additional-data-about-adult-care-homes-in-scotland#schema",
+    "url": "people-tested.csv",
+    "tableSchema": {
+        "columns": [
+            {
+                "titles": "Label",
+                "name": "label",
+                "datatype": "string",
+                "required": true,
+                "propertyUrl": "rdfs:label"
+            },
+            {
+                "titles": "Notation",
+                "name": "notation",
+                "datatype": {
+                    "base": "string",
+                    "format": "^-?[\\w\\.\\/]+(-[\\w\\.\\/]+)*$"
+                },
+                "required": true,
+                "propertyUrl": "skos:notation"
+            },
+            {
+                "titles": "Parent Notation",
+                "name": "parent_notation",
+                "datatype": {
+                    "base": "string",
+                    "format": "^(-?[\\w\\.\\/]+(-[\\w\\.\\/]+)*|)$"
+                },
+                "required": false,
+                "propertyUrl": "skos:broader",
+                "valueUrl": "http://gss-data.org.uk/data/gss_data/covid-19/sg-coronavirus-covid-19-additional-data-about-adult-care-homes-in-scotland#concept/people-tested/{+parent_notation}"
+            },
+            {
+                "titles": "Sort Priority",
+                "name": "sort",
+                "datatype": "integer",
+                "required": false,
+                "propertyUrl": "http://www.w3.org/ns/ui#sortPriority"
+            },
+            {
+                "titles": "Description",
+                "name": "description",
+                "datatype": "string",
+                "required": false,
+                "propertyUrl": "rdfs:comment"
+            },
+            {
+                "virtual": true,
+                "propertyUrl": "rdf:type",
+                "valueUrl": "skos:Concept"
+            },
+            {
+                "virtual": true,
+                "propertyUrl": "skos:inScheme",
+                "valueUrl": "http://gss-data.org.uk/data/gss_data/covid-19/sg-coronavirus-covid-19-additional-data-about-adult-care-homes-in-scotland#scheme/people-tested"
+            }
+        ],
+        "primaryKey": "notation",
+        "aboutUrl": "http://gss-data.org.uk/data/gss_data/covid-19/sg-coronavirus-covid-19-additional-data-about-adult-care-homes-in-scotland#concept/people-tested/{+notation}"
+    },
+    "prov:hadDerivation": {
+        "@id": "http://gss-data.org.uk/data/gss_data/covid-19/sg-coronavirus-covid-19-additional-data-about-adult-care-homes-in-scotland#scheme/people-tested",
+        "@type": [
+            "skos:ConceptScheme",
+            "http://publishmydata.com/pmdcat#ConceptScheme"
+        ]
+    },
     "rdfs:label": "People Tested",
-    "skos:hasTopConcept { "@id": "http://gss-data.org.uk/data/gss_data/covid-19/sg-coronavirus-covid-19-additional-data-about-adult-care-homes-in-scotland#concept/people-tested/all" }
-  }
+    "dc:title": "People Tested",
+    "rdfs:seeAlso": [
+        {
+            "@id": "http://gss-data.org.uk/data/gss_data/covid-19/sg-coronavirus-covid-19-additional-data-about-adult-care-homes-in-scotland#schema/dataset",
+            "@type": [
+                "dcat:Dataset",
+                "http://publishmydata.com/pmdcat#Dataset"
+            ],
+            "http://publishmydata.com/pmdcat#datasetContents": {
+                "@id": "http://gss-data.org.uk/data/gss_data/covid-19/sg-coronavirus-covid-19-additional-data-about-adult-care-homes-in-scotland#schema"
+            },
+            "http://publishmydata.com/pmdcat#graph": {
+                "@id": "http://gss-data.org.uk/data/gss_data/covid-19/sg-coronavirus-covid-19-additional-data-about-adult-care-homes-in-scotland#schema"
+            },
+            "dc:modified": {
+                "@type": "dateTime",
+                "@value": "2021-05-20T11:48:27.143676"
+            },
+            "rdfs:label": "People Tested",
+            "dc:title": "People Tested",
+            "rdfs:comment": "Dataset representing the 'People Tested' code list.",
+            "dc:issued": {
+                "@type": "dateTime",
+                "@value": "2021-05-20T11:46:42.673310"
+            }
+        },
+        {
+            "@id": "http://gss-data.org.uk/catalog/vocabularies",
+            "dcat:record": {
+                "@id": "http://gss-data.org.uk/data/gss_data/covid-19/sg-coronavirus-covid-19-additional-data-about-adult-care-homes-in-scotland#schema/catalog-record"
+            }
+        },
+        {
+            "@id": "http://gss-data.org.uk/data/gss_data/covid-19/sg-coronavirus-covid-19-additional-data-about-adult-care-homes-in-scotland#schema/catalog-record",
+            "@type": "dcat:CatalogRecord",
+            "foaf:primaryTopic": {
+                "@id": "http://gss-data.org.uk/data/gss_data/covid-19/sg-coronavirus-covid-19-additional-data-about-adult-care-homes-in-scotland#schema/dataset"
+            },
+            "http://publishmydata.com/pmdcat#metadataGraph": {
+                "@id": "http://gss-data.org.uk/data/gss_data/covid-19/sg-coronavirus-covid-19-additional-data-about-adult-care-homes-in-scotland#schema"
+            },
+            "dc:title": "People Tested Catalog Record",
+            "rdfs:label": "People Tested Catalog Record",
+            "dc:issued": {
+                "@type": "dateTime",
+                "@value": "2021-05-20T11:46:42.673310"
+            },
+            "dc:modified": {
+                "@type": "dateTime",
+                "@value": "2021-05-20T11:46:42.673310"
+            }
+        }
+    ]
 }

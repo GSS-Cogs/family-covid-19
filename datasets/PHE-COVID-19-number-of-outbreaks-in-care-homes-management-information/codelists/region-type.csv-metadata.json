@@ -30,7 +30,7 @@
                 },
                 "required": false,
                 "propertyUrl": "skos:broader",
-                "valueUrl": "http://gss-data.org.uk/data/gss_data/covid-19/phe-covid-19-number-of-outbreaks-in-care-homes-management-information#concept/region-type/{parent_notation}"
+                "valueUrl": "http://gss-data.org.uk/data/gss_data/covid-19/phe-covid-19-number-of-outbreaks-in-care-homes-management-information#concept/region-type/{+parent_notation}"
             },
             {
                 "titles": "Sort Priority",
@@ -58,7 +58,7 @@
             }
         ],
         "primaryKey": "notation",
-        "aboutUrl": "http://gss-data.org.uk/data/gss_data/covid-19/phe-covid-19-number-of-outbreaks-in-care-homes-management-information#concept/region-type/{notation}"
+        "aboutUrl": "http://gss-data.org.uk/data/gss_data/covid-19/phe-covid-19-number-of-outbreaks-in-care-homes-management-information#concept/region-type/{+notation}"
     },
     "prov:hadDerivation": {
         "@id": "http://gss-data.org.uk/data/gss_data/covid-19/phe-covid-19-number-of-outbreaks-in-care-homes-management-information#scheme/region-type",
@@ -84,7 +84,15 @@
             },
             "rdfs:label": "Region Type",
             "dc:title": "Region Type",
-            "rdfs:comment": "Dataset representing the 'Region Type' code list."
+            "rdfs:comment": "Dataset representing the 'Region Type' code list.",
+            "dc:modified": {
+                "@type": "dateTime",
+                "@value": "2021-05-20T11:48:27.111793"
+            },
+            "dc:issued": {
+                "@type": "dateTime",
+                "@value": "2021-05-20T11:41:10.818494"
+            }
         },
         {
             "@id": "http://gss-data.org.uk/catalog/vocabularies",

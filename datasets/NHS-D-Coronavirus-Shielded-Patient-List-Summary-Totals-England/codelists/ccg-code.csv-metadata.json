@@ -30,7 +30,7 @@
                 },
                 "required": false,
                 "propertyUrl": "skos:broader",
-                "valueUrl": "http://gss-data.org.uk/data/gss_data/covid-19/nhs-d-coronavirus-shielded-patient-list-summary-totals-england#concept/ccg-code/{parent_notation}"
+                "valueUrl": "http://gss-data.org.uk/data/gss_data/covid-19/nhs-d-coronavirus-shielded-patient-list-summary-totals-england#concept/ccg-code/{+parent_notation}"
             },
             {
                 "titles": "Sort Priority",
@@ -58,7 +58,7 @@
             }
         ],
         "primaryKey": "notation",
-        "aboutUrl": "http://gss-data.org.uk/data/gss_data/covid-19/nhs-d-coronavirus-shielded-patient-list-summary-totals-england#concept/ccg-code/{notation}"
+        "aboutUrl": "http://gss-data.org.uk/data/gss_data/covid-19/nhs-d-coronavirus-shielded-patient-list-summary-totals-england#concept/ccg-code/{+notation}"
     },
     "prov:hadDerivation": {
         "@id": "http://gss-data.org.uk/data/gss_data/covid-19/nhs-d-coronavirus-shielded-patient-list-summary-totals-england#scheme/ccg-code",
@@ -84,7 +84,15 @@
             },
             "rdfs:label": "CCG Code",
             "dc:title": "CCG Code",
-            "rdfs:comment": "Dataset representing the 'CCG Code' code list."
+            "rdfs:comment": "Dataset representing the 'CCG Code' code list.",
+            "dc:modified": {
+                "@type": "dateTime",
+                "@value": "2021-05-20T11:48:27.140765"
+            },
+            "dc:issued": {
+                "@type": "dateTime",
+                "@value": "2021-05-20T11:46:42.668592"
+            }
         },
         {
             "@id": "http://gss-data.org.uk/catalog/vocabularies",

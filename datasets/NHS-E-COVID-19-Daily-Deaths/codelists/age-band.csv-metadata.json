@@ -1,69 +1,125 @@
 {
-  "@context": "http://www.w3.org/ns/csvw",
-  "@id": "#table",
-  "url": "age-band.csv",
-  "tableSchema": {
-    "columns": [
-      {
-        "titles": "Label",
-        "name": "label",
-        "datatype": "string",
-        "required": true,
-        "propertyUrl": "rdfs:label"
-      },
-      {
-        "titles": "Notation",
-        "name": "notation",
-        "datatype": {
-          "base": "string",
-          "format": "^-?[\\w\\.\\/]+(-[\\w\\.\\/]+)*$"
-        },
-        "required": true,
-        "propertyUrl": "skos:notation"
-      },
-      {
-        "titles": "Parent Notation",
-        "name": "parent_notation",
-        "datatype": {
-          "base": "string",
-          "format": "^(-?[\\w\\.\\/]+(-[\\w\\.\\/]+)*|)$"
-        },
-        "required": false,
-        "propertyUrl": "skos:broader",
-        "valueUrl": "http://gss-data.org.uk/data/gss_data/covid-19/nhs-e-covid-19-daily-deaths/concept/age-band/{parent_notation}"
-      },
-      {
-        "titles": "Sort Priority",
-        "name": "sort",
-        "datatype": "integer",
-        "required": false,
-        "propertyUrl": "http://www.w3.org/ns/ui#sortPriority"
-      },
-      {
-        "titles": "Description",
-        "name": "description",
-        "datatype": "string",
-        "required": false,
-        "propertyUrl": "rdfs:comment"
-      },
-      {
-        "virtual": true,
-        "propertyUrl": "rdf:type",
-        "valueUrl": "skos:Concept"
-      },
-      {
-        "virtual": true,
-        "propertyUrl": "skos:inScheme",
-        "valueUrl": "http://gss-data.org.uk/data/gss_data/covid-19/nhs-e-covid-19-daily-deaths/concept-scheme/age-band"
-      }
-    ],
-    "primaryKey": "notation",
-    "aboutUrl": "http://gss-data.org.uk/data/gss_data/covid-19/nhs-e-covid-19-daily-deaths/concept/age-band/{notation}"
-  },
-  "prov:hadDerivation": {
+    "@context": "http://www.w3.org/ns/csvw",
     "@id": "http://gss-data.org.uk/data/gss_data/covid-19/nhs-e-covid-19-daily-deaths/concept-scheme/age-band",
-    "@type": "skos:ConceptScheme",
+    "url": "age-band.csv",
+    "tableSchema": {
+        "columns": [
+            {
+                "titles": "Label",
+                "name": "label",
+                "datatype": "string",
+                "required": true,
+                "propertyUrl": "rdfs:label"
+            },
+            {
+                "titles": "Notation",
+                "name": "notation",
+                "datatype": {
+                    "base": "string",
+                    "format": "^-?[\\w\\.\\/]+(-[\\w\\.\\/]+)*$"
+                },
+                "required": true,
+                "propertyUrl": "skos:notation"
+            },
+            {
+                "titles": "Parent Notation",
+                "name": "parent_notation",
+                "datatype": {
+                    "base": "string",
+                    "format": "^(-?[\\w\\.\\/]+(-[\\w\\.\\/]+)*|)$"
+                },
+                "required": false,
+                "propertyUrl": "skos:broader",
+                "valueUrl": "http://gss-data.org.uk/data/gss_data/covid-19/nhs-e-covid-19-daily-deaths/concept/age-band/{+parent_notation}"
+            },
+            {
+                "titles": "Sort Priority",
+                "name": "sort",
+                "datatype": "integer",
+                "required": false,
+                "propertyUrl": "http://www.w3.org/ns/ui#sortPriority"
+            },
+            {
+                "titles": "Description",
+                "name": "description",
+                "datatype": "string",
+                "required": false,
+                "propertyUrl": "rdfs:comment"
+            },
+            {
+                "virtual": true,
+                "propertyUrl": "rdf:type",
+                "valueUrl": "skos:Concept"
+            },
+            {
+                "virtual": true,
+                "propertyUrl": "skos:inScheme",
+                "valueUrl": "http://gss-data.org.uk/data/gss_data/covid-19/nhs-e-covid-19-daily-deaths/concept-scheme/age-band"
+            }
+        ],
+        "primaryKey": "notation",
+        "aboutUrl": "http://gss-data.org.uk/data/gss_data/covid-19/nhs-e-covid-19-daily-deaths/concept/age-band/{+notation}"
+    },
+    "prov:hadDerivation": {
+        "@id": "http://gss-data.org.uk/data/gss_data/covid-19/nhs-e-covid-19-daily-deaths/concept-scheme/age-band",
+        "@type": [
+            "skos:ConceptScheme",
+            "http://publishmydata.com/pmdcat#ConceptScheme"
+        ],
+        "skos:hasTopConcept": "http://gss-data.org.uk/data/gss_data/covid-19/nhs-e-covid-19-daily-deaths/concept/age-band/all"
+    },
     "rdfs:label": "Age Band",
-    "skos:hasTopConcept": "http://gss-data.org.uk/data/gss_data/covid-19/nhs-e-covid-19-daily-deaths/concept/age-band/all"
-  }
+    "dc:title": "Age Band",
+    "rdfs:seeAlso": [
+        {
+            "@id": "http://gss-data.org.uk/data/gss_data/covid-19/nhs-e-covid-19-daily-deaths/concept-scheme/age-band/dataset",
+            "@type": [
+                "dcat:Dataset",
+                "http://publishmydata.com/pmdcat#Dataset"
+            ],
+            "http://publishmydata.com/pmdcat#datasetContents": {
+                "@id": "http://gss-data.org.uk/data/gss_data/covid-19/nhs-e-covid-19-daily-deaths/concept-scheme/age-band"
+            },
+            "http://publishmydata.com/pmdcat#graph": {
+                "@id": "http://gss-data.org.uk/data/gss_data/covid-19/nhs-e-covid-19-daily-deaths/concept-scheme/age-band"
+            },
+            "dc:modified": {
+                "@type": "dateTime",
+                "@value": "2021-05-20T11:48:27.170372"
+            },
+            "rdfs:label": "Age Band",
+            "dc:title": "Age Band",
+            "rdfs:comment": "Dataset representing the 'Age Band' code list.",
+            "dc:issued": {
+                "@type": "dateTime",
+                "@value": "2021-05-20T11:47:53.979021"
+            }
+        },
+        {
+            "@id": "http://gss-data.org.uk/catalog/vocabularies",
+            "dcat:record": {
+                "@id": "http://gss-data.org.uk/data/gss_data/covid-19/nhs-e-covid-19-daily-deaths/concept-scheme/age-band/catalog-record"
+            }
+        },
+        {
+            "@id": "http://gss-data.org.uk/data/gss_data/covid-19/nhs-e-covid-19-daily-deaths/concept-scheme/age-band/catalog-record",
+            "@type": "dcat:CatalogRecord",
+            "foaf:primaryTopic": {
+                "@id": "http://gss-data.org.uk/data/gss_data/covid-19/nhs-e-covid-19-daily-deaths/concept-scheme/age-band/dataset"
+            },
+            "http://publishmydata.com/pmdcat#metadataGraph": {
+                "@id": "http://gss-data.org.uk/data/gss_data/covid-19/nhs-e-covid-19-daily-deaths/concept-scheme/age-band"
+            },
+            "dc:title": "Age Band Catalog Record",
+            "rdfs:label": "Age Band Catalog Record",
+            "dc:issued": {
+                "@type": "dateTime",
+                "@value": "2021-05-20T11:47:53.979021"
+            },
+            "dc:modified": {
+                "@type": "dateTime",
+                "@value": "2021-05-20T11:47:53.979021"
+            }
+        }
+    ]
 }

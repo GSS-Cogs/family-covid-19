@@ -30,7 +30,7 @@
                 },
                 "required": false,
                 "propertyUrl": "skos:broader",
-                "valueUrl": "http://gss-data.org.uk/data/gss_data/covid-19/mmo-ad-hoc-statistical-release-uk-sea-fisheries-statistics#concept/species-group/{parent_notation}"
+                "valueUrl": "http://gss-data.org.uk/data/gss_data/covid-19/mmo-ad-hoc-statistical-release-uk-sea-fisheries-statistics#concept/species-group/{+parent_notation}"
             },
             {
                 "titles": "Sort Priority",
@@ -58,7 +58,7 @@
             }
         ],
         "primaryKey": "notation",
-        "aboutUrl": "http://gss-data.org.uk/data/gss_data/covid-19/mmo-ad-hoc-statistical-release-uk-sea-fisheries-statistics#concept/species-group/{notation}"
+        "aboutUrl": "http://gss-data.org.uk/data/gss_data/covid-19/mmo-ad-hoc-statistical-release-uk-sea-fisheries-statistics#concept/species-group/{+notation}"
     },
     "prov:hadDerivation": {
         "@id": "http://gss-data.org.uk/data/gss_data/covid-19/mmo-ad-hoc-statistical-release-uk-sea-fisheries-statistics#scheme/species-group",
@@ -106,7 +106,7 @@
             },
             "dc:modified": {
                 "@type": "dateTime",
-                "@value": "2012-12-18T00:00:00"
+                "@value": "2021-05-20T11:48:27.146766"
             },
             "http://publishmydata.com/pmdcat#markdownDescription": {
                 "@type": "https://www.w3.org/ns/iana/media-types/text/markdown#Resource",

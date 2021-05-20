@@ -1,69 +1,125 @@
 {
-  "@context": "http://www.w3.org/ns/csvw",
-  "@id": "#table",
-  "url": "{codelist}.csv",
-  "tableSchema": {
-    "columns": [
-      {
-        "titles": "Label",
-        "name": "label",
-        "datatype": "string",
-        "required": true,
-        "propertyUrl": "rdfs:label"
-      },
-      {
-        "titles": "Notation",
-        "name": "notation",
-        "datatype": {
-          "base": "string",
-          "format": "^-?[\\w\\.\\/]+(-[\\w\\.\\/]+)*$"
-        },
-        "required": true,
-        "propertyUrl": "skos:notation"
-      },
-      {
-        "titles": "Parent Notation",
-        "name": "parent_notation",
-        "datatype": {
-          "base": "string",
-          "format": "^(-?[\\w\\.\\/]+(-[\\w\\.\\/]+)*|)$"
-        },
-        "required": false,
-        "propertyUrl": "skos:broader",
-        "valueUrl": "http://gss-data.org.uk/data/gss_data/{family}/{transformname}#concept/{codelist}/{parent_notation}"
-      },
-      {
-        "titles": "Sort Priority",
-        "name": "sort",
-        "datatype": "integer",
-        "required": false,
-        "propertyUrl": "http://www.w3.org/ns/ui#sortPriority"
-      },
-      {
-        "titles": "Description",
-        "name": "description",
-        "datatype": "string",
-        "required": false,
-        "propertyUrl": "rdfs:comment"
-      },
-      {
-        "virtual": true,
-        "propertyUrl": "rdf:type",
-        "valueUrl": "skos:Concept"
-      },
-      {
-        "virtual": true,
-        "propertyUrl": "skos:inScheme",
-        "valueUrl": "http://gss-data.org.uk/data/gss_data/{family}/{transformname}#scheme/{codelist}"
-      }
-    ],
-    "primaryKey": "notation",
-    "aboutUrl": "http://gss-data.org.uk/data/gss_data/{family}/{transformname}#concept/{codelist}/{notation}"
-  },
-  "prov:hadDerivation": {
+    "@context": "http://www.w3.org/ns/csvw",
     "@id": "http://gss-data.org.uk/data/gss_data/{family}/{transformname}#scheme/{codelist}",
-    "@type": "skos:ConceptScheme",
+    "url": "{codelist}.csv",
+    "tableSchema": {
+        "columns": [
+            {
+                "titles": "Label",
+                "name": "label",
+                "datatype": "string",
+                "required": true,
+                "propertyUrl": "rdfs:label"
+            },
+            {
+                "titles": "Notation",
+                "name": "notation",
+                "datatype": {
+                    "base": "string",
+                    "format": "^-?[\\w\\.\\/]+(-[\\w\\.\\/]+)*$"
+                },
+                "required": true,
+                "propertyUrl": "skos:notation"
+            },
+            {
+                "titles": "Parent Notation",
+                "name": "parent_notation",
+                "datatype": {
+                    "base": "string",
+                    "format": "^(-?[\\w\\.\\/]+(-[\\w\\.\\/]+)*|)$"
+                },
+                "required": false,
+                "propertyUrl": "skos:broader",
+                "valueUrl": "http://gss-data.org.uk/data/gss_data/{+family}/{+transformname}#concept/{codelist}/{parent_notation}"
+            },
+            {
+                "titles": "Sort Priority",
+                "name": "sort",
+                "datatype": "integer",
+                "required": false,
+                "propertyUrl": "http://www.w3.org/ns/ui#sortPriority"
+            },
+            {
+                "titles": "Description",
+                "name": "description",
+                "datatype": "string",
+                "required": false,
+                "propertyUrl": "rdfs:comment"
+            },
+            {
+                "virtual": true,
+                "propertyUrl": "rdf:type",
+                "valueUrl": "skos:Concept"
+            },
+            {
+                "virtual": true,
+                "propertyUrl": "skos:inScheme",
+                "valueUrl": "http://gss-data.org.uk/data/gss_data/{+family}/{+transformname}#scheme/{codelist}"
+            }
+        ],
+        "primaryKey": "notation",
+        "aboutUrl": "http://gss-data.org.uk/data/gss_data/{+family}/{+transformname}#concept/{codelist}/{notation}"
+    },
+    "prov:hadDerivation": {
+        "@id": "http://gss-data.org.uk/data/gss_data/{family}/{transformname}#scheme/{codelist}",
+        "@type": [
+            "skos:ConceptScheme",
+            "http://publishmydata.com/pmdcat#ConceptScheme"
+        ],
+        "skos:hasTopConcept": "http://gss-data.org.uk/data/gss_data/{family}/{transformname}#concept/{codelist}/all"
+    },
     "rdfs:label": "{codelistlabel}",
-    "skos:hasTopConcept": "http://gss-data.org.uk/data/gss_data/{family}/{transformname}#concept/{codelist}/all"
-  }
+    "dc:title": "{codelistlabel}",
+    "rdfs:seeAlso": [
+        {
+            "@id": "http://gss-data.org.uk/data/gss_data/{family}/{transformname}#scheme/{codelist}/dataset",
+            "@type": [
+                "dcat:Dataset",
+                "http://publishmydata.com/pmdcat#Dataset"
+            ],
+            "http://publishmydata.com/pmdcat#datasetContents": {
+                "@id": "http://gss-data.org.uk/data/gss_data/{family}/{transformname}#scheme/{codelist}"
+            },
+            "http://publishmydata.com/pmdcat#graph": {
+                "@id": "http://gss-data.org.uk/data/gss_data/{family}/{transformname}#scheme/{codelist}"
+            },
+            "dc:modified": {
+                "@type": "dateTime",
+                "@value": "2021-05-20T11:48:27.190930"
+            },
+            "rdfs:label": "{codelistlabel}",
+            "dc:title": "{codelistlabel}",
+            "rdfs:comment": "Dataset representing the '{codelistlabel}' code list.",
+            "dc:issued": {
+                "@type": "dateTime",
+                "@value": "2021-05-20T11:47:54.004227"
+            }
+        },
+        {
+            "@id": "http://gss-data.org.uk/catalog/vocabularies",
+            "dcat:record": {
+                "@id": "http://gss-data.org.uk/data/gss_data/{family}/{transformname}#scheme/{codelist}/catalog-record"
+            }
+        },
+        {
+            "@id": "http://gss-data.org.uk/data/gss_data/{family}/{transformname}#scheme/{codelist}/catalog-record",
+            "@type": "dcat:CatalogRecord",
+            "foaf:primaryTopic": {
+                "@id": "http://gss-data.org.uk/data/gss_data/{family}/{transformname}#scheme/{codelist}/dataset"
+            },
+            "http://publishmydata.com/pmdcat#metadataGraph": {
+                "@id": "http://gss-data.org.uk/data/gss_data/{family}/{transformname}#scheme/{codelist}"
+            },
+            "dc:title": "{codelistlabel} Catalog Record",
+            "rdfs:label": "{codelistlabel} Catalog Record",
+            "dc:issued": {
+                "@type": "dateTime",
+                "@value": "2021-05-20T11:47:54.004227"
+            },
+            "dc:modified": {
+                "@type": "dateTime",
+                "@value": "2021-05-20T11:47:54.004227"
+            }
+        }
+    ]
 }

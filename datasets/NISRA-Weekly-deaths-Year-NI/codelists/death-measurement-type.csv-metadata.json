@@ -30,7 +30,7 @@
                 },
                 "required": false,
                 "propertyUrl": "skos:broader",
-                "valueUrl": "http://gss-data.org.uk/data/gss_data/covid-19/nisra-weekly-deaths-year-ni#concept/death-measurement-type/{parent_notation}"
+                "valueUrl": "http://gss-data.org.uk/data/gss_data/covid-19/nisra-weekly-deaths-year-ni#concept/death-measurement-type/{+parent_notation}"
             },
             {
                 "titles": "Sort Priority",
@@ -58,7 +58,7 @@
             }
         ],
         "primaryKey": "notation",
-        "aboutUrl": "http://gss-data.org.uk/data/gss_data/covid-19/nisra-weekly-deaths-year-ni#concept/death-measurement-type/{notation}"
+        "aboutUrl": "http://gss-data.org.uk/data/gss_data/covid-19/nisra-weekly-deaths-year-ni#concept/death-measurement-type/{+notation}"
     },
     "prov:hadDerivation": {
         "@id": "http://gss-data.org.uk/data/gss_data/covid-19/nisra-weekly-deaths-year-ni#scheme/death-measurement-type",
@@ -94,7 +94,7 @@
             },
             "dc:modified": {
                 "@type": "dateTime",
-                "@value": "2021-01-05T17:01:52.817501"
+                "@value": "2021-05-20T11:48:27.158977"
             }
         },
         {

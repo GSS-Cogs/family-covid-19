@@ -88,5 +88,15 @@ def excelRange(bag):
 for tab in tabs:
     print(tab.name)
     if tab.name == 'Table 1':
-        columns = ['Period', 'Country', 'Gender', 'Measurement', 'Lower 95 Percent CI', 'Upper 95 Percent CI', 'Difference between 2020 and average', 'Percentage difference']
+        columns = ['Country', 'Measurement', 'Number of deaths', 'Rate', 'Lower 95 Percent CI', 'Upper 95 Percent CI', 'Percentage of all deaths', 'Difference between 2020 and average', 'Percentage difference']
         trace.start(datasetTitle, tab, columns, dist.downloadURL)
+
+        country = tab.excel_ref('A7').expand(DOWN).is_not_blank() & tab.excel_ref('A25').expand(UP).is_not_blank()
+        trace.Country('Defined from cell range: {}', var=excelRange(country))
+
+        measurement = tab.excel_ref('B4').expand(RIGHT).is_not_blank()
+        trace.Measurement('Defined from cell range: {}', var=excelRange(measurement))
+
+        number_of_deaths = tab.filter('Number of deaths').expand(DOWN).is_not_blank()
+        trace.Number_of_deaths('Defined from cell range: {}', var=excelRange(number_of_deaths))
+        

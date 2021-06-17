@@ -103,9 +103,6 @@ for tab in tabs:
         rate = tab.filter('Rate').expand(DOWN).is_not_blank()
         trace.Rate('Defined from cell range: {}', var=excelRange(rate))
 
-        percentage_all_deaths = tab.filter('Percentage of all deaths').expand(DOWN).is_not_blank()
-        trace.Percentage_of_all_deaths('Defined from cell range: {}', var=excelRange(percentage_all_deaths))
-
         lower_95_percent_ci = tab.filter('Lower 95% CI').expand(DOWN).is_not_blank()
         trace.Lower_95_Percent_CI('Defined from cell range: {}', var=excelRange(lower_95_percent_ci))
 
@@ -114,3 +111,12 @@ for tab in tabs:
 
         percentage_all_deaths = tab.filter('Percentage of all deaths').expand(DOWN).is_not_blank()
         trace.Percentage_of_all_deaths('Defined from cell range: {}', var=excelRange(percentage_all_deaths))
+
+        difference_2020_and_average = tab.filter('Difference between 2020 and average').expand(DOWN).is_not_blank()
+        trace.Difference_between_2020_and_average('Defined from cell range: {}',
+                                                  var=excelRange(difference_2020_and_average))
+
+        percentage_difference = tab.filter('Percentage difference').expand(DOWN).is_not_blank()
+        trace.Percentage_difference('Defined from cell range: {}', var=excelRange(percentage_difference))
+
+        observations = tab.excel_ref('B7').expand(RIGHT).expand(DOWN).is_not_blank()

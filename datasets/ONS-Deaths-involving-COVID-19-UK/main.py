@@ -120,3 +120,20 @@ for tab in tabs:
         trace.Percentage_difference('Defined from cell range: {}', var=excelRange(percentage_difference))
 
         observations = tab.excel_ref('B7').expand(RIGHT).expand(DOWN).is_not_blank()
+
+        dimensions = [
+            HDim(country, 'Country', DIRECTLY, LEFT),
+            HDim(measurement, 'Measurement', DIRECTLY, ABOVE),
+            HDim(number_of_deaths, 'Number of deaths', DIRECTLY, RIGHT),
+            HDim(rate, 'Rate', DIRECTLY, RIGHT),
+            HDim(lower_95_percent_ci, 'Lower 95 Percent CI', DIRECTLY, RIGHT),
+            HDim(upper_95_percent_ci, 'Upper 95 Percent CI', DIRECTLY, RIGHT),
+            HDim(percentage_all_deaths, 'Percentage of all deaths', DIRECTLY, RIGHT),
+            HDim(difference_2020_and_average, 'Difference between 2020 and average', DIRECTLY, RIGHT),
+            HDim(percentage_difference, 'Percentage difference', DIRECTLY, RIGHT)
+        ]
+
+        tidy_sheet = ConversionSegment(tab, dimensions, observations)
+        trace.with_preview(tidy_sheet)
+        savepreviewhtml(tidy_sheet, fname=f'{tab.name}_Preview.html')
+        trace.store(f'combined_dataframe_table_1', tidy_sheet.topandas())

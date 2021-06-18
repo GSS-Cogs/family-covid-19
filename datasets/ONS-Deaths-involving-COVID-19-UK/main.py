@@ -88,20 +88,34 @@ def excelRange(bag):
 for tab in tabs:
     print(tab.name)
     if tab.name == 'Table 1':
-        columns = ['Country', 'Measurement', 'Number of deaths', 'Rate', 'Lower 95 Percent CI', 'Upper 95 Percent CI', 'Percentage of all deaths', 'Difference between 2020 and average', 'Percentage difference']
+        columns = ['Period', 'Country', 'Persons', 'Males', 'Females', 'Measurement', 'Rate', 'Lower 95 Percent CI',
+                   'Upper 95 Percent CI', 'Percentage of all deaths', 'Difference between 2020 and average',
+                   'Percentage difference', 'Measure Type', 'Unit']
         trace.start(datasetTitle, tab, columns, dist.downloadURL)
 
-        country = tab.excel_ref('A7').expand(DOWN).is_not_blank() & tab.excel_ref('A25').expand(UP).is_not_blank()
+        period = '2020-03-01T00:00:00/P2M'
+        trace.Period('Hardcoded as {}', var=period)
+
+        country = tab.excel_ref('A7:A25').is_not_blank()
         trace.Country('Defined from cell range: {}', var=excelRange(country))
+
+        persons = tab.filter('Persons').is_not_blank()
+        trace.Persons('Defined from cell value: {}', var=cellLoc(persons))
+
+        males = tab.filter('Males').is_not_blank()
+        trace.Males('Defined from cell value: {}', var=cellLoc(males))
+
+        females = tab.filter('Females').is_not_blank()
+        trace.Females('Defined from cell value: {}', var=cellLoc(females))
 
         measurement = tab.excel_ref('B4').expand(RIGHT).is_not_blank()
         trace.Measurement('Defined from cell range: {}', var=excelRange(measurement))
 
-        number_of_deaths = tab.filter('Number of deaths').expand(DOWN).is_not_blank()
-        trace.Number_of_deaths('Defined from cell range: {}', var=excelRange(number_of_deaths))
-
         rate = tab.filter('Rate').expand(DOWN).is_not_blank()
         trace.Rate('Defined from cell range: {}', var=excelRange(rate))
+
+        percentage_all_deaths = tab.filter('Percentage of all deaths').expand(DOWN).is_not_blank()
+        trace.Percentage_of_all_deaths('Defined from cell range: {}', var=excelRange(percentage_all_deaths))
 
         lower_95_percent_ci = tab.filter('Lower 95% CI').expand(DOWN).is_not_blank()
         trace.Lower_95_Percent_CI('Defined from cell range: {}', var=excelRange(lower_95_percent_ci))
@@ -119,18 +133,29 @@ for tab in tabs:
         percentage_difference = tab.filter('Percentage difference').expand(DOWN).is_not_blank()
         trace.Percentage_difference('Defined from cell range: {}', var=excelRange(percentage_difference))
 
-        observations = tab.excel_ref('B7').expand(RIGHT).expand(DOWN).is_not_blank()
+        measure_type = measurement
+        trace.Measure_Type('Defined from cell range: {}', var=excelRange(measure_type))
+
+        unit = 'Number of deaths'
+        trace.Unit('Hardcoded as {}', var=unit)
+
+        observations = tab.filter('Number of deaths').expand(DOWN).is_not_blank()
 
         dimensions = [
             HDim(country, 'Country', DIRECTLY, LEFT),
+            HDim(persons, 'Persons', CLOSEST, ABOVE),
+            HDim(males, 'Males', CLOSEST, ABOVE),
+            HDim(females, 'Females', CLOSEST, ABOVE),
             HDim(measurement, 'Measurement', DIRECTLY, ABOVE),
-            HDim(number_of_deaths, 'Number of deaths', DIRECTLY, RIGHT),
             HDim(rate, 'Rate', DIRECTLY, RIGHT),
             HDim(lower_95_percent_ci, 'Lower 95 Percent CI', DIRECTLY, RIGHT),
             HDim(upper_95_percent_ci, 'Upper 95 Percent CI', DIRECTLY, RIGHT),
             HDim(percentage_all_deaths, 'Percentage of all deaths', DIRECTLY, RIGHT),
             HDim(difference_2020_and_average, 'Difference between 2020 and average', DIRECTLY, RIGHT),
-            HDim(percentage_difference, 'Percentage difference', DIRECTLY, RIGHT)
+            HDim(percentage_difference, 'Percentage difference', DIRECTLY, RIGHT),
+            HDim(measure_type, 'Measure Type', DIRECTLY, ABOVE),
+            HDimConst('Unit', unit),
+            HDimConst('Period', period)
         ]
 
         tidy_sheet = ConversionSegment(tab, dimensions, observations)

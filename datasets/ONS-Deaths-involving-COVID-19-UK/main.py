@@ -162,3 +162,11 @@ for tab in tabs:
         trace.with_preview(tidy_sheet)
         savepreviewhtml(tidy_sheet, fname=f'{tab.name}_Preview.html')
         trace.store(f'combined_dataframe_table_1', tidy_sheet.topandas())
+
+df_tbl_1 = trace.combine_and_trace(datasetTitle, 'combined_dataframe_table_1')
+trace.add_column('Value')
+trace.Value('Rename databaker column OBS to Value')
+df_tbl_1.rename(columns={'OBS': 'Value', 'DATAMARKER': 'Marker'}, inplace=True)
+
+df_tbl_1_marker_idx = df_tbl_1[df_tbl_1['Marker'].isin(['Number of deaths'])].index
+df_tbl_1.drop(df_tbl_1_marker_idx , inplace=True)

@@ -162,6 +162,19 @@ for tab in tabs:
         trace.with_preview(tidy_sheet)
         savepreviewhtml(tidy_sheet, fname=f'{tab.name}_Preview.html')
         trace.store(f'combined_dataframe_table_1', tidy_sheet.topandas())
+    if tab.name == 'Table 2':
+        columns = ['Period', 'Age', 'Country', 'Persons', 'Males', 'Females', 'Measurement', 'Rate',
+                   'Lower 95 Percent CI', 'Upper 95 Percent CI', 'Measure Type', 'Unit']
+        trace.start(datasetTitle, tab, columns, dist.downloadURL)
+
+        period = '2020-03-01T00:00:00/P2M'
+        trace.Period('Hardcoded as {}', var=period)
+
+        age = tab.excel_ref('A7:A67').is_not_blank()
+        trace.Age('Defined from cell range: {}', var=excelRange(age))
+
+        country = 'United Kingdom'
+        trace.Country('Hardcoded as {}', var=country)
 
 df_tbl_1 = trace.combine_and_trace(datasetTitle, 'combined_dataframe_table_1')
 trace.add_column('Value')
@@ -182,3 +195,18 @@ df_tbl_1.loc[(df_tbl_1['Females'] == 'Females'), 'Gender'] = 'Female'
 df_tbl_1['Marker'] = None
 
 df_tbl_1 = df_tbl_1[['Period', 'Country', 'Gender', 'Measurement', 'Rate', 'Lower 95 Percent CI', 'Upper 95 Percent CI', 'Percentage of all deaths', 'Difference between 2020 and average', 'Percentage difference', 'Measure Type', 'Unit', 'Marker', 'Value']]
+
+# Notes from tab
+notes = """
+Table 1
+1. Based on bounderies as of Feb 2020
+2. Based on the date a death occurred rather than when a death was registered. Includes deaths registered by 15th May
+3. Excludes deaths of non-residents with the exception on Northern Ireland data
+4. Data for 2020 is provisional
+5. COVID-19 defined as ICD10 codes U07.1 and U07.2
+6. Age-standardised mortality rates per 100,000 population, standardised to the 2013 European Standard Population. Age-standardised rates are used to allow comparison between populations which may contain different proportions of people of different ages.
+7. The lower and upper confidence limits have been provided. These form a confidence interval, which is a measure of the statistical precision of an estimate and shows the range of uncertainty around the estimated figure. Calculations based on small numbers of events are often subject to random fluctuations. As a general rule, if the confidence interval around one figure overlaps with the interval around another, we cannot say with certainty that there is more than a chance difference between the two figures.
+8. Figures for deaths involving COVID-19 show the number of deaths involving coronavirus (COVID-19), based on any mention of COVID-19 on the death certificate.
+"""
+scraper.dataset.comment = notes
+scraper.dataset.family = 'covid-19'

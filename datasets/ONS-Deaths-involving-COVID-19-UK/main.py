@@ -176,6 +176,33 @@ for tab in tabs:
         country = 'United Kingdom'
         trace.Country('Hardcoded as {}', var=country)
 
+        persons = tab.filter('Persons').is_not_blank()
+        trace.Persons('Defined from cell value: {}', var=cellLoc(persons))
+
+        males = tab.filter('Males').is_not_blank()
+        trace.Males('Defined from cell value: {}', var=cellLoc(males))
+
+        females = tab.filter('Females').is_not_blank()
+        trace.Females('Defined from cell value: {}', var=cellLoc(females))
+
+        measurement = tab.excel_ref('B4').expand(RIGHT).is_not_blank()
+        trace.Measurement('Defined from cell range: {}', var=excelRange(measurement))
+
+        rate = tab.filter('Rate').expand(DOWN).is_not_blank()
+        trace.Rate('Defined from cell range: {}', var=excelRange(rate))
+
+        lower_95_percent_ci = tab.filter('Lower 95% CI').expand(DOWN).is_not_blank()
+        trace.Lower_95_Percent_CI('Defined from cell range: {}', var=excelRange(lower_95_percent_ci))
+
+        upper_95_percent_ci = tab.filter('Upper 95% CI').expand(DOWN).is_not_blank()
+        trace.Upper_95_Percent_CI('Defined from cell range: {}', var=excelRange(upper_95_percent_ci))
+
+        measure_type = measurement
+        trace.Measure_Type('Defined from cell range: {}', var=excelRange(measure_type))
+
+        unit = 'Number of deaths'
+        trace.Unit('Hardcoded as {}', var=unit)
+
 df_tbl_1 = trace.combine_and_trace(datasetTitle, 'combined_dataframe_table_1')
 trace.add_column('Value')
 trace.Value('Rename databaker column OBS to Value')

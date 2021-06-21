@@ -170,3 +170,15 @@ df_tbl_1.rename(columns={'OBS': 'Value', 'DATAMARKER': 'Marker'}, inplace=True)
 
 df_tbl_1_marker_idx = df_tbl_1[df_tbl_1['Marker'].isin(['Number of deaths'])].index
 df_tbl_1.drop(df_tbl_1_marker_idx , inplace=True)
+
+df_tbl_1.loc[df_tbl_1['Measurement'].isin(['All deaths', '5-year average']), 'Percentage of all deaths'] = None
+df_tbl_1.loc[df_tbl_1['Measurement'].isin(['All deaths', 'Deaths involving COVID-19']), 'Difference between 2020 and average'] = None
+df_tbl_1.loc[df_tbl_1['Measurement'].isin(['All deaths', 'Deaths involving COVID-19']), 'Percentage difference'] = None
+
+df_tbl_1.loc[(df_tbl_1['Persons'] == 'Persons'), 'Gender'] = 'All'
+df_tbl_1.loc[(df_tbl_1['Males'] == 'Males'), 'Gender'] = 'Male'
+df_tbl_1.loc[(df_tbl_1['Females'] == 'Females'), 'Gender'] = 'Female'
+
+df_tbl_1['Marker'] = None
+
+df_tbl_1 = df_tbl_1[['Period', 'Country', 'Gender', 'Measurement', 'Rate', 'Lower 95 Percent CI', 'Upper 95 Percent CI', 'Percentage of all deaths', 'Difference between 2020 and average', 'Percentage difference', 'Measure Type', 'Unit', 'Marker', 'Value']]

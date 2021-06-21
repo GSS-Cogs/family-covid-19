@@ -203,6 +203,28 @@ for tab in tabs:
         unit = 'Number of deaths'
         trace.Unit('Hardcoded as {}', var=unit)
 
+        observations = tab.filter('Number of deaths').expand(DOWN).is_not_blank()
+
+        dimensions = [
+            HDim(age, 'Age', DIRECTLY, LEFT),
+            HDim(persons, 'Persons', CLOSEST, ABOVE),
+            HDim(males, 'Males', CLOSEST, ABOVE),
+            HDim(females, 'Females', CLOSEST, ABOVE),
+            HDim(measurement, 'Measurement', DIRECTLY, ABOVE),
+            HDim(rate, 'Rate', DIRECTLY, RIGHT),
+            HDim(lower_95_percent_ci, 'Lower 95 Percent CI', DIRECTLY, RIGHT),
+            HDim(upper_95_percent_ci, 'Upper 95 Percent CI', DIRECTLY, RIGHT),
+            HDim(measure_type, 'Measure Type', DIRECTLY, ABOVE),
+            HDimConst('Unit', unit),
+            HDimConst('Period', period),
+            HDimConst('Country', country)
+        ]
+
+        tidy_sheet = ConversionSegment(tab, dimensions, observations)
+        trace.with_preview(tidy_sheet)
+        savepreviewhtml(tidy_sheet, fname=f'{tab.name}_Preview.html')
+        trace.store(f'combined_dataframe_table_2', tidy_sheet.topandas())
+
 df_tbl_1 = trace.combine_and_trace(datasetTitle, 'combined_dataframe_table_1')
 trace.add_column('Value')
 trace.Value('Rename databaker column OBS to Value')

@@ -240,6 +240,20 @@ for tab in tabs:
         unit = 'Number of deaths'
         trace.Unit('Hardcoded as {}', var=unit)
 
+        observations = tab.excel_ref('B5').expand(RIGHT).expand(DOWN).is_not_blank()
+
+        dimensions = [
+            HDim(period, 'Period', DIRECTLY, LEFT),
+            HDim(measure_type, 'Measure Type', DIRECTLY, ABOVE),
+            HDimConst('Unit', unit),
+            HDimConst('Country', country)
+        ]
+
+        tidy_sheet = ConversionSegment(tab, dimensions, observations)
+        trace.with_preview(tidy_sheet)
+        savepreviewhtml(tidy_sheet, fname=f'{tab.name}_Preview.html')
+        trace.store(f'combined_dataframe_table_3', tidy_sheet.topandas())
+
 country_geocode_dict={'United Kingdom': 'K02000001', 'England':'E92000001', 'Wales':'W92000004', 'Northern Ireland':'N92000002', 'Scotland':'S92000003'}
 
 df_tbl_1 = trace.combine_and_trace(datasetTitle, 'combined_dataframe_table_1')

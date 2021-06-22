@@ -225,6 +225,8 @@ for tab in tabs:
         savepreviewhtml(tidy_sheet, fname=f'{tab.name}_Preview.html')
         trace.store(f'combined_dataframe_table_2', tidy_sheet.topandas())
 
+country_geocode_dict={'United Kingdom': 'K02000001', 'England':'E92000001', 'Wales':'W92000004', 'Northern Ireland':'N92000002', 'Scotland':'S92000003'}
+
 df_tbl_1 = trace.combine_and_trace(datasetTitle, 'combined_dataframe_table_1')
 trace.add_column('Value')
 trace.Value('Rename databaker column OBS to Value')
@@ -241,9 +243,13 @@ df_tbl_1.loc[(df_tbl_1['Persons'] == 'Persons'), 'Gender'] = 'All'
 df_tbl_1.loc[(df_tbl_1['Males'] == 'Males'), 'Gender'] = 'Male'
 df_tbl_1.loc[(df_tbl_1['Females'] == 'Females'), 'Gender'] = 'Female'
 
+df_tbl_1['Country Geocode'] = df_tbl_1['Country'].replace(country_geocode_dict)
+trace.add_column('Country Geocode')
+trace.Country_Code("Create Country Geocode Value based on 'Country' column")
+
 df_tbl_1['Marker'] = None
 
-df_tbl_1 = df_tbl_1[['Period', 'Country', 'Gender', 'Measurement', 'Rate', 'Lower 95 Percent CI', 'Upper 95 Percent CI', 'Percentage of all deaths', 'Difference between 2020 and average', 'Percentage difference', 'Measure Type', 'Unit', 'Marker', 'Value']]
+df_tbl_1 = df_tbl_1[['Period', 'Country', 'Country Geocode', 'Gender', 'Measurement', 'Rate', 'Lower 95 Percent CI', 'Upper 95 Percent CI', 'Percentage of all deaths', 'Difference between 2020 and average', 'Percentage difference', 'Measure Type', 'Unit', 'Marker', 'Value']]
 
 # Notes from tab
 notes = """

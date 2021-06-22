@@ -261,6 +261,18 @@ df_tbl_2 = df_tbl_2.replace({'Rate': {':': 'None'}, 'Lower 95 Percent CI': {':':
 df_tbl_2_marker_idx = df_tbl_2[df_tbl_2['Marker'].isin(['Number of deaths'])].index
 df_tbl_2.drop(df_tbl_2_marker_idx , inplace=True)
 
+df_tbl_2.loc[(df_tbl_2['Persons'] == 'Persons'), 'Gender'] = 'All'
+df_tbl_2.loc[(df_tbl_2['Males'] == 'Males'), 'Gender'] = 'Male'
+df_tbl_2.loc[(df_tbl_2['Females'] == 'Females'), 'Gender'] = 'Female'
+
+df_tbl_2['Country Geocode'] = df_tbl_2['Country'].replace(country_geocode_dict)
+trace.add_column('Country Geocode')
+trace.Country_Geocode("Create Country Geocode Value based on 'Country' column")
+
+df_tbl_2['Marker'] = None
+
+df_tbl_2 = df_tbl_2[['Period', 'Age', 'Country', 'Country Geocode', 'Gender', 'Measurement', 'Rate', 'Lower 95 Percent CI', 'Upper 95 Percent CI', 'Measure Type', 'Unit', 'Marker', 'Value']]
+
 # Notes from tab
 notes = """
 Table 1

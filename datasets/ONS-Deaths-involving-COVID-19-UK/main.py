@@ -251,6 +251,16 @@ df_tbl_1['Marker'] = None
 
 df_tbl_1 = df_tbl_1[['Period', 'Country', 'Country Geocode', 'Gender', 'Measurement', 'Rate', 'Lower 95 Percent CI', 'Upper 95 Percent CI', 'Percentage of all deaths', 'Difference between 2020 and average', 'Percentage difference', 'Measure Type', 'Unit', 'Marker', 'Value']]
 
+df_tbl_2 = trace.combine_and_trace(datasetTitle, 'combined_dataframe_table_2')
+trace.add_column('Value')
+trace.Value('Rename databaker column OBS to Value')
+df_tbl_2.rename(columns={'OBS': 'Value', 'DATAMARKER': 'Marker'}, inplace=True)
+
+df_tbl_2 = df_tbl_2.replace({'Rate': {':': 'None'}, 'Lower 95 Percent CI': {':': 'None'}, 'Upper 95 Percent CI': {':': 'None'}})
+
+df_tbl_2_marker_idx = df_tbl_2[df_tbl_2['Marker'].isin(['Number of deaths'])].index
+df_tbl_2.drop(df_tbl_2_marker_idx , inplace=True)
+
 # Notes from tab
 notes = """
 Table 1
@@ -262,6 +272,17 @@ Table 1
 6. Age-standardised mortality rates per 100,000 population, standardised to the 2013 European Standard Population. Age-standardised rates are used to allow comparison between populations which may contain different proportions of people of different ages.
 7. The lower and upper confidence limits have been provided. These form a confidence interval, which is a measure of the statistical precision of an estimate and shows the range of uncertainty around the estimated figure. Calculations based on small numbers of events are often subject to random fluctuations. As a general rule, if the confidence interval around one figure overlaps with the interval around another, we cannot say with certainty that there is more than a chance difference between the two figures.
 8. Figures for deaths involving COVID-19 show the number of deaths involving coronavirus (COVID-19), based on any mention of COVID-19 on the death certificate.
+Table 2
+1. Based on bounderies as of Feb 2020
+2. Based on the date a death occurred rather than when a death was registered. Includes deaths registered by 15th May
+3. Excludes deaths of non-residents with the exception on Northern Ireland data
+4. Data for 2020 is provisional
+5. COVID-19 defined as ICD10 codes U07.1 and U07.2
+6. Rates are not available where there are less than 3 deaths
+7. Age-specific rates where there were fewer than 10 deaths are unreliable and denoted with a u to indicate that rates are based on small numbers
+8. Age-specific mortality rates per 100,000 population.
+9. The lower and upper confidence limits have been provided. These form a confidence interval, which is a measure of the statistical precision of an estimate and shows the range of uncertainty around the estimated figure. Calculations based on small numbers of events are often subject to random fluctuations. As a general rule, if the confidence interval around one figure overlaps with the interval around another, we cannot say with certainty that there is more than a chance difference between the two figures.
+10. Figures for deaths involving COVID-19 show the number of deaths involving coronavirus (COVID-19), based on any mention of COVID-19 on the death certificate.
 """
 scraper.dataset.comment = notes
 scraper.dataset.family = 'covid-19'

@@ -224,6 +224,21 @@ for tab in tabs:
         trace.with_preview(tidy_sheet)
         savepreviewhtml(tidy_sheet, fname=f'{tab.name}_Preview.html')
         trace.store(f'combined_dataframe_table_2', tidy_sheet.topandas())
+    if tab.name == 'Table 3':
+        columns = ['Period', 'Country', 'Measure Type', 'Unit']
+        trace.start(datasetTitle, tab, columns, dist.downloadURL)
+
+        period = tab.excel_ref('A5:A65').is_not_blank()
+        trace.Period('Defined from cell range: {}', var=excelRange(period))
+
+        country = 'United Kingdom'
+        trace.Country('Hardcoded as {}', var=country)
+
+        measure_type = tab.filter('All Deaths').expand(RIGHT).is_not_blank()
+        trace.Measure_Type('Defined from cell range: {}', var=excelRange(measure_type))
+
+        unit = 'Number of deaths'
+        trace.Unit('Hardcoded as {}', var=unit)
 
 country_geocode_dict={'United Kingdom': 'K02000001', 'England':'E92000001', 'Wales':'W92000004', 'Northern Ireland':'N92000002', 'Scotland':'S92000003'}
 

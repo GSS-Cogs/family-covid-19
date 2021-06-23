@@ -312,6 +312,16 @@ df_tbl_3.rename(columns={'OBS': 'Value', 'DATAMARKER': 'Marker'}, inplace=True)
 df_tbl_3['Period'] = df_tbl_3['Period'].apply(lambda x: parse(str(x)).strftime('%Y-%m-%dT%H:%M:%S'))
 trace.Period("Format 'Period' column with gregorian day format")
 
+df_tbl_3['Country Geocode'] = df_tbl_3['Country'].replace(country_geocode_dict)
+trace.add_column('Country Geocode')
+trace.Country_Geocode("Create Country Geocode Value based on 'Country' column")
+
+df_tbl_3['Value'] = pd.to_numeric(df_tbl_3['Value'], errors='coerce').astype('Int64')
+
+df_tbl_3['Marker'] = None
+
+df_tbl_3 = df_tbl_3[['Period', 'Country', 'Country Geocode', 'Measure Type', 'Unit', 'Marker', 'Value']]
+
 # Notes from tab
 notes = """
 Table 1

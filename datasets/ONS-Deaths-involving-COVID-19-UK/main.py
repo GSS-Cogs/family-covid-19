@@ -270,6 +270,10 @@ df_tbl_1.loc[df_tbl_1['Measurement'].isin(['All deaths', '5-year average']), 'Pe
 df_tbl_1.loc[df_tbl_1['Measurement'].isin(['All deaths', 'Deaths involving COVID-19']), 'Difference between 2020 and average'] = None
 df_tbl_1.loc[df_tbl_1['Measurement'].isin(['All deaths', 'Deaths involving COVID-19']), 'Percentage difference'] = None
 
+df_tbl_1['Percentage of all deaths'] = pd.to_numeric(df_tbl_1['Percentage of all deaths'], errors='coerce').astype('float64').replace(np.nan, 'None')
+df_tbl_1['Difference between 2020 and average'] = pd.to_numeric(df_tbl_1['Difference between 2020 and average'], errors='coerce').astype('float64').replace(np.nan, 'None')
+df_tbl_1['Percentage difference'] = pd.to_numeric(df_tbl_1['Percentage difference'], errors='coerce').astype('float64').replace(np.nan, 'None')
+
 df_tbl_1.loc[(df_tbl_1['Persons'] == 'Persons'), 'Gender'] = 'All'
 df_tbl_1.loc[(df_tbl_1['Males'] == 'Males'), 'Gender'] = 'Male'
 df_tbl_1.loc[(df_tbl_1['Females'] == 'Females'), 'Gender'] = 'Female'

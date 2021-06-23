@@ -6,6 +6,8 @@ import pandas as pd
 from gssutils import *
 import json
 import string
+import numpy as np
+from dateutil.parser import parse
 
 info = json.load(open('info.json'))
 landingPage = info['landingPage']
@@ -301,6 +303,14 @@ trace.Country_Geocode("Create Country Geocode Value based on 'Country' column")
 df_tbl_2['Marker'] = None
 
 df_tbl_2 = df_tbl_2[['Period', 'Age', 'Country', 'Country Geocode', 'Gender', 'Measurement', 'Rate', 'Lower 95 Percent CI', 'Upper 95 Percent CI', 'Measure Type', 'Unit', 'Marker', 'Value']]
+
+df_tbl_3 = trace.combine_and_trace(datasetTitle, 'combined_dataframe_table_3')
+trace.add_column('Value')
+trace.Value('Rename databaker column OBS to Value')
+df_tbl_3.rename(columns={'OBS': 'Value', 'DATAMARKER': 'Marker'}, inplace=True)
+
+df_tbl_3['Period'] = df_tbl_3['Period'].apply(lambda x: parse(str(x)).strftime('%Y-%m-%dT%H:%M:%S'))
+trace.Period("Format 'Period' column with gregorian day format")
 
 # Notes from tab
 notes = """

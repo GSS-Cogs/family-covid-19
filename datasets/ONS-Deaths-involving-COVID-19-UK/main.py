@@ -324,6 +324,13 @@ Table 2
 8. Age-specific mortality rates per 100,000 population.
 9. The lower and upper confidence limits have been provided. These form a confidence interval, which is a measure of the statistical precision of an estimate and shows the range of uncertainty around the estimated figure. Calculations based on small numbers of events are often subject to random fluctuations. As a general rule, if the confidence interval around one figure overlaps with the interval around another, we cannot say with certainty that there is more than a chance difference between the two figures.
 10. Figures for deaths involving COVID-19 show the number of deaths involving coronavirus (COVID-19), based on any mention of COVID-19 on the death certificate.
+Table 3
+1. Based on bounderies as of Feb 2020
+2. Based on the date a death occurred rather than when a death was registered. Includes deaths registered by 15th May
+3. Excludes deaths of non-residents with the exception on Northern Ireland data
+4. Data for 2020 is provisional
+5. COVID-19 defined as ICD10 codes U07.1 and U07.2
+6. Figures for deaths involving COVID-19 show the number of deaths involving coronavirus (COVID-19), based on any mention of COVID-19 on the death certificate.
 """
 scraper.dataset.comment = notes
 scraper.dataset.family = 'covid-19'

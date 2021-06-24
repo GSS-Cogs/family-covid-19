@@ -301,6 +301,11 @@ for tab in tabs:
             HDimConst('Period', period)
         ]
 
+        tidy_sheet = ConversionSegment(tab, dimensions, observations)
+        trace.with_preview(tidy_sheet)
+        savepreviewhtml(tidy_sheet, fname=f'{tab.name}_Preview.html')
+        trace.store(f'combined_dataframe_table_4', tidy_sheet.topandas())
+
 country_geocode_dict={'United Kingdom': 'K02000001', 'England':'E92000001', 'Wales':'W92000004', 'Northern Ireland':'N92000002', 'Scotland':'S92000003'}
 
 df_tbl_1 = trace.combine_and_trace(datasetTitle, 'combined_dataframe_table_1')
@@ -400,6 +405,15 @@ Table 3
 4. Data for 2020 is provisional
 5. COVID-19 defined as ICD10 codes U07.1 and U07.2
 6. Figures for deaths involving COVID-19 show the number of deaths involving coronavirus (COVID-19), based on any mention of COVID-19 on the death certificate.
+Table 4
+1. Based on bounderies as of Feb 2020
+2. Based on the date a death occurred rather than when a death was registered. Includes deaths registered by 15th May
+3. Excludes deaths of non-residents with the exception on Northern Ireland data
+4. Data for 2020 is provisional
+5. COVID-19 defined as ICD10 codes U07.1 and U07.2
+6. Home includes non-institutions for Scotland 
+7. Hospital includes deaths in hospices for all countries
+8. Figures for deaths involving COVID-19 show the number of deaths involving coronavirus (COVID-19), based on any mention of COVID-19 on the death certificate.
 """
 scraper.dataset.comment = notes
 scraper.dataset.family = 'covid-19'

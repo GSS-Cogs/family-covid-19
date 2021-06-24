@@ -255,6 +255,13 @@ for tab in tabs:
         trace.with_preview(tidy_sheet)
         savepreviewhtml(tidy_sheet, fname=f'{tab.name}_Preview.html')
         trace.store(f'combined_dataframe_table_3', tidy_sheet.topandas())
+    if tab.name == 'Table 4':
+        columns = ['Period', 'United Kingdom', 'England', 'Wales', 'Scotland', 'Northern Ireland', 'Place of death',
+                   'Measure Type', 'Unit']
+        trace.start(datasetTitle, tab, columns, dist.downloadURL)
+
+        period = '2020-03-01T00:00:00/P2M'
+        trace.Period('Hardcoded as {}', var=period)
 
 country_geocode_dict={'United Kingdom': 'K02000001', 'England':'E92000001', 'Wales':'W92000004', 'Northern Ireland':'N92000002', 'Scotland':'S92000003'}
 

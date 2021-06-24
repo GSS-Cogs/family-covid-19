@@ -263,6 +263,21 @@ for tab in tabs:
         period = '2020-03-01T00:00:00/P2M'
         trace.Period('Hardcoded as {}', var=period)
 
+        united_kingdom = tab.excel_ref('A5').is_not_blank()
+        trace.United_Kingdom('Defined from cell value: {}', var=cellLoc(united_kingdom))
+
+        england = tab.excel_ref('A11').is_not_blank()
+        trace.England('Defined from cell value: {}', var=cellLoc(england))
+
+        wales = tab.excel_ref('A17').is_not_blank()
+        trace.Wales('Defined from cell value: {}', var=cellLoc(wales))
+
+        scotland = tab.excel_ref('A23').is_not_blank()
+        trace.Scotland('Defined from cell value: {}', var=cellLoc(scotland))
+
+        northern_ireland = tab.excel_ref('A29').is_not_blank()
+        trace.Northern_Ireland('Defined from cell value: {}', var=cellLoc(northern_ireland))
+
 country_geocode_dict={'United Kingdom': 'K02000001', 'England':'E92000001', 'Wales':'W92000004', 'Northern Ireland':'N92000002', 'Scotland':'S92000003'}
 
 df_tbl_1 = trace.combine_and_trace(datasetTitle, 'combined_dataframe_table_1')

@@ -278,6 +278,29 @@ for tab in tabs:
         northern_ireland = tab.excel_ref('A29').is_not_blank()
         trace.Northern_Ireland('Defined from cell value: {}', var=cellLoc(northern_ireland))
 
+        place_of_death = tab.excel_ref('A6:A33').is_not_blank()
+        trace.Place_of_death('Defined from cell range: {}', var=excelRange(place_of_death))
+
+        measure_type = tab.filter('All deaths').expand(RIGHT).is_not_blank()
+        trace.Measure_Type('Defined from cell range: {}', var=excelRange(measure_type))
+
+        unit = 'Number of deaths'
+        trace.Unit('Hardcoded as {}', var=unit)
+
+        observations = tab.excel_ref('B6').expand(RIGHT).expand(DOWN).is_not_blank()
+
+        dimensions = [
+            HDim(place_of_death, 'Place of death', DIRECTLY, LEFT),
+            HDim(united_kingdom, 'United Kingdom', CLOSEST, ABOVE),
+            HDim(england, 'England', CLOSEST, ABOVE),
+            HDim(wales, 'Wales', CLOSEST, ABOVE),
+            HDim(scotland, 'Scotland', CLOSEST, ABOVE),
+            HDim(northern_ireland, 'Northern Ireland', CLOSEST, ABOVE),
+            HDim(measure_type, 'Measure Type', DIRECTLY, ABOVE),
+            HDimConst('Unit', unit),
+            HDimConst('Period', period)
+        ]
+
 country_geocode_dict={'United Kingdom': 'K02000001', 'England':'E92000001', 'Wales':'W92000004', 'Northern Ireland':'N92000002', 'Scotland':'S92000003'}
 
 df_tbl_1 = trace.combine_and_trace(datasetTitle, 'combined_dataframe_table_1')

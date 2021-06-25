@@ -376,6 +376,13 @@ df_tbl_3['Marker'] = None
 
 df_tbl_3 = df_tbl_3[['Period', 'Country', 'Country Geocode', 'Measure Type', 'Unit', 'Marker', 'Value']]
 
+df_tbl_4 = trace.combine_and_trace(datasetTitle, 'combined_dataframe_table_4')
+trace.add_column('Value')
+trace.Value('Rename databaker column OBS to Value')
+df_tbl_4.rename(columns={'OBS': 'Value', 'DATAMARKER': 'Marker'}, inplace=True)
+
+
+
 # Notes from tab
 notes = """
 Table 1

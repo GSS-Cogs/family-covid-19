@@ -381,7 +381,13 @@ trace.add_column('Value')
 trace.Value('Rename databaker column OBS to Value')
 df_tbl_4.rename(columns={'OBS': 'Value', 'DATAMARKER': 'Marker'}, inplace=True)
 
-
+df_tbl_4.loc[(df_tbl_4['United Kingdom'] == 'United Kingdom'), 'Country'] = 'United Kingdom'
+df_tbl_4.loc[(df_tbl_4['England'] == 'England'), 'Country'] = 'England'
+df_tbl_4.loc[(df_tbl_4['Wales'] == 'Wales'), 'Country'] = 'Wales'
+df_tbl_4.loc[(df_tbl_4['Scotland'] == 'Scotland'), 'Country'] = 'Scotland'
+df_tbl_4.loc[(df_tbl_4['Northern Ireland'] == 'Northern Ireland'), 'Country'] = 'Northern Ireland'
+trace.add_column('Country')
+trace.Country("Create Country Value based on dataset")
 
 # Notes from tab
 notes = """

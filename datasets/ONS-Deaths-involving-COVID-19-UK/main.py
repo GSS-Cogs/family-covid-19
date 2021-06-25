@@ -389,6 +389,18 @@ df_tbl_4.loc[(df_tbl_4['Northern Ireland'] == 'Northern Ireland'), 'Country'] = 
 trace.add_column('Country')
 trace.Country("Create Country Value based on dataset")
 
+df_tbl_4['Country Geocode'] = df_tbl_4['Country'].replace(country_geocode_dict)
+trace.add_column('Country Geocode')
+trace.Country_Geocode("Create Country Geocode Value based on 'Country' column")
+
+df_tbl_4['Value'] = pd.to_numeric(df_tbl_4['Value'], errors='coerce').astype('Int64')
+
+df_tbl_4['Marker'] = None
+trace.add_column('Marker')
+trace.Marker("Create Marker Value based on dataset")
+
+df_tbl_4 = df_tbl_4[['Period', 'Place of death', 'Country', 'Country Geocode', 'Measure Type', 'Unit', 'Marker', 'Value']]
+
 # Notes from tab
 notes = """
 Table 1

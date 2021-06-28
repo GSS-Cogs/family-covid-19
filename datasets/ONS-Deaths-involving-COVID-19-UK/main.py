@@ -465,3 +465,8 @@ convert_category_datatype(df_tbl_1, ['Period', 'Country', 'Country Geocode', 'Ge
 convert_category_datatype(df_tbl_2, ['Period', 'Age', 'Country', 'Country Geocode', 'Gender', 'Measurement', 'Measure Type', 'Unit', 'Marker'])
 convert_category_datatype(df_tbl_3, ['Period', 'Country', 'Country Geocode', 'Measure Type', 'Unit', 'Marker'])
 convert_category_datatype(df_tbl_4, ['Period', 'Place of death', 'Country', 'Country Geocode', 'Measure Type', 'Unit', 'Marker'])
+
+pathify_columns(df_tbl_1, ['Period', 'Country', 'Country Geocode', 'Gender', 'Measurement', 'Measure Type', 'Unit', 'Marker'])
+pathify_columns(df_tbl_2, ['Period', 'Age', 'Country', 'Country Geocode', 'Gender', 'Measurement', 'Measure Type', 'Unit', 'Marker'])
+pathify_columns(df_tbl_3, ['Period', 'Country', 'Country Geocode', 'Measure Type', 'Unit', 'Marker'])
+pathify_columns(df_tbl_4, ['Period', 'Place of death', 'Country', 'Country Geocode', 'Measure Type', 'Unit', 'Marker'])

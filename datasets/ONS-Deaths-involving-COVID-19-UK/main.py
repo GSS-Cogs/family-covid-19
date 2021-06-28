@@ -86,6 +86,24 @@ def excelRange(bag):
     return '{' + lowx + lowy + '-' + highx + highy + '}'
 
 
+def convert_category_datatype(df, columns_arr):
+    for col in df.columns:
+        if col in columns_arr:
+            try:
+                df[col] = df[col].astype('category').replace(np.nan, 'None')
+            except ValueError as err:
+                raise ValueError('Failed to convert category data type for column "{}".'.format(col)) from err
+
+
+def pathify_columns(df, columns_arr):
+    for col in df.columns:
+        if col in columns_arr:
+            try:
+                df[col] = df[col].apply(lambda x: pathify(str(x)))
+            except Exception as err:
+                raise Exception('Failed to pathify column "{}".'.format(col)) from err
+
+
 # Transform process
 for tab in tabs:
     print(tab.name)

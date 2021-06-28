@@ -460,3 +460,8 @@ Table 4
 """
 scraper.dataset.comment = notes
 scraper.dataset.family = 'covid-19'
+
+convert_category_datatype(df_tbl_1, ['Period', 'Country', 'Country Geocode', 'Gender', 'Measurement', 'Measure Type', 'Unit', 'Marker'])
+convert_category_datatype(df_tbl_2, ['Period', 'Age', 'Country', 'Country Geocode', 'Gender', 'Measurement', 'Measure Type', 'Unit', 'Marker'])
+convert_category_datatype(df_tbl_3, ['Period', 'Country', 'Country Geocode', 'Measure Type', 'Unit', 'Marker'])
+convert_category_datatype(df_tbl_4, ['Period', 'Place of death', 'Country', 'Country Geocode', 'Measure Type', 'Unit', 'Marker'])

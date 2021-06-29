@@ -363,6 +363,7 @@ trace.multi(["Marker", "Value"], "Rename databaker columns OBS and DATAMARKER co
 df_tbl_2.rename(columns={'OBS': 'Value', 'DATAMARKER': 'Marker'}, inplace=True)
 
 df_tbl_2 = df_tbl_2.replace({'Rate': {':': 'None'}, 'Lower 95 Percent CI': {':': 'None'}, 'Upper 95 Percent CI': {':': 'None'}})
+trace.multi(["Rate", "Lower_95_Percent_CI", "Upper_95_Percent_CI"], "Change : DataMarker to 'None'")
 
 df_tbl_2_marker_idx = df_tbl_2[df_tbl_2['Marker'].isin(['Number of deaths'])].index
 df_tbl_2.drop(df_tbl_2_marker_idx , inplace=True)

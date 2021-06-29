@@ -183,15 +183,15 @@ for tab in tabs:
         savepreviewhtml(tidy_sheet, fname=f'{tab.name}_Preview.html')
         trace.store(f'combined_dataframe_table_1', tidy_sheet.topandas())
     if tab.name == 'Table 2':
-        columns = ['Period', 'Age', 'Country', 'Persons', 'Males', 'Females', 'Measurement', 'Rate',
+        columns = ['Period', 'Age Group', 'Country', 'Persons', 'Males', 'Females', 'Measurement', 'Rate',
                    'Lower 95 Percent CI', 'Upper 95 Percent CI', 'Measure Type', 'Unit']
         trace.start(datasetTitle, tab, columns, dist.downloadURL)
 
         period = '2020-03-01T00:00:00/P2M'
         trace.Period('Hardcoded as {}', var=period)
 
-        age = tab.excel_ref('A7:A67').is_not_blank()
-        trace.Age('Defined from cell range: {}', var=excelRange(age))
+        age_group = tab.excel_ref('A7:A67').is_not_blank()
+        trace.Age_Group('Defined from cell range: {}', var=excelRange(age_group))
 
         country = 'United Kingdom'
         trace.Country('Hardcoded as {}', var=country)
@@ -226,7 +226,7 @@ for tab in tabs:
         observations = tab.filter('Number of deaths').expand(DOWN).is_not_blank()
 
         dimensions = [
-            HDim(age, 'Age', DIRECTLY, LEFT),
+            HDim(age_group, 'Age Group', DIRECTLY, LEFT),
             HDim(persons, 'Persons', CLOSEST, ABOVE),
             HDim(males, 'Males', CLOSEST, ABOVE),
             HDim(females, 'Females', CLOSEST, ABOVE),
@@ -374,7 +374,7 @@ trace.Country_Geocode("Create Country Geocode Value based on 'Country' column")
 
 df_tbl_2['Marker'] = None
 
-df_tbl_2 = df_tbl_2[['Period', 'Age', 'Country', 'Country Geocode', 'Gender', 'Measurement', 'Rate', 'Lower 95 Percent CI', 'Upper 95 Percent CI', 'Measure Type', 'Unit', 'Marker', 'Value']]
+df_tbl_2 = df_tbl_2[['Period', 'Age Group', 'Country', 'Country Geocode', 'Gender', 'Measurement', 'Rate', 'Lower 95 Percent CI', 'Upper 95 Percent CI', 'Measure Type', 'Unit', 'Marker', 'Value']]
 
 df_tbl_3 = trace.combine_and_trace(datasetTitle, 'combined_dataframe_table_3')
 trace.add_column('Value')
@@ -462,11 +462,11 @@ scraper.dataset.comment = notes
 scraper.dataset.family = 'covid-19'
 
 convert_category_datatype(df_tbl_1, ['Period', 'Country', 'Country Geocode', 'Gender', 'Measurement', 'Measure Type', 'Unit', 'Marker'])
-convert_category_datatype(df_tbl_2, ['Period', 'Age', 'Country', 'Country Geocode', 'Gender', 'Measurement', 'Measure Type', 'Unit', 'Marker'])
+convert_category_datatype(df_tbl_2, ['Period', 'Age Group', 'Country', 'Country Geocode', 'Gender', 'Measurement', 'Measure Type', 'Unit', 'Marker'])
 convert_category_datatype(df_tbl_3, ['Period', 'Country', 'Country Geocode', 'Measure Type', 'Unit', 'Marker'])
 convert_category_datatype(df_tbl_4, ['Period', 'Place of death', 'Country', 'Country Geocode', 'Measure Type', 'Unit', 'Marker'])
 
 pathify_columns(df_tbl_1, ['Period', 'Country', 'Country Geocode', 'Gender', 'Measurement', 'Measure Type', 'Unit', 'Marker'])
-pathify_columns(df_tbl_2, ['Period', 'Age', 'Country', 'Country Geocode', 'Gender', 'Measurement', 'Measure Type', 'Unit', 'Marker'])
+pathify_columns(df_tbl_2, ['Period', 'Age Group', 'Country', 'Country Geocode', 'Gender', 'Measurement', 'Measure Type', 'Unit', 'Marker'])
 pathify_columns(df_tbl_3, ['Period', 'Country', 'Country Geocode', 'Measure Type', 'Unit', 'Marker'])
 pathify_columns(df_tbl_4, ['Period', 'Place of death', 'Country', 'Country Geocode', 'Measure Type', 'Unit', 'Marker'])

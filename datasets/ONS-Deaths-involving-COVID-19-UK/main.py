@@ -328,7 +328,8 @@ ons_geography_code_dict={'United Kingdom': 'K02000001', 'England':'E92000001', '
 
 df_tbl_1 = trace.combine_and_trace(datasetTitle, 'combined_dataframe_table_1')
 trace.add_column('Value')
-trace.Value('Rename databaker column OBS to Value')
+trace.add_column('Marker')
+trace.multi(["Marker", "Value"], "Rename databaker columns OBS and DATAMARKER columns to Value and Marker respectively")
 df_tbl_1.rename(columns={'OBS': 'Value', 'DATAMARKER': 'Marker'}, inplace=True)
 
 df_tbl_1_marker_idx = df_tbl_1[df_tbl_1['Marker'].isin(['Number of deaths'])].index
@@ -351,12 +352,14 @@ trace.add_column('ONS Geography Code')
 trace.ONS_Geography_Code("Create ONS Geography Code Value based on 'Country' column")
 
 df_tbl_1['Marker'] = None
+trace.Marker("Create Marker Value based on dataset")
 
 df_tbl_1 = df_tbl_1[['Period', 'Country', 'ONS Geography Code', 'Gender', 'Measurement', 'Rate', 'Lower 95 Percent CI', 'Upper 95 Percent CI', 'Percentage of all deaths', 'Difference between 2020 and average', 'Percentage difference', 'Measure Type', 'Unit', 'Marker', 'Value']]
 
 df_tbl_2 = trace.combine_and_trace(datasetTitle, 'combined_dataframe_table_2')
 trace.add_column('Value')
-trace.Value('Rename databaker column OBS to Value')
+trace.add_column('Marker')
+trace.multi(["Marker", "Value"], "Rename databaker columns OBS and DATAMARKER columns to Value and Marker respectively")
 df_tbl_2.rename(columns={'OBS': 'Value', 'DATAMARKER': 'Marker'}, inplace=True)
 
 df_tbl_2 = df_tbl_2.replace({'Rate': {':': 'None'}, 'Lower 95 Percent CI': {':': 'None'}, 'Upper 95 Percent CI': {':': 'None'}})
@@ -373,12 +376,14 @@ trace.add_column('ONS Geography Code')
 trace.ONS_Geography_Code("Create ONS Geography Code Value based on 'Country' column")
 
 df_tbl_2['Marker'] = None
+trace.Marker("Create Marker Value based on dataset")
 
 df_tbl_2 = df_tbl_2[['Period', 'Age Group', 'Country', 'ONS Geography Code', 'Gender', 'Measurement', 'Rate', 'Lower 95 Percent CI', 'Upper 95 Percent CI', 'Measure Type', 'Unit', 'Marker', 'Value']]
 
 df_tbl_3 = trace.combine_and_trace(datasetTitle, 'combined_dataframe_table_3')
 trace.add_column('Value')
-trace.Value('Rename databaker column OBS to Value')
+trace.add_column('Marker')
+trace.multi(["Marker", "Value"], "Rename databaker columns OBS and DATAMARKER columns to Value and Marker respectively")
 df_tbl_3.rename(columns={'OBS': 'Value', 'DATAMARKER': 'Marker'}, inplace=True)
 
 df_tbl_3['Period'] = df_tbl_3['Period'].apply(lambda x: parse(str(x)).strftime('%Y-%m-%dT%H:%M:%S'))
@@ -391,12 +396,14 @@ trace.ONS_Geography_Code("Create ONS Geography Code Value based on 'Country' col
 df_tbl_3['Value'] = pd.to_numeric(df_tbl_3['Value'], errors='coerce').astype('Int64')
 
 df_tbl_3['Marker'] = None
+trace.Marker("Create Marker Value based on dataset")
 
 df_tbl_3 = df_tbl_3[['Period', 'Country', 'ONS Geography Code', 'Measure Type', 'Unit', 'Marker', 'Value']]
 
 df_tbl_4 = trace.combine_and_trace(datasetTitle, 'combined_dataframe_table_4')
 trace.add_column('Value')
-trace.Value('Rename databaker column OBS to Value')
+trace.add_column('Marker')
+trace.multi(["Marker", "Value"], "Rename databaker columns OBS and DATAMARKER columns to Value and Marker respectively")
 df_tbl_4.rename(columns={'OBS': 'Value', 'DATAMARKER': 'Marker'}, inplace=True)
 
 df_tbl_4.loc[(df_tbl_4['United Kingdom'] == 'United Kingdom'), 'Country'] = 'United Kingdom'
@@ -414,7 +421,6 @@ trace.ONS_Geography_Code("Create ONS Geography Code Value based on 'Country' col
 df_tbl_4['Value'] = pd.to_numeric(df_tbl_4['Value'], errors='coerce').astype('Int64')
 
 df_tbl_4['Marker'] = None
-trace.add_column('Marker')
 trace.Marker("Create Marker Value based on dataset")
 
 df_tbl_4 = df_tbl_4[['Period', 'Place of death', 'Country', 'ONS Geography Code', 'Measure Type', 'Unit', 'Marker', 'Value']]

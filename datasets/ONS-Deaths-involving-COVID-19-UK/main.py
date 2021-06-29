@@ -473,7 +473,7 @@ convert_category_datatype(df_tbl_2, ['Period', 'Age Group', 'Country', 'ONS Geog
 convert_category_datatype(df_tbl_3, ['Period', 'Country', 'ONS Geography Code', 'Measure Type', 'Unit', 'Marker'])
 convert_category_datatype(df_tbl_4, ['Period', 'Place of death', 'Country', 'ONS Geography Code', 'Measure Type', 'Unit', 'Marker'])
 
-pathify_columns(df_tbl_1, ['Period', 'Country', 'ONS Geography Code', 'Gender', 'Measurement', 'Measure Type', 'Unit', 'Marker'])
-pathify_columns(df_tbl_2, ['Period', 'Age Group', 'Country', 'ONS Geography Code', 'Gender', 'Measurement', 'Measure Type', 'Unit', 'Marker'])
-pathify_columns(df_tbl_3, ['Period', 'Country', 'ONS Geography Code', 'Measure Type', 'Unit', 'Marker'])
-pathify_columns(df_tbl_4, ['Period', 'Place of death', 'Country', 'ONS Geography Code', 'Measure Type', 'Unit', 'Marker'])
+pathify_columns(df_tbl_1, ['Country', 'Gender', 'Measurement', 'Measure Type', 'Unit', 'Marker'])
+pathify_columns(df_tbl_2, ['Age Group', 'Country', 'Gender', 'Measurement', 'Measure Type', 'Unit', 'Marker'])
+pathify_columns(df_tbl_3, ['Country', 'Measure Type', 'Unit', 'Marker'])
+pathify_columns(df_tbl_4, ['Place of death', 'Country', 'Measure Type', 'Unit', 'Marker'])

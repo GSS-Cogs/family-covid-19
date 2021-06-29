@@ -324,7 +324,7 @@ for tab in tabs:
         savepreviewhtml(tidy_sheet, fname=f'{tab.name}_Preview.html')
         trace.store(f'combined_dataframe_table_4', tidy_sheet.topandas())
 
-country_geocode_dict={'United Kingdom': 'K02000001', 'England':'E92000001', 'Wales':'W92000004', 'Northern Ireland':'N92000002', 'Scotland':'S92000003'}
+ons_geography_code_dict={'United Kingdom': 'K02000001', 'England':'E92000001', 'Wales':'W92000004', 'Northern Ireland':'N92000002', 'Scotland':'S92000003'}
 
 df_tbl_1 = trace.combine_and_trace(datasetTitle, 'combined_dataframe_table_1')
 trace.add_column('Value')
@@ -346,13 +346,13 @@ df_tbl_1.loc[(df_tbl_1['Persons'] == 'Persons'), 'Gender'] = 'All'
 df_tbl_1.loc[(df_tbl_1['Males'] == 'Males'), 'Gender'] = 'Male'
 df_tbl_1.loc[(df_tbl_1['Females'] == 'Females'), 'Gender'] = 'Female'
 
-df_tbl_1['Country Geocode'] = df_tbl_1['Country'].replace(country_geocode_dict)
-trace.add_column('Country Geocode')
-trace.Country_Code("Create Country Geocode Value based on 'Country' column")
+df_tbl_1['ONS Geography Code'] = df_tbl_1['Country'].replace(ons_geography_code_dict)
+trace.add_column('ONS Geography Code')
+trace.ONS_Geography_Code("Create ONS Geography Code Value based on 'Country' column")
 
 df_tbl_1['Marker'] = None
 
-df_tbl_1 = df_tbl_1[['Period', 'Country', 'Country Geocode', 'Gender', 'Measurement', 'Rate', 'Lower 95 Percent CI', 'Upper 95 Percent CI', 'Percentage of all deaths', 'Difference between 2020 and average', 'Percentage difference', 'Measure Type', 'Unit', 'Marker', 'Value']]
+df_tbl_1 = df_tbl_1[['Period', 'Country', 'ONS Geography Code', 'Gender', 'Measurement', 'Rate', 'Lower 95 Percent CI', 'Upper 95 Percent CI', 'Percentage of all deaths', 'Difference between 2020 and average', 'Percentage difference', 'Measure Type', 'Unit', 'Marker', 'Value']]
 
 df_tbl_2 = trace.combine_and_trace(datasetTitle, 'combined_dataframe_table_2')
 trace.add_column('Value')
@@ -368,13 +368,13 @@ df_tbl_2.loc[(df_tbl_2['Persons'] == 'Persons'), 'Gender'] = 'All'
 df_tbl_2.loc[(df_tbl_2['Males'] == 'Males'), 'Gender'] = 'Male'
 df_tbl_2.loc[(df_tbl_2['Females'] == 'Females'), 'Gender'] = 'Female'
 
-df_tbl_2['Country Geocode'] = df_tbl_2['Country'].replace(country_geocode_dict)
-trace.add_column('Country Geocode')
-trace.Country_Geocode("Create Country Geocode Value based on 'Country' column")
+df_tbl_2['ONS Geography Code'] = df_tbl_2['Country'].replace(ons_geography_code_dict)
+trace.add_column('ONS Geography Code')
+trace.ONS_Geography_Code("Create ONS Geography Code Value based on 'Country' column")
 
 df_tbl_2['Marker'] = None
 
-df_tbl_2 = df_tbl_2[['Period', 'Age Group', 'Country', 'Country Geocode', 'Gender', 'Measurement', 'Rate', 'Lower 95 Percent CI', 'Upper 95 Percent CI', 'Measure Type', 'Unit', 'Marker', 'Value']]
+df_tbl_2 = df_tbl_2[['Period', 'Age Group', 'Country', 'ONS Geography Code', 'Gender', 'Measurement', 'Rate', 'Lower 95 Percent CI', 'Upper 95 Percent CI', 'Measure Type', 'Unit', 'Marker', 'Value']]
 
 df_tbl_3 = trace.combine_and_trace(datasetTitle, 'combined_dataframe_table_3')
 trace.add_column('Value')
@@ -384,15 +384,15 @@ df_tbl_3.rename(columns={'OBS': 'Value', 'DATAMARKER': 'Marker'}, inplace=True)
 df_tbl_3['Period'] = df_tbl_3['Period'].apply(lambda x: parse(str(x)).strftime('%Y-%m-%dT%H:%M:%S'))
 trace.Period("Format 'Period' column with gregorian day format")
 
-df_tbl_3['Country Geocode'] = df_tbl_3['Country'].replace(country_geocode_dict)
-trace.add_column('Country Geocode')
-trace.Country_Geocode("Create Country Geocode Value based on 'Country' column")
+df_tbl_3['ONS Geography Code'] = df_tbl_3['Country'].replace(ons_geography_code_dict)
+trace.add_column('ONS Geography Code')
+trace.ONS_Geography_Code("Create ONS Geography Code Value based on 'Country' column")
 
 df_tbl_3['Value'] = pd.to_numeric(df_tbl_3['Value'], errors='coerce').astype('Int64')
 
 df_tbl_3['Marker'] = None
 
-df_tbl_3 = df_tbl_3[['Period', 'Country', 'Country Geocode', 'Measure Type', 'Unit', 'Marker', 'Value']]
+df_tbl_3 = df_tbl_3[['Period', 'Country', 'ONS Geography Code', 'Measure Type', 'Unit', 'Marker', 'Value']]
 
 df_tbl_4 = trace.combine_and_trace(datasetTitle, 'combined_dataframe_table_4')
 trace.add_column('Value')
@@ -407,9 +407,9 @@ df_tbl_4.loc[(df_tbl_4['Northern Ireland'] == 'Northern Ireland'), 'Country'] = 
 trace.add_column('Country')
 trace.Country("Create Country Value based on dataset")
 
-df_tbl_4['Country Geocode'] = df_tbl_4['Country'].replace(country_geocode_dict)
-trace.add_column('Country Geocode')
-trace.Country_Geocode("Create Country Geocode Value based on 'Country' column")
+df_tbl_4['ONS Geography Code'] = df_tbl_4['Country'].replace(ons_geography_code_dict)
+trace.add_column('ONS Geography Code')
+trace.ONS_Geography_Code("Create ONS Geography Code Value based on 'Country' column")
 
 df_tbl_4['Value'] = pd.to_numeric(df_tbl_4['Value'], errors='coerce').astype('Int64')
 
@@ -417,7 +417,7 @@ df_tbl_4['Marker'] = None
 trace.add_column('Marker')
 trace.Marker("Create Marker Value based on dataset")
 
-df_tbl_4 = df_tbl_4[['Period', 'Place of death', 'Country', 'Country Geocode', 'Measure Type', 'Unit', 'Marker', 'Value']]
+df_tbl_4 = df_tbl_4[['Period', 'Place of death', 'Country', 'ONS Geography Code', 'Measure Type', 'Unit', 'Marker', 'Value']]
 
 # Notes from tab
 notes = """
@@ -461,12 +461,12 @@ Table 4
 scraper.dataset.comment = notes
 scraper.dataset.family = 'covid-19'
 
-convert_category_datatype(df_tbl_1, ['Period', 'Country', 'Country Geocode', 'Gender', 'Measurement', 'Measure Type', 'Unit', 'Marker'])
-convert_category_datatype(df_tbl_2, ['Period', 'Age Group', 'Country', 'Country Geocode', 'Gender', 'Measurement', 'Measure Type', 'Unit', 'Marker'])
-convert_category_datatype(df_tbl_3, ['Period', 'Country', 'Country Geocode', 'Measure Type', 'Unit', 'Marker'])
-convert_category_datatype(df_tbl_4, ['Period', 'Place of death', 'Country', 'Country Geocode', 'Measure Type', 'Unit', 'Marker'])
+convert_category_datatype(df_tbl_1, ['Period', 'Country', 'ONS Geography Code', 'Gender', 'Measurement', 'Measure Type', 'Unit', 'Marker'])
+convert_category_datatype(df_tbl_2, ['Period', 'Age Group', 'Country', 'ONS Geography Code', 'Gender', 'Measurement', 'Measure Type', 'Unit', 'Marker'])
+convert_category_datatype(df_tbl_3, ['Period', 'Country', 'ONS Geography Code', 'Measure Type', 'Unit', 'Marker'])
+convert_category_datatype(df_tbl_4, ['Period', 'Place of death', 'Country', 'ONS Geography Code', 'Measure Type', 'Unit', 'Marker'])
 
-pathify_columns(df_tbl_1, ['Period', 'Country', 'Country Geocode', 'Gender', 'Measurement', 'Measure Type', 'Unit', 'Marker'])
-pathify_columns(df_tbl_2, ['Period', 'Age Group', 'Country', 'Country Geocode', 'Gender', 'Measurement', 'Measure Type', 'Unit', 'Marker'])
-pathify_columns(df_tbl_3, ['Period', 'Country', 'Country Geocode', 'Measure Type', 'Unit', 'Marker'])
-pathify_columns(df_tbl_4, ['Period', 'Place of death', 'Country', 'Country Geocode', 'Measure Type', 'Unit', 'Marker'])
+pathify_columns(df_tbl_1, ['Period', 'Country', 'ONS Geography Code', 'Gender', 'Measurement', 'Measure Type', 'Unit', 'Marker'])
+pathify_columns(df_tbl_2, ['Period', 'Age Group', 'Country', 'ONS Geography Code', 'Gender', 'Measurement', 'Measure Type', 'Unit', 'Marker'])
+pathify_columns(df_tbl_3, ['Period', 'Country', 'ONS Geography Code', 'Measure Type', 'Unit', 'Marker'])
+pathify_columns(df_tbl_4, ['Period', 'Place of death', 'Country', 'ONS Geography Code', 'Measure Type', 'Unit', 'Marker'])

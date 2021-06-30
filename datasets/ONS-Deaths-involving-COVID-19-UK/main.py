@@ -332,6 +332,9 @@ trace.add_column('Marker')
 trace.multi(["Marker", "Value"], "Rename databaker columns OBS and DATAMARKER columns to Value and Marker respectively")
 df_tbl_1.rename(columns={'OBS': 'Value', 'DATAMARKER': 'Marker'}, inplace=True)
 
+trace.multi(["Lower_95_Percent_CI", "Upper_95_Percent_CI"], "Rename databaker columns Lower 95 Percent CI and Upper 95 Percent CI columns to Lower 95% CI and Upper 95% CI respectively")
+df_tbl_1.rename(columns={'Lower 95 Percent CI': 'Lower 95% CI', 'Upper 95 Percent CI': 'Upper 95% CI'}, inplace=True)
+
 df_tbl_1_marker_idx = df_tbl_1[df_tbl_1['Marker'].isin(['Number of deaths'])].index
 df_tbl_1.drop(df_tbl_1_marker_idx , inplace=True)
 
@@ -354,7 +357,7 @@ trace.ONS_Geography_Code("Create ONS Geography Code Value based on 'Country' col
 df_tbl_1['Marker'] = None
 trace.Marker("Create Marker Value based on dataset")
 
-df_tbl_1 = df_tbl_1[['Period', 'Country', 'ONS Geography Code', 'Gender', 'Measurement', 'Rate', 'Lower 95 Percent CI', 'Upper 95 Percent CI', 'Percentage of all deaths', 'Difference between 2020 and average', 'Percentage difference', 'Measure Type', 'Unit', 'Marker', 'Value']]
+df_tbl_1 = df_tbl_1[['Period', 'Country', 'ONS Geography Code', 'Gender', 'Measurement', 'Rate', 'Lower 95% CI', 'Upper 95% CI', 'Percentage of all deaths', 'Difference between 2020 and average', 'Percentage difference', 'Measure Type', 'Unit', 'Marker', 'Value']]
 
 df_tbl_2 = trace.combine_and_trace(datasetTitle, 'combined_dataframe_table_2')
 trace.add_column('Value')
@@ -364,6 +367,8 @@ df_tbl_2.rename(columns={'OBS': 'Value', 'DATAMARKER': 'Marker'}, inplace=True)
 
 df_tbl_2 = df_tbl_2.replace({'Rate': {':': 'None'}, 'Lower 95 Percent CI': {':': 'None'}, 'Upper 95 Percent CI': {':': 'None'}})
 trace.multi(["Rate", "Lower_95_Percent_CI", "Upper_95_Percent_CI"], "Change : DataMarker to 'None'")
+trace.multi(["Lower_95_Percent_CI", "Upper_95_Percent_CI"], "Rename databaker columns Lower 95 Percent CI and Upper 95 Percent CI columns to Lower 95% CI and Upper 95% CI respectively")
+df_tbl_2.rename(columns={'Lower 95 Percent CI': 'Lower 95% CI', 'Upper 95 Percent CI': 'Upper 95% CI'}, inplace=True)
 
 df_tbl_2_marker_idx = df_tbl_2[df_tbl_2['Marker'].isin(['Number of deaths'])].index
 df_tbl_2.drop(df_tbl_2_marker_idx , inplace=True)
@@ -379,7 +384,7 @@ trace.ONS_Geography_Code("Create ONS Geography Code Value based on 'Country' col
 df_tbl_2['Marker'] = None
 trace.Marker("Create Marker Value based on dataset")
 
-df_tbl_2 = df_tbl_2[['Period', 'Age Group', 'Country', 'ONS Geography Code', 'Gender', 'Measurement', 'Rate', 'Lower 95 Percent CI', 'Upper 95 Percent CI', 'Measure Type', 'Unit', 'Marker', 'Value']]
+df_tbl_2 = df_tbl_2[['Period', 'Age Group', 'Country', 'ONS Geography Code', 'Gender', 'Measurement', 'Rate', 'Lower 95% CI', 'Upper 95% CI', 'Measure Type', 'Unit', 'Marker', 'Value']]
 
 df_tbl_3 = trace.combine_and_trace(datasetTitle, 'combined_dataframe_table_3')
 trace.add_column('Value')

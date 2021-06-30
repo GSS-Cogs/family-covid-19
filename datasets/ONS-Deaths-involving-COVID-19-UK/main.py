@@ -477,3 +477,12 @@ pathify_columns(df_tbl_1, ['Country', 'Gender', 'Measurement', 'Measure Type', '
 pathify_columns(df_tbl_2, ['Age Group', 'Country', 'Gender', 'Measurement', 'Measure Type', 'Unit', 'Marker'])
 pathify_columns(df_tbl_3, ['Country', 'Measure Type', 'Unit', 'Marker'])
 pathify_columns(df_tbl_4, ['Place of death', 'Country', 'Measure Type', 'Unit', 'Marker'])
+
+cubes.add_cube(scraper, df_tbl_1, datasetTitle+'-table-1')
+cubes.add_cube(scraper, df_tbl_2, datasetTitle+'-table-2')
+cubes.add_cube(scraper, df_tbl_3, datasetTitle+'-table-3')
+cubes.add_cube(scraper, df_tbl_4, datasetTitle+'-table-4')
+
+cubes.output_all()
+
+trace.render('spec_v1.html')

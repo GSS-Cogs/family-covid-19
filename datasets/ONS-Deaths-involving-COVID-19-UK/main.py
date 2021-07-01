@@ -473,6 +473,12 @@ Table 4
 scraper.dataset.comment = notes
 scraper.dataset.family = 'covid-19'
 
+description = """
+Analysis of deaths involving COVID-19: deaths occurring in March and April 2020, United Kingdom.
+Source: Office for National Statistics, National records of Scotland and Northern Ireland Research and Statistics Agency
+"""
+scraper.dataset.description = scraper.dataset.description + description
+
 convert_category_datatype(df_tbl_1, ['Period', 'Country', 'ONS Geography Code', 'Gender', 'Measurement', 'Measure Type', 'Unit', 'Marker'])
 convert_category_datatype(df_tbl_2, ['Period', 'Age Group', 'Country', 'ONS Geography Code', 'Gender', 'Measurement', 'Measure Type', 'Unit', 'Marker'])
 convert_category_datatype(df_tbl_3, ['Period', 'Country', 'ONS Geography Code', 'Measure Type', 'Unit', 'Marker'])

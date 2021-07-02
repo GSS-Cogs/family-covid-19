@@ -354,6 +354,8 @@ df_tbl_1['ONS Geography Code'] = df_tbl_1['Country'].replace(ons_geography_code_
 trace.add_column('ONS Geography Code')
 trace.ONS_Geography_Code("Create ONS Geography Code Value based on 'Country' column")
 
+df_tbl_1['Value'] = pd.to_numeric(df_tbl_1['Value'], errors='coerce').astype('Int64')
+
 df_tbl_1['Marker'] = None
 trace.Marker("Create Marker Value based on dataset")
 
@@ -380,6 +382,8 @@ df_tbl_2.loc[(df_tbl_2['Females'] == 'Females'), 'Gender'] = 'Female'
 df_tbl_2['ONS Geography Code'] = df_tbl_2['Country'].replace(ons_geography_code_dict)
 trace.add_column('ONS Geography Code')
 trace.ONS_Geography_Code("Create ONS Geography Code Value based on 'Country' column")
+
+df_tbl_2['Value'] = pd.to_numeric(df_tbl_2['Value'], errors='coerce').astype('Int64')
 
 df_tbl_2['Marker'] = None
 trace.Marker("Create Marker Value based on dataset")

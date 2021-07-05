@@ -387,6 +387,10 @@ df_tbl_2['ONS Geography Code'] = df_tbl_2['Country'].replace(ons_geography_code_
 trace.add_column('ONS Geography Code')
 trace.ONS_Geography_Code("Create ONS Geography Code Value based on 'Country' column")
 
+df_tbl_2['Rate'] = pd.to_numeric(df_tbl_2['Rate'], errors='coerce').astype('float64').replace(np.nan, 'None')
+df_tbl_2['Lower 95% CI'] = pd.to_numeric(df_tbl_2['Lower 95% CI'], errors='coerce').astype('float64').replace(np.nan, 'None')
+df_tbl_2['Upper 95% CI'] = pd.to_numeric(df_tbl_2['Upper 95% CI'], errors='coerce').astype('float64').replace(np.nan, 'None')
+
 df_tbl_2['Value'] = pd.to_numeric(df_tbl_2['Value'], errors='coerce').astype('Int64')
 
 df_tbl_2['Marker'] = None

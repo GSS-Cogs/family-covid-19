@@ -441,7 +441,7 @@ df_tbl_4['Value'] = pd.to_numeric(df_tbl_4['Value'], errors='coerce').astype('In
 df_tbl_4['Marker'] = None
 trace.Marker("Create Marker Value based on dataset")
 
-df_tbl_4 = df_tbl_4[['Period', 'Place of death', 'Country', 'ONS Geography Code', 'Measure Type', 'Unit', 'Marker', 'Value']]
+df_tbl_4 = df_tbl_4[['Period', 'Country', 'ONS Geography Code', 'Place of death', 'Measure Type', 'Unit', 'Marker', 'Value']]
 
 # Notes from tab
 notes = """

@@ -108,7 +108,7 @@ def pathify_columns(df, columns_arr):
 for tab in tabs:
     print(tab.name)
     if tab.name == 'Table 1':
-        columns = ['Period', 'Country', 'Persons', 'Males', 'Females', 'Measurement', 'Rate', 'Lower 95 Percent CI',
+        columns = ['Period', 'Country', 'Persons', 'Males', 'Females', 'Rate', 'Lower 95 Percent CI',
                    'Upper 95 Percent CI', 'Percentage of all deaths', 'Difference between 2020 and average',
                    'Percentage difference', 'Measure Type', 'Unit']
         trace.start(datasetTitle, tab, columns, dist.downloadURL)
@@ -127,9 +127,6 @@ for tab in tabs:
 
         females = tab.filter('Females').is_not_blank()
         trace.Females('Defined from cell value: {}', var=cellLoc(females))
-
-        measurement = tab.excel_ref('B4').expand(RIGHT).is_not_blank()
-        trace.Measurement('Defined from cell range: {}', var=excelRange(measurement))
 
         rate = tab.filter('Rate').expand(DOWN).is_not_blank()
         trace.Rate('Defined from cell range: {}', var=excelRange(rate))
@@ -153,7 +150,7 @@ for tab in tabs:
         percentage_difference = tab.filter('Percentage difference').expand(DOWN).is_not_blank()
         trace.Percentage_difference('Defined from cell range: {}', var=excelRange(percentage_difference))
 
-        measure_type = measurement
+        measure_type = tab.excel_ref('B4').expand(RIGHT).is_not_blank()
         trace.Measure_Type('Defined from cell range: {}', var=excelRange(measure_type))
 
         unit = 'Number of deaths'
@@ -166,7 +163,6 @@ for tab in tabs:
             HDim(persons, 'Persons', CLOSEST, ABOVE),
             HDim(males, 'Males', CLOSEST, ABOVE),
             HDim(females, 'Females', CLOSEST, ABOVE),
-            HDim(measurement, 'Measurement', DIRECTLY, ABOVE),
             HDim(rate, 'Rate', DIRECTLY, RIGHT),
             HDim(lower_95_percent_ci, 'Lower 95 Percent CI', DIRECTLY, RIGHT),
             HDim(upper_95_percent_ci, 'Upper 95 Percent CI', DIRECTLY, RIGHT),
@@ -338,9 +334,9 @@ df_tbl_1.rename(columns={'Lower 95 Percent CI': 'Lower 95% CI', 'Upper 95 Percen
 df_tbl_1_marker_idx = df_tbl_1[df_tbl_1['Marker'].isin(['Number of deaths'])].index
 df_tbl_1.drop(df_tbl_1_marker_idx , inplace=True)
 
-df_tbl_1.loc[df_tbl_1['Measurement'].isin(['All deaths', '5-year average']), 'Percentage of all deaths'] = None
-df_tbl_1.loc[df_tbl_1['Measurement'].isin(['All deaths', 'Deaths involving COVID-19']), 'Difference between 2020 and average'] = None
-df_tbl_1.loc[df_tbl_1['Measurement'].isin(['All deaths', 'Deaths involving COVID-19']), 'Percentage difference'] = None
+df_tbl_1.loc[df_tbl_1['Measure Type'].isin(['All deaths', '5-year average']), 'Percentage of all deaths'] = None
+df_tbl_1.loc[df_tbl_1['Measure Type'].isin(['All deaths', 'Deaths involving COVID-19']), 'Difference between 2020 and average'] = None
+df_tbl_1.loc[df_tbl_1['Measure Type'].isin(['All deaths', 'Deaths involving COVID-19']), 'Percentage difference'] = None
 
 df_tbl_1['Percentage of all deaths'] = pd.to_numeric(df_tbl_1['Percentage of all deaths'], errors='coerce').astype('float64').replace(np.nan, 'None')
 df_tbl_1['Difference between 2020 and average'] = pd.to_numeric(df_tbl_1['Difference between 2020 and average'], errors='coerce').astype('float64').replace(np.nan, 'None')
@@ -363,7 +359,7 @@ df_tbl_1['Value'] = pd.to_numeric(df_tbl_1['Value'], errors='coerce').astype('In
 df_tbl_1['Marker'] = None
 trace.Marker("Create Marker Value based on dataset")
 
-df_tbl_1 = df_tbl_1[['Period', 'Country', 'ONS Geography Code', 'Gender', 'Measurement', 'Rate', 'Lower 95% CI', 'Upper 95% CI', 'Percentage of all deaths', 'Difference between 2020 and average', 'Percentage difference', 'Measure Type', 'Unit', 'Marker', 'Value']]
+df_tbl_1 = df_tbl_1[['Period', 'Country', 'ONS Geography Code', 'Gender', 'Rate', 'Lower 95% CI', 'Upper 95% CI', 'Percentage of all deaths', 'Difference between 2020 and average', 'Percentage difference', 'Measure Type', 'Unit', 'Marker', 'Value']]
 
 df_tbl_2 = trace.combine_and_trace(datasetTitle, 'combined_dataframe_table_2')
 trace.add_column('Value')
@@ -491,12 +487,12 @@ Source: Office for National Statistics, National records of Scotland and Norther
 """
 scraper.dataset.description = scraper.dataset.description + description
 
-convert_category_datatype(df_tbl_1, ['Period', 'Country', 'ONS Geography Code', 'Gender', 'Measurement', 'Measure Type', 'Unit', 'Marker'])
+convert_category_datatype(df_tbl_1, ['Period', 'Country', 'ONS Geography Code', 'Gender', 'Measure Type', 'Unit', 'Marker'])
 convert_category_datatype(df_tbl_2, ['Period', 'Age Group', 'Country', 'ONS Geography Code', 'Gender', 'Measurement', 'Measure Type', 'Unit', 'Marker'])
 convert_category_datatype(df_tbl_3, ['Period', 'Country', 'ONS Geography Code', 'Measure Type', 'Unit', 'Marker'])
 convert_category_datatype(df_tbl_4, ['Period', 'Place of death', 'Country', 'ONS Geography Code', 'Measure Type', 'Unit', 'Marker'])
 
-pathify_columns(df_tbl_1, ['Country', 'Gender', 'Measurement', 'Measure Type', 'Unit', 'Marker'])
+pathify_columns(df_tbl_1, ['Country', 'Gender', 'Measure Type', 'Unit', 'Marker'])
 pathify_columns(df_tbl_2, ['Age Group', 'Country', 'Gender', 'Measurement', 'Measure Type', 'Unit', 'Marker'])
 pathify_columns(df_tbl_3, ['Country', 'Measure Type', 'Unit', 'Marker'])
 pathify_columns(df_tbl_4, ['Place of death', 'Country', 'Measure Type', 'Unit', 'Marker'])

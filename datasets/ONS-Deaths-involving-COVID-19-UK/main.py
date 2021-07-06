@@ -396,7 +396,7 @@ df_tbl_2['Value'] = pd.to_numeric(df_tbl_2['Value'], errors='coerce').astype('In
 df_tbl_2['Marker'] = None
 trace.Marker("Create Marker Value based on dataset")
 
-df_tbl_2 = df_tbl_2[['Period', 'Age Group', 'Country', 'ONS Geography Code', 'Gender', 'Measurement', 'Rate', 'Lower 95% CI', 'Upper 95% CI', 'Measure Type', 'Unit', 'Marker', 'Value']]
+df_tbl_2 = df_tbl_2[['Period', 'Country', 'ONS Geography Code', 'Age Group', 'Gender', 'Measurement', 'Rate', 'Lower 95% CI', 'Upper 95% CI', 'Measure Type', 'Unit', 'Marker', 'Value']]
 
 df_tbl_3 = trace.combine_and_trace(datasetTitle, 'combined_dataframe_table_3')
 trace.add_column('Value')

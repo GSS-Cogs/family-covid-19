@@ -179,7 +179,7 @@ for tab in tabs:
         savepreviewhtml(tidy_sheet, fname=f'{tab.name}_Preview.html')
         trace.store(f'combined_dataframe_table_1', tidy_sheet.topandas())
     if tab.name == 'Table 2':
-        columns = ['Period', 'Age Group', 'Country', 'Persons', 'Males', 'Females', 'Measurement', 'Rate',
+        columns = ['Period', 'Age Group', 'Country', 'Persons', 'Males', 'Females', 'Rate',
                    'Lower 95 Percent CI', 'Upper 95 Percent CI', 'Measure Type', 'Unit']
         trace.start(datasetTitle, tab, columns, dist.downloadURL)
 
@@ -201,9 +201,6 @@ for tab in tabs:
         females = tab.filter('Females').is_not_blank()
         trace.Females('Defined from cell value: {}', var=cellLoc(females))
 
-        measurement = tab.excel_ref('B4').expand(RIGHT).is_not_blank()
-        trace.Measurement('Defined from cell range: {}', var=excelRange(measurement))
-
         rate = tab.filter('Rate').expand(DOWN).is_not_blank()
         trace.Rate('Defined from cell range: {}', var=excelRange(rate))
 
@@ -213,7 +210,7 @@ for tab in tabs:
         upper_95_percent_ci = tab.filter('Upper 95% CI').expand(DOWN).is_not_blank()
         trace.Upper_95_Percent_CI('Defined from cell range: {}', var=excelRange(upper_95_percent_ci))
 
-        measure_type = measurement
+        measure_type = tab.excel_ref('B4').expand(RIGHT).is_not_blank()
         trace.Measure_Type('Defined from cell range: {}', var=excelRange(measure_type))
 
         unit = 'Number of deaths'
@@ -226,7 +223,6 @@ for tab in tabs:
             HDim(persons, 'Persons', CLOSEST, ABOVE),
             HDim(males, 'Males', CLOSEST, ABOVE),
             HDim(females, 'Females', CLOSEST, ABOVE),
-            HDim(measurement, 'Measurement', DIRECTLY, ABOVE),
             HDim(rate, 'Rate', DIRECTLY, RIGHT),
             HDim(lower_95_percent_ci, 'Lower 95 Percent CI', DIRECTLY, RIGHT),
             HDim(upper_95_percent_ci, 'Upper 95 Percent CI', DIRECTLY, RIGHT),
@@ -392,7 +388,7 @@ df_tbl_2['Value'] = pd.to_numeric(df_tbl_2['Value'], errors='coerce').astype('In
 df_tbl_2['Marker'] = None
 trace.Marker("Create Marker Value based on dataset")
 
-df_tbl_2 = df_tbl_2[['Period', 'Country', 'ONS Geography Code', 'Age Group', 'Gender', 'Measurement', 'Rate', 'Lower 95% CI', 'Upper 95% CI', 'Measure Type', 'Unit', 'Marker', 'Value']]
+df_tbl_2 = df_tbl_2[['Period', 'Country', 'ONS Geography Code', 'Age Group', 'Gender', 'Rate', 'Lower 95% CI', 'Upper 95% CI', 'Measure Type', 'Unit', 'Marker', 'Value']]
 
 df_tbl_3 = trace.combine_and_trace(datasetTitle, 'combined_dataframe_table_3')
 trace.add_column('Value')
@@ -488,12 +484,12 @@ Source: Office for National Statistics, National records of Scotland and Norther
 scraper.dataset.description = scraper.dataset.description + description
 
 convert_category_datatype(df_tbl_1, ['Period', 'Country', 'ONS Geography Code', 'Gender', 'Measure Type', 'Unit', 'Marker'])
-convert_category_datatype(df_tbl_2, ['Period', 'Age Group', 'Country', 'ONS Geography Code', 'Gender', 'Measurement', 'Measure Type', 'Unit', 'Marker'])
+convert_category_datatype(df_tbl_2, ['Period', 'Age Group', 'Country', 'ONS Geography Code', 'Gender', 'Measure Type', 'Unit', 'Marker'])
 convert_category_datatype(df_tbl_3, ['Period', 'Country', 'ONS Geography Code', 'Measure Type', 'Unit', 'Marker'])
 convert_category_datatype(df_tbl_4, ['Period', 'Place of death', 'Country', 'ONS Geography Code', 'Measure Type', 'Unit', 'Marker'])
 
 pathify_columns(df_tbl_1, ['Country', 'Gender', 'Measure Type', 'Unit', 'Marker'])
-pathify_columns(df_tbl_2, ['Age Group', 'Country', 'Gender', 'Measurement', 'Measure Type', 'Unit', 'Marker'])
+pathify_columns(df_tbl_2, ['Age Group', 'Country', 'Gender', 'Measure Type', 'Unit', 'Marker'])
 pathify_columns(df_tbl_3, ['Country', 'Measure Type', 'Unit', 'Marker'])
 pathify_columns(df_tbl_4, ['Place of death', 'Country', 'Measure Type', 'Unit', 'Marker'])
 

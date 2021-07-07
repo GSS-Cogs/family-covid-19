@@ -445,7 +445,7 @@ Table 1
 5. COVID-19 defined as ICD10 codes U07.1 and U07.2
 6. Age-standardised mortality rates per 100,000 population, standardised to the 2013 European Standard Population. Age-standardised rates are used to allow comparison between populations which may contain different proportions of people of different ages.
 7. The lower and upper confidence limits have been provided. These form a confidence interval, which is a measure of the statistical precision of an estimate and shows the range of uncertainty around the estimated figure. Calculations based on small numbers of events are often subject to random fluctuations. As a general rule, if the confidence interval around one figure overlaps with the interval around another, we cannot say with certainty that there is more than a chance difference between the two figures.
-8. Figures for deaths involving COVID-19 show the number of deaths involving coronavirus (COVID-19), based on any mention of COVID-19 on the death certificate.
+8. Figures for deaths involving COVID-19 show the number of deaths involving coronavirus (COVID-19), based on any mention of COVID-19 on the death certificate. \n
 Table 2
 1. Based on bounderies as of Feb 2020
 2. Based on the date a death occurred rather than when a death was registered. Includes deaths registered by 15th May
@@ -456,14 +456,14 @@ Table 2
 7. Age-specific rates where there were fewer than 10 deaths are unreliable and denoted with a u to indicate that rates are based on small numbers
 8. Age-specific mortality rates per 100,000 population.
 9. The lower and upper confidence limits have been provided. These form a confidence interval, which is a measure of the statistical precision of an estimate and shows the range of uncertainty around the estimated figure. Calculations based on small numbers of events are often subject to random fluctuations. As a general rule, if the confidence interval around one figure overlaps with the interval around another, we cannot say with certainty that there is more than a chance difference between the two figures.
-10. Figures for deaths involving COVID-19 show the number of deaths involving coronavirus (COVID-19), based on any mention of COVID-19 on the death certificate.
+10. Figures for deaths involving COVID-19 show the number of deaths involving coronavirus (COVID-19), based on any mention of COVID-19 on the death certificate. \n
 Table 3
 1. Based on bounderies as of Feb 2020
 2. Based on the date a death occurred rather than when a death was registered. Includes deaths registered by 15th May
 3. Excludes deaths of non-residents with the exception on Northern Ireland data
 4. Data for 2020 is provisional
 5. COVID-19 defined as ICD10 codes U07.1 and U07.2
-6. Figures for deaths involving COVID-19 show the number of deaths involving coronavirus (COVID-19), based on any mention of COVID-19 on the death certificate.
+6. Figures for deaths involving COVID-19 show the number of deaths involving coronavirus (COVID-19), based on any mention of COVID-19 on the death certificate. \n
 Table 4
 1. Based on bounderies as of Feb 2020
 2. Based on the date a death occurred rather than when a death was registered. Includes deaths registered by 15th May
@@ -478,10 +478,10 @@ scraper.dataset.comment = notes
 scraper.dataset.family = 'covid-19'
 
 description = """
-Analysis of deaths involving COVID-19: deaths occurring in March and April 2020, United Kingdom.
+Analysis of deaths involving COVID-19: deaths occurring in March and April 2020, United Kingdom. \n
 Source: Office for National Statistics, National records of Scotland and Northern Ireland Research and Statistics Agency
 """
-scraper.dataset.description = scraper.dataset.description + description
+scraper.dataset.description = scraper.dataset.description + '\n' + description
 
 convert_category_datatype(df_tbl_1, ['Period', 'Country', 'ONS Geography Code', 'Gender', 'Measure Type', 'Unit', 'Marker'])
 convert_category_datatype(df_tbl_2, ['Period', 'Age Group', 'Country', 'ONS Geography Code', 'Gender', 'Measure Type', 'Unit', 'Marker'])

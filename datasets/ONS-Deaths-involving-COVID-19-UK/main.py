@@ -341,6 +341,7 @@ df_tbl_1['Percentage difference'] = pd.to_numeric(df_tbl_1['Percentage differenc
 df_tbl_1['Rate'] = pd.to_numeric(df_tbl_1['Rate'], errors='coerce').astype('float64').replace(np.nan, 'None')
 df_tbl_1['Lower 95% CI'] = pd.to_numeric(df_tbl_1['Lower 95% CI'], errors='coerce').astype('float64').replace(np.nan, 'None')
 df_tbl_1['Upper 95% CI'] = pd.to_numeric(df_tbl_1['Upper 95% CI'], errors='coerce').astype('float64').replace(np.nan, 'None')
+trace.multi(["Percentage_of_all_deaths", "Difference_between_2020_and_average", "Percentage_difference", "Rate", "Lower_95_Percent_CI", "Upper_95_Percent_CI"], "Format column to float64 value type")
 
 df_tbl_1.loc[(df_tbl_1['Persons'] == 'Persons'), 'Gender'] = 'All'
 df_tbl_1.loc[(df_tbl_1['Males'] == 'Males'), 'Gender'] = 'Male'
@@ -383,6 +384,7 @@ trace.ONS_Geography_Code("Create ONS Geography Code Value based on 'Country' col
 df_tbl_2['Rate'] = pd.to_numeric(df_tbl_2['Rate'], errors='coerce').astype('float64').replace(np.nan, 'None')
 df_tbl_2['Lower 95% CI'] = pd.to_numeric(df_tbl_2['Lower 95% CI'], errors='coerce').astype('float64').replace(np.nan, 'None')
 df_tbl_2['Upper 95% CI'] = pd.to_numeric(df_tbl_2['Upper 95% CI'], errors='coerce').astype('float64').replace(np.nan, 'None')
+trace.multi(["Rate", "Lower_95_Percent_CI", "Upper_95_Percent_CI"], "Format column to float64 value type")
 
 df_tbl_2['Value'] = pd.to_numeric(df_tbl_2['Value'], errors='coerce').astype('Int64').replace(np.nan, 'None')
 trace.Value("Format 'Value' column to Int64 value type")

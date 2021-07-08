@@ -351,6 +351,7 @@ trace.add_column('ONS Geography Code')
 trace.ONS_Geography_Code("Create ONS Geography Code Value based on 'Country' column")
 
 df_tbl_1['Value'] = pd.to_numeric(df_tbl_1['Value'], errors='coerce').astype('Int64').replace(np.nan, 'None')
+trace.Value("Format 'Value' column to Int64 value type")
 
 df_tbl_1['Marker'] = None
 trace.Marker("Create Marker Value based on dataset")
@@ -384,6 +385,7 @@ df_tbl_2['Lower 95% CI'] = pd.to_numeric(df_tbl_2['Lower 95% CI'], errors='coerc
 df_tbl_2['Upper 95% CI'] = pd.to_numeric(df_tbl_2['Upper 95% CI'], errors='coerce').astype('float64').replace(np.nan, 'None')
 
 df_tbl_2['Value'] = pd.to_numeric(df_tbl_2['Value'], errors='coerce').astype('Int64').replace(np.nan, 'None')
+trace.Value("Format 'Value' column to Int64 value type")
 
 df_tbl_2['Marker'] = None
 trace.Marker("Create Marker Value based on dataset")
@@ -404,6 +406,7 @@ trace.add_column('ONS Geography Code')
 trace.ONS_Geography_Code("Create ONS Geography Code Value based on 'Country' column")
 
 df_tbl_3['Value'] = pd.to_numeric(df_tbl_3['Value'], errors='coerce').astype('Int64').replace(np.nan, 'None')
+trace.Value("Format 'Value' column to Int64 value type")
 
 df_tbl_3['Marker'] = None
 trace.Marker("Create Marker Value based on dataset")
@@ -429,6 +432,7 @@ trace.add_column('ONS Geography Code')
 trace.ONS_Geography_Code("Create ONS Geography Code Value based on 'Country' column")
 
 df_tbl_4['Value'] = pd.to_numeric(df_tbl_4['Value'], errors='coerce').astype('Int64').replace(np.nan, 'None')
+trace.Value("Format 'Value' column to Int64 value type")
 
 df_tbl_4['Marker'] = None
 trace.Marker("Create Marker Value based on dataset")

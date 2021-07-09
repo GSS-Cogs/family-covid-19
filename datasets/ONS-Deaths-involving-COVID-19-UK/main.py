@@ -493,13 +493,13 @@ Source: Office for National Statistics, National records of Scotland and Norther
 """
 scraper.dataset.description = scraper.dataset.description + '\n' + description
 
-convert_category_datatype(df_tbl_1, ['Period', 'Country', 'ONS Geography Code', 'Gender', 'Measure Type', 'Unit', 'Marker'])
-convert_category_datatype(df_tbl_2, ['Period', 'Age Group', 'Country', 'ONS Geography Code', 'Gender', 'Measure Type', 'Unit', 'Marker'])
+convert_category_datatype(df_tbl_1, ['Period', 'Gender', 'Country', 'ONS Geography Code', 'Measure Type', 'Unit', 'Marker'])
+convert_category_datatype(df_tbl_2, ['Period', 'Gender', 'Age Group', 'Country', 'ONS Geography Code', 'Measure Type', 'Unit', 'Marker'])
 convert_category_datatype(df_tbl_3, ['Period', 'Country', 'ONS Geography Code', 'Measure Type', 'Unit', 'Marker'])
 convert_category_datatype(df_tbl_4, ['Period', 'Place of death', 'Country', 'ONS Geography Code', 'Measure Type', 'Unit', 'Marker'])
 
-pathify_columns(df_tbl_1, ['Country', 'Gender', 'Measure Type', 'Unit', 'Marker'])
-pathify_columns(df_tbl_2, ['Age Group', 'Country', 'Gender', 'Measure Type', 'Unit', 'Marker'])
+pathify_columns(df_tbl_1, ['Gender', 'Country', 'Measure Type', 'Unit', 'Marker'])
+pathify_columns(df_tbl_2, ['Gender', 'Age Group', 'Country', 'Measure Type', 'Unit', 'Marker'])
 pathify_columns(df_tbl_3, ['Country', 'Measure Type', 'Unit', 'Marker'])
 pathify_columns(df_tbl_4, ['Place of death', 'Country', 'Measure Type', 'Unit', 'Marker'])
 

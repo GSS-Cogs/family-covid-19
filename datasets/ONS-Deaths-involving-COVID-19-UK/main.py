@@ -355,6 +355,7 @@ df_tbl_1['Value'] = pd.to_numeric(df_tbl_1['Value'], errors='coerce').astype('In
 trace.Value("Format 'Value' column to Int64 value type")
 
 df_tbl_1['Marker'] = None
+df_tbl_1['Marker'] = df_tbl_1['Marker'].astype(str)
 trace.Marker("Create Marker Value based on dataset")
 
 df_tbl_1 = df_tbl_1[['Period', 'Country', 'ONS Geography Code', 'Gender', 'Rate', 'Lower 95% CI', 'Upper 95% CI', 'Percentage of all deaths', 'Difference between 2020 and average', 'Percentage difference', 'Measure Type', 'Unit', 'Marker', 'Value']]
@@ -390,6 +391,7 @@ df_tbl_2['Value'] = pd.to_numeric(df_tbl_2['Value'], errors='coerce').astype('In
 trace.Value("Format 'Value' column to Int64 value type")
 
 df_tbl_2['Marker'] = None
+df_tbl_2['Marker'] = df_tbl_2['Marker'].astype(str)
 trace.Marker("Create Marker Value based on dataset")
 
 df_tbl_2 = df_tbl_2[['Period', 'Country', 'ONS Geography Code', 'Age Group', 'Gender', 'Rate', 'Lower 95% CI', 'Upper 95% CI', 'Measure Type', 'Unit', 'Marker', 'Value']]
@@ -411,6 +413,7 @@ df_tbl_3['Value'] = pd.to_numeric(df_tbl_3['Value'], errors='coerce').astype('In
 trace.Value("Format 'Value' column to Int64 value type")
 
 df_tbl_3['Marker'] = None
+df_tbl_3['Marker'] = df_tbl_3['Marker'].astype(str)
 trace.Marker("Create Marker Value based on dataset")
 
 df_tbl_3 = df_tbl_3[['Period', 'Country', 'ONS Geography Code', 'Measure Type', 'Unit', 'Marker', 'Value']]
@@ -437,6 +440,7 @@ df_tbl_4['Value'] = pd.to_numeric(df_tbl_4['Value'], errors='coerce').astype('In
 trace.Value("Format 'Value' column to Int64 value type")
 
 df_tbl_4['Marker'] = None
+df_tbl_4['Marker'] = df_tbl_4['Marker'].astype(str)
 trace.Marker("Create Marker Value based on dataset")
 
 df_tbl_4 = df_tbl_4[['Period', 'Country', 'ONS Geography Code', 'Place of death', 'Measure Type', 'Unit', 'Marker', 'Value']]

@@ -79,3 +79,26 @@ def excelRange(bag):
     highy = str(max(yvalues))
     lowy = str(min(yvalues))
     return '{' + lowx + lowy + '-' + highx + highy + '}'
+
+
+# Transform process
+for tab in tabs:
+    print(tab.name)
+    if tab.name == 'Table 1.1':
+        columns = ['Period', 'Title', 'Target', 'Age Group', 'Percentage', 'Measure Type', 'Unit']
+        trace.start(datasetTitle, tab, columns, dist.downloadURL)
+
+        period = tab.excel_ref('A3').is_not_blank()
+        trace.Period('Defined from cell value: {}', var=cellLoc(period))
+
+        title = tab.excel_ref('A2').is_not_blank()
+        trace.Title('Defined from cell value: {}', var=cellLoc(title))
+
+        target = tab.excel_ref('A1').is_not_blank()
+        trace.Target('Defined from cell value: {}', var=cellLoc(target))
+
+        age_group = tab.excel_ref('A6:A15').is_not_blank()
+        trace.Age_Group('Defined from cell range: {}', var=excelRange(age_group))
+
+        percentage = tab.filter('Percentage').expand(DOWN).is_not_blank()
+        trace.Percentage('Defined from cell range: {}', var=excelRange(percentage))

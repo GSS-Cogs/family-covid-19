@@ -102,3 +102,21 @@ for tab in tabs:
 
         percentage = tab.filter('Percentage').expand(DOWN).is_not_blank()
         trace.Percentage('Defined from cell range: {}', var=excelRange(percentage))
+
+        measure_type = 'Number of those advised to shield, by age'
+        trace.Measure_Type('Hardcoded as {}', var=measure_type)
+
+        unit = 'Estimate in thousands'
+        trace.Unit('Hardcoded as {}', var=unit)
+
+        observations = tab.filter('Estimate in thousands').expand(DOWN).is_not_blank()
+
+        dimensions = [
+            HDim(period, 'Period', CLOSEST, ABOVE),
+            HDim(title, 'Title', CLOSEST, ABOVE),
+            HDim(target, 'Target', CLOSEST, ABOVE),
+            HDim(age_group, 'Age Group', DIRECTLY, LEFT),
+            HDim(percentage, 'Percentage', DIRECTLY, RIGHT),
+            HDimConst('Measure Type', measure_type),
+            HDimConst('Unit', unit)
+        ]

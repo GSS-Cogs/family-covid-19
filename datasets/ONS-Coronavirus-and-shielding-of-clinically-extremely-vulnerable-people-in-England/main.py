@@ -143,3 +143,26 @@ for tab in tabs:
 
         percentage = tab.filter('Percentage').expand(DOWN).is_not_blank()
         trace.Percentage('Defined from cell range: {}', var=excelRange(percentage))
+
+        measure_type = 'Number of those advised to shield, by gender'
+        trace.Measure_Type('Hardcoded as {}', var=measure_type)
+
+        unit = 'Estimate in thousands'
+        trace.Unit('Hardcoded as {}', var=unit)
+
+        observations = tab.filter('Estimate in thousands').expand(DOWN).is_not_blank()
+
+        dimensions = [
+            HDim(period, 'Period', CLOSEST, ABOVE),
+            HDim(title, 'Title', CLOSEST, ABOVE),
+            HDim(target, 'Target', CLOSEST, ABOVE),
+            HDim(gender, 'Gender', DIRECTLY, LEFT),
+            HDim(percentage, 'Percentage', DIRECTLY, RIGHT),
+            HDimConst('Measure Type', measure_type),
+            HDimConst('Unit', unit)
+        ]
+
+        tidy_sheet = ConversionSegment(tab, dimensions, observations)
+        trace.with_preview(tidy_sheet)
+        savepreviewhtml(tidy_sheet, fname=f'{tab.name}_Preview.html')
+        trace.store(f'combined_dataframe_table_1_2', tidy_sheet.topandas())

@@ -120,3 +120,26 @@ for tab in tabs:
             HDimConst('Measure Type', measure_type),
             HDimConst('Unit', unit)
         ]
+
+        tidy_sheet = ConversionSegment(tab, dimensions, observations)
+        trace.with_preview(tidy_sheet)
+        savepreviewhtml(tidy_sheet, fname=f'{tab.name}_Preview.html')
+        trace.store(f'combined_dataframe_table_1_1', tidy_sheet.topandas())
+    if tab.name == 'Table 1.2':
+        columns = ['Period', 'Title', 'Target', 'Gender', 'Percentage', 'Measure Type', 'Unit']
+        trace.start(datasetTitle, tab, columns, dist.downloadURL)
+
+        period = tab.excel_ref('A3').is_not_blank()
+        trace.Period('Defined from cell value: {}', var=cellLoc(period))
+
+        title = tab.excel_ref('A2').is_not_blank()
+        trace.Title('Defined from cell value: {}', var=cellLoc(title))
+
+        target = tab.excel_ref('A1').is_not_blank()
+        trace.Target('Defined from cell value: {}', var=cellLoc(target))
+
+        gender = tab.excel_ref('A6:A13').is_not_blank()
+        trace.Gender('Defined from cell range: {}', var=excelRange(gender))
+
+        percentage = tab.filter('Percentage').expand(DOWN).is_not_blank()
+        trace.Percentage('Defined from cell range: {}', var=excelRange(percentage))

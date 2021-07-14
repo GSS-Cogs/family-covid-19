@@ -166,3 +166,25 @@ for tab in tabs:
         trace.with_preview(tidy_sheet)
         savepreviewhtml(tidy_sheet, fname=f'{tab.name}_Preview.html')
         trace.store(f'combined_dataframe_table_1_2', tidy_sheet.topandas())
+    if tab.name == 'Table 1.3':
+        columns = ['Period', 'Title', 'Target', 'Text message or letter', 'Registration', 'Percentage', 'Measure Type',
+                   'Unit']
+        trace.start(datasetTitle, tab, columns, dist.downloadURL)
+
+        period = tab.excel_ref('A3').is_not_blank()
+        trace.Period('Defined from cell value: {}', var=cellLoc(period))
+
+        title = tab.excel_ref('A2').is_not_blank()
+        trace.Title('Defined from cell value: {}', var=cellLoc(title))
+
+        target = tab.excel_ref('A1').is_not_blank()
+        trace.Target('Defined from cell value: {}', var=cellLoc(target))
+
+        text_msg = tab.excel_ref('A7:A9').is_not_blank()
+        trace.Text_message_or_letter('Defined from cell range: {}', var=excelRange(text_msg))
+
+        registration = tab.excel_ref('B5').expand(RIGHT).is_not_blank()
+        trace.Registration('Defined from cell range: {}', var=excelRange(registration))
+
+        percentage = tab.filter('Percentage').expand(DOWN).is_not_blank()
+        trace.Percentage('Defined from cell range: {}', var=excelRange(percentage))

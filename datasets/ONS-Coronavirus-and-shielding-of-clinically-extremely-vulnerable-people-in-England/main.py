@@ -188,3 +188,22 @@ for tab in tabs:
 
         percentage = tab.filter('Percentage').expand(DOWN).is_not_blank()
         trace.Percentage('Defined from cell range: {}', var=excelRange(percentage))
+
+        measure_type = 'Number of those who received a letter or text message advising them to shield'
+        trace.Measure_Type('Hardcoded as {}', var=measure_type)
+
+        unit = 'Estimate in thousands'
+        trace.Unit('Hardcoded as {}', var=unit)
+
+        observations = tab.filter('Estimate in thousands').expand(DOWN).is_not_blank()
+
+        dimensions = [
+            HDim(period, 'Period', CLOSEST, ABOVE),
+            HDim(title, 'Title', CLOSEST, ABOVE),
+            HDim(target, 'Target', CLOSEST, ABOVE),
+            HDim(text_msg, 'Text message or letter', DIRECTLY, LEFT),
+            HDim(registration, 'Registration', DIRECTLY, ABOVE),
+            HDim(percentage, 'Percentage', DIRECTLY, RIGHT),
+            HDimConst('Measure Type', measure_type),
+            HDimConst('Unit', unit)
+        ]

@@ -207,3 +207,17 @@ for tab in tabs:
             HDimConst('Measure Type', measure_type),
             HDimConst('Unit', unit)
         ]
+
+        tidy_sheet = ConversionSegment(tab, dimensions, observations)
+        trace.with_preview(tidy_sheet)
+        savepreviewhtml(tidy_sheet, fname=f'{tab.name}_Preview.html')
+        trace.store(f'combined_dataframe_table_1_3', tidy_sheet.topandas())
+
+
+ons_geography_code_dict={'United Kingdom': 'K02000001', 'England':'E92000001', 'Wales':'W92000004', 'Northern Ireland':'N92000002', 'Scotland':'S92000003'}
+
+df_tbl_1_1 = trace.combine_and_trace(datasetTitle, 'combined_dataframe_table_1_1')
+trace.add_column('Value')
+trace.add_column('Marker')
+trace.multi(["Marker", "Value"], "Rename databaker columns OBS and DATAMARKER columns to Value and Marker respectively")
+df_tbl_1_1.rename(columns={'OBS': 'Value', 'DATAMARKER': 'Marker'}, inplace=True)

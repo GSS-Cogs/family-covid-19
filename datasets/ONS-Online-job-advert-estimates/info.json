@@ -1,6 +1,7 @@
 {
+    "id": "ons-online-job-advert-estimates",
     "title": "Online job advert estimates",
-    "publisher": "Office for National Statistics",
+    "publisher": "International trade in services by subnational areas of the UK: 2018",
     "description": "Experimental job advert indices covering the UK job market",
     "landingPage": "https://www.ons.gov.uk/economy/economicoutputandproductivity/output/datasets/onlinejobadvertestimates",
     "datasetNotes": [

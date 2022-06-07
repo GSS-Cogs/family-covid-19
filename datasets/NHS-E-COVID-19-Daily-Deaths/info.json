@@ -1,4 +1,5 @@
 {
+    "id": "nhs-e-covid-19-daily-deaths",
     "title": "COVID-19 Daily Deaths",
     "publisher": "NHS England",
     "description": "This section contains information on deaths of patients who have died in hospitals in England and had tested positive for COVID-19 or where COVID-19 was mentioned on the death certificate. All deaths are recorded against the date of death rather than the date the deaths were announced.",
@@ -40,5 +41,5 @@
         }
     },
     "sizingNotes": "Simple table structure across 7 tabs of differing size",
-    "notes": ""
+    "notes": "After discussion with DM (Leigh) agreed that Tab 1 column date \"up to 1st March 20\" would be ignored as the first recorded death was 2/3/20. Also, columns JB-JF (13-17Nov20) which are noted as \"Data likely to change, please refer to data notes\" can be taken as accurate at present as any future amendments will be picked up by the scraper in future daily publications."
 }

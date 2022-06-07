@@ -1,6 +1,7 @@
 {
+    "id": "ons-deaths-involving-covid-19-by-local-area-and-socioeconomic-deprivation",
     "title": "Deaths involving COVID-19 by local area and deprivation",
-    "publisher": "Office for National Statistics",
+    "publisher": "International trade in services by subnational areas of the UK: 2018",
     "description": "Provisional counts of the number of deaths and age-standardised mortality rates involving the coronavirus (COVID-19) in England and Wales. Figures are provided by age, sex, geographies down to local authority level and deprivation indices.",
     "published": "2020-06-12",
     "families": [

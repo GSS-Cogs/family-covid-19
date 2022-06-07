@@ -1,6 +1,7 @@
 {
+    "id": "ons-weekly-shipping-indicators",
     "title": "Weekly shipping indicators",
-    "publisher": "Office for National Statistics",
+    "publisher": "International trade in services by subnational areas of the UK: 2018",
     "description": "The weekly shipping indicators dataset associated with the faster indicators of UK economic activity Research Output.",
     "landingPage": "https://www.ons.gov.uk/economy/economicoutputandproductivity/output/datasets/weeklyshippingindicators",
     "datasetNotes": [

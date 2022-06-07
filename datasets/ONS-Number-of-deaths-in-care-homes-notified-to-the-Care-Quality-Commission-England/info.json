@@ -1,11 +1,12 @@
 {
+    "id": "ons-number-of-deaths-in-care-homes-notified-to-the-care-quality-commission-england",
     "title": "Number of deaths in care homes notified to the Care Quality Commission, England",
-    "publisher": "Office for National Statistics",
+    "publisher": "International trade in services by subnational areas of the UK: 2018",
     "description": "Provisional counts of deaths in care homes caused by the coronavirus (COVID-19) by local authority. Published by the Office for National Statistics and Care Quality Commission.",
-    "landingPage": "https://www.ons.gov.uk/peoplepopulationandcommunity/birthsdeathsandmarriages/deaths/datasets/numberofdeathsincarehomesnotifiedtothecarequalitycommissionengland",
+    "landingPage": "https://www.ons.gov.uk/peoplepopulationandcommunity/birthsdeathsandmarriages/deaths/datasets/numberofdeathsincarehomesnotifiedtothecarequalitycommissionengland/2020",
     "dataURL": "https://www.ons.gov.uk/file?uri=/peoplepopulationandcommunity/birthsdeathsandmarriages/deaths/datasets/numberofdeathsincarehomesnotifiedtothecarequalitycommissionengland/2020/20200823officialsensitivecoviddeathnotificationsdata20200821.xlsx",
     "datasetNotes": [
-        "On the landing page click on the ltest version "
+        "On the landing page click on the latest version "
     ],
     "published": "2020-06-02",
     "families": [

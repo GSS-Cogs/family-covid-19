@@ -1,6 +1,7 @@
 {
+    "id": "ons-online-price-changes-for-high-demand-products",
     "title": "Online price changes for high-demand products",
-    "publisher": "Office for National Statistics",
+    "publisher": "International trade in services by subnational areas of the UK: 2018",
     "description": "The online price changes of selected high demand products (HDP) dataset. These data are experimental estimates developed to deliver timely indicators to help understand the impact of COVID-19.",
     "landingPage": "https://www.ons.gov.uk/economy/inflationandpriceindices/datasets/onlinepricechangesforhighdemandproducts",
     "datasetNotes": [
@@ -16,8 +17,7 @@
     },
     "transform": {
         "stage": [
-            "To Do",
-            "Priority"
+            "Transformed"
         ],
         "airtable": "recYxaK7Iqkx6aoyD",
         "main_issue": 122,
@@ -36,7 +36,8 @@
                 "datatype": "float64"
             },
             "Product": {
-                "description":"These products were chosen at the beginning of lockdown using anecdotal evidence on which products were in high demand from consumers.",          		"source":"https://www.ons.gov.uk/peoplepopulationandcommunity/healthandsocialcare/conditionsanddiseases/methodologies/onlineweeklypricechangesmethodology"
+                "description": "These products were chosen at the beginning of lockdown using anecdotal evidence on which products were in high demand from consumers.",
+                "source": "https://www.ons.gov.uk/peoplepopulationandcommunity/healthandsocialcare/conditionsanddiseases/methodologies/onlineweeklypricechangesmethodology"
             }
         },
         "codelists": [
@@ -44,5 +45,5 @@
         ]
     },
     "sizingNotes": "2 simple tables with footnotes on 1 tab",
-    "notes": ""
+    "notes": "This dataset now been replaced with an expanded set of indices, published for the first time on 10 September 2020. DM (Leigh) has moved dataset in Github into \"Done\".\nMore information about the replacement dataset can be found on website: https://www.ons.gov.uk/peoplepopulationandcommunity/healthandsocialcare/conditionsanddiseases/methodologies/onlineweeklypricechangesmethodology"
 }

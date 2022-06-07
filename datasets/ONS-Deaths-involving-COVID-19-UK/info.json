@@ -1,6 +1,7 @@
 {
+    "id": "ons-deaths-involving-covid-19-uk",
     "title": "Deaths involving COVID-19 : UK",
-    "publisher": "Office for National Statistics",
+    "publisher": "International trade in services by subnational areas of the UK: 2018",
     "description": "Provisional counts of the number of deaths and age-standardised mortality rates (ASMRs) involving the coronavirus (COVID-19) between 1 March and 30 April 2020 in the UK.",
     "published": "2020-06-12",
     "families": [

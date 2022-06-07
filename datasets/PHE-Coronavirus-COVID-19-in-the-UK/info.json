@@ -1,25 +1,26 @@
 {
-    "title": "Coronavirus (COVID-19) in the UK",
+    "id": "phe-coronavirus-covid-19-in-the-uk",
+    "title": "Coronavirus COVID-19 in the UK - Cases by specimen date, by Nation, England: LTLA, UTLA, Region",
     "publisher": "Public Health England",
-    "description": "",
-    "landingPage": "https://coronavirus.data.gov.uk/",
+    "description": "Number of lab-confirmed positive or negative COVID-19 test results, across all types of testing, reported on or up to the reporting date.",
+    "landingPage": "https://coronavirus.data.gov.uk/about-data",
     "dataURL": "https://coronavirus.data.gov.uk/downloads/csv/coronavirus-cases_latest.csv",
     "datasetNotes": [
-        "On the landing page scroll to the map of the UK and underneath is the option to Download the latest cases data as CSV or JSON & the latest deaths data as CSV or JSON"
+        "On the landing page scroll towards end of page to heading \"Legacy CSV downloads\". Dataset is obtained by clicking link \"Cases\"."
     ],
-    "published": "2020-05-14",
+    "published": "2020-09-30",
     "families": [
         "COVID-19"
     ],
     "extract": {
-        "source": "CSV, JSON",
-        "stage": "To document"
+        "source": "CSV",
+        "stage": "Documented"
     },
     "transform": {
         "airtable": "recyr2nSSQUdgJrRK",
         "main_issue": 36,
         "stage": [
-            "Hold"
+            "Transformed"
         ],
         "columns": {
             "Date": {
@@ -39,6 +40,6 @@
             }
         }
     },
-    "sizingNotes": "Available as 2 CSV or JSON files.",
-    "notes": ""
+    "sizingNotes": "Available as CSV file.",
+    "notes": "Original landing page and title have been updated, as agreed with DM (LP)."
 }

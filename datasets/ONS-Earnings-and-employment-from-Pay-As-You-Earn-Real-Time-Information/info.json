@@ -1,6 +1,7 @@
 {
+    "id": "ons-earnings-and-employment-from-pay-as-you-earn-real-time-information",
     "title": "Earnings and employment from Pay As You Earn Real Time Information",
-    "publisher": "Office for National Statistics",
+    "publisher": "International trade in services by subnational areas of the UK: 2018",
     "description": "Experimental monthly estimates of paid employees and their pay from HM Revenue and Customs' (HMRC) Pay As You Earn (PAYE) Real Time Information (RTI) data, including a flash estimate of employment and median pay for the most recent month. This is a joint release between HMRC and the Office for National Statistics (ONS).",
     "landingPage": "https://www.ons.gov.uk/releases/earningsandemploymentfrompayasyouearnrealtimeinformationukjuly2014toapril2020",
     "datasetNotes": [

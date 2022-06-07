@@ -1,4 +1,5 @@
 {
+    "id": "phs-daily-covid-19-cases-in-scotland",
     "title": "Daily COVID-19 Cases in Scotland",
     "publisher": "Public Health Scotland",
     "description": "This dataset replaces the \"COVID-19 Statistical report\" dataset and provides information on number of new daily confirmed cases, negative cases and deaths from novel coronavirus (COVID-19) in Scotland, including cumulative totals and population rates at Scotland, NHS Board and Council Area levels.",

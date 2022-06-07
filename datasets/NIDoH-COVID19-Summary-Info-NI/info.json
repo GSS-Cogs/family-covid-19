@@ -1,4 +1,5 @@
 {
+    "id": "nidoh-covid19-summary-info-ni",
     "title": "COVID19 Summary Info (NI)",
     "publisher": "Northern Ireland Department of Health",
     "description": "DoH COVID-19 interactive statistics dashboard, displays information on:\nCOVID-19 test results by LGD\nPositive test results by Gender\nCumulative positive tests by date\nNumber of COVID-19 deaths[1]\nCOVID-19 deaths by gender\nCOVID-19 deaths by age group\nCumulative deaths by date\nHospital beds available\nHospital beds occupied\nICU beds available and occupied, including the number occupied by COVID-19 patients\nNumber of COVID-19 hospital discharges\nPatients in hospital broken down by age group\nCumulative numbers of patient admissions and discharges for COVID-19",

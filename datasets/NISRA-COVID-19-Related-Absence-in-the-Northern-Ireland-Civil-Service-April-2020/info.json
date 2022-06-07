@@ -1,7 +1,8 @@
 {
+    "id": "nisra-covid-19-related-absence-in-the-northern-ireland-civil-service-april-2020",
     "title": "COVID-19 Related Absence in the Northern Ireland Civil Service April 2020",
     "publisher": "Northern Ireland Statistics and Research Agency",
-    "description": "Northern Ireland Statistics and Research Agency",
+    "description": "This report provides provisional statistics on COVID-19 related absence in the Northern Ireland Civil Service.",
     "datasetNotes": [
         "Delayed to July 2020"
     ],
@@ -11,16 +12,13 @@
     ],
     "extract": {
         "source": "",
-        "stage": "Not Required"
+        "stage": "Candidate"
     },
     "transform": {
-        "airtable": [
-            "recbYzNqtOwhVXp5d",
-            "recx603mysPPBCLDf"
-        ],
+        "airtable": "recbYzNqtOwhVXp5d",
         "main_issue": 71
     },
     "sizingNotes": "",
-    "notes": "Duplicate",
+    "notes": "This publication has been delayed until July a provisional date has been added in the next due field",
     "landingPage": "https://www.gov.uk/government/statistics/announcements/covid-19-related-absence-in-the-northern-ireland-civil-service-april-2020#history"
 }

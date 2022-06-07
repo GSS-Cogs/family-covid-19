@@ -1,4 +1,5 @@
 {
+    "id": "wg-nhs-activity-and-capacity-during-the-coronavirus-covid-19-pandemic",
     "title": "NHS activity and capacity during the coronavirus (COVID-19) pandemic",
     "publisher": "Welsh Government",
     "description": "Weekly update on coronavirus and NHS activity and capacity.",
@@ -6,7 +7,7 @@
     "datasetNotes": [
         "On the landing page scroll to the latest release, this will open another page scroll to data and click on the + the spreadsheet can be found here"
     ],
-    "published": "2020-10-01",
+    "published": "2020-04-30",
     "families": [
         "COVID-19"
     ],

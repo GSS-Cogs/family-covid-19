@@ -1,4 +1,5 @@
 {
+    "id": "nisra-weekly-deaths-year-ni",
     "title": "Weekly deaths, [Year] (NI)",
     "publisher": "Northern Ireland Statistics and Research Agency",
     "description": "NISRA weekly provisional death statistics, which are based on death registration information collected by the General Register Office, count all deaths where COVID-19 was mentioned on the death certificate by the doctor who certified the death, whether or not COVID-19 was the primary underlying cause of death.",
@@ -68,6 +69,6 @@
         }
     },
     "sizingNotes": "Simple table structure with multiple dimensions and some footnotes.",
-    "notes": "Data viz\n\nThe Northern Ireland weekly deaths statistics have been extended to include information relating to respiratory and COVID-19 related deaths.",
+    "notes": "Data viz.\nSplit into 2 datasets on PMD - Registrations & occurrences.\n\nThe Northern Ireland weekly deaths statistics have been extended to include information relating to respiratory and COVID-19 related deaths.",
     "landingPage": "https://www.nisra.gov.uk/publications/weekly-deaths"
 }

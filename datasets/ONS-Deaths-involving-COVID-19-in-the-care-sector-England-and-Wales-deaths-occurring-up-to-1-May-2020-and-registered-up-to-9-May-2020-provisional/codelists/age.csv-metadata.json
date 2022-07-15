@@ -1,7 +1,9 @@
 {
     "@context": "http://www.w3.org/ns/csvw",
-    "@id": "http://gss-data.org.uk/data/gss_data/covid-19/ons-deaths-involving-covid-19-in-the-care-sector-england-and-wales-deaths-occurring-up-to-1-may-2020-and-registered-up-to-9-may-2020-provisional#schema",
+    "@id": "http://gss-data.org.uk/data/gss_data/covid-19/ons-deaths-involving-covid-19-in-the-care-sector-england-and-wales-deaths-occurring-up-to-1-may-2020-and-registered-up-to-9-may-2020-provisional#scheme/age",
     "url": "age.csv",
+    "rdfs:label": "Age",
+    "dc:title": "Age",
     "tableSchema": {
         "columns": [
             {
@@ -16,7 +18,7 @@
                 "name": "notation",
                 "datatype": {
                     "base": "string",
-                    "format": "^-?[\\w\\.\\/]+(-[\\w\\.\\/]+)*$"
+                    "format": "^-?[\\w\\.\\/\\+]+(-[\\w\\.\\/\\+]+)*$"
                 },
                 "required": true,
                 "propertyUrl": "skos:notation"
@@ -26,7 +28,7 @@
                 "name": "parent_notation",
                 "datatype": {
                     "base": "string",
-                    "format": "^(-?[\\w\\.\\/]+(-[\\w\\.\\/]+)*|)$"
+                    "format": "^(-?[\\w\\.\\/\\+]+(-[\\w\\.\\/\\+]+)*|)$"
                 },
                 "required": false,
                 "propertyUrl": "skos:broader",
@@ -34,7 +36,7 @@
             },
             {
                 "titles": "Sort Priority",
-                "name": "sort",
+                "name": "sort_priority",
                 "datatype": "integer",
                 "required": false,
                 "propertyUrl": "http://www.w3.org/ns/ui#sortPriority"
@@ -67,57 +69,65 @@
             "http://publishmydata.com/pmdcat#ConceptScheme"
         ]
     },
-    "rdfs:label": "Age",
-    "dc:title": "Age",
     "rdfs:seeAlso": [
         {
-            "@id": "http://gss-data.org.uk/data/gss_data/covid-19/ons-deaths-involving-covid-19-in-the-care-sector-england-and-wales-deaths-occurring-up-to-1-may-2020-and-registered-up-to-9-may-2020-provisional#schema/dataset",
+            "@id": "http://gss-data.org.uk/data/gss_data/covid-19/ons-deaths-involving-covid-19-in-the-care-sector-england-and-wales-deaths-occurring-up-to-1-may-2020-and-registered-up-to-9-may-2020-provisional#scheme/age/dataset",
             "@type": [
                 "dcat:Dataset",
                 "http://publishmydata.com/pmdcat#Dataset"
             ],
             "http://publishmydata.com/pmdcat#datasetContents": {
-                "@id": "http://gss-data.org.uk/data/gss_data/covid-19/ons-deaths-involving-covid-19-in-the-care-sector-england-and-wales-deaths-occurring-up-to-1-may-2020-and-registered-up-to-9-may-2020-provisional#schema"
+                "@id": "http://gss-data.org.uk/data/gss_data/covid-19/ons-deaths-involving-covid-19-in-the-care-sector-england-and-wales-deaths-occurring-up-to-1-may-2020-and-registered-up-to-9-may-2020-provisional#scheme/age"
             },
             "http://publishmydata.com/pmdcat#graph": {
-                "@id": "http://gss-data.org.uk/data/gss_data/covid-19/ons-deaths-involving-covid-19-in-the-care-sector-england-and-wales-deaths-occurring-up-to-1-may-2020-and-registered-up-to-9-may-2020-provisional#schema"
-            },
-            "dc:modified": {
-                "@type": "dateTime",
-                "@value": "2021-05-20T11:48:27.117352"
+                "@id": "http://gss-data.org.uk/data/gss_data/covid-19/ons-deaths-involving-covid-19-in-the-care-sector-england-and-wales-deaths-occurring-up-to-1-may-2020-and-registered-up-to-9-may-2020-provisional#scheme/age"
             },
             "rdfs:label": "Age",
             "dc:title": "Age",
             "rdfs:comment": "Dataset representing the 'Age' code list.",
+            "dc:publisher": {
+                "@id": "https://www.ons.gov.uk"
+            },
+            "dcat:landingPage": {
+                "@id": "https://www.ons.gov.uk/peoplepopulationandcommunity/birthsdeathsandmarriages/deaths/datasets/deathsinvolvingcovid19inthecaresectorenglandandwales"
+            },
             "dc:issued": {
                 "@type": "dateTime",
-                "@value": "2021-05-20T11:46:42.640556"
+                "@value": "2020-12-18T00:00:00"
+            },
+            "dc:modified": {
+                "@type": "dateTime",
+                "@value": "2022-07-15T11:35:12.541302"
+            },
+            "http://publishmydata.com/pmdcat#markdownDescription": {
+                "@type": "https://www.w3.org/ns/iana/media-types/text/markdown#Resource",
+                "@value": "Provisional counts of the number of deaths and age-standardised mortality rates involving the coronavirus (COVID-19) within the care sector occurring up to 1 May 2020 and registered up to 9 May 2020."
             }
         },
         {
             "@id": "http://gss-data.org.uk/catalog/vocabularies",
             "dcat:record": {
-                "@id": "http://gss-data.org.uk/data/gss_data/covid-19/ons-deaths-involving-covid-19-in-the-care-sector-england-and-wales-deaths-occurring-up-to-1-may-2020-and-registered-up-to-9-may-2020-provisional#schema/catalog-record"
+                "@id": "http://gss-data.org.uk/data/gss_data/covid-19/ons-deaths-involving-covid-19-in-the-care-sector-england-and-wales-deaths-occurring-up-to-1-may-2020-and-registered-up-to-9-may-2020-provisional#scheme/age/catalog-record"
             }
         },
         {
-            "@id": "http://gss-data.org.uk/data/gss_data/covid-19/ons-deaths-involving-covid-19-in-the-care-sector-england-and-wales-deaths-occurring-up-to-1-may-2020-and-registered-up-to-9-may-2020-provisional#schema/catalog-record",
+            "@id": "http://gss-data.org.uk/data/gss_data/covid-19/ons-deaths-involving-covid-19-in-the-care-sector-england-and-wales-deaths-occurring-up-to-1-may-2020-and-registered-up-to-9-may-2020-provisional#scheme/age/catalog-record",
             "@type": "dcat:CatalogRecord",
             "foaf:primaryTopic": {
-                "@id": "http://gss-data.org.uk/data/gss_data/covid-19/ons-deaths-involving-covid-19-in-the-care-sector-england-and-wales-deaths-occurring-up-to-1-may-2020-and-registered-up-to-9-may-2020-provisional#schema/dataset"
+                "@id": "http://gss-data.org.uk/data/gss_data/covid-19/ons-deaths-involving-covid-19-in-the-care-sector-england-and-wales-deaths-occurring-up-to-1-may-2020-and-registered-up-to-9-may-2020-provisional#scheme/age/dataset"
             },
             "http://publishmydata.com/pmdcat#metadataGraph": {
-                "@id": "http://gss-data.org.uk/data/gss_data/covid-19/ons-deaths-involving-covid-19-in-the-care-sector-england-and-wales-deaths-occurring-up-to-1-may-2020-and-registered-up-to-9-may-2020-provisional#schema"
+                "@id": "http://gss-data.org.uk/data/gss_data/covid-19/ons-deaths-involving-covid-19-in-the-care-sector-england-and-wales-deaths-occurring-up-to-1-may-2020-and-registered-up-to-9-may-2020-provisional#scheme/age"
             },
             "dc:title": "Age Catalog Record",
             "rdfs:label": "Age Catalog Record",
             "dc:issued": {
                 "@type": "dateTime",
-                "@value": "2021-05-20T11:46:42.640556"
+                "@value": "2022-05-13T14:53:03.939928"
             },
             "dc:modified": {
                 "@type": "dateTime",
-                "@value": "2021-05-20T11:46:42.640556"
+                "@value": "2022-07-15T11:35:12.541302"
             }
         }
     ]

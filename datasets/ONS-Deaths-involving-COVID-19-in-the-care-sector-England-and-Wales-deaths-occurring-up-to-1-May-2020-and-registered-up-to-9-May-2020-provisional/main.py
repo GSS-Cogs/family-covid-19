@@ -799,7 +799,7 @@ all_dat["table 9"] = df
 all_dat['table 9']
 
 
-# In[30]:
+# In[26]:
 
 
 df = pd.concat(all_dat.values())
@@ -818,12 +818,23 @@ df = df.replace({'Age' : {'All ages' : 'all'},
 df['Place of Death'] = df['Place of Death'].apply(pathify)
 df['Sex'] = df['Sex'].apply(pathify)
 
+df['Value'] = df.apply(lambda x: '0' if x['Marker'] != ''else x['Value'], axis = 1)
+
 df = df[['Period', 'Area', 'Age', 'Sex', 'Cause of Death', 'Place of Death', 'Value', 'Marker', 'Measure Type', 'Unit']]
 
 df
 
 
-# In[31]:
+# In[27]:
+
+
+df.to_csv('observations.csv', index=False)
+
+catalog_metadata = scraper.as_csvqb_catalog_metadata()
+catalog_metadata.to_json_file('catalog-metadata.json')
+
+
+# In[24]:
 
 
 from IPython.core.display import HTML

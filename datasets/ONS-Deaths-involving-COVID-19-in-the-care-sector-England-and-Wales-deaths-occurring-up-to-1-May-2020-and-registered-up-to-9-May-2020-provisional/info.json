@@ -21,39 +21,48 @@
         ],
         "columns": {
             "Period": {
-                "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
-                "value": "http://reference.data.gov.uk/id/{+period}"
+                "type": "dimension",
+                "new": {
+                    "subPropertyOf": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
+                    "codelist": false
+                },
+                "value": "https://reference.data.gov.uk/id/{+period}"
             },
-            "Local Authority": {
-                "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refArea",
-                "value": "http://statistics.data.gov.uk/id/statistical-geography/{local_authority}"
+            "Area": {
+                "type": "dimension",
+                "uri": "http://purl.org/linked-data/sdmx/2009/dimension#refArea",
+                "value": "http://statistics.data.gov.uk/id/statistical-geography/{area}"
             },
             "Sex": {
-                "parent": "http://purl.org/linked-data/sdmx/2009/dimension#sex",
+                "type": "dimension",
+                "uri": "http://purl.org/linked-data/sdmx/2009/dimension#sex",
                 "value": "http://purl.org/linked-data/sdmx/2009/code#sex-{sex}"
             },
             "Value": {
-                "unit": "http://gss-data.org.uk/def/concept/measurement-units/deaths",
-                "measure": "http://gss-data.org.uk/def/measure/cumulative-count",
-                "datatype": "integer"
+                "type": "observations",
+                "datatype": "double"
+            },
+            "Measure Type": {
+                "type": "measures",
+                "value": "http://gss-data.org.uk/def/measure/{+measure_type}"
+            },
+            "Unit": {
+                "type": "units",
+                "value": "http://gss-data.org.uk/def/concept/measurement-units/{+unit}"
             },
             "Cause of Death": {
-                "description": "The cause of death reported represents the final underlying cause of death.",
-                "source": "https://www.ons.gov.uk/peoplepopulationandcommunity/birthsdeathsandmarriages/deaths/methodologies/mortalitystatisticsinenglandandwalesqmi"
+                "type": "dimension",
+                "new": {
+                  "codelist": "./codelists/cause-of-death.csv-metadata.json"
+                }
+            },
+            "Place of Death": {
+                "type": "dimension",
+                "new": {
+                  "codelist": "./codelists/place-of-death.csv-metadata.json"
+                }
             }
-        },
-        "codelists": [
-            "Recorded Death Type",
-            "Source",
-            "Person Type",
-            "Sex",
-            "Age",
-            "Local Authority",
-            "Place of death",
-            "Cause of death",
-            "Leading cause of Death",
-            "Main Pre-existing Condition"
-        ]
+        }
     },
     "sizingNotes": "Multiple tabs with simple structures and multiple dimensions. One tab with multiple tables. Multiple footnotes in tabs.",
     "notes": "",

@@ -1,4 +1,72 @@
 Label,Notation,Parent Notation,Sort Priority
-Covid 19,covid-19,,1
-All causes,all-causes,,2
-All,all,,3
+Coronavirus (COVID-19),u07-1-u07-2,,1
+Intestinal infectious diseases,a00-a09,,2
+Tuberculosis,a15-a19-b90,,3
+Vector-borne diseases and rabies,a20-a44-a75-a79-a82-a84-a85-2-a90-a98-b50-b57,,4
+Vaccine-preventable diseases,a33-a37-a49-2-a80-b01-b02-b05-b06-b15-b16-b17-0-b18-0-b18-1-b26-b91-g14,,5
+Meningitis and meningococcal infection,a39-a87-g00-g03,,6
+Septicaemia,a40-a41,,7
+Human immunodeficiency virus [HIV] disease,b20-b24,,8
+Malignant neoplasm of oesophagus,c15,,9
+Malignant neoplasm of stomach,c16,,10
+"Malignant neoplasm of colon, sigmoid, rectum and anus",c18-c21,,11
+Malignant neoplasm of liver and intrahepatic bile ducts,c22,,12
+Malignant neoplasm of gallbladder and other parts of biliary tract,c23-c24,,13
+Malignant neoplasm of pancreas,c25,,14
+Malignant neoplasm of larynx,c32,,15
+"Malignant neoplasm of trachea, bronchus and lung",c33-c34,,16
+Malignant neoplasms of bone and articular cartilage,c40-c41,,17
+Melanoma and other malignant neoplasms of skin,c43-c44,,18
+Malignant neoplasm of breast,c50,,19
+Malignant neoplasm of uterus,c53-c55,,20
+Malignant neoplasm of ovary,c56,,21
+Malignant neoplasm of prostate,c61,,22
+"Malignant neoplasm of kidney, except renal pelvis",c64,,23
+Malignant neoplasm of bladder,c67,,24
+Malignant neoplasm of brain,c71,,25
+"Malignant neoplasms, stated or presumed to be primary of lymphoid, haematopoietic and related tissue",c81-c96,,26
+"In situ and benign neoplasms, and neoplasms of uncertain or unknown behaviour",d00-d48,,27
+Diabetes,e10-e14,,28
+"Malnutrition, nutritional anaemias and other nutritional deficiencies",d50-d53-e40-e64,,29
+"Disorders of fluid, electrolyte and acid-base balance (incl. dehydration)",e86-e87,,30
+Dementia and Alzheimer disease,f01-f03-g30,,31
+Mental and behavioural disorders due to psychoactive substance use,f10-f19,,32
+Systemic atrophies primarily affecting the central nervous system,g10-g12,,33
+Parkinson disease,g20,,34
+Epilepsy and status epilepticus,g40-g41,,35
+Cerebral palsy and other paralytic syndromes,g80-g83,,36
+Chronic rheumatic heart diseases,i05-i09,,37
+Hypertensive diseases,i10-i15,,38
+Ischaemic heart diseases,i20-i25,,39
+Pulmonary heart disease and diseases of pulmonary circulation,i26-i28,,40
+Nonrheumatic valve disorders and endocarditis,i34-i38,,41
+Cardiomyopathy,i42,,42
+Cardiac arrest,i46,,43
+Cardiac arrhythmias,i47-i49,,44
+Heart failure and complications and ill-defined heart disease,i50-i51,,45
+Cerebrovascular diseases,i60-i69,,46
+Atherosclerosis,i70,,47
+Aortic aneurysm and dissection,i71,,48
+Acute respiratory infections other than influenza and pneumonia,j00-j06-j20-j22,,49
+Influenza and pneumonia,j09-j18,,50
+Chronic lower respiratory diseases,j40-j47,,51
+Pulmonary oedema and other interstitial pulmonary diseases,j80-j84,,52
+Respiratory failure,j96,,53
+"Appendicitis, hernia and intestinal obstruction",k35-k46-k56,,54
+Cirrhosis and other diseases of liver,k70-k76,,55
+Diseases of the musculoskeletal system and connective tissue,m00-m99,,56
+Diseases of the urinary system,n00-n39,,57
+"Pregnancy, childbirth and the puerperium",o00-o99,,58
+Certain conditions originating in the perinatal period,p00-p96,,59
+"Congenital malformations, deformations and chromosomal abnormalities",q00-q99,,60
+Land transport accidents ,v01-v89,,61
+Accidental falls,w00-w19,,62
+Non-intentional firearm discharge,w32-w34,,63
+Accidental drowning and submersion,w65-w74,,64
+Accidental threats to breathing,w75-w84,,65
+Accidental poisoning ,x40-x49,,66
+Suicide and injury/poisoning of undetermined intent,x60-x84-y10-y34,,67
+Homicide and probable homicide,u50-9-x85-y09-y87-1,,68
+"Symptoms, signs and ill-defined conditions",r00-r99,,69
+All,all,,70
+Involving COVID-19,involving-covid-19,,71

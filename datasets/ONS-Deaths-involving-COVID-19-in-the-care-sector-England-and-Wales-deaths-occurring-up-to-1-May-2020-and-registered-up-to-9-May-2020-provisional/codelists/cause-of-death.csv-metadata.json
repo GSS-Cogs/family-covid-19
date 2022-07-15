@@ -67,8 +67,8 @@
             "http://publishmydata.com/pmdcat#ConceptScheme"
         ]
     },
-    "rdfs:label": "Cause of death",
-    "dc:title": "Cause of death",
+    "rdfs:label": "Cause of Death",
+    "dc:title": "Cause of Death",
     "rdfs:seeAlso": [
         {
             "@id": "http://gss-data.org.uk/data/gss_data/covid-19/ons-deaths-involving-covid-19-in-the-care-sector-england-and-wales-deaths-occurring-up-to-1-may-2020-and-registered-up-to-9-may-2020-provisional#schema/dataset",
@@ -84,14 +84,14 @@
             },
             "dc:modified": {
                 "@type": "dateTime",
-                "@value": "2021-05-20T11:48:27.116113"
+                "@value": "2021-05-20T11:48:27.118047"
             },
-            "rdfs:label": "Cause of death",
-            "dc:title": "Cause of death",
-            "rdfs:comment": "Dataset representing the 'Cause of death' code list.",
+            "rdfs:label": "Cause of Death",
+            "dc:title": "Cause of Death",
+            "rdfs:comment": "Dataset representing the 'Cause of Death' code list.",
             "dc:issued": {
                 "@type": "dateTime",
-                "@value": "2021-05-20T11:46:42.639330"
+                "@value": "2021-05-20T11:46:42.641222"
             }
         },
         {
@@ -109,15 +109,15 @@
             "http://publishmydata.com/pmdcat#metadataGraph": {
                 "@id": "http://gss-data.org.uk/data/gss_data/covid-19/ons-deaths-involving-covid-19-in-the-care-sector-england-and-wales-deaths-occurring-up-to-1-may-2020-and-registered-up-to-9-may-2020-provisional#schema"
             },
-            "dc:title": "Cause of death Catalog Record",
-            "rdfs:label": "Cause of death Catalog Record",
+            "dc:title": "Cause of Death Catalog Record",
+            "rdfs:label": "Cause of Death Catalog Record",
             "dc:issued": {
                 "@type": "dateTime",
-                "@value": "2021-05-20T11:46:42.639330"
+                "@value": "2021-05-20T11:46:42.641222"
             },
             "dc:modified": {
                 "@type": "dateTime",
-                "@value": "2021-05-20T11:46:42.639330"
+                "@value": "2021-05-20T11:46:42.641222"
             }
         }
     ]

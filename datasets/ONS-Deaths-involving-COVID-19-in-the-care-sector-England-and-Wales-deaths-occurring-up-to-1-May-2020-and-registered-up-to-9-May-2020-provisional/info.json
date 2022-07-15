@@ -61,6 +61,12 @@
                 "new": {
                   "codelist": "./codelists/place-of-death.csv-metadata.json"
                 }
+            },
+            "Age": {
+                "type": "dimension",
+                "new": {
+                  "codelist": "./codelists/age.csv-metadata.json"
+                }
             }
         }
     },

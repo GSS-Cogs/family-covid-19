@@ -2,8 +2,8 @@
     "@context": "http://www.w3.org/ns/csvw",
     "@id": "http://gss-data.org.uk/data/gss_data/covid-19/ons-deaths-involving-covid-19-in-the-care-sector-england-and-wales-deaths-occurring-up-to-1-may-2020-and-registered-up-to-9-may-2020-provisional#scheme/cause-of-death",
     "url": "cause-of-death.csv",
-    "rdfs:label": "Cause of Death",
-    "dc:title": "Cause of Death",
+    "rdfs:label": "Cause of death",
+    "dc:title": "Cause of death",
     "tableSchema": {
         "columns": [
             {
@@ -82,9 +82,9 @@
             "http://publishmydata.com/pmdcat#graph": {
                 "@id": "http://gss-data.org.uk/data/gss_data/covid-19/ons-deaths-involving-covid-19-in-the-care-sector-england-and-wales-deaths-occurring-up-to-1-may-2020-and-registered-up-to-9-may-2020-provisional#scheme/cause-of-death"
             },
-            "rdfs:label": "Cause of Death",
-            "dc:title": "Cause of Death",
-            "rdfs:comment": "Dataset representing the 'Cause of Death' code list.",
+            "rdfs:label": "Cause of death",
+            "dc:title": "Cause of death",
+            "rdfs:comment": "Dataset representing the 'Cause of death' code list.",
             "dc:publisher": {
                 "@id": "https://www.ons.gov.uk"
             },
@@ -119,8 +119,8 @@
             "http://publishmydata.com/pmdcat#metadataGraph": {
                 "@id": "http://gss-data.org.uk/data/gss_data/covid-19/ons-deaths-involving-covid-19-in-the-care-sector-england-and-wales-deaths-occurring-up-to-1-may-2020-and-registered-up-to-9-may-2020-provisional#scheme/cause-of-death"
             },
-            "dc:title": "Cause of Death Catalog Record",
-            "rdfs:label": "Cause of Death Catalog Record",
+            "dc:title": "Cause of death Catalog Record",
+            "rdfs:label": "Cause of death Catalog Record",
             "dc:issued": {
                 "@type": "dateTime",
                 "@value": "2022-05-13T14:53:03.939928"

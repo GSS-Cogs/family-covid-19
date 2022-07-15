@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[112]:
+# In[192]:
 
 
 # ONS Deaths involving COVID-19 in the care sector, England and Wales 
@@ -15,7 +15,7 @@ import re
 import isodate
 
 
-# In[113]:
+# In[193]:
 
 
 #### Add transformation script here #### 
@@ -27,7 +27,7 @@ print("Using source data", source_sheet)
 scraper
 
 
-# In[114]:
+# In[194]:
 
 
 def tabs_from_named(tabs, wanted):
@@ -153,13 +153,13 @@ get_local_authorities = Geography("https://api.beta.ons.gov.uk/v1/code-lists/loc
                                 overrides=local_authority_overrides)
 
 
-# In[115]:
+# In[195]:
 
 
 all_dat = {}
 
 
-# In[116]:
+# In[196]:
 
 
 # ## Transform: Table 1
@@ -193,7 +193,7 @@ for tab in tabs_from_named(tabs, "Table_1"):
         raise Exception(f"Problem encountered processing cube from tab '{tab.name}'.") from e
 
 
-# In[117]:
+# In[197]:
 
 
 df = all_dat['table 1'].replace(r'\n',' ', regex=True) 
@@ -213,7 +213,7 @@ df['Sex'] = 'all'
 
 df['Age'] = 'all'
 
-df['Place of Death'] = 'Care Home'
+df['Place of Death'] = 'all'
 
 df['Marker'] = ''
 
@@ -231,7 +231,7 @@ all_dat["table 1"] = df
 df
 
 
-# In[118]:
+# In[198]:
 
 
 # ## Transform: Table 2
@@ -269,7 +269,7 @@ for tab in tabs_from_named(tabs, "Table_2"):
         raise Exception(f"Problem encountered processing cube from tab '{tab.name}'.") from e
 
 
-# In[119]:
+# In[199]:
 
 
 df = all_dat['table 2'].replace(r'\n',' ', regex=True) 
@@ -299,7 +299,7 @@ all_dat['table 2'] = df
 all_dat['table 2']
 
 
-# In[120]:
+# In[200]:
 
 
 # ## Transform: Table 3
@@ -335,7 +335,7 @@ for tab in tabs_from_named(tabs, "Table_3"):
         raise Exception(f"Problem encountered processing cube from tab '{tab.name}'.") from e
 
 
-# In[121]:
+# In[201]:
 
 
 df = all_dat['table 3'].replace(r'\n',' ', regex=True) 
@@ -372,7 +372,7 @@ all_dat["table 3"] = df
 all_dat['table 3']
 
 
-# In[122]:
+# In[202]:
 
 
 # ## Transform: Table 4
@@ -408,7 +408,7 @@ for tab in tabs_from_named(tabs, "Table_4"):
         raise Exception(f"Problem encountered processing cube from tab '{tab.name}'.") from e
 
 
-# In[123]:
+# In[203]:
 
 
 df = all_dat['table 4'].replace(r'\n',' ', regex=True) 
@@ -445,7 +445,7 @@ all_dat["table 4"] = df
 all_dat['table 4']
 
 
-# In[124]:
+# In[204]:
 
 
 # ## Transform: Table 5
@@ -483,7 +483,7 @@ for tab in tabs_from_named(tabs, "Table_5"):
         raise Exception(f"Problem encountered processing cube from tab '{tab.name}'.") from e
 
 
-# In[125]:
+# In[205]:
 
 
 df = all_dat['table 5'].replace(r'\n',' ', regex=True) 
@@ -528,7 +528,7 @@ all_dat["table 5"] = df
 all_dat['table 5']
 
 
-# In[126]:
+# In[206]:
 
 
 # ## Transform: Table 6
@@ -566,7 +566,7 @@ for tab in tabs_from_named(tabs, "Table_6"):
         raise Exception(f"Problem encountered processing cube from tab '{tab.name}'.") from e
 
 
-# In[127]:
+# In[207]:
 
 
 df = all_dat['table 6'].replace(r'\n',' ', regex=True) 
@@ -611,7 +611,7 @@ all_dat["table 6"] = df
 all_dat['table 6']
 
 
-# In[128]:
+# In[208]:
 
 
 # ## Transform: Table 7
@@ -644,7 +644,7 @@ for tab in tabs_from_named(tabs, "Table_7"):
         raise Exception(f"Problem encountered processing cube from tab '{tab.name}'.") from e
 
 
-# In[129]:
+# In[209]:
 
 
 df = all_dat['table 7'].replace(r'\n',' ', regex=True) 
@@ -672,7 +672,7 @@ all_dat["table 7"] = df
 all_dat['table 7']
 
 
-# In[130]:
+# In[210]:
 
 
 # ## Transform: Table 8
@@ -705,7 +705,7 @@ for tab in tabs_from_named(tabs, "Table_8"):
         raise Exception(f"Problem encountered processing cube from tab '{tab.name}'.") from e
 
 
-# In[131]:
+# In[211]:
 
 
 df = all_dat['table 8'].replace(r'\n',' ', regex=True) 
@@ -733,7 +733,7 @@ all_dat["table 8"] = df
 all_dat['table 8']
 
 
-# In[132]:
+# In[212]:
 
 
 # ## Transform: Table 9
@@ -768,7 +768,7 @@ for tab in tabs_from_named(tabs, "Table_9"):
         raise Exception(f"Problem encountered processing cube from tab '{tab.name}'.") from e
 
 
-# In[133]:
+# In[213]:
 
 
 df = all_dat['table 9'].replace(r'\n',' ', regex=True) 
@@ -799,7 +799,7 @@ all_dat["table 9"] = df
 all_dat['table 9']
 
 
-# In[134]:
+# In[214]:
 
 
 df = pd.concat(all_dat.values())
@@ -813,10 +813,12 @@ df = df.replace({'Age' : {'All ages' : 'all'},
                           'all' : 'T'},
                  'Cause of Death' : {'involving covid-19' : 'involving-covid-19',
                                      'Proportion of deaths involving COVID-19 (%)' : 'involving-covid-19',
-                                     'Deaths involving COVID-19' : 'involving-covid-19'}})
+                                     'Deaths involving COVID-19' : 'involving-covid-19',
+                                     'All deaths' : 'all'}})
 
 df['Place of Death'] = df['Place of Death'].apply(pathify)
 df['Sex'] = df['Sex'].apply(pathify)
+df['Cause of Death'] = df['Cause of Death'].apply(pathify)
 
 df['Value'] = df.apply(lambda x: '0' if x['Marker'] != '' else x['Value'], axis = 1)
 
@@ -827,7 +829,7 @@ df = df[['Period', 'Area', 'Age', 'Sex', 'Cause of Death', 'Place of Death', 'Va
 df
 
 
-# In[135]:
+# In[215]:
 
 
 df.to_csv('observations.csv', index=False)
@@ -836,7 +838,7 @@ catalog_metadata = scraper.as_csvqb_catalog_metadata()
 catalog_metadata.to_json_file('catalog-metadata.json')
 
 
-# In[136]:
+# In[216]:
 
 
 from IPython.core.display import HTML

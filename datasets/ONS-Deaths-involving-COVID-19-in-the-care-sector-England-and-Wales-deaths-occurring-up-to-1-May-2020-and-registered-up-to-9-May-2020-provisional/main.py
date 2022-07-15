@@ -817,7 +817,6 @@ df = df.replace({'Age' : {'All ages' : 'all'},
                                      'All deaths' : 'all'}})
 
 df['Place of Death'] = df['Place of Death'].apply(pathify)
-df['Sex'] = df['Sex'].apply(pathify)
 df['Cause of Death'] = df['Cause of Death'].apply(pathify)
 
 df['Value'] = df.apply(lambda x: '0' if x['Marker'] != '' else x['Value'], axis = 1)

@@ -113,16 +113,16 @@ for tab in tabs:
         if 'DD' in tab.name:
             deduplicated = 'yes'
 
-            unit = 'Job Adverts Deduplicated'
+            unit = 'Job Adverts'
 
-            measure_type = 'Indicator'
+            measure_type = 'Indicator Deduplicated'
 
         elif 'YoY' in tab.name:
             deduplicated = 'yes'
 
-            unit = 'Job Adverts Equivalent to Prior Year'
+            unit = 'Job Adverts'
 
-            measure_type = 'Indicator'
+            measure_type = 'Indicator Equivalent to Prior Year'
 
         else:
             deduplicated = 'no'
@@ -179,16 +179,16 @@ for tab in tabs:
         if 'DD' in tab.name:
             deduplicated = 'yes'
 
-            unit = 'Job Adverts Deduplicated'
+            unit = 'Job Adverts'
 
-            measure_type = 'Indicator'
+            measure_type = 'Indicator Deduplicated'
 
         elif 'YoY' in tab.name:
             deduplicated = 'yes'
 
-            unit = 'Job Adverts Equivalent to Prior Year'
+            unit = 'Job Adverts '
 
-            measure_type = 'Indicator'
+            measure_type = 'Indicator Equivalent to Prior Year'
 
         else:
             deduplicated = 'no'

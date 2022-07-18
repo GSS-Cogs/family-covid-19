@@ -1,3 +1,9 @@
+#!/usr/bin/env python
+# coding: utf-8
+
+# In[88]:
+
+
 # # ONS Online job advert estimates 
 
 # +
@@ -64,8 +70,8 @@ def excelRange(bag):
     return '{' + lowx + lowy + '-' + highx + highy + '}'
 
 
+# In[89]:
 
-# -
 
 info = json.load(open('info.json')) 
 landingPage = info['landingPage'] 
@@ -73,96 +79,179 @@ landingPage
 
 scrape = Scraper(landingPage)  
 distribution = scrape.distributions[0]
+distribution
+
+
+# In[90]:
+
 
 datasetTitle = 'Online job advert estimates'
 tabs = { tab: tab for tab in distribution.as_databaker() }
-trace = TransformTrace()
-df = pd.DataFrame()
+for i in tabs:
+    print(i.name)
 
-# +
+
+# In[91]:
+
+
+tidied_tabs = []
+
 for tab in tabs:
-   
-    columns=["Date", "Industry", "NUTS1 Region", 'Marker', "Measure Type", "Unit"]
-    trace.start(datasetTitle, tab, columns, scrape.distributions[0].downloadURL)
-    
-    remove_notes = tab.filter(contains_string('Notes')).expand(RIGHT).expand(DOWN)
-    measure_type = 'Job Adverts'
-    trace.Measure_Type('Hardcoded value as: Job Adverts')
-    unit = 'Indicator'
-    trace.Unit('Hardcoded value as: Indicator')
-    
-    if tab.name == 'Vacancies by Adzuna Category':
-        
-        date = tab.filter(contains_string('Date')).shift(1,0).expand(RIGHT).is_not_blank()
-        trace.Date('Date given at cell range: {}', var = excelRange(date))
 
-        imputed_values = tab.filter(contains_string('Imputed values')).shift(1,0).expand(RIGHT)
-        trace.Marker('Imputed Values given at cell range: {}', var = excelRange(date))
-        
-        industry = tab.filter(contains_string('Date')).shift(0,1).expand(DOWN).is_not_blank() - tab.filter(contains_string('Imputed values')).expand(RIGHT).expand(DOWN)
-        trace.Industry('Industry given at cell range: {}', var = excelRange(date))
+    if 'adverts by category' in tab.name.lower():
 
-        nuts1_region = "United Kingdom"
-        trace.NUTS1_Region("Hardcoded as United Kingdom")
-        
-        observations = industry.fill(RIGHT).is_not_blank() 
+        print(tab.name)
+
+        remove = tab.filter('Notes:').expand(RIGHT).expand(DOWN)
+
+        date = tab.filter('Date').fill(RIGHT).is_not_blank()
+
+        category = tab.filter('Date').fill(DOWN).is_not_blank() - remove - tab.filter('Imputed values')
+
+        imputed_values = tab.filter('Imputed values').fill(RIGHT).filter('All').fill(UP).is_not_blank() | tab.filter('Imputed values').fill(RIGHT).filter('Education only').fill(UP) - (tab.filter('Date').fill(DOWN)-tab.filter('Education')).expand(RIGHT) - date 
+
+        if 'DD' in tab.name:
+            deduplicated = 'yes'
+
+            measure_type = 'Job Adverts Deduplicated'
+
+            unit = 'Indicator'
+
+        elif 'YoY' in tab.name:
+            deduplicated = 'yes'
+
+            measure_type = 'Job Adverts Equivalent to Prior Year'
+
+            unit = 'Indicator'
+
+        else:
+            deduplicated = 'no'
+
+            measure_type = 'Job Adverts'
+
+            unit = 'Indicator'
+
+        region = "United Kingdom"
+
+        observations = category.fill(RIGHT).is_not_blank() - imputed_values
+
         dimensions = [
-            HDim(date, 'Date', DIRECTLY, ABOVE),
-            HDim(industry, 'Industry', DIRECTLY, LEFT),
-            HDim(imputed_values, 'Marker', DIRECTLY, BELOW),
-            HDimConst('NUTS1 Region', nuts1_region),
+            HDim(date, 'Period', DIRECTLY, ABOVE),
+            HDim(category, 'Category', DIRECTLY, LEFT),
+            HDimConst('Region', region),
             HDimConst('Measure Type', measure_type),
             HDimConst('Unit', unit),
+            HDimConst('Marker', '')
             ]
         tidy_sheet = ConversionSegment(tab, dimensions, observations)
-        trace.with_preview(tidy_sheet)
-       # savepreviewhtml(tidy_sheet) 
-        trace.store("combined_dataframe", tidy_sheet.topandas())
-    
-    if tab.name == 'Vacancies by NUTS1 Region':
-       
-        date = tab.filter(contains_string('Date')).shift(1,0).expand(RIGHT).is_not_blank()
-        trace.Date('Date given at cell range: {}', var = excelRange(date))
+        savepreviewhtml(tidy_sheet, fname=tab.name + " Preview.html")
         
-        imputed_values = tab.filter(contains_string('Imputed values')).shift(1,0).expand(RIGHT)
-        trace.Marker('Imputed Values given at cell range: {}', var = excelRange(date))
+        nonimputed = tidy_sheet.topandas()
 
-        nuts1_region = tab.filter(contains_string('Date')).shift(0,1).expand(DOWN).is_not_blank() - tab.filter(contains_string('Imputed values')).expand(RIGHT).expand(DOWN)
-        trace.NUTS1_Region('Industry given at cell range: {}', var = excelRange(date))
-        
-        industry = "All"
-        trace.Industry("Hardcoded as All")
-      
-        observations = nuts1_region.fill(RIGHT).is_not_blank() 
+        observations = (tab.filter('Imputed values').fill(RIGHT).filter('All').fill(UP).is_not_blank() | tab.filter('Imputed values').fill(RIGHT).filter('Education only').fill(UP) - (tab.filter('Date').fill(DOWN)-tab.filter('Education')).expand(RIGHT)).is_not_blank() - date
+
         dimensions = [
-            HDim(date, 'Date', DIRECTLY, ABOVE),
-            HDim(nuts1_region, 'NUTS1 Region', DIRECTLY, LEFT),
-            HDim(imputed_values, 'Marker', DIRECTLY, BELOW),
-            HDimConst('Industry', industry),
+            HDim(date, 'Period', DIRECTLY, ABOVE),
+            HDim(category, 'Category', DIRECTLY, LEFT),
+            HDimConst('Region', region),
             HDimConst('Measure Type', measure_type),
             HDimConst('Unit', unit),
+            HDimConst('Marker', 'imputed')
             ]
         tidy_sheet = ConversionSegment(tab, dimensions, observations)
-        trace.with_preview(tidy_sheet)
-        #savepreviewhtml(tidy_sheet) 
-        trace.store("combined_dataframe", tidy_sheet.topandas())
+ 
+        imputed = tidy_sheet.topandas()
+
+        tidied_tabs.append(pd.concat([nonimputed, imputed]))
+
+    elif 'adverts by region' in tab.name.lower():
+
+        print(tab.name)
+
+        remove = tab.filter('Notes:').expand(RIGHT).expand(DOWN)
+
+        date = tab.filter('Date').fill(RIGHT).is_not_blank()
+
+        region = (tab.filter('Date').fill(DOWN).is_not_blank() - remove - tab.filter('Imputed values')) | tab.filter('Unknown') | tab.filter('Unmatched')
+
+        imputed_values = tab.filter('Imputed values').fill(RIGHT).filter('All').fill(UP).is_not_blank() - date
+
+        if 'DD' in tab.name:
+            deduplicated = 'yes'
+
+            measure_type = 'Job Adverts Deduplicated'
+
+            unit = 'Indicator'
+
+        elif 'YoY' in tab.name:
+            deduplicated = 'yes'
+
+            measure_type = 'Job Adverts Equivalent to Prior Year'
+
+            unit = 'Indicator'
+
+        else:
+            deduplicated = 'no'
+
+            measure_type = 'Job Adverts'
+
+            unit = 'Indicator'
+
+        observations = region.shift(RIGHT).fill(RIGHT).is_not_blank() - imputed_values
+
+        dimensions = [
+            HDim(date, 'Period', DIRECTLY, ABOVE),
+            HDim(region, 'Region', DIRECTLY, LEFT),
+            HDimConst('Category', 'all'),
+            HDimConst('Measure Type', measure_type),
+            HDimConst('Unit', unit),
+            HDimConst('Marker', '')
+            ]
+        tidy_sheet = ConversionSegment(tab, dimensions, observations)
+        savepreviewhtml(tidy_sheet, fname=tab.name + " Preview.html")
         
-        
+        nonimputed = tidy_sheet.topandas()
+
+        observations = tab.filter('Imputed values').fill(RIGHT).filter('All').fill(UP).is_not_blank() - date
+
+        dimensions = [
+            HDim(date, 'Period', DIRECTLY, ABOVE),
+            HDim(region, 'Region', DIRECTLY, LEFT),
+            HDimConst('Category', 'all'),
+            HDimConst('Measure Type', measure_type),
+            HDimConst('Unit', unit),
+            HDimConst('Marker', 'imputed')
+            ]
+        tidy_sheet = ConversionSegment(tab, dimensions, observations)
+ 
+        imputed = tidy_sheet.topandas()
+
+        tidied_tabs.append(pd.concat([nonimputed, imputed]))
 
 
-# +
-df = trace.combine_and_trace(datasetTitle, "combined_dataframe")
+# In[92]:
+
+
+df = pd.concat(tidied_tabs)
 df.rename(columns={'OBS' : 'Value'}, inplace=True)
 
-#imputed values are highlighted in spreadsheet
-f1=((df['Marker'] !='') )
-df.loc[f1,'Marker'] = 'Imputed'
+df['Period'] = df['Period'].map(lambda x: f'day/{x}')
 
-trace.add_column("Value")
-trace.Value("Rename databaker columns OBS to Value")
-trace.Date("Formating to day/YYY-MM-DD")
-df['Date'] = df['Date'].map(lambda x: f'day/{x}')
-# -
+df = df.rename(columns={'Category' : 'Industry'})
+
+df['Region'] = df['Region'].str.replace('(' , '').str.replace(')' , '')
+
+df = df.replace({'Region' : {'United Kingdom' : 'K02000001'}})
+
+df['Industry'] = df['Industry'].apply(pathify)
+df['Measure Type'] = df['Measure Type'].apply(pathify)
+df['Unit'] = df['Unit'].apply(pathify)
+
+df
+
+
+# In[93]:
+
 
 from IPython.core.display import HTML
 for col in df:
@@ -171,25 +260,22 @@ for col in df:
         display(HTML(f"<h2>{col}</h2>"))
         display(df[col].cat.categories) 
 
-# +
-tidy = df[['Date', 'Industry', 'NUTS1 Region', 'Measure Type', 'Unit', 'Value', 'Marker']]
 
-trace.Industry("Remove any prefixed whitespace from all values in column and pathify")
-trace.NUTS1_Region("Remove any prefixed whitespace from all values in column and pathify")
+# In[94]:
+
+
+tidy = df[['Period', 'Industry', 'Region', 'Measure Type', 'Unit', 'Value', 'Marker']]
+
 for column in tidy:
-    if column in ('Industry', 'NUTS1 Region'):
+    if column in ('Industry', 'Region'):
         tidy[column] = tidy[column].str.lstrip()
         tidy[column] = tidy[column].str.rstrip()
-        tidy[column] = tidy[column].map(lambda x: pathify(x))
-# -
 
-del tidy['Measure Type']
-del tidy['Unit']
+tidy
 
-tidy['Marker'] = tidy['Marker'].apply(pathify)
-tidy['Marker'].unique()
 
-# Notes taken from tab: Vacancies
+# In[95]:
+
 
 notes = """
 Total job adverts by Adzuna Category, Index 2019 average = 100
@@ -203,53 +289,12 @@ Total job adverts by Adzuna Category, Index 2019 average = 100
 
 """
 
-#SET UP OUTPUT FOLDER AND OUTPUT DATA TO CSV
-csvName = 'observations.csv'
-out = Path('out')
-out.mkdir(exist_ok=True)
-tidy.drop_duplicates().to_csv(out / csvName, index = False)
 
-#SET VARIOUS ATTRIBUTES OF THE SCRAPER
-scrape.dataset.family = 'covid-19'
-scrape.dataset.title = datasetTitle
-scrape.dataset.description = scrape.dataset.description + '/n' + notes
-scrape.dataset.comment = 'Experimental job advert indices covering the UK job market.'
-dataset_path = pathify(os.environ.get('JOB_NAME', 'gss_data/covid-19/' + Path(os.getcwd()).name))
-scrape.set_base_uri('http://gss-data.org.uk')
-scrape.set_dataset_id(dataset_path)
+# In[96]:
 
-# CREATE MAPPING CLASS INSTANCE, SET UP VARIABLES AND WRITE FILES
-csvw_transform = CSVWMapping()
-csvw_transform.set_csv(out / csvName)
-csvw_transform.set_mapping(json.load(open('info.json')))
-csvw_transform.set_dataset_uri(urljoin(scrape._base_uri, f'data/{scrape._dataset_id}'))
-csvw_transform.write(out / f'{csvName}-metadata.json')
 
-# CREATE AND OUTPUT TRIG FILE
-with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
-    metadata.write(scrape.generate_trig())
+tidy.to_csv('observations.csv', index=False)
 
-# +
-#newTxt = ''
-#info = json.load(open('info.json')) 
-#mtp = info['transform']['columns']['Value']['measure'].replace('http://gss-data.org.uk/def/measure/','')
-#mt = mtp.capitalize()
-#mtpath = f'''"@id": "http://gss-data.org.uk/def/measure/{mtp}",'''
-#h = '''"@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure",'''
-
-#with open("out/observations.csv-metadata.json") as fp: 
-#    for line in fp: 
-#        if mtpath in line.strip():
-#            print(line)
-#            newTxt = newTxt + line + '''\t"rdfs:label": "''' + mt + '''",\n'''
-#        else:
-#            newTxt += line
-#            
-#f = open("out/observations.csv-metadata.json", "w")
-#f.write(newTxt)
-#f.close()
-# -
-
-trace.output()
-
+catalog_metadata = scrape.as_csvqb_catalog_metadata()
+catalog_metadata.to_json_file('catalog-metadata.json')
 

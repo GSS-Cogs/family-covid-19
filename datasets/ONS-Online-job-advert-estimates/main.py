@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[88]:
+# In[97]:
 
 
 # # ONS Online job advert estimates 
@@ -70,7 +70,7 @@ def excelRange(bag):
     return '{' + lowx + lowy + '-' + highx + highy + '}'
 
 
-# In[89]:
+# In[98]:
 
 
 info = json.load(open('info.json')) 
@@ -82,7 +82,7 @@ distribution = scrape.distributions[0]
 distribution
 
 
-# In[90]:
+# In[99]:
 
 
 datasetTitle = 'Online job advert estimates'
@@ -91,7 +91,7 @@ for i in tabs:
     print(i.name)
 
 
-# In[91]:
+# In[100]:
 
 
 tidied_tabs = []
@@ -113,23 +113,23 @@ for tab in tabs:
         if 'DD' in tab.name:
             deduplicated = 'yes'
 
-            measure_type = 'Job Adverts Deduplicated'
+            unit = 'Job Adverts Deduplicated'
 
-            unit = 'Indicator'
+            measure_type = 'Indicator'
 
         elif 'YoY' in tab.name:
             deduplicated = 'yes'
 
-            measure_type = 'Job Adverts Equivalent to Prior Year'
+            unit = 'Job Adverts Equivalent to Prior Year'
 
-            unit = 'Indicator'
+            measure_type = 'Indicator'
 
         else:
             deduplicated = 'no'
 
-            measure_type = 'Job Adverts'
+            unit = 'Job Adverts'
 
-            unit = 'Indicator'
+            measure_type = 'Indicator'
 
         region = "United Kingdom"
 
@@ -179,23 +179,23 @@ for tab in tabs:
         if 'DD' in tab.name:
             deduplicated = 'yes'
 
-            measure_type = 'Job Adverts Deduplicated'
+            unit = 'Job Adverts Deduplicated'
 
-            unit = 'Indicator'
+            measure_type = 'Indicator'
 
         elif 'YoY' in tab.name:
             deduplicated = 'yes'
 
-            measure_type = 'Job Adverts Equivalent to Prior Year'
+            unit = 'Job Adverts Equivalent to Prior Year'
 
-            unit = 'Indicator'
+            measure_type = 'Indicator'
 
         else:
             deduplicated = 'no'
 
-            measure_type = 'Job Adverts'
+            unit = 'Job Adverts'
 
-            unit = 'Indicator'
+            measure_type = 'Indicator'
 
         observations = region.shift(RIGHT).fill(RIGHT).is_not_blank() - imputed_values
 
@@ -229,7 +229,7 @@ for tab in tabs:
         tidied_tabs.append(pd.concat([nonimputed, imputed]))
 
 
-# In[92]:
+# In[101]:
 
 
 df = pd.concat(tidied_tabs)
@@ -250,7 +250,7 @@ df['Unit'] = df['Unit'].apply(pathify)
 df
 
 
-# In[93]:
+# In[102]:
 
 
 from IPython.core.display import HTML
@@ -261,7 +261,7 @@ for col in df:
         display(df[col].cat.categories) 
 
 
-# In[94]:
+# In[103]:
 
 
 tidy = df[['Period', 'Industry', 'Region', 'Measure Type', 'Unit', 'Value', 'Marker']]
@@ -274,7 +274,7 @@ for column in tidy:
 tidy
 
 
-# In[95]:
+# In[104]:
 
 
 notes = """
@@ -290,7 +290,7 @@ Total job adverts by Adzuna Category, Index 2019 average = 100
 """
 
 
-# In[96]:
+# In[105]:
 
 
 tidy.to_csv('observations.csv', index=False)

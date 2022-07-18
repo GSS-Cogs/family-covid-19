@@ -1,7 +1,9 @@
 {
     "@context": "http://www.w3.org/ns/csvw",
-    "@id": "http://gss-data.org.uk/data/gss_data/covid-19/ons-online-job-advert-estimates#schema",
+    "@id": "http://gss-data.org.uk/data/gss_data/covid-19/ons-online-job-advert-estimates#scheme/industry",
     "url": "industry.csv",
+    "rdfs:label": "Industry",
+    "dc:title": "Industry",
     "tableSchema": {
         "columns": [
             {
@@ -16,7 +18,7 @@
                 "name": "notation",
                 "datatype": {
                     "base": "string",
-                    "format": "^-?[\\w\\.\\/]+(-[\\w\\.\\/]+)*$"
+                    "format": "^-?[\\w\\.\\/\\+]+(-[\\w\\.\\/\\+]+)*$"
                 },
                 "required": true,
                 "propertyUrl": "skos:notation"
@@ -26,7 +28,7 @@
                 "name": "parent_notation",
                 "datatype": {
                     "base": "string",
-                    "format": "^(-?[\\w\\.\\/]+(-[\\w\\.\\/]+)*|)$"
+                    "format": "^(-?[\\w\\.\\/\\+]+(-[\\w\\.\\/\\+]+)*|)$"
                 },
                 "required": false,
                 "propertyUrl": "skos:broader",
@@ -34,7 +36,7 @@
             },
             {
                 "titles": "Sort Priority",
-                "name": "sort",
+                "name": "sort_priority",
                 "datatype": "integer",
                 "required": false,
                 "propertyUrl": "http://www.w3.org/ns/ui#sortPriority"
@@ -67,57 +69,65 @@
             "http://publishmydata.com/pmdcat#ConceptScheme"
         ]
     },
-    "rdfs:label": "Industry",
-    "dc:title": "Industry",
     "rdfs:seeAlso": [
         {
-            "@id": "http://gss-data.org.uk/data/gss_data/covid-19/ons-online-job-advert-estimates#schema/dataset",
+            "@id": "http://gss-data.org.uk/data/gss_data/covid-19/ons-online-job-advert-estimates#scheme/industry/dataset",
             "@type": [
                 "dcat:Dataset",
                 "http://publishmydata.com/pmdcat#Dataset"
             ],
             "http://publishmydata.com/pmdcat#datasetContents": {
-                "@id": "http://gss-data.org.uk/data/gss_data/covid-19/ons-online-job-advert-estimates#schema"
+                "@id": "http://gss-data.org.uk/data/gss_data/covid-19/ons-online-job-advert-estimates#scheme/industry"
             },
             "http://publishmydata.com/pmdcat#graph": {
-                "@id": "http://gss-data.org.uk/data/gss_data/covid-19/ons-online-job-advert-estimates#schema"
-            },
-            "dc:modified": {
-                "@type": "dateTime",
-                "@value": "2021-05-20T11:48:27.126095"
+                "@id": "http://gss-data.org.uk/data/gss_data/covid-19/ons-online-job-advert-estimates#scheme/industry"
             },
             "rdfs:label": "Industry",
             "dc:title": "Industry",
             "rdfs:comment": "Dataset representing the 'Industry' code list.",
+            "dc:publisher": {
+                "@id": "https://www.ons.gov.uk"
+            },
+            "dcat:landingPindustry": {
+                "@id": "https://www.ons.gov.uk/peoplepopulationandcommunity/birthsdeathsandmarriindustrys/deaths/datasets/deathsinvolvingcovid19inthecaresectorenglandandwales"
+            },
             "dc:issued": {
                 "@type": "dateTime",
-                "@value": "2021-05-20T11:46:42.651678"
+                "@value": "2020-12-18T00:00:00"
+            },
+            "dc:modified": {
+                "@type": "dateTime",
+                "@value": "2022-07-15T11:35:12.541302"
+            },
+            "http://publishmydata.com/pmdcat#markdownDescription": {
+                "@type": "https://www.w3.org/ns/iana/media-types/text/markdown#Resource",
+                "@value": "Experimental job advert indices covering the UK job market"
             }
         },
         {
             "@id": "http://gss-data.org.uk/catalog/vocabularies",
             "dcat:record": {
-                "@id": "http://gss-data.org.uk/data/gss_data/covid-19/ons-online-job-advert-estimates#schema/catalog-record"
+                "@id": "http://gss-data.org.uk/data/gss_data/covid-19/ons-online-job-advert-estimates#scheme/industry/catalog-record"
             }
         },
         {
-            "@id": "http://gss-data.org.uk/data/gss_data/covid-19/ons-online-job-advert-estimates#schema/catalog-record",
+            "@id": "http://gss-data.org.uk/data/gss_data/covid-19/ons-online-job-advert-estimates#scheme/industry/catalog-record",
             "@type": "dcat:CatalogRecord",
             "foaf:primaryTopic": {
-                "@id": "http://gss-data.org.uk/data/gss_data/covid-19/ons-online-job-advert-estimates#schema/dataset"
+                "@id": "http://gss-data.org.uk/data/gss_data/covid-19/ons-online-job-advert-estimates#scheme/industry/dataset"
             },
             "http://publishmydata.com/pmdcat#metadataGraph": {
-                "@id": "http://gss-data.org.uk/data/gss_data/covid-19/ons-online-job-advert-estimates#schema"
+                "@id": "http://gss-data.org.uk/data/gss_data/covid-19/ons-online-job-advert-estimates#scheme/industry"
             },
             "dc:title": "Industry Catalog Record",
             "rdfs:label": "Industry Catalog Record",
             "dc:issued": {
                 "@type": "dateTime",
-                "@value": "2021-05-20T11:46:42.651678"
+                "@value": "2022-05-13T14:53:03.939928"
             },
             "dc:modified": {
                 "@type": "dateTime",
-                "@value": "2021-05-20T11:46:42.651678"
+                "@value": "2022-07-15T11:35:12.541302"
             }
         }
     ]
